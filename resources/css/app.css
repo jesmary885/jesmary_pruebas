@@ -1,0 +1,7 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@import 'inputNumber.css';
+@import 'precarga.css';
+@import "loader.css";
