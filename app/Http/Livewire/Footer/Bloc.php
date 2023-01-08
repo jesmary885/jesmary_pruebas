@@ -26,6 +26,8 @@ class Bloc extends Component
                 $user->update([
                     'bloc' => $this->bloc
                 ]);
+
+               // session(['bloc' => $this->bloc]);
             }
     
             else{
