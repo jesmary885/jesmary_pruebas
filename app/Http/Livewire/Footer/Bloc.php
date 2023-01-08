@@ -31,7 +31,7 @@ class Bloc extends Component
             }
     
             else{
-                $this->emit('error','Tu bloc se excede de la cantidad de caracteres permitido');
+                $this->emit('error','Tu bloc se excede de ');
             }
 
         return view('livewire.footer.bloc');
