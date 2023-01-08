@@ -1,20 +1,32 @@
 <div x-data="{jumper_2: @entangle('jumper_2'),points_user: @entangle('points_user'), is_high: @entangle('is_high'),is_basic: @entangle('is_basic'), calc_link: @entangle('calc_link'), pid: @entangle('pid_new'), psid: @entangle('psid_register'), jumper_detect: @entangle('jumper_detect'), no_detect: @entangle('no_detect'), k_detect: @entangle('k_detect')}">
     <div class="card">
-        <div class="card-header flex justify-between">
-            <div class="flex-grow-1">
-                <input wire:model="search" type="search" placeholder="" class="form-control">
+        <div class="card-header form-row">
+
+            <div class="col-sm-8 col-lg-9 col-xl-10">
+
+                <div class="input-group">
+                    <input wire:model="search" placeholder="" id="validationCustomUsername" class="form-control" aria-describedby="inputGroupPrepend" >
+                    @if($search)
+                            <div class="input-group-prepend">
+                                <button class="btn btn-md btn-outline-secondary input-group-text" id="inputGroupPrepend" wire:click="clear" title="Borrar">
+                                        <i class="fas fa-backspace"></i>
+                                </button>
+                            </div>
+                    @endif
+                </div>
             </div>
 
-         
-
-            <div class="ml-2 mr-2 mt-1">
+            <div class="mt-1 mr-1">
                 @livewire('jumpers.ssidkr.ssidkr-create')
             </div>
 
             <div class="mt-1">
                 @livewire('jumpers.ssidkr.ssidkr-create-high')
             </div>
+
         </div>
+        
+ 
 
         <div wire:loading.delay>
             <div class="loader"></div>
@@ -58,7 +70,7 @@
         @endif
             <div :class="{'hidden': (jumper_2 == '')}">
                 <div :class="{'hidden': (calc_link == 0)}">
-                    <button class="btn btn-sm btn-outline-secondary ml-2 mb-3" title="{{__('messages.copiar_portapapeles')}}" id="button_copy">@if($jumper_2 != '') Copiar @endif</button>    
+                    <button class="btn btn-sm btn-success ml-2 mb-3 text-bold" title="{{__('messages.copiar_portapapeles')}}" id="button_copy">@if($jumper_2 != '') Copiar @endif</button>    
                 </div>
             </div>
         @if ($jumper_complete != 0 || $jumper != "")

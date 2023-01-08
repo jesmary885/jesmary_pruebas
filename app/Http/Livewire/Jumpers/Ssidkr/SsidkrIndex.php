@@ -14,7 +14,7 @@ class SsidkrIndex extends Component
     use WithPagination;
     protected $paginationTheme = "bootstrap";
 
-    public $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $wix_detect = '0', $psid_register=0,$jumper_redirect,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$is_high,$is_basic,$calc_link,$jumper_select ;
+    public $posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $wix_detect = '0', $psid_register=0,$jumper_redirect,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$is_high,$is_basic,$calc_link,$jumper_select ;
 
     protected $listeners = ['render' => 'render'];
 
@@ -49,10 +49,12 @@ class SsidkrIndex extends Component
         $this->is_high = 'no';
         $this->points_user='no';
         $this->no_detect = '0';
+        $this->posicion = 8; //me esta buscand a partir de https://
 
-        $long_psid = strlen($this->search);
+        $this->search = trim($this->search); //quitando espacios en blancos al inicio y final
+        $long_psid = strlen($this->search); //buscando cuantos caracteres tiene en total
     
-        if($long_psid>30 || $this->jumper_redirect){
+        if($long_psid>=5 || $this->jumper_redirect){
             if($this->jumper_redirect){
                 $jumper = $this->jumper_redirect;
                 //aca estoy completando el psid que traje de la redireccion con  mi ultima letra de mi psid
@@ -63,19 +65,25 @@ class SsidkrIndex extends Component
             }
             else{
 
-                $busqueda_psid= strpos($this->search, 'psid'); 
-
-                if($busqueda_psid !== false){ //si no tiene la palabra psid
-                    $subs_psid = substr($this->search,($busqueda_psid + 5),5);
-                    $subs_psid_sin_cortar = substr($this->search,($busqueda_psid + 5));
-                    $psid_complete = substr($subs_psid_sin_cortar,0,21);
+                if(strpos($this->search, 'ttp') == false){
+                    $subs_psid =  substr($this->search,0,5);
+                    $psid_complete = $subs_psid;
                 }
+                else{
+                    $busqueda_psid= strpos($this->search, 'psid'); 
 
-                else{ // busco los **
-                    $busqueda_id= strpos($this->search, '**');
-                    $subs_psid = substr($this->search,($busqueda_id - 22),5);
-                    $subs_psid_sin_cortar = substr($this->search,($busqueda_id - 22));
-                    $psid_complete = substr($subs_psid_sin_cortar,0,21);
+                    if($busqueda_psid !== false){ //si no tiene la palabra psid
+                        $subs_psid = substr($this->search,($busqueda_psid + 5),5);
+                        $subs_psid_sin_cortar = substr($this->search,($busqueda_psid + 5));
+                        $psid_complete = substr($subs_psid_sin_cortar,0,21);
+                    }
+
+                    else{ // busco los **
+                        $busqueda_id= strpos($this->search, '**');
+                        $subs_psid = substr($this->search,($busqueda_id - 22),5);
+                        $subs_psid_sin_cortar = substr($this->search,($busqueda_id - 22));
+                        $psid_complete = substr($subs_psid_sin_cortar,0,21);
+                    }
                 }
 
                 $jumper = Link::where('psid',$subs_psid)->first();
@@ -161,30 +169,57 @@ class SsidkrIndex extends Component
             } 
 
             else {
-         
-                $url_detect_com= strpos($this->search, '.com');
-                $k_detect= strpos($this->search, '_k=');
-                if($url_detect_com)$url_detect = substr($this->search,8,($url_detect_com-8)).'.com';
-                else $url_detect = 'error';
 
-                if($url_detect != 'dkr1.ssisurveys.com' && $url_detect != 'error'){
+                $url_detect_com= strpos($this->search, 'ttp');
+
+                
+                if($url_detect_com != false){
+
+                   // $posicion = 8; 
+                  
+                    $i = 0;
                     
-                    $link = new Link();
-                    $link->jumper = $url_detect;
-                    $link->psid = $subs_psid;
-                    $link->user_id = auth()->user()->id;
-                    $link->jumper_type_id = 15;
-                    if($k_detect) $link->k_detected = 'K='.substr($this->search,($k_detect + 3),4);
-                    $link->save();
+                    do{
+                        $detect= substr($this->search, $this->posicion,1);
+
+                        if($detect == '/') $i = 1;
+                        else{
+                            $i = 0;
+                            $this->posicion = $this->posicion + 1;
+                        }
+
+                    }while($i != 1);
+
+                    //dd($this->posicion);
+
+                    $url_detect = 'https://'.substr($this->search,8,($this->posicion-8));
+
+            
+                    $k_detect= strpos($this->search, '_k=');
+     
+                    if($url_detect != 'https://dkr1.ssisurveys.com'){
+                        //dd($subs_psid);
+
+                        $link = new Link();
+                        $link->jumper = $url_detect;
+                        $link->psid = $subs_psid;
+                        $link->user_id = auth()->user()->id;
+                        $link->jumper_type_id = 15;
+                        if($k_detect) $link->k_detected = 'K='.substr($this->search,($k_detect + 3),4);
+                        $link->save();
+                    }
+    
+                    else{
+            
+                        $this->no_detect = 1;
+                    }
+
+                    $this->jumper_2 = '';
                 }
 
                 else{
-        
                     $this->no_detect = 1;
                 }
-
-
-                $this->jumper_2 = '';
             }
         }
         
@@ -244,12 +279,16 @@ class SsidkrIndex extends Component
 
     public function calculo_high($jumper_id){
         $jumper_id = Link::where('id',$jumper_id)->first();
-        $this->calculo_high = $jumper_id->high - ($jumper_id->pid - $this->pid_new) * ($jumper_id->high / $jumper_id->pid);
+        $this->calculo_high = $jumper_id->high - ($jumper_id->pid - $this->pid_new) * round(($jumper_id->high / $jumper_id->pid),0);
         if(session('pid')) return $this->calculo_high;
         else{
      
             $this->calc_link = 1;
             $this->emit('render', 'jumpers.ssidkr.ssidkr-index');
         }
+    }
+
+    public function clear(){
+        $this->reset(['search']);
     }
 }
