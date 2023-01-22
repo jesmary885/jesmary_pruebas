@@ -25,7 +25,7 @@ class JumperIndex extends Component
         $jumpers = Link::where('psid', 'LIKE', '%' . $this->search . '%')
         ->orwhere('jumper', 'LIKE', '%' . $this->search . '%')
         ->latest('id')
-        ->paginate(10);
+        ->paginate(20);
 
         $total = Link::count();
 

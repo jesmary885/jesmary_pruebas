@@ -18,6 +18,7 @@ class JumperEdit extends Component
     public function mount(Link $jumper){
         $this->jumper = $jumper;
         $this->psid = $this->jumper->psid;
+        $this->pid = $this->jumper->pid;
         $this->high = $this->jumper->high;
         $this->basic = $this->jumper->basic;
         $this->dominio = $this->jumper->jumper;
@@ -48,10 +49,11 @@ class JumperEdit extends Component
         $this->jumper->update([
             'psid' => $this->psid,
             'high' => $this->high,
+            'pid' => $this->pid,
             'basic' => $this->basic,
             'jumper' => $this->dominio,
             'jumper_type_id' => $this->type_id,
-            'k_detect' => $this->k_detected,
+            'k_detected' => $this->k_detect,
         ]);
   
         $this->reset(['isopen']);
