@@ -303,6 +303,12 @@ return [
                     'can' => 'admin.users'
                 ],
                 [
+                    'text' => 'Jumpers',
+                    'route'  => 'admin.jumpers',
+                    'icon'    => 'fas fa-server',
+                    'can' => 'admin.users'
+                ],
+                [
                     'text' => 'Mi marketplace',
                     'route'  => 'admin.marketplace',
                     'icon'    => 'fas fa-box-open',
