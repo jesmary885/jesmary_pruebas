@@ -184,10 +184,8 @@ class SsidkrIndex extends Component
                 else{
                     $k_detect= strpos($this->search, '_k=');
                     if($k_detect){
-
                         $this->posicionk = $k_detect + 3;
     
-                            
                         $ik = 0;
                         
                             do{
