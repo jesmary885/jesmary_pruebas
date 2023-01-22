@@ -255,7 +255,7 @@
                     return sonido;
                 }
 
-                const sonido = cargarSonido("diabla.mp3");
+                const sonido = cargarSonido("alarma.mp3");
                 const ocultarElemento = elemento => {
                     elemento.style.display = "none";
                 }
