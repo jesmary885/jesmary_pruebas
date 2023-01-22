@@ -9,8 +9,8 @@
                 <table class="w-full text-sm text-left text-gray-400">
                     <thead class="text-xs uppercase bg-gray-700 text-gray-400">
                         <tr>
-                            <th class="text-center px-16">TIPO</th>
-                            <th class="text-center py-3">PSID</th>
+                            <th class="text-center py-3">TIPO</th>
+                            <th class="text-center ">PSID</th>
                             <th class="text-center">PID</th>
                             <th class="text-center ">HIGH</th>
                             <th class="text-center">BASIC</th>
@@ -25,7 +25,7 @@
                         <tbody>
                             @foreach ($jumpers as $jumper)
                                 <tr class="bg-gray-800 border-gray-700 hover:bg-gray-600">
-                                    <th class="py-3 text-center font-medium whitespace-nowrap text-white w-full">{{$jumper->jumperType->name}}</th>
+                                    <th class="py-3 text-center font-medium whitespace-nowrap text-white">{{$jumper->jumperType->name}}</th>
                                     <td class="text-center">{{$jumper->psid}}</td>
                                     <td class="text-center">{{$jumper->pid}}</td>
                                     <td class="text-center">{{$jumper->high}}</td>
