@@ -1,4 +1,4 @@
-<div x-data="{jumper_2: @entangle('jumper_2'),points_user: @entangle('points_user'), is_high: @entangle('is_high'),is_basic: @entangle('is_basic'), calc_link: @entangle('calc_link'), pid: @entangle('pid_new'), psid: @entangle('psid_register'), jumper_detect: @entangle('jumper_detect'), no_detect: @entangle('no_detect'), k_detect: @entangle('k_detect')}">
+<div x-data="{jumper_2: @entangle('jumper_2'),points_user: @entangle('points_user'), is_high: @entangle('is_high'),is_basic: @entangle('is_basic'), calc_link: @entangle('calc_link'), pid: @entangle('pid_new'), psid: @entangle('psid_register'), jumper_detect: @entangle('jumper_detect'), no_detect: @entangle('no_detect'), k_detect: @entangle('k_detect'), no_jumpear: @entangle('no_jumpear')}">
     <div class="card">
         <div class="card-header form-row">
 
@@ -24,25 +24,17 @@
                 @livewire('jumpers.ssidkr.ssidkr-create-high')
             </div>
 
+            
+
         </div>
         
  
 
-        <div wire:loading.delay>
+        <!-- <div wire:loading.delay>
             <div class="loader"></div>
-        </div>
+        </div> -->
 
         <div class="flex justify-between">
-            @if($pid_new == 0)
-            <div class="px-4" :class="{'hidden': (pid != 0)}">
-                <div class="alert alert-info alert-dismissible">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><font style="vertical-align: inherit;"><font style="vertical-align: inherit; color:darkred;">×</font></font></button>
-                    <h5><i class="icon fas fa-info"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">¡Alerta!</font></font></h5><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-                    Aún no has registrado tu PID</font><font style="vertical-align: inherit;"> ,haz clic <a class="hover:font-bold" href="{{route('registro.pid')}}"> aquí</a> para registrarlo
-                    </font></font>
-                </div>
-            </div>
-            @endif
 
             @if($psid_register == 0)
             <div class="px-4" :class="{'hidden': (psid != 0)}">
@@ -55,22 +47,36 @@
                 </div>
             </div>
             @endif
+            @if($pid_new == 0)
+            <div class="px-4" :class="{'hidden': (pid != 0)}">
+                <div class="alert alert-info alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><font style="vertical-align: inherit;"><font style="vertical-align: inherit; color:darkred;">×</font></font></button>
+                    <h5><i class="icon fas fa-info"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">¡Alerta!</font></font></h5><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                    Aún no has registrado tu PID</font><font style="vertical-align: inherit;"> ,haz clic <a class="hover:font-bold" href="{{route('registro.pid')}}"> aquí</a> para registrarlo
+                    </font></font>
+                </div>
+            </div>
+            @endif
+
+            
 
            
         </div>
 
        
-        @if ($jumper_complete != 0 && $jumper != "" && $calc_link == 1)
+        @if ($jumper_complete != 0 && $jumper != "" && $calc_link == 1 && $no_jumpear == 0)
             <div class="card-body mt-0">
 
                 <div class="flex flex-row justify-center">
                     <div>
-                        <p class="text-blue-400 text-lg ml-4 mb-2 " id="jumper_copy">{{$jumper_complete}}</p>
+                        <p class="text-blue-400 text-md font-bold ml-4 mb-2 " id="jumper_copy">{{$jumper_complete}}</p>
                     </div>
         @endif
             <div :class="{'hidden': (jumper_2 == '')}">
                 <div :class="{'hidden': (calc_link == 0)}">
-                    <button class="btn btn-sm btn-success ml-2 mb-3 text-bold" title="{{__('messages.copiar_portapapeles')}}" id="button_copy">@if($jumper_2 != '') Copiar @endif</button>    
+                    <div :class="{'hidden': (no_jumpear == 1)}">
+                        <button class="btn btn-sm btn-success ml-2 mb-3 text-bold" title="{{__('messages.copiar_portapapeles')}}" id="button_copy">@if($jumper_2 != '') Copiar @endif</button>    
+                    </div>
                 </div>
             </div>
         @if ($jumper_complete != 0 || $jumper != "")

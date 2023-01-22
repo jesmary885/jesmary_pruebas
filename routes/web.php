@@ -65,6 +65,7 @@ Route::middleware(['auth'])->group(function()
     //Administración
 
     Route::get('admin_users', [AdminController::class, 'users'])->name('admin.users')->middleware('permission:admin.users');
+    Route::get('admin_jumpers', [AdminController::class, 'jumpers'])->name('admin.jumpers')->middleware('permission:admin.users');
     Route::get('admin_ganancias', [AdminController::class, 'ganancias'])->name('admin.ganancias.index')->middleware('permission:admin.users');
     Route::get('admin_sales', [AdminController::class, 'sales'])->name('admin.sales')->middleware('permission:admin.sales');
     Route::get('admin_marketplace', [AdminController::class, 'marketplace'])->name('admin.marketplace')->middleware('permission:admin.sales');

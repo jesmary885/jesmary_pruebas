@@ -8,7 +8,7 @@ use Livewire\Component;
 
 class SsidkrCreate extends Component
 {
-    public $isopen = false,$psid,$basic,$url,$posicion,$save = 0;
+    public $isopen = false,$psid,$basic,$posicion,$save = 0;
 
     protected $rules_create = [
         'psid' => 'required|min:5',
@@ -36,7 +36,7 @@ class SsidkrCreate extends Component
         $rules_create = $this->rules_create;
         $this->validate($rules_create);
 
-        $this->posicion = 8; 
+        //$this->posicion = 8; 
 
         $user_auth =  auth()->user()->id;
         $long_psid = strlen($this->psid);
@@ -54,10 +54,10 @@ class SsidkrCreate extends Component
                 'user_id' => $user_auth,
                 'jumper_type_id' => 1,
             ]);
-            $this->save = 1;
+            //$this->save = 1;
        }
        else{
-            if($this->url){
+            /*if($this->url){
                 $this->url = trim($this->url); 
                 $url_detect_com= strpos($this->url, 'ttp');
                 if($url_detect_com != false){
@@ -81,19 +81,9 @@ class SsidkrCreate extends Component
                     }else{
                         $url_finish =  '';
                     }
-
-                    $link = new Link();
-                    $link->basic = $this->basic;
-                    $link->psid = $part_psid;
-                // $link->jumper = $jumper;
-                    $link->user_id = $user_auth;
-                    $link->jumper_type_id = 1;
-                    if($this->url){
-                    $link->jumper = $url_finish ;
-                    }
-                    $link->save();
-
+                    
                     $this->save = 1;
+
                 }
                 else{
                     $this->save = 0;
@@ -101,11 +91,26 @@ class SsidkrCreate extends Component
                     $this->emitTo('jumpers.ssidkr.ssidkr-create','render');
                 }
             }
+            else{
+                $this->save = 1;
+            }*/
+
+            $link = new Link();
+            $link->basic = $this->basic;
+            $link->psid = $part_psid;
+        // $link->jumper = $jumper;
+            $link->user_id = $user_auth;
+            $link->jumper_type_id = 1;
+          /*  if($this->url){
+            $link->jumper = $url_finish ;
+            }*/
+            $link->save();
         }
-       if($this->save == 1){
-            $this->reset(['basic','isopen','psid','url']);
-            $this->emit('alert','Datos registrados correctamente');
-            $this->emitTo('jumpers.ssidkr.ssidkr-index','render');
-       }
+       //if($this->save == 1){
+
+        $this->reset(['basic','isopen','psid']);
+        $this->emit('alert','Datos registrados correctamente');
+        $this->emitTo('jumpers.ssidkr.ssidkr-index','render');
+       //}
     }
 }

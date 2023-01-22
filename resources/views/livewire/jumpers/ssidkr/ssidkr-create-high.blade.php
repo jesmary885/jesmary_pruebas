@@ -13,7 +13,7 @@
                     </div>
                     <div class="modal-body">
                     <h2 class="text-sm ml-2 m-0 p-0 text-gray-300 font-semibold"><i class="fas fa-info-circle"></i> {{__('messages.Complete_todos_los_campos_y_presiona_Guardar')}}</h2> 
-                    <h2 class="text-sm ml-2 m-0 p-0 text-gray-300 font-semibold"><i class="fas fa-info-circle"></i> Si aún cuentas con el link de la encuesta pegala en el campo URL (Este no es un campo obligatorio)</h2>  
+                    <!-- <h2 class="text-sm ml-2 m-0 p-0 text-gray-300 font-semibold"><i class="fas fa-info-circle"></i> Si aún cuentas con el link de la encuesta pegala en el campo URL (Este no es un campo obligatorio)</h2>   -->
                         <hr class="m-2 p-2">
 
                         <div class="form-group">
@@ -31,10 +31,10 @@
                             <input type="text" wire:model="pid" class="form-control" id="formGroupExampleInput2" placeholder="0123456789012345">
                             <x-input-error for="pid" />
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="formGroupExampleInput2">URL</label>
                             <input type="text" wire:model="url" class="form-control" id="formGroupExampleInput2" placeholder="https://decipherinc.com/survey/selfserve/2157/220847?list=101&pid=256212666&psid=ku9BrkvUN8pkuCiK2G4a8Sq0h">
-                        </div>
+                        </div> -->
 
                     </div>
                     <div class="modal-footer">

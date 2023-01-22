@@ -281,7 +281,7 @@
                         mostrarElemento($btnPausar);
                         ocultarElemento($btnIniciar);
                         ocultarElemento($btnDetener);
-                        agregarClase($tiempoRestante );
+                        agregarClase($tiempoRestante);
 
 
                         if (fechaFuturo) {
@@ -327,7 +327,7 @@
                     ocultarElemento($btnPausar);
                     mostrarElemento($btnIniciar);
                     mostrarElemento($btnDetener);
-                    agregarClase($tiempoRestante );
+                    agregarClase($tiempoRestante);
 
                     fechaFuturo = localStorage.getItem("fecha_futuro_bdd")
                     diferenciaTemporal = fechaFuturo - new Date().getTime();

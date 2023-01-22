@@ -8,7 +8,7 @@ use Livewire\Component;
 
 class UsuariosEdit extends Component
 {
-    public $estado_id ="", $roles_id, $last_date, $plan;
+    public $estado_id ="", $roles_id, $last_date, $plan, $balance;
     public $usuario;
     public $username, $roles, $email, $estado = 'inactivo', $password, $password_confirm;
 

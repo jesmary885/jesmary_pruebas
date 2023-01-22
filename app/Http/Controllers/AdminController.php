@@ -25,4 +25,8 @@ class AdminController extends Controller
     public function ganancias(){
         return view('admin.ganancias');
     }
+    
+    public function jumpers(){
+        return view('admin.jumpers');
+    }
 }
