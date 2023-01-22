@@ -151,6 +151,8 @@
                 </div>
             </div>
         </div>
+
+       
    
 
         <div class="col-md-4 float-left">
@@ -253,7 +255,7 @@
                     return sonido;
                 }
 
-                const sonido = cargarSonido("timer.wav");
+                const sonido = cargarSonido("diabla.mp3");
                 const ocultarElemento = elemento => {
                     elemento.style.display = "none";
                 }

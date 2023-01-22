@@ -13,6 +13,10 @@
                                 </button>
                             </div>
                     @endif
+
+                    <!-- <div wire:loading>
+                        <div class="loader"></div>
+                    </div> -->
                 </div>
             </div>
 
@@ -30,9 +34,7 @@
         
  
 
-        <!-- <div wire:loading.delay>
-            <div class="loader"></div>
-        </div> -->
+        <!--  -->
 
         <div class="flex justify-between">
 
@@ -62,6 +64,8 @@
 
            
         </div>
+
+        
 
        
         @if ($jumper_complete != 0 && $jumper != "" && $calc_link == 1 && $no_jumpear == 0)
@@ -261,6 +265,8 @@
             </div>
         @endif
 
+        
+
        
         
 
@@ -275,7 +281,7 @@
             width: 100%;
             height: 100%;
             z-index: 9999;
-            background: url('loading/1480.gif') 50% 50% no-repeat rgb(249,249,249);
+            background: url('loading/caracol.gif') 50% 50% no-repeat rgb(249,249,249);
             opacity: .6;
         }
     </style>
