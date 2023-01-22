@@ -104,7 +104,7 @@
 
     </div> -->
 
-    <div class="hidden md:block" id="accordion">
+    <div id="accordion">
         <div class="col-md-3 float-right">
             <div class="card card-info">
                 <div class="card-header py-0" id="headingTwo">
@@ -153,7 +153,7 @@
         </div>
    
 
-        <div class="col-md-3">
+        <div class="col-md-4 float-left">
             <div class="card card-info">
                 <div class="card-header py-0" id="headingTwo">
                     <h5 class="mb-0 ">
