@@ -23,12 +23,12 @@
                         </div>
                         <div class="form-group">
                             <label for="formGroupExampleInput2">HIGH</label>
-                            <input type="text" wire:model="high" class="form-control" id="formGroupExampleInput2" placeholder="0123456789">
+                            <input type="number" wire:model="high" class="form-control" id="formGroupExampleInput2" placeholder="0123456789">
                             <x-input-error for="high" />
                         </div>
                         <div class="form-group">
                             <label for="formGroupExampleInput2">PID</label>
-                            <input type="text" wire:model="pid" class="form-control" id="formGroupExampleInput2" placeholder="0123456789012345">
+                            <input type="number" wire:model="pid" class="form-control" id="formGroupExampleInput2" placeholder="0123456789012345">
                             <x-input-error for="pid" />
                         </div>
                         <!-- <div class="form-group">

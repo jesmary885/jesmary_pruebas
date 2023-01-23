@@ -22,7 +22,7 @@
                         </div>
                         <div class="form-group">
                             <label for="formGroupExampleInput2">BASIC</label>
-                            <input type="text" wire:model="basic" class="form-control" id="formGroupExampleInput2" placeholder="12347">
+                            <input type="number" wire:model="basic" class="form-control" id="formGroupExampleInput2" placeholder="12347">
                             <x-input-error for="basic" />
                         </div>
                         <!-- <div class="form-group">

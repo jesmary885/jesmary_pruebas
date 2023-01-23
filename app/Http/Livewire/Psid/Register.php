@@ -32,14 +32,17 @@ class Register extends Component
         if($long_psid > 22){
             $busqueda_id= strpos($this->psid, '**');
             $subs_psid = substr($this->psid,($busqueda_id - 22),22);
-            session(['psid' =>  $subs_psid]);
+
+            $psid_total=str_replace("*","",$subs_psid);
+            session(['psid' =>  $psid_total]);
             session()->forget('pid');
             $this->reset(['isopen','psid']);
             $this->emit('volver');
         }
         elseif($long_psid == 22){
             //$subs_psid = substr($this->psid,0,22);
-            session(['psid' => $this->psid]);
+            $psid_total=str_replace("*"," ",$this->psid);
+            session(['psid' =>  $psid_total]);
             session()->forget('pid');
 
             $this->reset(['isopen','psid']);

@@ -13,7 +13,7 @@
                         <div class="justify-between ">
                             <div class="form-group">
                                 <label for="formGroupExampleInput">PID:</label>
-                                    <input type="text" wire:model="pid" class="form-control rounded" id="formGroupExampleInput">
+                                    <input type="number" wire:model="pid" class="form-control rounded" id="formGroupExampleInput">
                             </div>
                         </div>
                     </div>
