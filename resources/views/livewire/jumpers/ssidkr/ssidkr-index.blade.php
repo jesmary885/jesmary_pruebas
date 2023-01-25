@@ -14,9 +14,7 @@
                             </div>
                     @endif
 
-                    <!-- <div wire:loading>
-                        <div class="loader"></div>
-                    </div> -->
+                     
                 </div>
             </div>
 
@@ -65,8 +63,6 @@
            
         </div>
 
-        
-
        
         @if ($jumper_complete != 0 && $jumper != "" && $calc_link == 1 && $no_jumpear == 0)
             <div class="card-body mt-0">
@@ -85,7 +81,7 @@
             </div>
         @if ($jumper_complete != 0 || $jumper != "")
 
-                </div>
+            </div>
             <table class="table table-striped table-responsive-md table-responsive-sm">
                     <thead class="thead-dark">
                         <tr>
@@ -147,30 +143,30 @@
                             </td>
                         </tr>
                     </tbody>
-                </table>
+            </table>
 
                 <div class="grid md:grid-cols-3 gap-4 mt-4 card container">
                     <aside class="md:col-span-1 p-2">
                     
                         <div class="info-box mb-3 bg-info" :class="{'hidden': (jumper_detect == '0')}">
-                        @if($jumper_detect != 0)
-                        <span class="info-box-icon"><i class="fas fa-tag"></i></span>
-                            <div class="info-box-content">
-                            <span class="info-box-text">Tipo {{$jumper->jumperType->name}}</span>
-                            <span class="info-box-number">Dominio: {{$jumper_detect}}</span>
-                            </div>
+                            @if($jumper_detect != 0)
+                                <span class="info-box-icon"><i class="fas fa-tag"></i></span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Tipo {{$jumper->jumperType->name}}</span>
+                                    <span class="info-box-number">Dominio: {{$jumper_detect}}</span>
+                                </div>
                             @endif
                         </div>
                     
-                    @if($k_detect != '0')
-                        <div class="info-box mb-3 bg-success" :class="{'hidden': (k_detect == '0')}">
-                            <span class="info-box-icon"><i class="far fa-heart"></i></span>
-                            <div class="info-box-content">
-                            <span class="info-box-text">Detectada una posible</span>
-                            <span class="info-box-number">{{$k_detect}}</span>
+                        @if($k_detect != '0')
+                            <div class="info-box mb-3 bg-success" :class="{'hidden': (k_detect == '0')}">
+                                <span class="info-box-icon"><i class="far fa-heart"></i></span>
+                                <div class="info-box-content">
+                                <span class="info-box-text">Detectada una posible</span>
+                                <span class="info-box-number">{{$k_detect}}</span>
+                                </div>
                             </div>
-                        </div>
-                    @endif
+                        @endif
 
                     </aside>
 
@@ -198,8 +194,8 @@
                                             <p class="text-gray-200 text-lg font-semibold">{{$comment->user->name}}</p>
                                             <p class="text-gray-200 text-sm ">{{$comment->created_at->format('d/m/Y h:i')}}</p>
                                         </div>
-                                        <div class="flex-1 ml-4 text-justify">
-                                            <p class="text-white font-semibold">{{$comment->comment}}</p>
+                                        <div class="flex-1 ml-4 text-justify overflow-x-auto">
+                                            <p class="text-white font-semibold text-justify">{{$comment->comment}}</p>
                                         </div>
                                         
                                     </div>
@@ -265,25 +261,64 @@
             </div>
         @endif
 
-        
-
-       
-        
-
+        <div wire:loading>
+            <div class="container2">
+                <div class="cargando">
+                    <div class="pelotas"></div>
+                    <div class="pelotas"></div>
+                    <div class="pelotas"></div>
+                    <span class="texto-cargando font-bold text-gray-300 ">Loading...</span>
+                </div>
+            </div>
+        </div>
     </div>
 
     <style>
-   
-        .loader {
-            position: fixed;
-            left: 0px;
-            top: 0px;
-            width: 100%;
-            height: 100%;
-            z-index: 9999;
-            background: url('loading/caracol.gif') 50% 50% no-repeat rgb(249,249,249);
-            opacity: .6;
-        }
+     
+            .container2{   
+            display: grid;
+                place-content: center;
+                height: 100px;
+            }
+            .cargando{
+                width: 120px;
+                height: 30px;
+                display: flex;
+                flex-wrap: wrap;
+                align-items: flex-end;
+                justify-content: space-between;
+            margin: 0 auto; 
+            }
+            .texto-cargando{ 
+            padding-top:10px
+            }
+            .cargando span{
+                font-size: 20px;
+                text-transform: uppercase;
+            }
+            .pelotas {
+                width: 30px;
+                height: 30px;
+                background-color: #00b8de;
+                animation: salto .5s alternate
+                infinite;
+            border-radius: 50%  
+            }
+            .pelotas:nth-child(2) {
+                animation-delay: .18s;
+            }
+            .pelotas:nth-child(3) {
+                animation-delay: .37s;
+            }
+            @keyframes salto {
+                from {
+                    transform: scaleX(1.25);
+                }
+                to{
+                    transform: 
+                    translateY(-50px) scaleX(1);
+                }
+            }
     </style>
 
     <script>

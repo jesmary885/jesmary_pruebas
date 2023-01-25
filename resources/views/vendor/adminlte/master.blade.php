@@ -94,6 +94,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 </head>
 
@@ -170,6 +172,29 @@
                 "hideMethod": "fadeOut"
             }
             toastr.error(ms)
+        })
+    </script>
+
+<script>
+        livewire.on('confirm', (ms,item1,item2,ms2) => {
+            Swal.fire({
+            title: ms,
+            text: "",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, deseo agregarlo'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                        livewire.emitTo(item1,item2)
+                        Swal.fire(
+                        '',
+                        ms2,
+                        'success'
+                        )
+                }
+            })
         })
     </script>
 

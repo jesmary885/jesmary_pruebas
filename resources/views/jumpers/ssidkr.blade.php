@@ -18,7 +18,7 @@
     @endif
 
    
-    @livewire('jumpers.ssidkr.ssidkr-index',['jumper'=>$jumper, 'link_complete' => $link_complete]) 
+    @livewire('jumpers.ssidkr.ssidkr-index',['jumper'=>$jumper, 'link_complete' => $link_complete, 'search' => $search]) 
   
 @stop
 

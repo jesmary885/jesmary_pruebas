@@ -14,15 +14,16 @@ class SsidkrIndex extends Component
     use WithPagination;
     protected $paginationTheme = "bootstrap";
 
-    public $posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $wix_detect = '0', $psid_register=0,$jumper_redirect,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$is_high,$is_basic,$calc_link,$jumper_select ;
+    public $posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $wix_detect = '0', $psid_register=0,$jumper_redirect,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$is_high,$is_basic,$calc_link,$jumper_select ;
 
-    protected $listeners = ['render' => 'render'];
+    protected $listeners = ['render' => 'render', 'registro_psid' => 'registro_psid'];
 
-    public function mount($jumper,$link_complete){
+    public function mount($jumper,$link_complete,$search){
         if($jumper != 0){
             $this->link_complete_2 = $link_complete;
             $this->jumper_redirect= Link::where('id',$jumper)->first();
         }
+        if($search != '') $this->search = $search;
         $this->jumper_2 = '';
         $this->user_auth =  auth()->user()->id;
         $this->points_user='no';
@@ -31,9 +32,8 @@ class SsidkrIndex extends Component
         $this->calc_link = 0;
         if(session('pid')) $this->pid_new = session('pid');
         if(session('psid')) $this->psid_register = session('psid');
+        if(session('search')) $this->search = session('search');
     }
-
-
 
     public function render()
     {
@@ -85,9 +85,31 @@ class SsidkrIndex extends Component
 
                     if($busqueda_ast_ !== false){
                         $busqueda_id= strpos($this->search, '**');
+                        
+
                         $subs_psid = substr($this->search,($busqueda_id - 22),5);
                         $subs_psid_sin_cortar = substr($this->search,($busqueda_id - 22));
                         $psid_complete = substr($subs_psid_sin_cortar,0,21);
+
+                        //Buscando coincidencia con el psid registrado
+                        $busqueda_psid_registrado = substr($this->search,($busqueda_id - 11),11);
+                        $this->psid_detectado = substr($this->search,($busqueda_id - 22),22);
+                        
+
+                        if(session('psid')){
+                            $ultimos_dig_psid = substr(session('psid'),11,11);
+
+                            if($busqueda_psid_registrado != $ultimos_dig_psid) {
+                                $this->emit('confirm', '¿Desea registrar el psid con terminal '.$busqueda_psid_registrado.'?','jumpers.ssidkr.ssidkr-index','registro_psid','Psid registrado');
+
+                            }
+                        }
+
+                        else{
+                            $this->emit('confirm', '¿Desea registrar el psid con terminal '.$busqueda_psid_registrado.'?','jumpers.ssidkr.ssidkr-index','registro_psid','Psid registrado');
+                        }
+
+
                     }
                     else{
                         $busqueda_psid_ = strpos($this->search, 'psid');
@@ -376,8 +398,45 @@ class SsidkrIndex extends Component
             $this->calc_link = 0;
         }
 
+        session()->forget('search');
 
         return view('livewire.jumpers.ssidkr.ssidkr-index',compact('jumper_complete','jumper','comments','subs_psid'));
+    }
+
+    public function registro_psid(){
+
+        session(['psid' =>  $this->psid_detectado]);
+        $this->psid_register = session('psid');
+
+        //BUSCANDO PID Y AGREGANDOLO
+            $busqueda_pid_search= strpos($this->search, 'PID=');
+
+            if($busqueda_pid_search){
+                $this->posicionpid = $busqueda_pid_search + 4;
+
+                $pid_c = 0;
+                
+                do{
+                    $detectpid= substr($this->search, $this->posicionpid,1);
+                            
+                    if($detectpid == '&') $pid_c= 1;
+                    else{
+                        $pid_c = 0;
+                        $this->posicionpid = $this->posicionpid + 1;
+                    }
+                }
+                while($pid_c != 1);
+
+                $posicion_total_pid = $this->posicionpid - ($busqueda_pid_search + 4);
+                session(['pid' => substr($this->search,($busqueda_pid_search + 4),$posicion_total_pid)]);
+            }
+
+        //TERMINANDO DE AGREGAR EL PID
+
+        session(['search' =>  $this->search]);
+
+        return redirect()->route('ssidkr.index');
+
     }
 
     public function positivo($jumper_id){
