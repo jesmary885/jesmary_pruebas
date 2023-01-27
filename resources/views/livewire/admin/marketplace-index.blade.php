@@ -38,6 +38,14 @@
                                     <td width="10px">
                                         @livewire('marketplace.marketplace-create',['accion'=>'edit','marketplace'=>$marketplace],key($marketplace->id))
                                     </td>
+
+                                    <td class="py-4 px-2 whitespace-nowrap text-center text-sm font-medium">
+                                    <a href="{{ route('marketplace.add.files', $marketplace) }}" class="text-blue-600 text-lg hover:text-blue-900">
+                                    <i class="far fa-images"></i>
+                                    </a>
+                                </td>
+
+                           
                                    
                                 </tr>
                             @endforeach

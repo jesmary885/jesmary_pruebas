@@ -44,7 +44,10 @@ Route::middleware(['auth'])->group(function()
     //Marketplace
     Route::get('marketplace',[MarketplaceController::class,'index'])->name('marketplace.index');
     Route::get('marketplace_shop/{marketplace}',[MarketplaceController::class,'shop'])->name('marketplace.shop');
+    Route::get('marketplace/{marketplace}',[MarketplaceController::class,'add_files'])->name('marketplace.add.files');
+    Route::post('marketplace/{marketplace}/files',[MarketplaceController::class,'files'])->name('marketplace.files');
 
+    
     //chat
     Route::get('chat-conver/{contact?}',[ChatController::class,'index'])->name('chat.index');
     Route::get('chat-conver/{user}',[ChatController::class,'chat_convers'])->name('chat.convers');

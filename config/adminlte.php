@@ -64,7 +64,7 @@ return [
     */
 
     'logo' => null,
-    'logo_img' => 'storage/logo/logo_2.png',
+    'logo_img' => 'storage/logo/LOGO_QUERYSET.png',
     'logo_img_class' => 'w-full h-full mx-auto my-0 d-block',
     'logo_img_xl' => null,
     'logo_img_xl_class' => null,

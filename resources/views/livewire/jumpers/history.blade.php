@@ -60,7 +60,6 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal" wire:click="close">{{__('messages.Cerrar')}}</button>
-                        <button type="button" class="btn btn-primary" wire:click="save">{{__('messages.Guardar')}}</button>
                     </div>
 
                 </div>

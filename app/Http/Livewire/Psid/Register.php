@@ -30,7 +30,8 @@ class Register extends Component
 
         $long_psid = strlen($this->psid);
         if($long_psid > 22){
-            $busqueda_id= strpos($this->psid, '**');
+            $busqueda_id= strpos($this->psid, '*');
+
             $subs_psid = substr($this->psid,($busqueda_id - 22),22);
 
             $psid_total=str_replace("*","",$subs_psid);
@@ -41,7 +42,7 @@ class Register extends Component
         }
         elseif($long_psid == 22){
             //$subs_psid = substr($this->psid,0,22);
-            $psid_total=str_replace("*"," ",$this->psid);
+            $psid_total=str_replace("*","",$this->psid);
             session(['psid' =>  $psid_total]);
             session()->forget('pid');
 

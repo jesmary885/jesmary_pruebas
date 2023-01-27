@@ -86,7 +86,6 @@ class SsidkrIndex extends Component
                     if($busqueda_ast_ !== false){
                         $busqueda_id= strpos($this->search, '**');
                         
-
                         $subs_psid = substr($this->search,($busqueda_id - 22),5);
                         $subs_psid_sin_cortar = substr($this->search,($busqueda_id - 22));
                         $psid_complete = substr($subs_psid_sin_cortar,0,21);

@@ -34,4 +34,9 @@ class Marketplace extends Model
         return $this->belongsToMany(PaymentMethods::class);
     }
 
+    //relacion uno a muchos polimoefica
+    public function images(){
+        return $this->morphMany(Images::class, "imageable");
+    }
+
 }
