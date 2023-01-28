@@ -150,7 +150,7 @@ class SsidkrIndex extends Component
                         //en el caso de direccionamiento desde otras vas a padar el jumper y el psid_complete
                          $this->is_basic = "si";
                         if(session('psid')) $link_complete =$psid_complete.substr(session('psid'),21);
-                        else $link_complete = $psid_complete.'(ultima letra del tu psid)';
+                        else $link_complete = $psid_complete.'(ultima letra de tu psid)';
                         
                         $this->calc_link = 1;
                     } 
