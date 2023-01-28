@@ -243,7 +243,8 @@ class SsidkrIndex extends Component
         
                 if($jumper->jumper_type_id == 1){
                     $this->is_basic = "si";
-                    $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?rst=1&psid='.$link_complete.'**&basic='.$jumper->basic;
+                    if($jumper->psid == 'j1nB1') $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?rst=1&psid='.$link_complete.'**&basic='.$jumper->basic.'&psid=j1nB';
+                    else $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?rst=1&psid='.$link_complete.'**&basic='.$jumper->basic;
                 } 
                             
                 if($jumper->jumper_type_id == 2){
