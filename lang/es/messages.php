@@ -12,6 +12,7 @@ return [
     'Guardar' => 'Guardar',
     'Mercado' => 'Mercado',
     'Chat' => 'Chat',
+    'tasa' => 'Tasa',
     'Sobre_nosotros' => 'Sobre nosotros',
     'Herramientas' => 'Herramientas',
     'Tipo' => 'Tipo',

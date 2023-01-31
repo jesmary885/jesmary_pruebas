@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CategoryMarketplace;
 use App\Models\Marketplace;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -9,7 +10,11 @@ use Illuminate\Support\Facades\Storage;
 class MarketplaceController extends Controller
 {
     public function index(){
-        return view('marketplace.index');
+
+        $categories = CategoryMarketplace::all();
+
+
+        return view('marketplace.index', compact('categories'));
     }
 
     public function shop($marketplace){

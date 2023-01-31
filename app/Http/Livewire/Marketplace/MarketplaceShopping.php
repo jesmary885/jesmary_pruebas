@@ -9,7 +9,7 @@ use Livewire\Component;
 
 class MarketplaceShopping extends Component
 {
-    public $marketplace,$marketplace_select, $contact, $porcentaje_marketplace, $porcentaje_vendedor;
+    public $marketplace,$marketplace_select, $contact, $porcentaje_marketplace, $porcentaje_vendedor, $metodos;
 
     protected $listeners = ['render' => 'render'];
 
@@ -20,6 +20,8 @@ class MarketplaceShopping extends Component
 
         $user= User::where('id',$this->marketplace_select->user_id)->first();
         if($user->sales) $this->porcentaje_vendedor = (100 * $user->points) / ($user->sales * 5)  ?? 0;
+
+        $this->metodos = $this->marketplace_select->payment_methods;
        
     }
 
@@ -160,6 +162,8 @@ class MarketplaceShopping extends Component
 
     public function render()
     {
+        $this->marketplace_select = Marketplace::where('id',$this->marketplace)->first(); 
+        
         return view('livewire.marketplace.marketplace-shopping');
     }
 

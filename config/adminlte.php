@@ -64,7 +64,7 @@ return [
     */
 
     'logo' => null,
-    'logo_img' => 'storage/logo/LOGO_AZUL.jpg',
+    'logo_img' => 'storage/logo/LOGO_DOS_COLORES.jpg',
     'logo_img_class' => 'w-full h-full mx-auto my-0 d-block',
     'logo_img_xl' => null,
     'logo_img_xl_class' => null,
@@ -309,8 +309,14 @@ return [
                     'can' => 'admin.users'
                 ],
                 [
-                    'text' => 'Mi marketplace',
+                    'text' => 'Mi marketplace venta',
                     'route'  => 'admin.marketplace',
+                    'icon'    => 'fas fa-box-open',
+                    'can' => 'admin.sales'
+                ],
+                [
+                    'text' => 'Mi marketplace compra',
+                    'route'  => 'admin.marketplace.compra',
                     'icon'    => 'fas fa-box-open',
                     'can' => 'admin.sales'
                 ],

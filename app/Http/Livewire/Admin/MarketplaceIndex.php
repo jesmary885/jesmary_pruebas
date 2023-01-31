@@ -14,10 +14,15 @@ class MarketplaceIndex extends Component
 
     protected $listeners = ['render' => 'render'];
 
-    public $search;
+    public $search,$vista;
 
     public function updatingSearch(){
         $this->resetPage();
+    }
+
+    public function mount($vista){
+        $this->vista = $vista;
+
     }
 
     public function reputation($value){
@@ -89,10 +94,21 @@ class MarketplaceIndex extends Component
 
     public function render()
     {
-        $marketplaces = Marketplace::where('name', 'LIKE', '%' . $this->search . '%')
-        ->where('user_id','=',auth()->id())
-        ->latest('id')
-        ->paginate(20);
+        if($this->vista == 'venta'){
+            $marketplaces = Marketplace::where('name', 'LIKE', '%' . $this->search . '%')
+            ->where('user_id','=',auth()->id())
+            ->where('type','venta')
+            ->latest('id')
+            ->paginate(20);
+        }
+        else{
+            $marketplaces = Marketplace::where('name', 'LIKE', '%' . $this->search . '%')
+            ->where('user_id','=',auth()->id())
+            ->where('type','compra')
+            ->latest('id')
+            ->paginate(20);
+        }
+        
 
         return view('livewire.admin.marketplace-index',compact('marketplaces'));
     }

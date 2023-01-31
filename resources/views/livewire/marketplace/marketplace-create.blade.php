@@ -41,9 +41,15 @@
                             </div>
                             <div class="flex justify-between">
                                 <div class="form-group w-full mr-2">
+                                    @if($vista == 'venta')
                                     <label for="formGroupExampleInput2">{{__('messages.precio')}}</label>
                                     <input type="number" wire:model="price" min="0" class="form-control rounded" id="formGroupExampleInput">
                                     <x-input-error for="price" />
+                                    @else
+                                    <label for="formGroupExampleInput2">{{__('messages.tasa')}}</label>
+                                    <input type="number" wire:model="tasa" min="0" class="form-control rounded" id="formGroupExampleInput">
+                                    <x-input-error for="tasa" />
+                                    @endif
                                 </div>
                                 <div class="form-group w-full">
                                     <label for="formGroupExampleInput2">{{__('messages.cantidad')}}</label>

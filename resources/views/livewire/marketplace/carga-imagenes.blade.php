@@ -1,13 +1,13 @@
 <div>
 
-    <h5 class="modal-title py-0 text-lg text-gray-300"> Registro de imagenes de marketplace</h5>
+    <h5 class=" container modal-title py-0 text-lg text-gray-300 font-bold mt-4"> Registro de imágenes del producto</h5>
         
         
                 
                         <hr class="m-2 p-2">
 
                         <div class="mb-4" wire:ignore>
-                            <form action="{{ route('marketplace.files', $marketplace) }}" method="POST" class="text-gray-800 dropzone" 
+                            <form action="{{ route('marketplace.files', $marketplace) }}" method="POST" class="text-gray-800 dropzone bg-gray-300" 
                             id="my-awesome-dropzone">
 
                             </form>
@@ -16,7 +16,8 @@
                         @if ($marketplace->images->count())
 
                             <section class="bg-white shadow-xl rounded-lg p-6 mb-4">
-                                <h1 class="text-2xl text-center font-semibold mb-2">Imagenes del producto</h1>
+                                <h1 class="text-2xl text-center font-semibold mb-2 text-gray-600">Imágenes del producto</h1>
+                                <hr class="m-2 p-2">
 
                                 <ul class="flex flex-wrap">
                                     @foreach ($marketplace->images as $image)
@@ -42,7 +43,7 @@
 
                         
                    
-                        <button type="button" class="btn btn-primary" wire:click="save">{{__('messages.Guardar')}}</button>
+                        <button type="button" class="btn btn-primary" wire:click="regresar">Regresar</button>
 
          
 
@@ -56,7 +57,7 @@
                 headers: {
                     'X-CSRF-TOKEN': "{{ csrf_token() }}"
                 },
-                dictDefaultMessage: "Arrastre una imagen al recuadro",
+                dictDefaultMessage: "Arrastre una(s) imagen(es) al recuadro o haga click aquí para seleccionarlas",
                 acceptedFiles: 'image/*',
                 paramName: "file", // The name that will be used to transfer the file
                 maxFilesize: 2, // MB

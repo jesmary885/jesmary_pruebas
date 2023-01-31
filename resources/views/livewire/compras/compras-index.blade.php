@@ -29,10 +29,10 @@
                                     <td class="text-center">{{$marketplace->cant}}</td>
                                     <td class="text-center">{{$marketplace->paymentMethod->name ?? 'No se ha registrado'}}</td>
                                     <td class="text-center">{{$marketplace->marketplace->user->username}}</td>
-                                    <td class="text-center">{{$this->status_value($marketplace->status)}}</td>
+                                    <td class="text-center">{{$marketplace->status}}</td>
                                     <td class="text-center">{{$marketplace->total_paid}}</td>                          
                                     <td width="10px">
-                                        @livewire('admin.venta-edit',['sale_marketplace'=>$marketplace],key($marketplace->id))
+                                
                                     </td>
                                 </tr>
                             @endforeach

@@ -13,11 +13,6 @@ class ComprasIndex extends Component
 
     protected $listeners = ['render' => 'render'];
 
-    public function status_value($value){
-        if($value == 1) return 'Pagado y entregado';
-        elseif($value == 2) return 'No pagado ni entregado';
-    }
-
     public function render()
     {
         $marketplaces = saleMarketplace::whereHas('marketplace',function(Builder $query){

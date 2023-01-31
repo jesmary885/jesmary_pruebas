@@ -154,10 +154,16 @@ class VentasIndex extends Component
             ->orwhereHas('user',function(Builder $query2){
                     $query2->where('username','LIKE', '%' . $this->search . '%');
             })
+            ->orwhere('id', 'LIKE', '%' . $this->search . '%')
             ->latest('id')
             ->paginate(30);
 
         return view('livewire.admin.ventas-index',compact('marketplaces'));
+    }
+
+    public function download($value){
+        $url = storage_path('app/public/'.str_replace('-', '/', $value));
+        return response()->download($url);
     }
 }
 

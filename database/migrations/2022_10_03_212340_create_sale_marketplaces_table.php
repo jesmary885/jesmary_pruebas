@@ -20,7 +20,7 @@ return new class extends Migration
 
             $table->string('cant');
             $table->string('total_paid')->nullable();
-            $table->enum('status', [saleMarketplace::PAGADO_ENTREGADO,saleMarketplace::NO_PAGADO_NO_ENTREGADO]);
+            $table->string('status');
   
             $table->unsignedBigInteger('payment_method_id')->nullable();
             $table->foreign('payment_method_id')->references('id')->on('payment_methods');

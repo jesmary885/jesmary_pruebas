@@ -17,16 +17,22 @@ class CategoryMarketplaceSeeder extends Seeder
     {
         $categories = [
             [
-                'name' => 'Categoria 1',
+                'name' => 'PROXIES, VPS Y VPN',
             ],
             [
-                'name' => 'Categoria 2',
+                'name' => 'GIFT CARD Y DIVISAS',
             ],
             [
-                'name' => 'Categoria 3',
+                'name' => 'VERIFICACIONES',
             ],
             [
-                'name' => 'Categoria 4',
+                'name' => 'TV STREAMING',
+            ],
+            [
+                'name' => 'EQUIPOS TECNOLÓGICOS',
+            ],
+            [
+                'name' => 'OTROS',
             ],
         ];
 

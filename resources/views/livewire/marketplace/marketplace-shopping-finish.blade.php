@@ -1,4 +1,5 @@
-<div x-data="{status: @entangle('status')}">
+<div x-data="{method_id: @entangle('metodo_id')}">
+
     <button type="submit" class="btn btn-primary btn-sm float-right" wire:click="open">
         Comprar
     </button>
@@ -10,12 +11,10 @@
                         <h5 class="modal-title py-0 text-lg text-gray-300"> {{__('messages.registro_ventas')}}</h5>
                     </div>
                     <div class="modal-body">
-                        <h2 class="text-sm ml-2 m-0 p-0 text-gray-300 font-semibold"><i class="fas fa-info-circle"></i> {{__('messages.Complete_todos_los_campos_y_presiona_Guardar')}}</h2> 
-                
-                        <hr class="m-2 p-2">
+
 
                         <div class="flex justify-end">
-                            <div class="mt-1">
+                            <div>
                                 <div class="mr-2 flex justify-between">
                                     <p class="text-gray-300 text-md font-semibold mt-1 mr-2">Cantidad: </p>
                                     <button type="button" class="mr-1 btn btn-secondary"
@@ -38,100 +37,32 @@
                             </div>
                         </div>
 
-                      
-                            <div class="form-group w-full mr-2 h-full">
-                                <label for="formGroupExampleInput2">Estado de su compra</label>
-                                <div class="custom-control custom-radio">
-                                    <input class="custom-control-input" type="radio" id="customRadio1" name="customRadio" value="1" wire:model="status">
-                                    <label for="customRadio1" class="custom-control-label">Ya he recibido y pagado el producto</label>
-                                </div>
-
-                                <div class="custom-control custom-radio">
-                                    <input class="custom-control-input custom-control-input-danger" type="radio" id="customRadio2" value="2" name="customRadio" wire:model="status">
-                                    <label for="customRadio2" class="custom-control-label">No he pagado ni recibido el producto</label>
-                                </div>
-
-                                <x-input-error for="status" />
-
+                        <div class="flex justify-between mt-1">
+                            <div class="form-group w-full mr-2 mt-4">
+                                <label for="formGroupExampleInput2 mb-2">Método de pago ha utilizar</label>
+                                    <select wire:model="metodo_id" class="form-control w-full">
+                                        <option value="" selected>Seleccione una opción</option>
+                                            @foreach ($metodos as $metodo)
+                                                <option value="{{$metodo->id}}">{{$metodo->name}}</option>
+                                            @endforeach
+                                    </select>
                             </div>
-                            
-                            <div class="flex justify-between mt-3" :class="{'hidden': (status == '2')}">
-                                <div class="form-group w-full mr-2 mt-4">
-                                    <label for="formGroupExampleInput2">Método de pago ha utilizar</label>
-                                        <select wire:model="metodo_id" class="form-control w-full">
-                                            <option value="" selected>Seleccione una opción</option>
-                                                @foreach ($metodos as $metodo)
-                                                    <option value="{{$metodo->id}}">{{$metodo->name}}</option>
-                                                @endforeach
-                                        </select>
-                                </div>
-                            </div>
+                        </div>
 
-                            <div class="mt-4">
-
-                            <div class="grid grid-cols-2" :class="{'hidden': (status == '2')}">
-                                <div>
-                                    <div class="form-group w-full mr-2 h-full">
-                                        <label for="formGroupExampleInput2">Tus puntos hacia el vendedor</label>
-                                        <div class="custom-control custom-radio">
-                                            <input class="custom-control-input" type="radio" id="customRadio5" name="customRadio1" value="1" wire:model.defer="ptos_vendedor">
-                                            <label for="customRadio5" class="custom-control-label"><p class="text-gray-700 text-md"> <i class="fas fa-star text-md text-yellow-400"></i></p></label>
-                                        </div>
-
-                                        <div class="custom-control custom-radio">
-                                            <input class="custom-control-input" type="radio" id="customRadio6" value="2" name="customRadio1" wire:model.defer="ptos_vendedor">
-                                            <label for="customRadio6" class="custom-control-label flex"><p class="text-gray-700 text-md"> <i class="fas fa-star text-md text-yellow-400"></i> <i class="fas fa-star text-md text-yellow-400"></i></p></label>
-                                        </div>
-
-                                        <div class="custom-control custom-radio">
-                                            <input class="custom-control-input" type="radio" id="customRadio7" value="3" name="customRadio1" wire:model.defer="ptos_vendedor">
-                                            <label for="customRadio7" class="custom-control-label flex"><p class="text-gray-700 text-md"> <i class="fas fa-star text-md text-yellow-400"></i> <i class="fas fa-star text-md text-yellow-400"></i> <i class="fas fa-star text-md text-yellow-400"></i></p></label>
-                                        </div>
-
-                                        <div class="custom-control custom-radio">
-                                            <input class="custom-control-input" type="radio" id="customRadio8" value="4" name="customRadio1" wire:model.defer="ptos_vendedor">
-                                            <label for="customRadio8" class="custom-control-label flex"><p class="text-gray-700 text-md"> <i class="fas fa-star text-md text-yellow-400"></i> <i class="fas fa-star text-md text-yellow-400"></i> <i class="fas fa-star text-md text-yellow-400"></i> <i class="fas fa-star text-md text-yellow-400"></i></p></label>
-                                        </div>
-
-                                        <div class="custom-control custom-radio">
-                                            <input class="custom-control-input" type="radio" id="customRadio9" value="5" name="customRadio1" wire:model.defer="ptos_vendedor">
-                                            <label for="customRadio9" class="custom-control-label flex"><p class="text-gray-700 text-md"> <i class="fas fa-star text-md text-yellow-400"></i> <i class="fas fa-star text-md text-yellow-400"></i> <i class="fas fa-star text-md text-yellow-400"></i> <i class="fas fa-star text-md text-yellow-400"></i> <i class="fas fa-star text-md text-yellow-400"></i></p></label>
+                        <div class="w-full" :class="{'hidden': (method_id == '1')}">
+                                <div class="flex">
+                                    <i class="fas fa-file-pdf mt-2 mr-2 text-gray-300"></i>
+                                    <h2 class="text-md inline mt-2 text-gray-300 mb-2">Adjunte la constancia de pago</h2>
+                                </div> 
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <input type="file" wire:model="file" id="file" class="block w-full text-base font-normal text-gray-300 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out focus:text-gray-300 focus:border-blue-600 focus:outline-none">
+                                        
+                                            <p class="text-gray-400 mt-2"></p>
                                         </div>
                                     </div>
                                 </div>
-
-
-                                <div :class="{'hidden': (status == '2')}">
-                                    <div class="form-group w-full mr-2 h-full">
-                                        <label for="formGroupExampleInput2">Tus puntos hacia el producto</label>
-                                        <div class="custom-control custom-radio">
-                                            <input class="custom-control-input" type="radio" id="customRadio10" name="customRadio2" value="1" wire:model.defer="ptos_producto">
-                                            <label for="customRadio10" class="custom-control-label"><p class="text-gray-700 text-md"> <i class="fas fa-star text-md text-yellow-400"></i></p></label>
-                                        </div>
-
-                                        <div class="custom-control custom-radio">
-                                            <input class="custom-control-input" type="radio" id="customRadio11" value="2" name="customRadio2" wire:model.defer="ptos_producto">
-                                            <label for="customRadio11" class="custom-control-label flex"><p class="text-gray-700 text-md"> <i class="fas fa-star text-md text-yellow-400"></i> <i class="fas fa-star text-md text-yellow-400"></i></p></label>
-                                        </div>
-
-                                        <div class="custom-control custom-radio">
-                                            <input class="custom-control-input" type="radio" id="customRadio12" value="3" name="customRadio2" wire:model.defer="ptos_producto">
-                                            <label for="customRadio12" class="custom-control-label flex"><p class="text-gray-700 text-md"> <i class="fas fa-star text-md text-yellow-400"></i> <i class="fas fa-star text-md text-yellow-400"></i> <i class="fas fa-star text-md text-yellow-400"></i></p></label>
-                                        </div>
-
-                                        <div class="custom-control custom-radio">
-                                            <input class="custom-control-input" type="radio" id="customRadio13" value="4" name="customRadio2" wire:model.defer="ptos_producto">
-                                            <label for="customRadio13" class="custom-control-label flex"><p class="text-gray-700 text-md"> <i class="fas fa-star text-md text-yellow-400"></i> <i class="fas fa-star text-md text-yellow-400"></i> <i class="fas fa-star text-md text-yellow-400"></i> <i class="fas fa-star text-md text-yellow-400"></i></p></label>
-                                        </div>
-
-                                        <div class="custom-control custom-radio">
-                                            <input class="custom-control-input" type="radio" id="customRadio14" value="5" name="customRadio2" wire:model.defer="ptos_producto">
-                                            <label for="customRadio14" class="custom-control-label flex"><p class="text-gray-700 text-md"> <i class="fas fa-star text-md text-yellow-400"></i> <i class="fas fa-star text-md text-yellow-400"></i> <i class="fas fa-star text-md text-yellow-400"></i> <i class="fas fa-star text-md text-yellow-400"></i> <i class="fas fa-star text-md text-yellow-400"></i></p></label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">

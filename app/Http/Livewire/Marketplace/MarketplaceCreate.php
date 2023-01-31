@@ -13,7 +13,7 @@ use App\Models\MarketplacePaymentMethods as Pivot;
 
 class MarketplaceCreate extends Component
 {
-    public $isopen = false;
+    public $isopen = false,$vista,$tasa;
     public $market,$accion,$name,$price,$description,$categories,$category_id="",$estado="1",$cant,$payment_methods,$marketplace;
 
     public $createForm = [
@@ -24,9 +24,17 @@ class MarketplaceCreate extends Component
         'payment_methods' => [],
     ];
 
-    protected $rules = [
+    protected $rules_venta = [
         'name' => 'required',
         'price' => 'required',
+        'description' => 'required',
+        'category_id' => 'required',
+        'cant' => 'required',
+    ];
+
+    protected $rules_compra = [
+        'name' => 'required',
+        'tasa' => 'required',
         'description' => 'required',
         'category_id' => 'required',
         'cant' => 'required',
@@ -40,7 +48,8 @@ class MarketplaceCreate extends Component
         'createForm.payment_methods' => 'payment_methods',
     ];
 
-    public function mount(Marketplace $marketplace){
+    public function mount(Marketplace $marketplace,$vista){
+        $this->vista = $vista;
         $this->marketplace = $marketplace;
         $this->categories =  CategoryMarketplace::all();
         $this->payment_methods = PaymentMethods::all();
@@ -72,44 +81,84 @@ class MarketplaceCreate extends Component
     }
 
     public function save(){
-       $this->validate();
+
+        if($this->vista == 'venta'){
+            $rules_venta = $this->rules_venta;
+            $this->validate($rules_venta);
+        }
+        else{
+            $rules_compra = $this->rules_compra;
+            $this->validate($rules_compra);
+        }
 
         $user=Auth::id();
 
         if($this->accion == 'create')
         {
-            $marketplace = new Marketplace();
-            $marketplace->name = $this->name;
-            $marketplace->price = $this->price;
-            $marketplace->description = $this->description;
-            if($this->estado == '1') $marketplace->status = 'Habilitado';
-            else $marketplace->status = 'Deshabilitado';
-            $marketplace->user_id = $user;
-            $marketplace->cant = $this->cant;
-            $marketplace->category_marketplace_id = $this->category_id;
-            $marketplace->save();
+            if($this->vista == 'venta'){
+                
+                $marketplace = new Marketplace();
+                $marketplace->name = $this->name;
+                $marketplace->price = $this->price;
+                $marketplace->description = $this->description;
+                if($this->estado == '1') $marketplace->status = 'Habilitado';
+                else $marketplace->status = 'Deshabilitado';
+                $marketplace->user_id = $user;
+                $marketplace->cant = $this->cant;
+                $marketplace->type = 'venta';
+                $marketplace->category_marketplace_id = $this->category_id;
+                $marketplace->save();
+                $marketplace->payment_methods()->attach($this->createForm['payment_methods']);
+                $this->reset(['isopen','name','price','description','estado','cant','category_id','createForm']);
+            }
 
-            $marketplace->payment_methods()->attach($this->createForm['payment_methods']);
+            else{
+                $marketplace = new Marketplace();
+                $marketplace->name = $this->name;
+                $marketplace->tasa = $this->tasa;
+                $marketplace->description = $this->description;
+                if($this->estado == '1') $marketplace->status = 'Habilitado';
+                else $marketplace->status = 'Deshabilitado';
+                $marketplace->user_id = $user;
+                $marketplace->price = 0;
+                $marketplace->cant = $this->cant;
+                $marketplace->type = 'compra';
+                $marketplace->category_marketplace_id = $this->category_id;
+                $marketplace->save();
+                $marketplace->payment_methods()->attach($this->createForm['payment_methods']);
+                $this->reset(['isopen','name','tasa','description','estado','cant','category_id','createForm']);
 
-            $this->reset(['isopen','name','price','description','estado','cant','category_id','createForm']);
+            }
+            
             $this->emit('alert','Datos registrados correctamente');
         }
         else{
             if($this->estado == '1') $estado = 'Habilitado';
             else $estado = 'Deshabilitado';
 
-            $this->marketplace->update([
-                'name' => $this->name,
-                'price' => $this->price,
-                'description' => $this->description,
-                'status' => $estado,
-                'cant' => $this->cant,
-                'category_marketplace_id' => $this->category_id
-            ]);
+            if($this->vista == 'venta'){
+                $this->marketplace->update([
+                    'name' => $this->name,
+                    'price' => $this->price,
+                    'description' => $this->description,
+                    'status' => $estado,
+                    'cant' => $this->cant,
+                    'category_marketplace_id' => $this->category_id
+                ]);
+            }
+            else{
+                $this->marketplace->update([
+                    'name' => $this->name,
+                    'tasa' => $this->tasa,
+                    'description' => $this->description,
+                    'status' => $estado,
+                    'cant' => $this->cant,
+                    'category_marketplace_id' => $this->category_id
+                ]);
+
+            }
 
             $this->marketplace->payment_methods()->sync($this->createForm['payment_methods']);
-
-
             $this->reset(['isopen']);
             $this->emit('alert','Datos modificados correctamente');
         }
@@ -122,7 +171,7 @@ class MarketplaceCreate extends Component
         $this->market = $marketplaceId;
         $busqueda = saleMarketplace::where('marketplace_id',$marketplaceId)->first();
 
-        if($busqueda) $this->emit('errorSize', 'Esta publicación esta asociada a una venta, no puede eliminarla');
+        if($busqueda) $this->emit('errorSize', 'Esta publicación esta asociada a una venta/compra, no puede eliminarla');
         else $this->emit('confirm', 'Esta seguro de eliminar esta publicación?','admin.marketplace-index','confirmacion','La publicación se ha eliminado.');
     }
 

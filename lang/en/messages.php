@@ -14,6 +14,7 @@ return [
     'Chat' => 'Chat',
     'Sobre_nosotros' => 'About us',
     'Herramientas' => 'Tools',
+    'tasa' => 'Rate',
     'Tipo' => 'Type',
     'Subido' => 'Registration date',
     'Puntuación' => 'Punctuation',

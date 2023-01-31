@@ -4,7 +4,7 @@
 @stop
 
 @section('content')
-    @livewire('admin.marketplace-index') 
+    @livewire('admin.marketplace-index',['vista'=>$vista]) 
 @stop
 
 @section('css')

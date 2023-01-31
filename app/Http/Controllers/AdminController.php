@@ -19,7 +19,13 @@ class AdminController extends Controller
     }
 
     public function marketplace(){
-        return view('admin.marketplace');
+        $vista = 'venta';
+        return view('admin.marketplace',compact('vista'));
+    }
+
+    public function marketplace_compra(){
+        $vista = 'compra';
+        return view('admin.marketplace',compact('vista'));
     }
 
     public function ganancias(){

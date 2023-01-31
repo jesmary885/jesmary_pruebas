@@ -34,4 +34,9 @@ class CargaImagenes extends Component
 
         $this->marketplace = $this->marketplace->fresh();
     }
+
+    public function regresar(){
+
+        redirect()->route('admin.marketplace');
+    }
 }

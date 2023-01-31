@@ -14,18 +14,33 @@ class MarketplaceIndex extends Component
 
     protected $listeners = ['render' => 'render'];
 
-    public $search;
+    public $category,$type;
 
-    public function updatingSearch(){
-        $this->resetPage();
+    public $marketplaces = [];
+
+    public function loadPosts(){
+
+        if($this->type == 'venta'){
+            $this->marketplaces = $this->category->Marketplaces()
+            ->where('status', 'Habilitado')
+            ->where('type', 'venta')
+            ->get();
+
+            $this->emit('glider', $this->category->id,'venta');
+        }
+        else{
+            $this->marketplaces= $this->category->Marketplaces()
+            ->where('status', 'Habilitado')
+            ->where('type', 'compra')
+            ->get();
+
+            $this->emit('glider', $this->category->id,'compra');
+        }
     }
+
+ 
     public function render()
     {
-        $marketplaces = Marketplace::where('name', 'LIKE', '%' . $this->search . '%')
-            ->where('status','Habilitado')
-            ->latest('id')
-            ->paginate(5);
-
-        return view('livewire.marketplace.marketplace-index',compact('marketplaces'));
+        return view('livewire.marketplace.marketplace-index');
     }
 }

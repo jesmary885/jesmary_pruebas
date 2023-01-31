@@ -2,35 +2,21 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Models\Chat;
+use App\Models\CommentUser;
 use App\Models\saleMarketplace;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Illuminate\Support\Facades\Notification;
 
 class VentaEdit extends Component
 {
-    public $isopen = false, $insuficiente= false, $qty, $sale_marketplace, $metodo_id, $metodo_id_bdd, $status, $ptos_vendedor, $ptos_producto, $user, $status_bdd;
+    public $existe = 0,$chat_active,$comentario_enviar,$condicion_venta = 'neutro',$isopen = false, $qty, $sale_marketplace, $metodo_id, $metodo_id_bdd, $status, $ptos_vendedor, $ptos_producto, $user, $status_bdd,$educado,$seguro,$paciente,$maleducado,$no_confiable;
 
     protected $rules = [
         'status' => 'required',    
     ];
-
-    protected $rules_recibido_pagado = [
-        'ptos_producto' => 'required',
-        'metodo_id' => 'required',
-        'ptos_vendedor' => 'required',
-    ];
-
-    protected $rules_no_recibido_pagado = [
-        'metodo_id' => 'required',
-        'ptos_vendedor' => 'required',
-    ];
-
-    protected $rules_recibido_no_pagado = [
-        'ptos_producto' => 'required',
-        'ptos_vendedor' => 'required',
-    ];
-
 
     public function open()
     {
@@ -41,31 +27,57 @@ class VentaEdit extends Component
         $this->isopen = false;  
     }
 
-    public function mount(saleMarketplace $sale_marketplace){
-        $this->sale_marketplace = $sale_marketplace;
-        $this->qty = $sale_marketplace->cant;
-        $this->status = $sale_marketplace->status;
-        $this->status_bdd = $sale_marketplace->status;
-        $this->metodo_id = $sale_marketplace->payment_method_id;
-        $this->metodo_id_bdd = $sale_marketplace->payment_method_id;
-        $this->ptos_vendedor = $sale_marketplace->points_vendedor;
-        $this->ptos_producto = $sale_marketplace->points_producto;
+    public function mount(saleMarketplace $marketplace){
+        $this->sale_marketplace = $marketplace;
+
+        if($this->sale_marketplace->status == 'Pago recibido'){
+            $this->status = 1;
+            $this->existe = 1;
+        } 
+        if ($this->sale_marketplace->status == 'Pago no recibido') {
+            $this->status = 2;
+            $this->existe = 1;
+        }
+
 
     }
 
-    public function decrement(){
-        $this->qty = $this->qty - 1;
+    public function getActiveProperty(){
+
+        if (empty($this->users_notifications->first()->id)){
+
+            return collect();
+
+        }else{
+
+            return $this->users->contains($this->users_notifications->first()->id);
+
+        }
     }
 
-    public function increment(){
-        $this->qty = $this->qty + 1;
+    //Ciclo de vida
+
+    public function updatedBodyMessage($value){
+        if (empty($this->users_notifications->first()->id)){
+            return collect();
+        }
+
+        else{
+            if($value){
+                Notification::send($this->users_notifications, new \App\Notifications\UserTyping($this->chat_active->id));
+            }
+        }
     }
 
     public function render()
     {
-        $metodos= $this->sale_marketplace->marketplace->payment_methods;
 
-        return view('livewire.admin.venta-edit', compact('metodos'));
+        return view('livewire.admin.venta-edit');
+    }
+
+    public function getUsersNotificationsProperty(){
+        return $this->chat_active ? $this->chat_active->users->where('id','!=', auth()->id()) : collect();
+        //es igual a Message::where('chat_id', $this->chat->id)->get()
     }
 
     public function save(){
@@ -73,117 +85,106 @@ class VentaEdit extends Component
         $rules = $this->rules;
         $this->validate($rules);
 
-        if($this->status == 1){
-                $rules_recibido = $this->rules_recibido_pagado;
-                $this->validate($rules_recibido);     
-        }
-    
-        if($this->status == 3){
-                $rules_no_recibido_pagado = $this->rules_no_recibido_pagado;
-                $this->validate($rules_no_recibido_pagado);     
-        }
-    
-        if($this->status == 4){
-                $rules_recibido_no_pagado = $this->rules_recibido_no_pagado;
-                $this->validate($rules_recibido_no_pagado);     
-        }  
-        
+        if($this->condicion_venta != 'neutro')
+        {
+            $comentario = '';
 
-        $ptos_bdd_user = $this->sale_marketplace->marketplace->user->points;
-        $ptos_bdd_market = $this->sale_marketplace->marketplace->points;
+            if($this->status == 1) $status = 'Pago recibido';
+            else $status = 'Pago no recibido';
 
-        if($this->status_bdd == '1'){
-            $ptos_vendedor = $this->sale_marketplace->points_vendedor;
-            $ptos_producto = $this->sale_marketplace->points_producto;
+            $this->sale_marketplace->update([
+                'status' => $status,
+            ]);
 
-            if($ptos_vendedor > $this->ptos_vendedor){
-                $diferencia_ptos_vendedor = $ptos_vendedor - $this->ptos_vendedor; 
-                $this->sale_marketplace->marketplace->user->update([
-                    'points' => $ptos_bdd_user - $diferencia_ptos_vendedor,
-                ]);
-            }
-            elseif($ptos_vendedor < $this->ptos_vendedor){
-                $diferencia_ptos_vendedor = $this->ptos_vendedor - $ptos_vendedor;
-                $this->sale_marketplace->marketplace->user->update([
-                    'points' => $ptos_bdd_user + $diferencia_ptos_vendedor,
-                ]); 
+            if($this->condicion_venta == 'positivo'){
+                if($this->educado == 1) $comentario = '-Educado y amable-'.' '.$comentario;
+                if($this->seguro == 1) $comentario = '-Seguro y confiable-'.' '.$comentario;
+                if($this->paciente == 1) $comentario = '-Paciente-'.' '.$comentario;
             }
 
-            if($ptos_producto > $this->ptos_producto){
-                $diferencia_ptos_producto = $ptos_producto- $this->ptos_producto; 
-                $this->sale_marketplace->marketplace->update([
-                    'points' => $ptos_bdd_market - $diferencia_ptos_producto,
-                ]);
-            }
-            elseif($ptos_producto  < $this->ptos_producto){
-                $diferencia_ptos_producto = $this->ptos_producto - $ptos_producto; 
-                $this->sale_marketplace->marketplace->update([
-                    'points' => $ptos_bdd_market + $diferencia_ptos_producto,
-                ]); 
+            if($this->condicion_venta == 'negativo'){
+                if($this->maleducado == 1) $comentario = '-Maleducado y malhablado-'.' '.$comentario;
+                if($this->no_confiable == 1) $comentario = '-No confiable-'.' '.$comentario;
             }
 
-            $this->reset(['isopen']);
-            $this->emit('alert','Datos modificados correctamente');
-        }
+            if($this->existe == 0){
+                $comment_user = new CommentUser();
+                $comment_user->user_id =  $this->sale_marketplace->user_id;
+                $comment_user->posicion =  'Comprador';
+                $comment_user->comment =  $comentario;
+                $comment_user->categoria_comentario =  $this->condicion_venta;
+                $comment_user->user_create_id = auth()->id();
+                $comment_user->sale_marketplace_id= $this->sale_marketplace->id;
+                $comment_user->save();
+            }
 
-        if($this->status_bdd == '2'  && $this->status == '1'){
-            if($this->metodo_id == '1'){
+            else{
+                $sale_market_search = CommentUser::where('user_id',$this->sale_marketplace->user_id)
+                    ->where('user_create_id',auth()->id())
+                    ->where('sale_marketplace_id',$this->sale_marketplace->id)
+                    ->first();
 
-                $comprador = User::where('id',Auth::id())->first();
-                $balance = $comprador->balance;
-    
-                if($balance < $this->qty * $this->sale_marketplace->marketplace->price){
-                    $this->insuficiente = true;
-                    $this->emit('error','El saldo en página del comprador es insuficiente para esta compra');
-                   // $this->emitTo('marketplace.marketplace-shopping','render');
-                }
-    
-                else{
-                    $saldo_pagina = $comprador->balance - ($this->qty * $this->sale_marketplace->marketplace->price);
-    
-                    $comprador->update([
-                        'balance' => $saldo_pagina,
+                  $sale_market_search->update([
+                    'categoria_comentario' => $this->condicion_venta,
+                    'comment' => $comentario,
+                  ]);  
+
+            }
+            
+
+            if($this->comentario_enviar){
+                $user_comprador = User::where('id',$this->sale_marketplace->user_id)->first();
+                $chat= auth()->user()->chats()
+                    ->whereHas('users',function($query) use ($user_comprador){
+                        $query->where('user_id', $user_comprador->id);
+                    })
+                    ->has('users',2)
+                    ->first();
+
+                if(!$chat){
+                    $chat_nuevo = Chat::create();
+                    $chat_nuevo->users()->attach([auth()->user()->id,$user_comprador->id]);
+
+                    $chat_nuevo->messages()->create([
+                        'body' => $this->comentario_enviar,
+                        'user_id' => auth()->user()->id
                     ]);
+
+                    $this->chat_active = $chat_nuevo;
+
+                    Notification::send($this->users_notifications, new \App\Notifications\NewMessage());
+                }
+                else{
+
+                    $chat->messages()->create([
+                        'body' => $this->comentario_enviar,
+                        'user_id' => auth()->user()->id
+                    ]);
+
+                    $this->chat_active = $chat;
+
+                    Notification::send($this->users_notifications, new \App\Notifications\NewMessage());
+
                 }
             }
 
-            if($this->insuficiente == false){
-
-                $this->sale_marketplace->update([
-                    'status' => $this->status,
-                    'payment_method_id' => $this->metodo_id,
-                    'points_producto' => $this->ptos_producto,
-                    'points_vendedor' =>  $this->ptos_vendedor
-                ]);
-    
-                $points_vendedor = $this->sale_marketplace->marketplace->user->points + $this->ptos_vendedor;
-                $sales_vendedor = $this->sale_marketplace->marketplace->user->sales + 1;
-    
-                $points_marketplace =  $this->sale_marketplace->marketplace->points + $this->ptos_producto;
-                $sales_marketplace = $this->sale_marketplace->marketplace->sales + 1;
-                $cant_new = $this->sale_marketplace->marketplace->cant - $this->qty;
-    
-                $this->sale_marketplace->marketplace->user->update([
-                    'points' => $points_vendedor,
-                    'sales' => $sales_vendedor,
-                ]);
-    
-                $this->sale_marketplace->marketplace->update([
-                    'points' => $points_marketplace,
-                    'sales' => $sales_marketplace,
-                    'cant' => $cant_new,
-                ]);
-    
-                $this->reset(['qty','status','metodo_id','ptos_vendedor','ptos_producto']);
-                $this->emit('alert','Datos registrados correctamente');
-                $this->isopen = false;  
-                $this->emitTo('compras.compras-index','render');
-            }
-
+            //$this->reset(['qty','status','metodo_id','ptos_vendedor','ptos_producto']);
+            $this->emit('alert','Datos registrados correctamente');
+            $this->isopen = false;  
+            $this->emitTo('admin.ventas-index','render');
+        }
+        else{
+            $this->emit('error','Debe indicar como fue tu experiencia con el comprador');
         }
 
+     }
 
-        
+    public function positivo(){
+        $this->condicion_venta = 'positivo';
+    }
+
+    public function negativo(){
+        $this->condicion_venta = 'negativo';
     }
     
 }

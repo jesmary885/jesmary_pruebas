@@ -11,8 +11,11 @@ class saleMarketplace extends Model
 
     protected $guarded = ['id','created_at','updated_at'];
 
-    const PAGADO_ENTREGADO = 1;
-    const NO_PAGADO_NO_ENTREGADO = 2;
+    const SOLICITADO = 1;
+    const PAGO_RECIBIDO= 2;
+    const PAGO_NO_RECIBIDO= 3;
+    const PRODUCTO_RECIBIDO= 4;
+    const PRODUCTO_NO_RECIBIDO= 5;
 
     //Relacion uno a muhos inversa
     public function marketplace(){
