@@ -7,7 +7,7 @@
             
             @foreach ($marketplaces as $marketplace)
                     
-                    <li class="bg-white rounded-lg shadow sm:mr-4">
+                    <li class="bg-white rounded-lg shadow mr-2">
                     <a href="{{route('marketplace.shop',['marketplace'=>$marketplace])}}">
                     <article>
                         @if ($marketplace->images->count())
