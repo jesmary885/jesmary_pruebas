@@ -2,40 +2,38 @@
 
 @if (count($marketplaces))
 
-<div class="glider-contain">
+        <div class="glider-contain">
             <ul class="glider-{{$category->id}}-{{$type}}">
             
-            @foreach ($marketplaces as $marketplace)
+                @foreach ($marketplaces as $marketplace)
                     
                     <li class="bg-white rounded-lg shadow mr-2">
-                    <a href="{{route('marketplace.shop',['marketplace'=>$marketplace])}}">
-                    <article>
-                        @if ($marketplace->images->count())
-                            <figure>
-                                <img class="h-52 w-full object-cover object-center" src="{{ Storage::url($marketplace->images->first()->url) }}" alt="">
-                            </figure>
-                            @else
-                            <figure>
-                            <img class="h-52 w-full object-cover object-center"
-                                src="/storage/marketplace/no-imagen.jpg" alt="">
-                                </figure>
-                            @endif
-                            
-
-                        <div class="py-4 px-6">
-                                <h1 class="text-md font-semibold">
-                                        {{$marketplace->name}}
-                                    
-                                </h1>
-
-                                @if($marketplace->type == 'venta')
-                                <p class="font-bold text-trueGray-700">$ {{$marketplace->price}}</p>
+                        <a href="{{route('marketplace.shop',['marketplace'=>$marketplace])}}">
+                            <article>
+                                @if ($marketplace->images->count())
+                                    <figure>
+                                        <img class="h-52 w-full object-cover object-center" src="{{ Storage::url($marketplace->images->first()->url) }}" alt="">
+                                    </figure>
                                 @else
-                                <p class="font-bold text-trueGray-700">Tasa: $ {{$marketplace->tasa}}</p>
+                                    <figure>
+                                        <img class="h-52 w-full object-cover object-center"
+                                        src="/storage/marketplace/no-imagen.jpg" alt="">
+                                    </figure>
                                 @endif
+                                    
 
-                        </div>
-                        </article>
+                                <div class="py-4 px-6">
+                                    <h1 class="text-md font-semibold">
+                                        {{$marketplace->name}}
+                                    </h1>
+
+                                    @if($marketplace->type == 'venta')
+                                        <p class="font-bold text-trueGray-700">$ {{$marketplace->price}}</p>
+                                    @else
+                                        <p class="font-bold text-trueGray-700">Tasa: $ {{$marketplace->tasa}}</p>
+                                    @endif
+                                </div>
+                            </article>
                         </a>
                     </li>
 
