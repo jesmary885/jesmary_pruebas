@@ -50,7 +50,7 @@
 
 
 @else
-        <div class="mb-4 h-48 flex justify-center items-center shadow-xl border border-gray-100 rounded-lg">
+        <div class="mb-4 h-48">
             <p class="mt-4 font-semibold text-gray-300"> Sin publicaciones </p>
             <!-- <div class="rounded animate-spin ease duration-300 font-semibold w-10 h-10 border-2 border-gray-400"></div> -->
         </div>
