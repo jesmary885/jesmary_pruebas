@@ -7,7 +7,7 @@
             
             @foreach ($marketplaces as $marketplace)
                     
-                    <li class="bg-white rounded-lg shadow {{ $loop->last ? '' : 'sm:mr-4' }}">
+                    <li class="bg-white rounded-lg shadow sm:mr-4">
                     <a href="{{route('marketplace.shop',['marketplace'=>$marketplace])}}">
                     <article>
                         @if ($marketplace->images->count())
@@ -50,6 +50,10 @@
 
 
 @else
+        <!-- <div class="mb-4 h-48 flex justify-center items-center shadow-xl border border-gray-100 rounded-lg">
+            <div class="rounded animate-spin ease duration-300 font-semibold w-10 h-10 border-2 border-gray-400"></div>
+        </div> -->
+
         <div class="mb-4 h-48">
             <p class="mt-4 font-semibold text-gray-300"> Sin publicaciones </p>
             <!-- <div class="rounded animate-spin ease duration-300 font-semibold w-10 h-10 border-2 border-gray-400"></div> -->
