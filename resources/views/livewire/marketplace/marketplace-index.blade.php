@@ -12,7 +12,7 @@
                             <article>
                                 @if ($marketplace->images->count())
                                     <figure>
-                                        <img class="h-52 w-full object-cover object-center" src="{{ Storage::url($marketplace->images->first()->url) }}" alt="">
+                                        <img class=" w-full h-52 object-cover" src="{{ Storage::url($marketplace->images->first()->url) }}" alt="">
                                     </figure>
                                 @else
                                     <figure>
@@ -48,62 +48,12 @@
 
 
 @else
-        <!-- <div class="mb-4 h-48 flex justify-center items-center shadow-xl border border-gray-100 rounded-lg">
+        <div class="mb-4 h-48 flex justify-center items-center shadow-xl border border-gray-100 rounded-lg">
             <div class="rounded animate-spin ease duration-300 font-semibold w-10 h-10 border-2 border-gray-400"></div>
-        </div> -->
+        </div> 
 
-        <div class="mb-4 h-48">
-            <p class="mt-4 font-semibold text-gray-300"> Sin publicaciones </p>
-            <!-- <div class="rounded animate-spin ease duration-300 font-semibold w-10 h-10 border-2 border-gray-400"></div> -->
-        </div>
 @endif
 
-@push('script')
-    <script>
-        Livewire.on('glider', function(id,type){
-            new Glider(document.querySelector('.glider-' + id +'-' + type), {
-                slidesToShow: 2, //cant de registros que se muestran
-                slidesToScroll: 1, //los saltos que se dan al darle click a los botones
-                draggable: true,
-                dots: '.glider-' + id +'-' + type + '~ .dots', //botones pequeños
-                arrows: {
-                    prev: '.glider-' + id +'-' + type + '~ .glider-prev',
-                    next: '.glider-' + id +'-' + type + '~ .glider-next'
-                },
-                //Slider responsivo
-                responsive:[
-                    {
-                        breakpoint: 640,
-                        settings:{
-                            slidesToShow: 4.5, 
-                            slidesToScroll: 4,
-                        }
-                    },
-                    {
-                        breakpoint: 768,
-                        settings:{
-                            slidesToShow: 4.5, 
-                            slidesToScroll: 4,
-                        }
-                    },
-                    {
-                        breakpoint: 1024,
-                        settings:{
-                            slidesToShow: 4.5, 
-                            slidesToScroll: 4,
-                        }
-                    },
-                    {
-                        breakpoint: 1280,
-                        settings:{
-                            slidesToShow: 4.5, 
-                            slidesToScroll: 4,
-                        }
-                    },
-                ]
-            });
-        })
-    </script>
-@endpush
+
 
 </div>

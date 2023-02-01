@@ -11,7 +11,7 @@
                             @if ($marketplace_select->images->count())
                                 @foreach ($marketplace_select->images as $image)
                                     <li data-thumb=" {{ Storage::url($image->url) }}">
-                                        <img class=" w-full object-cover object-center"  src=" {{ Storage::url($image->url) }}" />
+                                        <img class=" w-full object-cover object-center" src=" {{ Storage::url($image->url) }}" />
                                     </li>
                                 @endforeach
                                     
@@ -140,10 +140,10 @@
         </div>
 
         
-        @push('js')
+        @push('script')
 
             {{-- jquery --}}
-            <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 
             {{-- FlexSlider --}}
             <script src="{{ asset('vendor/FlexSlider/jquery.flexslider-min.js') }}"></script>

@@ -72,6 +72,61 @@
     <link rel="stylesheet" href="/css/admin_custom.css">
 @stop
 
+@push('script')
+    {{-- jquery --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+
+    {{-- Glider --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/glider-js/1.7.7/glider.min.js" integrity="sha512-tHimK/KZS+o34ZpPNOvb/bTHZb6ocWFXCtdGqAlWYUcz+BGHbNbHMKvEHUyFxgJhQcEO87yg5YqaJvyQgAEEtA==" crossorigin="anonymous"></script>
+
+
+    <script>
+        Livewire.on('glider', function(id,type){
+            new Glider(document.querySelector('.glider-' + id +'-' + type), {
+                slidesToShow: 2, //cant de registros que se muestran
+                slidesToScroll: 1, //los saltos que se dan al darle click a los botones
+                draggable: true,
+                dots: '.glider-' + id +'-' + type + '~ .dots', //botones pequeños
+                arrows: {
+                    prev: '.glider-' + id +'-' + type + '~ .glider-prev',
+                    next: '.glider-' + id +'-' + type + '~ .glider-next'
+                },
+                //Slider responsivo
+                responsive:[
+                    {
+                        breakpoint: 640,
+                        settings:{
+                            slidesToShow: 4.5, 
+                            slidesToScroll: 4,
+                        }
+                    },
+                    {
+                        breakpoint: 768,
+                        settings:{
+                            slidesToShow: 4.5, 
+                            slidesToScroll: 4,
+                        }
+                    },
+                    {
+                        breakpoint: 1024,
+                        settings:{
+                            slidesToShow: 4.5, 
+                            slidesToScroll: 4,
+                        }
+                    },
+                    {
+                        breakpoint: 1280,
+                        settings:{
+                            slidesToShow: 4.5, 
+                            slidesToScroll: 4,
+                        }
+                    },
+                ]
+            });
+        })
+    </script>
+@endpush
+
 
 
 
