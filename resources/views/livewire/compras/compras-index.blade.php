@@ -30,8 +30,19 @@
                                     <td class="text-center">{{$marketplace->paymentMethod->name ?? 'No se ha registrado'}}</td>
                                     <td class="text-center">{{$marketplace->marketplace->user->username}}</td>
                                     <td class="text-center">{{$marketplace->status}}</td>
-                                    <td class="text-center">{{$marketplace->total_paid}}</td>                          
+                                    <td class="text-center">{{$marketplace->total_paid}}</td>  
+                                    @if($marketplace->status != 'solicitado')                        
                                     <td width="10px">
+                                        @livewire('compras.compra-edit', ['marketplace' => $marketplace],key($marketplace->id))
+                                    </td>
+                                    @else
+
+                                    <td width="10px">
+                                        
+                                    </td>
+                                    @endif
+
+                              
                                 
                                     </td>
                                 </tr>

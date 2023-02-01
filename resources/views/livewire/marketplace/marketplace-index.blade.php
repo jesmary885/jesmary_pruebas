@@ -48,9 +48,9 @@
 
 
 @else
-        <div class="mb-4 h-48 flex justify-center items-center shadow-xl border border-gray-100 rounded-lg">
-            <div class="rounded animate-spin ease duration-300 font-semibold w-10 h-10 border-2 border-gray-400"></div>
-        </div> 
+        <div class="mb-4 py- h-44 flex justify-center items-center shadow-xl border border-gray-100 rounded-lg">
+            <svg class="animate-spin h-10 w-10 rounded-full bg-transparent border-2 border-gray-400 border-opacity-50" style="border-right-color: white; border-top-color: white;" viewBox="0 0 24 24"></svg>
+        </div>
 
 @endif
 
