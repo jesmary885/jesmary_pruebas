@@ -28,7 +28,10 @@
 
                     <div class="mt-10 text-gray-200">
                     <h2 class="font-bold text-lg">Descripción</h2>
-                    {!!$marketplace_select->description!!}
+                    <p class="font-semibold text-gray-200 text-md text-justify mt-2">
+                    {{$marketplace_select->description}}
+                    </p>
+                    
                 </div>
 
             </div>
@@ -39,6 +42,8 @@
                         <h1 class="text-lg font-bold text-gray-100">{{$marketplace_select->name}}</h1>
                     </div>
 
+                    @if($marketplace_select->type == 'venta')
+
                     <div class=" ml-2 flex">
                         
                         <div class="flex mt-1">
@@ -48,12 +53,14 @@
                                 @if ($porcentaje_marketplace)
                                ( {{round($porcentaje_marketplace,2)}} % de puntuación positiva por parte de los compradores )
                                @else
-                                Este producto aún no tiene ventas registradas
+                                Esta publicación aún no tiene puntos registrados
                                 @endif
                             </div>
                         </div>
 
                     </div>
+
+                    @endif
 
 
                     <div class="flex w-full">
@@ -70,24 +77,21 @@
 
                 <div class=" mt-6 ">
                     @if($marketplace_select->type == 'venta')
-                    <p class=" font-bold text-lg text-gray-100">Información sobre el vendedor</p>
+                        <p class=" font-bold text-lg text-gray-100">Información sobre el vendedor</p>
                     @else
-                    <p class=" font-bold text-lg text-gray-100">Información sobre el comprador</p>
+                        <p class=" font-bold text-lg text-gray-100">Información sobre el comprador</p>
                     @endif
 
                     <p class="mt-2 text-md font-bold mb-2 ml-2 text-gray-400">{{__('messages.username')}} : {{$marketplace_select->user->username}}</p>
 
                     <div class=" ml-2 flex">
-                        
                         <div class="flex">
-                            <i class="{{$this->reputation_vendedor($marketplace_select->user_id)[1]}}"></i> <i class="{{$this->reputation_vendedor($marketplace_select->user_id)[2]}}"></i> <i class="{{$this->reputation_vendedor($marketplace_select->user_id)[3]}}"></i> <i class="{{$this->reputation_vendedor($marketplace_select->user_id)[4]}}"></i> <i class="{{$this->reputation_vendedor($marketplace_select->user_id)[5]}}"></i>
-
                             <div class="text-sm text-gray-300 mt-3 ml-2">
-                                @if($porcentaje_vendedor)
-                               ( {{round($porcentaje_vendedor,2)}} % de puntuación positiva por parte de los compradores )
-                               @else
-                               Este usuario aún no tiene ventas registradas
-                                @endif
+                            @if($marketplace_select->type == 'venta')
+                                @livewire('marketplace.comments-marketplace', ['user' => $marketplace_select->user_id,'tipo'=>'Vendedor'])
+                            @else
+                                @livewire('marketplace.comments-marketplace', ['user' => $marketplace_select->user_id,'tipo'=>'Comprador'])
+                            @endif  
                             </div>
                         </div>
 
@@ -102,14 +106,10 @@
                     <div>
                         <ul>
                             @foreach ($metodos as $metodo)
-                                    <p class="text-md font-bold mb-2 ml-2 text-gray-400">{{$metodo->name}}</p>
+                                    <p class="text-md font-bold mb-2 ml-2 text-gray-400"><i class="text-green-500 far fa-check-circle"></i> {{$metodo->name}}</p>
                             @endforeach
                         </ul>
                     </div>
-
-
-
-
 
                 </div>
 
@@ -117,29 +117,28 @@
                     <div class=" mt-6 flex">
 
                         <div class="mr-2 ">
-
-                            <button
-                                class="btn btn-primary btn-sm" 
-                                wire:click="contact()"
-                                >
+                        @if($marketplace_select->type == 'venta')
+                            <button class="btn btn-primary btn-sm" wire:click="contact()">
                                 Contactar con el vendedor
                             </button>
+                        @else
+                            <button class="btn btn-primary btn-sm" wire:click="contact()">
+                                Contactar con el comprador
+                            </button>
+
+                        @endif
 
                         </div>
                         <div>
-                        @livewire('marketplace.marketplace-shopping-finish', ['marketplace' => $marketplace_select])
-
-
+                            @if($marketplace_select->type == 'venta')
+                                @livewire('marketplace.marketplace-shopping-finish', ['marketplace' => $marketplace_select])
+                            @endif
                         </div>
-
-
                     </div>
                 </div>
             </div>
-            
         </div>
 
-        
         @push('script')
 
             {{-- jquery --}}

@@ -70,9 +70,9 @@ Route::middleware(['auth'])->group(function()
     Route::get('admin_users', [AdminController::class, 'users'])->name('admin.users')->middleware('permission:admin.users');
     Route::get('admin_jumpers', [AdminController::class, 'jumpers'])->name('admin.jumpers')->middleware('permission:admin.users');
     Route::get('admin_ganancias', [AdminController::class, 'ganancias'])->name('admin.ganancias.index')->middleware('permission:admin.users');
-    Route::get('admin_sales', [AdminController::class, 'sales'])->name('admin.sales')->middleware('permission:admin.sales');
+    Route::get('sales', [AdminController::class, 'sales'])->name('admin.sales')->middleware('permission:admin.sales');
     Route::get('marketplace_venta', [AdminController::class, 'marketplace'])->name('admin.marketplace')->middleware('permission:admin.sales');
-    Route::get('marketplace_compra', [AdminController::class, 'marketplace_compra'])->name('admin.marketplace.compra')->middleware('permission:admin.sales');
+    Route::get('marketplace_compra', [AdminController::class, 'marketplace_compra'])->name('admin.marketplace.compra')->middleware('permission:admin.marketplace.compras');
     Route::resource('roles', RoleController::class)->only('index','edit','update','destroy','create','store')->names('admin.roles')->middleware('permission:admin.roles');
 });
 

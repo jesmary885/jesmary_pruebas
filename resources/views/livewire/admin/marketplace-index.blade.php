@@ -33,7 +33,7 @@
                         <tbody>
                             @foreach ($marketplaces as $marketplace)
                                 <tr class="bg-gray-800 border-gray-700 hover:bg-gray-600">
-                                    <th class="py-3 text-center font-medium whitespace-nowrap text-white">{{$marketplace->name}}</th>
+                                    <th class="py-3 text-center font-medium whitespace-nowrap text-white">{{$this->get_name($marketplace->name)}}</th>
                                     @if($vista == 'venta')
                                     <td class="text-center">$ {{$marketplace->price}}</td>
                                     @else

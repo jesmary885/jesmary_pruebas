@@ -26,23 +26,25 @@ class MarketplaceCreate extends Component
 
     protected $rules_venta = [
         'name' => 'required',
-        'price' => 'required',
+        'price' => 'required|numeric',
         'description' => 'required',
         'category_id' => 'required',
-        'cant' => 'required',
+        'cant' => 'required|numeric',
+        'payment_methods' => 'required',
     ];
 
     protected $rules_compra = [
         'name' => 'required',
-        'tasa' => 'required',
+        'tasa' => 'required|numeric',
         'description' => 'required',
         'category_id' => 'required',
-        'cant' => 'required',
+        'cant' => 'required|numeric',
+        'payment_methods' => 'required',
     ];
 
     protected $validationAttributes = [
         'name' => 'name',
-        'price' => 'price',
+        'price' => 'price|numeric',
         'description' => 'description',
         'category_id' => 'category_id',
         'createForm.payment_methods' => 'payment_methods',
@@ -64,6 +66,13 @@ class MarketplaceCreate extends Component
             if( $this->marketplace->status =='Habilitado') $this->estado=1 ; else $this->estado = 0;
             $this->createForm['payment_methods'] = $this->marketplace->payment_methods->pluck('id');
         }
+    }
+
+    public function get_name($value){
+        if(strlen($value) > 80){
+            return substr($value, 0, 80) . '...';
+        }
+        return $value;
     }
 
     public function open()
@@ -98,7 +107,7 @@ class MarketplaceCreate extends Component
             if($this->vista == 'venta'){
                 
                 $marketplace = new Marketplace();
-                $marketplace->name = $this->name;
+                $marketplace->name = $this->get_name($this->name);
                 $marketplace->price = $this->price;
                 $marketplace->description = $this->description;
                 if($this->estado == '1') $marketplace->status = 'Habilitado';
@@ -114,7 +123,7 @@ class MarketplaceCreate extends Component
 
             else{
                 $marketplace = new Marketplace();
-                $marketplace->name = $this->name;
+                $marketplace->name = $this->get_name($this->name);
                 $marketplace->tasa = $this->tasa;
                 $marketplace->description = $this->description;
                 if($this->estado == '1') $marketplace->status = 'Habilitado';
@@ -138,7 +147,7 @@ class MarketplaceCreate extends Component
 
             if($this->vista == 'venta'){
                 $this->marketplace->update([
-                    'name' => $this->name,
+                    'name' => $this->get_name($this->name),
                     'price' => $this->price,
                     'description' => $this->description,
                     'status' => $estado,
@@ -148,7 +157,7 @@ class MarketplaceCreate extends Component
             }
             else{
                 $this->marketplace->update([
-                    'name' => $this->name,
+                    'name' => $this->get_name($this->name),
                     'tasa' => $this->tasa,
                     'description' => $this->description,
                     'status' => $estado,

@@ -21,6 +21,8 @@ class RoleSeeder extends Seeder
         $role2 = Role::create(['name' => 'Encuestador']);
         $role3 = Role::create(['name' => 'Vendedor']);
         $role4 = Role::create(['name' => 'Inactivo']);
+        $role5 = Role::create(['name' => 'Comprador']);
+        $role6 = Role::create(['name' => 'Vendedor y comprador']);
 
         //JUMPERS
 
@@ -66,14 +68,16 @@ class RoleSeeder extends Seeder
         'description' => 'Administrar usuarios'])->syncRoles([$role1,$role3]);
 
         Permission::create(['name' => 'admin.roles',
-        'description' => 'Administrar roles y permisos'])->syncRoles([$role1,$role3]);
+        'description' => 'Administrar roles y permisos'])->syncRoles([$role1,$role3,$role6]);
 
-        Permission::create(['name' => ' admin.marketplace',
+        Permission::create(['name' => 'admin.marketplace.compras', //id18
+        'description' => 'Ver y editar marketplace'])->syncRoles([$role1,$role5,$role6]);
+
+        Permission::create(['name' => 'admin.marketplace.ventas', //id21
         'description' => 'Ver y editar marketplace'])->syncRoles([$role1,$role3]);
 
         Permission::create(['name' => ' admin.ganancias.index',
         'description' => 'Ver mis ganancias'])->syncRoles([$role1,$role3]);
-
 
         Permission::create(['name' => 'cuenta.inactiva',
         'description' => 'Informar cuenta inactiva'])->syncRoles([$role4]);

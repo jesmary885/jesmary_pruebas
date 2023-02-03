@@ -24,7 +24,7 @@
 
                                 <div class="py-4 px-6">
                                     <h1 class="text-md font-semibold">
-                                        {{$marketplace->name}}
+                                        {{$this->get_name($marketplace->name)}}
                                     </h1>
 
                                     @if($marketplace->type == 'venta')

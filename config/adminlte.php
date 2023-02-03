@@ -318,7 +318,7 @@ return [
                     'text' => 'Mi marketplace compra',
                     'route'  => 'admin.marketplace.compra',
                     'icon'    => 'fas fa-box-open',
-                    'can' => 'admin.sales'
+                    'can' => 'admin.marketplace.compras'
                 ],
                 [
                     'text' => 'Mis ventas',

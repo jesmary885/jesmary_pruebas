@@ -25,6 +25,13 @@ class MarketplaceIndex extends Component
 
     }
 
+    public function get_name($value){
+        if(strlen($value) > 20){
+            return substr($value, 0, 20) . '...';
+        }
+        return $value;
+    }
+
     public function reputation($value){
 
         if($value->sales > 0){

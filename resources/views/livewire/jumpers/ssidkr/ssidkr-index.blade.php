@@ -70,13 +70,24 @@
                 <div class="flex flex-row justify-center">
                     <div>
                         <p class="text-blue-400 text-md font-bold ml-4 mb-2 " id="jumper_copy">{{$jumper_complete}}</p>
+                        
                     </div>
         @endif
             <div :class="{'hidden': (jumper_2 == '')}">
                 <div :class="{'hidden': (calc_link == 0)}">
                     <div :class="{'hidden': (no_jumpear == 1)}">
-                        <button class="btn btn-sm btn-success ml-2 mb-3 text-bold" title="{{__('messages.copiar_portapapeles')}}" id="button_copy">@if($jumper_2 != '') Copiar @endif</button>    
+                        <div class="flex">
+                        <button wire:target="save" wire:click="save" class="btn btn-sm btn-success ml-2 mb-3 text-bold flex-1" title="{{__('messages.copiar_portapapeles')}}" id="button_copy">@if($jumper_2 != '') Copiar @endif</button> 
+                        <x-jet-action-message class="ml-3 text-green-500 text-md font-semibold mt-1 " on="saved">
+                            Copiado...
+                        </x-jet-action-message>
+
+                        </div>
+                       
+                        
+                           
                     </div>
+
                 </div>
             </div>
         @if ($jumper_complete != 0 || $jumper != "")
@@ -258,6 +269,16 @@
                   
                 </div>
                 @endif
+                @if($comment_new_psid_register != '')
+                <div class="info-box mb-3 bg-success">
+                   
+                    <span class="info-box-icon"><i class="far fa-heart"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-number">{{$comment_new_psid_register}}</span>
+                        </div>
+                  
+                </div>
+                @endif
             </div>
         @endif
 
@@ -321,19 +342,20 @@
             }
     </style>
 
+    @push('js')
     <script>
+        Livewire.on('copiar_port', function(){
             var boton = document.getElementById("button_copy");
-            boton.addEventListener("click", copiarAlPortapapeles, false);
-            function copiarAlPortapapeles() {
-                var codigoACopiar = document.getElementById('jumper_copy');
-                var seleccion = document.createRange();
-                seleccion.selectNodeContents(codigoACopiar);
-                window.getSelection().removeAllRanges();
-                window.getSelection().addRange(seleccion);
-                var res = document.execCommand('copy');
-                window.getSelection().removeRange(seleccion);
-            }
+            var codigoACopiar = document.getElementById('jumper_copy');
+            var seleccion = document.createRange();
+            seleccion.selectNodeContents(codigoACopiar);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(seleccion);
+            var res = document.execCommand('copy');
+            window.getSelection().removeRange(seleccion);
+        })
     </script>
+    @endpush
 </div>
 
 
