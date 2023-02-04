@@ -6,7 +6,7 @@
 <div class="row flex mt-2 h-100">
   <div class="col-12 col-sm-6 col-md-3">
 
-  @if($status == 'activo')
+  @if($rol != '4')
   <a  href="{{route('marketplace.index')}}" >
     <div class="info-box flex">
         <span class="info-box-icon bg-success elevation-1 flex">
@@ -38,11 +38,11 @@
   </div>
 
   <div class="col-12 col-sm-6 col-md-3">
-  @if($status == 'activo')
+  @if($rol != '4')
     <a href="{{route('marketplace_compras.index')}}">
       <div class="info-box flex">
         <span class="info-box-icon bg-warning elevation-1 flex">
-          <i class="fas fa-users">
+          <i class="fa fa-shopping-basket text-white">
           </i>
         </span>
         <div class="info-box-content flex">
@@ -68,7 +68,7 @@
   </div>
 
   <div class="col-12 col-sm-6 col-md-3">
-  @if($status == 'activo')
+  @if($rol != '4')
     <a href="{{route('contacts.index')}}">
       <div class="info-box flex">
         <span class="info-box-icon bg-info elevation-1 flex">
@@ -98,7 +98,7 @@
   </div>
 
   <div class="col-12 col-sm-6 col-md-3">
-  @if($status == 'activo')
+  @if($rol != '4')
   <a href="{{route('chat.index')}}">
     <div class="info-box flex">
       <span class="info-box-icon bg-danger elevation-1 flex">
@@ -127,19 +127,18 @@
     @endif
   </div>
   
-  @if($status == 'inactivo')
+  @if($rol == '4')
   <div>
 
-    <blockquote class="text-gray-400">
-    Su cuenta esta inactiva, reporta tu pago aquí para disfrutar de los servicios
+  <blockquote class="text-gray-400 flex">
+    <p class="mr-1">Su cuenta esta inactiva, reporta tu pago</p>
+     @livewire('pagos.reporte-pago') 
+     <p class="ml-1"> para disfrutar de los servicios</p>
+     
   </blockquote>
 
   </div>
   @endif
-
- 
-
-
 
 </div>
 

@@ -72,6 +72,7 @@
                                     <label class="w-full text-justify">Plan</label>
                                     <select wire:model="plan" title="Plan" id="estado" class="block w-full text-gray-400 py-2 px-2 pr-8 leading-tight rounded focus:outline-none focus:border-gray-500" name="estado">
                                         <option value="" selected>Plan</option>
+                                        <option value="7">7 días</option>
                                         <option value="15">15 días</option>
                                         <option value="30">30 días</option>
                                     </select>

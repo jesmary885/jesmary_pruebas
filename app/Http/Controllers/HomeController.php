@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -18,11 +19,10 @@ class HomeController extends Controller
 
     public function index(){
 
-        $status = auth()->user()->status;
+        $user = User::where('id',auth()->user()->id)->first();
+        $rol = $user->roles->first()->id;
 
-      
-
-        return view('home',compact('status'));
+        return view('home',compact('rol'));
     }
 
 
