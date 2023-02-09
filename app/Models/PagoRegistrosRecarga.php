@@ -24,4 +24,8 @@ class PagoRegistrosRecarga extends Model
     public function admin_verific2(){
         return $this->belongsTo(User::class, 'admin_second_id');
     }
+
+    public function paymentMethod(){
+        return $this->belongsTo(PaymentMethods::class);
+    }
 }

@@ -60,18 +60,18 @@ class UsuariosEdit extends Component
         if($this->estado == 0) $estado = 'inactivo'; else $estado = 'activo';
  
         $this->usuario->update([
-                'name' => $this->username,
-                'username' => $this->username,
-                'email' => $this->email,
-                'status' => $estado,
-                'balance' => $this->balance,
-                'plan' => $this->plan,
-                'last_payment_date' => date("Y-m-d", strtotime($this->last_date)),
-            ]);
-            $this->usuario->roles()->sync($this->roles_id);
+            'name' => $this->username,
+            'username' => $this->username,
+            'email' => $this->email,
+            'status' => $estado,
+            'balance' => $this->balance,
+            'plan' => $this->plan,
+            'last_payment_date' => date("Y-m-d", strtotime($this->last_date)),
+        ]);
+        $this->usuario->roles()->sync($this->roles_id);
 
-            $this->reset(['isopen']);
-            $this->emitTo('admin.usuarios-index','render');
-            $this->emit('alert','Datos modificados correctamente');
+        $this->reset(['isopen']);
+        $this->emitTo('admin.usuarios-index','render');
+        $this->emit('alert','Datos modificados correctamente');
     }
 }

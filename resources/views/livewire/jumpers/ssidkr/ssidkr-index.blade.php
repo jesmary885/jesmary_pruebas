@@ -76,16 +76,16 @@
             <div :class="{'hidden': (jumper_2 == '')}">
                 <div :class="{'hidden': (calc_link == 0)}">
                     <div :class="{'hidden': (no_jumpear == 1)}">
+                    @if ($jumper_complete != 0 && $jumper != "" && $calc_link == 1 && $no_jumpear == 0)
                         <div class="flex">
-                        <button wire:target="save" wire:click="save" class="btn btn-sm btn-success ml-2 mb-3 text-bold flex-1" title="{{__('messages.copiar_portapapeles')}}" id="button_copy">@if($jumper_2 != '') Copiar @endif</button> 
-                        <x-jet-action-message class="ml-3 text-green-500 text-md font-semibold mt-1 " on="saved">
-                            Copiado...
-                        </x-jet-action-message>
+                            <button wire:target="save" wire:click="save" class="btn btn-sm btn-success ml-2 mb-3 text-bold flex-1" title="{{__('messages.copiar_portapapeles')}}" id="button_copy">@if($jumper_2 != '') Copiar @endif</button> 
+                            <x-jet-action-message class="ml-3 text-green-500 text-sm font-semibold mt-1 " on="saved">
+                                Copy.
+                            </x-jet-action-message>
 
                         </div>
-                       
-                        
-                           
+                    @endif
+
                     </div>
 
                 </div>

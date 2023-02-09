@@ -295,22 +295,34 @@ return [
             'text'    => 'ADMINISTRACIÓN',
             'icon'    => 'fas fa-file-invoice-dollar fa-fw',
             'can' => 'administracion_principal',
+            'icon_color' => 'cyan',
             'submenu' => [
                 [
                     'text' => 'Usuarios',
                     'route'  => 'admin.users',
                     'icon'    => 'fas fa-users',
+                    'icon_color' => 'red',
                     'can' => 'administracion_principal'
+                    
                 ],
                 [
                     'text' => 'Jumpers',
                     'route'  => 'admin.jumpers',
                     'icon'    => 'fas fa-server',
+                    'icon_color' => 'red',
                     'can' => 'administracion_principal'
                 ],
                 [
-                    'text' => 'Mis ganancias',
+                    'text' => 'Pagos',
+                    'route'  => 'admin.pagos',
+                    'icon_color' => 'red',
+                    'icon'    => 'far fa-credit-card',
+                    'can' => 'administracion_principal'
+                ],
+                [
+                    'text' => 'Ganancias',
                     'route'  => 'admin.ganancias.index',
+                    'icon_color' => 'red',
                     'icon'    => 'fas fa-heart',
                     'can' => 'administracion_principal'
                 ],
@@ -322,18 +334,21 @@ return [
             'text'    => 'SALE MARKET',
             'icon'    => 'fas fa-cart-arrow-down',
             'can' => 'admin.sales',
+            'icon_color' => 'cyan',
             'submenu' => [
                 [
                     'text' => 'Mi marketplace',
                     'route'  => 'admin.marketplace',
                     'icon'    => 'fas fa-box-open',
-                    'can' => 'admin.sales'
+                    'can' => 'admin.sales',
+                    'icon_color' => 'red',
                 ],
                 [
                     'text' => 'Mis ventas',
                     'route'  => 'admin.sales',
                     'icon'    => 'fas fa-hand-holding-heart',
-                    'can' => 'admin.sales'
+                    'can' => 'admin.sales',
+                    'icon_color' => 'red',
                 ],
             ],
         ],
@@ -342,34 +357,36 @@ return [
             'text'    => 'SHOPPING MARKET',
             'icon'    => 'fab fa-cc-amazon-pay',
             'can' => 'admin.marketplace.compras',
+            'icon_color' => 'cyan',
             'submenu' => [
                 [
                     'text' => 'Mi marketplace',
                     'route'  => 'admin.marketplace.compra',
                     'icon'    => 'fas fa-box-open',
+                    'icon_color' => 'cyan',
                     'can' => 'admin.marketplace.compras'
                 ],
             ],
         ],
         
         // Navbar items:
-        [
-            'type'         => 'navbar-search',
-            'text'         => 'search',
-            'topnav_right' => true,
-        ],
-        [
-            'type'         => 'fullscreen-widget',
-            'topnav_right' => true,
-        ],
+        // [
+        //     'type'         => 'navbar-search',
+        //     'text'         => 'search',
+        //     'topnav_right' => true,
+        // ],
+         [
+             'type'         => 'fullscreen-widget',
+             'topnav_right' => true,
+         ],
 
         // Sidebar items:
-        [
-            'type' => 'sidebar-menu-search',
-            'text' => 'search',
-        ],
+        // [
+        //     'type' => 'sidebar-menu-search',
+        //     'text' => 'search',
+        // ],
       
-        //['header' => 'Jumpers'],
+        ['header' => 'JUMPERS'],
 
         [
             'text' => 'Su cuenta esta inactiva',
@@ -377,98 +394,122 @@ return [
             'icon_color' => 'green',
             'icon'    => '	fas fa-sad-cry',
         ],
-
         [
-            'text' => 'SSI DKR',
-            'route'  => 'ssidkr.index',
+            'text'    => 'SSI',
+            'icon'    => 'fas fa-search',
             'can' => 'ssidkr.index',
-            'icon_color' => 'green',
-            'icon'    => 'fas fa-seedling',
+            'icon_color' => 'red',
+            'submenu' => [
+                [
+                    'text' => 'SSI DKR',
+                    'route'  => 'ssidkr.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'cyan',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                [
+                    'text' => 'QuickThoughts',
+                    'route'  => 'qt.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                [
+                    'text' => 'K1000',
+                    'route'  => 'kmil.index',
+                    'can' => 'kmil.index',
+                    'icon_color' => 'cyan',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+                [
+                    'text' => 'K1092',
+                    'route'  => 'kmilnoventaydos.index',
+                    'can' => 'kmilnoventaydos.index',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+                [
+                    'text' => 'K2062',
+                    'route'  => 'kdosmilsesentaydos.index',
+                    'can' => 'kdosmilsesentaydos.index',
+                    'icon_color' => 'cyan',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+
+                [
+                    'text' => 'K23',
+                    'route'  => 'kveintitres.index',
+                    'can' => 'kveintitres.index',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+                [
+                    'text' => 'K7341',
+                    'route'  => 'ksietemilcuarentayuno.index',
+                    'can' => 'ksietemilcuarentayuno.index',
+                    'icon_color' => 'cyan',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+
+               
+            ],
+            
         ],
+
+        
         [
             'text' => 'CINT',
             'route'  => 'cint.index',
             'can' => 'cint.index',
-            'icon'    => 'fas fa-seedling',
-            'icon_color' => 'yellow',
+            'icon'    => 'fas fa-search',
+            'icon_color' => 'cyan',
         ],
         [
             'text' => 'INTERNALS',
             'route'  => 'internals.index',
             'can' => 'internals.index',
-            'icon_color' => 'cyan',
-            'icon'    => 'fas fa-seedling',
-        ],
-        [
-            'text' => 'K1000',
-            'route'  => 'kmil.index',
-            'can' => 'kmil.index',
             'icon_color' => 'red',
-            'icon'    => 'fas fa-seedling',
+            'icon'    => 'fas fa-search',
         ],
-        [
-            'text' => 'K1092',
-            'route'  => 'kmilnoventaydos.index',
-            'can' => 'kmilnoventaydos.index',
-            'icon_color' => 'green',
-            'icon'    => 'fas fa-seedling',
-        ],
-        [
-            'text' => 'K2062',
-            'route'  => 'kdosmilsesentaydos.index',
-            'can' => 'kdosmilsesentaydos.index',
-            'icon_color' => 'yellow',
-            'icon'    => 'fas fa-seedling',
-        ],
-        [
-            'text' => 'K23',
-            'route'  => 'kveintitres.index',
-            'can' => 'kveintitres.index',
-            'icon_color' => 'cyan',
-            'icon'    => 'fas fa-seedling',
-        ],
-        [
-            'text' => 'K7341',
-            'route'  => 'ksietemilcuarentayuno.index',
-            'can' => 'ksietemilcuarentayuno.index',
-            'icon_color' => 'red',
-            'icon'    => 'fas fa-seedling',
-        ],
+        
+        
         [
             'text' => 'PRODEGE',
             'route'  => 'prodege.index',
             'can' => 'prodege.index',
-            'icon_color' => 'green',
-            'icon'    => 'fas fa-seedling',
+            'icon_color' => 'cyan',
+            'icon'    => 'fas fa-search',
         ],
         [
             'text' => 'SAMPLICIO',
             'route'  => 'samplicio.index',
             'can' => 'samplicio.index',
-            'icon_color' => 'yellow',
-            'icon'    => 'fas fa-seedling',
+            'icon_color' => 'red',
+            'icon'    => 'fas fa-search',
         ],
         [
             'text' => 'SCUBE',
             'route'  => 'scube.index',
             'can' => 'scube.index',
             'icon_color' => 'cyan',
-            'icon'    => 'fas fa-seedling',
+            'icon'    => 'fas fa-search',
         ],
         [
             'text' => 'SPECTRUM',
             'route'  => 'spectrum.index',
             'can' => 'spectrum.index',
             'icon_color' => 'red',
-            'icon'    => 'fas fa-seedling',
+            'icon'    => 'fas fa-search',
         ],
         
         [
             'text' => 'TOLUNA',
             'route'  => 'toluna.index',
             'can' => 'toluna.index',
-            'icon'    => 'fas fa-seedling',
-            'icon_color' => 'green',
+            'icon'    => 'fas fa-search',
+            'icon_color' => 'cyan',
         ],
 
     ],

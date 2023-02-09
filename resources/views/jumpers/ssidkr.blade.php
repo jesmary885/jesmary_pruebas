@@ -3,7 +3,7 @@
 
 <div class="flex justify-between">
     
-    <h1 class="text-lg ml-2 text-light font-weight-bold">SSI DKR</h1>
+    <h1 class="text-lg font-weight-bold text-blue-300"> <i class="fas fa-asterisk mr-1 text-blue-300"></i> SSI DKR</h1>
 
    
 </div>

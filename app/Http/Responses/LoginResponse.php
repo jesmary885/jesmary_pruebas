@@ -12,15 +12,6 @@ class LoginResponse implements LoginResponseContract
 {
     public function toResponse($request): RedirectResponse {
   
-       /* if ($request->user()->status == 'activo') {
-            return redirect(route("home"));
-        }
-      
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-        return redirect(route("login_guest"));*/
-
         if ($request->user()->status == 'activo') {
 
             $request->session()->regenerate();
@@ -37,10 +28,8 @@ class LoginResponse implements LoginResponseContract
         }
 
         else{
-            Auth::logout();
-            $request->session()->invalidate();
-            $request->session()->regenerateToken();
-            return redirect(route("login_guest"));
+
+            return redirect('/login');
         }
     }
 }

@@ -49,7 +49,7 @@
             @endif
         </a>
         <ul class="dropdown-menu">
-            @if(auth()->user()->status =='activo')
+            @if(auth()->user()->roles->first()->id != 4)
                 @if(session('psid'))
                     <a class="block dropdown-item " href="{{route('registro.psid')}}"> Cambiar PSID </a> 
                 @else
@@ -72,7 +72,7 @@
             @endif
         </a>
         <ul class="dropdown-menu">
-        @if(auth()->user()->status =='activo')
+        @if(auth()->user()->roles->first()->id != 4)
             @if(session('pid'))
                 <a class="block dropdown-item " href="{{route('registro.pid')}}"> Cambiar PID </a> 
             @else
@@ -96,7 +96,7 @@
     <div class="dropdown-divider"></div>
 
         <div class="dropdown-divider"></div>
-        @if(auth()->user()->status =='activo')
+        @if(auth()->user()->roles->first()->id != 4)
             <a href="{{route('chat.index')}}" class="dropdown-item dropdown-footer">Ver todos los mensajes</a>
         @else
             <a class="block dropdown-item " href="#"> Su cuenta esta inactiva </a> 
@@ -122,10 +122,17 @@
     <ul class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
 
         <li class="user-footer">
+        <a href="{{ route('reporte_pago') }}" class="btn btn-default btn-flat btn-block">
+                    <i class="far fa-credit-card text-green mr-2"></i>
+                    Reportar pago
+            </a>
+
             <a href="{{ route('profile.show') }}" class="btn btn-default btn-flat btn-block">
                     <i class="fa fa-fw fa-user text-lightblue"></i>
                     {{ __('adminlte::menu.profile') }}
             </a>
+
+            
 
             <a class="btn btn-default btn-flat float-right  btn-block"
                href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

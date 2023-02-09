@@ -140,6 +140,20 @@
   </div>
   @endif
 
+  @if($mensaje != '' && $rol != '4')
+  <div>
+
+  <blockquote class="text-gray-400 flex">
+    <p class="inline">
+    {{$mensaje}}
+    </p>
+   @livewire('pagos.reporte-pago')
+     
+  </blockquote>
+
+  </div>
+  @endif
+
 </div>
 
     

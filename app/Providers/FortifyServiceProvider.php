@@ -52,7 +52,7 @@ class FortifyServiceProvider extends ServiceProvider
             return Limit::perMinute(5)->by($request->session()->get('login.id'));
         });
 
-        $this->app->bind(RegisterResponseContract::class, RegisterResponse::class);
+       // $this->app->bind(RegisterResponseContract::class, RegisterResponse::class);
         $this->app->bind(LoginResponseContract::class, LoginResponse::class);
     }
 }

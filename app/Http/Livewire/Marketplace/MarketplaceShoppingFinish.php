@@ -18,6 +18,11 @@ class MarketplaceShoppingFinish extends Component
 
     public $chat_active,$file,$isopen = false, $insuficiente= false, $quantity, $qty = 1, $marketplace, $metodo_id, $status, $ptos_vendedor, $ptos_producto;
 
+    protected $rules_with_image = [
+        'metodo_id' => 'required',
+        'file' => 'required|image|max:2048'
+    ];
+
     protected $rules = [
         'metodo_id' => 'required',
     ];
@@ -83,6 +88,10 @@ class MarketplaceShoppingFinish extends Component
         $rules = $this->rules;
         $this->validate($rules);
 
+        if($this->metodo_id != '1'){
+            $rules_with_image = $this->rules_with_image;
+            $this->validate($rules_with_image);
+        }
 
         if($this->metodo_id == '1'){
 

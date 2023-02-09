@@ -71,4 +71,8 @@ class JumpersController extends Controller
         return view('jumpers.ssidkr',compact('jumper','link_complete','search'));
     }
 
+    public function qt($search=''){
+        return view('jumpers.qt',compact('search'));
+    }
+
 }

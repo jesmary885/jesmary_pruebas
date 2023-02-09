@@ -1,5 +1,5 @@
 <div>
-    <button title="Editar usuario" type="submit" class="text-blue-500 font-bold underline  "  wire:click="open"> AQUÍ </button> 
+    <button title="Editar usuario" type="submit" class="text-blue-500 font-bold underline ml-1"  wire:click="open"> AQUÍ </button> 
 
     @if ($isopen)
         <div class="modal d-block" tabindex="-1" role="dialog" style="overflow-y: auto; display: block;">
@@ -18,6 +18,7 @@
                                 <div class="form-group w-full">
                                     <label class="w-full text-justify">Plan</label>
                                     <select wire:model="plan" title="Plan" id="estado" class="block w-full text-gray-400 py-2 px-2 pr-8 leading-tight rounded focus:outline-none focus:border-gray-500" name="estado">
+                                        <option value="" selected>Seleccione una opción</option>    
                                         <option value="7">7 días</option>
                                         <option value="15">15 días</option>
                                         <option value="30">30 días</option>
@@ -26,6 +27,21 @@
                                     
                                 </div>
                             </div>
+
+                            <div class="flex justify-between mt-2">
+                            <div class="form-group w-full mr-2">
+                                <label for="formGroupExampleInput2 mb-2">Método de pago ha utilizar</label>
+                                    <select wire:model="metodo_id" class="form-control w-full">
+                                        <option value="" selected>Seleccione una opción</option>
+                                            @foreach ($payment_methods as $metodo)
+                                                <option value="{{$metodo->id}}">{{$metodo->name}}</option>
+                                            @endforeach
+                                    </select>
+                                    <x-input-error for="metodo_id" />
+                            </div>
+                        </div>
+
+                            
 
                             <div class="w-full">
                                 <div class="flex">
@@ -38,7 +54,9 @@
                                             <input type="file" wire:model="file" id="file" class="block w-full text-base font-normal text-gray-300 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out focus:text-gray-300 focus:border-blue-600 focus:outline-none">
                                         
                                             <p class="text-gray-400 mt-2"></p>
+                                            <x-input-error for="file" />
                                         </div>
+                                        
                                     </div>
                                 </div>
                             </div>

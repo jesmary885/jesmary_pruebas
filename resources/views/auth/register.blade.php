@@ -1,86 +1,188 @@
-<x-guest-layout>
-<div
-	class="bg-blue-900 absolute top-0 left-0 bg-gradient-to-b from-gray-900 via-gray-900 to-blue-800 bottom-0 leading-5 h-full w-full overflow-hidden">
-	
-</div>
-<div
-	class="relative   min-h-screen  sm:flex sm:flex-row  justify-center bg-transparent rounded-3xl shadow-xl">
-	<div class="flex-col flex  self-center lg:px-14 sm:max-w-4xl xl:max-w-md  z-10">
-		<div class="self-start hidden lg:flex flex-col  text-gray-300">
-			
-			<h1 class="my-3 font-semibold text-4xl">Welcome back</h1>
-			<p class="pr-3 text-sm opacity-75">Lorem ipsum is placeholder text commonly used in the graphic, print,
-				and publishing industries for previewing layouts and visual mockups</p>
-		</div>
-	</div>
-	<div class="flex justify-center self-center  z-10">
-		<div class="p-12 bg-white mx-auto rounded-3xl w-96 ">
-			
-            <form method="POST" action="{{ route('register') }}">
-            @csrf
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
 
-            <div>
-                <x-jet-label for="name" value="{{ __('Username') }}" />
-                <x-jet-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            </div>
+    <title>QuerySet</title>
 
 
-            <div class="mt-4">
-                <x-jet-label for="email" value="{{ __('Email') }}" />
-                <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
-            </div>
+    <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-            <div class="mt-4">
-                <x-jet-label for="password" value="{{ __('Password') }}" />
-                <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            </div>
+    <!-- Styles -->
+    @livewireStyles
 
-            <div class="mt-4">
-                <x-jet-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                <x-jet-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
-            </div>
+    <link rel="stylesheet" href="{{ asset('vendor/login_banner/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/login_banner/banner.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/login_banner/graphic.css') }}">
+    
+</head>
 
-            @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
-                <div class="mt-4">
-                    <x-jet-label for="terms">
-                        <div class="flex items-center">
-                            <x-jet-checkbox name="terms" id="terms"/>
+<body>
+    <section class="main-banner h-full w-full">
 
-                            <div class="ml-2">
-                                {!! __('I agree to the :terms_of_service and :privacy_policy', [
-                                        'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'" class="underline text-sm text-gray-600 hover:text-gray-900">'.__('Terms of Service').'</a>',
-                                        'privacy_policy' => '<a target="_blank" href="'.route('policy.show').'" class="underline text-sm text-gray-600 hover:text-gray-900">'.__('Privacy Policy').'</a>',
-                                ]) !!}
-                            </div>
+        <!--grind-container -->
+
+        <div class="md:hidden lg:hidden">
+        <div class="grid-container">
+            <div class="content">
+                <!--Titulo-->
+                <h1 class=" title s-center">
+                    <span class="line-1"> Domina los Jumpers</span>
+                    <br>
+                    <span class="line-2">con Queryset</span>
+                </h1>
+
+                <div class="mt-6">
+                    <div class="mx-auto rounded-3xl">
+                        
+                        <form method="POST" action="{{ route('register') }}">
+                        @csrf
+
+                        <div>
+                            <input id="name" class="w-full text-gray-600 text-sm px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400" type="text" name="name" :value="old('name')" required autofocus autocomplete="name"  placeholder="Username">
+                        
                         </div>
-                    </x-jet-label>
-                </div>
-            @endif
 
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
+                        <div class="mt-4">
 
-                <x-jet-button class="ml-4">
-                    {{ __('Register') }}
-                </x-jet-button>
+                            <input id="email" class="w-full text-gray-600 text-sm px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400" type="email" name="email" :value="old('email')" required  placeholder="Email">
+                            
+                        </div>
+
+                        <div class="mt-4">
+                            <input id="password" name="password" placeholder="Password" type="password" name="password" required autocomplete="new-password" class="text-sm text-gray-500 px-4 py-3 rounded-lg w-full bg-gray-200 focus:bg-gray-100 border border-gray-200 focus:outline-none focus:border-purple-400">
+
+                        </div>
+
+                        <div class="mt-4">
+                            <input id="password_confirmation" name="password_confirmation" placeholder="Confirm Password" type="password" required class="text-sm text-gray-500 px-4 py-3 rounded-lg w-full bg-gray-200 focus:bg-gray-100 border border-gray-200 focus:outline-none focus:border-purple-400">
+
+                        </div>
+
+                        @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
+                            <div class="mt-4">
+                                <x-jet-label for="terms">
+                                    <div class="flex items-center">
+                                        <x-jet-checkbox name="terms" id="terms"/>
+
+                                        <div class="ml-2">
+                                            {!! __('I agree to the :terms_of_service and :privacy_policy', [
+                                                    'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'" class="underline text-sm text-gray-600 hover:text-gray-900">'.__('Terms of Service').'</a>',
+                                                    'privacy_policy' => '<a target="_blank" href="'.route('policy.show').'" class="underline text-sm text-gray-600 hover:text-gray-900">'.__('Privacy Policy').'</a>',
+                                            ]) !!}
+                                        </div>
+                                    </div>
+                                </x-jet-label>
+                            </div>
+                        @endif
+
+                        <div class="flex items-center justify-end mt-6  ">
+
+                            <button class="w-full flex justify-center bg-green-200  hover:blue-700 text-gray-600 p-3  rounded-lg tracking-wide font-semibold  cursor-pointer transition ease-in duration-500">
+                                {{ __('Register') }}
+                            </button>
+                        </div>
+                    </form>
+
+		            </div>
+	            </div>
             </div>
-        </form>
+	    </div>
 
-		</div>
-	</div>
-	</div>
-	<footer class="bg-transparent absolute w-full bottom-0 left-0 z-30">
-	<div class="container p-5 mx-auto  flex items-center justify-between ">
-		<div class="flex mr-auto">
-        <h1 class="text-blue-600 text-lg font-semibold">QuerySet</h1>
-			
-		</div>
+        </div>
 
-	</div>
-	</footer>
+        <div class="hidden md:block w-full">
+        <div class="grid-container flex">
+            <div class="content w-full">
+                <!--Titulo-->
+                <h1 class=" title s-center">
+                    <span class="line-1"> Domina los Jumpers</span>
+                    <br>
+                    <span class="line-2">Con Queryset</span>
+                </h1>
 
-<svg class="absolute bottom-0 left-0 " viewBox="0 0 1440 320"><path fill="#fff" fill-opacity="1" d="M0,0L40,42.7C80,85,160,171,240,197.3C320,224,400,192,480,154.7C560,117,640,75,720,74.7C800,75,880,117,960,154.7C1040,192,1120,224,1200,213.3C1280,203,1360,149,1400,122.7L1440,96L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"></path></svg>
-<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js"></script>
-</x-guest-layout>
+                <!--Descripcián-->
+                <!-- <p class="description s-center">Dile adiós a los jumpers mal creados que te banean y te desmotivan. Comienza ya con Queryset.para obetener los mejores Jumpers del mercado.</p> -->
+
+                <div class="mt-6 w-3/4">
+                    <div class="mx-auto rounded-3xl">
+                        
+                    <form method="POST" action="{{ route('register') }}">
+                        @csrf
+
+                        <div>
+                            <input id="name" class="w-full text-gray-600 text-sm px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400" type="text" name="name" :value="old('name')" required autofocus autocomplete="name"  placeholder="Username">
+                        
+                        </div>
+
+
+                        <div class="mt-4">
+
+                            <input id="email" class="w-full text-gray-600 text-sm px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400" type="email" name="email" :value="old('email')" required  placeholder="Email">
+                            
+                        </div>
+
+                        <div class="mt-4">
+                            <input id="password" name="password" placeholder="Contraseña" type="password" name="password" required autocomplete="new-password" class="text-sm text-gray-500 px-4 py-3 rounded-lg w-full bg-gray-200 focus:bg-gray-100 border border-gray-200 focus:outline-none focus:border-purple-400">
+
+                        </div>
+
+                        <div class="mt-4">
+                            <input id="password_confirmation"  placeholder="Confirmar contraseña" type="password" name="password_confirmation" required autocomplete="new-password" class="text-sm text-gray-500 px-4 py-3 rounded-lg w-full bg-gray-200 focus:bg-gray-100 border border-gray-200 focus:outline-none focus:border-purple-400">
+
+                        </div>
+
+                        <div class="flex items-center justify-end mt-6  ">
+
+                            <button class="w-full flex justify-center bg-green-200  hover:blue-700 text-gray-600 p-3  rounded-lg tracking-wide font-semibold  cursor-pointer transition ease-in duration-500">
+                                {{ __('Registrar') }}
+                            </button>
+                        </div>
+                    </form>
+
+		            </div>
+	            </div>
+            </div>
+
+            <div class="graphic w-full">
+                <img class="graphic-man" src="/imagenes/tech-man.png">
+                <img class="graphic-go absolute" src="/imagenes/buscador.png">
+                <div class="graphic-circles absolute">
+                    <img class="graphic-logo absolute" src="/imagenes/logo.png">
+                    <img class="graphic-circle-1 absolute" src="/imagenes/internal-new.png">
+                    <img class="graphic-circle-2 absolute" src="/imagenes/external-new.png">
+                    <img class="graphic-energy absolute" src="/imagenes/power-sphere.png">
+                </div>
+            </div>
+	    </div>
+
+        </div>
+
+        <div class=" mt-24 text-center text-gray-300 text-xs">
+            <span>
+                Copyright © 2021-2023 <span class="text-blue-500 hover:text-blue-600"> QuerySet
+            </span>
+        </div>
+
+    </section>
+
+    
+   
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

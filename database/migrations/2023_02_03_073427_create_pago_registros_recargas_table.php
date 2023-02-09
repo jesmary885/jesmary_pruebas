@@ -22,6 +22,10 @@ return new class extends Migration
             $table->string('file');
             $table->string('plan');
             $table->string('comentario')->nullable(); 
+            $table->string('status');
+
+            $table->unsignedBigInteger('payment_method_id');
+            $table->foreign('payment_method_id')->references('id')->on('payment_methods');
 
              //Administrador que verifica el pago
             $table->unsignedBigInteger('admin_first_id')->nullable();

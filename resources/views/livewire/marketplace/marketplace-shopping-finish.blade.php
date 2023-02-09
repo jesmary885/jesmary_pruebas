@@ -46,6 +46,7 @@
                                                 <option value="{{$metodo->id}}">{{$metodo->name}}</option>
                                             @endforeach
                                     </select>
+                                    <x-input-error for="metodo_id" />
                             </div>
                         </div>
 
@@ -60,8 +61,10 @@
                                             <input type="file" wire:model="file" id="file" class="block w-full text-base font-normal text-gray-300 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out focus:text-gray-300 focus:border-blue-600 focus:outline-none">
                                         
                                             <p class="text-gray-400 mt-2"></p>
+                                            <x-input-error for="file" />
                                         </div>
                                     </div>
+                                    
                                 </div>
                         </div>
                     </div>

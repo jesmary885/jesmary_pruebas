@@ -47,6 +47,7 @@ class SsidkrIndex extends Component
         $comments ="";
         $jumper = "";
         $link_complete="";
+        $ultima_letra_psid_search = "";
         $nuevo_high_registrado = 0;
         $nuevo_basic_registrado = 0;
         $this->no_jumpear = 0;
@@ -131,8 +132,11 @@ class SsidkrIndex extends Component
                                 $busqueda_id= strpos($this->search, '**');
                                 
                                 $subs_psid = substr($this->search,($busqueda_id - 22),5);
+                                //$ultima_letra_psid_search = substr($this->search,($busqueda_id + 22),1);
                                 $subs_psid_sin_cortar = substr($this->search,($busqueda_id - 22));
-                                $psid_complete = substr($subs_psid_sin_cortar,0,21);
+                                
+                                if(session('psid'))$psid_complete = substr($subs_psid_sin_cortar,0,11).substr(session('psid'),11,11);
+                                else  $psid_complete = substr($subs_psid_sin_cortar,0,22);
         
                                 //Buscando coincidencia con el psid registrado
                                 $busqueda_psid_registrado = substr($this->search,($busqueda_id - 11),11);
@@ -161,7 +165,13 @@ class SsidkrIndex extends Component
                                     $busqueda_psid= strpos($this->search, 'psid'); 
                                     $subs_psid = substr($this->search,($busqueda_psid + 5),5);
                                     $subs_psid_sin_cortar = substr($this->search,($busqueda_psid + 5));
-                                    $psid_complete = substr($subs_psid_sin_cortar,0,21);
+
+                                    if(session('psid'))$psid_complete = substr($subs_psid_sin_cortar,0,11).substr(session('psid'),11,11);
+                                    else  $psid_complete = substr($subs_psid_sin_cortar,0,22);
+
+                                    
+
+                                    //$ultima_letra_psid_search = substr($this->search,($busqueda_psid + 27),1);
                                 }
         
                                 else{
@@ -172,7 +182,10 @@ class SsidkrIndex extends Component
                                         $busqueda_id= strpos($this->search, 'id='); 
                                         $subs_psid = substr($this->search,($busqueda_id+ 3),5);
                                         $subs_psid_sin_cortar = substr($this->search,($busqueda_id + 5));
-                                        $psid_complete = substr($subs_psid_sin_cortar,0,21);
+                                        
+                                        if(session('psid'))$psid_complete = substr($subs_psid_sin_cortar,0,11).substr(session('psid'),11,11);
+                                        else  $psid_complete = substr($subs_psid_sin_cortar,0,21);
+                                        //$ultima_letra_psid_search = substr($this->search,($busqueda_id + 25),1);
                                     }
         
                                     else{
@@ -194,14 +207,15 @@ class SsidkrIndex extends Component
                     if($jumper->jumper_type_id == 1){
                         //en el caso de direccionamiento desde otras vas a padar el jumper y el psid_complete
                          $this->is_basic = "si";
-                        if(session('psid')) $link_complete =$psid_complete.substr(session('psid'),21);
-                        else $link_complete = $psid_complete.'(ultima letra de tu psid)';
+                        if(session('psid')) $link_complete =$psid_complete;
+                        else $link_complete = $psid_complete;
+
                         
                         $this->calc_link = 1;
                     } 
                     if($jumper->jumper_type_id == 2){
-                        if(session('psid')) $link_complete = $psid_complete.substr(session('psid'),21);
-                        else $link_complete = $psid_complete.'(ultima letra de tu psid)';
+                        if(session('psid')) $link_complete = $psid_complete;
+                        else $link_complete = $psid_complete;
                         
                         $this->is_high = "si";
                     }
