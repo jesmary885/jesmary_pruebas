@@ -18,10 +18,30 @@
     <link rel="stylesheet" href="{{ asset('vendor/login_banner/styles.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/login_banner/banner.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/login_banner/graphic.css') }}">
+
+    <style>
+        .Div_flotante{
+        /* position:fixed; 
+        bottom: 0px;
+        top:auto;
+        width:100%;
+        height:100px;
+        text-align: center;
+        z-index:5; */
+
+        position: absolute;
+        bottom: 0px;
+        width: 100%;
+        height: 40px;
+        text-align: center;
+        z-index:5;
+
+        }
+    </style>
     
 </head>
 
-<body>
+<body class=" overflow-hidden  ">
     <section class="main-banner h-full w-full">
 
         <!--grind-container -->
@@ -39,7 +59,7 @@
                 <div class="mt-6">
                     <div class=" mx-auto rounded-3xl">
                         <div class="mb-7">
-                            <p class="text-gray-400">¿Aún no posees una cuenta? <a href="{{ route('register') }}" class="text-sm text-blue-700 hover:text-blue-700">Registrate aquí</a></p>
+                            <p class="text-gray-400">¿Aún no posees una cuenta? <a href="#" class="text-sm text-blue-700 hover:text-blue-700">Registrate aquí</a></p>
                         </div>
 
                         <form method="POST" action="{{ route('login') }}">
@@ -97,8 +117,8 @@
         </div>
 
         <div class="hidden md:block w-full">
-        <div class="grid-container flex">
-            <div class="content w-full">
+        <div class="flex">
+            <div class="content w-full md:ml-12 md:mt-12  2xl:ml-16 2xl:mt-28  ">
                 <!--Titulo-->
                 <h1 class=" title s-center">
                     <span class="line-1"> Domina los Jumpers</span>
@@ -112,7 +132,7 @@
                 <div class="mt-6 w-3/4">
                     <div class=" mx-auto rounded-3xl">
                         <div class="mb-7">
-                            <p class="text-gray-400">¿Aún no posees una cuenta? <a href="{{ route('register') }}" class="text-sm text-blue-700 hover:text-blue-700">Registrate aquí</a></p>
+                             <p class="text-gray-400">¿Aún no posees una cuenta? <a href="#" class="text-sm text-blue-700 hover:text-blue-700">Registrate aquí</a></p>
                         </div>
 
                         <form method="POST" action="{{ route('login') }}">
@@ -167,11 +187,11 @@
             </div>
 
             <div class="graphic w-full">
-                <img class="graphic-man" src="/imagenes/tech-man.png">
-                <img class="graphic-go absolute" src="/imagenes/buscador.png">
+                <img class="graphic-man" src="/imagenes/man.png">
+                <!-- <img class="graphic-go absolute" src="/imagenes/buscador.png"> -->
                 <div class="graphic-circles absolute">
                     <img class="graphic-logo absolute" src="/imagenes/logo.png">
-                    <img class="graphic-circle-1 absolute" src="/imagenes/internal-new.png">
+                    <img class="graphic-circle-1 absolute" src="/imagenes/internal-techs.png">
                     <img class="graphic-circle-2 absolute" src="/imagenes/external-new.png">
                     <img class="graphic-energy absolute" src="/imagenes/power-sphere.png">
                 </div>
@@ -180,11 +200,16 @@
 
         </div>
 
-        <div class=" mt-24 text-center text-gray-300 text-xs">
+        <footer class="Div_flotante">
+        <div class="flex justify-center text-gray-300 text-xs">
             <span>
                 Copyright © 2021-2023 <span class="text-blue-500 hover:text-blue-600"> QuerySet
             </span>
         </div>
+
+        </footer>
+
+        
 
     </section>
 

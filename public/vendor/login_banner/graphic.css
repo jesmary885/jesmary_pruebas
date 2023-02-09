@@ -9,9 +9,19 @@
 
 .graphic-man {
 
-    width: 90%;
+    width: 110%;
+    height: 112%;
     grid-column-start: 3;
 }
+
+.graphic-man-lg {
+
+    width: 180%;
+    height: 160%;
+    grid-column-start: 3;
+}
+
+
 
 
 .absolute{
