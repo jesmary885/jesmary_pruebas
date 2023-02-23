@@ -74,7 +74,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="text-center">K1092</td>
+                                    <td class="text-center">K3203</td>
                                     <td class="text-center">{{$busqueda_link->psid}}</td>
                                     <td class="text-center">{{$busqueda_link->created_at->format('d/m/Y')}}</td>
                    

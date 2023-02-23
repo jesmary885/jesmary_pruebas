@@ -33,9 +33,12 @@ class QtIndex extends Component
             }
             else{
 
-                if((strpos($this->search, 'psid=') != false)){
+                //dd(strpos($this->search, 'psid='));
+
+                if((strpos($this->search, 'psid=') !== false)){
 
                     $detectado= strpos($this->search, 'psid=');
+                    
                     $i = 0;
                     $posicion = 5;
                         

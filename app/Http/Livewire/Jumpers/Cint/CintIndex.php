@@ -2,18 +2,22 @@
 
 namespace App\Http\Livewire\Jumpers\Cint;
 
+use App\Imports\CintImport;
 use App\Models\Comments;
 use App\Models\Link;
 use App\Models\User_Links_Points;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CintIndex extends Component
 {
     use WithPagination;
+    
     protected $paginationTheme = "bootstrap";
 
-    public $no_detect,$jumper_redirect,$link_complete_2,$search,$jumper_2,$points_user,$user_auth,$comentario,$calc_link,$jump;
+    public $no_detect,$file,$jumper_redirect,$link_complete_2,$search,$jumper_2,$points_user,$user_auth,$comentario,$calc_link,$jump;
 
     protected $listeners = ['render' => 'render'];
 
@@ -221,4 +225,6 @@ class CintIndex extends Component
         $this->reset(['comentario']);
         $this->emit('render', 'jumpers.ssidkr.ssidkr-index');
     }
+
+    
 }

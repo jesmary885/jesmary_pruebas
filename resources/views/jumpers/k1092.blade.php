@@ -3,11 +3,9 @@
 
 <div class="flex justify-between">
     
-    <h1 class="text-lg ml-2"><i class="fas fa-th-list"></i> k1092</h1>
+    <h1 class="text-lg font-weight-bold text-red-500"> <i class="fas fa-asterisk mr-1 text-red-500"></i> K1092</h1>
 
-    <div class="justify-end">
-       {{-- @livewire('jumpers.cint.cint-create') --}}
-    </div>
+   
 </div>
 
 @stop

@@ -52,7 +52,7 @@
         @if ($jumper_complete != 0)
             <div class="card-body mt-0">
 
-                <div class="flex flex-row justify-center">
+                <div class="flex-nowrap justify-center callout callout-info">
                     <div>
                         <p class="text-blue-400 text-md font-bold ml-4 mb-2 " id="jumper_copy">{{$jumper_complete}}</p>
                         
@@ -60,11 +60,8 @@
         @endif
                 @if($jumper_complete != 0)
                     <div :class="{'hidden': (jumper_complete == 0)}">
-                        <div class="flex">
-                            <button wire:target="save" wire:click="save" class="btn btn-sm btn-success ml-2 mb-3 text-bold flex-1" title="{{__('messages.copiar_portapapeles')}}" id="button_copy">Copiar</button> 
-                                <x-jet-action-message class="ml-3 text-green-500 text-sm font-semibold mt-1 " on="saved">
-                                    Copy.
-                                </x-jet-action-message>
+                        <div class="flex justify-center">
+                        <button onclick="copiarAlPortapapeles('jumper_copy')" class="btn btn-sm btn-success text-bold" title="{{__('messages.copiar_portapapeles')}}" id="button_copy">Copiar</button> 
                         </div>
                     </div>
                 @endif
@@ -72,16 +69,6 @@
             </div>
 
 
-        <!-- <div wire:loading>
-            <div class="container2">
-                <div class="cargando">
-                    <div class="pelotas"></div>
-                    <div class="pelotas"></div>
-                    <div class="pelotas"></div>
-                    <span class="texto-cargando font-bold text-gray-300 ">Loading...</span>
-                </div>
-            </div>
-        </div> -->
     </div>
 
     <!-- <style>
@@ -132,18 +119,35 @@
             }
     </style> -->
 
-    @push('js')
-    <script>
-        Livewire.on('copiar_port', function(){
-            var boton = document.getElementById("button_copy");
-            var codigoACopiar = document.getElementById('jumper_copy');
-            var seleccion = document.createRange();
-            seleccion.selectNodeContents(codigoACopiar);
-            window.getSelection().removeAllRanges();
-            window.getSelection().addRange(seleccion);
-            var res = document.execCommand('copy');
-            window.getSelection().removeRange(seleccion);
-        })
-    </script>
-    @endpush
+    @section('js')
+        <script>
+            function copiarAlPortapapeles(id_elemento) {
+                var aux = document.createElement("input");
+                aux.setAttribute("value", document.getElementById(id_elemento).innerHTML);
+                document.body.appendChild(aux);
+                aux.select();
+                document.execCommand("copy");
+                document.body.removeChild(aux);
+
+                toastr.options={
+                    "closeButton": true,
+                    "debug": true,
+                    "newestOnTop": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": true,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+                toastr.success('Copy..')
+            }
+        </script>
+    @stop
 </div>

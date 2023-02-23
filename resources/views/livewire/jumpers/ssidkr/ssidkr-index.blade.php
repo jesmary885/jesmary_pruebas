@@ -1,8 +1,8 @@
-<div x-data="{jumper_2: @entangle('jumper_2'),points_user: @entangle('points_user'), is_high: @entangle('is_high'),is_basic: @entangle('is_basic'), calc_link: @entangle('calc_link'), pid: @entangle('pid_new'), psid: @entangle('psid_register'), jumper_detect: @entangle('jumper_detect'), no_detect: @entangle('no_detect'), k_detect: @entangle('k_detect'), no_jumpear: @entangle('no_jumpear')}">
+<div x-data="{jumper_2: @entangle('jumper_2'),points_user: @entangle('points_user'), is_high: @entangle('is_high'),is_basic: @entangle('is_basic'), calc_link: @entangle('calc_link'), pid: @entangle('pid_new'), psid: @entangle('psid_register'), jumper_detect: @entangle('jumper_detect'), no_detect: @entangle('no_detect'), k_detect: @entangle('k_detect'), no_jumpear: @entangle('no_jumpear'),points_user_positive: @entangle('points_user_positive'),points_user_negative: @entangle('points_user_negative')}">
     <div class="card">
         <div class="card-header form-row">
 
-            <div class="col-sm-8 col-lg-9 col-xl-10">
+            <div class="col-sm-7 col-lg-8 col-xl-9">
 
                 <div class="input-group">
                     <input wire:model="search" placeholder="" id="validationCustomUsername" class="form-control" aria-describedby="inputGroupPrepend" >
@@ -22,17 +22,21 @@
                 @livewire('jumpers.ssidkr.ssidkr-create')
             </div>
 
-            <div class="mt-1">
+            <div class="mt-1 m-1">
                 @livewire('jumpers.ssidkr.ssidkr-create-high')
             </div>
 
-            
-
+            @if($jumper_complete != 0 || $jumper != "")
+            <div class="mt-1 ">
+                <button
+                    class="btn btn-danger btn-sm float-right" 
+                    wire:click="qt">
+                    <i class="fas fa-cloud mr-1"></i> QT
+                </button>
+            </div>
+            @endif
         </div>
-        
- 
 
-        <!--  -->
 
         <div class="flex justify-between">
 
@@ -58,103 +62,122 @@
             </div>
             @endif
 
-            
-
-           
         </div>
 
        
         @if ($jumper_complete != 0 && $jumper != "" && $calc_link == 1 && $no_jumpear == 0)
             <div class="card-body mt-0">
 
-                <div class="flex flex-row justify-center">
+                <div class="flex-nowrap justify-center callout callout-info">
                     <div>
-                        <p class="text-blue-400 text-md font-bold ml-4 mb-2 " id="jumper_copy">{{$jumper_complete}}</p>
+                        <p class="text-blue-400 text-md text-center font-bold mb-1 " id="jumper_copy">{{$jumper_complete}}</p>
                         
                     </div>
         @endif
-            <div :class="{'hidden': (jumper_2 == '')}">
-                <div :class="{'hidden': (calc_link == 0)}">
-                    <div :class="{'hidden': (no_jumpear == 1)}">
-                    @if ($jumper_complete != 0 && $jumper != "" && $calc_link == 1 && $no_jumpear == 0)
-                        <div class="flex">
-                            <button wire:target="save" wire:click="save" class="btn btn-sm btn-success ml-2 mb-3 text-bold flex-1" title="{{__('messages.copiar_portapapeles')}}" id="button_copy">@if($jumper_2 != '') Copiar @endif</button> 
-                            <x-jet-action-message class="ml-3 text-green-500 text-sm font-semibold mt-1 " on="saved">
-                                Copy.
-                            </x-jet-action-message>
+                    <div>
+                        <div>
+                            <div>
+                                @if ($jumper_complete != 0 && $jumper != "" && $calc_link == 1 && $no_jumpear == 0)
+                                    <div class="flex justify-center">
+                                    <button onclick="copiarAlPortapapeles('jumper_copy')" class="btn btn-sm btn-success text-bold" title="{{__('messages.copiar_portapapeles')}}" id="button_copy">Copiar</button> 
+
+                                    </div>
+                                @endif
+
+                            </div>
 
                         </div>
-                    @endif
-
                     </div>
+                @if ($jumper_complete != 0 || $jumper != "")
 
                 </div>
-            </div>
-        @if ($jumper_complete != 0 || $jumper != "")
 
-            </div>
-            <table class="table table-striped table-responsive-md table-responsive-sm">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th class="text-center">{{__('messages.Tipo')}}</th>
-                            <th class="text-center">PSID</th>
-                            <th class="text-center">{{$jumper->jumperType->name}}</th>
-                            <th class="text-center">{{__('messages.Subido')}}</th>
-                            <th class="text-center" :class="{'hidden': (is_high == 'no')}">PID</th>
-                            <th class="text-center">Historial</th>
-                            <th colspan="2" class="text-center">{{__('messages.Puntuación')}}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="text-center">{{$jumper->jumperType->name}}</td>
-                            <td class="text-center">{{$jumper->psid}}</td>
-                            @if($jumper->jumper_type_id == 15) <td class="text-center"> - </td>@endif
-                            <td class="text-center" :class="{'hidden': (is_high == 'no')}"> {{$calculo_high}}</td>
-                            <td class="text-center" :class="{'hidden': (is_basic == 'no')}">{{$jumper->basic}}</td>
-                            <td class="text-center">{{$jumper->created_at->format('d/m/Y')}}</td>
-                            <td class="text-center" :class="{'hidden': (is_high == 'no')}"> 
-                                <div class=" row flex justify-between">
-                            
-                                    <div class="flex-grow-1">
-                                        <input type="text" wire:model="pid_new" class="form-control" id="formGroupExampleInput" placeholder="{{__('messages.ingrese_pdi')}}">
-                                    </div>
-                                    <div>
-                                        <button
-                                            class="btn btn-md btn-outline-secondary" 
-                                            wire:click="calculo_high('{{$jumper->id}}')">
-                                            <i class="font-semibold fas fa-sync"></i>
+                <div class="mt-2 mb-2">
+                    @if($jumper_complete_qt != '')
+                    
+
+                    <div class="flex-nowrap justify-center callout callout-info">
+                        <h5 class="font-semibold text-white"><i class="text-white mr-1 fas fa-cloud"></i> Tu enlace de QuickThoughts: </h5>
+
+                        <p class="text-gray-100 text-md text-center font-bold mb-1 mt-2" id="jumper_copy_qt">{{$jumper_complete_qt}}</p>
+
+                        <div class="flex justify-center">
+                            <button onclick="copiarAlPortapapeles_qt('jumper_copy_qt')" class="btn btn-sm btn-success text-bold" title="{{__('messages.copiar_portapapeles')}}" id="button_copy_qt">Copiar</button> 
+
+                        </div>
+
+                    </div>
+                    @endif
+                </div>
+
+
+                <div class="table-responsive">
+                    <table class="table table-striped table-responsive">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th class="text-center">{{__('messages.Tipo')}}</th>
+                                    <th class="text-center">PSID</th>
+                                    @if($jumper->jumper_type_id == 1 || $jumper->jumper_type_id == 2)
+                                    <th class="text-center">{{$jumper->jumperType->name}}</th>
+                                    @endif
+                                    <th class="text-center">{{__('messages.Subido')}}</th>
+                                    <th class="text-center" :class="{'hidden': (is_high == 'no')}">PID</th>
+                                    <th class="text-center">Historial</th>
+                                    <th colspan="2" class="text-center">{{__('messages.Puntuación')}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-center">{{$jumper->jumperType->name}}</td>
+                                    <td class="text-center">{{$jumper->psid}}</td>
+                                    <td class="text-center" :class="{'hidden': (is_high == 'no')}"> {{$calculo_high}}</td>
+                                    <td class="text-center" :class="{'hidden': (is_basic == 'no')}">{{$jumper->basic}}</td>
+                                    <td class="text-center">{{$jumper->created_at->format('d/m/Y')}}</td>
+                                    <td class="text-center" :class="{'hidden': (is_high == 'no')}"> 
+                                        <div class=" row flex justify-between">
                                     
-                                        </button>
-                                    </div>
-                                </div>
-                            </td>
+                                            <div class="flex-grow-1">
+                                                <input type="text" wire:model="pid_new" class="form-control" id="formGroupExampleInput" placeholder="{{__('messages.ingrese_pdi')}}">
+                                            </div>
+                                            <div>
+                                                <button
+                                                    class="btn btn-md btn-outline-secondary" 
+                                                    wire:click="calculo_high('{{$jumper->id}}')">
+                                                    <i class="font-semibold fas fa-sync"></i>
+                                            
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </td>
 
-                            <td width="10px">
-                                @livewire('jumpers.history', ['jumper' => $jumper])
-                            </td>
-                                
-                            <td width="10px">
-                                <button
-                                    class="py-2 px-3 text-md font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" 
-                                    x-bind:disabled="points_user == 'si'"
-                                    wire:click="positivo('{{$jumper->id}}')"
-                                    title="Positivo">
-                                    <i class="font-semibold far fa-thumbs-up">{{$jumper->positive_points}}</i>
-                                </button>
-                            </td>
-                            <td width="10px">
-                            <button
-                                    class="py-2 px-3 text-md font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" 
-                                    x-bind:disabled="points_user == 'si'"
-                                    wire:click="negativo('{{$jumper->id}}')"
-                                    title="Negativo">
-                                    <i class="font-semibold far fa-thumbs-down">{{$jumper->negative_points}}</i>
-                            </button>
-                            </td>
-                        </tr>
-                    </tbody>
-            </table>
+                                    <td width="10px">
+                                        @livewire('jumpers.history', ['jumper' => $jumper])
+                                    </td>
+                                        
+                                    <td width="10px">
+                                        <button
+                                            class="py-2 px-3 text-md font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" 
+                                            x-bind:disabled="points_user_positive == 'si'"
+                                            wire:click="positivo('{{$jumper->id}}')"
+                                            title="Positivo">
+                                            <i class="font-semibold far fa-thumbs-up">{{$jumper->positive_points}}</i>
+                                        </button>
+                                    </td>
+                                    <td width="10px">
+                                    <button
+                                            class="py-2 px-3 text-md font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" 
+                                            x-bind:disabled="points_user_negative == 'si'"
+                                            wire:click="negativo('{{$jumper->id}}')"
+                                            title="Negativo">
+                                            <i class="font-semibold far fa-thumbs-down">{{$jumper->negative_points}}</i>
+                                    </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                    </table>
+
+                </div>
+                
 
                 <div class="grid md:grid-cols-3 gap-4 mt-4 card container">
                     <aside class="md:col-span-1 p-2">
@@ -230,7 +253,7 @@
             <div class="card-body">
 
                 <div class="m-2 mb-2">
-                @if($no_detect != 0)
+                    @if($no_detect != 0)
                     <div class="info-box mb-3 bg-info" :class="{'hidden': (no_detect == '0')}">
                        
                         <span class="info-box-icon"><i class="fas fa-tag"></i></span>
@@ -292,6 +315,10 @@
                 </div>
             </div>
         </div>
+
+       
+
+
     </div>
 
     <style>
@@ -342,20 +369,86 @@
             }
     </style>
 
-    @push('js')
-    <script>
-        Livewire.on('copiar_port', function(){
-            var boton = document.getElementById("button_copy");
-            var codigoACopiar = document.getElementById('jumper_copy');
-            var seleccion = document.createRange();
-            seleccion.selectNodeContents(codigoACopiar);
-            window.getSelection().removeAllRanges();
-            window.getSelection().addRange(seleccion);
-            var res = document.execCommand('copy');
-            window.getSelection().removeRange(seleccion);
-        })
-    </script>
-    @endpush
+    @section('js')
+
+    
+        <script>
+            function copiarAlPortapapeles(id_elemento) {
+             
+               var codigoACopiar = document.getElementById(id_elemento);
+                var seleccion = document.createRange();
+                seleccion.selectNodeContents(codigoACopiar);
+                window.getSelection().removeAllRanges();
+                window.getSelection().addRange(seleccion);
+                var res = document.execCommand('copy');
+                window.getSelection().removeRange(seleccion);
+
+                toastr.options={
+                    "closeButton": true,
+                    "debug": true,
+                    "newestOnTop": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": true,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+                toastr.success('Copy..')
+            }
+        </script>
+
+<script>
+            function copiarAlPortapapeles_qt(id_elemento) {
+             
+               var codigoACopiar = document.getElementById(id_elemento);
+                var seleccion = document.createRange();
+                seleccion.selectNodeContents(codigoACopiar);
+                window.getSelection().removeAllRanges();
+                window.getSelection().addRange(seleccion);
+                var res = document.execCommand('copy');
+                window.getSelection().removeRange(seleccion);
+
+                toastr.options={
+                    "closeButton": true,
+                    "debug": true,
+                    "newestOnTop": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": true,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+                toastr.success('Copy qt..')
+            }
+        </script>
+
+        <script>
+
+            Livewire.on('wait', function(){
+
+                Swal.fire(
+                'Espere un momento, se esta procesando su jumper',
+                'Esta siendo redireccionado...',
+                )
+
+            })
+
+        </script>
+    @stop
 </div>
 
 

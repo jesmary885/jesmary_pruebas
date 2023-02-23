@@ -18,7 +18,7 @@
     @endif
 
    
-    @livewire('jumpers.qt.qt-index',['search' => $search]) 
+    @livewire('jumpers.qt.qt-index') 
   
 @stop
 

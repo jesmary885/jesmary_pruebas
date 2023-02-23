@@ -2,77 +2,110 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Livewire\Cint\CintImport;
 use App\Models\Link;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class JumpersController extends Controller
 {
-    public function cint($jumper=0,$link_complete=0){
-        return view('jumpers.cint',compact('jumper','link_complete'));
+    public function cint(){
+        return view('jumpers.cint');
         
     }
 
-    public function internals($jumper=0,$link_complete=0){
-        return view('jumpers.internals',compact('jumper','link_complete'));
+    public function internals(){
+        return view('jumpers.internals');
         
     }
 
-    public function kmil($jumper=0,$link_complete=0){
-       return view('jumpers.k1000',compact('jumper','link_complete'));
+    public function k3203(){
+    
+        return view('jumpers.k3203');
+        
+     }
+
+    public function kmil(){
+       return view('jumpers.k1000');
        
     }
 
-    public function kmilnoventaydos($jumper=0,$link_complete=0){
-        return view('jumpers.k1092',compact('jumper','link_complete'));
+    public function kmilnoventaydos(){
+        return view('jumpers.k1092');
         
     }
 
-    public function kdosmilsesentaydos($jumper=0,$link_complete=0){
-       return view('jumpers.k2062',compact('jumper','link_complete'));
+    public function kdosmilsesentaydos(){
+       return view('jumpers.k2062');
         
     }
 
-    public function kveintitres($jumper=0,$link_complete=0){
-         return view('jumpers.k23',compact('jumper','link_complete'));
+    public function kveintitres(){
+         return view('jumpers.k23');
         
     }
 
-    public function ksietemilcuarentayuno($jumper=0,$link_complete=0){
-        return view('jumpers.k7341',compact('jumper','link_complete'));
+    public function ksietemilcuarentayuno(){
+        return view('jumpers.k7341');
      
     }
 
-    public function prodege($jumper=0,$link_complete=0){
-        return view('jumpers.prodege',compact('jumper','link_complete'));
+    public function prodege(){
+        return view('jumpers.prodege');
       
     }
 
-    public function samplicio($jumper=0,$link_complete=0){
-        return view('jumpers.samplicio',compact('jumper','link_complete'));
+    public function samplicio(){
+        return view('jumpers.samplicio');
        
     }
 
-    public function scube($jumper=0,$link_complete=0){
-         return view('jumpers.scube',compact('jumper','link_complete'));
+    public function scube(){
+         return view('jumpers.scube');
 
     }
 
-    public function spectrum($jumper=0,$link_complete=0){
-        return view('jumpers.spectrum',compact('jumper','link_complete'));
+    public function spectrum(){
+        return view('jumpers.spectrum');
        
     }
 
-    public function toluna($jumper=0,$link_complete=0){
-        return view('jumpers.toluna',compact('jumper','link_complete'));
+    public function toluna(){
+        return view('jumpers.toluna');
 
     }
 
-    public function ssidkr($jumper=0,$link_complete=0,$search=''){
-        return view('jumpers.ssidkr',compact('jumper','link_complete','search'));
+    public function ssidkr(){
+      
+        return view('jumpers.ssidkr');
     }
 
-    public function qt($search=''){
-        return view('jumpers.qt',compact('search'));
+    public function qt(){
+        return view('jumpers.qt');
+    }
+
+    public function wix(){
+        return view('jumpers.wix');
+    }
+
+    public function descalificador(){
+        return view('jumpers.descalificador');
+        
+     }
+
+     public function import_cint(Request $request){
+
+        $request->validate([
+            'import_file' => 'required'
+        ]);
+     
+        
+        $file = $request->file('import_file');
+
+        Excel::import(new CintImport(), $file);
+
+        return redirect()->route('jumpers.cint.cint-index');
+
     }
 
 }

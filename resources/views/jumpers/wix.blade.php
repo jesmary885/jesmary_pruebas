@@ -3,7 +3,7 @@
 
 <div class="flex justify-between">
     
-    <h1 class="text-lg font-weight-bold text-blue-300"> <i class="fas fa-asterisk mr-1 text-blue-300"></i> SSI DKR</h1>
+    <h1 class="text-lg font-weight-bold text-blue-300"> <i class="fas fa-asterisk mr-1 text-blue-300"></i> SALTADOR WIX</h1>
 
    
 </div>
@@ -16,14 +16,12 @@
             <strong>{{session('info')}}</strong>
         </div>
     @endif
-
-   
-    @livewire('jumpers.ssidkr.ssidkr-index') 
-  
+    
+    @livewire('jumpers.wix') 
 @stop
 
 @section('css')
-      <link rel="stylesheet" href="{{asset('css/app.css')}}">
+    <link rel="stylesheet" href="/css/admin_custom.css">
 @stop
 
 @section('js')

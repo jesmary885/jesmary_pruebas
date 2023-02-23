@@ -41,20 +41,24 @@ Route::middleware(['auth','verified'])->group(function()
 {
     Route::middleware(['active'])->group(function(){
         //Jumpers
-        Route::get('cint/{jumper?}/{link_complete?}',[JumpersController::class,'cint'])->name('cint.index');
-        Route::get('internals/{jumper?}/{link_complete?}',[JumpersController::class,'internals'])->name('internals.index');
-        Route::get('k100/{jumper?}/{link_complete?}',[JumpersController::class,'kmil'])->name('kmil.index');
-        Route::get('k1092/{jumper?}/{link_complete?}',[JumpersController::class,'kmilnoventaydos'])->name('kmilnoventaydos.index');
-        Route::get('k2062/{jumper?}/{link_complete?}',[JumpersController::class,'kdosmilsesentaydos'])->name('kdosmilsesentaydos.index');
-        Route::get('k23/{jumper?}/{link_complete?}',[JumpersController::class,'kveintitres'])->name('kveintitres.index');
-        Route::get('k7341/{jumper?}/{link_complete?}',[JumpersController::class,'ksietemilcuarentayuno'])->name('ksietemilcuarentayuno.index');
-        Route::get('prodege/{jumper?}/{link_complete?}',[JumpersController::class,'prodege'])->name('prodege.index');
-        Route::get('samplicio/{jumper?}/{link_complete?}',[JumpersController::class,'samplicio'])->name('samplicio.index');
-        Route::get('scube/{jumper?}/{link_complete?}',[JumpersController::class,'scube'])->name('scube.index');
-        Route::get('spectrum/{jumper?}/{link_complete?}',[JumpersController::class,'spectrum'])->name('spectrum.index');
-        Route::get('toluna/{jumper?}/{link_complete?}',[JumpersController::class,'toluna'])->name('toluna.index');
-        Route::get('ssidkr/{jumper?}/{link_complete?}',[JumpersController::class,'ssidkr'])->name('ssidkr.index');
+        Route::get('cint',[JumpersController::class,'cint'])->name('cint.index');
+        Route::get('internals',[JumpersController::class,'internals'])->name('internals.index');
+        Route::get('k100',[JumpersController::class,'kmil'])->name('kmil.index');
+        Route::get('k1092',[JumpersController::class,'kmilnoventaydos'])->name('kmilnoventaydos.index');
+        Route::get('k2062',[JumpersController::class,'kdosmilsesentaydos'])->name('kdosmilsesentaydos.index');
+        Route::get('k23',[JumpersController::class,'kveintitres'])->name('kveintitres.index');
+        Route::get('k3203',[JumpersController::class,'k3203'])->name('k3203.index');
+        Route::get('k7341',[JumpersController::class,'ksietemilcuarentayuno'])->name('ksietemilcuarentayuno.index');
+        Route::get('prodege',[JumpersController::class,'prodege'])->name('prodege.index');
+        Route::get('samplicio',[JumpersController::class,'samplicio'])->name('samplicio.index');
+        Route::get('scube',[JumpersController::class,'scube'])->name('scube.index');
+        Route::get('spectrum',[JumpersController::class,'spectrum'])->name('spectrum.index');
+        Route::get('toluna',[JumpersController::class,'toluna'])->name('toluna.index');
+        Route::get('ssidkr',[JumpersController::class,'ssidkr'])->name('ssidkr.index');
+        Route::get('descalificador',[JumpersController::class,'descalificador'])->name('descalificador.index');
+        Route::get('wix',[JumpersController::class,'wix'])->name('wix.index');
         Route::get('qt',[JumpersController::class,'qt'])->name('qt.index');
+        Route::get('import_cint',[JumpersController::class,'import_cint'])->name('cint.import');
 
         //Marketplace
         Route::get('marketplace',[MarketplaceController::class,'index'])->name('marketplace.index');

@@ -1,25 +1,28 @@
 <?php
 
-namespace App\Http\Livewire\Jumpers\K1000;
+namespace App\Http\Livewire\Jumpers\K3203;
 
 use App\Models\Comments;
 use App\Models\Link;
 use App\Models\User_Links_Points;
-use GuzzleHttp\Client;
 use Livewire\Component;
+use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Http;
 use Livewire\WithPagination;
+use Illuminate\Http\Request;
 
-class K1000Index extends Component
+class K3203Index extends Component
 {
     use WithPagination;
     protected $paginationTheme = "bootstrap";
 
-    public  $jumper_complete = [],$jumper_list = 0,$busqueda_link,$comment_new_psid_register,$pid_register_high,$psid_register_bh,$high_register_bh,$basic_register_bh,$posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $wix_detect = '0', $psid_register=0,$jumper_redirect,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$is_high,$is_basic,$calc_link,$jumper_select,$points_user_positive, $points_user_negative;
+    public  $jumper_complete = [],$jumper_list = 0,$busqueda_link,$comment_new_psid_register,$pid_register_high,$psid_register_bh,$high_register_bh,$basic_register_bh,$posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $wix_detect = '0', $psid_register=0,$jumper_redirect,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$is_high,$is_basic,$calc_link,$jumper_select ;
 
     protected $listeners = ['render' => 'render', 'registro_psid' => 'registro_psid'];
     
     public function mount(){
         $this->user_auth =  auth()->user()->id;
+        $this->points_user='no';
         if(session('pid')) $this->pid_new = session('pid');
         if(session('psid')) $this->psid_register = session('psid');
         if(session('search')) $this->search = session('search');
@@ -34,14 +37,14 @@ class K1000Index extends Component
         return redirect()->route('kdosmilsesentaydos.index');
     }
 
+    public function k1000(){
+        $this->emit('wait');
+        return redirect()->route('kmil.index');
+    }
+
     public function k1092(){
         $this->emit('wait');
         return redirect()->route('kmilnoventaydos.index');
-    }
-
-    public function k3203(){
-        $this->emit('wait');
-        return redirect()->route('k3203.index');
     }
 
     public function k7341(){
@@ -51,6 +54,7 @@ class K1000Index extends Component
 
     public function render()
     {
+        
         $subs_psid = '0';
        
         $comments ="";
@@ -62,6 +66,7 @@ class K1000Index extends Component
      
         $this->no_jumpear = 0;
         $this->jumper_detect = 0;
+        $this->points_user='no';
         $this->no_detect = '0';
         $this->comment_new_psid_register = '';
         $this->posicion = 8; //me esta buscand a partir de https://
@@ -71,16 +76,14 @@ class K1000Index extends Component
 
         if($long_psid>=5){
 
-            $busqueda_k1000_ = strpos($this->search, 'k=1000&');
+            $busqueda_k3203_ = strpos($this->search, 'k=3203&');
 
-            if($busqueda_k1000_ !== false){
+            if($busqueda_k3203_ !== false){
               
                 $busqueda_ast_ = strpos($this->search, '**');
             
                 if($busqueda_ast_ !== false){
                     $busqueda_id= strpos($this->search, '**');
-                                    
-                    //$psid_buscar = substr($this->search,($busqueda_id - 22),22);
 
                     if(session('psid')) $psid_buscar = substr($this->search,($busqueda_id - 22),11).substr(session('psid'),11,11);
                     else $psid_buscar = substr($this->search,($busqueda_id - 22),22);
@@ -137,18 +140,43 @@ class K1000Index extends Component
                             $pid_buscar = session('pid');
                         }
 
-                
+                        $busqueda_ord= strpos($this->search, '&ORD=');
+
+                        if($busqueda_ord != false){
+
+                       
+
+                            $posicion_ord = $busqueda_ord + 5;
+                            $i_ord = 0;
+                            
+                            do{
+                                $detect_ord= substr($this->search, $posicion_ord,1);
+        
+                                if($detect_ord == '') $i_ord = 1;
+                                else{
+                                    $posicion_ord = $posicion_ord + 1;
+                                }
+        
+                            }while($i_ord != 1);
+
+                            $ord_buscar = substr($this->search,($busqueda_ord + 5),($posicion_ord - ($busqueda_ord + 5)));
+
+                          
+                        }
+
+                        else{
+                            $this->jumper_detect = 3;
+                        }
 
 
                         if($this->jumper_detect == 0){
 
                             if($this->jumper_list == 0){
                                 $client = new Client([
-                                    //'base_uri' => 'http://127.0.0.1:8000',
-                                    'base_uri' => 'http://146.190.74.228/',
+                                    'base_uri' => 'http://127.0.0.1:8000',
                                 ]);
             
-                                $resultado = $client->request('GET', '/k1000/1/'.$psid_buscar.'/'.$pid_buscar);
+                                $resultado = $client->request('GET', '/k3203/1/'.$psid_buscar.'/'.$pid_buscar.'/'.$ord_buscar);
 
                                 if($resultado->getStatusCode() == 200){
      
@@ -167,25 +195,8 @@ class K1000Index extends Component
                                              ->latest('id')
                                              ->paginate(5);
                                                              
-                                             if($user_point) {
-                                                if($user_point->point == 'positive'){
-                                              
-                                                    $this->points_user_positive='si';
-                                                    $this->points_user_negative='no';
-                                                    $this->points_user='si';
-                        
-                                                }
-                        
-                                                else{
-                                                    $this->points_user_positive='no';
-                                                    $this->points_user_negative='si';
-                                                }
-                                                        
-                                            }
-                                            else{
-                                                $this->points_user_positive='no';
-                                                $this->points_user_negative='no';
-                                            }
+                                         if($user_point) $this->points_user='si';
+                                         else $this->points_user='no';
          
                                     }
                                     else{
@@ -220,8 +231,8 @@ class K1000Index extends Component
                                              $link->jumper = $url_detect;
                                              $link->psid = substr($this->search,($busqueda_id - 22),5);
                                              $link->user_id = auth()->user()->id;
-                                             $link->jumper_type_id = 5;
-                                             $link->k_detected = 'K=1000';
+                                             $link->jumper_type_id = 15;
+                                             $link->k_detected = 'K=3203';
                                              $link->save();
          
                                              $this->busqueda_link = Link::where('id',$link->id)->first();
@@ -236,25 +247,8 @@ class K1000Index extends Component
                                                  ->latest('id')
                                                  ->paginate(5);
                                                                  
-                                                 if($user_point) {
-                                                    if($user_point->point == 'positive'){
-                                                  
-                                                        $this->points_user_positive='si';
-                                                        $this->points_user_negative='no';
-                                                        $this->points_user='si';
-                            
-                                                    }
-                            
-                                                    else{
-                                                        $this->points_user_positive='no';
-                                                        $this->points_user_negative='si';
-                                                    }
-                                                            
-                                                }
-                                                else{
-                                                    $this->points_user_positive='no';
-                                                    $this->points_user_negative='no';
-                                                }
+                                             if($user_point) $this->points_user='si';
+                                             else $this->points_user='no';
                                          }
                                     }
 
@@ -281,25 +275,8 @@ class K1000Index extends Component
                                         ->latest('id')
                                         ->paginate(5);
                                                              
-                                        if($user_point) {
-                                            if($user_point->point == 'positive'){
-                                          
-                                                $this->points_user_positive='si';
-                                                $this->points_user_negative='no';
-                                                $this->points_user='si';
-                    
-                                            }
-                    
-                                            else{
-                                                $this->points_user_positive='no';
-                                                $this->points_user_negative='si';
-                                            }
-                                                    
-                                        }
-                                        else{
-                                            $this->points_user_positive='no';
-                                            $this->points_user_negative='no';
-                                        }
+                                    if($user_point) $this->points_user='si';
+                                    else $this->points_user='no';
          
                                 }
                             }
@@ -320,7 +297,6 @@ class K1000Index extends Component
             
                     if($busqueda_psid_ !== false){
                         $busqueda_psid= strpos($this->search, 'psid'); 
-                        //$psid_buscar = substr($this->search,($busqueda_psid + 5),22);
 
                         if(session('psid'))$psid_complete = substr($this->search,($busqueda_psid + 5),11).substr(session('psid'),11,11);
                         else  $psid_buscar = substr($this->search,($busqueda_psid + 5),22);
@@ -356,7 +332,29 @@ class K1000Index extends Component
                                  $pid_buscar = session('pid');
                             }
 
-                          
+                            $busqueda_ord= strpos($this->search, '&ORD=');
+
+                            if($busqueda_ord != false){
+
+                                $posicion_ord = $busqueda_ord + 5;
+                                $i_ord = 0;
+                                
+                                do{
+                                    $detect_ord= substr($this->search, $posicion_ord,1);
+            
+                                    if($detect_ord == '') $i_ord = 1;
+                                    else{
+                                        $posicion_ord = $posicion_ord + 1;
+                                    }
+            
+                                }while($i_ord != 1);
+    
+                                $ord_buscar = substr($this->search,($busqueda_ord + 5),($posicion_ord - ($busqueda_ord + 5)));
+                            }
+    
+                            else{
+                                $this->jumper_detect = 3;
+                            }
 
 
                             if($this->jumper_detect == 0){
@@ -366,9 +364,10 @@ class K1000Index extends Component
                                     'base_uri' => 'http://146.190.74.228/',
                                 ]);
             
-                                $resultado = $client->request('GET', '/k1000/1/'.$psid_buscar.'/'.$pid_buscar);
+                                $resultado = $client->request('GET', '/k3203/1/'.$psid_buscar.'/'.$pid_buscar.'/'.$ord_buscar);
             
                                 if($resultado->getStatusCode() == 200){
+                                    //$jumper_complete = substr(json_decode((string)$resultado->getBody(),true),12,-2);
 
                                     $this->jumper_complete = json_decode($resultado->getBody(),true);
         
@@ -385,25 +384,8 @@ class K1000Index extends Component
                                             ->latest('id')
                                             ->paginate(5);
                                                             
-                                            if($user_point) {
-                                                if($user_point->point == 'positive'){
-                                              
-                                                    $this->points_user_positive='si';
-                                                    $this->points_user_negative='no';
-                                                    $this->points_user='si';
-                        
-                                                }
-                        
-                                                else{
-                                                    $this->points_user_positive='no';
-                                                    $this->points_user_negative='si';
-                                                }
-                                                        
-                                            }
-                                            else{
-                                                $this->points_user_positive='no';
-                                                $this->points_user_negative='no';
-                                            }
+                                        if($user_point) $this->points_user='si';
+                                        else $this->points_user='no';
         
                                     }
                                     else{
@@ -438,8 +420,8 @@ class K1000Index extends Component
                                             $link->jumper = $url_detect;
                                             $link->psid = substr($this->search,($busqueda_psid + 5),5);
                                             $link->user_id = auth()->user()->id;
-                                            $link->jumper_type_id = 5;
-                                            $link->k_detected = 'K=1000';
+                                            $link->jumper_type_id = 15;
+                                            $link->k_detected = 'K=3203';
                                             $link->save();
         
                                             $this->busqueda_link = Link::where('id',$link->id)->first();
@@ -454,25 +436,8 @@ class K1000Index extends Component
                                                 ->latest('id')
                                                 ->paginate(5);
                                                                 
-                                                if($user_point) {
-                                                    if($user_point->point == 'positive'){
-                                                  
-                                                        $this->points_user_positive='si';
-                                                        $this->points_user_negative='no';
-                                                        $this->points_user='si';
-                            
-                                                    }
-                            
-                                                    else{
-                                                        $this->points_user_positive='no';
-                                                        $this->points_user_negative='si';
-                                                    }
-                                                            
-                                                }
-                                                else{
-                                                    $this->points_user_positive='no';
-                                                    $this->points_user_negative='no';
-                                                }
+                                            if($user_point) $this->points_user='si';
+                                            else $this->points_user='no';
                                         }
                                     }
         
@@ -529,24 +494,29 @@ class K1000Index extends Component
                 
                 else{
                     $busqueda_k2062_ = strpos($this->search, 'k=2062&');
+                    $busqueda_k1000_ = strpos($this->search, 'k=1000&');
                     $busqueda_k1092_ = strpos($this->search, 'k=1092&');
-                    $busqueda_k3203_ = strpos($this->search, 'k=3203&');
+                    //$busqueda_k3203_ = strpos($this->search, 'k=3203&');
                     $busqueda_k7341_ = strpos($this->search, 'k=7341&');
               
                     if($busqueda_k7341_ !== false) $this->k7341();
-              
                     if($busqueda_k2062_ !== false) $this->k3203();
+                    if($busqueda_k1000_ !== false) $this->k1000();
                     if($busqueda_k1092_ !== false) $this->k1092();
-                    if($busqueda_k3203_ !== false) $this->k3203();
+                    
+                    //if($busqueda_k3203_ !== false) $this->k3203();
                 }
             }
         }
         else{
             $this->calc_link = 0;
         }
+        
 
-        return view('livewire.jumpers.k1000.k1000-index',compact('jumper','comments','subs_psid','busqueda_link_def'));
+        return view('livewire.jumpers.k3203.k3203-index',compact('jumper','comments','subs_psid','busqueda_link_def'));
     }
+
+   
 
     public function registro_psid(){
 
@@ -596,100 +566,35 @@ class K1000Index extends Component
 
     }
 
-    public function positivo($jumper_id){
+    public function positivo(){
+        $jumper_id = Link::where('id',$this->busqueda_link->id)->first();
+        $new_points = $jumper_id->positive_points + 1;
 
-        $user_point= User_Links_Points::where('link_id',$jumper_id)
-            ->where('user_id',$this->user_auth)
-            ->first();
+        $jumper_id->update([
+            'positive_points' => $new_points, 
+        ]);
 
-        if($user_point){
-            $user_point->update([
-                'point' => 'positive'
-            ]);
-
-            $jumper_id = Link::where('id',$jumper_id)->first();
-
-            $new_points_positive = $jumper_id->positive_points + 1;
-            $new_points_negative = $jumper_id->negative_points - 1;
-
-            $jumper_id->update([
-                'positive_points' => $new_points_positive, 
-                'negative_points' => $new_points_negative, 
-            ]);
-
-            $this->points_user_positive='si';
-            $this->points_user_negative='no';
-
-        }
-        else{
-            $links_points = new User_Links_Points();
-            $links_points->user_id = auth()->user()->id;
-            $links_points->link_id = $jumper_id;
-            $links_points->point = 'positive';
-            $links_points->save();
-
-            $jumper_id = Link::where('id',$jumper_id)->first();
-
-            $new_points = $jumper_id->positive_points + 1;
-
-            $jumper_id->update([
-                'positive_points' => $new_points, 
-            ]);
-
-            $this->points_user_positive='si';
-            $this->points_user_negative='no';
-
-        }
-
-        
+        $links_points = new User_Links_Points();
+        $links_points->user_id = auth()->user()->id;
+        $links_points->link_id = $this->busqueda_link->id;
+        $links_points->point = 'positive';
+        $links_points->save();
 
     }
 
-    public function negativo($jumper_id){
-        $user_point= User_Links_Points::where('link_id',$jumper_id)
-            ->where('user_id',$this->user_auth)
-            ->first();
+    public function negativo(){
+        $jumper_id = Link::where('id',$this->busqueda_link->id)->first();
+        $new_points = $jumper_id->negative_points + 1;
 
-        if($user_point){
-            $user_point->update([
-                'point' => 'negative'
-            ]);
+        $jumper_id->update([
+            'negative_points' => $new_points, 
+        ]);
+        $links_points = new User_Links_Points();
+        $links_points->user_id = auth()->user()->id;
+        $links_points->link_id = $this->busqueda_link->id;
+        $links_points->point = 'negative';
+        $links_points->save();
 
-            $jumper_id = Link::where('id',$jumper_id)->first();
-
-            $new_points_positive = $jumper_id->positive_points - 1;
-            $new_points_negative = $jumper_id->negative_points + 1;
-
-            $jumper_id->update([
-                'positive_points' => $new_points_positive, 
-                'negative_points' => $new_points_negative, 
-            ]);
-
-            $this->points_user_positive='no';
-            $this->points_user_negative='si';
-
-        }
-        else{
-            $links_points = new User_Links_Points();
-            $links_points->user_id = auth()->user()->id;
-            $links_points->link_id = $jumper_id;
-            $links_points->point = 'negative';
-            $links_points->save();
-
-            $jumper_id = Link::where('id',$jumper_id)->first();
-
-            $new_points = $jumper_id->negative_points + 1;
-
-            $jumper_id->update([
-                'negative_points' => $new_points, 
-            ]);
-
-            $this->points_user_positive='no';
-            $this->points_user_negative='si';
-
-        }
-
-        
     }
 
     public function comentar(){

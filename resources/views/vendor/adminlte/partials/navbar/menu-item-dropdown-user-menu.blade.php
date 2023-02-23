@@ -16,29 +16,32 @@
 <li class="nav-item dropdown">
 
     {{-- User menu toggler --}}
-    <a href="#" class="nav-link dropdown-toggle text-gray-800 font-semibold" data-toggle="dropdown">
-        @if(session('locale'))
-            @if(session('locale') == "es")
+    <div class="d-none d-lg-block">
+        <a href="#" class="nav-link dropdown-toggle text-gray-800 font-semibold " data-toggle="dropdown">
+            @if(session('locale'))
+                @if(session('locale') == "es")
+                    <span>
+                        {{__('messages.Idioma')}} : Español
+                    </span>
+                @else
                 <span>
-                    {{__('messages.Idioma')}} : Español
+                    {{__('messages.Idioma')}} : English
                 </span>
+                @endif
             @else
-            <span>
-                {{__('messages.Idioma')}} : English
-            </span>
+                <span>
+                {{__('messages.Idioma')}} : Español
+                </span>
             @endif
-        @else
-            <span>
-            {{__('messages.Idioma')}} : Español
-            </span>
-        @endif
-    </a>
+        </a>
 
-    <ul class="dropdown-menu">
-        @livewire('idioma.cambiar-idioma')
-    </ul>
+        <ul class="dropdown-menu">
+            @livewire('idioma.cambiar-idioma')
+        </ul>
 
-    <li class="nav-item dropdown">
+    </div>
+    
+    <li class="nav-item dropdown d-none d-md-block">
         <a href="#" class="nav-link dropdown-toggle text-gray-800 font-semibold" data-toggle="dropdown">
             @if(session('psid'))
                 <span class="text-green-600">
@@ -61,7 +64,7 @@
         </ul>
     </li>
 
-    <li class="nav-item dropdown">
+    <li class="nav-item dropdown d-none d-md-block">
         <a href="#" class="nav-link dropdown-toggle text-gray-800 font-semibold" data-toggle="dropdown">
             @if(session('pid'))
                 <span class="text-blue-600">

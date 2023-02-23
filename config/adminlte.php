@@ -363,7 +363,7 @@ return [
                     'text' => 'Mi marketplace',
                     'route'  => 'admin.marketplace.compra',
                     'icon'    => 'fas fa-box-open',
-                    'icon_color' => 'cyan',
+                    'icon_color' => 'red',
                     'can' => 'admin.marketplace.compras'
                 ],
             ],
@@ -438,22 +438,43 @@ return [
                     'icon'    => '	fas fa-angle-right',
                 ],
 
+                // [
+                //     'text' => 'K23',
+                //     'route'  => 'kveintitres.index',
+                //     'can' => 'kveintitres.index',
+                //     'icon_color' => 'red',
+                //     'icon'    => '	fas fa-angle-right',
+                // ],
+
                 [
-                    'text' => 'K23',
-                    'route'  => 'kveintitres.index',
-                    'can' => 'kveintitres.index',
+                    'text' => 'K3203',
+                    'route'  => 'k3203.index',
+                    'can' => 'ssidkr.index',
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
                 ],
                 [
                     'text' => 'K7341',
                     'route'  => 'ksietemilcuarentayuno.index',
-                    'can' => 'ksietemilcuarentayuno.index',
+                    'can' => 'ssidkr.index',
                     'icon_color' => 'cyan',
                     'icon'    => '	fas fa-angle-right',
                 ],
 
-               
+                [
+                    'text' => 'DESCALIFICADOR',
+                    'route'  => 'descalificador.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+                [
+                    'text' => 'SALTADOR WIX',
+                    'route'  => 'wix.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'cyan',
+                    'icon'    => '	fas fa-angle-right',
+                ],
             ],
             
         ],
@@ -466,51 +487,51 @@ return [
             'icon'    => 'fas fa-search',
             'icon_color' => 'cyan',
         ],
-        [
-            'text' => 'INTERNALS',
-            'route'  => 'internals.index',
-            'can' => 'internals.index',
-            'icon_color' => 'red',
-            'icon'    => 'fas fa-search',
-        ],
+        // [
+        //     'text' => 'INTERNALS',
+        //     'route'  => 'internals.index',
+        //     'can' => 'internals.index',
+        //     'icon_color' => 'red',
+        //     'icon'    => 'fas fa-search',
+        // ],
         
         
-        [
-            'text' => 'PRODEGE',
-            'route'  => 'prodege.index',
-            'can' => 'prodege.index',
-            'icon_color' => 'cyan',
-            'icon'    => 'fas fa-search',
-        ],
-        [
-            'text' => 'SAMPLICIO',
-            'route'  => 'samplicio.index',
-            'can' => 'samplicio.index',
-            'icon_color' => 'red',
-            'icon'    => 'fas fa-search',
-        ],
-        [
-            'text' => 'SCUBE',
-            'route'  => 'scube.index',
-            'can' => 'scube.index',
-            'icon_color' => 'cyan',
-            'icon'    => 'fas fa-search',
-        ],
-        [
-            'text' => 'SPECTRUM',
-            'route'  => 'spectrum.index',
-            'can' => 'spectrum.index',
-            'icon_color' => 'red',
-            'icon'    => 'fas fa-search',
-        ],
+        // [
+        //     'text' => 'PRODEGE',
+        //     'route'  => 'prodege.index',
+        //     'can' => 'prodege.index',
+        //     'icon_color' => 'cyan',
+        //     'icon'    => 'fas fa-search',
+        // ],
+        // [
+        //     'text' => 'SAMPLICIO',
+        //     'route'  => 'samplicio.index',
+        //     'can' => 'samplicio.index',
+        //     'icon_color' => 'red',
+        //     'icon'    => 'fas fa-search',
+        // ],
+        // [
+        //     'text' => 'SCUBE',
+        //     'route'  => 'scube.index',
+        //     'can' => 'scube.index',
+        //     'icon_color' => 'cyan',
+        //     'icon'    => 'fas fa-search',
+        // ],
+        // [
+        //     'text' => 'SPECTRUM',
+        //     'route'  => 'spectrum.index',
+        //     'can' => 'spectrum.index',
+        //     'icon_color' => 'red',
+        //     'icon'    => 'fas fa-search',
+        // ],
         
-        [
-            'text' => 'TOLUNA',
-            'route'  => 'toluna.index',
-            'can' => 'toluna.index',
-            'icon'    => 'fas fa-search',
-            'icon_color' => 'cyan',
-        ],
+         [
+             'text' => 'TOLUNA',
+             'route'  => 'toluna.index',
+             'can' => 'toluna.index',
+             'icon'    => 'fas fa-search',
+             'icon_color' => 'cyan',
+         ],
 
     ],
 
