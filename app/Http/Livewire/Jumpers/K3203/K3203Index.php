@@ -173,7 +173,8 @@ class K3203Index extends Component
 
                             if($this->jumper_list == 0){
                                 $client = new Client([
-                                    'base_uri' => 'http://127.0.0.1:8000',
+                                    //'base_uri' => 'http://127.0.0.1:8000',
+                                    'base_uri' => 'http://146.190.74.228/',
                                 ]);
             
                                 $resultado = $client->request('GET', '/k3203/1/'.$psid_buscar.'/'.$pid_buscar.'/'.$ord_buscar);
