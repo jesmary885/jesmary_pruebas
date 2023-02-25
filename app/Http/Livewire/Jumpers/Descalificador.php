@@ -62,7 +62,8 @@ class Descalificador extends Component
 
             
                     $client = new Client([
-                        'base_uri' => 'http://127.0.0.1:8000',
+                       // 'base_uri' => 'http://127.0.0.1:8000',
+                        'base_uri' => 'http://146.190.74.228/',
                     ]);
             
                     if($this->type == 'usa')

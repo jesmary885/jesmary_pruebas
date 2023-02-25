@@ -14,7 +14,7 @@ class K1000Index extends Component
     use WithPagination;
     protected $paginationTheme = "bootstrap";
 
-    public  $jumper_complete = [],$jumper_list = 0,$busqueda_link,$comment_new_psid_register,$pid_register_high,$psid_register_bh,$high_register_bh,$basic_register_bh,$posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $wix_detect = '0', $psid_register=0,$jumper_redirect,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$is_high,$is_basic,$calc_link,$jumper_select,$points_user_positive, $points_user_negative;
+    public  $jumper_complete = [],$jumper_list = 0,$busqueda_link,$comment_new_psid_register,$pid_register_high,$psid_register_bh,$high_register_bh,$basic_register_bh,$posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $wix_detect = '0', $psid_register=0,$jumper_redirect,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$is_high,$is_basic,$calc_link,$jumper_select,$points_user_positive, $points_user_negative, $jumper_detect_k ='';
 
     protected $listeners = ['render' => 'render', 'registro_psid' => 'registro_psid'];
     
@@ -30,30 +30,27 @@ class K1000Index extends Component
     }
 
     public function k2062(){
-        $this->emit('wait');
         return redirect()->route('kdosmilsesentaydos.index');
     }
 
     public function k1092(){
-        $this->emit('wait');
         return redirect()->route('kmilnoventaydos.index');
     }
 
     public function k3203(){
-        $this->emit('wait');
         return redirect()->route('k3203.index');
     }
 
     public function k7341(){
-        $this->emit('wait');
         return redirect()->route('ksietemilcuarentayuno.index');
     }
 
     public function render()
     {
         $subs_psid = '0';
+
        
-        $comments ="";
+        $comments =0;
         $jumper = "";
         $link_complete="";
         $psid_buscar = "";
@@ -62,12 +59,15 @@ class K1000Index extends Component
      
         $this->no_jumpear = 0;
         $this->jumper_detect = 0;
+        $this->busqueda_link = "";
         $this->no_detect = '0';
         $this->comment_new_psid_register = '';
         $this->posicion = 8; //me esta buscand a partir de https://
 
         $this->search = trim($this->search); //quitando espacios en blancos al inicio y final
         $long_psid = strlen($this->search); //buscando cuantos caracteres tiene en total
+
+     
 
         if($long_psid>=5){
 
@@ -76,7 +76,8 @@ class K1000Index extends Component
             if($busqueda_k1000_ !== false){
               
                 $busqueda_ast_ = strpos($this->search, '**');
-            
+
+                
                 if($busqueda_ast_ !== false){
                     $busqueda_id= strpos($this->search, '**');
                                     
@@ -496,11 +497,15 @@ class K1000Index extends Component
 
                     session()->forget('search');
                 }
-                        
+
+
                 session()->forget('search');
             }
 
             else{
+
+
+                
                 $this->calc_link = 0;
 
                 session(['search' =>  $this->search]);
@@ -523,21 +528,109 @@ class K1000Index extends Component
 
                 
                 if($this->busqueda_link){
-                    if($this->busqueda_link->jumper_type_id == 1 || $this->busqueda_link->jumper_type_id == 2)  $this->basic();
+                    
+                    $busqueda_k3203_ = strpos($this->search, 'k=3203&');
+                    $busqueda_k2062_ = strpos($this->search, 'k=2062&');
+                    $busqueda_k1092_ = strpos($this->search, 'k=1092&');
+                    $busqueda_k7341_ = strpos($this->search, 'k=7341&');
+
+                    if($busqueda_k3203_ == false && $busqueda_k2062_ == false && $busqueda_k1092_ == false && $busqueda_k7341_ == false ){
+
+                        if($this->busqueda_link->jumper_type_id == 1 || $this->busqueda_link->jumper_type_id == 2) {
+
+                            session(['search' =>  $this->search]);
+                            $this->basic();
+    
+                        }
+    
+                        
+                        elseif($this->busqueda_link->k_detected == 'K=1000'){
+
+                            
+    
+                            $this->k_detect = 'k=1000';
+                            $this->jumper_detect_k = $this->busqueda_link->jumper;
+    
+                            $user_point= User_Links_Points::where('link_id',$this->busqueda_link->id)
+                                ->where('user_id',auth()->user()->id)
+                                ->first();
+                                                             
+                            $comments = Comments::where('link_id',$this->busqueda_link->id)
+                                ->latest('id')
+                                ->paginate(5);
+                                                                 
+                            if($user_point) {
+                                if($user_point->point == 'positive'){
+                                                    
+                                    $this->points_user_positive='si';
+                                    $this->points_user_negative='no';
+                                    $this->points_user='si';
+                                
+                                }
+                            
+                                else{
+                                    $this->points_user_positive='no';
+                                    $this->points_user_negative='si';
+                                }
+                                                            
+                            }
+                            else{
+                                $this->points_user_positive='no';
+                                $this->points_user_negative='no';
+                            }
+    
+                            session()->forget('search');
+
+                            
+    
+                        }
+    
+                        elseif($this->busqueda_link->k_detected == 'K=3203') {
+                            session(['search' =>  $this->search]);
+                            $this->k3203();
+                        }
+                        elseif($this->busqueda_link->k_detected == 'K=2062') {
+                            session(['search' =>  $this->search]);
+                            $this->k2062();
+                        }
+                        elseif($this->busqueda_link->k_detected == 'K=1092') {
+                            session(['search' =>  $this->search]);
+                            $this->k1092();
+                        }
+                        elseif($this->busqueda_link->k_detected == 'K=7341') {
+                            session(['search' =>  $this->search]);
+                            $this->k7341();
+                        }
+                        else{
+                            session()->forget('search');
+                        }
+
+                    }
+
+                    else{
+                        if($busqueda_k3203_  != false) {
+                            session()->forget('search');
+                            $this->k3203();
+                        }
+                        if($busqueda_k2062_  != false) {
+                            session()->forget('search');
+                            $this->k2062();
+                        }
+                        if($busqueda_k1092_ != false) {
+                            session()->forget('search');
+                            $this->k1092();
+                        }
+                        if($busqueda_k7341_  != false) {
+                            session()->forget('search');
+                            $this->k7341();
+                        }
+                    }
                 }
 
                 
                 else{
-                    $busqueda_k2062_ = strpos($this->search, 'k=2062&');
-                    $busqueda_k1092_ = strpos($this->search, 'k=1092&');
-                    $busqueda_k3203_ = strpos($this->search, 'k=3203&');
-                    $busqueda_k7341_ = strpos($this->search, 'k=7341&');
-              
-                    if($busqueda_k7341_ !== false) $this->k7341();
-              
-                    if($busqueda_k2062_ !== false) $this->k3203();
-                    if($busqueda_k1092_ !== false) $this->k1092();
-                    if($busqueda_k3203_ !== false) $this->k3203();
+                    session()->forget('search');
+
                 }
             }
         }
@@ -545,55 +638,9 @@ class K1000Index extends Component
             $this->calc_link = 0;
         }
 
+       // session()->forget('search');
+
         return view('livewire.jumpers.k1000.k1000-index',compact('jumper','comments','subs_psid','busqueda_link_def'));
-    }
-
-    public function registro_psid(){
-
-        session(['psid' =>  $this->psid_detectado]);
-        $this->psid_register = session('psid');
-
-        //BUSCANDO PID Y AGREGANDOLO
-            $busqueda_pid_search= strpos($this->search, 'PID=');
-
-            if($busqueda_pid_search){
-                $this->posicionpid = $busqueda_pid_search + 4;
-
-                $pid_c = 0;
-                $i_bus = 0;
-                
-                do{
-                    $detectpid= substr($this->search, $this->posicionpid,1);
-                            
-                    if($detectpid == '&') $pid_c= 1;
-                    else{
-                        $pid_c = 0;
-                        $this->posicionpid = $this->posicionpid + 1;
-                        $i_bus ++;
-                    }
-
-                    if($i_bus > 13){
-                        $pid_c= 1;
-                    }
-                }
-                while($pid_c != 1);
-
-                if($i_bus < 13){
-                    $posicion_total_pid = $this->posicionpid - ($busqueda_pid_search + 4);
-                    $valor_pid= substr($this->search,($busqueda_pid_search + 4),$posicion_total_pid);
-                    if(is_numeric($valor_pid)) session(['pid' => substr($this->search,($busqueda_pid_search + 4),$posicion_total_pid)]);
-                }
-                else{
-                    $valor_pid= substr($this->search,($busqueda_pid_search + 4),8);
-                    if(is_numeric($valor_pid)) session(['pid' => substr($this->search,($busqueda_pid_search + 4),8)]);
-                }
-
-            }
-
-        session(['search' =>  $this->search]);
-
-        return redirect()->route('ssidkr.index');
-
     }
 
     public function positivo($jumper_id){
@@ -709,5 +756,7 @@ class K1000Index extends Component
         $this->reset(['search']);
         $this->jumper_list = 0;
         $this->jumper_complete = [];
+        session()->forget('search');
+        $this->busqueda_link = 0;
     }
 }

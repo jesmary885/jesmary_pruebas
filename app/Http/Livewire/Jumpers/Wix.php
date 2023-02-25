@@ -97,7 +97,8 @@ class Wix extends Component
                         if($this->jumper_detect == 0){
 
                             $client = new Client([
-                                'base_uri' => 'http://127.0.0.1:8000',
+                                //'base_uri' => 'http://127.0.0.1:8000',
+                                'base_uri' => 'http://146.190.74.228/',
                             ]);
         
                             $resultado = $client->request('GET', '/w/wix/'.$psid_buscar.'/'.$pid_buscar.'/'.$ord_buscar);
@@ -190,7 +191,8 @@ class Wix extends Component
                             if($this->jumper_detect == 0){
 
                                 $client = new Client([
-                                    'base_uri' => 'http://127.0.0.1:8000',
+                                   // 'base_uri' => 'http://127.0.0.1:8000',
+                                   'base_uri' => 'http://146.190.74.228/',
                                 ]);
             
                                 $resultado = $client->request('GET', '/w/wix/'.$psid_buscar.'/'.$pid_buscar.'/'.$ord_buscar);

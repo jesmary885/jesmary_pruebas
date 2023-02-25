@@ -181,16 +181,15 @@
 
                 <div class="grid md:grid-cols-3 gap-4 mt-4 card container">
                     <aside class="md:col-span-1 p-2">
-                    
-                        <div class="info-box mb-3 bg-info" :class="{'hidden': (jumper_detect == '0')}">
-                            @if($jumper_detect != 0)
+                        @if($jumper_detect != 0)
+                            <div class="info-box mb-3 bg-info" :class="{'hidden': (jumper_detect == '0')}">
                                 <span class="info-box-icon"><i class="fas fa-tag"></i></span>
-                                <div class="info-box-content">
-                                    <span class="info-box-text">Tipo {{$jumper->jumperType->name}}</span>
-                                    <span class="info-box-number">Dominio: {{$jumper_detect}}</span>
-                                </div>
-                            @endif
-                        </div>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Tipo {{$jumper->jumperType->name}}</span>
+                                        <span class="info-box-number">Dominio: {{$jumper_detect}}</span>
+                                    </div>
+                            </div>
+                        @endif
                     
                         @if($k_detect != '0')
                             <div class="info-box mb-3 bg-success" :class="{'hidden': (k_detect == '0')}">

@@ -29,30 +29,29 @@ class SsidkrIndex extends Component
         if(session('search')) $this->search = session('search');
     }
 
-
-
     public function k3203(){
-        $this->emit('wait');
+       // $this->emit('wait');
         return redirect()->route('k3203.index');
     }
 
     public function k2062(){
-        $this->emit('wait');
+       // $this->emit('wait');
         return redirect()->route('kdosmilsesentaydos.index');
     }
 
     public function k1000(){
-        $this->emit('wait');
+       // dd(session('search'));
+        //$this->emit('wait');
         return redirect()->route('kmil.index');
     }
 
     public function k1092(){
-        $this->emit('wait');
+        //$this->emit('wait');
         return redirect()->route('kmilnoventaydos.index');
     }
 
     public function k7341(){
-        $this->emit('wait');
+        //$this->emit('wait');
         return redirect()->route('ksietemilcuarentayuno.index');
     }
 
@@ -72,8 +71,6 @@ class SsidkrIndex extends Component
         $this->wix_detect = '0';
         $this->is_basic = 'no';
         $this->is_high = 'no';
-       // 
-   
 
         $this->no_detect = '0';
         $this->comment_new_psid_register = '';
@@ -81,6 +78,7 @@ class SsidkrIndex extends Component
 
         $this->search = trim($this->search); //quitando espacios en blancos al inicio y final
         $long_psid = strlen($this->search); //buscando cuantos caracteres tiene en total
+
     
         if($long_psid>=5){
 
@@ -90,7 +88,7 @@ class SsidkrIndex extends Component
             $busqueda_k1092_ = strpos($this->search, 'k=1092&');
             $busqueda_k7341_ = strpos($this->search, 'k=7341&');
               
-            if($busqueda_k3203_ == false && $busqueda_k2062_ == false && $busqueda_k1000_ == false && $busqueda_k1092_ == false){
+
                 //Registro automático de high y basic
                 if((strpos($this->search, '//dkr1.ssisurveys.com/projects/end?rst') !== false)){
 
@@ -190,7 +188,6 @@ class SsidkrIndex extends Component
         
                                     if($busqueda_psid_registrado != $ultimos_dig_psid) {
                                         $this->emit('confirm', '¿Desea registrar el psid con terminal '.$busqueda_psid_registrado.'?','jumpers.ssidkr.ssidkr-index','registro_psid','Psid registrado');
-        
                                     }
                                 }
         
@@ -254,7 +251,7 @@ class SsidkrIndex extends Component
 
                             $con_seguridad= strpos($this->search, 'ttps');
                             $i = 0;
-                            $i_busu = 0;
+                          
                             
                             do{
                                 $detect= substr($this->search, $this->posicion,1);
@@ -264,24 +261,12 @@ class SsidkrIndex extends Component
                                     $i = 0;
                                     $this->posicion = $this->posicion + 1;
                                 }
-
-                                $i_busu ++;
-
-                                if($i_busu > 15){
-                                    $i = 1;
-                                }
         
                             }while($i != 1);
 
-                            if($i_busu < 15){
-                                if($con_seguridad != false){
-                                    $url_detect = 'https://'.substr($this->search,8,($this->posicion-8));
-                                }
-                
-                                else{
-                                    $url_detect = 'https://'.substr($this->search,7,($this->posicion-7));
-                                }
-            
+                        
+                            $url_detect = 'https://'.substr($this->search,8,($this->posicion-8));
+
                 
                                 if($url_detect != 'https://dkr1.ssisurveys.com'){
                                     $jumper->update(
@@ -289,7 +274,7 @@ class SsidkrIndex extends Component
                                     );
                                 }
 
-                            }
+                            
                         }
                     
                     }
@@ -333,9 +318,40 @@ class SsidkrIndex extends Component
                                     ['k_detected' => 'K='.substr($this->search,($k_detect + 3),5) ]
                                 );
                             }
+
+                            $this->k_detect = 'K='.substr($this->search,($k_detect + 3),5);
                         }
                     }
 
+                    if($this->k_detect){
+
+                        if($busqueda_k3203_ == false && $busqueda_k2062_ == false && $busqueda_k1000_ == false && $busqueda_k1092_ == false && $busqueda_k7341_ == false){
+                      
+                            if($this->k_detect == 'K=3203') {
+                                session(['search' =>  $this->search]);
+                                $this->k3203();
+                            }
+                            if($this->k_detect == 'K=2062') {
+                                session(['search' =>  $this->search]);
+                                $this->k2062();
+                            }
+                            if($this->k_detect == 'K=1000') {
+                                
+                                session(['search' =>  $this->search]);
+                                $this->k1000();
+                            }
+                            if($this->k_detect == 'K=1092') {
+                                session(['search' =>  $this->search]);
+                                $this->k1092();
+                            }
+                            if($this->k_detect == 'K=7341') {
+                                session(['search' =>  $this->search]);
+                                $this->k7341();
+                            }
+                        }
+                    
+                    }
+         
                     $this->jumper_2 = '1';
                     
                     $user_point= User_Links_Points::where('link_id',$jumper->id)
@@ -346,9 +362,6 @@ class SsidkrIndex extends Component
                         ->latest('id')
                         ->paginate(5);
 
-                         
-            
-                                    
                     if($user_point) {
                         if($user_point->point == 'positive'){
                       
@@ -437,6 +450,8 @@ class SsidkrIndex extends Component
                                 $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?rst=1&psid='.$psid_complete.'**&basic='.$jumper->basic;
                             }
 
+                            session()->forget('search');
+
                         } 
                                     
                         if($jumper->jumper_type_id == 2){
@@ -502,9 +517,13 @@ class SsidkrIndex extends Component
                                     $jumper_complete = 'Ingrese su PID para calcular el valor high';
                                 }
                                 else{
+                                    $this->calc_link = 1;
+                
+                                   // $calculo_high_new = $this->calculo_high($jumper->id);
                                     $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?rst=1&psid='.$psid_complete.'**&high='.$this->calculo_high;
                                 }
                             }
+                            session()->forget('search');
                         } 
                         $this->jumper_redirect = [];
                     }
@@ -567,6 +586,30 @@ class SsidkrIndex extends Component
                                     while($ik != 1);
 
                                     $this->posicion_total_k = $this->posicionk -  ($k_detect + 3);
+
+                                       /* $kk_d='K='.substr($this->search,($k_detect + 3),$this->posicion_total_k);
+
+                                        if($kk_d == 'K=3203') {
+                                            session(['search' =>  $this->search]);
+                                            $this->k3203();
+                                        }
+                                        if($kk_d == 'K=2062') {
+                                            session(['search' =>  $this->search]);
+                                            $this->k2062();
+                                        }
+                                        if($kk_d == 'K=1000') {
+                                            session(['search' =>  $this->search]);
+                                            $this->k1000();
+                                        }
+                                        if($kk_d == 'K=1092') {
+                                            session(['search' =>  $this->search]);
+                                            $this->k1092();
+                                        }
+                                        if($kk_d == 'K=7341') {
+                                            session(['search' =>  $this->search]);
+                                            $this->k7341();
+                                        }*/
+
                             }
 
             
@@ -752,21 +795,11 @@ class SsidkrIndex extends Component
                             else $this->no_detect = 1;
                             
                         }
+
+                        
                     }
                 }
-
-                session()->forget('search');
-               // $this->jumper_complete_qt = '';
-            }
-            else{
-                session(['search' =>  $this->search]);
-        
-                if($busqueda_k3203_ !== false) $this->k3203();
-                if($busqueda_k2062_ !== false) $this->k2062();
-                if($busqueda_k1000_ !== false) $this->k1000();
-                if($busqueda_k1092_ !== false) $this->k1092();
-                if($busqueda_k7341_ !== false) $this->k7341();
-            }
+                
         }
         
         else{
@@ -777,8 +810,6 @@ class SsidkrIndex extends Component
            // $this->jumper_complete_qt = '';
         }
 
-
-        
        //session()->forget('search');
         return view('livewire.jumpers.ssidkr.ssidkr-index',compact('jumper_complete','jumper','comments','subs_psid'));
     }
@@ -993,14 +1024,8 @@ class SsidkrIndex extends Component
     public function calculo_high($jumper_id){
         $jumper_id = Link::where('id',$jumper_id)->first();
         $this->calculo_high = $jumper_id->high - ($jumper_id->pid - $this->pid_new) * round(($jumper_id->high / $jumper_id->pid),0);
-
+        $this->calc_link = 1;
         return $this->calculo_high;
-       /* if(session('pid')) return $this->calculo_high;
-        else{*/
-     
-           /* $this->calc_link = 1;
-            $this->emit('render', 'jumpers.ssidkr.ssidkr-index');*/
-        //}
     }
 
     public function registro_basic(){

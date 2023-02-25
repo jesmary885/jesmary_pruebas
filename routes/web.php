@@ -43,7 +43,7 @@ Route::middleware(['auth','verified'])->group(function()
         //Jumpers
         Route::get('cint',[JumpersController::class,'cint'])->name('cint.index');
         Route::get('internals',[JumpersController::class,'internals'])->name('internals.index');
-        Route::get('k100',[JumpersController::class,'kmil'])->name('kmil.index');
+        Route::get('k1000',[JumpersController::class,'kmil'])->name('kmil.index');
         Route::get('k1092',[JumpersController::class,'kmilnoventaydos'])->name('kmilnoventaydos.index');
         Route::get('k2062',[JumpersController::class,'kdosmilsesentaydos'])->name('kdosmilsesentaydos.index');
         Route::get('k23',[JumpersController::class,'kveintitres'])->name('kveintitres.index');

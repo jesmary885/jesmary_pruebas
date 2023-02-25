@@ -69,5 +69,6 @@ class QtIndex extends Component
 
     public function clear(){
         $this->reset(['search']);
+      
     }
 }
