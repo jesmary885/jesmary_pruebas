@@ -74,7 +74,7 @@ class K1000Index extends Component
             $busqueda_k1000_ = strpos($this->search, 'k=1000&');
 
             if($busqueda_k1000_ !== false){
-              
+                
                 $busqueda_ast_ = strpos($this->search, '**');
 
                 
@@ -518,11 +518,19 @@ class K1000Index extends Component
                 }
 
                 else{
-                    $busqueda_psid_ = strpos($this->search, 'psid');
+
+                    if(strlen($this->search) < 24){
+                        $busqueda_psid_ =  substr($this->search,0,5);
+                        $this->busqueda_link = Link::where('psid',$busqueda_psid_)->first();
+                    }
+
+                    else{
+                        $busqueda_psid_ = strpos($this->search, 'psid');
             
-                    if($busqueda_psid_ !== false){
-                       
-                        $this->busqueda_link = Link::where('psid',substr($this->search,($busqueda_psid_ + 5),5))->first();
+                        if($busqueda_psid_ !== false){
+                        
+                            $this->busqueda_link = Link::where('psid',substr($this->search,($busqueda_psid_ + 5),5))->first();
+                        }
                     }
                 }
 
@@ -602,6 +610,43 @@ class K1000Index extends Component
                             $this->k7341();
                         }
                         else{
+                       
+                            if($this->busqueda_link->k_detected){
+                        
+                                $this->k_detect = $this->busqueda_link->k_detected;
+                       
+                            }
+                            if($this->busqueda_link->jumper){
+                                $this->jumper_detect_k = $this->busqueda_link->jumper;
+                            }
+
+                            $user_point= User_Links_Points::where('link_id',$this->busqueda_link->id)
+                                ->where('user_id',auth()->user()->id)
+                                ->first();
+                                                            
+                            $comments = Comments::where('link_id',$this->busqueda_link->id)
+                                ->latest('id')
+                                ->paginate(5);
+                                                                
+                            if($user_point) {
+                                if($user_point->point == 'positive'){
+                                                    
+                                    $this->points_user_positive='si';
+                                    $this->points_user_negative='no';
+                                    $this->points_user='si';
+                                
+                                }
+                            
+                                else{
+                                    $this->points_user_positive='no';
+                                    $this->points_user_negative='si';
+                                }
+                                                            
+                            }
+                            else{
+                                $this->points_user_positive='no';
+                                $this->points_user_negative='no';
+                            }
                             session()->forget('search');
                         }
 
@@ -629,6 +674,7 @@ class K1000Index extends Component
 
                 
                 else{
+                    $this->no_detect = 1;
                     session()->forget('search');
 
                 }

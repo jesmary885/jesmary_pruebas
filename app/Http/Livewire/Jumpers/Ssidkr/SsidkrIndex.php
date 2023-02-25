@@ -131,13 +131,12 @@ class SsidkrIndex extends Component
 
                     if((strpos($this->search, 'ttps://') === false) && (strpos($this->search, 'ttp://') === false)){
                            
-
-                            if(strlen($this->search) < 22){
+                            if(strlen($this->search) <= 24){
                                 $subs_psid =  substr($this->search,0,5);
                                 $psid_complete = $subs_psid;
                             }
         
-                            if(strlen($this->search) >= 22){
+                            if(strlen($this->search) > 24){
 
                                 $busqueda_psid_ = strpos($this->search, 'psid');
         

@@ -191,6 +191,20 @@
             </div>
         @endif
 
+        <div class="m-2 mb-2">
+            @if($no_detect != 0)
+                <div class="info-box mb-3 bg-info" :class="{'hidden': (no_detect == '0')}">
+                        
+                    <span class="info-box-icon"><i class="fas fa-tag"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">No se encuentra en nuestros registros</span>
+                        <span class="info-box-number">Si deseas registrarla, pega en nuestro buscador "SSI DKR" el link de la encuesta</span>
+                    </div>
+                            
+                </div>
+            @endif
+        </div>
+
         @if ($jumper_detect == 2)
         <div>
         <div class=" info-box bg-warning">
