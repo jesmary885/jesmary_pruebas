@@ -131,16 +131,31 @@ class SsidkrIndex extends Component
 
                     if((strpos($this->search, 'ttps://') === false) && (strpos($this->search, 'ttp://') === false)){
                            
-                            if(strlen($this->search) <= 24){
-                                $subs_psid =  substr($this->search,0,5);
-                                $psid_complete = $subs_psid;
+                            if(strlen($this->search) <= 11){
+                                $this->no_jumpear = 1;
+
+                                if(strlen($this->search) < 11){
+                                    $subs_psid =  substr($this->search,0,5);
+                                    $psid_complete = $subs_psid;
+                                }
+
+                                if(strlen($this->search) == 11){
+                                    $subs_psid =  substr($this->search,0,5);
+                                    $psid_complete = $subs_psid;
+                                    if(session('psid'))$psid_complete = substr($this->search,0,11).substr(session('psid'),11,11);
+                                    else  $psid_complete = $subs_psid;
+
+                                }
                             }
         
-                            if(strlen($this->search) > 24){
+                            if(strlen($this->search) > 11){
 
                                 $busqueda_psid_ = strpos($this->search, 'psid');
         
                                 if($busqueda_psid_ !== false){
+
+                                    if(strlen($this->search) < 27) $this->no_jumpear = 1; 
+
                                     $subs_psid = substr($this->search,($busqueda_psid_ + 5),5);
                                     $subs_psid_sin_cortar = substr($this->search,($busqueda_psid_ + 5));
 
@@ -149,19 +164,20 @@ class SsidkrIndex extends Component
 
                                 }
                                 else{
-                                    $subs_psid_sin_cortar = substr($this->search,22);
-                                   // $psid_complete = substr($this->search,0,22);
 
+                                    $subs_psid = substr($this->search,0,5);
 
-                                    if(session('psid'))$psid_complete = substr($subs_psid_sin_cortar,0,11).substr(session('psid'),11,11);
-                                    else  $psid_complete = substr($subs_psid_sin_cortar,0,22);
+                                    if(strlen($this->search) < 22) $this->no_jumpear = 1; 
+
+                                    if(session('psid'))$psid_complete = substr($this->search,0,11).substr(session('psid'),11,11);
+                                    else  $psid_complete = substr($this->search,0,22);
 
                                 }
                                 
                             }
-                            else{
+                            /*else{
                                 $this->no_jumpear = 1;
-                            }
+                            }*/
         
                         }
                     else{
@@ -819,7 +835,7 @@ class SsidkrIndex extends Component
 
         if($long_psid>=30){
 
-            if($long_psid<35){
+            if($long_psid<33){
                 $link_complete = $this->search;
                 $this->jumper_complete_qt='https://dkr1.ssisurveys.com/projects/pstart?psid='.$link_complete.'&subpanelid=38';
             }

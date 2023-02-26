@@ -58,6 +58,7 @@ class K1000Index extends Component
         $busqueda_link_def = "";
      
         $this->no_jumpear = 0;
+        $this->k_detect = '0';
         $this->jumper_detect = 0;
         $this->busqueda_link = "";
         $this->no_detect = '0';

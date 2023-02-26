@@ -64,6 +64,7 @@ class K3203Index extends Component
         $this->jumper_detect = 0;
         $this->points_user='no';
         $this->no_detect = '0';
+        $this->k_detect = '0';
         $this->comment_new_psid_register = '';
         $this->posicion = 8; //me esta buscand a partir de https://
 
