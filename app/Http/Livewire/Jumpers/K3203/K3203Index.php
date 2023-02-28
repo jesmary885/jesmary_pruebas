@@ -28,26 +28,6 @@ class K3203Index extends Component
         if(session('search')) $this->search = session('search');
     }
 
-    public function basic(){
-        return redirect()->route('ssidkr.index');
-    }
-
-    public function k2062(){
-        return redirect()->route('kdosmilsesentaydos.index');
-    }
-
-    public function k1000(){
-        return redirect()->route('kmil.index');
-    }
-
-    public function k1092(){
-        return redirect()->route('kmilnoventaydos.index');
-    }
-
-    public function k7341(){
-        return redirect()->route('ksietemilcuarentayuno.index');
-    }
-
     public function render()
     {
         
@@ -73,10 +53,6 @@ class K3203Index extends Component
 
         if($long_psid>=5){
 
-            $busqueda_k3203_ = strpos($this->search, 'k=3203&');
-
-            if($busqueda_k3203_ !== false){
-              
                 $busqueda_ast_ = strpos($this->search, '**');
             
                 if($busqueda_ast_ !== false){
@@ -171,18 +147,28 @@ class K3203Index extends Component
 
                             $posicion_ord = $busqueda_ord + 1;
                             $i_ord = 0;
+                            $busq_ord_s = 0;
                             
                             do{
                                 $detect_ord= substr($this->search, $posicion_ord,1);
         
-                                if($detect_ord == '&') $i_ord = 1;
+                                if($detect_ord == '&' || $detect_ord == '\\') $i_ord = 1;
                                 else{
                                     $posicion_ord = $posicion_ord + 1;
+                                    $busq_ord_s ++;
+                                }
+
+                                if($busq_ord_s > 20){
+                                    $i_ord = 1;
                                 }
         
                             }while($i_ord != 1);
 
-                            $ord_buscar = substr($this->search,($busqueda_ord + 1),($posicion_ord - ($busqueda_ord + 1)));
+                            if($busq_ord_s < 20)
+                                $ord_buscar = substr($this->search,($busqueda_ord + 1),($posicion_ord - ($busqueda_ord + 1)));
+
+                            else
+                                $ord_buscar = substr($this->search,($busqueda_ord + 1),20);
                          
                         }
 
@@ -463,18 +449,28 @@ class K3203Index extends Component
     
                                 $posicion_ord = $busqueda_ord + 1;
                                 $i_ord = 0;
+                                $busq_ord_s = 0;
                                 
                                 do{
                                     $detect_ord= substr($this->search, $posicion_ord,1);
             
-                                    if($detect_ord == '&') $i_ord = 1;
+                                    if($detect_ord == '&' || $detect_ord == '\\') $i_ord = 1;
                                     else{
                                         $posicion_ord = $posicion_ord + 1;
+                                        $busq_ord_s ++;
+                                    }
+
+                                    if($busq_ord_s > 20){
+                                        $i_ord = 1;
                                     }
             
                                 }while($i_ord != 1);
-    
-                                $ord_buscar = substr($this->search,($busqueda_ord + 1),($posicion_ord - ($busqueda_ord + 1)));
+
+                                if($busq_ord_s < 20)
+                                    $ord_buscar = substr($this->search,($busqueda_ord + 1),($posicion_ord - ($busqueda_ord + 1)));
+
+                                else
+                                    $ord_buscar = substr($this->search,($busqueda_ord + 1),20);
                              
                             }
     
@@ -668,173 +664,7 @@ class K3203Index extends Component
                 }
                         
                 session()->forget('search');
-            }
-
-            else{
-                $this->calc_link = 0;
-
-                session(['search' =>  $this->search]);
-
-                $busqueda_id= strpos($this->search, '**');
-
-                if($busqueda_id !== false){
-
-                    $this->busqueda_link = Link::where('psid',substr($this->search,($busqueda_id - 22),5))->first();
-                }
-
-                else{
-                    if(strlen($this->search) < 24){
-                        $busqueda_psid_ =  substr($this->search,0,5);
-                        $this->busqueda_link = Link::where('psid',$busqueda_psid_)->first();
-                    }
-
-                    else{
-                        $busqueda_psid_ = strpos($this->search, 'psid');
-                
-                        if($busqueda_psid_ !== false){
-                        
-                            $this->busqueda_link = Link::where('psid',substr($this->search,($busqueda_psid_ + 5),5))->first();
-                        }
-                    }
-                }
-
-                
-                if($this->busqueda_link){
-                    $busqueda_k1000_ = strpos($this->search, 'k=1000&');
-                    $busqueda_k2062_ = strpos($this->search, 'k=2062&');
-                    $busqueda_k1092_ = strpos($this->search, 'k=1092&');
-                    $busqueda_k7341_ = strpos($this->search, 'k=7341&');
-
-                    if($busqueda_k1000_ == false && $busqueda_k2062_ == false && $busqueda_k1092_ == false && $busqueda_k7341_ == false ){
-                        if($this->busqueda_link->jumper_type_id == 1 || $this->busqueda_link->jumper_type_id == 2) {
-
-                            session(['search' =>  $this->search]);
-                            $this->basic();
-
-                        }
-
-                        elseif($this->busqueda_link->k_detected == 'K=3203'){
-
-                            $this->k_detect = 'k=3203';
-                            $this->jumper_detect_k = $this->busqueda_link->jumper;
-
-                            $user_point= User_Links_Points::where('link_id',$this->busqueda_link->id)
-                                ->where('user_id',auth()->user()->id)
-                                ->first();
-                                                            
-                            $comments = Comments::where('link_id',$this->busqueda_link->id)
-                                ->latest('id')
-                                ->paginate(5);
-                                                                
-                            if($user_point) {
-                                if($user_point->point == 'positive'){
-                                                    
-                                    $this->points_user_positive='si';
-                                    $this->points_user_negative='no';
-                                    $this->points_user='si';
-                                
-                                }
-                            
-                                else{
-                                    $this->points_user_positive='no';
-                                    $this->points_user_negative='si';
-                                }
-                                                            
-                            }
-                            else{
-                                $this->points_user_positive='no';
-                                $this->points_user_negative='no';
-                            }
-
-                            session()->forget('search');
-
-        
-                        }
-
-                        elseif($this->busqueda_link->k_detected == 'K=1000') {
-                            session(['search' =>  $this->search]);
-                            $this->k1000();
-                        }
-                        elseif($this->busqueda_link->k_detected == 'K=2062') {
-                            session(['search' =>  $this->search]);
-                            $this->k2062();
-                        }
-                        elseif($this->busqueda_link->k_detected == 'K=1092') {
-                            session(['search' =>  $this->search]);
-                            $this->k1092();
-                        }
-                        elseif($this->busqueda_link->k_detected == 'K=7341') {
-                            session(['search' =>  $this->search]);
-                            $this->k7341();
-                        }
-                        else{
-                       
-                            if($this->busqueda_link->k_detected){
-                        
-                                $this->k_detect = $this->busqueda_link->k_detected;
-                       
-                            }
-                            if($this->busqueda_link->jumper){
-                                $this->jumper_detect_k = $this->busqueda_link->jumper;
-                            }
-
-                            $user_point= User_Links_Points::where('link_id',$this->busqueda_link->id)
-                                ->where('user_id',auth()->user()->id)
-                                ->first();
-                                                            
-                            $comments = Comments::where('link_id',$this->busqueda_link->id)
-                                ->latest('id')
-                                ->paginate(5);
-                                                                
-                            if($user_point) {
-                                if($user_point->point == 'positive'){
-                                                    
-                                    $this->points_user_positive='si';
-                                    $this->points_user_negative='no';
-                                    $this->points_user='si';
-                                
-                                }
-                            
-                                else{
-                                    $this->points_user_positive='no';
-                                    $this->points_user_negative='si';
-                                }
-                                                            
-                            }
-                            else{
-                                $this->points_user_positive='no';
-                                $this->points_user_negative='no';
-                            }
-                            session()->forget('search');
-                        }
-                    }
-                    
-                    else{
-                        if($busqueda_k1000_ != false) {
-                            session()->forget('search');
-                            $this->k1000();
-                        }
-                        if($busqueda_k2062_ != false) {
-                            session()->forget('search');
-                            $this->k2062();
-                        }
-                        if($busqueda_k1092_ != false) {
-                            session()->forget('search');
-                            $this->k1092();
-                        }
-                        if($busqueda_k7341_ != false) {
-                            session()->forget('search');
-                            $this->k7341();
-                        }
-                    }
-                }
-
-                
-                else{
-                    $this->no_detect = 1;
-                    session()->forget('search');
-                }
-            }
+       
         }
         else{
             $this->calc_link = 0;

@@ -22,7 +22,7 @@ class Wix extends Component
         $this->search = trim($this->search); //quitando espacios en blancos al inicio y final
         $long_psid = strlen($this->search); //buscando cuantos caracteres tiene en total
 
-        if($long_psid>80){
+        if($long_psid>5){
 
             $busqueda_ast_ = strpos($this->search, '**');
             
@@ -116,19 +116,29 @@ class Wix extends Component
 
                             $posicion_ord = $busqueda_ord + 1;
                             $i_ord = 0;
+                            $busq_ord_s = 0;
                             
                             do{
                                 $detect_ord= substr($this->search, $posicion_ord,1);
         
-                                if($detect_ord == '&') $i_ord = 1;
+                                if($detect_ord == '&' || $detect_ord == '\\') $i_ord = 1;
                                 else{
                                     $posicion_ord = $posicion_ord + 1;
+                                    $busq_ord_s ++;
+                                }
+
+                                if($busq_ord_s > 20){
+                                    $i_ord = 1;
                                 }
         
                             }while($i_ord != 1);
 
-                            $ord_buscar = substr($this->search,($busqueda_ord + 1),($posicion_ord - ($busqueda_ord + 1)));
-                         
+                            if($busq_ord_s < 20)
+                                $ord_buscar = substr($this->search,($busqueda_ord + 1),($posicion_ord - ($busqueda_ord + 1)));
+
+                            else
+                                $ord_buscar = substr($this->search,($busqueda_ord + 1),20);
+                       
                         }
 
                         else{
@@ -260,19 +270,29 @@ class Wix extends Component
     
                                 $posicion_ord = $busqueda_ord + 1;
                                 $i_ord = 0;
+                                $busq_ord_s = 0;
                                 
                                 do{
                                     $detect_ord= substr($this->search, $posicion_ord,1);
             
-                                    if($detect_ord == '&') $i_ord = 1;
+                                    if($detect_ord == '&' || $detect_ord == '\\') $i_ord = 1;
                                     else{
                                         $posicion_ord = $posicion_ord + 1;
+                                        $busq_ord_s ++;
+                                    }
+
+                                    if($busq_ord_s > 20){
+                                        $i_ord = 1;
                                     }
             
                                 }while($i_ord != 1);
-    
-                                $ord_buscar = substr($this->search,($busqueda_ord + 1),($posicion_ord - ($busqueda_ord + 1)));
-                             
+
+                                if($busq_ord_s < 20)
+                                    $ord_buscar = substr($this->search,($busqueda_ord + 1),($posicion_ord - ($busqueda_ord + 1)));
+
+                                else
+                                    $ord_buscar = substr($this->search,($busqueda_ord + 1),20);
+
                             }
     
                             else{
