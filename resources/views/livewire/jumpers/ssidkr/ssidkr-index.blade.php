@@ -1,4 +1,4 @@
-<div x-data="{jumper_2: @entangle('jumper_2'),points_user: @entangle('points_user'), is_high: @entangle('is_high'),is_basic: @entangle('is_basic'), calc_link: @entangle('calc_link'), pid: @entangle('pid_new'), psid: @entangle('psid_register'), jumper_detect: @entangle('jumper_detect'), no_detect: @entangle('no_detect'), k_detect: @entangle('k_detect'), no_jumpear: @entangle('no_jumpear'),points_user_positive: @entangle('points_user_positive'),points_user_negative: @entangle('points_user_negative')}">
+<div x-data="{jumper_2: @entangle('jumper_2'),points_user: @entangle('points_user'), is_high: @entangle('is_high'),is_basic: @entangle('is_basic'), calc_link: @entangle('calc_link'), pid: @entangle('pid_new'), psid: @entangle('psid_register'), jumper_detect: @entangle('jumper_detect'), no_detect: @entangle('no_detect'), k_detect: @entangle('k_detect'), no_jumpear: @entangle('no_jumpear'),points_user_positive: @entangle('points_user_positive'),points_user_negative: @entangle('points_user_negative'),descalific_active: @entangle('descalific_active')}">
     <div class="card">
         <div class="card-header form-row">
 
@@ -37,12 +37,27 @@
             @endif
         </div>
 
+        @if($descalific_active == 1)
+
+        <div class="px-4">
+                <div class="alert bg-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><font style="vertical-align: inherit;"><font style="vertical-align: inherit; color:darkred;">×</font></font></button>
+                    <h5><i class="icon fas fa-info"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">¡Descalificación procesada!</font></font></h5><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                    </font></font>
+                </div>
+            </div>
+
+        
+         
+        
+        @endif
+
 
         <div class="flex justify-between">
 
             @if($psid_register == 0)
             <div class="px-4" :class="{'hidden': (psid != 0)}">
-                <div class="alert alert-info alert-dismissible">
+                <div class="alert bg-info alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><font style="vertical-align: inherit;"><font style="vertical-align: inherit; color:darkred;">×</font></font></button>
                         <h5><i class="icon fas fa-info"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">¡Alerta!</font></font></h5><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
                         Aún no has registrado tu PSID</font><font style="vertical-align: inherit;"> ,haz clic <a class="hover:text-white" href="{{route('registro.psid')}}"> aquí</a> para registrarlo
@@ -53,7 +68,7 @@
             @endif
             @if($pid_new == 0)
             <div class="px-4" :class="{'hidden': (pid != 0)}">
-                <div class="alert alert-info alert-dismissible">
+                <div class="alert bg-info alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><font style="vertical-align: inherit;"><font style="vertical-align: inherit; color:darkred;">×</font></font></button>
                     <h5><i class="icon fas fa-info"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">¡Alerta!</font></font></h5><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
                     Aún no has registrado tu PID</font><font style="vertical-align: inherit;"> ,haz clic <a class="hover:font-bold" href="{{route('registro.pid')}}"> aquí</a> para registrarlo
@@ -112,100 +127,147 @@
 
 
                 <div class="table-responsive">
-                    <table class="table table-striped table-responsive">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th class="text-center">{{__('messages.Tipo')}}</th>
-                                    <th class="text-center">PSID</th>
-                                    @if($jumper->jumper_type_id == 1 || $jumper->jumper_type_id == 2)
-                                    <th class="text-center">{{$jumper->jumperType->name}}</th>
-                                    @endif
-                                    <th class="text-center">{{__('messages.Subido')}}</th>
-                                    <th class="text-center" :class="{'hidden': (is_high == 'no')}">PID</th>
-                                    <th class="text-center">Historial</th>
-                                    <th colspan="2" class="text-center">{{__('messages.Puntuación')}}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="text-center">{{$jumper->jumperType->name}}</td>
-                                    <td class="text-center">{{$jumper->psid}}</td>
-                                    <td class="text-center" :class="{'hidden': (is_high == 'no')}"> {{$calculo_high}}</td>
-                                    <td class="text-center" :class="{'hidden': (is_basic == 'no')}">{{$jumper->basic}}</td>
-                                    <td class="text-center">{{$jumper->created_at->format('d/m/Y')}}</td>
-                                    <td class="text-center" :class="{'hidden': (is_high == 'no')}"> 
-                                        <div class=" row flex justify-between">
-                                    
-                                            <div class="flex-grow-1">
-                                                <input type="text" wire:model="pid_new" class="form-control" id="formGroupExampleInput" placeholder="{{__('messages.ingrese_pdi')}}">
-                                            </div>
-                                            <div>
-                                                <button
-                                                    class="btn btn-md btn-outline-secondary" 
-                                                    wire:click="calculo_high('{{$jumper->id}}')">
-                                                    <i class="font-semibold fas fa-sync"></i>
-                                            
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </td>
-
-                                    <td width="10px">
-                                        @livewire('jumpers.history', ['jumper' => $jumper])
-                                    </td>
+                        <table class="table table-striped table-responsive">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        @if($jumper->jumper_type_id == 1 || $jumper->jumper_type_id == 2)
+                                        <th class="text-center">{{__('messages.Tipo')}}</th>
+                                        @endif
+                                        <th class="text-center">PSID</th>
+                                        @if($jumper->jumper_type_id == 1 || $jumper->jumper_type_id == 2)
+                                        <th class="text-center">{{$jumper->jumperType->name}}</th>
+                                        @endif
+                                        <th class="text-center">{{__('messages.Subido')}}</th>
+                                        <th class="text-center" :class="{'hidden': (is_high == 'no')}">PID</th>
+                                        <th class="text-center">Historial</th>
+                                        <th colspan="2" class="text-center">{{__('messages.Puntuación')}}</th>
+                                        <th colspan="1" class="text-center"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        @if($jumper->jumper_type_id == 1 || $jumper->jumper_type_id == 2)
+                                        <td class="text-center">{{$jumper->jumperType->name}}</td>
+                                        @endif
+                                        <td class="text-center">{{$jumper->psid}}</td>
+                                        <td class="text-center" :class="{'hidden': (is_high == 'no')}"> {{$calculo_high}}</td>
+                                        <td class="text-center" :class="{'hidden': (is_basic == 'no')}">{{$jumper->basic}}</td>
+                                        <td class="text-center">{{$jumper->created_at->format('d/m/Y')}}</td>
+                                        <td class="text-center" :class="{'hidden': (is_high == 'no')}"> 
+                                            <div class="flex ">
                                         
-                                    <td width="10px">
+                                                <div >
+                                                    <input type="number" wire:model.defer="pid_new" class="rounded-sm bg-light py-1 px-1"  placeholder="{{__('messages.ingrese_pdi')}}">
+                                                </div>
+                                                <div>
+                                                    <button
+                                                        class="btn-outline-secondary py-1 ml-2" 
+                                                        wire:click="calculo_high('{{$jumper->id}}')">
+                                                        <i class="font-semibold fas fa-sync"></i>
+                                                
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                        <td width="10px">
+                                            @livewire('jumpers.history', ['jumper' => $jumper])
+                                        </td>
+                                            
+                                        <td width="10px">
+                                            <button
+                                                class="py-2 px-3 text-md font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" 
+                                                x-bind:disabled="points_user_positive == 'si'"
+                                                wire:click="positivo('{{$jumper->id}}')"
+                                                title="Positivo">
+                                                <i class="font-semibold far fa-thumbs-up">{{$jumper->positive_points}}</i>
+                                            </button>
+                                        </td>
+                                        <td width="10px">
                                         <button
-                                            class="py-2 px-3 text-md font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" 
-                                            x-bind:disabled="points_user_positive == 'si'"
-                                            wire:click="positivo('{{$jumper->id}}')"
-                                            title="Positivo">
-                                            <i class="font-semibold far fa-thumbs-up">{{$jumper->positive_points}}</i>
+                                                class="py-2 px-3 text-md font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" 
+                                                x-bind:disabled="points_user_negative == 'si'"
+                                                wire:click="negativo('{{$jumper->id}}')"
+                                                title="Negativo">
+                                                <i class="font-semibold far fa-thumbs-down">{{$jumper->negative_points}}</i>
                                         </button>
-                                    </td>
-                                    <td width="10px">
-                                    <button
-                                            class="py-2 px-3 text-md font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" 
-                                            x-bind:disabled="points_user_negative == 'si'"
-                                            wire:click="negativo('{{$jumper->id}}')"
-                                            title="Negativo">
-                                            <i class="font-semibold far fa-thumbs-down">{{$jumper->negative_points}}</i>
-                                    </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                    </table>
+                                        </td>
+
+                        
+                                        <td width="10px">
+                                            <button
+                                                class="py-2 px-3 text-md font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" 
+                                                wire:click="descalificador()"
+                                                title="Descalificador">
+                                               DESCALIFICAR
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                        </table>
 
                 </div>
+             
                 
 
-                <div class="grid md:grid-cols-3 gap-4 mt-4 card container">
+                <div class="grid md:grid-cols-3 gap-4 mt-4 card">
                     <aside class="md:col-span-1 p-2">
                         @if($jumper_detect != 0)
                             <div class="info-box mb-3 bg-info" :class="{'hidden': (jumper_detect == '0')}">
-                                <span class="info-box-icon"><i class="fas fa-tag"></i></span>
+                          
                                     <div class="info-box-content">
-                                        <span class="info-box-text">Tipo {{$jumper->jumperType->name}}</span>
-                                        <span class="info-box-number">Dominio: {{$jumper_detect}}</span>
+                                        <span class="info-box-text font-bold">Dominio:</span>
+                                        <span class="info-box-text sm:text-sm md:text-md">{{$jumper_detect}}</span>
+                                        @if($k_detect != '0')
+                                        <span class="info-box-text font-bold">Detectada una posible:</span>
+                                    <span class="info-box-text sm:text-sm md:text-md">{{$k_detect}}</span>
+                                        @endif
                                     </div>
                             </div>
                         @endif
-                    
-                        @if($k_detect != '0')
-                            <div class="info-box mb-3 bg-success" :class="{'hidden': (k_detect == '0')}">
-                                <span class="info-box-icon"><i class="far fa-heart"></i></span>
-                                <div class="info-box-content">
-                                <span class="info-box-text">Detectada una posible</span>
-                                <span class="info-box-number">{{$k_detect}}</span>
-                                </div>
-                            </div>
+
+                    @if ($k_detect == 'K=1000' || $k_detect == 'K=1092' || $k_detect == 'K=1098' || $k_detect == 'K=2062' || $k_detect == 'K=3203' || $k_detect == 'K=7341')
+                    <div>
+                        @if ($k_detect == 'K=1000')
+                        <a href={{$this->k1000()}}>
                         @endif
+                        @if ($k_detect == 'K=1092')
+                        <a href={{$this->k1092()}}>
+                        @endif
+                        @if ($k_detect == 'K=1098')
+                        <a href={{$this->k1098()}}>
+                        @endif
+                        @if ($k_detect == 'K=2062')
+                        <a href={{$this->k2062()}}>
+                        @endif
+                        @if ($k_detect == 'K=3203')
+                        <a href={{$this->k3203()}}>
+                        @endif
+                        @if ($k_detect == 'K=7341')
+                        <a href={{$this->k7341()}}>
+                        @endif
+
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3 class="text-md font-semibold">Dirígete a </h3>
+                                    <p>Sección "{{$k_detect}}"</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="	far fa-heart"></i>
+                                </div>
+                                <p class="font-bold text-sm small-box-footer"> Haciendo clic aquí </p>
+                            </div>
+                        </a>
+                    </div>
+                    @endif
+                    
+                        
 
                     </aside>
 
                     <div class="md:col-span-2">
                         <div class="flex justify-between">
-                            <div class=" mt-2 mr-2 ml-2 flex-1 ">
+                            <div class=" mt-2 mr-2 ml-2 flex-1 mb-2">
                                 <textarea wire:model.defer="comentario" class="form-control" id="formGroupExampleInput" name="comentario" cols="80" rows="2" placeholder="{{__('messages.comparte_experiencia')}}"></textarea>
                             </div>
 
@@ -219,7 +281,7 @@
 
                             </div>
                         </div>
-                        <div class="card container ml-2">
+                        <div class="card ml-2">
                             @if ($comments->count())
                                 @foreach ($comments as $comment)
                                     <div class="flex justify-between card-body">
@@ -253,6 +315,15 @@
 
                 <div class="m-2 mb-2">
                     @if($no_detect != 0)
+                    <div class="flex justify-center mb-4">
+                        <button
+                            class="py-2 px-3 text-md font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" 
+                            wire:click="descalificador()"
+                            title="Descalificador">
+                            DESCALIFICAR
+                        </button>
+
+                    </div>
                     <div class="info-box mb-3 bg-info" :class="{'hidden': (no_detect == '0')}">
                        
                         <span class="info-box-icon"><i class="fas fa-tag"></i></span>
@@ -262,19 +333,17 @@
                         </div>
                         
                     </div>
+
+                    
                     @endif
                 </div>
                 
                 @if($jumper_detect  != 0)
                 <div class="info-box mb-3 bg-info" :class="{'hidden': (jumper_detect == '0')}">
                    
-                    <span class="info-box-icon"><i class="fas fa-tag"></i></span>
+                    <span class="info-box-icon"></span>
                         <div class="info-box-content">
-                            @if($jumper)
-                            <span class="info-box-text">Tipo {{$jumper->jumperType->name}}</span>
-                            @else
-                            <span class="info-box-text">Tipo No identificado</span>
-                            @endif
+                        
                             <span class="info-box-number">Dominio: {{$jumper_detect}}</span>
                         </div>
                   
@@ -283,7 +352,7 @@
                 @if($k_detect != 0)
                 <div class="info-box mb-3 bg-success" :class="{'hidden': (k_detect == '0')}">
                    
-                    <span class="info-box-icon"><i class="far fa-heart"></i></span>
+                    <span class="info-box-icon"></span>
                         <div class="info-box-content">
                             <span class="info-box-text">Detectada una posible</span>
                             <span class="info-box-number">{{$k_detect}}</span>
@@ -314,6 +383,10 @@
                 </div>
             </div>
         </div>
+
+
+
+    
 
        
 
@@ -403,7 +476,7 @@
             }
         </script>
 
-<script>
+        <script>
             function copiarAlPortapapeles_qt(id_elemento) {
              
                var codigoACopiar = document.getElementById(id_elemento);

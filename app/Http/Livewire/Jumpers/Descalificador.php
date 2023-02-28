@@ -8,22 +8,36 @@ use GuzzleHttp\Client;
 class Descalificador extends Component
 {
 
-    public $jumper_complete , $search, $psid_register=0,$pid_new=0,$type, $jumper_detect = 0;
+    public $search,$type;
 
-    protected $listeners = ['render' => 'render', 'registro_psid' => 'registro_psid'];
+    protected $listeners = ['render' => 'render'];
 
+    public $isopen = false;
 
-    public function render()
+    protected $rules = [
+        'type' => 'required',
+    ];
+
+    public function mount($search){
+        $this->search = $search;
+    }
+
+    public function open()
     {
+        $this->isopen = true;  
+    }
+    public function close()
+    {
+        $this->isopen = false;  
+    }
 
-        $this->jumper_complete = 0;
-        $link_complete = 0;
-        $this->jumper_detect = 0;
-
-        $this->search = trim($this->search); //quitando espacios en blancos al inicio y final
+    public function save(){
+      
+       
         $long_psid = strlen($this->search); //buscando cuantos caracteres tiene en total
 
         if($long_psid>=32){
+            $this->close();
 
             if($long_psid==32){
                 $psid_detect = $this->search;
@@ -59,48 +73,48 @@ class Descalificador extends Component
                     else{
                         $psid_detect = substr($this->search,$busqueda_psid+5,32);
                     }
-
-            
-                    $client = new Client([
-                       // 'base_uri' => 'http://127.0.0.1:8000',
-                        'base_uri' => 'http://146.190.74.228/',
-                    ]);
-            
-                    if($this->type == 'usa')
-                        $resultado = $client->request('GET', '/Descalificador_usa/1/'.$psid_detect);
-                    else
-                        $resultado = $client->request('GET', '/Descalificador_Uk/1/'.$psid_detect);
-
-                    if($resultado->getStatusCode() == 200){
-                        $this->jumper_detect = 1;
-
-                        $this->emit('alert','Descalificación exitosa');
-                    }
-
-                    else{
-                        $this->jumper_detect = 3;
-
-                        $this->emit('error','Ha ocurrido un error, intentelo de nuevo');
-                    }
-
                 }
-
                 else{
-                   
-                    $this->jumper_detect = 2;
-
-                    $this->emit('error','Algo en su link no esta bien. Copielo correctamente');
-                    
+                    $this->emit('error','Algo en su link no esta bien. Copielo correctamente');  
                 }
-
             }
-           
+
+           // $this->emit('alert','Espere mientras se procesa su solicitud...');
+            
+
+            $client = new Client([
+                // 'base_uri' => 'http://127.0.0.1:8000',
+                'base_uri' => 'http://146.190.74.228/',
+            ]);
+
+        
+            
+            if($this->type == 'usa')
+                $resultado = $client->request('GET', '/Descalificador_usa/1/'.$psid_detect);
+            else
+                $resultado = $client->request('GET', '/Descalificador_Uk/1/'.$psid_detect);
+
+            if($resultado->getStatusCode() == 200){
+                $this->emit('alert','Descalificación exitosa');
+            }
+
+            else{
+                $this->emit('error','Ha ocurrido un error, intentelo de nuevo');
+            }
+
         }
+
+        else{
+            $this->emit('error','Algo en su link no esta bien. Copielo correctamente');
+        }
+
+        $this->reset(['type']);
+    }
+
+    public function render()
+    {
 
         return view('livewire.jumpers.descalificador');
     }
 
-    public function clear(){
-        $this->reset(['search']);
-    }
 }

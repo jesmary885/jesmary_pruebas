@@ -18,31 +18,6 @@
         </div>
         
 
-        <div class="flex justify-between mt-2">
-
-            @if($psid_register == 0)
-            <div class="px-4" :class="{'hidden': (psid != 0)}">
-                <div class="alert alert-info alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><font style="vertical-align: inherit;"><font style="vertical-align: inherit; color:darkred;">×</font></font></button>
-                        <h5><i class="icon fas fa-info"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">¡Alerta!</font></font></h5><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-                        Aún no has registrado tu PSID</font><font style="vertical-align: inherit;"> ,haz clic <a class="hover:text-white" href="{{route('registro.psid')}}"> aquí</a> para registrarlo
-                        
-                    </font></font>
-                </div>
-            </div>
-            @endif
-            @if($pid_new == 0)
-            <div class="px-4" :class="{'hidden': (pid != 0)}">
-                <div class="alert alert-info alert-dismissible">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><font style="vertical-align: inherit;"><font style="vertical-align: inherit; color:darkred;">×</font></font></button>
-                    <h5><i class="icon fas fa-info"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">¡Alerta!</font></font></h5><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-                    Aún no has registrado tu PID</font><font style="vertical-align: inherit;"> ,haz clic <a class="hover:font-bold" href="{{route('registro.pid')}}"> aquí</a> para registrarlo
-                    </font></font>
-                </div>
-            </div>
-            @endif
-        </div>
-
         <div class="mt-4" wire:loading>
             <div class="container2">
                 <div class="cargando">
@@ -56,18 +31,21 @@
 
     </div>
 
-    @if ($jumper_detect == 1)
-        <div>
-        <div class=" info-box bg-info">
-                <span class="info-box-icon"><i class="fas fa-tag"></i></span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">Saltador wix procesado con éxito</span>
-           
-                    </div>
-            </div>
+    <div class="card-body mt-0">
 
-        </div>
-            
+                @if ($jumper_complete)
+
+                <div class="flex-nowrap justify-center callout callout-info">
+                
+                      
+                    <p  class="text-blue-400 text-clip text-sm text-center font-bold mb-2" id="jumper_copy">{{$jumper_complete['jumper']}}</p>
+
+                    <div class="flex justify-center">
+                        <button onclick="copiarAlPortapapeles('jumper_copy')" class="btn btn-sm btn-success text-bold" title="{{__('messages.copiar_portapapeles')}}" id="button_copy">Copiar</button> 
+                    </div>
+                            
+                    
+                </div>
 
     @endif
 
@@ -150,6 +128,72 @@
      }
     </style>
 
+@section('js')
+        <script>
+            function copiarAlPortapapeles(id_elemento) {
+                /*var aux = document.createElement("input");
+                aux.setAttribute("value", document.getElementById(id_elemento).innerHTML);
+                document.body.appendChild(aux);
+                aux.select();
+                document.execCommand("copy");
+                document.body.removeChild(aux);*/
+                
+                var codigoACopiar = document.getElementById(id_elemento);
+                var seleccion = document.createRange();
+                seleccion.selectNodeContents(codigoACopiar);
+                window.getSelection().removeAllRanges();
+                window.getSelection().addRange(seleccion);
+                var res = document.execCommand('copy');
+                window.getSelection().removeRange(seleccion);
 
+                toastr.options={
+                    "closeButton": true,
+                    "debug": true,
+                    "newestOnTop": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": true,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+                toastr.success('Copy..')
+            }
+        </script>
+
+        <script>
+
+            Livewire.on('wait', function(){
+
+                toastr.options={
+                    "closeButton": true,
+                    "debug": true,
+                    "newestOnTop": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": true,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+                toastr.success('Momento')
+
+            })
+
+        </script>
+
+    @stop
 
 </div>

@@ -32,20 +32,49 @@ class Wix extends Component
                     $psid_buscar = substr($this->search,($busqueda_id - 22),22);
 
                     $busqueda_pid= strpos($this->search, '&PID=');
-                    $busqueda_pid_2= strpos($this->search, '&pid=');
+                    $busqueda_pid2= strpos($this->search, '&pid=');
+                    $busqueda_pid3= strpos($this->search, '?ID=');
+                    $busqueda_pid4= strpos($this->search, '?id=');
+                    $busqueda_pid5= strpos($this->search, '&ID=');
+                    $busqueda_pid6= strpos($this->search, '&id=');
 
-                    if($busqueda_pid !== false || $this->pid_new != 0 || $busqueda_pid_2 !== false ){
+                    if($this->pid_new != 0 ||  $busqueda_pid !== false || $busqueda_pid2 !== false || $busqueda_pid3 !== false || $busqueda_pid4 !== false || $busqueda_pid5 !== false || $busqueda_pid6 !== false){
 
 
-                        if($busqueda_pid !== false || $busqueda_pid_2 !== false){
-                            if($busqueda_pid !== false)
+                        if($busqueda_pid !== false || $busqueda_pid2 !== false || $busqueda_pid3 !== false || $busqueda_pid4 !== false || $busqueda_pid5 !== false || $busqueda_pid6 !== false){
+                            if($busqueda_pid !== false){
                                 $pid_detect_com= strpos($this->search, '&PID=');
-                                
-                            if($busqueda_pid_2 !== false)
+                                $posicion_pid = $pid_detect_com + 5;
+                                $pid_calculate = $pid_detect_com + 5;
+                            }
+                            elseif($busqueda_pid2 !== false){ 
                                 $pid_detect_com= strpos($this->search, '&pid=');
+                                $posicion_pid = $pid_detect_com + 5;
+                                $pid_calculate = $pid_detect_com + 5;
+                            }
+                            elseif($busqueda_pid3 !== false){
+                                $pid_detect_com= strpos($this->search, '?ID=');
+                                $posicion_pid = $pid_detect_com + 4;
+                                $pid_calculate = $pid_detect_com + 4;
+                            }
+                            elseif($busqueda_pid4 !== false){
+                                $pid_detect_com= strpos($this->search, '?id=');
+                                $posicion_pid = $pid_detect_com + 4;
+                                $pid_calculate = $pid_detect_com + 4;
+                            }
+                            elseif($busqueda_pid5 !== false){
+                                $pid_detect_com= strpos($this->search, '&ID=');
+                                $posicion_pid = $pid_detect_com + 4;
+                                $pid_calculate = $pid_detect_com + 4;
+                            }
+                            else{
+                                $pid_detect_com= strpos($this->search, '&id=');
+                                $posicion_pid = $pid_detect_com + 4;
+                                $pid_calculate = $pid_detect_com + 4;
+                            }
 
-                            $posicion_pid = $pid_detect_com + 5;
                             $i = 0;
+                            $busq_pid_s = 0;
                             
                             do{
                                 $detect= substr($this->search, $posicion_pid,1);
@@ -54,14 +83,25 @@ class Wix extends Component
                                 else{
                                     $i = 0;
                                     $posicion_pid = $posicion_pid + 1;
+                                    $busq_pid_s ++;
+                                }
+
+                                if($busq_pid_s > 13){
+                                    $i = 1;
                                 }
         
                             }while($i != 1);
 
-                            if(is_numeric(substr($this->search,($pid_detect_com + 5),($posicion_pid - ($pid_detect_com + 5)))))
-                                $pid_buscar = substr($this->search,($pid_detect_com + 5),($posicion_pid - ($pid_detect_com + 5)));
+                            if($busq_pid_s < 13){
+                                if(is_numeric(substr($this->search,($pid_calculate),($posicion_pid - ($pid_calculate)))))
+                                    $pid_buscar = substr($this->search,($pid_calculate),($posicion_pid - ($pid_calculate)));
+                                else $this->jumper_detect = 3;
+                                
+                            }
                             else{
-                                $this->jumper_detect = 3;
+                                if(is_numeric(substr($this->search,($pid_calculate),11)))
+                                    $pid_buscar = substr($this->search,($pid_calculate),11);
+                                else $this->jumper_detect = 3;
                             }
                                 
                         }
@@ -69,27 +109,30 @@ class Wix extends Component
                             $pid_buscar = session('pid');
                         }
 
-                        $busqueda_ord= strpos($this->search, '&ORD=');
+                        $busqueda_ord= strpos($this->search, '=ORD');
+
 
                         if($busqueda_ord != false){
 
-                            $posicion_ord = $busqueda_ord + 5;
+                            $posicion_ord = $busqueda_ord + 1;
                             $i_ord = 0;
                             
                             do{
                                 $detect_ord= substr($this->search, $posicion_ord,1);
         
-                                if($detect_ord == '') $i_ord = 1;
+                                if($detect_ord == '&') $i_ord = 1;
                                 else{
                                     $posicion_ord = $posicion_ord + 1;
                                 }
         
                             }while($i_ord != 1);
 
-                            $ord_buscar = substr($this->search,($busqueda_ord + 5),($posicion_ord - ($busqueda_ord + 5)));
+                            $ord_buscar = substr($this->search,($busqueda_ord + 1),($posicion_ord - ($busqueda_ord + 1)));
+                         
                         }
 
                         else{
+                   
                             $this->jumper_detect = 3;
                         }
 
@@ -107,7 +150,8 @@ class Wix extends Component
                               
                                 $this->jumper_detect = 1;
 
-                                $this->emit('alert','Saltador wix procesado con éxito');
+                                $this->jumper_complete = json_decode($resultado->getBody(),true);
+
                             }
 
                             else{
@@ -132,58 +176,107 @@ class Wix extends Component
                         $psid_buscar = substr($this->search,($busqueda_psid + 5),22);
     
                         $busqueda_pid= strpos($this->search, '&PID=');
-                        $busqueda_pid_2= strpos($this->search, '&pid=');
+                        $busqueda_pid2= strpos($this->search, '&pid=');
+                        $busqueda_pid3= strpos($this->search, '?ID=');
+                        $busqueda_pid4= strpos($this->search, '?id=');
+                        $busqueda_pid5= strpos($this->search, '&ID=');
+                        $busqueda_pid6= strpos($this->search, '&id=');
     
-                        if($busqueda_pid !== false || $this->pid_new != 0 || $busqueda_pid_2 !== false){
+                        if($this->pid_new != 0 ||  $busqueda_pid !== false || $busqueda_pid2 !== false || $busqueda_pid3 !== false || $busqueda_pid4 !== false || $busqueda_pid5 !== false || $busqueda_pid6 !== false){
     
-                            if($busqueda_pid !== false || $busqueda_pid_2 !== false){
-                                if($busqueda_pid !== false)
+                            if($busqueda_pid !== false || $busqueda_pid2 !== false || $busqueda_pid3 !== false || $busqueda_pid4 !== false || $busqueda_pid5 !== false || $busqueda_pid6 !== false){
+                                if($busqueda_pid !== false){
                                     $pid_detect_com= strpos($this->search, '&PID=');
-                                if($busqueda_pid_2 !== false)
+                                    $posicion_pid = $pid_detect_com + 5;
+                                    $pid_calculate = $pid_detect_com + 5;
+                                }
+                                elseif($busqueda_pid2 !== false){ 
                                     $pid_detect_com= strpos($this->search, '&pid=');
-
-                                $posicion_pid = $pid_detect_com + 5;
+                                    $posicion_pid = $pid_detect_com + 5;
+                                    $pid_calculate = $pid_detect_com + 5;
+                                }
+                                elseif($busqueda_pid3 !== false){
+                                    $pid_detect_com= strpos($this->search, '?ID=');
+                                    $posicion_pid = $pid_detect_com + 4;
+                                    $pid_calculate = $pid_detect_com + 4;
+                                }
+                                elseif($busqueda_pid4 !== false){
+                                    $pid_detect_com= strpos($this->search, '?id=');
+                                    $posicion_pid = $pid_detect_com + 4;
+                                    $pid_calculate = $pid_detect_com + 4;
+                                }
+                                elseif($busqueda_pid5 !== false){
+                                    $pid_detect_com= strpos($this->search, '&ID=');
+                                    $posicion_pid = $pid_detect_com + 4;
+                                    $pid_calculate = $pid_detect_com + 4;
+                                }
+                                else{
+                                    $pid_detect_com= strpos($this->search, '&id=');
+                                    $posicion_pid = $pid_detect_com + 4;
+                                    $pid_calculate = $pid_detect_com + 4;
+                                }
+                                
                                 $i = 0;
-                                    
+                                $busq_pid_s = 0;
+                                
                                 do{
                                     $detect= substr($this->search, $posicion_pid,1);
-                
+            
                                     if($detect == '&') $i = 1;
                                     else{
                                         $i = 0;
                                         $posicion_pid = $posicion_pid + 1;
+                                        $busq_pid_s ++;
                                     }
-                
-                                }while($i != 1);
+    
+                                    if($busq_pid_s > 13){
+                                        $i = 1;
+                                    }
             
-                                $pid_buscar = substr($this->search,($pid_detect_com + 5),($posicion_pid - ($pid_detect_com + 5)));
+                                }while($i != 1);
+    
+                                if($busq_pid_s < 13){
+                                    if(is_numeric(substr($this->search,($pid_calculate),($posicion_pid - ($pid_calculate)))))
+                                        $pid_buscar = substr($this->search,($pid_calculate),($posicion_pid - ($pid_calculate)));
+                                    else $this->jumper_detect = 3;
+                                    
+                                }
+                                else{
+                                    if(is_numeric(substr($this->search,($pid_calculate),11)))
+                                        $pid_buscar = substr($this->search,($pid_calculate),11);
+                                    else $this->jumper_detect = 3;
+                                }
                             }
                             else{
-                                 $pid_buscar = session('pid');
+                                $pid_buscar = session('pid');
                             }
-
-                            $busqueda_ord= strpos($this->search, '&ORD=');
-
+    
+                            
+    
+                            $busqueda_ord= strpos($this->search, '=ORD');
+    
+    
                             if($busqueda_ord != false){
-
-                                $posicion_ord = $busqueda_ord + 5;
+    
+                                $posicion_ord = $busqueda_ord + 1;
                                 $i_ord = 0;
                                 
                                 do{
                                     $detect_ord= substr($this->search, $posicion_ord,1);
             
-                                    if($detect_ord == '') $i_ord = 1;
+                                    if($detect_ord == '&') $i_ord = 1;
                                     else{
                                         $posicion_ord = $posicion_ord + 1;
                                     }
             
                                 }while($i_ord != 1);
-
-                                $ord_buscar = substr($this->search,($busqueda_ord + 5),($posicion_ord - ($busqueda_ord + 5)));
-
+    
+                                $ord_buscar = substr($this->search,($busqueda_ord + 1),($posicion_ord - ($busqueda_ord + 1)));
+                             
                             }
-
+    
                             else{
+                       
                                 $this->jumper_detect = 3;
                             }
     
@@ -200,8 +293,8 @@ class Wix extends Component
                                 if($resultado->getStatusCode() == 200){
                                   
                                     $this->jumper_detect = 1;
-    
-                                    $this->emit('alert','Saltador wix procesado con éxito');
+
+                                    $this->jumper_complete = json_decode($resultado->getBody(),true);
                                 }
     
                                 else{

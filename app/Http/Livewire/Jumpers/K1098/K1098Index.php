@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Jumpers\K1000;
+namespace App\Http\Livewire\Jumpers\K1098;
 
 use App\Models\Comments;
 use App\Models\Link;
@@ -9,7 +9,7 @@ use GuzzleHttp\Client;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class K1000Index extends Component
+class K1098Index extends Component
 {
     use WithPagination;
     protected $paginationTheme = "bootstrap";
@@ -69,9 +69,9 @@ class K1000Index extends Component
 
         if($long_psid>=5){
 
-            $busqueda_k1000_ = strpos($this->search, 'k=1000&');
+            $busqueda_k1098_ = strpos($this->search, 'k=1098&');
 
-            if($busqueda_k1000_ !== false){
+            if($busqueda_k1098_ !== false){
                 
                 $busqueda_ast_ = strpos($this->search, '**');
 
@@ -84,82 +84,7 @@ class K1000Index extends Component
                     if(session('psid')) $psid_buscar = substr($this->search,($busqueda_id - 22),11).substr(session('psid'),11,11);
                     else $psid_buscar = substr($this->search,($busqueda_id - 22),22);
 
-                    $busqueda_pid= strpos($this->search, '&PID=');
-                    $busqueda_pid2= strpos($this->search, '&pid=');
-                    $busqueda_pid3= strpos($this->search, '?ID=');
-                    $busqueda_pid4= strpos($this->search, '?id=');
-                    $busqueda_pid5= strpos($this->search, '&ID=');
-                    $busqueda_pid6= strpos($this->search, '&id=');
-
-                    if($this->pid_new != 0 ||  $busqueda_pid !== false || $busqueda_pid2 !== false || $busqueda_pid3 !== false || $busqueda_pid4 !== false || $busqueda_pid5 !== false || $busqueda_pid6 !== false){
-
-                        if($busqueda_pid !== false || $busqueda_pid2 !== false || $busqueda_pid3 !== false || $busqueda_pid4 !== false || $busqueda_pid5 !== false || $busqueda_pid6 !== false){
-                            if($busqueda_pid !== false){
-                                $pid_detect_com= strpos($this->search, '&PID=');
-                                $posicion_pid = $pid_detect_com + 5;
-                                $pid_calculate = $pid_detect_com + 5;
-                            }
-                            elseif($busqueda_pid2 !== false){ 
-                                $pid_detect_com= strpos($this->search, '&pid=');
-                                $posicion_pid = $pid_detect_com + 5;
-                                $pid_calculate = $pid_detect_com + 5;
-                            }
-                            elseif($busqueda_pid3 !== false){
-                                $pid_detect_com= strpos($this->search, '?ID=');
-                                $posicion_pid = $pid_detect_com + 4;
-                                $pid_calculate = $pid_detect_com + 4;
-                            }
-                            elseif($busqueda_pid4 !== false){
-                                $pid_detect_com= strpos($this->search, '?id=');
-                                $posicion_pid = $pid_detect_com + 4;
-                                $pid_calculate = $pid_detect_com + 4;
-                            }
-                            elseif($busqueda_pid5 !== false){
-                                $pid_detect_com= strpos($this->search, '&ID=');
-                                $posicion_pid = $pid_detect_com + 4;
-                                $pid_calculate = $pid_detect_com + 4;
-                            }
-                            else{
-                                $pid_detect_com= strpos($this->search, '&id=');
-                                $posicion_pid = $pid_detect_com + 4;
-                                $pid_calculate = $pid_detect_com + 4;
-                            }
-                            
-                            $i = 0;
-                            $busq_pid_s = 0;
-                            
-                            do{
-                                $detect= substr($this->search, $posicion_pid,1);
-        
-                                if($detect == '&') $i = 1;
-                                else{
-                                    $i = 0;
-                                    $posicion_pid = $posicion_pid + 1;
-                                    $busq_pid_s ++;
-                                }
-
-                                if($busq_pid_s > 13){
-                                    $i = 1;
-                                }
-        
-                            }while($i != 1);
-
-                            if($busq_pid_s < 13){
-                                if(is_numeric(substr($this->search,($pid_calculate),($posicion_pid - ($pid_calculate)))))
-                                    $pid_buscar = substr($this->search,($pid_calculate),($posicion_pid - ($pid_calculate)));
-                                else $this->jumper_detect = 3;
-                                
-                            }
-                            else{
-                                if(is_numeric(substr($this->search,($pid_calculate),11)))
-                                    $pid_buscar = substr($this->search,($pid_calculate),11);
-                                else $this->jumper_detect = 3;
-                            }
-                        }
-                        else{
-                            $pid_buscar = session('pid');
-                        }
-
+                
                         if($this->jumper_detect == 0){
 
                             if($this->jumper_list == 0){
@@ -168,7 +93,7 @@ class K1000Index extends Component
                                     'base_uri' => 'http://146.190.74.228/',
                                 ]);
             
-                                $resultado = $client->request('GET', '/k1000/1/'.$psid_buscar.'/'.$pid_buscar);
+                                $resultado = $client->request('GET', '/k1098/1/'.$psid_buscar);
 
                                 if($resultado->getStatusCode() == 200){
      
@@ -240,8 +165,8 @@ class K1000Index extends Component
                                              $link->jumper = $url_detect;
                                              $link->psid = substr($psid_buscar,0,5);
                                              $link->user_id = auth()->user()->id;
-                                             $link->jumper_type_id = 5;
-                                             $link->k_detected = 'K=1000';
+                                             $link->jumper_type_id = 16;
+                                             $link->k_detected = 'K=1098';
                                              $link->save();
          
                                              $this->busqueda_link = Link::where('id',$link->id)->first();
@@ -329,11 +254,7 @@ class K1000Index extends Component
                         else{
                             $this->jumper_detect = 3;
                         }
-              
-                    }
-                    else{
-                        $this->jumper_detect = 3;
-                    }
+
                 }
                 else{
                     $busqueda_psid_ = strpos($this->search, 'psid');
@@ -345,81 +266,7 @@ class K1000Index extends Component
                         if(session('psid'))$psid_complete = substr($this->search,($busqueda_psid + 5),11).substr(session('psid'),11,11);
                         else  $psid_buscar = substr($this->search,($busqueda_psid + 5),22);
     
-                        $busqueda_pid= strpos($this->search, '&PID=');
-                    $busqueda_pid2= strpos($this->search, '&pid=');
-                    $busqueda_pid3= strpos($this->search, '?ID=');
-                    $busqueda_pid4= strpos($this->search, '?id=');
-                    $busqueda_pid5= strpos($this->search, '&ID=');
-                    $busqueda_pid6= strpos($this->search, '&id=');
-
-                    if($this->pid_new != 0 ||  $busqueda_pid !== false || $busqueda_pid2 !== false || $busqueda_pid3 !== false || $busqueda_pid4 !== false || $busqueda_pid5 !== false || $busqueda_pid6 !== false){
-
-                        if($busqueda_pid !== false || $busqueda_pid2 !== false || $busqueda_pid3 !== false || $busqueda_pid4 !== false || $busqueda_pid5 !== false || $busqueda_pid6 !== false){
-                            if($busqueda_pid !== false){
-                                $pid_detect_com= strpos($this->search, '&PID=');
-                                $posicion_pid = $pid_detect_com + 5;
-                                $pid_calculate = $pid_detect_com + 5;
-                            }
-                            elseif($busqueda_pid2 !== false){ 
-                                $pid_detect_com= strpos($this->search, '&pid=');
-                                $posicion_pid = $pid_detect_com + 5;
-                                $pid_calculate = $pid_detect_com + 5;
-                            }
-                            elseif($busqueda_pid3 !== false){
-                                $pid_detect_com= strpos($this->search, '?ID=');
-                                $posicion_pid = $pid_detect_com + 4;
-                                $pid_calculate = $pid_detect_com + 4;
-                            }
-                            elseif($busqueda_pid4 !== false){
-                                $pid_detect_com= strpos($this->search, '?id=');
-                                $posicion_pid = $pid_detect_com + 4;
-                                $pid_calculate = $pid_detect_com + 4;
-                            }
-                            elseif($busqueda_pid5 !== false){
-                                $pid_detect_com= strpos($this->search, '&ID=');
-                                $posicion_pid = $pid_detect_com + 4;
-                                $pid_calculate = $pid_detect_com + 4;
-                            }
-                            else{
-                                $pid_detect_com= strpos($this->search, '&id=');
-                                $posicion_pid = $pid_detect_com + 4;
-                                $pid_calculate = $pid_detect_com + 4;
-                            }
-                            
-                            $i = 0;
-                            $busq_pid_s = 0;
-                            
-                            do{
-                                $detect= substr($this->search, $posicion_pid,1);
-        
-                                if($detect == '&') $i = 1;
-                                else{
-                                    $i = 0;
-                                    $posicion_pid = $posicion_pid + 1;
-                                    $busq_pid_s ++;
-                                }
-
-                                if($busq_pid_s > 13){
-                                    $i = 1;
-                                }
-        
-                            }while($i != 1);
-
-                            if($busq_pid_s < 13){
-                                if(is_numeric(substr($this->search,($pid_calculate),($posicion_pid - ($pid_calculate)))))
-                                    $pid_buscar = substr($this->search,($pid_calculate),($posicion_pid - ($pid_calculate)));
-                                else $this->jumper_detect = 3;
-                                
-                            }
-                            else{
-                                if(is_numeric(substr($this->search,($pid_calculate),11)))
-                                    $pid_buscar = substr($this->search,($pid_calculate),11);
-                                else $this->jumper_detect = 3;
-                            }
-                        }
-                        else{
-                            $pid_buscar = session('pid');
-                        }
+                        
 
                             if($this->jumper_detect == 0){
 
@@ -428,7 +275,7 @@ class K1000Index extends Component
                                     'base_uri' => 'http://146.190.74.228/',
                                 ]);
             
-                                $resultado = $client->request('GET', '/k1000/1/'.$psid_buscar.'/'.$pid_buscar);
+                                $resultado = $client->request('GET', '/k1098/1/'.$psid_buscar);
             
                                 if($resultado->getStatusCode() == 200){
 
@@ -550,11 +397,7 @@ class K1000Index extends Component
                         else{
                             $this->jumper_detect = 3;
                         }
-                    }
-
-                    else{
-                        $this->jumper_detect = 3;
-                    }
+                    
 
                     session()->forget('search');
                 }
@@ -751,7 +594,7 @@ class K1000Index extends Component
 
        // session()->forget('search');
 
-        return view('livewire.jumpers.k1000.k1000-index',compact('jumper','comments','subs_psid','busqueda_link_def'));
+        return view('livewire.jumpers.k1098.k1098-index',compact('jumper','comments','subs_psid','busqueda_link_def'));
     }
 
     public function positivo($jumper_id){

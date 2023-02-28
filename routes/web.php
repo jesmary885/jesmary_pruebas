@@ -48,6 +48,7 @@ Route::middleware(['auth','verified'])->group(function()
         Route::get('k2062',[JumpersController::class,'kdosmilsesentaydos'])->name('kdosmilsesentaydos.index');
         Route::get('k23',[JumpersController::class,'kveintitres'])->name('kveintitres.index');
         Route::get('k3203',[JumpersController::class,'k3203'])->name('k3203.index');
+        Route::get('k1098',[JumpersController::class,'k1098'])->name('k1098.index');
         Route::get('k7341',[JumpersController::class,'ksietemilcuarentayuno'])->name('ksietemilcuarentayuno.index');
         Route::get('prodege',[JumpersController::class,'prodege'])->name('prodege.index');
         Route::get('samplicio',[JumpersController::class,'samplicio'])->name('samplicio.index');
@@ -78,8 +79,11 @@ Route::middleware(['auth','verified'])->group(function()
 
         //PSID
         Route::get('register_psid',[PsidController::class,'index_psid'])->name('registro.psid');
+        Route::get('limpiar_psid',[PsidController::class,'limpiar_psid'])->name('limpiar.psid');
+       
         //PID
         Route::get('register_pid',[PsidController::class,'index_pid'])->name('registro.pid');
+        Route::get('limpiar_pid',[PsidController::class,'limpiar_pid'])->name('limpiar.pid');
         //BLOC
         Route::get('bloc',[PsidController::class,'index_bloc'])->name('registro.bloc');
 

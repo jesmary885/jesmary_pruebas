@@ -431,6 +431,13 @@ return [
                     'icon'    => 'fas fa-angle-right',
                 ],
                 [
+                    'text' => 'K1098',
+                    'route'  => 'k1098.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+                [
                     'text' => 'K2062',
                     'route'  => 'kdosmilsesentaydos.index',
                     'can' => 'kdosmilsesentaydos.index',
@@ -461,13 +468,13 @@ return [
                     'icon'    => '	fas fa-angle-right',
                 ],
 
-                [
-                    'text' => 'DESCALIFICADOR',
-                    'route'  => 'descalificador.index',
-                    'can' => 'ssidkr.index',
-                    'icon_color' => 'red',
-                    'icon'    => '	fas fa-angle-right',
-                ],
+                // [
+                //     'text' => 'DESCALIFICADOR',
+                //     'route'  => 'descalificador.index',
+                //     'can' => 'ssidkr.index',
+                //     'icon_color' => 'red',
+                //     'icon'    => '	fas fa-angle-right',
+                // ],
                 [
                     'text' => 'SALTADOR WIX',
                     'route'  => 'wix.index',

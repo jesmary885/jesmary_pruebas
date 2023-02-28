@@ -25,6 +25,12 @@ class JumpersController extends Controller
         
      }
 
+     public function k1098(){
+    
+        return view('jumpers.k1098');
+        
+     }
+
     public function kmil(){
        return view('jumpers.k1000');
        

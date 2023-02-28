@@ -202,7 +202,7 @@
         })
     </script>
 
-<script>
+    <script>
         livewire.on('confirm', (ms,item1,item2,ms2) => {
             Swal.fire({
             title: ms,
@@ -221,6 +221,27 @@
                         'success'
                         )
                 }
+            })
+        })
+    </script>
+
+    <script>
+        livewire.on('descalific', () => {
+            Swal.fire({
+            title: 'Indique la localidad',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'USA',
+            denyButtonText: 'UK',
+            }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                livewire.emitTo('jumpers.ssidkr.ssidkr-index','descalificar',[$type='usa'])
+                Swal.fire('Espere mientras se procesa la solicitud', '', 'info')
+            } else if (result.isDenied) {
+                livewire.emitTo('jumpers.ssidkr.ssidkr-index','descalificar',[$type='uk'])
+                Swal.fire('Espere mientras se procesa la solicitud', '', 'info')
+            }
             })
         })
     </script>

@@ -629,9 +629,7 @@ class K1092Index extends Component
         return view('livewire.jumpers.k1092.k1092-index',compact('jumper','comments','subs_psid','busqueda_link_def'));
     }
 
- 
-
-    public function positivo($jumper_id){
+     public function positivo($jumper_id){
 
         $user_point= User_Links_Points::where('link_id',$jumper_id)
             ->where('user_id',$this->user_auth)

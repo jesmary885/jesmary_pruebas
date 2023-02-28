@@ -55,6 +55,8 @@
             @if(auth()->user()->roles->first()->id != 4)
                 @if(session('psid'))
                     <a class="block dropdown-item " href="{{route('registro.psid')}}"> Cambiar PSID </a> 
+                    <a class="block dropdown-item " href="{{route('limpiar.psid')}}"> Limpiar</a> 
+                  
                 @else
                     <a class="block dropdown-item " href="{{route('registro.psid')}}"> Registrar PSID </a> 
                 @endif
@@ -78,6 +80,7 @@
         @if(auth()->user()->roles->first()->id != 4)
             @if(session('pid'))
                 <a class="block dropdown-item " href="{{route('registro.pid')}}"> Cambiar PID </a> 
+                <a class="block dropdown-item " href="{{route('limpiar.pid')}}"> Limpiar</a> 
             @else
                 <a class="block dropdown-item " href="{{route('registro.pid')}}"> Registrar PID </a> 
             @endif

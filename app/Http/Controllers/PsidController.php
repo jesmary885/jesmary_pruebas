@@ -16,6 +16,17 @@ class PsidController extends Controller
         return view('pid_register',compact('isopen'));
     }
 
+    public function limpiar_pid(){
+        session()->forget('pid');
+        return back();
+    }
+
+    public function limpiar_psid(){
+        session()->forget('psid');
+        return back();
+       
+    }
+
     public function index_bloc(){
         $isopen = 'true';
         return view('bloc',compact('isopen'));
