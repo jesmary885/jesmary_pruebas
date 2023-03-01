@@ -22,7 +22,7 @@
 
             @if($psid_register == 0)
             <div class="px-4" :class="{'hidden': (psid != 0)}">
-                <div class="alert alert-info alert-dismissible">
+                <div class="alert alert-info alert-dismissible bg-info">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><font style="vertical-align: inherit;"><font style="vertical-align: inherit; color:darkred;">×</font></font></button>
                         <h5><i class="icon fas fa-info"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">¡Alerta!</font></font></h5><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
                         Aún no has registrado tu PSID</font><font style="vertical-align: inherit;"> ,haz clic <a class="hover:text-white" href="{{route('registro.psid')}}"> aquí</a> para registrarlo
@@ -33,7 +33,7 @@
             @endif
             @if($pid_new == 0)
             <div class="px-4" :class="{'hidden': (pid != 0)}">
-                <div class="alert alert-info alert-dismissible">
+                <div class="alert alert-info alert-dismissible bg-info">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><font style="vertical-align: inherit;"><font style="vertical-align: inherit; color:darkred;">×</font></font></button>
                     <h5><i class="icon fas fa-info"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">¡Alerta!</font></font></h5><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
                     Aún no has registrado tu PID</font><font style="vertical-align: inherit;"> ,haz clic <a class="hover:font-bold" href="{{route('registro.pid')}}"> aquí</a> para registrarlo

@@ -68,10 +68,11 @@ class K3203Index extends Component
                     $busqueda_pid4= strpos($this->search, '?id=');
                     $busqueda_pid5= strpos($this->search, '&ID=');
                     $busqueda_pid6= strpos($this->search, '&id=');
+                    $busqueda_pid7= strpos($this->search, '&Broker=');
 
-                    if($this->pid_new != 0 ||  $busqueda_pid !== false || $busqueda_pid2 !== false || $busqueda_pid3 !== false || $busqueda_pid4 !== false || $busqueda_pid5 !== false || $busqueda_pid6 !== false){
+                    if($this->pid_new != 0 ||  $busqueda_pid !== false || $busqueda_pid2 !== false || $busqueda_pid3 !== false || $busqueda_pid4 !== false || $busqueda_pid5 !== false || $busqueda_pid6 !== false || $busqueda_pid7 !== false){
 
-                        if($busqueda_pid !== false || $busqueda_pid2 !== false || $busqueda_pid3 !== false || $busqueda_pid4 !== false || $busqueda_pid5 !== false || $busqueda_pid6 !== false){
+                        if($busqueda_pid !== false || $busqueda_pid2 !== false || $busqueda_pid3 !== false || $busqueda_pid4 !== false || $busqueda_pid5 !== false || $busqueda_pid6 !== false || $busqueda_pid7 !== false){
                             if($busqueda_pid !== false){
                                 $pid_detect_com= strpos($this->search, '&PID=');
                                 $posicion_pid = $pid_detect_com + 5;
@@ -96,6 +97,11 @@ class K3203Index extends Component
                                 $pid_detect_com= strpos($this->search, '&ID=');
                                 $posicion_pid = $pid_detect_com + 4;
                                 $pid_calculate = $pid_detect_com + 4;
+                            }
+                            elseif($busqueda_pid7 !== false){
+                                $pid_detect_com= strpos($this->search, '&Broker=');
+                                $posicion_pid = $pid_detect_com + 8;
+                                $pid_calculate = $pid_detect_com + 8;
                             }
                             else{
                                 $pid_detect_com= strpos($this->search, '&id=');
@@ -260,7 +266,7 @@ class K3203Index extends Component
                                              $link->jumper = $url_detect;
                                              $link->psid = substr($psid_buscar,0,5);
                                              $link->user_id = auth()->user()->id;
-                                             $link->jumper_type_id = 15;
+                                             $link->jumper_type_id = 17;
                                              $link->k_detected = 'K=3203';
                                              $link->save();
          
@@ -370,10 +376,12 @@ class K3203Index extends Component
                         $busqueda_pid4= strpos($this->search, '?id=');
                         $busqueda_pid5= strpos($this->search, '&ID=');
                         $busqueda_pid6= strpos($this->search, '&id=');
+                        $busqueda_pid7= strpos($this->search, '&Broker=');
+
     
-                        if($this->pid_new != 0 ||  $busqueda_pid !== false || $busqueda_pid2 !== false || $busqueda_pid3 !== false || $busqueda_pid4 !== false || $busqueda_pid5 !== false || $busqueda_pid6 !== false){
+                        if($this->pid_new != 0 ||  $busqueda_pid !== false || $busqueda_pid2 !== false || $busqueda_pid3 !== false || $busqueda_pid4 !== false || $busqueda_pid5 !== false || $busqueda_pid6 !== false || $busqueda_pid7 !== false){
     
-                            if($busqueda_pid !== false || $busqueda_pid2 !== false || $busqueda_pid3 !== false || $busqueda_pid4 !== false || $busqueda_pid5 !== false || $busqueda_pid6 !== false){
+                            if($busqueda_pid !== false || $busqueda_pid2 !== false || $busqueda_pid3 !== false || $busqueda_pid4 !== false || $busqueda_pid5 !== false || $busqueda_pid6 !== false || $busqueda_pid7 !== false){
                                 if($busqueda_pid !== false){
                                     $pid_detect_com= strpos($this->search, '&PID=');
                                     $posicion_pid = $pid_detect_com + 5;
@@ -398,6 +406,11 @@ class K3203Index extends Component
                                     $pid_detect_com= strpos($this->search, '&ID=');
                                     $posicion_pid = $pid_detect_com + 4;
                                     $pid_calculate = $pid_detect_com + 4;
+                                }
+                                elseif($busqueda_pid7 !== false){
+                                    $pid_detect_com= strpos($this->search, '&Broker=');
+                                    $posicion_pid = $pid_detect_com + 8;
+                                    $pid_calculate = $pid_detect_com + 8;
                                 }
                                 else{
                                     $pid_detect_com= strpos($this->search, '&id=');
@@ -560,7 +573,7 @@ class K3203Index extends Component
                                                  $link->jumper = $url_detect;
                                                  $link->psid = substr($psid_buscar,0,5);
                                                  $link->user_id = auth()->user()->id;
-                                                 $link->jumper_type_id = 15;
+                                                 $link->jumper_type_id = 17;
                                                  $link->k_detected = 'K=3203';
                                                  $link->save();
              

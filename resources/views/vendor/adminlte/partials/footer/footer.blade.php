@@ -107,7 +107,7 @@
     <div id="accordion">
         <div class="col-md-3 float-right">
             <div class="card card-info">
-                <div class="card-header py-0" id="headingTwo">
+                <div class="card-header py-0 bg-info" id="headingTwo">
                     <h5 class="mb-0 ">
                         <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo"
                             aria-expanded="false" aria-controls="collapseTwo">
@@ -156,8 +156,8 @@
    
 
         <div class="col-md-4 float-left">
-            <div class="card card-info">
-                <div class="card-header py-0" id="headingTwo">
+            <div class="card card-info ">
+                <div class="card-header py-0 bg-info" id="headingTwo">
                     <h5 class="mb-0 ">
                         <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo"
                             aria-expanded="false" aria-controls="collapseTwo">

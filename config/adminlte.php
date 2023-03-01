@@ -398,29 +398,20 @@ return [
             'text'    => 'SSI',
             'icon'    => 'fas fa-search',
             'can' => 'ssidkr.index',
-            'icon_color' => 'red',
+            'icon_color' => 'cyan',
             'submenu' => [
                 [
                     'text' => 'SSI DKR',
                     'route'  => 'ssidkr.index',
                     'can' => 'ssidkr.index',
-                    'icon_color' => 'cyan',
+                    'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
-
-                // [
-                //     'text' => 'QuickThoughts',
-                //     'route'  => 'qt.index',
-                //     'can' => 'ssidkr.index',
-                //     'icon_color' => 'red',
-                //     'icon'    => 'fas fa-angle-right',
-                // ],
-
                 [
                     'text' => 'K1000',
                     'route'  => 'kmil.index',
                     'can' => 'kmil.index',
-                    'icon_color' => 'cyan',
+                    'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
                 ],
                 [
@@ -441,18 +432,16 @@ return [
                     'text' => 'K2062',
                     'route'  => 'kdosmilsesentaydos.index',
                     'can' => 'kdosmilsesentaydos.index',
-                    'icon_color' => 'cyan',
+                    'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
                 ],
-
-                // [
-                //     'text' => 'K23',
-                //     'route'  => 'kveintitres.index',
-                //     'can' => 'kveintitres.index',
-                //     'icon_color' => 'red',
-                //     'icon'    => '	fas fa-angle-right',
-                // ],
-
+                [
+                     'text' => 'K23',
+                     'route'  => 'kveintitres.index',
+                     'can' => 'kveintitres.index',
+                     'icon_color' => 'red',
+                     'icon'    => '	fas fa-angle-right',
+                ],
                 [
                     'text' => 'K3203',
                     'route'  => 'k3203.index',
@@ -464,22 +453,14 @@ return [
                     'text' => 'K7341',
                     'route'  => 'ksietemilcuarentayuno.index',
                     'can' => 'ssidkr.index',
-                    'icon_color' => 'cyan',
+                    'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
                 ],
-
-                // [
-                //     'text' => 'DESCALIFICADOR',
-                //     'route'  => 'descalificador.index',
-                //     'can' => 'ssidkr.index',
-                //     'icon_color' => 'red',
-                //     'icon'    => '	fas fa-angle-right',
-                // ],
                 [
                     'text' => 'SALTADOR WIX',
                     'route'  => 'wix.index',
                     'can' => 'ssidkr.index',
-                    'icon_color' => 'cyan',
+                    'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
                 ],
             ],

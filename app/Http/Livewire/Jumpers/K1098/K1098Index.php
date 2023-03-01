@@ -347,8 +347,8 @@ class K1098Index extends Component
                                             $link->jumper = $url_detect;
                                             $link->psid = substr($psid_buscar,0,5);
                                             $link->user_id = auth()->user()->id;
-                                            $link->jumper_type_id = 5;
-                                            $link->k_detected = 'K=1000';
+                                            $link->jumper_type_id = 16;
+                                            $link->k_detected = 'K=1098';
                                             $link->save();
         
                                             $this->busqueda_link = Link::where('id',$link->id)->first();

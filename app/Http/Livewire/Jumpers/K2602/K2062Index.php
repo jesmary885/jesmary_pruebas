@@ -66,10 +66,17 @@ class K2062Index extends Component
                     $busqueda_pid4= strpos($this->search, '?id=');
                     $busqueda_pid5= strpos($this->search, '&ID=');
                     $busqueda_pid6= strpos($this->search, '&id=');
+                    $busqueda_pid7= strpos($this->search, '&Broker=');
+
+                        /*elseif($busqueda_pid7 !== false){
+                            $pid_detect_com= strpos($this->search, '&Broker=');
+                            $posicion_pid = $pid_detect_com + 8;
+                            $pid_calculate = $pid_detect_com + 8;
+                        }*/
     
-                        if($this->pid_new != 0 ||  $busqueda_pid !== false || $busqueda_pid2 !== false || $busqueda_pid3 !== false || $busqueda_pid4 !== false || $busqueda_pid5 !== false || $busqueda_pid6 !== false){
+                        if($this->pid_new != 0 ||  $busqueda_pid !== false || $busqueda_pid2 !== false || $busqueda_pid3 !== false || $busqueda_pid4 !== false || $busqueda_pid5 !== false || $busqueda_pid6 !== false || $busqueda_pid7 !== false){
     
-                        if($busqueda_pid !== false || $busqueda_pid2 !== false || $busqueda_pid3 !== false || $busqueda_pid4 !== false || $busqueda_pid5 !== false || $busqueda_pid6 !== false){
+                        if($busqueda_pid !== false || $busqueda_pid2 !== false || $busqueda_pid3 !== false || $busqueda_pid4 !== false || $busqueda_pid5 !== false || $busqueda_pid6 !== false || $busqueda_pid7 !== false){
                             if($busqueda_pid !== false){
                                 $pid_detect_com= strpos($this->search, '&PID=');
                                 $posicion_pid = $pid_detect_com + 5;
@@ -94,6 +101,11 @@ class K2062Index extends Component
                                 $pid_detect_com= strpos($this->search, '&ID=');
                                 $posicion_pid = $pid_detect_com + 4;
                                 $pid_calculate = $pid_detect_com + 4;
+                            }
+                            elseif($busqueda_pid7 !== false){
+                                $pid_detect_com= strpos($this->search, '&Broker=');
+                                $posicion_pid = $pid_detect_com + 8;
+                                $pid_calculate = $pid_detect_com + 8;
                             }
                             else{
                                 $pid_detect_com= strpos($this->search, '&id=');
@@ -367,10 +379,11 @@ class K2062Index extends Component
                         $busqueda_pid4= strpos($this->search, '?id=');
                         $busqueda_pid5= strpos($this->search, '&ID=');
                         $busqueda_pid6= strpos($this->search, '&id=');
+                        $busqueda_pid7= strpos($this->search, '&Broker=');
+
+                        if($this->pid_new != 0 ||  $busqueda_pid !== false || $busqueda_pid2 !== false || $busqueda_pid3 !== false || $busqueda_pid4 !== false || $busqueda_pid5 !== false || $busqueda_pid6 !== false || $busqueda_pid7 !== false){
     
-                        if($this->pid_new != 0 ||  $busqueda_pid !== false || $busqueda_pid2 !== false || $busqueda_pid3 !== false || $busqueda_pid4 !== false || $busqueda_pid5 !== false || $busqueda_pid6 !== false){
-    
-                            if($busqueda_pid !== false || $busqueda_pid2 !== false || $busqueda_pid3 !== false || $busqueda_pid4 !== false || $busqueda_pid5 !== false || $busqueda_pid6 !== false){
+                            if($busqueda_pid !== false || $busqueda_pid2 !== false || $busqueda_pid3 !== false || $busqueda_pid4 !== false || $busqueda_pid5 !== false || $busqueda_pid6 !== false || $busqueda_pid7 !== false){
                                 if($busqueda_pid !== false){
                                     $pid_detect_com= strpos($this->search, '&PID=');
                                     $posicion_pid = $pid_detect_com + 5;
@@ -395,6 +408,11 @@ class K2062Index extends Component
                                     $pid_detect_com= strpos($this->search, '&ID=');
                                     $posicion_pid = $pid_detect_com + 4;
                                     $pid_calculate = $pid_detect_com + 4;
+                                }
+                                elseif($busqueda_pid7 !== false){
+                                    $pid_detect_com= strpos($this->search, '&Broker=');
+                                    $posicion_pid = $pid_detect_com + 8;
+                                    $pid_calculate = $pid_detect_com + 8;
                                 }
                                 else{
                                     $pid_detect_com= strpos($this->search, '&id=');

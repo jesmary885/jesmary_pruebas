@@ -14,7 +14,7 @@ class SsidkrCreateHigh extends Component
     protected $rules_create = [
         'psid' => 'required|min:5',
         'high' => 'required|min:10',
-        'pid' => 'required|min:9',
+        'pid' => 'required|min:8',
     ];
 
     public function mount(){

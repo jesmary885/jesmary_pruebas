@@ -18,6 +18,10 @@ class SsidkrIndex extends Component
 
     protected $listeners = ['render' => 'render', 'registro_psid' => 'registro_psid', 'descalificar' => 'descalificar'];
 
+    protected $rules_pid = [
+        'pid_new' => 'required|min:8',
+    ];
+    
     public function mount(){
         $this->jumper_2 = '';
         $this->user_auth =  auth()->user()->id;
@@ -60,6 +64,11 @@ class SsidkrIndex extends Component
         return 'k1098';
     }
 
+    public function k23(){
+        session()->forget('search');
+        return 'k23';
+    }
+
     public function render()
     {
         $subs_psid = '0';
@@ -70,6 +79,7 @@ class SsidkrIndex extends Component
         $ultima_letra_psid_search = "";
         $nuevo_high_registrado = 0;
         $nuevo_basic_registrado = 0;
+        $type_k = 0;
         $this->no_jumpear = 0;
         $this->jumper_detect = 0;
         $this->k_detect = '0';
@@ -286,10 +296,10 @@ class SsidkrIndex extends Component
         
                             }while($i != 1);
 
-                        
                             $url_detect = 'https://'.substr($this->search,8,($this->posicion-8));
 
-                
+                            $this->jumper_detect = $url_detect ;
+
                                 if($url_detect != 'https://dkr1.ssisurveys.com'){
                                     $jumper->update(
                                         ['jumper' => $url_detect ]
@@ -303,9 +313,12 @@ class SsidkrIndex extends Component
 
                     if($jumper->k_detected) $this->k_detect = $jumper->k_detected;
                     else{
+                      
                         $k_detect= strpos($this->search, '_k=');
-                        if($k_detect){
-                            $this->posicionk = $k_detect + 3;
+                        $k_detect2= strpos($this->search, '_K=');
+                        if($k_detect != false || $k_detect2 != false){
+                            if ($k_detect != false) $this->posicionk = $k_detect + 3;
+                            else $this->posicionk = $k_detect2 + 3;
         
                             $ik = 0;
                             $i_busk = 0;
@@ -330,50 +343,36 @@ class SsidkrIndex extends Component
                             if($i_busk < 10){
         
                                 $this->posicion_total_k = $this->posicionk -  ($k_detect + 3);
-                                
-                                $jumper->update(
-                                    ['k_detected' => 'K='.substr($this->search,($k_detect + 3),$this->posicion_total_k) ]
-                                );
+                                $this->k_detect = 'K='.substr($this->search,($k_detect + 3),$this->posicion_total_k);
+            
                             }
                             else{
-                                $jumper->update(
-                                    ['k_detected' => 'K='.substr($this->search,($k_detect + 3),5) ]
-                                );
+                                $this->posicion_total_k = 5;
+                                $this->k_detect = 'K='.substr($this->search,($k_detect + 3),5);
+
+                                
                             }
 
-                            $this->k_detect = 'K='.substr($this->search,($k_detect + 3),5);
+                            if((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '1000') $type_k = 5;
+                            elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '1092') $type_k = 6;
+                            elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '2062') $type_k = 7;
+                            elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '23') $type_k = 8;
+                            elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '7341') $type_k = 9;
+                            elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '1098') $type_k = 16;
+                            elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '3203') $type_k = 17;
+                            else  $type_k = 15;
+
+                            $jumper->update(
+                                [
+                                    'k_detected' => 'K='.substr($this->search,($k_detect + 3),$this->posicion_total_k),
+                                     'jumper_type_id' => $type_k
+                                ]
+                            );
+
+                            
                         }
                     }
 
-                   /* if($this->k_detect){
-
-                        if($busqueda_k3203_ == false && $busqueda_k2062_ == false && $busqueda_k1000_ == false && $busqueda_k1092_ == false && $busqueda_k7341_ == false){
-                      
-                            if($this->k_detect == 'K=3203') {
-                                session(['search' =>  $this->search]);
-                                $this->k3203();
-                            }
-                            if($this->k_detect == 'K=2062') {
-                                session(['search' =>  $this->search]);
-                                $this->k2062();
-                            }
-                            if($this->k_detect == 'K=1000') {
-                                
-                                session(['search' =>  $this->search]);
-                                $this->k1000();
-                            }
-                            if($this->k_detect == 'K=1092') {
-                                session(['search' =>  $this->search]);
-                                $this->k1092();
-                            }
-                            if($this->k_detect == 'K=7341') {
-                                session(['search' =>  $this->search]);
-                                $this->k7341();
-                            }
-                        }
-                    
-                    }*/
-         
                     $this->jumper_2 = '1';
                     
                     $user_point= User_Links_Points::where('link_id',$jumper->id)
@@ -494,8 +493,9 @@ class SsidkrIndex extends Component
                                 $busqueda_pid4= strpos($this->search, '?id=');
                                 $busqueda_pid5= strpos($this->search, '&ID=');
                                 $busqueda_pid6= strpos($this->search, '&id=');
+                                $busqueda_pid7= strpos($this->search, '&Broker=');
 
-                                if($busqueda_pid !== false || $busqueda_pid2 !== false || $busqueda_pid3 !== false || $busqueda_pid4 !== false || $busqueda_pid5 !== false || $busqueda_pid6 !== false){
+                                if($busqueda_pid !== false || $busqueda_pid2 !== false || $busqueda_pid3 !== false || $busqueda_pid4 !== false || $busqueda_pid5 !== false || $busqueda_pid6 !== false || $busqueda_pid7 !== false){
                                
                                     $this->calc_link = 1;
 
@@ -524,6 +524,11 @@ class SsidkrIndex extends Component
                                         $posicion_pid = $pid_detect_com + 4;
                                         $pid_calculate = $pid_detect_com + 4;
                                     }
+                                    elseif($busqueda_pid7 !== false){
+                                        $pid_detect_com= strpos($this->search, '&Broker=');
+                                        $posicion_pid = $pid_detect_com + 8;
+                                        $pid_calculate = $pid_detect_com + 8;
+                                    }
                                     else{
                                         $pid_detect_com= strpos($this->search, '&id=');
                                         $posicion_pid = $pid_detect_com + 4;
@@ -534,6 +539,7 @@ class SsidkrIndex extends Component
                                     $busq_pid_s = 0;
                                     
                                     do{
+
                                         $detect= substr($this->search, $posicion_pid,1);
                 
                                         if($detect == '&') $i = 1;
@@ -623,12 +629,14 @@ class SsidkrIndex extends Component
                             }
 
                             $k_detect= strpos($this->search, '_k=');
+                            $k_detect2= strpos($this->search, '_K=');
 
-                            if($k_detect){
-                                $this->posicionk = $k_detect + 3;
+                            if($k_detect != false || $k_detect2 != false){
+                                if ($k_detect != false) $this->posicionk = $k_detect + 3;
+                                else $this->posicionk = $k_detect2 + 3;
 
-                                
                                 $ik = 0;
+                                $busq_pid_s = 0;
                             
                                     do{
                                         $detectk= substr($this->search, $this->posicionk,1);
@@ -637,34 +645,33 @@ class SsidkrIndex extends Component
                                         else{
                                             $ik = 0;
                                             $this->posicionk = $this->posicionk + 1;
+                                            $busq_pid_s ++;
+                                        }
+
+                                        if($busq_pid_s > 13){
+                                            $ik = 1;
                                         }
                                     }
                                     while($ik != 1);
 
-                                    $this->posicion_total_k = $this->posicionk -  ($k_detect + 3);
+                                    if($busq_pid_s < 13){
+                                        $this->posicion_total_k = $this->posicionk -  ($k_detect + 3);
 
-                                       /* $kk_d='K='.substr($this->search,($k_detect + 3),$this->posicion_total_k);
+                                    }
+                                    else{
+                                        $this->posicion_total_k = 5;
+                                    }
 
-                                        if($kk_d == 'K=3203') {
-                                            session(['search' =>  $this->search]);
-                                            $this->k3203();
-                                        }
-                                        if($kk_d == 'K=2062') {
-                                            session(['search' =>  $this->search]);
-                                            $this->k2062();
-                                        }
-                                        if($kk_d == 'K=1000') {
-                                            session(['search' =>  $this->search]);
-                                            $this->k1000();
-                                        }
-                                        if($kk_d == 'K=1092') {
-                                            session(['search' =>  $this->search]);
-                                            $this->k1092();
-                                        }
-                                        if($kk_d == 'K=7341') {
-                                            session(['search' =>  $this->search]);
-                                            $this->k7341();
-                                        }*/
+                                    //dd(substr($this->search,($k_detect + 3),$this->posicion_total_k));
+
+                                    if((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '1000') $type_k = 5;
+                                    elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '1092') $type_k = 6;
+                                    elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '2062') $type_k = 7;
+                                    elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '23') $type_k = 8;
+                                    elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '7341') $type_k = 9;
+                                    elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '1098') $type_k = 16;
+                                    elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '3203') $type_k = 17;
+                                    else  $type_k = 15;
 
                             }
 
@@ -674,13 +681,18 @@ class SsidkrIndex extends Component
 
                                 if($subs_psid != 'no_existe_psid_error_volver_a_intentar&&..'){
 
-                                  
+                               
                                     $link = new Link();
                                     $link->jumper = $url_detect;
                                     $link->psid = $subs_psid;
                                     $link->user_id = auth()->user()->id;
-                                    $link->jumper_type_id = 15;
-                                    if($k_detect) $link->k_detected = 'K='.substr($this->search,($k_detect + 3),$this->posicion_total_k);
+                                    if($k_detect != false || $k_detect2 != false){
+                                        $link->k_detected = 'K='.substr($this->search,($k_detect + 3),$this->posicion_total_k);
+                                        $link->jumper_type_id = $type_k;
+                                    }
+                                    else{
+                                        $link->jumper_type_id = 15;
+                                    }
                                     $link->save();
 
                                     $this->jumper_detect = $url_detect;
@@ -1006,10 +1018,10 @@ class SsidkrIndex extends Component
         $busqueda_pid4= strpos($this->search, '?id=');
         $busqueda_pid5= strpos($this->search, '&ID=');
         $busqueda_pid6= strpos($this->search, '&id=');
+        $busqueda_pid7= strpos($this->search, '&Broker=');
 
 
-
-        if($busqueda_pid !== false || $busqueda_pid2 !== false || $busqueda_pid3 !== false || $busqueda_pid4 !== false || $busqueda_pid5 !== false || $busqueda_pid6 !== false){
+        if($busqueda_pid !== false || $busqueda_pid2 !== false || $busqueda_pid3 !== false || $busqueda_pid4 !== false || $busqueda_pid5 !== false || $busqueda_pid6 !== false || $busqueda_pid7 !== false){
             //dd('ok');
             if($busqueda_pid !== false){
                 $pid_detect_com= strpos($this->search, '&PID=');
@@ -1035,6 +1047,11 @@ class SsidkrIndex extends Component
                 $pid_detect_com= strpos($this->search, '&ID=');
                 $posicion_pid = $pid_detect_com + 4;
                 $pid_calculate = $pid_detect_com + 4;
+            }
+            elseif($busqueda_pid7 !== false){
+                $pid_detect_com= strpos($this->search, '&Broker=');
+                $posicion_pid = $pid_detect_com + 8;
+                $pid_calculate = $pid_detect_com + 8;
             }
             else{
                 $pid_detect_com= strpos($this->search, '&id=');
@@ -1201,6 +1218,9 @@ class SsidkrIndex extends Component
     }
 
     public function calculo_high($jumper_id){
+        $rules_pid = $this->rules_pid;
+        $this->validate($rules_pid);
+
         $jumper_id = Link::where('id',$jumper_id)->first();
         $this->calculo_high = $jumper_id->high - ($jumper_id->pid - $this->pid_new) * round(($jumper_id->high / $jumper_id->pid),0);
         $this->calc_link = 1;
@@ -1260,5 +1280,6 @@ class SsidkrIndex extends Component
         $this->jumper_complete_qt = '';
         session()->forget('search');
         $this->descalific_active = 0;
+        $this->pid_new = 0;
     }
 }

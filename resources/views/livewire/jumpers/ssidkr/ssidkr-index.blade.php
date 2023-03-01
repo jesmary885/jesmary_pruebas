@@ -154,10 +154,11 @@
                                         <td class="text-center" :class="{'hidden': (is_basic == 'no')}">{{$jumper->basic}}</td>
                                         <td class="text-center">{{$jumper->created_at->format('d/m/Y')}}</td>
                                         <td class="text-center" :class="{'hidden': (is_high == 'no')}"> 
-                                            <div class="flex ">
+                                            <div class="flex justify-center">
                                         
                                                 <div >
                                                     <input type="number" wire:model.defer="pid_new" class="rounded-sm bg-light py-1 px-1"  placeholder="{{__('messages.ingrese_pdi')}}">
+                                                    <x-input-error for="pid_new" />
                                                 </div>
                                                 <div>
                                                     <button
@@ -240,6 +241,9 @@
                         @if ($k_detect == 'K=2062')
                         <a href={{$this->k2062()}}>
                         @endif
+                        @if ($k_detect == 'K=23')
+                        <a href={{$this->k23()}}>
+                        @endif
                         @if ($k_detect == 'K=3203')
                         <a href={{$this->k3203()}}>
                         @endif
@@ -247,7 +251,7 @@
                         <a href={{$this->k7341()}}>
                         @endif
 
-                            <div class="small-box bg-info">
+                            <div class="small-box bg-success">
                                 <div class="inner">
                                     <h3 class="text-md font-semibold">Dirígete a </h3>
                                     <p>Sección "{{$k_detect}}"</p>
