@@ -467,6 +467,23 @@ class SsidkrIndex extends Component
                                 if(session('pid')) $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?rst=1&psid='.session('pid').'**&basic=34334';
                                 else $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?rst=1&psid=(QUITA LOS PARENTESIS QUE RODEA ESTA FRASE Y COLOCA TU PID)**&basic=34334';
                             }
+                            elseif($jumper->psid == 'aKwSA'){
+                                $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?PSID='.$psid_complete.'%2A%2A&basic=17305&pe_ses_key=PSID&psid='.$psid_complete.'%2A%2A&rst=1';
+                            }  
+                            elseif($jumper->psid == 'wkH72'){
+                                $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?PSID='.$psid_complete.'%2A%2A&basic=59632&pe_ses_key=PSID&psid='.$psid_complete.'%2A%2A&rst=1';
+                            }
+                            elseif($jumper->psid == 'nlA3c'){
+                                $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?PSID='.$psid_complete.'%2A%2A&basic=43924&pe_ses_key=PSID&psid='.$psid_complete.'%2A%2A&rst=1';
+                            }
+                            elseif($jumper->psid == 'kOUBN'){
+                                $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?PSID='.$psid_complete.'%2A%2A&basic=32081&pe_ses_key=PSID&psid='.$psid_complete.'%2A%2A&rst=1';
+                            }
+                            elseif($jumper->psid == '1kY7h'){
+                                if(session('pid'))
+                                $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?rst=1&psid='.$psid_complete.'**&basic=80256&mid='.session('pid');
+                                else 'https://dkr1.ssisurveys.com/projects/end?rst=1&psid='.$psid_complete.'**&basic=80256&mid=(QUITA LOS PARENTESIS QUE RODEA ESTA FRASE Y COLOCA TU PID)';
+                            }
                             else {
                                 $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?rst=1&psid='.$psid_complete.'**&basic='.$jumper->basic;
                             }
