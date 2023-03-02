@@ -69,7 +69,7 @@
 
                 @endif
 
-            @if($busqueda_link || $jumper_complete)
+            @if($busqueda_link || $jumper_complete || $pid_detectado == 'no')
 
                 <div class="table-responsive">
                     <table class="table table-striped table-responsive">
@@ -79,6 +79,9 @@
                                     <th class="text-center">PSID</th>
                       
                                     <th class="text-center">{{__('messages.Subido')}}</th>
+                                    @if ($pid_detectado == 'no')
+                                    <th class="text-center">PID</th>
+                                    @endif
                                     <th class="text-center">Historial</th>
                                     <th colspan="2" class="text-center">{{__('messages.Puntuación')}}</th>
                                 </tr>
@@ -88,6 +91,26 @@
                                     <td class="text-center">{{$busqueda_link->jumperType->name}}</td>
                                     <td class="text-center">{{$busqueda_link->psid}}</td>
                                     <td class="text-center">{{$busqueda_link->created_at->format('d/m/Y')}}</td>
+
+                                    @if ($pid_detectado == 'no')
+                                    <td class="text-center"> 
+                                            <div class="flex justify-center">
+                                        
+                                                <div >
+                                                    <input type="number" wire:model.defer="pid_manual" class="rounded-sm bg-light py-1 px-1"  placeholder="{{__('messages.ingrese_pdi')}}">
+                                                    <x-input-error for="pid_manual" />
+                                                </div>
+                                                <div>
+                                                    <button
+                                                        class="btn-outline-secondary py-1 ml-2" 
+                                                        wire:click="jumpear()">
+                                                        <i class="font-semibold fas fa-sync"></i>
+                                                
+                                                    </button>
+                                                </div>
+                                            </div>
+                                    </td>
+                                    @endif
                    
                                     <td width="10px">
                                         @livewire('jumpers.history', ['jumper' => $busqueda_link])
@@ -313,12 +336,6 @@
     @section('js')
         <script>
             function copiarAlPortapapeles(id_elemento) {
-                /*var aux = document.createElement("input");
-                aux.setAttribute("value", document.getElementById(id_elemento).innerHTML);
-                document.body.appendChild(aux);
-                aux.select();
-                document.execCommand("copy");
-                document.body.removeChild(aux);*/
                 
                 var codigoACopiar = document.getElementById(id_elemento);
                 var seleccion = document.createRange();
@@ -349,46 +366,6 @@
             }
         </script>
 
-
-        <script>
-
-            Livewire.on('wait', function(){
-
-                toastr.options={
-                    "closeButton": true,
-                    "debug": true,
-                    "newestOnTop": true,
-                    "progressBar": true,
-                    "positionClass": "toast-top-right",
-                    "preventDuplicates": true,
-                    "onclick": null,
-                    "showDuration": "300",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                }
-                toastr.success('Momento')
-
-            })
-
-        </script>
-
-        <script>
-
-            Livewire.on('wait', function(){
-
-                Swal.fire(
-                'Espere un momento, se esta procesando su jumper',
-                'Esta siendo redireccionado...',
-                )
-
-            })
-
-        </script>
     @stop
 </div>
 

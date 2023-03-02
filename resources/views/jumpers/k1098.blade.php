@@ -3,7 +3,7 @@
 
 <div class="flex justify-between">
     
-    <h1 class="text-lg font-weight-bold text-red-500"> <i class="fas fa-asterisk mr-1 text-red-500"></i> K1098</h1>
+    <h1 class="text-lg font-weight-bold text-blue-300"> <i class="fas fa-asterisk mr-1 text-blue-300"></i> K1098</h1>
 
    
 </div>

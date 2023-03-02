@@ -70,8 +70,6 @@ class K1000Index extends Component
         else{
             $this->jumper_detect = 3;
         }
-
-
     }
 
     public function render()

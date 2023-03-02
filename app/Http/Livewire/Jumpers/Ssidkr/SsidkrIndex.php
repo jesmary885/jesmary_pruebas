@@ -470,6 +470,9 @@ class SsidkrIndex extends Component
                             elseif($jumper->psid == 'aKwSA'){
                                 $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?PSID='.$psid_complete.'%2A%2A&basic=17305&pe_ses_key=PSID&psid='.$psid_complete.'%2A%2A&rst=1';
                             }  
+                            elseif($jumper->psid == 'MghQh'){
+                                $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?PSID='.$psid_complete.'%2A%2A&basic=51816&pe_ses_key=PSID&psid='.$psid_complete.'%2A%2A&rst=1';
+                            }  
                             elseif($jumper->psid == 'wkH72'){
                                 $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?PSID='.$psid_complete.'%2A%2A&basic=59632&pe_ses_key=PSID&psid='.$psid_complete.'%2A%2A&rst=1';
                             }
