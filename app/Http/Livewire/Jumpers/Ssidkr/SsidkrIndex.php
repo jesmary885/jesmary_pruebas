@@ -1280,6 +1280,5 @@ class SsidkrIndex extends Component
         $this->jumper_complete_qt = '';
         session()->forget('search');
         $this->descalific_active = 0;
-        $this->pid_new = 0;
     }
 }
