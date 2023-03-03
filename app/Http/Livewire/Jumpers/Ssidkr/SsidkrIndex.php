@@ -14,7 +14,7 @@ class SsidkrIndex extends Component
     use WithPagination;
     protected $paginationTheme = "bootstrap";
 
-    public $descalific_active=0,$type,$jumper_complete_qt,$comment_new_psid_register,$pid_register_high,$psid_register_bh,$high_register_bh,$basic_register_bh,$posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $wix_detect = '0', $psid_register=0,$jumper_redirect,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$is_high,$is_basic,$calc_link,$jumper_select,$points_user_positive, $points_user_negative ;
+    public $type_basic,$descalific_active=0,$type,$jumper_complete_qt,$comment_new_psid_register,$pid_register_high,$psid_register_bh,$high_register_bh,$basic_register_bh,$posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $wix_detect = '0', $psid_register=0,$jumper_redirect,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$is_high,$is_basic,$calc_link,$jumper_select,$points_user_positive, $points_user_negative ;
 
     protected $listeners = ['render' => 'render', 'registro_psid' => 'registro_psid', 'descalificar' => 'descalificar'];
 
@@ -68,6 +68,22 @@ class SsidkrIndex extends Component
         session()->forget('search');
         return 'k23';
     }
+    public function k3906(){
+        session()->forget('search');
+        return 'k3906';
+    }
+    public function k11052(){
+        session()->forget('search');
+        return 'k11052';
+    }
+    public function k15293(){
+        session()->forget('search');
+        return 'k15293';
+    }
+    public function k17564(){
+        session()->forget('search');
+        return 'k17564';
+    }
 
     public function render()
     {
@@ -108,7 +124,7 @@ class SsidkrIndex extends Component
               
 
                 //Registro automático de high y basic
-                if((strpos($this->search, '//dkr1.ssisurveys.com/projects/end?rst') !== false)){
+                if((strpos($this->search, '//dkr1.ssisurveys.com/projects/end?') !== false)){
 
                     if((strpos($this->search, 'imperium') === false)){
                             
@@ -132,17 +148,45 @@ class SsidkrIndex extends Component
                             
                         }
                         else{
+                            
                             if((strpos($this->search, '**&basic=') != false)){
                                 $basic_detectado = strpos($this->search, '**&basic=');
                                 $this->psid_register_bh = substr($this->search,($basic_detectado - 22),5);
                                 $this->basic_register_bh = substr($this->search,($basic_detectado + 9));
+                                $this->type_basic = 1;
 
                                 $nuevo_basic_registrado = 1;
 
                                 $this->registro_basic();
                             }
+                            else{
+                                if((strpos($this->search, '%2A%2A&basic=') != false)){
+                                
+                                    $basic_detectado = strpos($this->search, '%2A%2A&basic=');
+                                    $this->psid_register_bh = substr($this->search,($basic_detectado - 22),5);
+                                    $this->basic_register_bh = substr($this->search,($basic_detectado + 13),5);
+                                    $this->type_basic = 2;
+                               
+                                    $nuevo_basic_registrado = 1;
+                                    $this->registro_basic();
+                                }
+                            }
                         }
                     }
+                }
+
+                elseif((strpos($this->search, '//api.dynata.com/respondent/exit?rst') !== false)){
+                    if((strpos($this->search, '**&basic=') != false)){
+                        $basic_detectado = strpos($this->search, '**&basic=');
+                        $this->psid_register_bh = substr($this->search,($basic_detectado - 22),5);
+                        $this->basic_register_bh = substr($this->search,($basic_detectado + 9));
+                        $this->type_basic = 3;
+
+                        $nuevo_basic_registrado = 1;
+
+                        $this->registro_basic();
+                    }
+
                 }
 
                 else{
@@ -277,7 +321,7 @@ class SsidkrIndex extends Component
 
                     if($jumper->jumper)$this->jumper_detect = $jumper->jumper;
                     else{
-                        $url_detect_com= strpos($this->search, 'ttps://');
+                        /*$url_detect_com= strpos($this->search, 'ttps://');
 
                         if($url_detect_com != false){
 
@@ -296,17 +340,53 @@ class SsidkrIndex extends Component
         
                             }while($i != 1);
 
-                            $url_detect = 'https://'.substr($this->search,8,($this->posicion-8));
+                            $url_detect = 'https://'.substr($this->search,8,($this->posicion-8));*/
 
-                            $this->jumper_detect = $url_detect ;
+                        $url_detect_com= strpos($this->search, 'http');
+                        $url_detect_com2= strpos($this->search, 'https');
+
+                        if($url_detect_com !== false || $url_detect_com2 !== false){
+
+                            if($url_detect_com2 !== false) {
+                                $con_seguridad= strpos($this->search, 'https');
+                                $posicion_url = 8;
+                            }
+                            else {
+                                $con_seguridad= strpos($this->search, 'http');
+                                $posicion_url = 7;
+                            }
+
+                            $i = 0;
+                            
+                            do{
+                                $detect= substr($this->search, $posicion_url,1);
+
+                                if($detect == '/') $i = 1;
+                                else{
+                                    $i = 0;
+                                    $posicion_url = $posicion_url + 1;
+                                }
+
+                            }
+                            while($i != 1);
+
+                            if($url_detect_com2 !== false){
+
+                            $url_detect = 'https://'.substr($this->search,8,($posicion_url-8));
+                            }
+
+                            else{
+                                $url_detect = 'https://'.substr($this->search,7,($posicion_url-7));
+                            }
+
+                           
 
                                 if($url_detect != 'https://dkr1.ssisurveys.com'){
                                     $jumper->update(
                                         ['jumper' => $url_detect ]
                                     );
+                                    $this->jumper_detect = $url_detect ;
                                 }
-
-                            
                         }
                     
                     }
@@ -360,6 +440,10 @@ class SsidkrIndex extends Component
                             elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '7341') $type_k = 9;
                             elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '1098') $type_k = 16;
                             elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '3203') $type_k = 17;
+                            elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '3906') $type_k = 18;
+                            elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '11052') $type_k = 19;
+                            elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '15293') $type_k = 20;
+                            elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '17564') $type_k = 21;
                             else  $type_k = 15;
 
                             $jumper->update(
@@ -463,11 +547,35 @@ class SsidkrIndex extends Component
                             $this->is_basic = "si";
                             $this->calc_link = 1;
                             if($jumper->psid == 'j1nB1') $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?rst=1&psid='.$psid_complete.'**&basic='.$jumper->basic.'&psid=j1nB';
-                            elseif($jumper->psid == 'aAC6g'){
+                            
+                                if($jumper->psid == 'aAC6g'){
                                 if(session('pid')) $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?rst=1&psid='.session('pid').'**&basic=34334';
                                 else $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?rst=1&psid=(QUITA LOS PARENTESIS QUE RODEA ESTA FRASE Y COLOCA TU PID)**&basic=34334';
                             }
-                            elseif($jumper->psid == 'aKwSA'){
+
+                            elseif($jumper->psid == '1kY7h'){
+                                if(session('pid'))
+                                $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?rst=1&psid='.$psid_complete.'**&basic=80256&mid='.session('pid');
+                                else 'https://dkr1.ssisurveys.com/projects/end?rst=1&psid='.$psid_complete.'**&basic=80256&mid=(QUITA LOS PARENTESIS QUE RODEA ESTA FRASE Y COLOCA TU PID)';
+                            }
+
+                            else{
+                               
+                                if($jumper->id_id == 2){
+                                    $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?PSID='.$psid_complete.'%2A%2A&basic='.$jumper->basic.'&pe_ses_key=PSID&psid='.$psid_complete.'%2A%2A&rst=1';
+                                }
+                                elseif($jumper->id_id == 3){
+                                    $jumper_complete = 'https://api.dynata.com/respondent/exit?rst=1&pe_ses_key=PSID&PSID='.$psid_complete.'**&basic='.$jumper->basic;
+                                }
+                                else{
+                                    $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?rst=1&psid='.$psid_complete.'**&basic='.$jumper->basic;
+                                }
+                            }
+
+                            
+
+                            
+                           /* elseif($jumper->psid == 'aKwSA'){
                                 $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?PSID='.$psid_complete.'%2A%2A&basic=17305&pe_ses_key=PSID&psid='.$psid_complete.'%2A%2A&rst=1';
                             }  
                             elseif($jumper->psid == 'MghQh'){
@@ -481,16 +589,8 @@ class SsidkrIndex extends Component
                             }
                             elseif($jumper->psid == 'kOUBN'){
                                 $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?PSID='.$psid_complete.'%2A%2A&basic=32081&pe_ses_key=PSID&psid='.$psid_complete.'%2A%2A&rst=1';
-                            }
-                            elseif($jumper->psid == '1kY7h'){
-                                if(session('pid'))
-                                $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?rst=1&psid='.$psid_complete.'**&basic=80256&mid='.session('pid');
-                                else 'https://dkr1.ssisurveys.com/projects/end?rst=1&psid='.$psid_complete.'**&basic=80256&mid=(QUITA LOS PARENTESIS QUE RODEA ESTA FRASE Y COLOCA TU PID)';
-                            }
-                            else {
-                                $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?rst=1&psid='.$psid_complete.'**&basic='.$jumper->basic;
-                            }
-
+                            }*/
+                           
                             session()->forget('search');
 
                         } 
@@ -619,34 +719,43 @@ class SsidkrIndex extends Component
                     
                     }
                     else{
-                        $url_detect_com= strpos($this->search, 'ttp');
+                        $url_detect_com= strpos($this->search, 'http');
+                        $url_detect_com2= strpos($this->search, 'https');
 
-                        if($url_detect_com != false){
+                        if($url_detect_com !== false || $url_detect_com2 !== false){
 
-                            $con_seguridad= strpos($this->search, 'ttps');
+                            if($url_detect_com2 !== false) {
+                                $con_seguridad= strpos($this->search, 'https');
+                                $posicion_url = 8;
+                            }
+                            else {
+                                $con_seguridad= strpos($this->search, 'http');
+                                $posicion_url = 7;
+                            }
 
                             $i = 0;
                             
                             do{
-                                $detect= substr($this->search, $this->posicion,1);
+                                $detect= substr($this->search, $posicion_url,1);
 
                                 if($detect == '/') $i = 1;
                                 else{
                                     $i = 0;
-                                    $this->posicion = $this->posicion + 1;
+                                    $posicion_url = $posicion_url + 1;
                                 }
 
                             }
                             while($i != 1);
 
-                            if($con_seguridad != false){
+                            if($url_detect_com2 !== false){
 
-                            $url_detect = 'https://'.substr($this->search,8,($this->posicion-8));
+                                $url_detect = 'https://'.substr($this->search,8,($posicion_url-8));
                             }
 
                             else{
-                                $url_detect = 'https://'.substr($this->search,7,($this->posicion-7));
+                                $url_detect = 'https://'.substr($this->search,7,($posicion_url-7));
                             }
+
 
                             $k_detect= strpos($this->search, '_k=');
                             $k_detect2= strpos($this->search, '_K=');
@@ -691,6 +800,10 @@ class SsidkrIndex extends Component
                                     elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '7341') $type_k = 9;
                                     elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '1098') $type_k = 16;
                                     elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '3203') $type_k = 17;
+                                    elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '3906') $type_k = 18;
+                                    elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '11052') $type_k = 19;
+                                    elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '15293') $type_k = 20;
+                                    elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '17564') $type_k = 21;
                                     else  $type_k = 15;
 
                             }
@@ -907,7 +1020,7 @@ class SsidkrIndex extends Component
     }
 
     public function descalificar($type){
-    
+
         $this->calc_link = 0;
         $this->type = $type;
         $long_psid = strlen($this->search); //buscando cuantos caracteres tiene en total
@@ -922,7 +1035,7 @@ class SsidkrIndex extends Component
                 $busqueda_psid = strpos($this->search, 'psid=');
         
                 if($busqueda_psid !== false){
-                    $i = 0;
+                  /*  $i = 0;
                     $i_bus = 0;
                     $posicion = $busqueda_psid + 5;
                             
@@ -947,7 +1060,8 @@ class SsidkrIndex extends Component
                     }
                     else{
                         $psid_detect = substr($this->search,$busqueda_psid+5,32);
-                    }
+                    }*/
+                    $psid_detect = substr($this->search,$busqueda_psid);
                 }
                 else{
                     $this->emit('error','Algo en su link no esta bien. Copielo correctamente');  
@@ -961,10 +1075,10 @@ class SsidkrIndex extends Component
             ]);
 
         
-            if($this->type == 'usa')
+            if($this->type[0] == 'usa')
                 $resultado = $client->request('GET', '/Descalificador_usa/1/'.$psid_detect);
             else
-                $resultado = $client->request('GET', '/Descalificador_Uk/1/'.$psid_detect);
+                $resultado = $client->request('GET', '/Descalificador_uk/1/'.$psid_detect);
 
             if($resultado->getStatusCode() == 200){
                 $this->emit('alert','Descalificación procesada');
@@ -1249,13 +1363,14 @@ class SsidkrIndex extends Component
 
     public function registro_basic(){
 
-        $jumper_detect_basic = Link::where('psid',$this->psid_register_bh)->first();
+    $jumper_detect_basic = Link::where('psid',$this->psid_register_bh)->first();
 
        if($jumper_detect_basic){
             $jumper_detect_basic->update([
                 'basic' => $this->basic_register_bh,
                 'user_id' => auth()->user()->id,
                 'jumper_type_id' => 1,
+                'id_id' => $this->type_basic,
             ]);
        }
        else{
@@ -1264,6 +1379,7 @@ class SsidkrIndex extends Component
             $link->psid = $this->psid_register_bh;
             $link->user_id = auth()->user()->id;
             $link->jumper_type_id = 1;
+            $link->id_id = $this->type_basic;
             $link->save();
        }
 

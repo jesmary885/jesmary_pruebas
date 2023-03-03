@@ -227,7 +227,7 @@
                             </div>
                         @endif
 
-                    @if ($k_detect == 'K=1000' || $k_detect == 'K=1092' || $k_detect == 'K=1098' || $k_detect == 'K=2062' || $k_detect == 'K=3203' || $k_detect == 'K=7341' || $k_detect == 'K=23')
+                    @if ($k_detect == 'K=1000' || $k_detect == 'K=1092' || $k_detect == 'K=1098' || $k_detect == 'K=2062' || $k_detect == 'K=3203' || $k_detect == 'K=7341' || $k_detect == 'K=23' || $k_detect == 'K=3906' || $k_detect == 'K=11052' || $k_detect == 'K=15293' || $k_detect == 'K=17564')
                     <div>
                         @if ($k_detect == 'K=1000')
                         <a href={{$this->k1000()}}>
@@ -249,6 +249,18 @@
                         @endif
                         @if ($k_detect == 'K=7341')
                         <a href={{$this->k7341()}}>
+                        @endif
+                        @if ($k_detect == 'K=3906')
+                        <a href={{$this->k3906()}}>
+                        @endif
+                        @if ($k_detect == 'K=11052')
+                        <a href={{$this->k11052()}}>
+                        @endif
+                        @if ($k_detect == 'K=15293')
+                        <a href={{$this->k15293()}}>
+                        @endif
+                        @if ($k_detect == 'K=17564')
+                        <a href={{$this->k17564()}}>
                         @endif
 
                             <div class="small-box bg-success">

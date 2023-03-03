@@ -414,13 +414,13 @@ return [
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
                 ],
-                [
+                /*[
                     'text' => 'K1092',
                     'route'  => 'kmilnoventaydos.index',
                     'can' => 'kmilnoventaydos.index',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
-                ],
+                ],*/
                 [
                     'text' => 'K1098',
                     'route'  => 'k1098.index',
@@ -450,12 +450,40 @@ return [
                     'icon'    => '	fas fa-angle-right',
                 ],
                 [
+                    'text' => 'K3906',
+                    'route'  => 'k3906.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+                [
                     'text' => 'K7341',
                     'route'  => 'ksietemilcuarentayuno.index',
                     'can' => 'ssidkr.index',
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
                 ],
+                [
+                    'text' => 'K11052',
+                    'route'  => 'k11052.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+                [
+                    'text' => 'K15293',
+                    'route'  => 'k15293.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+               /* [
+                    'text' => 'K17564',
+                    'route'  => 'k17564.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],*/
                 [
                     'text' => 'SALTADOR WIX',
                     'route'  => 'wix.index',

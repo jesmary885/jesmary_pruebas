@@ -48,6 +48,10 @@ Route::middleware(['auth','verified'])->group(function()
         Route::get('k2062',[JumpersController::class,'kdosmilsesentaydos'])->name('kdosmilsesentaydos.index');
         Route::get('k23',[JumpersController::class,'kveintitres'])->name('kveintitres.index');
         Route::get('k3203',[JumpersController::class,'k3203'])->name('k3203.index');
+        Route::get('k3906',[JumpersController::class,'k3906'])->name('k3906.index');
+        Route::get('k11052',[JumpersController::class,'k11052'])->name('k11052.index');
+        Route::get('k15293',[JumpersController::class,'k15293'])->name('k15293.index');
+        Route::get('k17564',[JumpersController::class,'k17564'])->name('k17564.index');
         Route::get('k1098',[JumpersController::class,'k1098'])->name('k1098.index');
         Route::get('k7341',[JumpersController::class,'ksietemilcuarentayuno'])->name('ksietemilcuarentayuno.index');
         Route::get('prodege',[JumpersController::class,'prodege'])->name('prodege.index');
