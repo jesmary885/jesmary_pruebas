@@ -1,5 +1,5 @@
 <div>
-    <button type="submit" class="btn btn-success btn-sm float-right" wire:click="open">
+    <button type="submit" class="btn btn-success btn-md float-right" wire:click="open">
         <i class="fas fa-plus-circle"></i> HIGH
     </button>
 

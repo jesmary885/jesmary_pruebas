@@ -2,7 +2,7 @@
     <div class="card">
         <div class="card-header form-row">
 
-            <div class="col-sm-7 col-lg-8 col-xl-9">
+            <div class="col-sm-5 col-lg-7 col-xl-8">
 
                 <div class="input-group">
                     <input wire:model="search" placeholder="" id="validationCustomUsername" class="form-control" aria-describedby="inputGroupPrepend" >
@@ -18,23 +18,42 @@
                 </div>
             </div>
 
-            <div class="mt-1 mr-1">
+            <div class="mr-1">
                 @livewire('jumpers.ssidkr.ssidkr-create')
             </div>
 
-            <div class="mt-1 m-1">
+            <div class="mr-1">
                 @livewire('jumpers.ssidkr.ssidkr-create-high')
             </div>
 
-            @if($jumper_complete != 0 || $jumper != "")
-            <div class="mt-1 ">
-                <button
-                    class="btn btn-danger btn-sm float-right" 
-                    wire:click="qt">
-                    <i class="fas fa-cloud mr-1"></i> QT
-                </button>
-            </div>
-            @endif
+             @if($jumper_complete != 0 || $jumper != "")
+             <div class="input-group-prepend show">
+                    <button type="button" class="btn btn-default dropdown-toggle bg-danger" data-toggle="dropdown" aria-expanded="true">
+                        Generadores
+                    </button>
+                    <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;">
+                        <div class=" hover:bg-red-600 w-full h-full ">
+                            <button
+                                class="text-white text-xs font-bold ml-2 hover:text-slate-500" 
+                                wire:click="qt">
+                                Quick Thoughts
+                            </button>
+
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class=" hover:bg-red-600 w-full h-full ">
+                            <button
+                                class="text-white text-xs font-bold ml-2 hover:text-slate-500" 
+                                wire:click="sp">
+                                Saltador Pre-Encuesta
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+             
+             @endif
+
         </div>
 
         @if($descalific_active == 1)
@@ -47,9 +66,6 @@
                 </div>
             </div>
 
-        
-         
-        
         @endif
 
 
@@ -109,18 +125,39 @@
 
                 <div class="mt-2 mb-2">
                     @if($jumper_complete_qt != '')
-                    
 
                     <div class="flex-nowrap justify-center callout callout-info">
-                        <h5 class="font-semibold text-white"><i class="text-white mr-1 fas fa-cloud"></i> Tu enlace de QuickThoughts: </h5>
-
-                        <p class="text-gray-100 text-md text-center font-bold mb-1 mt-2" id="jumper_copy_qt">{{$jumper_complete_qt}}</p>
+                 
+                    <h5 class="text-sm"><i class="text-white mr-1 fas fa-cloud"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tu enlace de QuickThoughts:</font></font></h5><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                    <div>
+                        <p class="text-gray-100 text-sm text-center font-bold mb-1 mt-2" id="jumper_copy_qt">{{$jumper_complete}}</p>
 
                         <div class="flex justify-center">
                             <button onclick="copiarAlPortapapeles_qt('jumper_copy_qt')" class="btn btn-sm btn-success text-bold" title="{{__('messages.copiar_portapapeles')}}" id="button_copy_qt">Copiar</button> 
 
                         </div>
+                        
+                    </div>
+                    </div>
 
+
+            
+                    @endif
+                </div>
+
+                <div class="mt-2 mb-2">
+                    @if($jumper_complete_sp != '')
+
+                    <div class="flex-nowrap justify-center callout callout-info">
+                  
+                    <h5 class="text-sm"><i class="text-white mr-1 icon fas fa-info"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tu enlace Saltador Pre-encuesta:</font></font></h5><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                    <p class="text-gray-100 text-sm text-center font-bold mb-1 mt-2" id="jumper_copy_sp">{{$jumper_complete_sp}}</p>
+
+                        <div class="flex justify-center">
+                            <button onclick="copiarAlPortapapeles_sp('jumper_copy_sp')" class="btn btn-sm btn-success text-bold" title="{{__('messages.copiar_portapapeles')}}" id="button_copy_sp">Copiar</button> 
+
+                        </div>
+                    </font></font>
                     </div>
                     @endif
                 </div>
@@ -521,6 +558,38 @@
                     "hideMethod": "fadeOut"
                 }
                 toastr.success('Copy qt..')
+            }
+        </script>
+
+        <script>
+            function copiarAlPortapapeles_sp(id_elemento) {
+             
+               var codigoACopiar = document.getElementById(id_elemento);
+                var seleccion = document.createRange();
+                seleccion.selectNodeContents(codigoACopiar);
+                window.getSelection().removeAllRanges();
+                window.getSelection().addRange(seleccion);
+                var res = document.execCommand('copy');
+                window.getSelection().removeRange(seleccion);
+
+                toastr.options={
+                    "closeButton": true,
+                    "debug": true,
+                    "newestOnTop": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": true,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+                toastr.success('Copy... Saltador Pre-encuesta')
             }
         </script>
 

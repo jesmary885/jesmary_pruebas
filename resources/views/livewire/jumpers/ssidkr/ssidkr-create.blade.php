@@ -1,5 +1,5 @@
 <div>
-    <button type="submit" class="btn btn-primary btn-sm float-right" wire:click="open">
+    <button type="submit" class="btn btn-primary float-right " wire:click="open">
         <i class="fas fa-plus-circle"></i> BASIC
     </button>
 

@@ -14,7 +14,7 @@ class SsidkrIndex extends Component
     use WithPagination;
     protected $paginationTheme = "bootstrap";
 
-    public $type_basic,$descalific_active=0,$type,$jumper_complete_qt,$comment_new_psid_register,$pid_register_high,$psid_register_bh,$high_register_bh,$basic_register_bh,$posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $wix_detect = '0', $psid_register=0,$jumper_redirect,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$is_high,$is_basic,$calc_link,$jumper_select,$points_user_positive, $points_user_negative ;
+    public $type_basic,$descalific_active=0,$type,$jumper_complete_qt,$jumper_complete_sp,$comment_new_psid_register,$pid_register_high,$psid_register_bh,$high_register_bh,$basic_register_bh,$posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $wix_detect = '0', $psid_register=0,$jumper_redirect,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$is_high,$is_basic,$calc_link,$jumper_select,$points_user_positive, $points_user_negative ;
 
     protected $listeners = ['render' => 'render', 'registro_psid' => 'registro_psid', 'descalificar' => 'descalificar'];
 
@@ -548,10 +548,10 @@ class SsidkrIndex extends Component
                             $this->calc_link = 1;
                             if($jumper->psid == 'j1nB1') $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?rst=1&psid='.$psid_complete.'**&basic='.$jumper->basic.'&psid=j1nB';
                             
-                                if($jumper->psid == 'aAC6g'){
+                             /*   if($jumper->psid == 'aAC6g'){
                                 if(session('pid')) $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?rst=1&psid='.session('pid').'**&basic=34334';
                                 else $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?rst=1&psid=(QUITA LOS PARENTESIS QUE RODEA ESTA FRASE Y COLOCA TU PID)**&basic=34334';
-                            }
+                            }*/
 
                             elseif($jumper->psid == '1kY7h'){
                                 if(session('pid'))
@@ -1137,6 +1137,51 @@ class SsidkrIndex extends Component
         }
     }
 
+    public function sp(){
+        $this->search = trim($this->search); //quitando espacios en blancos al inicio y final
+        $long_psid = strlen($this->search); //buscando cuantos caracteres tiene en total
+
+        if($long_psid>=22){
+
+            if($long_psid==22){
+                $link_complete = $this->search;
+                $this->jumper_complete_sp = 'https://dkr1.ssisurveys.com/projects/end?rst=4&psid='.$link_complete.'**';
+            }
+            else{
+                $busqueda_id= strpos($this->search, '**');
+
+                if(($busqueda_id !== false)){
+                                
+                    $subs_psid_sin_cortar = substr($this->search,($busqueda_id - 22),22);
+                                
+                    if(session('psid'))$psid_complete = substr($subs_psid_sin_cortar,0,11).substr(session('psid'),11,11);
+                    else  $psid_complete = substr($subs_psid_sin_cortar,0,22);
+
+                    $this->jumper_complete_sp = 'https://dkr1.ssisurveys.com/projects/end?rst=4&psid='.$psid_complete.'**';
+                }
+
+                else{
+                    if((strpos($this->search, 'psid=') !== false)){
+
+                        $detectado= strpos($this->search, 'psid=');
+
+                        $posicion = $detectado+27;
+
+                        if(session('psid'))$psid_complete = substr($this->search,$detectado+5,(($posicion - ($detectado+5))-1)).substr(session('psid'),21,1);
+                        else  $psid_complete = substr($this->search,$detectado+5,($posicion - ($detectado+5)));
+
+                        $this->jumper_complete_sp = 'https://dkr1.ssisurveys.com/projects/end?rst=4&psid='.$psid_complete.'**';
+                    }
+
+                }
+
+                
+
+            }
+
+        }
+    }
+
     public function registro_psid(){
 
         //dd($this->psid_detectado);
@@ -1414,6 +1459,7 @@ class SsidkrIndex extends Component
     public function clear(){
         $this->reset(['search']);
         $this->jumper_complete_qt = '';
+        $this->jumper_complete_sp = '';
         session()->forget('search');
         $this->descalific_active = 0;
     }

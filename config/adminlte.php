@@ -477,13 +477,13 @@ return [
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
                 ],
-               /* [
+                [
                     'text' => 'K17564',
                     'route'  => 'k17564.index',
                     'can' => 'ssidkr.index',
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
-                ],*/
+                ],
                 [
                     'text' => 'SALTADOR WIX',
                     'route'  => 'wix.index',
