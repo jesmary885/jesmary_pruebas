@@ -130,7 +130,7 @@
                  
                     <h5 class="text-sm"><i class="text-white mr-1 fas fa-cloud"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tu enlace de QuickThoughts:</font></font></h5><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
                     <div>
-                        <p class="text-gray-100 text-sm text-center font-bold mb-1 mt-2" id="jumper_copy_qt">{{$jumper_complete}}</p>
+                        <p class="text-gray-100 text-sm text-center font-bold mb-1 mt-2" id="jumper_copy_qt">{{$jumper_complete_qt}}</p>
 
                         <div class="flex justify-center">
                             <button onclick="copiarAlPortapapeles_qt('jumper_copy_qt')" class="btn btn-sm btn-success text-bold" title="{{__('messages.copiar_portapapeles')}}" id="button_copy_qt">Copiar</button> 
