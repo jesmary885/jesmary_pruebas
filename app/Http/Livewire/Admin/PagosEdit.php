@@ -55,6 +55,14 @@ class PagosEdit extends Component
                 'admin_first_id' => auth()->id(),
                 'admin_second_id' => $this->admin_verifi_id
             ]);
+
+            $user_cliente = User::where('id',$this->registro->user_id)->first();
+
+            $user_cliente->update([
+                'status' => 'activo',
+            ]);
+
+            $user_cliente->roles()->sync(2);
         }
 
         else{
