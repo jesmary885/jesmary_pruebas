@@ -16,6 +16,18 @@
     <link rel="stylesheet" href="{{ asset('vendor/login_banner/styles.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/login_banner/banner.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/login_banner/graphic.css') }}">
+
+    <style>
+        .Div_flotante{
+        position: absolute;
+        bottom: 0px;
+        width: 95%;
+        height: 40px;
+        text-align: center;
+        z-index:3;
+
+        }
+    </style>
     
 </head>
 
@@ -94,8 +106,8 @@
         </div>
 
         <div class="hidden md:block w-full">
-        <div class="grid-container flex">
-            <div class="content w-full">
+        <div class="flex">
+            <div class="content w-full md:ml-0 md:mt-0 lg:ml-6 lg:mt-6  2xl:ml-16 2xl:mt-20 ">
                 <!--Titulo-->
                 <h1 class=" title s-center">
                     <span class="line-1"> Domina los Jumpers</span>
@@ -147,11 +159,11 @@
             </div>
 
             <div class="graphic w-full">
-                <img class="graphic-man" src="/imagenes/tech-man.png">
-                <img class="graphic-go absolute" src="/imagenes/buscador.png">
+                <img class="graphic-man" src="/imagenes/man.png">
+                <!-- <img class="graphic-go absolute" src="/imagenes/buscador.png"> -->
                 <div class="graphic-circles absolute">
                     <img class="graphic-logo absolute" src="/imagenes/logo.png">
-                    <img class="graphic-circle-1 absolute" src="/imagenes/internal-new.png">
+                    <img class="graphic-circle-1 absolute" src="/imagenes/internal-techs.png">
                     <img class="graphic-circle-2 absolute" src="/imagenes/external-new.png">
                     <img class="graphic-energy absolute" src="/imagenes/power-sphere.png">
                 </div>
@@ -160,11 +172,14 @@
 
         </div>
 
-        <div class=" mt-24 text-center text-gray-300 text-xs">
+        <footer class="Div_flotante">
+        <div class="flex justify-center text-gray-300 text-xs">
             <span>
                 Copyright © 2021-2023 <span class="text-blue-500 hover:text-blue-600"> QuerySet
             </span>
         </div>
+
+        </footer>
 
     </section>
 

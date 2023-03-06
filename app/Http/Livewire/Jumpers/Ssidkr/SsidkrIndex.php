@@ -1198,9 +1198,22 @@ class SsidkrIndex extends Component
         $busqueda_pid5= strpos($this->search, '&ID=');
         $busqueda_pid6= strpos($this->search, '&id=');
         $busqueda_pid7= strpos($this->search, '&Broker=');
+        $busqueda_pid8= strpos($this->search, '?PID=');
+        $busqueda_pid9= strpos($this->search, '?pid=');
+
+       /* elseif($busqueda_pid8 !== false){
+            $pid_detect_com= strpos($this->search, '?PID=');
+            $posicion_pid = $pid_detect_com + 5;
+            $pid_calculate = $pid_detect_com + 5;
+        }
+        elseif($busqueda_pid9 !== false){
+            $pid_detect_com= strpos($this->search, '?pid=');
+            $posicion_pid = $pid_detect_com + 5;
+            $pid_calculate = $pid_detect_com + 5;
+        }*/
 
 
-        if($busqueda_pid !== false || $busqueda_pid2 !== false || $busqueda_pid3 !== false || $busqueda_pid4 !== false || $busqueda_pid5 !== false || $busqueda_pid6 !== false || $busqueda_pid7 !== false){
+        if($busqueda_pid !== false || $busqueda_pid2 !== false || $busqueda_pid3 !== false || $busqueda_pid4 !== false || $busqueda_pid5 !== false || $busqueda_pid6 !== false || $busqueda_pid7 !== false || $busqueda_pid8 !== false || $busqueda_pid9 !== false){
             //dd('ok');
             if($busqueda_pid !== false){
                 $pid_detect_com= strpos($this->search, '&PID=');
@@ -1231,6 +1244,16 @@ class SsidkrIndex extends Component
                 $pid_detect_com= strpos($this->search, '&Broker=');
                 $posicion_pid = $pid_detect_com + 8;
                 $pid_calculate = $pid_detect_com + 8;
+            }
+            elseif($busqueda_pid8 !== false){
+                $pid_detect_com= strpos($this->search, '?PID=');
+                $posicion_pid = $pid_detect_com + 5;
+                $pid_calculate = $pid_detect_com + 5;
+            }
+            elseif($busqueda_pid9 !== false){
+                $pid_detect_com= strpos($this->search, '?pid=');
+                $posicion_pid = $pid_detect_com + 5;
+                $pid_calculate = $pid_detect_com + 5;
             }
             else{
                 $pid_detect_com= strpos($this->search, '&id=');

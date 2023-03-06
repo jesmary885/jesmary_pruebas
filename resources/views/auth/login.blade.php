@@ -21,14 +21,6 @@
 
     <style>
         .Div_flotante{
-        /* position:fixed; 
-        bottom: 0px;
-        top:auto;
-        width:100%;
-        height:100px;
-        text-align: center;
-        z-index:5; */
-
         position: absolute;
         bottom: 0px;
         width: 100%;
@@ -59,7 +51,7 @@
                 <div class="mt-6">
                     <div class=" mx-auto rounded-3xl">
                         <div class="mb-7">
-                            <p class="text-gray-400">¿Aún no posees una cuenta? <a href="#" class="text-sm text-blue-700 hover:text-blue-700">Registrate aquí</a></p>
+                            <p class="text-gray-400">¿Aún no posees una cuenta? <a href="{{ route('register') }}" class="text-sm text-blue-700 hover:text-blue-700">Registrate aquí</a></p>
                         </div>
 
                         <form method="POST" action="{{ route('login') }}">
@@ -132,7 +124,7 @@
                 <div class="mt-6 w-3/4">
                     <div class=" mx-auto rounded-3xl">
                         <div class="mb-7">
-                             <p class="text-gray-400">¿Aún no posees una cuenta? <a href="#" class="text-sm text-blue-700 hover:text-blue-700">Registrate aquí</a></p>
+                             <p class="text-gray-400">¿Aún no posees una cuenta? <a href="{{ route('register') }}" class="text-sm text-blue-700 hover:text-blue-700">Registrate aquí</a></p>
                         </div>
 
                         <form method="POST" action="{{ route('login') }}">

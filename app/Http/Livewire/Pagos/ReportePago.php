@@ -75,6 +75,8 @@ class ReportePago extends Component
         $this->reset(['plan','file','comentario']);
         $this->isopen = false;  
 
+        $this->emitTo('admin.pagos-pendientes','render');
+
         return redirect()->to('/home');
         
 

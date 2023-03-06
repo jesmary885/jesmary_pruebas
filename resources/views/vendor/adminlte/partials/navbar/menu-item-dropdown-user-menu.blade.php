@@ -110,6 +110,24 @@
     </div>
 </li>
 
+@if(auth()->user()->roles->first()->id == 1)
+<li class="nav-item dropdown">
+    <a class="nav-link" data-toggle="dropdown" href="#">
+        <i class="far fa-bell"></i>
+        <span class="badge badge-danger navbar-badge"> @livewire('admin.pagos-pendientes')</span>
+    </a>
+    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+
+    <div class="dropdown-divider"></div>
+
+        <div class="dropdown-divider"></div>
+       
+            <a href="{{route('admin.pagos')}}" class="dropdown-item dropdown-footer">Ver todos</a>
+   
+    </div>
+</li>
+@endif
+
 <li class="nav-item dropdown user-menu">
 
     {{-- User menu toggler --}}

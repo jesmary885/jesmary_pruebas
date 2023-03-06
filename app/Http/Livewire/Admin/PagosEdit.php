@@ -75,6 +75,7 @@ class PagosEdit extends Component
 
         $this->reset(['isopen']);
         $this->emitTo('admin.pagos-index','render');
+        $this->emitTo('admin.pagos-pendientes','render');
         $this->emit('alert','Datos modificados correctamente');
     }
 }
