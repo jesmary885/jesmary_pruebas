@@ -709,11 +709,14 @@ class K1098Index extends Component
 
 
     public function clear(){
+
         $this->reset(['search']);
         $this->jumper_list = 0;
         $this->jumper_complete = [];
         session()->forget('search');
         $this->busqueda_link = "";
+        return redirect()->route('k1098.index');
+
 
     }
 }

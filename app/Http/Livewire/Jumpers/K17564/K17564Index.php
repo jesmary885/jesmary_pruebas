@@ -771,10 +771,18 @@ class K17564Index extends Component
     }
 
     public function clear(){
+        /*$this->reset(['search']);
+        $this->jumper_list = 0;
+        $this->jumper_complete = [];
+        session()->forget('search');
+        $this->busqueda_link = 0;*/
+
+
         $this->reset(['search']);
         $this->jumper_list = 0;
         $this->jumper_complete = [];
         session()->forget('search');
-        $this->busqueda_link = 0;
+        $this->busqueda_link = "";
+        return redirect()->route('k17564.index');
     }
 }

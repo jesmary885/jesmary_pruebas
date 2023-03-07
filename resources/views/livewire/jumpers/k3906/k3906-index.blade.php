@@ -69,7 +69,7 @@
 
                 @endif
 
-            @if($busqueda_link || $jumper_complete)
+            @if($busqueda_link || $jumper_complete && $jumper_detect == 0)
 
                 <div class="table-responsive">
                     <table class="table table-striped table-responsive">

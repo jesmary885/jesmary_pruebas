@@ -14,9 +14,26 @@
                             </div>
                     @endif
                 </div>
+                @if ($pid_detectado == 'no')
+                <div class="flex justify-center mb-2 mt-2">
+                    <div>
+                        <input type="number" wire:model.defer="pid_manual" class="rounded-sm bg-light py-1 px-1"  placeholder="{{__('messages.ingrese_pdi')}}">
+                        <x-input-error for="pid_manual" />
+                    </div>
+                    <div>
+                        <button
+                            class="btn-outline-secondary px-2 py-1 ml-2" 
+                            wire:click="jumpear()">
+                            <i class="font-semibold fas fa-sync"></i>
+                                                    
+                        </button>
+                    </div>
+                </div>
+            @endif
             </div>
+            
+
         </div>
-        
 
         <div class="mt-4" wire:loading>
             <div class="container2">
@@ -33,7 +50,9 @@
 
     <div class="card-body mt-0">
 
-                @if ($jumper_complete)
+        
+
+                @if ($jumper_complete )
 
                 <div class="flex-nowrap justify-center callout callout-info">
                 
@@ -47,7 +66,7 @@
                     
                 </div>
 
-    @endif
+                @endif
 
     @if ($jumper_detect == 2)
         <div>

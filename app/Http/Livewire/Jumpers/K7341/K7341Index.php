@@ -701,6 +701,9 @@ class K7341Index extends Component
         $this->jumper_list = 0;
         $this->jumper_complete = [];
         session()->forget('search');
-        $this->busqueda_link = 0;
+        $this->busqueda_link = "";
+        return redirect()->route('ksietemilcuarentayuno.index');
+
+        
     }
 }

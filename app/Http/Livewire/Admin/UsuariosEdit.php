@@ -57,6 +57,12 @@ class UsuariosEdit extends Component
 
         $this->validate($rule_email);
 
+        $rule_username = [
+            'username' => 'required|max:30|unique:users,username,' .$this->usuario->id,
+        ];
+
+        $this->validate($rule_username);
+
         if($this->estado == 0) $estado = 'inactivo'; else $estado = 'activo';
  
         $this->usuario->update([

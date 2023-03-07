@@ -321,26 +321,6 @@ class SsidkrIndex extends Component
 
                     if($jumper->jumper)$this->jumper_detect = $jumper->jumper;
                     else{
-                        /*$url_detect_com= strpos($this->search, 'ttps://');
-
-                        if($url_detect_com != false){
-
-                            $con_seguridad= strpos($this->search, 'ttps');
-                            $i = 0;
-                          
-                            
-                            do{
-                                $detect= substr($this->search, $this->posicion,1);
-        
-                                if($detect == '/') $i = 1;
-                                else{
-                                    $i = 0;
-                                    $this->posicion = $this->posicion + 1;
-                                }
-        
-                            }while($i != 1);
-
-                            $url_detect = 'https://'.substr($this->search,8,($this->posicion-8));*/
 
                         $url_detect_com= strpos($this->search, 'http');
                         $url_detect_com2= strpos($this->search, 'https');
@@ -378,8 +358,6 @@ class SsidkrIndex extends Component
                             else{
                                 $url_detect = 'https://'.substr($this->search,7,($posicion_url-7));
                             }
-
-                           
 
                                 if($url_detect != 'https://dkr1.ssisurveys.com'){
                                     $jumper->update(
@@ -572,25 +550,6 @@ class SsidkrIndex extends Component
                                 }
                             }
 
-                            
-
-                            
-                           /* elseif($jumper->psid == 'aKwSA'){
-                                $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?PSID='.$psid_complete.'%2A%2A&basic=17305&pe_ses_key=PSID&psid='.$psid_complete.'%2A%2A&rst=1';
-                            }  
-                            elseif($jumper->psid == 'MghQh'){
-                                $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?PSID='.$psid_complete.'%2A%2A&basic=51816&pe_ses_key=PSID&psid='.$psid_complete.'%2A%2A&rst=1';
-                            }  
-                            elseif($jumper->psid == 'wkH72'){
-                                $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?PSID='.$psid_complete.'%2A%2A&basic=59632&pe_ses_key=PSID&psid='.$psid_complete.'%2A%2A&rst=1';
-                            }
-                            elseif($jumper->psid == 'nlA3c'){
-                                $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?PSID='.$psid_complete.'%2A%2A&basic=43924&pe_ses_key=PSID&psid='.$psid_complete.'%2A%2A&rst=1';
-                            }
-                            elseif($jumper->psid == 'kOUBN'){
-                                $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?PSID='.$psid_complete.'%2A%2A&basic=32081&pe_ses_key=PSID&psid='.$psid_complete.'%2A%2A&rst=1';
-                            }*/
-                           
                             session()->forget('search');
 
                         } 
@@ -598,15 +557,14 @@ class SsidkrIndex extends Component
                         if($jumper->jumper_type_id == 2){
                             $this->is_high = "si"; 
                             if(session('pid')){
-                             
                                 $this->calc_link = 1;
                                 $this->pid_new = session('pid');
                                 $calculo_high_new = $this->calculo_high($jumper->id);
                                 $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?rst=1&psid='.$psid_complete.'**&high='.$calculo_high_new;
                             }
                             else{
-                                //$buscar_pid_search = 
 
+                                $cont_pid = 0;
                                 $busqueda_pid= strpos($this->search, '&PID=');
                                 $busqueda_pid2= strpos($this->search, '&pid=');
                                 $busqueda_pid3= strpos($this->search, '?ID=');
@@ -614,85 +572,113 @@ class SsidkrIndex extends Component
                                 $busqueda_pid5= strpos($this->search, '&ID=');
                                 $busqueda_pid6= strpos($this->search, '&id=');
                                 $busqueda_pid7= strpos($this->search, '&Broker=');
+                                $busqueda_pid8= strpos($this->search, '?PID=');
+                                $busqueda_pid9= strpos($this->search, '?pid=');
+                                $busqueda_pid10= strpos($this->search, 'fill?1=');
 
-                                if($busqueda_pid !== false || $busqueda_pid2 !== false || $busqueda_pid3 !== false || $busqueda_pid4 !== false || $busqueda_pid5 !== false || $busqueda_pid6 !== false || $busqueda_pid7 !== false){
-                               
-                                    $this->calc_link = 1;
+                                if($busqueda_pid !== false || $busqueda_pid2 !== false || $busqueda_pid3 !== false || $busqueda_pid4 !== false || $busqueda_pid5 !== false || $busqueda_pid6 !== false || $busqueda_pid7 !== false || $busqueda_pid8 !== false || $busqueda_pid9 !== false || $busqueda_pid10 !== false){
 
                                     if($busqueda_pid !== false){
                                         $pid_detect_com= strpos($this->search, '&PID=');
                                         $posicion_pid = $pid_detect_com + 5;
                                         $pid_calculate = $pid_detect_com + 5;
+                                        $cont_pid++;
                                     }
-                                    elseif($busqueda_pid2 !== false){ 
+                                    if($busqueda_pid2 !== false){ 
                                         $pid_detect_com= strpos($this->search, '&pid=');
                                         $posicion_pid = $pid_detect_com + 5;
                                         $pid_calculate = $pid_detect_com + 5;
+                                        $cont_pid++;
                                     }
-                                    elseif($busqueda_pid3 !== false){
+                                    if($busqueda_pid3 !== false){
                                         $pid_detect_com= strpos($this->search, '?ID=');
                                         $posicion_pid = $pid_detect_com + 4;
                                         $pid_calculate = $pid_detect_com + 4;
+                                        $cont_pid++;
                                     }
-                                    elseif($busqueda_pid4 !== false){
+                                    if($busqueda_pid4 !== false){
                                         $pid_detect_com= strpos($this->search, '?id=');
                                         $posicion_pid = $pid_detect_com + 4;
                                         $pid_calculate = $pid_detect_com + 4;
+                                        $cont_pid++;
                                     }
-                                    elseif($busqueda_pid5 !== false){
+                                    if($busqueda_pid5 !== false){
                                         $pid_detect_com= strpos($this->search, '&ID=');
                                         $posicion_pid = $pid_detect_com + 4;
                                         $pid_calculate = $pid_detect_com + 4;
+                                        $cont_pid++;
                                     }
-                                    elseif($busqueda_pid7 !== false){
+                                    if($busqueda_pid7 !== false){
                                         $pid_detect_com= strpos($this->search, '&Broker=');
                                         $posicion_pid = $pid_detect_com + 8;
                                         $pid_calculate = $pid_detect_com + 8;
+                                        $cont_pid++;
                                     }
-                                    else{
+                                    if($busqueda_pid8 !== false){
+                                        $pid_detect_com= strpos($this->search, '?PID=');
+                                        $posicion_pid = $pid_detect_com + 5;
+                                        $pid_calculate = $pid_detect_com + 5;
+                                        $cont_pid++;
+                                    }
+                                    if($busqueda_pid9 !== false){
+                                        $pid_detect_com= strpos($this->search, '?pid=');
+                                        $posicion_pid = $pid_detect_com + 5;
+                                        $pid_calculate = $pid_detect_com + 5;
+                                        $cont_pid++;
+                                    }
+                                    if($busqueda_pid10 !== false){
+                                        $pid_detect_com= strpos($this->search, 'fill?1=');
+                                        $posicion_pid = $pid_detect_com + 7;
+                                        $pid_calculate = $pid_detect_com + 7;
+                                        $cont_pid++;
+                                    }
+                                    if($busqueda_pid6 !== false){
                                         $pid_detect_com= strpos($this->search, '&id=');
                                         $posicion_pid = $pid_detect_com + 4;
                                         $pid_calculate = $pid_detect_com + 4;
+                                        $cont_pid++;
                                     }
-                                    
-                                    $i = 0;
-                                    $busq_pid_s = 0;
-                                    
-                                    do{
 
-                                        $detect= substr($this->search, $posicion_pid,1);
-                
-                                        if($detect == '&') $i = 1;
-                                        else{
-                                            $i = 0;
-                                            $posicion_pid = $posicion_pid + 1;
-                                            $busq_pid_s ++;
-                                        }
-
-                                        if($busq_pid_s > 13){
-                                            $i = 1;
-                                        }
-                
-                                    }while($i != 1);
-
-                                    if($busq_pid_s < 13){
-                                        if(is_numeric(substr($this->search,($pid_calculate),($posicion_pid - ($pid_calculate)))))
-                                            $this->pid_new = substr($this->search,($pid_calculate),($posicion_pid - ($pid_calculate)));
-                                        else $this->pid_new = 0;
+                                    if($cont_pid == 1){
+                                        $i = 0;
+                                        $busq_pid_s = 0;
                                         
-                                    }
-                                    else{
-                                        if(is_numeric(substr($this->search,($pid_calculate),11)))
-                                            $this->pid_new = substr($this->search,($pid_calculate),11);
-                                        else $this->pid_new = 0;
+                                        do{
+    
+                                            $detect= substr($this->search, $posicion_pid,1);
+                    
+                                            if($detect == '&') $i = 1;
+                                            else{
+                                                $i = 0;
+                                                $posicion_pid = $posicion_pid + 1;
+                                                $busq_pid_s ++;
+                                            }
+    
+                                            if($busq_pid_s > 13){
+                                                $i = 1;
+                                            }
+                    
+                                        }while($i != 1);
+    
+                                        if($busq_pid_s < 13){
+                                            if(is_numeric(substr($this->search,($pid_calculate),($posicion_pid - ($pid_calculate)))))
+                                                $this->pid_new = substr($this->search,($pid_calculate),($posicion_pid - ($pid_calculate)));
+                                            else $this->pid_new = 0;
+                                            
+                                        }
+                                        else{
+                                            if(is_numeric(substr($this->search,($pid_calculate),11)))
+                                                $this->pid_new = substr($this->search,($pid_calculate),11);
+                                            else $this->pid_new = 0;
+                                        }
+    
+                                        $this->calc_link = 1;
+                                        $calculo_high_new = $this->calculo_high($jumper->id);
+                                        $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?rst=1&psid='.$psid_complete.'**&high='.$calculo_high_new;
+
                                     }
 
-                                    $this->calc_link = 1;
-                                    $calculo_high_new = $this->calculo_high($jumper->id);
-                                    $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?rst=1&psid='.$psid_complete.'**&high='.$calculo_high_new;
                                 }
-
-                                
 
 
                                 if($this->calc_link == 0){
@@ -830,7 +816,9 @@ class SsidkrIndex extends Component
 
                                     $this->jumper_detect = $url_detect;
 
-                                    $jumper = Link::get()->last();
+                                    //$jumper = Link::get()->last();
+
+                                    $jumper = Link::where('id',$link->id)->first();
 
                                     //////falta optimizar
 
@@ -1191,6 +1179,8 @@ class SsidkrIndex extends Component
 
 
         //BUSCANDO PID Y AGREGANDOLO
+
+        $cont_pid = 0;
         $busqueda_pid= strpos($this->search, '&PID=');
         $busqueda_pid2= strpos($this->search, '&pid=');
         $busqueda_pid3= strpos($this->search, '?ID=');
@@ -1200,6 +1190,7 @@ class SsidkrIndex extends Component
         $busqueda_pid7= strpos($this->search, '&Broker=');
         $busqueda_pid8= strpos($this->search, '?PID=');
         $busqueda_pid9= strpos($this->search, '?pid=');
+        $busqueda_pid10= strpos($this->search, 'fill?1=');
 
        /* elseif($busqueda_pid8 !== false){
             $pid_detect_com= strpos($this->search, '?PID=');
@@ -1210,94 +1201,118 @@ class SsidkrIndex extends Component
             $pid_detect_com= strpos($this->search, '?pid=');
             $posicion_pid = $pid_detect_com + 5;
             $pid_calculate = $pid_detect_com + 5;
+        }
+        elseif($busqueda_pid10 !== false){
+                $pid_detect_com= strpos($this->search, 'fill?1=');
+                $posicion_pid = $pid_detect_com + 7;
+                $pid_calculate = $pid_detect_com + 7;
         }*/
 
 
-        if($busqueda_pid !== false || $busqueda_pid2 !== false || $busqueda_pid3 !== false || $busqueda_pid4 !== false || $busqueda_pid5 !== false || $busqueda_pid6 !== false || $busqueda_pid7 !== false || $busqueda_pid8 !== false || $busqueda_pid9 !== false){
-            //dd('ok');
+        if($busqueda_pid !== false || $busqueda_pid2 !== false || $busqueda_pid3 !== false || $busqueda_pid4 !== false || $busqueda_pid5 !== false || $busqueda_pid6 !== false || $busqueda_pid7 !== false || $busqueda_pid8 !== false || $busqueda_pid9 !== false || $busqueda_pid10 !== false){
+            //dd('ok
             if($busqueda_pid !== false){
                 $pid_detect_com= strpos($this->search, '&PID=');
                 $posicion_pid = $pid_detect_com + 5;
                 $pid_calculate = $pid_detect_com + 5;
+                $cont_pid++;
             }
-            elseif($busqueda_pid2 !== false){ 
+            if($busqueda_pid2 !== false){ 
                 $pid_detect_com= strpos($this->search, '&pid=');
                 $posicion_pid = $pid_detect_com + 5;
                 $pid_calculate = $pid_detect_com + 5;
+                $cont_pid++;
             }
-            elseif($busqueda_pid3 !== false){
+            if($busqueda_pid3 !== false){
                 $pid_detect_com= strpos($this->search, '?ID=');
                 $posicion_pid = $pid_detect_com + 4;
                 $pid_calculate = $pid_detect_com + 4;
+                $cont_pid++;
             }
-            elseif($busqueda_pid4 !== false){
+            if($busqueda_pid4 !== false){
                 $pid_detect_com= strpos($this->search, '?id=');
                 $posicion_pid = $pid_detect_com + 4;
                 $pid_calculate = $pid_detect_com + 4;
+                $cont_pid++;
             }
-            elseif($busqueda_pid5 !== false){
+            if($busqueda_pid5 !== false){
                 $pid_detect_com= strpos($this->search, '&ID=');
                 $posicion_pid = $pid_detect_com + 4;
                 $pid_calculate = $pid_detect_com + 4;
+                $cont_pid++;
             }
-            elseif($busqueda_pid7 !== false){
+            if($busqueda_pid7 !== false){
                 $pid_detect_com= strpos($this->search, '&Broker=');
                 $posicion_pid = $pid_detect_com + 8;
                 $pid_calculate = $pid_detect_com + 8;
+                $cont_pid++;
             }
-            elseif($busqueda_pid8 !== false){
+            if($busqueda_pid8 !== false){
                 $pid_detect_com= strpos($this->search, '?PID=');
                 $posicion_pid = $pid_detect_com + 5;
                 $pid_calculate = $pid_detect_com + 5;
+                $cont_pid++;
             }
-            elseif($busqueda_pid9 !== false){
-                $pid_detect_com= strpos($this->search, '?pid=');
+            if($busqueda_pid9 !== false){
+                $pid_detect_com= strpos($this->search,'?pid=');
                 $posicion_pid = $pid_detect_com + 5;
                 $pid_calculate = $pid_detect_com + 5;
+                $cont_pid++;
             }
-            else{
+            if($busqueda_pid10 !== false){
+                $pid_detect_com= strpos($this->search,'fill?1=');
+                $posicion_pid = $pid_detect_com + 7;
+                $pid_calculate = $pid_detect_com + 7;
+                $cont_pid++;
+            }
+            if($busqueda_pid6 !== false){
                 $pid_detect_com= strpos($this->search, '&id=');
                 $posicion_pid = $pid_detect_com + 4;
                 $pid_calculate = $pid_detect_com + 4;
+                $cont_pid++;
             }
 
-            $i = 0;
-            $busq_pid_s = 0;
+            if($cont_pid == 1){
+                $i = 0;
+                $busq_pid_s = 0;
             
-            do{
-                $detect= substr($this->search, $posicion_pid,1);
+                do{
+                    $detect= substr($this->search, $posicion_pid,1);
 
-                if($detect == '&') $i = 1;
+                    if($detect == '&') $i = 1;
+                    else{
+                        $i = 0;
+                        $posicion_pid = $posicion_pid + 1;
+                        $busq_pid_s ++;
+                    }
+
+                    if($busq_pid_s > 13){
+                        $i = 1;
+                    }
+
+                }while($i != 1);
+
+                if($busq_pid_s < 13){
+                    
+                    if(is_numeric(substr($this->search,($pid_calculate),($posicion_pid - ($pid_calculate)))))
+                    session(['pid' => substr($this->search,($pid_calculate),($posicion_pid - ($pid_calculate)))]);
+
+                    /*$posicion_total_pid = $this->posicionpid - ($busqueda_pid_search + 4);
+                    $valor_pid= substr($this->search,($busqueda_pid_search + 4),$posicion_total_pid);
+                    if(is_numeric($valor_pid)) session(['pid' => substr($this->search,($busqueda_pid_search + 4),$posicion_total_pid)]);*/
+                }
                 else{
-                    $i = 0;
-                    $posicion_pid = $posicion_pid + 1;
-                    $busq_pid_s ++;
+
+                    if(is_numeric(substr($this->search,($pid_calculate),11)))
+                        session(['pid' => substr($this->search,($pid_calculate),11)]);
+
+
+                    /*$valor_pid= substr($this->search,($busqueda_pid_search + 4),8);
+                    if(is_numeric($valor_pid)) session(['pid' => substr($this->search,($busqueda_pid_search + 4),8)]);*/
                 }
 
-                if($busq_pid_s > 13){
-                    $i = 1;
-                }
-
-            }while($i != 1);
-
-            if($busq_pid_s < 13){
-                
-                if(is_numeric(substr($this->search,($pid_calculate),($posicion_pid - ($pid_calculate)))))
-                session(['pid' => substr($this->search,($pid_calculate),($posicion_pid - ($pid_calculate)))]);
-
-                /*$posicion_total_pid = $this->posicionpid - ($busqueda_pid_search + 4);
-                $valor_pid= substr($this->search,($busqueda_pid_search + 4),$posicion_total_pid);
-                if(is_numeric($valor_pid)) session(['pid' => substr($this->search,($busqueda_pid_search + 4),$posicion_total_pid)]);*/
             }
-            else{
-
-                if(is_numeric(substr($this->search,($pid_calculate),11)))
-                    session(['pid' => substr($this->search,($pid_calculate),11)]);
-
-
-                /*$valor_pid= substr($this->search,($busqueda_pid_search + 4),8);
-                if(is_numeric($valor_pid)) session(['pid' => substr($this->search,($busqueda_pid_search + 4),8)]);*/
-            }
+            
         }
 
         //TERMINANDO DE AGREGAR EL PID

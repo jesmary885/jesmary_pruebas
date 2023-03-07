@@ -45,6 +45,23 @@
 
         </div>
 
+        @if ($jumper_complete == [])
+        <div class="flex justify-center">
+            <div class="mt-4" wire:loading>
+                <div class="container2">
+                    <div class="cargando">
+                        <div class="pelotas"></div>
+                        <div class="pelotas"></div>
+                        <div class="pelotas"></div>
+                        <span class="texto-cargando font-bold text-gray-300 ">Loading...</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+        @endif
+
       
 
        
@@ -69,7 +86,7 @@
 
                 @endif
 
-            @if($busqueda_link || $jumper_complete || $pid_detectado == 'no')
+            @if($busqueda_link || $jumper_complete || $pid_detectado == 'no' && $jumper_detect == 0)
 
                 <div class="table-responsive">
                     <table class="table table-striped table-responsive">
@@ -102,7 +119,7 @@
                                                 </div>
                                                 <div>
                                                     <button
-                                                        class="btn-outline-secondary py-1 ml-2" 
+                                                        class="btn-outline-secondary py-1 px-1 ml-2" 
                                                         wire:click="jumpear()">
                                                         <i class="font-semibold fas fa-sync"></i>
                                                 
@@ -265,24 +282,7 @@
 
         @endif
 
-       
-        
-        @if ($jumper_complete == [])
-        <div class="flex justify-center">
-            <div class="mt-4" wire:loading>
-                <div class="container2">
-                    <div class="cargando">
-                        <div class="pelotas"></div>
-                        <div class="pelotas"></div>
-                        <div class="pelotas"></div>
-                        <span class="texto-cargando font-bold text-gray-300 ">Loading...</span>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        
-        @endif
+    
     </div>
 
     <style>
