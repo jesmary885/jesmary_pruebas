@@ -62,6 +62,8 @@ Route::middleware(['auth','verified'])->group(function()
         Route::get('ssidkr',[JumpersController::class,'ssidkr'])->name('ssidkr.index');
         Route::get('descalificador',[JumpersController::class,'descalificador'])->name('descalificador.index');
         Route::get('wix',[JumpersController::class,'wix'])->name('wix.index');
+        Route::get('k2066',[JumpersController::class,'k2066'])->name('k2066.index');
+        Route::get('ktmr',[JumpersController::class,'ktmr'])->name('ktmr.index');
         Route::get('qt',[JumpersController::class,'qt'])->name('qt.index');
         Route::get('import_cint',[JumpersController::class,'import_cint'])->name('cint.import');
 

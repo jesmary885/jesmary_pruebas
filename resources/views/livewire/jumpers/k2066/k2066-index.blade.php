@@ -3,7 +3,7 @@
 
         <div class="card-header form-row">
 
-            <div class="col-sm-12 col-lg-13 col-xl-14">
+            <div class="col-sm-6 col-md-9 col-lg-10 col-xl-11">
 
                 <div class="input-group">
                     <input wire:model="search" placeholder="" id="validationCustomUsername" class="form-control" aria-describedby="inputGroupPrepend" >
@@ -16,6 +16,7 @@
                         @endif
                 </div>
             </div>
+
         </div>
 
         <div class="flex justify-between">
@@ -44,25 +45,13 @@
 
         </div>
 
-     
-        <div class="flex justify-center">
-            <div class="mt-4" wire:loading>
-                <div class="container2">
-                    <div class="cargando">
-                        <div class="pelotas"></div>
-                        <div class="pelotas"></div>
-                        <div class="pelotas"></div>
-                        <span class="texto-cargando font-bold text-gray-300 ">Loading...</span>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        
+      
 
        
            
             <div class="card-body mt-0">
+
+    
 
                 @if ($jumper_complete)
 
@@ -207,6 +196,8 @@
             </div>
         @endif
 
+        
+
         <div class="m-2 mb-2">
             @if($no_detect != 0)
                 <div class="info-box mb-3 bg-info" :class="{'hidden': (no_detect == '0')}">
@@ -252,6 +243,23 @@
         @endif
 
        
+        
+        @if ($jumper_complete == [])
+        <div class="flex justify-center">
+            <div class="mt-4" wire:loading>
+                <div class="container2">
+                    <div class="cargando">
+                        <div class="pelotas"></div>
+                        <div class="pelotas"></div>
+                        <div class="pelotas"></div>
+                        <span class="texto-cargando font-bold text-gray-300 ">Loading...</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+        @endif
     </div>
 
     <style>
@@ -341,24 +349,45 @@
             }
         </script>
 
+
         <script>
 
-        Livewire.on('wait', function(){
+            Livewire.on('wait', function(){
 
-            Swal.fire(
-            'El jumper será generado en aproximadamente 3 minutos',
-            'Espere pacientemente...',
-            )
+                toastr.options={
+                    "closeButton": true,
+                    "debug": true,
+                    "newestOnTop": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": true,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+                toastr.success('Momento')
 
-            livewire.emitTo('jumpers.k7341.k7341-index','jumpear')
-
-        })
+            })
 
         </script>
 
-  
+        <script>
 
-    
+            Livewire.on('wait', function(){
+
+                Swal.fire(
+                'Espere un momento, se esta procesando su jumper',
+                'Esta siendo redireccionado...',
+                )
+
+            })
+
+        </script>
     @stop
 </div>
-

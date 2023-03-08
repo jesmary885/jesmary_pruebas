@@ -54,23 +54,23 @@
 
                         <div>
                             <input id="name" class="w-full text-gray-600 text-sm px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400" type="text" name="name" :value="old('name')" required autofocus autocomplete="name"  placeholder="Username">
-                        
+                            <x-input-error for="name" />
                         </div>
 
                         <div class="mt-4">
 
                             <input id="email" class="w-full text-gray-600 text-sm px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400" type="email" name="email" :value="old('email')" required  placeholder="Email">
-                            
+                            <x-input-error for="email" />
                         </div>
 
                         <div class="mt-4">
                             <input id="password" name="password" placeholder="Password" type="password" name="password" required autocomplete="new-password" class="text-sm text-gray-500 px-4 py-3 rounded-lg w-full bg-gray-200 focus:bg-gray-100 border border-gray-200 focus:outline-none focus:border-purple-400">
-
+                            <x-input-error for="password" />
                         </div>
 
                         <div class="mt-4">
                             <input id="password_confirmation" name="password_confirmation" placeholder="Confirm Password" type="password" required class="text-sm text-gray-500 px-4 py-3 rounded-lg w-full bg-gray-200 focus:bg-gray-100 border border-gray-200 focus:outline-none focus:border-purple-400">
-
+                            <x-input-error for="password_confirmation" />
                         </div>
 
                         @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
@@ -126,24 +126,24 @@
 
                         <div>
                             <input id="name" class="w-full text-gray-600 text-sm px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400" type="text" name="name" :value="old('name')" required autofocus autocomplete="name"  placeholder="Username">
-                        
+                            <x-input-error for="name" />
                         </div>
 
 
                         <div class="mt-4">
 
                             <input id="email" class="w-full text-gray-600 text-sm px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400" type="email" name="email" :value="old('email')" required  placeholder="Email">
-                            
+                            <x-input-error for="email" />
                         </div>
 
                         <div class="mt-4">
                             <input id="password" name="password" placeholder="Contraseña" type="password" name="password" required autocomplete="new-password" class="text-sm text-gray-500 px-4 py-3 rounded-lg w-full bg-gray-200 focus:bg-gray-100 border border-gray-200 focus:outline-none focus:border-purple-400">
-
+                            <x-input-error for="password" />
                         </div>
 
                         <div class="mt-4">
                             <input id="password_confirmation"  placeholder="Confirmar contraseña" type="password" name="password_confirmation" required autocomplete="new-password" class="text-sm text-gray-500 px-4 py-3 rounded-lg w-full bg-gray-200 focus:bg-gray-100 border border-gray-200 focus:outline-none focus:border-purple-400">
-
+                            <x-input-error for="password_confirmation" />
                         </div>
 
                         <div class="flex items-center justify-end mt-6  ">

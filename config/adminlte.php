@@ -408,6 +408,20 @@ return [
                     'icon'    => 'fas fa-angle-right',
                 ],
                 [
+                    'text' => 'SALTADOR WIX',
+                    'route'  => 'wix.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+                [
+                    'text' => 'KTMR',
+                    'route'  => 'ktmr.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+                [
                     'text' => 'K1000',
                     'route'  => 'kmil.index',
                     'can' => 'kmil.index',
@@ -432,6 +446,13 @@ return [
                     'text' => 'K2062',
                     'route'  => 'kdosmilsesentaydos.index',
                     'can' => 'kdosmilsesentaydos.index',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+                [
+                    'text' => 'K2066',
+                    'route'  => 'k2066.index',
+                    'can' => 'ssidkr.index',
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
                 ],
@@ -480,13 +501,6 @@ return [
                 [
                     'text' => 'K17564',
                     'route'  => 'k17564.index',
-                    'can' => 'ssidkr.index',
-                    'icon_color' => 'red',
-                    'icon'    => '	fas fa-angle-right',
-                ],
-                [
-                    'text' => 'SALTADOR WIX',
-                    'route'  => 'wix.index',
                     'can' => 'ssidkr.index',
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
