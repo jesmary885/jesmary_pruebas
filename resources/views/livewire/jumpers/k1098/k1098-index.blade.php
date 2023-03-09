@@ -3,7 +3,7 @@
 
         <div class="card-header form-row">
 
-            <div class="col-sm-6 col-md-9 col-lg-10 col-xl-11">
+            <div class="col-sm-12 col-lg-13 col-xl-14">
 
                 <div class="input-group">
                     <input wire:model="search" placeholder="" id="validationCustomUsername" class="form-control" aria-describedby="inputGroupPrepend" >

@@ -1,4 +1,4 @@
-<div>
+<div x-data="{plan: @entangle('plan')}">
     @if ($isopen)
         <div class="modal d-block" tabindex="-1" role="dialog" style="overflow-y: auto; display: block;">
             <div class="modal-dialog" role="document">
@@ -14,33 +14,73 @@
                             <div class="flex justify-between">
                                 
                                 <div class="form-group w-full">
-                                    <label class="w-full text-justify">Plan</label>
+                                    <label class="w-full text-justify">Motivo</label>
                                     <select wire:model="plan" title="Plan" id="estado" class="block w-full text-gray-400 py-2 px-2 pr-8 leading-tight rounded focus:outline-none focus:border-gray-500" name="estado">
                                         <option value="" selected>Seleccione una opción</option>    
-                                        <option value="7">7 días</option>
-                                        <option value="15">15 días</option>
-                                        <option value="30">30 días</option>
+                                        <option value="balance">Saldo en página</option>
+                                        <option value="7">Pago de plan - 7 días</option>
+                                        <option value="15">Pago de plan - 15 días</option>
+                                        <option value="30">Pago de plan - 30 días</option>
                                     </select>
                                     <x-input-error for="plan" />
                                     
                                 </div>
                             </div>
 
-                            <div class="flex justify-between mt-2">
+
+                            @if($plan == "balance")
+                                <div class="form-group w-full mr-2">
+                                    <label class="w-full text-justify">Monto:</label>
+                                    <div class="flex ">
+                                        <input type="number" wire:model="monto" class="form-control rounded w-1/3" >
+                                        <p class="text-gray-300 font-bold text-ms ml-2 mt-1">$</p>
+                                    </div>
+                                    
+                                    <x-input-error for="monto" />
+                                </div>
+                            @endif
+
+                         
                             <div class="form-group w-full mr-2">
-                                <label for="formGroupExampleInput2 mb-2">Método de pago ha utilizar</label>
-                                    <select wire:model="metodo_id" class="form-control w-full">
-                                        <option value="" selected>Seleccione una opción</option>
-                                            @foreach ($payment_methods as $metodo)
-                                                <option value="{{$metodo->id}}">{{$metodo->name}}</option>
-                                            @endforeach
-                                    </select>
+                                    <label for="formGroupExampleInput2 mb-2">Método de pago ha utilizar</label>
+                                        <select wire:model="metodo_id" class="form-control w-full">
+                                            <option value="" selected>Seleccione una opción</option>
+                                                @foreach ($payment_methods as $metodo)
+                                                    <option value="{{$metodo->id}}">{{$metodo->name}}</option>
+                                                @endforeach
+                                        </select>
                                     <x-input-error for="metodo_id" />
                             </div>
-                        </div>
 
-                            
 
+                            <div class="form-group w-full mr-2">
+                                    <label class="w-full text-justify">Nro de referencia:</label>
+                                    <div class="flex ">
+                                        <input type="number" wire:model="referencia" class="form-control rounded" >
+                                    </div>
+                                    
+                                    <x-input-error for="referencia" />
+                            </div>
+
+                            <div class="form-group w-full">
+                                    <label class="w-full text-justify">Fecha de pago</label>
+                                    <div>
+                                        <div wire:ignore x-data="datepicker()">
+                                            <div class="flex flex-col">
+                                                <div class="flex items-center gap-2">
+                                                    <input 
+                                                        type="text" 
+                                                        class="px-4 outline-none cursor-pointer rounded" 
+                                                        x-ref="myDatepicker" 
+                                                        wire:model="fecha_pago" 
+                                                        placeholder="Seleccione la fecha">
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                      
                             <div class="w-full">
                                 <div class="flex">
                                     <i class="fas fa-file-pdf mt-2 mr-2 text-gray-300"></i>
@@ -81,6 +121,20 @@
         Livewire.on('volver', function(){
             window.history.back();      
         })
+    </script>
+
+    <script>
+            document.addEventListener('alpine:init',()=>{
+                Alpine.data('datepicker',()=>({
+                    fecha_pago:null,
+                    init(){
+                        flatpickr(this.$refs.myDatepicker, {dateFormat:'Y-m-d H:i', altInput:true, altFormat: 'F j, Y',})
+                    },
+                    reset(){
+                        this.fecha_pago= null;
+                    }
+                }))
+            })
     </script>
 
     @endpush

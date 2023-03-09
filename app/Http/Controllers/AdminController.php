@@ -14,6 +14,10 @@ class AdminController extends Controller
         return view('admin.pagos');
     }
 
+    public function comunidad(){
+        return view('admin.comunidad');
+    }
+
     public function paymentsMethods(){
         return view('admin.metodos_pago');
     }

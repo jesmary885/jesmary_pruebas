@@ -14,11 +14,13 @@ class ReportePago extends Component
 {
     use WithFileUploads;
 
-    public $file,$isopen = false, $plan,$comentario,$metodo_id,$payment_methods;
+    public $file,$isopen = false, $plan,$comentario,$metodo_id,$payment_methods,$referencia,$fecha_pago;
 
     protected $rules = [
         'plan' => 'required',
         'metodo_id' => 'required',
+        'referencia' => 'required|numeric',
+        'fecha_pago' => 'required',
         'file' => 'required|image|max:2048'
     ];
 
@@ -52,6 +54,8 @@ class ReportePago extends Component
         $new_pago->file = $this->file->store('pagos_recargas');
         $new_pago->plan = $this->plan;
         $new_pago->status = 'pendiente';
+        $new_pago->nro_referencia = $this->referencia;
+        $new_pago->fecha_pago = $this->fecha_pago;
         $new_pago->payment_method_id = $this->metodo_id;
         $new_pago->comentario = $this->comentario;
         $new_pago->save();

@@ -29,7 +29,8 @@ class UsuariosEdit extends Component
         $this->balance = $this->usuario->balance;
         $this->plan = $this->usuario->plan;
         $this->roles_id = $this->usuario->roles->first()->id;
-        $this->roles=Role::all();
+        $this->roles=Role::where('id','!=','1')->get();
+        //$this->roles=Role::all();
     }
 
     public function open()
@@ -70,7 +71,6 @@ class UsuariosEdit extends Component
             'username' => $this->username,
             'email' => $this->email,
             'status' => $estado,
-            'balance' => $this->balance,
             'plan' => $this->plan,
             'last_payment_date' => date("Y-m-d", strtotime($this->last_date)),
         ]);

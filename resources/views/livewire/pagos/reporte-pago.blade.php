@@ -29,17 +29,45 @@
                             </div>
 
                             <div class="flex justify-between mt-2">
-                            <div class="form-group w-full mr-2">
-                                <label for="formGroupExampleInput2 mb-2">Método de pago ha utilizar</label>
-                                    <select wire:model="metodo_id" class="form-control w-full">
-                                        <option value="" selected>Seleccione una opción</option>
-                                            @foreach ($payment_methods as $metodo)
-                                                <option value="{{$metodo->id}}">{{$metodo->name}}</option>
-                                            @endforeach
-                                    </select>
-                                    <x-input-error for="metodo_id" />
+                                <div class="form-group w-full mr-2">
+                                    <label for="formGroupExampleInput2 mb-2">Método de pago ha utilizar</label>
+                                        <select wire:model="metodo_id" class="form-control w-full">
+                                            <option value="" selected>Seleccione una opción</option>
+                                                @foreach ($payment_methods as $metodo)
+                                                    <option value="{{$metodo->id}}">{{$metodo->name}}</option>
+                                                @endforeach
+                                        </select>
+                                        <x-input-error for="metodo_id" />
+                                </div>
                             </div>
-                        </div>
+
+                            <div class="form-group w-full mr-2">
+                                    <label class="w-full text-justify">Nro de referencia:</label>
+                                    <div class="flex ">
+                                        <input type="number" wire:model="referencia" class="form-control rounded" >
+                                    </div>
+                                    
+                                    <x-input-error for="referencia" />
+                            </div>
+
+                            <div class="form-group w-full">
+                                    <label class="w-full text-justify">Fecha de pago</label>
+                                    <div>
+                                        <div wire:ignore x-data="datepicker()">
+                                            <div class="flex flex-col">
+                                                <div class="flex items-center gap-2">
+                                                    <input 
+                                                        type="text" 
+                                                        class="px-4 outline-none cursor-pointer rounded" 
+                                                        x-ref="myDatepicker" 
+                                                        wire:model="fecha_pago" 
+                                                        placeholder="Seleccione la fecha">
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
 
                             
 
@@ -76,6 +104,24 @@
             </div>
         </div>
     @endif
+
+    @push('js')
+
+        <script>
+                document.addEventListener('alpine:init',()=>{
+                    Alpine.data('datepicker',()=>({
+                        fecha_pago:null,
+                        init(){
+                            flatpickr(this.$refs.myDatepicker, {dateFormat:'Y-m-d H:i', altInput:true, altFormat: 'F j, Y',})
+                        },
+                        reset(){
+                            this.fecha_pago= null;
+                        }
+                    }))
+                })
+        </script>
+
+    @endpush
   
 </div>
 

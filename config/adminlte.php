@@ -306,6 +306,13 @@ return [
                     
                 ],
                 [
+                    'text' => 'Comunidad',
+                    'route'  => 'admin.comunidad',
+                    'icon'    => 'fas fa-users',
+                    'icon_color' => 'red',
+                    'can' => 'otro.admin'
+                ],
+                [
                     'text' => 'Jumpers',
                     'route'  => 'admin.jumpers',
                     'icon'    => 'fas fa-server',
@@ -424,7 +431,7 @@ return [
                 [
                     'text' => 'K1000',
                     'route'  => 'kmil.index',
-                    'can' => 'kmil.index',
+                    'can' => 'ssidkr.index',
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
                 ],
@@ -443,9 +450,16 @@ return [
                     'icon'    => '	fas fa-angle-right',
                 ],
                 [
+                    'text' => 'K2001',
+                    'route'  => 'k2001.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+                [
                     'text' => 'K2062',
                     'route'  => 'kdosmilsesentaydos.index',
-                    'can' => 'kdosmilsesentaydos.index',
+                    'can' => 'ssidkr.index',
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
                 ],
@@ -459,7 +473,7 @@ return [
                 [
                      'text' => 'K23',
                      'route'  => 'kveintitres.index',
-                     'can' => 'kveintitres.index',
+                     'can' => 'ssidkr.index',
                      'icon_color' => 'red',
                      'icon'    => '	fas fa-angle-right',
                 ],

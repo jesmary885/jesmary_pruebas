@@ -140,7 +140,7 @@
   </div>
   @endif
 
-  @if($mensaje != '' && $rol != '4')
+  @if($mensaje != '' && $rol != '4' && auth()->user()->type != 'gratis')
   <div>
 
   <blockquote class="text-gray-400 flex">

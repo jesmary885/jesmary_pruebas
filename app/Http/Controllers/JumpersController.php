@@ -30,6 +30,10 @@ class JumpersController extends Controller
         return view('jumpers.k2066');
      }
 
+     public function k2001(){
+        return view('jumpers.k2001');
+     }
+
      public function ktmr(){
         return view('jumpers.ktmr');
      }

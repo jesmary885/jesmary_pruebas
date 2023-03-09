@@ -35,7 +35,7 @@
                             <div class="flex justify-between mt-2">
                                 <div class="form-group w-full mr-2">
                                     <label class="w-full text-justify">Balance</label>
-                                    <input type="number" wire:model="balance" class="form-control rounded" id="formGroupExampleInput">
+                                    <input type="number" readonly wire:model="balance" class="form-control rounded" id="formGroupExampleInput">
                                 </div>
                            
                                 <div class="form-group w-full">

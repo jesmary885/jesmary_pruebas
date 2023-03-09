@@ -55,6 +55,8 @@ class KtmrIndex extends Component
             if($busqueda_f_ != false) $this->psid_buscar= substr($this->search, $busqueda_f_ + 13);
             else $this->psid_buscar= $this->search;
 
+            //dd($this->psid_buscar);
+
             if($this->jumper_complete == "") $this->wait();
         }
         

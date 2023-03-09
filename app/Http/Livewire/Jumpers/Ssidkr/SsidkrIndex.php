@@ -14,7 +14,7 @@ class SsidkrIndex extends Component
     use WithPagination;
     protected $paginationTheme = "bootstrap";
 
-    public $type_basic,$descalific_active=0,$type,$jumper_complete_qt,$jumper_complete_sp,$comment_new_psid_register,$pid_register_high,$psid_register_bh,$high_register_bh,$basic_register_bh,$posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $wix_detect = '0', $psid_register=0,$jumper_redirect,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$is_high,$is_basic,$calc_link,$jumper_select,$points_user_positive, $points_user_negative ;
+    public $type_basic,$descalific_active=0,$type,$jumper_complete_qt,$jumper_complete_sp,$comment_new_psid_register,$pid_register_high,$psid_register_bh,$high_register_bh,$basic_register_bh,$posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $wix_detect = '0', $psid_register=0,$jumper_redirect,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$is_high,$is_basic,$calc_link,$jumper_select,$points_user_positive, $points_user_negative, $router_cint_detect=0 ;
 
     protected $listeners = ['render' => 'render', 'registro_psid' => 'registro_psid', 'descalificar' => 'descalificar'];
 
@@ -42,6 +42,21 @@ class SsidkrIndex extends Component
     public function k2062(){
         session()->forget('search');
         return 'k2062';
+    }
+
+    public function k2001(){
+        session()->forget('search');
+        return 'k2001';
+    }
+
+    public function k2066(){
+        session()->forget('search');
+        return 'k2066';
+    }
+
+    public function router(){
+        session()->forget('search');
+        return 'ktmr';
     }
 
     public function k1000(){
@@ -369,6 +384,13 @@ class SsidkrIndex extends Component
                     
                     }
 
+                    if($this->jumper_detect){
+                        $router_cint_detect= strpos($this->jumper_detect, 'router.cint.com');
+                        if($router_cint_detect !== false) $this->router_cint_detect = 1;
+                    }
+
+                    
+
                     if($jumper->k_detected) $this->k_detect = $jumper->k_detected;
                     else{
                       
@@ -422,6 +444,8 @@ class SsidkrIndex extends Component
                             elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '11052') $type_k = 19;
                             elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '15293') $type_k = 20;
                             elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '17564') $type_k = 21;
+                            elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '2066') $type_k = 22;
+                            elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '2001') $type_k = 23;
                             else  $type_k = 15;
 
                             $jumper->update(
@@ -433,6 +457,8 @@ class SsidkrIndex extends Component
 
                             
                         }
+
+                       
                     }
 
                     $this->jumper_2 = '1';
@@ -790,6 +816,8 @@ class SsidkrIndex extends Component
                                     elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '11052') $type_k = 19;
                                     elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '15293') $type_k = 20;
                                     elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '17564') $type_k = 21;
+                                    elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '2066') $type_k = 22;
+                                    elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '2001') $type_k = 23;
                                     else  $type_k = 15;
 
                             }
@@ -815,6 +843,11 @@ class SsidkrIndex extends Component
                                     $link->save();
 
                                     $this->jumper_detect = $url_detect;
+
+                                    if($this->jumper_detect){
+                                        $router_cint_detect= strpos($this->jumper_detect, 'router.cint.com');
+                                        if($router_cint_detect !== false) $this->router_cint_detect = 1;
+                                    }
 
                                     //$jumper = Link::get()->last();
 
@@ -943,14 +976,15 @@ class SsidkrIndex extends Component
                             if($busqueda_psid_qt !== false){
                                 $subs_psid = substr($this->search,($busqueda_psid_qt + 5),5);
 
-
                                 $link = new Link();
                                 $link->psid = $subs_psid;
                                 $link->user_id = auth()->user()->id;
                                 $link->jumper_type_id = 15;
                                 $link->save();
 
-                                $jumper = Link::get()->last();
+                                $jumper = Link::where('id',$link->id)->first();
+
+                                //$jumper = Link::get()->last();
 
                                 $user_point= User_Links_Points::where('link_id',$jumper->id)
                                         ->where('user_id',$this->user_auth)
@@ -1191,23 +1225,6 @@ class SsidkrIndex extends Component
         $busqueda_pid8= strpos($this->search, '?PID=');
         $busqueda_pid9= strpos($this->search, '?pid=');
         $busqueda_pid10= strpos($this->search, 'fill?1=');
-
-       /* elseif($busqueda_pid8 !== false){
-            $pid_detect_com= strpos($this->search, '?PID=');
-            $posicion_pid = $pid_detect_com + 5;
-            $pid_calculate = $pid_detect_com + 5;
-        }
-        elseif($busqueda_pid9 !== false){
-            $pid_detect_com= strpos($this->search, '?pid=');
-            $posicion_pid = $pid_detect_com + 5;
-            $pid_calculate = $pid_detect_com + 5;
-        }
-        elseif($busqueda_pid10 !== false){
-                $pid_detect_com= strpos($this->search, 'fill?1=');
-                $posicion_pid = $pid_detect_com + 7;
-                $pid_calculate = $pid_detect_com + 7;
-        }*/
-
 
         if($busqueda_pid !== false || $busqueda_pid2 !== false || $busqueda_pid3 !== false || $busqueda_pid4 !== false || $busqueda_pid5 !== false || $busqueda_pid6 !== false || $busqueda_pid7 !== false || $busqueda_pid8 !== false || $busqueda_pid9 !== false || $busqueda_pid10 !== false){
             //dd('ok

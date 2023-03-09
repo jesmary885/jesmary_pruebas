@@ -46,40 +46,54 @@ class PagosEdit extends Component
     }
 
     public function save(){
+
         $rules = $this->rules;
         $this->validate($rules);
 
-        if($this->status == '1'){
-            $this->registro->update([
-                'status' => 'verificado',
-                'admin_first_id' => auth()->id(),
-                'admin_second_id' => $this->admin_verifi_id
-            ]);
-
-            $user_cliente = User::where('id',$this->registro->user_id)->first();
-
-            $user_cliente->update([
-                'status' => 'activo',
-            ]);
-
-            $user_cliente->roles()->sync(2);
+        if($this->registro->plan != 'balance'){
+            if($this->status == '1'){
+                $this->registro->update([
+                    'status' => 'verificado',
+                    'admin_first_id' => auth()->id(),
+                    'admin_second_id' => $this->admin_verifi_id
+                ]);
+    
+                $user_cliente = User::where('id',$this->registro->user_id)->first();
+    
+                $user_cliente->update([
+                    'status' => 'activo',
+                ]);
+    
+                $user_cliente->roles()->sync(2);
+            }
+    
+            else{
+                $this->registro->update([
+                    'status' => 'pendiente',
+                    'admin_first_id' => auth()->id(),
+                    'admin_second_id' => $this->admin_verifi_id
+                ]);
+    
+                $user_cliente = User::where('id',$this->registro->user_id)->first();
+    
+                $user_cliente->update([
+                    'status' => 'inactivo',
+                ]);
+    
+                $user_cliente->roles()->sync(4);
+            }
         }
 
         else{
-            $this->registro->update([
-                'status' => 'pendiente',
-                'admin_first_id' => auth()->id(),
-                'admin_second_id' => $this->admin_verifi_id
-            ]);
-
             $user_cliente = User::where('id',$this->registro->user_id)->first();
-
+            $balance_total = $user_cliente->balance + $this->registro->monto;
+    
             $user_cliente->update([
-                'status' => 'inactivo',
+                'balance' => $balance_total,
             ]);
-
-            $user_cliente->roles()->sync(4);
         }
+
+        
 
         $this->reset(['isopen']);
         $this->emitTo('admin.pagos-index','render');

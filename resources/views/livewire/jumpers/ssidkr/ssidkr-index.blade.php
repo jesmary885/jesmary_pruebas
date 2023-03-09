@@ -1,4 +1,4 @@
-<div x-data="{jumper_2: @entangle('jumper_2'),points_user: @entangle('points_user'), is_high: @entangle('is_high'),is_basic: @entangle('is_basic'), calc_link: @entangle('calc_link'), pid: @entangle('pid_new'), psid: @entangle('psid_register'), jumper_detect: @entangle('jumper_detect'), no_detect: @entangle('no_detect'), k_detect: @entangle('k_detect'), no_jumpear: @entangle('no_jumpear'),points_user_positive: @entangle('points_user_positive'),points_user_negative: @entangle('points_user_negative'),descalific_active: @entangle('descalific_active')}">
+<div x-data="{jumper_2: @entangle('jumper_2'),points_user: @entangle('points_user'), is_high: @entangle('is_high'),is_basic: @entangle('is_basic'), calc_link: @entangle('calc_link'), pid: @entangle('pid_new'), psid: @entangle('psid_register'), jumper_detect: @entangle('jumper_detect'), no_detect: @entangle('no_detect'), k_detect: @entangle('k_detect'), no_jumpear: @entangle('no_jumpear'),points_user_positive: @entangle('points_user_positive'),points_user_negative: @entangle('points_user_negative'),descalific_active: @entangle('descalific_active'), router_cint_detect: @entangle('router_cint_detect')}">
     <div class="card">
         <div class="card-header form-row">
 
@@ -264,7 +264,7 @@
                             </div>
                         @endif
 
-                    @if ($k_detect == 'K=1000' || $k_detect == 'K=1092' || $k_detect == 'K=1098' || $k_detect == 'K=2062' || $k_detect == 'K=3203' || $k_detect == 'K=7341' || $k_detect == 'K=23' || $k_detect == 'K=3906' || $k_detect == 'K=11052' || $k_detect == 'K=15293' || $k_detect == 'K=17564')
+                    @if ($k_detect == 'K=1000' || $k_detect == 'K=1092' || $k_detect == 'K=1098' || $k_detect == 'K=2001' || $k_detect == 'K=2062' || $k_detect == 'K=2066' || $k_detect == 'K=3203' || $k_detect == 'K=7341' || $k_detect == 'K=23' || $k_detect == 'K=3906' || $k_detect == 'K=11052' || $k_detect == 'K=15293' || $k_detect == 'K=17564')
                     <div>
                         @if ($k_detect == 'K=1000')
                         <a href={{$this->k1000()}}>
@@ -275,8 +275,14 @@
                         @if ($k_detect == 'K=1098')
                         <a href={{$this->k1098()}}>
                         @endif
+                        @if ($k_detect == 'K=2001')
+                        <a href={{$this->k2001()}}>
+                        @endif
                         @if ($k_detect == 'K=2062')
                         <a href={{$this->k2062()}}>
+                        @endif
+                        @if ($k_detect == 'K=2066')
+                        <a href={{$this->k2066()}}>
                         @endif
                         @if ($k_detect == 'K=23')
                         <a href={{$this->k23()}}>
@@ -312,6 +318,25 @@
                             </div>
                         </a>
                     </div>
+                    @endif
+
+                    @if ($router_cint_detect == 1)
+                    <div>
+                        <a href={{$this->router()}}>
+                            <div class="small-box bg-success">
+                                <div class="inner">
+                                    <h3 class="text-md font-semibold">Dirígete a </h3>
+                                    <p>Sección KTMR</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="	far fa-heart"></i>
+                                </div>
+                                <p class="font-bold text-sm small-box-footer"> Haciendo clic aquí </p>
+                            </div>
+                        </a>
+
+                    </div>
+
                     @endif
                     
                         
@@ -436,13 +461,6 @@
                 </div>
             </div>
         </div>
-
-
-
-    
-
-       
-
 
     </div>
 
