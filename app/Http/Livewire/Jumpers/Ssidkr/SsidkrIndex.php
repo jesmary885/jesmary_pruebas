@@ -375,7 +375,7 @@ class SsidkrIndex extends Component
                                 $url_detect = 'https://'.substr($this->search,7,($posicion_url-7));
                             }
 
-                                if($url_detect != 'https://dkr1.ssisurveys.com'){
+                                if($url_detect != 'https://dkr1.ssisurveys.com' && $url_detect != 'https://online.ssisurveys.com' ){
                                     $jumper->update(
                                         ['jumper' => $url_detect ]
                                     );
@@ -831,7 +831,7 @@ class SsidkrIndex extends Component
 
                                
                                     $link = new Link();
-                                    $link->jumper = $url_detect;
+                                    if($url_detect != 'https://online.ssisurveys.com') $link->jumper = $url_detect;
                                     $link->psid = $subs_psid;
                                     $link->user_id = auth()->user()->id;
                                     if($k_detect != false || $k_detect2 != false){
@@ -843,7 +843,7 @@ class SsidkrIndex extends Component
                                     }
                                     $link->save();
 
-                                    $this->jumper_detect = $url_detect;
+                                    if($url_detect != 'https://online.ssisurveys.com') $this->jumper_detect = $url_detect;
 
                                     if($this->jumper_detect){
                                         $router_cint_detect= strpos($this->jumper_detect, 'router.cint.com');

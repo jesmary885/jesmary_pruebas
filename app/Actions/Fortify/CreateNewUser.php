@@ -27,7 +27,7 @@ class CreateNewUser implements CreatesNewUsers
              'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
          ])->validate();
 
-        return User::create([
+       /* return User::create([
             'name' => $input['name'],
             'username' => $input['name'],
             'status' => 'activo',
@@ -39,6 +39,6 @@ class CreateNewUser implements CreatesNewUsers
             'points_neutral' => 0,
             'plan' => 30,
             'last_payment_date' => date('Y-m-d')
-        ])->assignRole('Inactivo');
+        ])->assignRole('Inactivo');*/
     }
 }

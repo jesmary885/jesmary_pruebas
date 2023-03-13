@@ -131,7 +131,7 @@
                         </div>
 
                         <div class="flex mt-1">
-                            <div class="mr-3 mt-2 mb-2">
+                            <div class="mr-3 mt-2 mb-2 w-3/4">
                                 <h2 class="font-semibold text-xl text-gray-300" id="tiempoRestante">00:00.0</h2>
                             </div>
 

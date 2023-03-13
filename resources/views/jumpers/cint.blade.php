@@ -5,9 +5,7 @@
     
 <h1 class="text-lg font-weight-bold text-blue-300"> <i class="fas fa-asterisk mr-1 text-blue-300"></i> CINT</h1>
 
-    <div class="justify-end">
-       {{-- @livewire('jumpers.cint.cint-create') --}}
-    </div>
+    
 </div>
 
 @stop
@@ -19,7 +17,12 @@
         </div>
     @endif
     
-    @livewire('jumpers.cint.cint-index') 
+  
+
+    <div class="flex justify-center">
+    <h2 class="mt-4 text-gray-200 font-bold">*** PRÓXIMAMENTE ***</h2>
+
+    </div>
 
 @stop
 
