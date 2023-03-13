@@ -117,6 +117,7 @@ class SsidkrIndex extends Component
         $this->wix_detect = '0';
         $this->is_basic = 'no';
         $this->is_high = 'no';
+        $this->router_cint_detect = 0;
       //  $this->descalific_active = 0;
         
 
@@ -1517,5 +1518,6 @@ class SsidkrIndex extends Component
         $this->jumper_complete_sp = '';
         session()->forget('search');
         $this->descalific_active = 0;
+        $this->router_cint_detect = 0;
     }
 }

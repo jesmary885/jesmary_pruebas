@@ -1,4 +1,4 @@
-<div x-data="{jumper_2: @entangle('jumper_2'),pid_detectado: @entangle('pid_detectado'),points_user: @entangle('points_user'), is_high: @entangle('is_high'),is_basic: @entangle('is_basic'), calc_link: @entangle('calc_link'), pid: @entangle('pid_new'), psid: @entangle('psid_register'), jumper_detect: @entangle('jumper_detect'), no_detect: @entangle('no_detect'), k_detect: @entangle('k_detect'), no_jumpear: @entangle('no_jumpear'),points_user_positive: @entangle('points_user_positive'),points_user_negative: @entangle('points_user_negative')}">
+<div x-data="{pid_detectado: @entangle('pid_detectado'),jumper_2: @entangle('jumper_2'),pid_detectado: @entangle('pid_detectado'),points_user: @entangle('points_user'), is_high: @entangle('is_high'),is_basic: @entangle('is_basic'), calc_link: @entangle('calc_link'), pid: @entangle('pid_new'), psid: @entangle('psid_register'), jumper_detect: @entangle('jumper_detect'), no_detect: @entangle('no_detect'), k_detect: @entangle('k_detect'), no_jumpear: @entangle('no_jumpear'),points_user_positive: @entangle('points_user_positive'),points_user_negative: @entangle('points_user_negative')}">
     <div class="card">
 
         <div class="card-header form-row">
@@ -85,6 +85,7 @@
                 </div>
 
                 @endif
+
 
             @if($busqueda_link || $jumper_complete || $pid_detectado == 'no' && $jumper_detect == 0)
 
@@ -281,6 +282,8 @@
             
 
         @endif
+
+        
 
     
     </div>

@@ -305,6 +305,7 @@
                         @if ($k_detect == 'K=17564')
                         <a href={{$this->k17564()}}>
                         @endif
+                       
 
                             <div class="small-box bg-success">
                                 <div class="inner">

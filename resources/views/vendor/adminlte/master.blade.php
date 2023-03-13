@@ -246,6 +246,28 @@
         })
     </script>
 
+
+    <script>
+        livewire.on('numerologia', (op,n1,n2) => {
+            Swal.fire({
+                title: op,
+                input: 'text',
+                inputAttributes: {
+                    autocapitalize: 'off'
+                },
+                showCancelButton: true,
+                confirmButtonText: 'Enviar',
+
+                allowOutsideClick: () => !Swal.isLoading()
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    console.log('hola')
+                    livewire.emitTo(n1,n2,[$result=result.value])
+                }
+            })
+        })
+    </script>
+
     {{-- Custom Scripts --}}
     @yield('adminlte_js')
 </body>

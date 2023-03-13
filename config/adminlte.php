@@ -421,13 +421,13 @@ return [
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
                 ],
-                [
+                /*[
                     'text' => 'KTMR',
                     'route'  => 'ktmr.index',
                     'can' => 'ssidkr.index',
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
-                ],
+                ],*/
                 [
                     'text' => 'K1000',
                     'route'  => 'kmil.index',
@@ -435,13 +435,13 @@ return [
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
                 ],
-                /*[
+                [
                     'text' => 'K1092',
                     'route'  => 'kmilnoventaydos.index',
-                    'can' => 'kmilnoventaydos.index',
+                    'can' => 'ssidkr.index',
                     'icon_color' => 'red',
-                    'icon'    => 'fas fa-angle-right',
-                ],*/
+                    'icon'    => '	fas fa-angle-right',
+                ],
                 [
                     'text' => 'K1098',
                     'route'  => 'k1098.index',
@@ -449,13 +449,13 @@ return [
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
                 ],
-                [
+               /* [
                     'text' => 'K2001',
                     'route'  => 'k2001.index',
                     'can' => 'ssidkr.index',
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
-                ],
+                ],*/
                 [
                     'text' => 'K2062',
                     'route'  => 'kdosmilsesentaydos.index',

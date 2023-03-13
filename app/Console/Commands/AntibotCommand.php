@@ -79,8 +79,200 @@ class AntibotCommand extends Command
                 'nro2' => '1',
                 'resultado' => '3',
             ],
+            [
+                'nro1' => '2',
+                'nro2' => '2',
+                'resultado' => '4',
+            ],
+            [
+                'nro1' => '2',
+                'nro2' => '3',
+                'resultado' => '5',
+            ],
+            [
+                'nro1' => '2',
+                'nro2' => '4',
+                'resultado' => '6',
+            ],
+            [
+                'nro1' => '2',
+                'nro2' => '5',
+                'resultado' => '7',
+            ],
+            [
+                'nro1' => '2',
+                'nro2' => '6',
+                'resultado' => '8',
+            ],
+            [
+                'nro1' => '2',
+                'nro2' => '7',
+                'resultado' => '9',
+            ],
+            [
+                'nro1' => '2',
+                'nro2' => '8',
+                'resultado' => '10',
+            ],
+            [
+                'nro1' => '2',
+                'nro2' => '9',
+                'resultado' => '11',
+            ],
+            [
+                'nro1' => '2',
+                'nro2' => '10',
+                'resultado' => '12',
+            ],
+            [
+                'nro1' => '3',
+                'nro2' => '1',
+                'resultado' => '4',
+            ],
+            [
+                'nro1' => '3',
+                'nro2' => '2',
+                'resultado' => '6',
+            ],
+            [
+                'nro1' => '3',
+                'nro2' => '3',
+                'resultado' => '6',
+            ],
+            [
+                'nro1' => '3',
+                'nro2' => '4',
+                'resultado' => '7',
+            ],
+            [
+                'nro1' => '3',
+                'nro2' => '5',
+                'resultado' => '8',
+            ],
+            [
+                'nro1' => '3',
+                'nro2' => '6',
+                'resultado' => '9',
+            ],
+            [
+                'nro1' => '3',
+                'nro2' => '7',
+                'resultado' => '10',
+            ],
+            [
+                'nro1' => '3',
+                'nro2' => '8',
+                'resultado' => '11',
+            ],
+            [
+                'nro1' => '3',
+                'nro2' => '9',
+                'resultado' => '12',
+            ],
+            [
+                'nro1' => '3',
+                'nro2' => '10',
+                'resultado' => '30',
+            ],
+            [
+                'nro1' => '4',
+                'nro2' => '1',
+                'resultado' => '5',
+            ],
+            [
+                'nro1' => '4',
+                'nro2' => '2',
+                'resultado' => '6',
+            ],
+            [
+                'nro1' => '4',
+                'nro2' => '3',
+                'resultado' => '7',
+            ],
+            [
+                'nro1' => '4',
+                'nro2' => '4',
+                'resultado' => '8',
+            ],
+            [
+                'nro1' => '4',
+                'nro2' => '5',
+                'resultado' => '9',
+            ],
+            [
+                'nro1' => '4',
+                'nro2' => '6',
+                'resultado' => '10',
+            ],
+            [
+                'nro1' => '4',
+                'nro2' => '0',
+                'resultado' => '4',
+            ],
+            [
+                'nro1' => '5',
+                'nro2' => '1',
+                'resultado' => '6',
+            ],
+            [
+                'nro1' => '5',
+                'nro2' => '2',
+                'resultado' => '7',
+            ],
+            [
+                'nro1' => '5',
+                'nro2' => '3',
+                'resultado' => '8',
+            ],
             
+            [
+                'nro1' => '5',
+                'nro2' => '4',
+                'resultado' => '9',
+            ],
+            [
+                'nro1' => '5',
+                'nro2' => '5',
+                'resultado' => '10',
+            ],
+
+            [
+                'nro1' => '6',
+                'nro2' => '0',
+                'resultado' => '6',
+            ],
+            [
+                'nro1' => '6',
+                'nro2' => '1',
+                'resultado' => '7',
+            ],
+            [
+                'nro1' => '6',
+                'nro2' => '2',
+                'resultado' => '8',
+            ],
+            [
+                'nro1' => '6',
+                'nro2' => '3',
+                'resultado' => '9',
+            ],
            
+            [
+                'nro1' => '6',
+                'nro2' => '4',
+                'resultado' => '10',
+            ],
+
+            [
+                'nro1' => '7',
+                'nro2' => '0',
+                'resultado' => '7',
+            ],
+            [
+                'nro1' => '7',
+                'nro2' => '1',
+                'resultado' => '8',
+            ],
         ];
 
         foreach ($antibots as $antibot) {

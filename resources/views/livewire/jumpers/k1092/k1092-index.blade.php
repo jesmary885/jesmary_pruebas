@@ -1,4 +1,4 @@
-<div x-data="{jumper_2: @entangle('jumper_2'),points_user: @entangle('points_user'), is_high: @entangle('is_high'),is_basic: @entangle('is_basic'), calc_link: @entangle('calc_link'), pid: @entangle('pid_new'), psid: @entangle('psid_register'), jumper_detect: @entangle('jumper_detect'), no_detect: @entangle('no_detect'), k_detect: @entangle('k_detect'), no_jumpear: @entangle('no_jumpear'),points_user_positive: @entangle('points_user_positive'),points_user_negative: @entangle('points_user_negative')}">
+<div x-data="{jumper_2: @entangle('jumper_2'),pid_detectado: @entangle('pid_detectado'),points_user: @entangle('points_user'), is_high: @entangle('is_high'),is_basic: @entangle('is_basic'), calc_link: @entangle('calc_link'), pid: @entangle('pid_new'), psid: @entangle('psid_register'), jumper_detect: @entangle('jumper_detect'), no_detect: @entangle('no_detect'), k_detect: @entangle('k_detect'), no_jumpear: @entangle('no_jumpear'),points_user_positive: @entangle('points_user_positive'),points_user_negative: @entangle('points_user_negative')}">
     <div class="card">
 
         <div class="card-header form-row">
@@ -16,13 +16,14 @@
                         @endif
                 </div>
             </div>
+
         </div>
 
         <div class="flex justify-between">
 
             @if($psid_register == 0)
             <div class="px-4" :class="{'hidden': (psid != 0)}">
-                <div class="alert alert-info alert-dismissible bg-info">
+                <div class="alert alert-info bg-info alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><font style="vertical-align: inherit;"><font style="vertical-align: inherit; color:darkred;">×</font></font></button>
                         <h5><i class="icon fas fa-info"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">¡Alerta!</font></font></h5><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
                         Aún no has registrado tu PSID</font><font style="vertical-align: inherit;"> ,haz clic <a class="hover:text-white" href="{{route('registro.psid')}}"> aquí</a> para registrarlo
@@ -33,7 +34,7 @@
             @endif
             @if($pid_new == 0)
             <div class="px-4" :class="{'hidden': (pid != 0)}">
-                <div class="alert alert-info alert-dismissible bg-info">
+                <div class="alert alert-info bg-info alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><font style="vertical-align: inherit;"><font style="vertical-align: inherit; color:darkred;">×</font></font></button>
                     <h5><i class="icon fas fa-info"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">¡Alerta!</font></font></h5><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
                     Aún no has registrado tu PID</font><font style="vertical-align: inherit;"> ,haz clic <a class="hover:font-bold" href="{{route('registro.pid')}}"> aquí</a> para registrarlo
@@ -44,9 +45,30 @@
 
         </div>
 
+        @if ($jumper_complete == [])
+        <div class="flex justify-center">
+            <div class="mt-4" wire:loading>
+                <div class="container2">
+                    <div class="cargando">
+                        <div class="pelotas"></div>
+                        <div class="pelotas"></div>
+                        <div class="pelotas"></div>
+                        <span class="texto-cargando font-bold text-gray-300 ">Loading...</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+        @endif
+
+      
+
        
            
             <div class="card-body mt-0">
+
+    
 
                 @if ($jumper_complete)
 
@@ -64,7 +86,8 @@
 
                 @endif
 
-            @if($busqueda_link || $jumper_complete && $jumper_detect == 0)
+
+            @if($busqueda_link || $jumper_complete || $pid_detectado == 'no' && $jumper_detect == 0)
 
                 <div class="table-responsive">
                     <table class="table table-striped table-responsive">
@@ -74,6 +97,9 @@
                                     <th class="text-center">PSID</th>
                       
                                     <th class="text-center">{{__('messages.Subido')}}</th>
+                                    @if ($pid_detectado == 'no')
+                                    <th class="text-center">PID</th>
+                                    @endif
                                     <th class="text-center">Historial</th>
                                     <th colspan="2" class="text-center">{{__('messages.Puntuación')}}</th>
                                 </tr>
@@ -84,6 +110,26 @@
                                     <td class="text-center">{{$busqueda_link->psid}}</td>
                                     <td class="text-center">{{$busqueda_link->created_at->format('d/m/Y')}}</td>
                    
+                                    @if ($pid_detectado == 'no')
+                                    <td class="text-center"> 
+                                            <div class="flex justify-center">
+                                        
+                                                <div >
+                                                    <input type="number" wire:model.defer="pid_manual" class="rounded-sm bg-light py-1 px-1"  placeholder="{{__('messages.ingrese_pdi')}}">
+                                                    <x-input-error for="pid_manual" />
+                                                </div>
+                                                <div>
+                                                    <button
+                                                        class="btn-outline-secondary py-1 px-1 ml-2" 
+                                                        wire:click="jumpear()">
+                                                        <i class="font-semibold fas fa-sync"></i>
+                                                
+                                                    </button>
+                                                </div>
+                                            </div>
+                                    </td>
+                                    @endif
+
                                     <td width="10px">
                                         @livewire('jumpers.history', ['jumper' => $busqueda_link])
                                     </td>
@@ -191,6 +237,8 @@
             </div>
         @endif
 
+        
+
         <div class="m-2 mb-2">
             @if($no_detect != 0)
                 <div class="info-box mb-3 bg-info" :class="{'hidden': (no_detect == '0')}">
@@ -235,24 +283,9 @@
 
         @endif
 
-       
         
-        @if ($jumper_complete == [])
-        <div class="flex justify-center">
-            <div class="mt-4" wire:loading>
-                <div class="container2">
-                    <div class="cargando">
-                        <div class="pelotas"></div>
-                        <div class="pelotas"></div>
-                        <div class="pelotas"></div>
-                        <span class="texto-cargando font-bold text-gray-300 ">Loading...</span>
-                    </div>
-                </div>
-            </div>
 
-        </div>
-        
-        @endif
+    
     </div>
 
     <style>
@@ -306,12 +339,6 @@
     @section('js')
         <script>
             function copiarAlPortapapeles(id_elemento) {
-                /*var aux = document.createElement("input");
-                aux.setAttribute("value", document.getElementById(id_elemento).innerHTML);
-                document.body.appendChild(aux);
-                aux.select();
-                document.execCommand("copy");
-                document.body.removeChild(aux);*/
                 
                 var codigoACopiar = document.getElementById(id_elemento);
                 var seleccion = document.createRange();
@@ -342,44 +369,7 @@
             }
         </script>
 
-        <script>
 
-            Livewire.on('wait', function(){
-
-                toastr.options={
-                    "closeButton": true,
-                    "debug": true,
-                    "newestOnTop": true,
-                    "progressBar": true,
-                    "positionClass": "toast-top-right",
-                    "preventDuplicates": true,
-                    "onclick": null,
-                    "showDuration": "300",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                }
-                toastr.success('Momento')
-
-            })
-
-        </script>
-
-        <script>
-
-            Livewire.on('wait', function(){
-
-                Swal.fire(
-                'Espere un momento, se esta procesando su jumper',
-                'Esta siendo redireccionado...',
-                )
-
-            })
-
-        </script>
+      
     @stop
 </div>

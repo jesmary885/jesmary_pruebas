@@ -350,7 +350,7 @@
             'Espere pacientemente...',
             )
 
-            livewire.emitTo('jumpers.k7341.k7341-index','jumpear')
+            livewire.emitTo('jumpers.k7341.k7341-index','jump')
 
         })
 
