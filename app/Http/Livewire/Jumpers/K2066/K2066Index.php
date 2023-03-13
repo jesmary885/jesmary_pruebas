@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Jumpers\K2066;
 
+use App\Models\Antibot;
 use Livewire\Component;
 
 use App\Models\Comments;
@@ -16,9 +17,9 @@ class K2066Index extends Component
     use WithPagination;
     protected $paginationTheme = "bootstrap";
 
-    public  $jumper_complete = [],$jumper_list = 0,$busqueda_link,$comment_new_psid_register,$pid_register_high,$psid_register_bh,$high_register_bh,$basic_register_bh,$posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $wix_detect = '0', $psid_register=0,$jumper_redirect,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$is_high,$is_basic,$calc_link,$jumper_select,$points_user_positive, $points_user_negative, $jumper_detect_k ='';
+    public  $operacion,$jumper_complete = [],$jumper_list = 0,$busqueda_link,$comment_new_psid_register,$pid_register_high,$psid_register_bh,$high_register_bh,$basic_register_bh,$posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $wix_detect = '0', $psid_register=0,$jumper_redirect,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$is_high,$is_basic,$calc_link,$jumper_select,$points_user_positive, $points_user_negative, $jumper_detect_k ='',$psid_buscar;
 
-    protected $listeners = ['render' => 'render', 'registro_psid' => 'registro_psid'];
+    protected $listeners = ['render' => 'render', 'registro_psid' => 'registro_psid' , 'verific' => 'verific'];
     
     public function mount(){
         $this->user_auth =  auth()->user()->id;
@@ -27,63 +28,31 @@ class K2066Index extends Component
         if(session('search')) $this->search = session('search');
     }
 
-    public function render()
-    {
-        $subs_psid = '0';
-        $comments =0;
-        $jumper = "";
-        $link_complete="";
-        $psid_buscar = "";
-        $pid_buscar = "";
-        $busqueda_link_def = "";
-     
-        $this->no_jumpear = 0;
-        $this->k_detect = '0';
-        $this->jumper_detect = 0;
-        $this->busqueda_link = "";
-        $this->no_detect = '0';
-        $this->comment_new_psid_register = '';
-        $this->posicion = 8; //me esta buscand a partir de https://
+    public function numerologia(){
 
-        $this->search = trim($this->search); //quitando espacios en blancos al inicio y final
-        $long_psid = strlen($this->search); //buscando cuantos caracteres tiene en total
+        $cant = Antibot::count();
+        $random = rand(1,$cant);
+        $this->operacion = Antibot::where('id',$random)->first();
+        $operacion_total = 'Resuelve esta operación matemática ('.$this->operacion->nro1.' + '.$this->operacion->nro2. ')';
 
+        $this->emit('numerologia',$operacion_total,'jumpers.k2066.k2066-index','verific');
+    }
 
-        if($long_psid>=5){
+    public function verific($result){
 
-            $busqueda_k2066_ = strpos($this->search, 'k=2066&');
-
-            if($busqueda_k2066_ !== false){
-                
-                $busqueda_ast_ = strpos($this->search, '**');
-
-                
-                if($busqueda_ast_ !== false){
-                    $busqueda_id= strpos($this->search, '**');
-                                    
-                    //$psid_buscar = substr($this->search,($busqueda_id - 22),22);
-
-                    if(session('psid')) $psid_buscar = substr($this->search,($busqueda_id - 22),11).substr(session('psid'),11,11);
-                    else $psid_buscar = substr($this->search,($busqueda_id - 22),22);
-
-                
-                        if($this->jumper_detect == 0){
-
-                            if($this->jumper_list == 0){
-                                $client = new Client([
+        if($result[0] == $this->operacion->resultado){
+            $client = new Client([
                                     //'base_uri' => 'http://127.0.0.1:8000',
                                     'base_uri' => 'http://146.190.74.228/',
                                 ]);
             
-                                $resultado = $client->request('GET', '/k2066/1/'.$psid_buscar);
+                                $resultado = $client->request('GET', '/k2066/1/'.$this->psid_buscar);
 
                                 if($resultado->getStatusCode() == 200){
      
                                     $this->jumper_complete = json_decode($resultado->getBody(),true);
      
-                                    $this->busqueda_link = Link::where('psid',substr($psid_buscar,0,5))->first();
-         
-                                    $busqueda_link_def =  $this->busqueda_link;
+                                    $this->busqueda_link = Link::where('psid',substr($this->psid_buscar,0,5))->first();
          
                                     if($this->busqueda_link){
                                          $user_point= User_Links_Points::where('link_id',$this->busqueda_link->id)
@@ -145,7 +114,7 @@ class K2066Index extends Component
          
                                              $link = new Link();
                                              $link->jumper = $url_detect;
-                                             $link->psid = substr($psid_buscar,0,5);
+                                             $link->psid = substr($this->psid_buscar,0,5);
                                              $link->user_id = auth()->user()->id;
                                              $link->jumper_type_id = 22;
                                              $link->k_detected = 'K=2066';
@@ -192,10 +161,66 @@ class K2066Index extends Component
                                 else{
                                      $this->jumper_detect = 3;
                                 }
+
+        }
+        else{
+            $this->reset(['search','operacion']);
+            $this->emit('error','Resultado incorrecto, intentalo de nuevo');
+        }
+    }
+
+
+
+    public function render()
+    {
+        $subs_psid = '0';
+        $comments =0;
+        $jumper = "";
+        $link_complete="";
+        $this->psid_buscar = "";
+        $pid_buscar = "";
+        $busqueda_link_def = "";
+     
+        $this->no_jumpear = 0;
+        $this->k_detect = '0';
+        $this->jumper_detect = 0;
+        $this->busqueda_link = "";
+        $this->no_detect = '0';
+        $this->comment_new_psid_register = '';
+        $this->posicion = 8; //me esta buscand a partir de https://
+
+        $this->search = trim($this->search); //quitando espacios en blancos al inicio y final
+        $long_psid = strlen($this->search); //buscando cuantos caracteres tiene en total
+
+
+        if($long_psid>=5){
+
+            $busqueda_k2066_ = strpos($this->search, 'k=2066&');
+
+            if($busqueda_k2066_ !== false){
+                
+                $busqueda_ast_ = strpos($this->search, '**');
+
+                
+                if($busqueda_ast_ !== false){
+                    $busqueda_id= strpos($this->search, '**');
+                                    
+                    //$this->psid_buscar = substr($this->search,($busqueda_id - 22),22);
+
+                    if(session('psid')) $this->psid_buscar = substr($this->search,($busqueda_id - 22),11).substr(session('psid'),11,11);
+                    else $this->psid_buscar = substr($this->search,($busqueda_id - 22),22);
+
+                
+                        if($this->jumper_detect == 0){
+
+                            if($this->jumper_list == 0){
+
+                                $this->numerologia();
+
                             }
 
                             else{
-                                $this->busqueda_link = Link::where('psid',substr($psid_buscar,0,5))->first();
+                                $this->busqueda_link = Link::where('psid',substr($this->psid_buscar,0,5))->first();
          
                                 $busqueda_link_def =  $this->busqueda_link;
          
@@ -243,10 +268,10 @@ class K2066Index extends Component
             
                     if($busqueda_psid_ !== false){
                         $busqueda_psid= strpos($this->search, 'psid'); 
-                        //$psid_buscar = substr($this->search,($busqueda_psid + 5),22);
+                        //$this->psid_buscar = substr($this->search,($busqueda_psid + 5),22);
 
                         if(session('psid'))$psid_complete = substr($this->search,($busqueda_psid + 5),11).substr(session('psid'),11,11);
-                        else  $psid_buscar = substr($this->search,($busqueda_psid + 5),22);
+                        else  $this->psid_buscar = substr($this->search,($busqueda_psid + 5),22);
     
                         
 
@@ -257,13 +282,13 @@ class K2066Index extends Component
                                     'base_uri' => 'http://146.190.74.228/',
                                 ]);
             
-                                $resultado = $client->request('GET', '/2066/1/'.$psid_buscar);
+                                $resultado = $client->request('GET', '/2066/1/'.$this->psid_buscar);
             
                                 if($resultado->getStatusCode() == 200){
 
                                     $this->jumper_complete = json_decode($resultado->getBody(),true);
         
-                                    $this->busqueda_link = Link::where('psid',substr($psid_buscar,0,5))->first();
+                                    $this->busqueda_link = Link::where('psid',substr($this->psid_buscar,0,5))->first();
         
                                     $busqueda_link_def =  $this->busqueda_link;
         
@@ -327,7 +352,7 @@ class K2066Index extends Component
         
                                             $link = new Link();
                                             $link->jumper = $url_detect;
-                                            $link->psid = substr($psid_buscar,0,5);
+                                            $link->psid = substr($this->psid_buscar,0,5);
                                             $link->user_id = auth()->user()->id;
                                             $link->jumper_type_id = 22;
                                             $link->k_detected = 'K=2066';
