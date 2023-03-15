@@ -31,56 +31,57 @@
 
 </head>
 
-<body>
-    <section class="main-banner h-full w-full">
+<body class="pequeno">
 
-        <!--grind-container -->
+    <video src="/imagenes/LOGIN.mp4" class="mt-14 hidden md:block" autoplay="true" muted="true" loop="true"></video>
 
-        <div class="md:hidden lg:hidden">
-        <div class="grid-container">
-            <div class="content">
-                <!--Titulo-->
-                <h1 class=" title s-center">
-                    <span class="line-1"> VERIFICACIÓN DE CORREO</span>
-                    <br>
-                    <span class="line-2">ELECTRÓNICO</span>
-                </h1>
+    <section id="sect1" class="sect">
 
-                <div class="mt-6">
-                    <div class="mx-auto rounded-3xl">
-                        <div class="mb-4 text-sm text-gray-200">
-                        Te hemos enviado un correo electrónico al email que has registrado, ábrelo y haz clic en el botón "Verify Email Address", serás direccionado inmediatamente al sistema para reportar tu pago de ingreso.
-                        </div>
 
-                        @if (session('status') == 'verification-link-sent')
-                            <div class="mb-4 font-medium text-sm text-green-600">
-                            Se ha enviado un nuevo enlace de verificación a la dirección de correo electrónico que proporcionó en la configuración de su perfil.
+        <div class="md:hidden lg:hidden w-full h-full pequeno main-banner">
+            <div class="grid-container">
+                <div class="content">
+                    <!--Titulo-->
+                    <h1 class=" title s-center">
+                        <span class="line-1"> VERIFICACIÓN DE CORREO</span>
+                        <br>
+                        <span class="line-2">ELECTRÓNICO</span>
+                    </h1>
+
+                    <div class="mt-6">
+                        <div class="mx-auto rounded-3xl">
+                            <div class="mb-4 text-sm text-gray-200">
+                            Te hemos enviado un correo electrónico al email que has registrado, ábrelo y haz clic en el botón "Verify Email Address", serás direccionado inmediatamente al sistema para reportar tu pago de ingreso.
                             </div>
-                        @endif
 
-                        <div class="mt-4 flex items-center justify-between">
-                            <form method="POST" action="{{ route('verification.send') }}">
-                                @csrf
-
-                                <div>
-                                    <button type="submit" class="w-full flex justify-center bg-green-200  hover:blue-700 text-gray-600 p-3  rounded-lg tracking-wide font-semibold  cursor-pointer transition ease-in duration-500">
-                                    Reenviar correo electrónico de verificación
-                                    </button>
+                            @if (session('status') == 'verification-link-sent')
+                                <div class="mb-4 font-medium text-sm text-green-600">
+                                Se ha enviado un nuevo enlace de verificación a la dirección de correo electrónico que proporcionó en la configuración de su perfil.
                                 </div>
-                            </form>
-                        </div>
-		            </div>
-	            </div>
-            </div>
-	    </div>
+                            @endif
 
+                            <div class="mt-4 flex items-center justify-between">
+                                <form method="POST" action="{{ route('verification.send') }}">
+                                    @csrf
+
+                                    <div>
+                                        <button type="submit" class="w-full flex justify-center bg-green-200  hover:blue-700 text-gray-600 p-3  rounded-lg tracking-wide font-semibold  cursor-pointer transition ease-in duration-500">
+                                        Reenviar correo electrónico de verificación
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="hidden md:block w-full">
+        <div class="hidden md:block">
         <div class="grid-container flex">
             <div class="content w-full">
                 <!--Titulo-->
-                <h1 class=" title s-center">
+                <h1 class=" title mx-8">
                     <span class="line-1"> VERIFICACIÓN DE CORREO</span>
                     <br>
                     <span class="line-2">ELECTRÓNICO</span>
@@ -90,7 +91,7 @@
                 <!-- <p class="description s-center">Dile adiós a los jumpers mal creados que te banean y te desmotivan. Comienza ya con Queryset.para obetener los mejores Jumpers del mercado.</p> -->
 
                 <div class="mt-6 w-3/4">
-                    <div class="mx-auto rounded-3xl">
+                    <div class=" mx-8 rounded-3xl">
                         <div class="mb-4 text-lg text-gray-200 text-justify">
                         Te hemos enviado un correo electrónico al email que has registrado, ábrelo y haz clic en el botón "Verify Email Address", serás redireccionado inmediatamente al sistema para reportar tu pago de ingreso.
                         </div>
@@ -121,9 +122,7 @@
             </div>
 
             <div class="graphic w-full">
-                <img class="graphic-man" src="/imagenes/man.png">
-                <!-- <img class="graphic-go absolute" src="/imagenes/buscador.png"> -->
-                <div class="graphic-circles absolute">
+                <div class="graphic-circles absolute hidden lg:block">
                     <img class="graphic-logo absolute" src="/imagenes/logo.png">
                     <img class="graphic-circle-1 absolute" src="/imagenes/internal-techs.png">
                     <img class="graphic-circle-2 absolute" src="/imagenes/external-new.png">

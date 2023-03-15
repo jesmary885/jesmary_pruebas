@@ -10,6 +10,17 @@ class AdminController extends Controller
         return view('admin.users');
     }
 
+    public function users_paying(){
+        return view('admin.users_paying');
+
+    }
+
+    public function users_free(){
+        return view('admin.users_free');
+        
+    }
+
+
     public function pagos(){
         return view('admin.pagos');
     }

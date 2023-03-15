@@ -306,11 +306,20 @@ return [
                     
                 ],
                 [
-                    'text' => 'Comunidad',
-                    'route'  => 'admin.comunidad',
+                    'text' => 'Usuarios pagos',
+                    'route'  => 'admin.users_paying',
                     'icon'    => 'fas fa-users',
                     'icon_color' => 'red',
-                    'can' => 'otro.admin'
+                    'can' => 'administracion_principal'
+                    
+                ],
+                [
+                    'text' => 'Usuarios Libres',
+                    'route'  => 'admin.users_free',
+                    'icon'    => 'fas fa-users',
+                    'icon_color' => 'red',
+                    'can' => 'administracion_principal'
+                    
                 ],
                 [
                     'text' => 'Jumpers',
@@ -375,6 +384,22 @@ return [
                 ],
             ],
         ],
+
+        [
+            'text'    => 'COMUNIDAD',
+            'icon'    => 'fas fa-users',
+            'can' => 'otro.admin',
+            'icon_color' => 'cyan',
+            'submenu' => [
+                [
+                    'text' => 'Dashboard',
+                    'route'  => 'admin.comunidad',
+                    'icon'    => 'fas fa-users',
+                    'icon_color' => 'red',
+                    'can' => 'otro.admin'
+                ],
+            ],
+        ],
         
         // Navbar items:
         // [
@@ -421,13 +446,13 @@ return [
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
                 ],
-                /*[
+                [
                     'text' => 'KTMR',
                     'route'  => 'ktmr.index',
                     'can' => 'ssidkr.index',
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
-                ],*/
+                ],
                 [
                     'text' => 'K1000',
                     'route'  => 'kmil.index',

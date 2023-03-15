@@ -28,15 +28,16 @@
 
         }
     </style>
-    
 </head>
 
-<body>
-    <section class="main-banner h-full w-full">
+<body class="pequeno" >
+
+    <video src="/imagenes/LOGIN.mp4" class="mt-14 hidden md:block" autoplay="true" muted="true" loop="true"></video>    
+    <section id="sect1" class="sect">
 
         <!--grind-container -->
 
-        <div class="md:hidden lg:hidden">
+        <div class="md:hidden lg:hidden w-full h-full pequeno main-banner">
         <div class="grid-container">
             <div class="content">
                 <!--Titulo-->
@@ -105,7 +106,7 @@
 
         </div>
 
-        <div class="hidden md:block w-full">
+        <div class="hidden md:block w-full ">
         <div class="flex">
             <div class="content w-full md:ml-0 md:mt-0 lg:ml-6 lg:mt-6  2xl:ml-16 2xl:mt-20 ">
                 <!--Titulo-->
@@ -159,10 +160,9 @@
             </div>
 
             <div class="graphic w-full">
-                <img class="graphic-man" src="/imagenes/man.png">
-                <!-- <img class="graphic-go absolute" src="/imagenes/buscador.png"> -->
-                <div class="graphic-circles absolute">
-                    <img class="graphic-logo absolute" src="/imagenes/logo.png">
+              
+                <div class="graphic-circles absolute hidden lg:block">
+                     <img class="graphic-logo absolute" src="/imagenes/logo.png">
                     <img class="graphic-circle-1 absolute" src="/imagenes/internal-techs.png">
                     <img class="graphic-circle-2 absolute" src="/imagenes/external-new.png">
                     <img class="graphic-energy absolute" src="/imagenes/power-sphere.png">
