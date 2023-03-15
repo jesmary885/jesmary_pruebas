@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Jumpers\K2001;
 
+use App\Models\Antibot;
 use App\Models\Comments;
 use App\Models\Link;
 use App\Models\User_Links_Points;
@@ -14,14 +15,42 @@ class K2001Index extends Component
     use WithPagination;
     protected $paginationTheme = "bootstrap";
 
-    public  $jumper_complete = "",$jumper_list = 0,$busqueda_link,$comment_new_psid_register,$pid_register_high,$psid_register_bh,$high_register_bh,$basic_register_bh,$posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $wix_detect = '0', $psid_register=0,$jumper_redirect,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$is_high,$is_basic,$calc_link,$jumper_select,$points_user_positive, $points_user_negative, $jumper_detect_k ='',$psid_buscar;
+    public  $calculo = 0,$jumper_complete = "",$jumper_list = 0,$busqueda_link,$comment_new_psid_register,$pid_register_high,$psid_register_bh,$high_register_bh,$basic_register_bh,$posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $wix_detect = '0', $psid_register=0,$jumper_redirect,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$is_high,$is_basic,$calc_link,$jumper_select,$points_user_positive, $points_user_negative, $jumper_detect_k ='',$psid_buscar,$operacion;
 
-    protected $listeners = ['render' => 'render', 'jumpear' => 'jumpear'];
+    protected $listeners = ['render' => 'render', 'jumpear' => 'jumpear' , 'verific' => 'verific', 'jump' => 'jump'];
 
-    public function jumpear(){
+    public function numerologia(){
+
+        $cant = Antibot::count();
+        $random = rand(1,$cant);
+        $this->calculo = 1;
+        $this->operacion = Antibot::where('id',$random)->first();
+        $operacion_total = 'Resuelve esta operación matemática ('.$this->operacion->nro1.' + '.$this->operacion->nro2. ')';
+
+        $this->emit('numerologia',$operacion_total,'jumpers.k2001.k2001-index','verific');
+    }
+
+    public function verific($result){
+
+        if($result[0] == $this->operacion->resultado){
+
+            $this->emit('wait');       
+        }
+
+        else{
+            $this->reset(['search','operacion']);
+            $this->calculo = 0;
+            $this->emit('error','Resultado incorrecto, intentalo de nuevo');
+       
+        }
+    }
+
+
+    public function jump(){
+  
         $client = new Client([
             //'base_uri' => 'http://127.0.0.1:8000',
-            'base_uri' => 'http://146.190.74.228/',
+            'base_uri' => 'http://209.94.57.88/',
         ]);
 
         $resultado = $client->request('GET', '/k2001/1/'.$this->psid_buscar);
@@ -35,13 +64,9 @@ class K2001Index extends Component
         else{
              $this->jumper_detect = 3;
         }
-
-       // session()->forget('search');
     }
 
-    public function wait(){
-        $this->emit('wait');
-    }
+   
     
     public function mount(){
         $this->user_auth =  auth()->user()->id;
@@ -197,7 +222,7 @@ class K2001Index extends Component
                     $this->jumper_list = 1;
                     $this->jumper_detect = 1;
 
-                    if($this->jumper_complete == "") $this->wait();
+                    if($this->jumper_complete == "" && $this->calculo == 0) $this->numerologia();
 
                 }
                 else{

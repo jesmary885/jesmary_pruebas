@@ -54,6 +54,10 @@
                             Te hemos enviado un correo electrónico al email que has registrado, ábrelo y haz clic en el botón "Verify Email Address", serás direccionado inmediatamente al sistema para reportar tu pago de ingreso.
                             </div>
 
+                            <div class="mb-4  text-xs text-gray-200 text-justify">
+                        Si no encuentras el email en bandeja de entrada revisa en Correos no deseados, si aún no lo encuentras, haz clic en el botón "Reenviar correo electrónico de verificación"
+                        </div>
+
                             @if (session('status') == 'verification-link-sent')
                                 <div class="mb-4 font-medium text-sm text-green-600">
                                 Se ha enviado un nuevo enlace de verificación a la dirección de correo electrónico que proporcionó en la configuración de su perfil.
@@ -97,7 +101,7 @@
                         </div>
 
                         <div class="mb-4  text-xs text-gray-200 text-justify">
-                        Si aún no has recibido el email, haz clic en el botón "Reenviar correo electrónico de verificación"
+                        Si no encuentras el email en bandeja de entrada revisa en Correos no deseados, si aún no lo encuentras, haz clic en el botón "Reenviar correo electrónico de verificación"
                         </div>
 
                         @if (session('status') == 'verification-link-sent')

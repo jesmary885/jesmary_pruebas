@@ -62,7 +62,7 @@ class K1098Index extends Component
 
             $client = new Client([
                 //'base_uri' => 'http://127.0.0.1:8000',
-                'base_uri' => 'http://146.190.74.228/',
+                'base_uri' => 'http://209.94.57.88/',
             ]);
 
             $resultado = $client->request('GET', '/k1098/1/'.$this->psid_buscar);
@@ -422,7 +422,7 @@ class K1098Index extends Component
 
                                 $client = new Client([
                                     //'base_uri' => 'http://127.0.0.1:8000',
-                                    'base_uri' => 'http://146.190.74.228/',
+                                    'base_uri' => 'http://209.94.57.88/',
                                 ]);
             
                                 $resultado = $client->request('GET', '/k1098/1/'.$this->psid_buscar);

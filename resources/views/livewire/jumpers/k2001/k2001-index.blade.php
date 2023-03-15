@@ -345,12 +345,14 @@
 
         Livewire.on('wait', function(){
 
+            
+
             Swal.fire(
-            'El jumper será generado en aproximadamente 1.5 min.',
+            'El jumper será generado en aproximadamente 1.5 minutos',
             'Espere pacientemente...',
             )
 
-            livewire.emitTo('jumpers.k2001.k2001-index','jumpear')
+            livewire.emitTo('jumpers.k2001.k2001-index','jump')
 
         })
 

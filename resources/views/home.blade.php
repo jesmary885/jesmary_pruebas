@@ -154,6 +154,25 @@
   </div>
   @endif
 
+  <div class="glider-contain">
+            <ul class="glider">
+              <video src="/imagenes/K.mp4" autoplay="true" class="mr-2 rounded-md" muted="true" loop="true"></video>
+          
+              <video src="/imagenes/marketplace.mp4" class="mr-2 rounded-md"  autoplay="true" muted="true" loop="true"></video>
+
+              <video src="/imagenes/comunidad.mp4" class="mr-2 rounded-md" autoplay="true" muted="true" loop="true"></video>
+
+              <video src="/imagenes/contactos.mp4" class="mr-2 rounded-md" autoplay="true" muted="true" loop="true"></video>
+
+              
+
+            </ul>
+        
+            <button aria-label="Previous" class="glider-prev">«</button>
+            <button aria-label="Next" class="glider-next">»</button>
+            <div role="tablist" class="dots"></div>
+  </div> 
+
 </div>
 
     
@@ -164,5 +183,56 @@
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+
+<script>
+            window.addEventListener('load', function(){
+                new Glider(document.querySelector('.glider'), {
+                slidesToShow: 2, //cant de registros que se muestran
+                slidesToScroll: 1, //los saltos que se dan al darle click a los botones
+                draggable: true,
+                dots: '.dots',
+                arrows: {
+                    prev: '.glider-prev',
+                    next: '.glider-next'
+                },
+
+                responsive:[
+                    {
+                        breakpoint: 640,
+                        settings:{
+                            slidesToShow: 1, 
+                            slidesToScroll: 2,
+                        }
+                    },
+                    {
+                        breakpoint: 768,
+                        settings:{
+                            slidesToShow: 2, 
+                            slidesToScroll: 3,
+                        }
+                    },
+                    {
+                        breakpoint: 1024,
+                        settings:{
+                            slidesToShow: 2, 
+                            slidesToScroll: 2,
+                        }
+                    },
+                    {
+                        breakpoint: 1280,
+                        settings:{
+                            slidesToShow: 2, 
+                            slidesToScroll: 2,
+                        }
+                    },
+                ]
+                });
+                
+            })
+
+      
+        </script>
+
+
+
 @stop

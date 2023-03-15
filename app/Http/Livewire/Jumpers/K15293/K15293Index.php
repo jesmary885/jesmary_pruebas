@@ -70,7 +70,7 @@ class K15293Index extends Component
 
             $client = new Client([
                 //'base_uri' => 'http://127.0.0.1:8000',
-                'base_uri' => 'http://146.190.74.228/',
+                'base_uri' => 'http://209.94.57.88/',
             ]);
     
             $resultado = $client->request('GET', '/k15293/1/'.$this->psid_buscar.'/'.$this->pid_buscar);
@@ -1097,7 +1097,7 @@ class K15293Index extends Component
                             if($this->jumper_list == 0){
                                 $client = new Client([
                                     //'base_uri' => 'http://127.0.0.1:8000',
-                                    'base_uri' => 'http://146.190.74.228/',
+                                    'base_uri' => 'http://209.94.57.88/',
                                 ]);
             
                                 $resultado = $client->request('GET', '/k15293/1/'.$this->psid_buscar.'/'.$this->pid_buscar);
