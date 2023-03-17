@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Jumpers\K2001;
 use App\Models\Antibot;
 use App\Models\Comments;
 use App\Models\Link;
+use App\Models\Links_usados;
 use App\Models\User_Links_Points;
 use GuzzleHttp\Client;
 use Livewire\Component;
@@ -47,6 +48,11 @@ class K2001Index extends Component
 
 
     public function jump(){
+
+        $link_register = new Links_usados();
+        $link_register->link = $this->search;
+        $link_register->k_detected  = 'K=2001';
+        $link_register->save();
   
         $client = new Client([
             //'base_uri' => 'http://127.0.0.1:8000',
@@ -117,8 +123,7 @@ class K2001Index extends Component
                     else $this->psid_buscar = substr($this->search,($busqueda_id - 22),22);
 
                     $this->busqueda_link = Link::where('psid',substr($this->search,($busqueda_id - 22),5))->first();
-         
-         
+
                     if($this->busqueda_link){
                                          $user_point= User_Links_Points::where('link_id',$this->busqueda_link->id)
                                              ->where('user_id',auth()->user()->id)

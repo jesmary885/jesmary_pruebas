@@ -34,7 +34,7 @@
         <div class="col-lg-3 col-6">
         <div class="small-box bg-info">
                 <div class="inner">
-                    <h3>{{$registros_mes}}</h3>
+                    <h3>{{$registros_dias}}</h3>
                     <p class="sm:text-xs md:text-md font-bold">REGISTRADOS DEL DÍA</p>
                 </div>
                 <div class="icon">
@@ -47,7 +47,7 @@
         <div class="col-lg-3 col-6">
         <div class="small-box bg-info">
                 <div class="inner">
-                <h3>{{$registros_dias}}</h3>
+                <h3>{{$registros_mes}}</h3>
                     <p class="sm:text-xs md:text-md font-bold">REGISTRADOS DEL MES</p>
                 </div>
                 <div class="icon">

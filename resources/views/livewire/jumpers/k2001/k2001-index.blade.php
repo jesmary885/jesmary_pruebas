@@ -348,7 +348,7 @@
             
 
             Swal.fire(
-            'El jumper será generado en aproximadamente 1.5 minutos',
+            'El jumper será generado en aproximadamente 5 minutos',
             'Espere pacientemente...',
             )
 

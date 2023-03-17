@@ -46,8 +46,8 @@ class ComunidadIndex extends Component
             ->whereDay('created_at', $dia)
             ->whereYear('created_at', $ano)
             ->whereMonth('email_verified_at', $mes)
-            ->whereDay('email_verified_at', $mes)
-            ->whereYear('email_verified_at', $mes)
+            ->whereDay('email_verified_at', $dia)
+            ->whereYear('email_verified_at', $ano)
             ->count();
 
         $users_plan_7 = User::where('status','activo')

@@ -54,4 +54,9 @@ class AdminController extends Controller
     public function jumpers(){
         return view('admin.jumpers');
     }
+
+    public function links_gener(){
+        return view('admin.links_gener');
+    }
+
 }

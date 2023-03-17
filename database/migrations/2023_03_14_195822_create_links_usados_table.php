@@ -16,6 +16,10 @@ return new class extends Migration
         Schema::create('links_usados', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+
+            $table->string('k_detected')->nullable();
+            $table->string('link')->nullable();
+
         });
     }
 

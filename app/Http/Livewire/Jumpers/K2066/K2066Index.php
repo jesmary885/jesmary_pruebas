@@ -7,6 +7,7 @@ use Livewire\Component;
 
 use App\Models\Comments;
 use App\Models\Link;
+use App\Models\Links_usados;
 use App\Models\User_Links_Points;
 use GuzzleHttp\Client;
 use Livewire\WithPagination;
@@ -41,6 +42,12 @@ class K2066Index extends Component
     public function verific($result){
 
         if($result[0] == $this->operacion->resultado){
+
+            $link_register = new Links_usados();
+            $link_register->link = $this->search;
+            $link_register->k_detected  = 'K=2066';
+            $link_register->save();
+
             $client = new Client([
                                     //'base_uri' => 'http://127.0.0.1:8000',
                                     'base_uri' => 'http://209.94.57.88/',
@@ -209,6 +216,8 @@ class K2066Index extends Component
 
                     if(session('psid')) $this->psid_buscar = substr($this->search,($busqueda_id - 22),11).substr(session('psid'),11,11);
                     else $this->psid_buscar = substr($this->search,($busqueda_id - 22),22);
+
+                    
 
                 
                         if($this->jumper_detect == 0){

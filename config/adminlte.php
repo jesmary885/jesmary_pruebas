@@ -329,6 +329,13 @@ return [
                     'can' => 'administracion_principal'
                 ],
                 [
+                    'text' => 'Links generados',
+                    'route'  => 'admin.links_gener',
+                    'icon'    => 'fas fa-server',
+                    'icon_color' => 'red',
+                    'can' => 'administracion_principal'
+                ],
+                [
                     'text' => 'Pagos',
                     'route'  => 'admin.pagos',
                     'icon_color' => 'red',

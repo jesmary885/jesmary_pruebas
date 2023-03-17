@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\User;
 use Illuminate\Console\Command;
 
 class closeCommand extends Command
@@ -15,7 +16,12 @@ class closeCommand extends Command
     
     public function handle()
     {
-        
+       /* $users = User::all();
+
+        foreach($users as $user){
+            if($user->id != '1' && 
+            $user->id != '1' && )
+        }*/
     }
 
 
