@@ -41,7 +41,7 @@
                 <div class="flex-nowrap justify-center callout callout-info">
                 
                       
-                    <p  class="text-blue-400 text-clip text-sm text-center font-bold mb-2" id="jumper_copy">{{$jumper_complete['jumper']}}</p>
+                    <p  class="text-blue-400 text-clip text-md text-center font-bold mb-2" id="jumper_copy">{{$jumper_complete['jumper']}}</p>
 
                     <div class="flex justify-center">
                         <button onclick="copiarAlPortapapeles('jumper_copy')" class="btn btn-sm btn-success text-bold" title="{{__('messages.copiar_portapapeles')}}" id="button_copy">Copiar</button> 
@@ -171,20 +171,19 @@
         </script>
 
 
-<script>
+    <script>
 
-Livewire.on('wait', function(){
+    Livewire.on('wait', function(){
 
-    Swal.fire(
-    'El jumper será generado en aproximadamente 3 minutos',
-    'Espere pacientemente...',
-    )
+        Swal.fire(
+        'El jumper será generado en aproximadamente 4 minutos',
+        'Espere pacientemente...',
+        )
 
-    livewire.emitTo('jumpers.ktmr.ktmr-index','jumpear')
+        livewire.emitTo('jumpers.ktmr.ktmr-index','jump')
+    })
 
-})
-
-</script>
+    </script>
 
     @stop
 

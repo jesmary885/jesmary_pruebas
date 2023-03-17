@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Models\Link;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -17,6 +18,17 @@ class UsuariosFree extends Component
 
     public function updatingSearch(){
         $this->resetPage();
+    }
+
+    public function links($user){
+        return Link::where('user_id',$user)->count();
+        
+    }
+
+    public function links_negativos($user){
+        return Link::where('user_id',$user)
+            ->where('negative_points','>','2')
+            ->count();
     }
 
     public function render()

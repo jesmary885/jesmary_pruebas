@@ -62,7 +62,7 @@ class K3906Index extends Component
 
             $client = new Client([
                                     //'base_uri' => 'http://127.0.0.1:8000',
-                                    'base_uri' => 'http://209.94.57.88/',
+                                    'base_uri' => 'http://146.190.74.228/',
                                 ]);
             
                                 $resultado = $client->request('GET', '/k3906/1/'.$this->psid_buscar);
@@ -241,7 +241,7 @@ class K3906Index extends Component
 
                                /* $client = new Client([
                                     //'base_uri' => 'http://127.0.0.1:8000',
-                                    'base_uri' => 'http://209.94.57.88/',
+                                    'base_uri' => 'http://146.190.74.228/',
                                 ]);
             
                                 $resultado = $client->request('GET', '/k3906/1/'.$this->psid_buscar);
@@ -423,7 +423,7 @@ class K3906Index extends Component
 
                                 $client = new Client([
                                     //'base_uri' => 'http://127.0.0.1:8000',
-                                    'base_uri' => 'http://209.94.57.88/',
+                                    'base_uri' => 'http://146.190.74.228/',
                                 ]);
             
                                 $resultado = $client->request('GET', '/k3906/1/'.$this->psid_buscar);

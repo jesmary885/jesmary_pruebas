@@ -163,9 +163,6 @@
               <video src="/imagenes/comunidad.mp4" class="mr-2 rounded-md" autoplay="true" muted="true" loop="true"></video>
 
               <video src="/imagenes/contactos.mp4" class="mr-2 rounded-md" autoplay="true" muted="true" loop="true"></video>
-
-              
-
             </ul>
         
             <button aria-label="Previous" class="glider-prev">«</button>

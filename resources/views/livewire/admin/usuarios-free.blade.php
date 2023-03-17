@@ -15,6 +15,8 @@
                             <th class="text-center">Plan</th>
                             <th class="text-center">Rol</th>
                             <th class="text-center">Estado</th>
+                            <th class="text-center">Links registrados</th>
+                            <th class="text-center px-8">Registrados con + 2 <i class="font-semibold far fa-thumbs-down text-red-800"></i></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -25,7 +27,9 @@
                                     <td class="text-center">{{$user->last_payment_date}}</td>
                                     <td class="text-center">{{$user->plan}} días</td>
                                     <td class="text-center">{{$user->roles->first()->name}}</td>
-                                    <td class="text-center">{{$user->status}}</td>                          
+                                    <td class="text-center">{{$user->status}}</td> 
+                                    <td class="text-center">{{$this->links($user->id)}}</td>   
+                                    <td class="text-center">{{$this->links_negativos($user->id)}}</td>                     
                                 </tr>
                             @endforeach
                         </tbody>
