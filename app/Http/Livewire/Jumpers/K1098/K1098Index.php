@@ -61,10 +61,10 @@ class K1098Index extends Component
 
         if($result[0] == $this->operacion->resultado){
 
-            $link_register = new Links_usados();
+         /*   $link_register = new Links_usados();
             $link_register->link = $this->search;
             $link_register->k_detected  = 'K=1098';
-            $link_register->save();
+            $link_register->save();*/
 
             $client = new Client([
                 //'base_uri' => 'http://127.0.0.1:8000',

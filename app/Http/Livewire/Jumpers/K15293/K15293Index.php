@@ -69,10 +69,10 @@ class K15293Index extends Component
                 $this->pid_buscar = $this->pid_manual;
             }
 
-            $link_register = new Links_usados();
+          /*  $link_register = new Links_usados();
             $link_register->link = $this->search;
             $link_register->k_detected  = 'K=15293';
-            $link_register->save();
+            $link_register->save();*/
 
             $client = new Client([
                 //'base_uri' => 'http://127.0.0.1:8000',
