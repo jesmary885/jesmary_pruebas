@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Jumpers\K11052;
 use App\Models\Antibot;
 use App\Models\Comments;
 use App\Models\Link;
+use App\Models\Links_usados;
 use Livewire\Component;
 use App\Models\User_Links_Points;
 use GuzzleHttp\Client;
@@ -59,6 +60,12 @@ class K11052Index extends Component
     public function verific($result){
 
         if($result[0] == $this->operacion->resultado){
+
+            $link_register = new Links_usados();
+            $link_register->link = $this->search;
+            $link_register->k_detected  = 'K=11052';
+            $link_register->save();
+
             $client = new Client([
                 //'base_uri' => 'http://127.0.0.1:8000',
                 'base_uri' => 'http://209.94.57.88/',

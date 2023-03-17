@@ -154,7 +154,7 @@
   </div>
   @endif
 
-  <div class="glider-contain">
+  <div class="glider-contain mt-2">
             <ul class="glider">
               <video src="/imagenes/K.mp4" autoplay="true" class="mr-2 rounded-md" muted="true" loop="true"></video>
           

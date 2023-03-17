@@ -64,8 +64,7 @@ class ReportePago extends Component
 
         $rol = $user->roles->first()->id;
 
-        if($this->plan == '7') $proxima_fecha = date("Y-m-d h:s",strtotime($fecha_actual."+ 7 days"));
-        elseif($this->plan == '15') $proxima_fecha = date("Y-m-d h:s",strtotime($fecha_actual."+ 15 days"));
+        if($this->plan == '15') $proxima_fecha = date("Y-m-d h:s",strtotime($fecha_actual."+ 15 days"));
         else $proxima_fecha = date("Y-m-d h:s",strtotime($fecha_actual."+ 30 days"));
 
         $user->update([

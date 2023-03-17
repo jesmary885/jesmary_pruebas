@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Jumpers\K15293;
 use App\Models\Antibot;
 use App\Models\Comments;
 use App\Models\Link;
+use App\Models\Links_usados;
 use App\Models\User_Links_Points;
 use GuzzleHttp\Client;
 use Livewire\Component;
@@ -67,6 +68,11 @@ class K15293Index extends Component
             if($this->pid_manual){
                 $this->pid_buscar = $this->pid_manual;
             }
+
+            $link_register = new Links_usados();
+            $link_register->link = $this->search;
+            $link_register->k_detected  = 'K=15293';
+            $link_register->save();
 
             $client = new Client([
                 //'base_uri' => 'http://127.0.0.1:8000',

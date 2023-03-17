@@ -328,13 +328,7 @@ return [
                     'icon_color' => 'red',
                     'can' => 'administracion_principal'
                 ],
-                [
-                    'text' => 'Links generados',
-                    'route'  => 'admin.links_gener',
-                    'icon'    => 'fas fa-server',
-                    'icon_color' => 'red',
-                    'can' => 'administracion_principal'
-                ],
+                
                 [
                     'text' => 'Pagos',
                     'route'  => 'admin.pagos',
@@ -399,9 +393,16 @@ return [
             'icon_color' => 'cyan',
             'submenu' => [
                 [
-                    'text' => 'Dashboard',
+                    'text' => 'Usuarios',
                     'route'  => 'admin.comunidad',
                     'icon'    => 'fas fa-users',
+                    'icon_color' => 'red',
+                    'can' => 'otro.admin'
+                ],
+                [
+                    'text' => 'Links generados',
+                    'route'  => 'admin.links_gener',
+                    'icon'    => 'fas fa-server',
                     'icon_color' => 'red',
                     'can' => 'otro.admin'
                 ],

@@ -134,10 +134,6 @@
     <div class="row">
 
         <div class="col-lg-3 col-6">
-
-        </div>
-
-        <div class="col-lg-3 col-6">
             <div class="small-box bg-warning">
                 <div class="inner">
                     <h3>{{$ganancia_dia_15}}</h3>
