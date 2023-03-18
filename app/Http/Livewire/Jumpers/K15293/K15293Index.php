@@ -74,21 +74,34 @@ class K15293Index extends Component
             $link_register->k_detected  = 'K=15293';
             $link_register->save();*/
 
-            $client = new Client([
-                //'base_uri' => 'http://127.0.0.1:8000',
-                'base_uri' => 'http://146.190.74.228/',
-            ]);
-    
-            $resultado = $client->request('GET', '/k15293/1/'.$this->psid_buscar.'/'.$this->pid_buscar);
-    
-            if($resultado->getStatusCode() == 200){
-    
-                $this->jumper_complete = json_decode($resultado->getBody(),true);
+            try {
+
+                $client = new Client([
+                    //'base_uri' => 'http://127.0.0.1:8000',
+                    'base_uri' => 'http://146.190.74.228/',
+                ]);
+        
+                $resultado = $client->request('GET', '/k15293/1/'.$this->psid_buscar.'/'.$this->pid_buscar);
+        
+                if($resultado->getStatusCode() == 200){
+        
+                    $this->jumper_complete = json_decode($resultado->getBody(),true);
+                }
+            }
+            catch (\GuzzleHttp\Exception\RequestException $e) {
+
+                $error['error'] = $e->getMessage();
+                $error['request'] = $e->getRequest();
+
+                if($e->hasResponse()){
+                    if ($e->getResponse()->getStatusCode() !== '200'){
+                        $error['response'] = $e->getResponse(); 
+                        $this->jumper_detect = 5;
+                    }
+                }
             }
     
-            else{
-                $this->jumper_detect = 3;
-            }
+            
         }
 
         else{

@@ -46,22 +46,35 @@ class K7341Index extends Component
     }
 
     public function jump(){
-        $client = new Client([
-            //'base_uri' => 'http://127.0.0.1:8000',
-            'base_uri' => 'http://209.94.57.88/',
-        ]);
 
-        $resultado = $client->request('GET', '/k7341/1/'.$this->psid_buscar);
+        try {
+            $client = new Client([
+                //'base_uri' => 'http://127.0.0.1:8000',
+                'base_uri' => 'http://209.94.57.88/',
+            ]);
 
-        if($resultado->getStatusCode() == 200){
-            $this->jumper_detect = 1;
+            $resultado = $client->request('GET', '/k7341/1/'.$this->psid_buscar);
 
-            $this->jumper_complete = json_decode($resultado->getBody(),true);
+            if($resultado->getStatusCode() == 200){
+                $this->jumper_detect = 1;
+
+                $this->jumper_complete = json_decode($resultado->getBody(),true);
+            }
+        }
+        catch (\GuzzleHttp\Exception\RequestException $e) {
+
+            $error['error'] = $e->getMessage();
+            $error['request'] = $e->getRequest();
+
+            if($e->hasResponse()){
+                if ($e->getResponse()->getStatusCode() !== '200'){
+                    $error['response'] = $e->getResponse(); 
+                    $this->jumper_detect = 5;
+                }
+            }
         }
 
-        else{
-             $this->jumper_detect = 3;
-        }
+        
     }
 
     

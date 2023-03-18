@@ -45,6 +45,44 @@
 
         </div>
 
+        @if ($jumper_detect == 2)
+            <div class="px-4">
+                <div class=" info-box bg-warning">
+                    <span class="info-box-icon"><i class="far fa-sad-tear"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Lo siento.</span>
+                            <span class="info-box-number">Ha ocurrido un error al generar el jumper...</span>
+                        </div>
+                </div>
+
+            </div>
+        @endif
+
+        @if ($jumper_detect == 5)
+            <div class="px-4">
+                <div class=" info-box bg-info">
+                    <span class="info-box-icon"><i class="	fas fa-info"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Ha ocurrido un error al generar el jumper.</span>
+                            <span class="info-box-number">Intentelo de nuevo...</span>
+                        </div>
+                </div>
+
+            </div>
+        @endif
+
+        @if ($jumper_detect == 3)
+            <div class="container">
+                <div class=" info-box bg-warning">
+                    <span class="info-box-icon"><i class="fas fa-tag"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Algo en su link no esta bien. </span>
+                            <span class="info-box-number">Copielo correctamente...</span>
+                        </div>
+                </div>
+            </div>
+        @endif
+
       
 
        
@@ -212,38 +250,7 @@
             @endif
         </div>
 
-        @if ($jumper_detect == 2)
-        <div>
-        <div class=" info-box bg-warning">
-                <span class="info-box-icon"><i class="fas fa-tag"></i></span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">Ha ocurrido un error. </span>
-                        <span class="info-box-number">Intentelo de nuevo...</span>
-                    </div>
-            </div>
 
-        </div>
-            
-
-        @endif
-
-        @if ($jumper_detect == 3)
-        <div>
-        <div class=" info-box bg-warning">
-                <span class="info-box-icon"><i class="fas fa-tag"></i></span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">Algo en su link no esta bien. </span>
-                        <span class="info-box-number">Copielo correctamente...</span>
-                    </div>
-            </div>
-
-        </div>
-            
-
-        @endif
-
-       
-        
         @if ($jumper_complete == [])
         <div class="flex justify-center">
             <div class="mt-4" wire:loading>

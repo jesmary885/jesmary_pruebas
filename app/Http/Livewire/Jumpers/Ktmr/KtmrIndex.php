@@ -39,22 +39,64 @@ class KtmrIndex extends Component
     }
 
     public function jump(){
+
+        try {
   
-        $client = new Client([
-            //'base_uri' => 'http://127.0.0.1:8000',
-            'base_uri' => 'http://209.94.57.88/',
-        ]);
+            $client = new Client([
+                //'base_uri' => 'http://127.0.0.1:8000',
+                'base_uri' => 'http://209.94.57.88/',
+            ]);
 
-        $resultado = $client->request('GET', '/ktmr/1/'.$this->psid_buscar);
+            $resultado = $client->request('GET', '/ktmr/1/'.$this->psid_buscar);
 
-        if($resultado->getStatusCode() == 200){
-            $this->jumper_detect = 1;
+            if($resultado->getStatusCode() == 200){
+                $this->jumper_detect = 1;
 
-            $this->jumper_complete = json_decode($resultado->getBody(),true);
+                $this->jumper_complete = json_decode($resultado->getBody(),true);
+            }
+
+            else{
+                $this->jumper_detect = 2;
+            }
         }
+        catch (\GuzzleHttp\Exception\RequestException $e) {
 
-        else{
-             $this->jumper_detect = 3;
+            $error['error'] = $e->getMessage();
+            $error['request'] = $e->getRequest();
+
+            if($e->hasResponse()){
+                try {
+  
+                        $client = new Client([
+                            //'base_uri' => 'http://127.0.0.1:8000',
+                            'base_uri' => 'http://209.94.57.88/',
+                        ]);
+            
+                        $resultado = $client->request('GET', '/ktmr/2/'.$this->psid_buscar);
+            
+                        if($resultado->getStatusCode() == 200){
+                            $this->jumper_detect = 1;
+            
+                            $this->jumper_complete = json_decode($resultado->getBody(),true);
+                        }
+            
+                        else{
+                            $this->jumper_detect = 3;
+                        }
+                }
+                catch (\GuzzleHttp\Exception\RequestException $e) {
+            
+                        $error['error'] = $e->getMessage();
+                        $error['request'] = $e->getRequest();
+            
+                        if($e->hasResponse()){
+                            if ($e->getResponse()->getStatusCode() !== '200'){
+                                $error['response'] = $e->getResponse(); 
+                                $this->jumper_detect = 2;
+                            }
+                        }
+                }
+            }
         }
     }
 
@@ -64,7 +106,6 @@ class KtmrIndex extends Component
     {
         //$this->jumper_complete = 0;
         $link_complete = 0;
-        $this->jumper_detect = 0;
 
         $this->search = trim($this->search); //quitando espacios en blancos al inicio y final
         $long_psid = strlen($this->search); //buscando cuantos caracteres tiene en total
@@ -75,8 +116,6 @@ class KtmrIndex extends Component
 
             if($busqueda_f_ != false) $this->psid_buscar= substr($this->search, $busqueda_f_ + 13);
             else $this->psid_buscar= $this->search;
-
-            //dd($this->psid_buscar);
 
             if($this->jumper_complete == "" && $this->calculo == 0) $this->numerologia();
         }
