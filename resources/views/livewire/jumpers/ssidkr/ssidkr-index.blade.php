@@ -264,7 +264,7 @@
                             </div>
                         @endif
 
-                    @if ($k_detect == 'K=1000' || $k_detect == 'K=1092' || $k_detect == 'K=1098' || $k_detect == 'K=2001' || $k_detect == 'K=2062' || $k_detect == 'K=2066' || $k_detect == 'K=3203' || $k_detect == 'K=7341' || $k_detect == 'K=23' || $k_detect == 'K=3906' || $k_detect == 'K=11052' || $k_detect == 'K=15293' || $k_detect == 'K=17564')
+                    @if ($k_detect == 'K=1000' || $k_detect == 'K=1092' || $k_detect == 'K=1098'|| $k_detect == 'K=2062' || $k_detect == 'K=2066' || $k_detect == 'K=3203' || $k_detect == 'K=7341' || $k_detect == 'K=23' || $k_detect == 'K=3906' || $k_detect == 'K=11052' || $k_detect == 'K=15293' || $k_detect == 'K=17564')
                     <div>
                         @if ($k_detect == 'K=1000')
                         <a href={{$this->k1000()}}>
@@ -274,9 +274,6 @@
                         @endif
                         @if ($k_detect == 'K=1098')
                         <a href={{$this->k1098()}}>
-                        @endif
-                        @if ($k_detect == 'K=2001')
-                        <a href={{$this->k2001()}}>
                         @endif
                         @if ($k_detect == 'K=2062')
                         <a href={{$this->k2062()}}>

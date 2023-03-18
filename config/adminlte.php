@@ -482,13 +482,13 @@ return [
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
                 ],
-               [
+               /*[
                     'text' => 'K2001',
                     'route'  => 'k2001.index',
                     'can' => 'ssidkr.index',
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
-                ],
+                ],*/
                 [
                     'text' => 'K2062',
                     'route'  => 'kdosmilsesentaydos.index',
