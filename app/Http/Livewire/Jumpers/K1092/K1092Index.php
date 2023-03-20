@@ -241,6 +241,7 @@ class K1092Index extends Component
         $this->k_detect = '0';
         $this->busqueda_link = "";
         $this->no_detect = '0';
+        $this->jumper_detect = 0;
         $this->comment_new_psid_register = '';
         $this->posicion = 8; //me esta buscand a partir de https://
 

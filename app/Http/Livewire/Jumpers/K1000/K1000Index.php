@@ -96,7 +96,7 @@ class K1000Index extends Component
                     $this->jumper_complete = json_decode($resultado->getBody(),true);
 
                     $this->busqueda_link = Link::where('psid',substr($this->psid_buscar,0,5))->first();
-     
+
                     if($this->busqueda_link){
                         $user_point= User_Links_Points::where('link_id',$this->busqueda_link->id)
                             ->where('user_id',auth()->user()->id)
@@ -203,12 +203,18 @@ class K1000Index extends Component
                 }
             }
             catch (\GuzzleHttp\Exception\RequestException $e) {
+                $this->jumper_detect = 2;
+
+               // dd($e->getResponse()->getStatusCode());
 
                 $error['error'] = $e->getMessage();
                 $error['request'] = $e->getRequest();
 
                 if($e->hasResponse()){
                     if ($e->getResponse()->getStatusCode() !== '200'){
+
+                       // dd($e->getResponse()->getStatusCode());
+
                         $error['response'] = $e->getResponse(); 
                         $this->jumper_detect = 2;
                     }
@@ -238,11 +244,9 @@ class K1000Index extends Component
         $this->psid_buscar = "";
         $this->pid_buscar = "";
         $busqueda_link_def = "";
-    
-     
         $this->no_jumpear = 0;
         $this->k_detect = '0';
-       // $this->jumper_detect = 0;
+        $this->jumper_detect = 0;
         $this->busqueda_link = "";
         $this->no_detect = '0';
         $this->comment_new_psid_register = '';

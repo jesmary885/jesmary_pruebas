@@ -169,8 +169,6 @@ class SsidkrIndex extends Component
                                 }
                                 while($i_high_busc_h != 1);
 
-
-
                             if($i_high_detect > 20){
                                 if(session('pid')) {
                                     $this->pid_register_high = session('pid');
