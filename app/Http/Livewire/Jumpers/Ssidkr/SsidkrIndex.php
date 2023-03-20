@@ -145,23 +145,49 @@ class SsidkrIndex extends Component
                     if((strpos($this->search, 'imperium') === false)){
                             
                         if((strpos($this->search, '**&high=') !== false)){
+
+
                             $high_detectado = strpos($this->search, '**&high=');
-                            if(session('pid')) {
-                                $this->pid_register_high = session('pid');
-                                $this->psid_register_bh = substr($this->search,($high_detectado - 22),5);
-                                $this->high_register_bh = substr($this->search,($high_detectado + 8));
 
-                                $nuevo_high_registrado = 1;
-
-                                $this->registro_high();
-                            }
-                            else{
-
-                                $nuevo_high_registrado = 2;
-
-                                $this->emit('error','Por favor registre su pid para guardar el high ingresado');
-                            }
+                            $detect_high_inicial= $high_detectado + 8;
+                            $i_high_detect = 0;
+                            $i_high_busc_h = 0;
                             
+                                do{
+                                    $detect_high = substr($this->search, $detect_high_inicial,1);
+                           
+                                    if($detect_high == '&') $i_high_busc_h = 1;
+                                    else{
+                                        $i_high_detect ++;
+                                        $detect_high_inicial = $detect_high_inicial + 1;
+                                    }
+
+                                    if($i_high_detect > 20){
+                                        $i_high_busc_h = 1;
+                                    }
+
+                                }
+                                while($i_high_busc_h != 1);
+
+
+
+                            if($i_high_detect > 20){
+                                if(session('pid')) {
+                                    $this->pid_register_high = session('pid');
+                                    $this->psid_register_bh = substr($this->search,($high_detectado - 22),5);
+                                    $this->high_register_bh = substr($this->search,($high_detectado + 8));
+    
+                                    $nuevo_high_registrado = 1;
+    
+                                    $this->registro_high();
+                                }
+                                else{
+    
+                                    $nuevo_high_registrado = 2;
+    
+                                    $this->emit('error','Por favor registre su pid para guardar el high ingresado');
+                                }
+                            }
                         }
                         else{
                             

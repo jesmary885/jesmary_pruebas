@@ -160,7 +160,7 @@
     Livewire.on('wait', function(){
 
         Swal.fire(
-        'El jumper será generado en aproximadamente 2.5 minutos',
+        'El jumper será generado en aproximadamente 4 minutos',
         'Espere pacientemente...',
         )
 
