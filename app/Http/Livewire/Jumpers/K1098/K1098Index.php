@@ -25,6 +25,8 @@ class K1098Index extends Component
         if(session('pid')) $this->pid_new = session('pid');
         if(session('psid')) $this->psid_register = session('psid');
         if(session('search')) $this->search = session('search');
+        $this->jumper_detect = 0;
+        $this->busqueda_link = "";
     }
 
     public function basic(){
@@ -69,7 +71,7 @@ class K1098Index extends Component
             try {
                 $client = new Client([
                     //'base_uri' => 'http://127.0.0.1:8000',
-                    'base_uri' => 'http://146.190.74.228/',
+                    'base_uri' => 'http://67.205.168.133/',
                 ]);
 
                 $resultado = $client->request('GET', '/k1098/1/'.$this->psid_buscar);
@@ -219,8 +221,8 @@ class K1098Index extends Component
      
         $this->no_jumpear = 0;
         $this->k_detect = '0';
-        $this->jumper_detect = 0;
-        $this->busqueda_link = "";
+        //$this->jumper_detect = 0;
+       // $this->busqueda_link = "";
         $this->no_detect = '0';
         $this->comment_new_psid_register = '';
         $this->posicion = 8; //me esta buscand a partir de https://
@@ -255,7 +257,7 @@ class K1098Index extends Component
 
                                /* $client = new Client([
                                     //'base_uri' => 'http://127.0.0.1:8000',
-                                    'base_uri' => 'http://146.190.74.228/',
+                                    'base_uri' => 'http://67.205.168.133/',
                                 ]);
             
                                 $resultado = $client->request('GET', '/k1098/1/'.$this->psid_buscar);
@@ -416,9 +418,9 @@ class K1098Index extends Component
 
                         }
     
-                        else{
+                       /* else{
                             $this->jumper_detect = 3;
-                        }
+                        }*/
 
                 }
                 else{
@@ -437,7 +439,7 @@ class K1098Index extends Component
 
                                 $client = new Client([
                                     //'base_uri' => 'http://127.0.0.1:8000',
-                                    'base_uri' => 'http://146.190.74.228/',
+                                    'base_uri' => 'http://67.205.168.133/',
                                 ]);
             
                                 $resultado = $client->request('GET', '/k1098/1/'.$this->psid_buscar);

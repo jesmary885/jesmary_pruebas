@@ -26,6 +26,8 @@ class K23Index extends Component
         if(session('pid')) $this->pid_new = session('pid');
         if(session('psid')) $this->psid_register = session('psid');
         if(session('search')) $this->search = session('search');
+        $this->jumper_detect = 0;
+        $this->busqueda_link = "";
     }
 
     protected $rules_pid = [
@@ -240,7 +242,7 @@ class K23Index extends Component
         $busqueda_link_def = "";
      
         $this->no_jumpear = 0;
-        $this->jumper_detect = 0;
+       // $this->jumper_detect = 0;
         $this->points_user='no';
         $this->no_detect = '0';
         $this->k_detect = '0';

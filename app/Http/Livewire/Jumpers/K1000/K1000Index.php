@@ -27,6 +27,8 @@ class K1000Index extends Component
         if(session('pid')) $this->pid_new = session('pid');
         if(session('psid')) $this->psid_register = session('psid');
         if(session('search')) $this->search = session('search');
+        $this->jumper_detect = 0;
+        $this->busqueda_link = "";
     }
 
     public function basic(){
@@ -203,17 +205,13 @@ class K1000Index extends Component
                 }
             }
             catch (\GuzzleHttp\Exception\RequestException $e) {
-                $this->jumper_detect = 2;
-
-               // dd($e->getResponse()->getStatusCode());
+           
 
                 $error['error'] = $e->getMessage();
                 $error['request'] = $e->getRequest();
 
                 if($e->hasResponse()){
                     if ($e->getResponse()->getStatusCode() !== '200'){
-
-                       // dd($e->getResponse()->getStatusCode());
 
                         $error['response'] = $e->getResponse(); 
                         $this->jumper_detect = 2;
@@ -246,8 +244,8 @@ class K1000Index extends Component
         $busqueda_link_def = "";
         $this->no_jumpear = 0;
         $this->k_detect = '0';
-        $this->jumper_detect = 0;
-        $this->busqueda_link = "";
+        //$this->jumper_detect = 0;
+        //$this->busqueda_link = "";
         $this->no_detect = '0';
         $this->comment_new_psid_register = '';
         $this->posicion = 8; //me esta buscand a partir de https://
@@ -988,14 +986,14 @@ class K1000Index extends Component
 
                     }
 
-                    else{
+                    /*else{
                         if($this->pid_detectado == 'si' && $this->jumper_detect != 0){
 
                             $this->jumper_detect = 3;
 
                         }
                         
-                    }
+                    }*/
 
                 }
                 else{

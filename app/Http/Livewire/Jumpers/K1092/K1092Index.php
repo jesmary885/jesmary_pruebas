@@ -26,6 +26,8 @@ class K1092Index extends Component
         if(session('pid')) $this->pid_new = session('pid');
         if(session('psid')) $this->psid_register = session('psid');
         if(session('search')) $this->search = session('search');
+        $this->jumper_detect = 0;
+        $this->busqueda_link = "";
     }
 
     public function basic(){
@@ -239,9 +241,9 @@ class K1092Index extends Component
         $busqueda_link_def = "";
         $this->no_jumpear = 0;
         $this->k_detect = '0';
-        $this->busqueda_link = "";
+        //$this->busqueda_link = "";
         $this->no_detect = '0';
-        $this->jumper_detect = 0;
+        //$this->jumper_detect = 0;
         $this->comment_new_psid_register = '';
         $this->posicion = 8; //me esta buscand a partir de https://
 
@@ -997,14 +999,14 @@ class K1092Index extends Component
 
                     }
 
-                    else{
+                    /*else{
                         if($this->jumper_detect != 0){
 
                             $this->jumper_detect = 3;
 
                         }
                         
-                    }
+                    }*/
 
                 }
                 else{

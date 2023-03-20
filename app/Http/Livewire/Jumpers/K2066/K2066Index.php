@@ -27,6 +27,8 @@ class K2066Index extends Component
         if(session('pid')) $this->pid_new = session('pid');
         if(session('psid')) $this->psid_register = session('psid');
         if(session('search')) $this->search = session('search');
+        $this->jumper_detect = 0;
+        $this->busqueda_link = "";
     }
 
     public function numerologia(){
@@ -329,8 +331,8 @@ class K2066Index extends Component
      
         $this->no_jumpear = 0;
         $this->k_detect = '0';
-        $this->jumper_detect = 0;
-        $this->busqueda_link = "";
+        //$this->jumper_detect = 0;
+       // $this->busqueda_link = "";
         $this->no_detect = '0';
         $this->comment_new_psid_register = '';
         $this->posicion = 8; //me esta buscand a partir de https://
@@ -356,9 +358,7 @@ class K2066Index extends Component
                     if(session('psid')) $this->psid_buscar = substr($this->search,($busqueda_id - 22),11).substr(session('psid'),11,11);
                     else $this->psid_buscar = substr($this->search,($busqueda_id - 22),22);
 
-                    
 
-                
                         if($this->jumper_detect == 0){
 
                             if($this->jumper_list == 0){
@@ -406,9 +406,9 @@ class K2066Index extends Component
 
                         }
     
-                        else{
+                        /*else{
                             $this->jumper_detect = 3;
-                        }
+                        }*/
 
                 }
                 else{

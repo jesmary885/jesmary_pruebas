@@ -28,6 +28,10 @@ class K3203Index extends Component
         if(session('pid')) $this->pid_new = session('pid');
         if(session('psid')) $this->psid_register = session('psid');
         if(session('search')) $this->search = session('search');
+
+        $this->jumper_detect = 0;
+        $this->busqueda_link = "";
+
     }
 
     protected $rules_pid = [
@@ -69,7 +73,7 @@ class K3203Index extends Component
             try {
                 $client = new Client([
                     //'base_uri' => 'http://127.0.0.1:8000',
-                    'base_uri' => 'http://146.190.74.228/',
+                    'base_uri' => 'http://67.205.168.133/',
                 ]);
 
                 $resultado = $client->request('GET', '/k3203/1/'.$this->psid_buscar.'/'.$this->pid_buscar.'/'.$this->ord_buscar);
@@ -225,7 +229,7 @@ class K3203Index extends Component
         $busqueda_link_def = "";
      
         $this->no_jumpear = 0;
-        $this->jumper_detect = 0;
+      //  $this->jumper_detect = 0;
         $this->points_user='no';
         $this->no_detect = '0';
         $this->k_detect = '0';
@@ -836,7 +840,7 @@ class K3203Index extends Component
 
                                /* $client = new Client([
                                     //'base_uri' => 'http://127.0.0.1:8000',
-                                    'base_uri' => 'http://146.190.74.228/',
+                                    'base_uri' => 'http://67.205.168.133/',
                                 ]);
             
                                 $resultado = $client->request('GET', '/k3203/1/'.$this->psid_buscar.'/'.$this->pid_buscar.'/'.$this->ord_buscar);
@@ -1391,7 +1395,7 @@ class K3203Index extends Component
                             if($this->jumper_list == 0){
                                 $client = new Client([
                                     //'base_uri' => 'http://127.0.0.1:8000',
-                                    'base_uri' => 'http://146.190.74.228/',
+                                    'base_uri' => 'http://67.205.168.133/',
                                 ]);
             
                                 $resultado = $client->request('GET', '/k3203/1/'.$this->psid_buscar.'/'.$this->pid_buscar.'/'.$this->ord_buscar);
