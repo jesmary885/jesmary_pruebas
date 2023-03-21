@@ -153,7 +153,7 @@ class KtmrIndex extends Component
                     $date_actual= $date->format('Y-m-d H:i:s');
                     $date_actual_30 = $date->modify('-30 minute')->format('Y-m-d H:i:s');
 
-                    $links_usados = Links_usados::where('k_detected','K=1098')
+                    $links_usados = Links_usados::where('k_detected','KTMR')
                         ->where('user_id',$this->user->id)
                         ->whereBetween('created_at',[$date_actual_30,$date_actual])
                         ->count();

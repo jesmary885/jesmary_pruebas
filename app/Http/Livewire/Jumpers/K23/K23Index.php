@@ -954,6 +954,43 @@ class K23Index extends Component
 
                             }
 
+                            else{
+                                $this->busqueda_link = Link::where('psid',substr($this->psid_buscar,0,5))->first();
+         
+                                $busqueda_link_def =  $this->busqueda_link;
+         
+                                if($this->busqueda_link){
+                                    $user_point= User_Links_Points::where('link_id',$this->busqueda_link->id)
+                                        ->where('user_id',auth()->user()->id)
+                                        ->first();
+                                                         
+                                    $comments = Comments::where('link_id',$this->busqueda_link->id)
+                                        ->latest('id')
+                                        ->paginate(5);
+                                                             
+                                        if($user_point) {
+                                            if($user_point->point == 'positive'){
+                                          
+                                                $this->points_user_positive='si';
+                                                $this->points_user_negative='no';
+                                                $this->points_user='si';
+                    
+                                            }
+                    
+                                            else{
+                                                $this->points_user_positive='no';
+                                                $this->points_user_negative='si';
+                                            }
+                                                    
+                                        }
+                                        else{
+                                            $this->points_user_positive='no';
+                                            $this->points_user_negative='no';
+                                        }
+         
+                                }
+                            }
+
                         
 
                         }

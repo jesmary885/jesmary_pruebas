@@ -369,9 +369,7 @@ class K1098Index extends Component
     
                         }
     
-                       /* else{
-                            $this->jumper_detect = 3;
-                        }*/
+                
 
                 }
                 else{
