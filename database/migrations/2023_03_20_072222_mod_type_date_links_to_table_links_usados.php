@@ -16,9 +16,8 @@ return new class extends Migration
         Schema::table('links_usados', function (Blueprint $table) {
             $table->longText('link')->change()->nullable();
 
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->nullable();
-
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

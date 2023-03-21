@@ -1125,7 +1125,7 @@ class SsidkrIndex extends Component
             if($this->type[0] == 'usa')
                 $resultado = $client->request('GET', '/Descalificador_usa/1/'.$psid_detect);
             else
-                $resultado = $client->request('GET', '/Descalificador_uk/1/'.$psid_detect);
+                $resultado = $client->request('GET', '/Descalificador_Uk/1/'.$psid_detect);
 
             if($resultado->getStatusCode() == 200){
                 $this->emit('alert','Descalificación procesada');

@@ -32,6 +32,55 @@
             </div>
         @endif
 
+        @if ($jumper_detect == 5)
+            <div class="px-4">
+                <div class=" info-box bg-info">
+                    <span class="info-box-icon"><i class="	fas fa-info"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Ha ocurrido un error al generar el jumper.</span>
+                            <span class="info-box-number">Intentelo de nuevo...</span>
+                        </div>
+                </div>
+
+            </div>
+        @endif
+
+        @if ($jumper_detect == 3)
+            <div class="px-4">
+                <div class=" info-box bg-warning">
+                    <span class="info-box-icon"><i class="fas fa-tag"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Algo en su link no esta bien. </span>
+                            <span class="info-box-number">Copielo correctamente...</span>
+                        </div>
+                </div>
+            </div>
+        @endif
+
+        @if ($jumper_detect == 6)
+            <div class="px-4">
+                <div class=" info-box bg-warning">
+                    <span class="info-box-icon"><i class="fas fa-info"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Esta intentando generar más de 6 jumpers en menos de 30 min. </span>
+                            <span class="info-box-number">Intentelo luego.</span>
+                        </div>
+                </div>
+            </div>
+        @endif
+
+        @if ($jumper_detect == 7)
+            <div class="px-4">
+                <div class=" info-box bg-warning">
+                    <span class="info-box-icon"><i class="fas fa-info"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Esta intentando generar el mismo link más de dos veces. </span>
+                            <span class="info-box-number">Intentelo de nuevo con otro link.</span>
+                        </div>
+                </div>
+            </div>
+        @endif
+
         <div class="mt-4" wire:loading>
             <div class="container2">
                 <div class="cargando">

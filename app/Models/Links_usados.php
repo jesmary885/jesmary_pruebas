@@ -11,4 +11,10 @@ class Links_usados extends Model
 
     protected $guarded = ['id','created_at','updated_at'];
 
+     //Relacion uno a muhos inversa
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
 }

@@ -517,13 +517,13 @@ return [
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
                 ],
-                [
-                    'text' => 'K3906',
-                    'route'  => 'k3906.index',
-                    'can' => 'ssidkr.index',
-                    'icon_color' => 'red',
-                    'icon'    => '	fas fa-angle-right',
-                ],
+                // [
+                //     'text' => 'K3906',
+                //     'route'  => 'k3906.index',
+                //     'can' => 'ssidkr.index',
+                //     'icon_color' => 'red',
+                //     'icon'    => '	fas fa-angle-right',
+                // ],
                 [
                     'text' => 'K7341',
                     'route'  => 'ksietemilcuarentayuno.index',

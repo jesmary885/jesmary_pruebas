@@ -73,7 +73,7 @@
         @endif
 
         @if ($jumper_detect == 3)
-            <div class="container">
+            <div class="px-4">
                 <div class=" info-box bg-warning">
                     <span class="info-box-icon"><i class="fas fa-tag"></i></span>
                         <div class="info-box-content">
@@ -84,10 +84,30 @@
             </div>
         @endif
 
-      
+        @if ($jumper_detect == 6)
+            <div class="px-4">
+                <div class=" info-box bg-warning">
+                    <span class="info-box-icon"><i class="fas fa-info"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Esta intentando generar más de 6 jumpers en menos de 30 min. </span>
+                            <span class="info-box-number">Intentelo luego.</span>
+                        </div>
+                </div>
+            </div>
+        @endif
 
-       
-           
+        @if ($jumper_detect == 7)
+            <div class="px-4">
+                <div class=" info-box bg-warning">
+                    <span class="info-box-icon"><i class="fas fa-info"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Esta intentando generar el mismo link más de dos veces. </span>
+                            <span class="info-box-number">Intentelo de nuevo con otro link.</span>
+                        </div>
+                </div>
+            </div>
+        @endif
+
             <div class="card-body mt-0">
 
     
@@ -137,7 +157,8 @@
                                             class="py-2 px-3 text-md font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" 
                                             x-bind:disabled="points_user_positive == 'si'"
                                             wire:click="positivo('{{$busqueda_link->id}}')"
-                                            title="Positivo">
+                                            title="Positivo"
+                                            wire:loading.attr="disabled">
                                             <i class="font-semibold far fa-thumbs-up">{{$busqueda_link->positive_points}}</i>
                                         </button>
                                     </td>
@@ -146,7 +167,8 @@
                                             class="py-2 ml-2 px-3 text-md font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" 
                                             x-bind:disabled="points_user_negative == 'si'"
                                             wire:click="negativo('{{$busqueda_link->id}}')"
-                                            title="Negativo">
+                                            title="Negativo"
+                                            wire:loading.attr="disabled">
                                             <i class="font-semibold far fa-thumbs-down">{{$busqueda_link->negative_points}}</i>
                                         </button>
                                     </td>
