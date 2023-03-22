@@ -311,7 +311,6 @@ return [
                     'icon'    => 'fas fa-users',
                     'icon_color' => 'red',
                     'can' => 'administracion_principal'
-                    
                 ],
                 [
                     'text' => 'Usuarios Libres',
@@ -341,6 +340,13 @@ return [
                     'route'  => 'admin.ganancias.index',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-heart',
+                    'can' => 'administracion_principal'
+                ],
+                [
+                    'text' => 'Comentarios',
+                    'route'  => 'admin.comentarios.index',
+                    'icon_color' => 'red',
+                    'icon'    => 'fab fa-facebook-messenger',
                     'can' => 'administracion_principal'
                 ],
             ],

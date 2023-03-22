@@ -211,7 +211,7 @@
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Si, deseo agregarlo'
+            confirmButtonText: 'Si'
             }).then((result) => {
             if (result.isConfirmed) {
                         livewire.emitTo(item1,item2)

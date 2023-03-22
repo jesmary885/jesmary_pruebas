@@ -15,6 +15,11 @@ class AdminController extends Controller
 
     }
 
+    public function comentarios(){
+        return view('admin.comentarios');
+
+    }
+
     public function users_free(){
         return view('admin.users_free');
         

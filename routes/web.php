@@ -112,6 +112,7 @@ Route::middleware(['auth','verified'])->group(function()
         Route::get('marketplace_venta', [AdminController::class, 'marketplace'])->name('admin.marketplace')->middleware('permission:admin.sales');
         Route::get('marketplace_compra', [AdminController::class, 'marketplace_compra'])->name('admin.marketplace.compra')->middleware('permission:admin.marketplace.compras');
         Route::resource('roles', RoleController::class)->only('index','edit','update','destroy','create','store')->names('admin.roles')->middleware('permission:admin.roles');
+        Route::get('comentarios', [AdminController::class, 'comentarios'])->name('admin.comentarios.index')->middleware('permission:administracion_principal');
     });
 });
 
