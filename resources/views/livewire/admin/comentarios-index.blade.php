@@ -14,11 +14,11 @@
 
             @if ($comentarios->count())
             <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
-                <table class="w-full text-sm text-left text-gray-400">
+                <table class="table text-sm table-bordered table-responsive-lg table-responsive-md table-responsive-sm">
                     <thead class="text-xs uppercase bg-gray-700 text-gray-400">
                         <tr>
                             <th class="text-center py-3">Fecha</th>
-                            <th class="text-center ">Comentario</th>
+                            <th class="text-center">Comentario</th>
                             <th class="text-center">PSID</th>
                             <th class="text-center ">Ususario</th>
                           
@@ -29,7 +29,7 @@
                             @foreach ($comentarios as $comentario)
                                 <tr class="bg-gray-800 border-gray-700 hover:bg-gray-600">
                                     <th class="py-3 text-center font-medium whitespace-nowrap text-white">{{\Carbon\Carbon::parse($comentario->created_at)->format('d-m-Y')}}</th>
-                                    <td class="text-center">{{$comentario->comment}}</td>
+                                    <td class="text-justify">{{$comentario->comment}}</td>
                                     <td class="text-center">{{$comentario->link->psid}}</td>
                                     <td class="text-center">{{$comentario->user->username}}</td>
                                     <td class="text-center">

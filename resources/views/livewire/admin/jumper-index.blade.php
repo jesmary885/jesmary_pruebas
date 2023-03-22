@@ -6,7 +6,7 @@
             </div>
             @if ($jumpers->count())
             <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
-                <table class="w-full text-sm text-left text-gray-400">
+                <table class="table text-sm table-bordered table-responsive-lg table-responsive-md table-responsive-sm">
                     <thead class="text-xs uppercase bg-gray-700 text-gray-400">
                         <tr>
                             <th class="text-center py-3">TIPO</th>
@@ -30,7 +30,7 @@
                                     <td class="text-center">{{$jumper->pid}}</td>
                                     <td class="text-center">{{$jumper->high}}</td>
                                     <td class="text-center">{{$jumper->basic}}</td>
-                                    <td class="text-center">{{$jumper->jumper}}</td>
+                                    <td class=" text-justify ">{{$jumper->jumper}}</td>
                                     <td class="text-center">{{$jumper->k_detected}}</td>
                                     <td class="text-center">{{$jumper->user->username}}</td>
                                     <td class="text-center"> {{$jumper->positive_points}}</td>

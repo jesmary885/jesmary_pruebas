@@ -137,7 +137,7 @@
                 <h3 class="my-2 mx-4 text-gray-200 font-bold text-lg">Registro de pagos</h3>
             </div>
             
-            <table class="w-full text-sm text-left text-gray-400">
+            <table class="table text-sm table-bordered table-responsive-lg table-responsive-md table-responsive-sm">
                     <thead class="text-xs uppercase bg-gray-700 text-gray-400">
                     <tr>
                       

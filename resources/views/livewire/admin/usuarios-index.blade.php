@@ -6,7 +6,7 @@
             </div>
             @if ($users->count())
             <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
-                <table class="w-full text-sm text-left text-gray-400">
+                <table class="table text-sm table-bordered table-responsive-lg table-responsive-md table-responsive-sm">
                     <thead class="text-xs uppercase bg-gray-700 text-gray-400">
                         <tr>
                             <th class="text-center py-3">Username</th>
