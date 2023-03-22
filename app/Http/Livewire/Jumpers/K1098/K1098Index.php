@@ -259,7 +259,7 @@ class K1098Index extends Component
 
                             if($this->jumper_list == 0){
 
-                                $link_register_search = Links_usados::where('link',$this->search)
+                               /* $link_register_search = Links_usados::where('link',$this->search)
                                     ->where('k_detected','K=1098')
                                     ->where('user_id',$this->user->id)
                                     ->first();
@@ -269,7 +269,7 @@ class K1098Index extends Component
                                     $this->jumper_detect = 7;
                                     
                                 }
-                                else{
+                                else{*/
                                     $date = new DateTime();
 
                                     $date_actual= $date->format('Y-m-d H:i:s');
@@ -288,7 +288,7 @@ class K1098Index extends Component
                                         $this->user->update(['cant_links_jump_alert'=>$alertas]);
                                         $this->jumper_detect = 6;
                                     }
-                                }
+                               // }
 
                             }
 
