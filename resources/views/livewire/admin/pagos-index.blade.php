@@ -154,6 +154,10 @@
                         </th>
                         <th 
                             class="text-center">
+                            Referencia
+                        </th>
+                        <th 
+                            class="text-center">
                             Monto
                         </th>
                         <th 
@@ -201,7 +205,10 @@
                             {{$registro->paymentMethod->name}}
                             </td>
                             <td class="text-center">
-                            {{$registro->monto}}
+                            {{$registro->nro_referencia}}
+                            </td>
+                            <td class="text-center">
+                            {{$registro->monto}} $
                             </td>
                             <td class="text-center">
                             {{$registro->user_cliente->username}}
