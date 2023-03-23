@@ -135,10 +135,27 @@ class ComunidadIndex extends Component
             ->where('type','premium')
             ->sum('monto');
 
+        
+        /////////////////// GANANCIA DE 1$ POR SUSCRIPTOR
+
+        $ganancia_mes_basic_15_suscriptor = PagoRegistrosRecarga::where('status','verificado')
+            ->whereMonth('created_at', $mes)
+            ->whereYear('created_at', $ano)
+            ->where('plan','15')
+            ->sum('pago_basico');
+
+        $ganancia_mes_basic_30_suscriptor = PagoRegistrosRecarga::where('status','verificado')
+            ->whereMonth('created_at', $mes)
+            ->whereYear('created_at', $ano)
+            ->where('plan','30')
+            ->sum('pago_basico');
+        
+        $ganancia_mes_basic_total_suscriptor = $ganancia_mes_basic_15_suscriptor + $ganancia_mes_basic_30_suscriptor;
+
         $users = User::where('type',null)
             ->paginate(15);
 
         
-        return view('livewire.admin.comunidad-index',compact('users','users_activos','users_inactivos','registros_mes','registros_dias','users_plan_15_basic','users_plan_15_premium','users_plan_30_basic','users_plan_30_premium','ganancia_dia_15_basic','ganancia_dia_30_basic','rol_user','ganancia_dia_15_premium','ganancia_dia_30_premium','ganancia_mes_15_basic','ganancia_mes_30_basic','ganancia_mes_15_premium','ganancia_mes_30_premium'));
+        return view('livewire.admin.comunidad-index',compact('users','users_activos','users_inactivos','registros_mes','registros_dias','users_plan_15_basic','users_plan_15_premium','users_plan_30_basic','users_plan_30_premium','ganancia_dia_15_basic','ganancia_dia_30_basic','rol_user','ganancia_dia_15_premium','ganancia_dia_30_premium','ganancia_mes_15_basic','ganancia_mes_30_basic','ganancia_mes_15_premium','ganancia_mes_30_premium','ganancia_mes_basic_15_suscriptor','ganancia_mes_basic_30_suscriptor','ganancia_mes_basic_total_suscriptor'));
     }
 }

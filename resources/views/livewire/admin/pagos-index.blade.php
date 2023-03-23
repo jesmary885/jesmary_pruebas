@@ -192,7 +192,7 @@
                         <tr class="bg-gray-800 border-gray-700 hover:bg-gray-600">
                             
                             <td class="py-3 text-center font-medium whitespace-nowrap text-white">
-                            {{\Carbon\Carbon::parse($registro->created_at)->format('d-m-Y')}}
+                            {{\Carbon\Carbon::parse($registro->created_at)->format('d-m-Y h:i')}}
                             </td>
                             <td class="text-center">
                             {{$registro->plan}}

@@ -246,8 +246,58 @@
         </div>
     </div>
 
+    <hr>
 
     <h2 class="text-gray-200 font-bold p-2 text-lg">
+        GANANCIA DEL MES (1$ POR SUSCRIPTOR)
+    </h2>
+
+    <div class="row">
+
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-success">
+                <div class="inner">
+                    <h3>{{$ganancia_mes_basic_15_suscriptor}} $</h3>
+                    <p class="sm:text-xs md:text-md font-bold">PLAN 15 DÍAS</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-hand-holding-heart"></i>
+                </div>
+                    <a href="# " class="small-box-footer">Más información<i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-success">
+                <div class="inner">
+                    <h3>{{$ganancia_mes_basic_30_suscriptor}} $</h3>
+                    <p class="sm:text-xs md:text-md font-bold">PLAN 30 DÍAS</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-hand-holding-heart"></i>
+                </div>
+                    <a href="# " class="small-box-footer">Más información<i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-warning">
+                <div class="inner">
+                    <h3>{{$ganancia_mes_basic_total_suscriptor}} $</h3>
+                    <p class="sm:text-xs md:text-md font-bold">TOTAL</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-hand-holding-heart"></i>
+                </div>
+                    <a href="# " class="small-box-footer">Más información<i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <!-- <h2 class="text-gray-200 font-bold p-2 text-lg">
         GANANCIA DEL MES DETALLADA
     </h2>
 
@@ -288,5 +338,5 @@
 
                 </div>
             </div>
-        @endif
+        @endif -->
 </div>

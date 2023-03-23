@@ -33,11 +33,11 @@ class UsuariosPaying extends Component
 
     public function render()
     {
-        $users = User::where('type',null)
+        $users = User::where('type','!=','gratis')
         ->latest('id')
         ->paginate(20);
         
-        $total = User::where('type',null)
+        $total = User::where('type','!=','gratis')
         ->count();
 
         return view('livewire.admin.usuarios-paying',compact('users','total'));

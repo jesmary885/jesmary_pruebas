@@ -133,7 +133,7 @@
   <blockquote class="text-gray-400 flex">
     <p class="mr-1">Su cuenta esta inactiva, reporta tu pago</p>
      @livewire('pagos.reporte-pago') 
-     <p class="ml-1"> para disfrutar de los servicios</p>
+     <p class="ml-1"> para disfrutar de nuestros servicios</p>
      
   </blockquote>
 

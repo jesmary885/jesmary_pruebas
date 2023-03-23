@@ -60,21 +60,35 @@ class ReportePago extends Component
         $new_pago->payment_method_id = $this->metodo_id;
         $new_pago->comentario = $this->comentario;
         $new_pago->type = $this->type;
-        if($this->type == 'basico' && $this->plan == '30') $new_pago->monto = '5';
-        if($this->type == 'basico' && $this->plan == '15') $new_pago->monto = '3';
+        if($this->type == 'basico' && $this->plan == '30'){
+            $new_pago->monto = '5';
+            $new_pago->pago_basico = '1';
+        } 
+        if($this->type == 'basico' && $this->plan == '15'){
+            $new_pago->monto = '3';
+            $new_pago->pago_basico = '0.5';
+        } 
         $new_pago->save();
 
         $user = User::where('id',Auth::id())->first();
 
         $rol = $user->roles->first()->id;
 
-        if($this->plan == '15') $proxima_fecha = date("Y-m-d h:s",strtotime($fecha_actual."+ 15 days"));
-        else $proxima_fecha = date("Y-m-d h:s",strtotime($fecha_actual."+ 30 days"));
+        if($this->plan == '15'){
+            $proxima_fecha = date("Y-m-d h:s",strtotime($fecha_actual."+ 15 days"));
+            $plan_nuevo = '15';
+
+        } 
+        else{
+            $proxima_fecha = date("Y-m-d h:s",strtotime($fecha_actual."+ 30 days"));
+            $plan_nuevo = '30';
+        } 
 
         $user->update([
             'status' => 'activo',
             'last_payment_date' => $proxima_fecha,
             'type' => $this->type,
+            'plan' => $plan_nuevo
         ]);
 
         if($rol == '4') $user->roles()->sync(2);

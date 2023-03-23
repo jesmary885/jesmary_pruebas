@@ -73,8 +73,15 @@ class ReportaPagoAdelantado extends Component
         {
             $new_pago->type = $this->type;
 
-            if($this->type == 30 && $this->plan == 'basico') $new_pago->monto = 5;
-            elseif($this->type == 15 && $this->plan == 'basico') $new_pago->monto = 3;
+            if($this->type == 'basico' && $this->plan == '30'){
+                $new_pago->monto = '5';
+                $new_pago->pago_basico = '1';
+            } 
+            if($this->type == 'basico' && $this->plan == '15'){
+                $new_pago->monto = '3';
+                $new_pago->pago_basico = '0.5';
+            } 
+
         }
         if($this->plan == "balance"){
             $new_pago->monto = $this->monto;
@@ -90,17 +97,31 @@ class ReportaPagoAdelantado extends Component
 
         if($this->plan == 15 || $this->plan == 30){
          
-            if($this->plan == '15') $proxima_fecha = date("Y-m-d h:s",strtotime($fecha_actual."+ 15 days"));
-            else $proxima_fecha = date("Y-m-d h:s",strtotime($fecha_actual."+ 30 days"));
+            if($this->plan == '15'){
+                $proxima_fecha = date("Y-m-d h:s",strtotime($fecha_actual."+ 15 days"));
+                $plan_nuevo = '15';
+
+            }
+            else{
+                $proxima_fecha = date("Y-m-d h:s",strtotime($fecha_actual."+ 30 days"));
+                $plan_nuevo = '30';
+
+            } 
 
             $user->update([
                 'status' => 'activo',
                 'last_payment_date' => $proxima_fecha,
                 'type' => $this->type,
+                'plan' => $plan_nuevo
             ]);
 
             if($rol == '4') $user->roles()->sync(2);
 
+        }
+        else{
+            $user->update([
+                'balance' => $this->monto,
+            ]);
         }
 
         $this->emit('alert','Datos registrados correctamente');

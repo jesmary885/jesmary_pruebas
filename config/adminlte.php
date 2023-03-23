@@ -399,9 +399,9 @@ return [
             'icon_color' => 'cyan',
             'submenu' => [
                 [
-                    'text' => 'Usuarios',
+                    'text' => 'Dashboard',
                     'route'  => 'admin.comunidad',
-                    'icon'    => 'fas fa-users',
+                    'icon'    => 'fas fa-clone',
                     'icon_color' => 'red',
                     'can' => 'otro.admin'
                 ],
