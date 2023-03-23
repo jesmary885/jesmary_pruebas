@@ -23,7 +23,8 @@ class ReportaPagoAdelantado extends Component
         'metodo_id' => 'required',
         'referencia' => 'required|numeric',
         'fecha_pago' => 'required',
-        'file' => 'required|image|max:2048'
+        'file' => 'required|image|max:2048',
+        'type' => 'required'
     ];
 
     protected $rule_monto = [
@@ -68,6 +69,13 @@ class ReportaPagoAdelantado extends Component
         $new_pago->plan = $this->plan;
         $new_pago->nro_referencia = $this->referencia;
         $new_pago->fecha_pago = $this->fecha_pago;
+        if($this->plan == "15" || $this->plan == "30")
+        {
+            $new_pago->type = $this->type;
+
+            if($this->type == 30 && $this->plan == 'basico') $new_pago->monto = 5;
+            elseif($this->type == 15 && $this->plan == 'basico') $new_pago->monto = 3;
+        }
         if($this->plan == "balance"){
             $new_pago->monto = $this->monto;
         }
@@ -88,6 +96,7 @@ class ReportaPagoAdelantado extends Component
             $user->update([
                 'status' => 'activo',
                 'last_payment_date' => $proxima_fecha,
+                'type' => $this->type,
             ]);
 
             if($rol == '4') $user->roles()->sync(2);
@@ -95,7 +104,7 @@ class ReportaPagoAdelantado extends Component
         }
 
         $this->emit('alert','Datos registrados correctamente');
-        $this->reset(['plan','file','comentario']);
+        $this->reset(['plan','file','comentario','type']);
         $this->isopen = false;  
 
         $this->emit('volver');

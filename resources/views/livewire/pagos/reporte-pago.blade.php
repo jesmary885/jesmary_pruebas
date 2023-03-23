@@ -1,5 +1,5 @@
 <div>
-    <button title="Editar usuario" type="submit" class="text-blue-500 font-bold underline ml-1"  wire:click="open"> AQUÍ </button> 
+    <button title="Reportar pago" type="submit" class="text-blue-500 font-bold underline ml-1"  wire:click="open"> AQUÍ </button> 
 
     @if ($isopen)
         <div class="modal d-block" tabindex="-1" role="dialog" style="overflow-y: auto; display: block;">
@@ -14,38 +14,30 @@
                         <hr class="m-2 p-2">
 
                             <div class="flex justify-between">
-                                    <div class="form-group w-full">
-                                        <label class="w-full text-justify"></label>
-                                        <select wire:model="plan" title="Plan" id="estado" class="block w-full text-gray-400 py-2 px-2 pr-8 leading-tight rounded focus:outline-none focus:border-gray-500" name="estado">
-                                            <option value="" selected>Seleccione una opción</option>    
-                                            <option value="15">15 días</option>
-                                            <option value="30">30 días</option>
-                                        </select>
-                                        <x-input-error for="plan" />
-                                        
-                                    </div>
-                                </div>
-
-                            <div class="flex justify-between">
                                 
                                 <div class="form-group w-full">
-                                    <label class="w-full text-justify">Plan</label>
+                                    <label class="w-full text-justify">Tipo de pago</label>
                                     <select wire:model="plan" title="Plan" id="estado" class="block w-full text-gray-400 py-2 px-2 pr-8 leading-tight rounded focus:outline-none focus:border-gray-500" name="estado">
-                                        <option value="" selected>Seleccione el tipo de plan</option>    
-                                        <option value="15">15 días</option>
-                                        <option value="30">30 días</option>
+                                        <option value="" selected>Seleccione una opción</option>    
+                                        <option value="15">Pago por 15 días</option>
+                                        <option value="30">Pago por 30 días</option>
                                     </select>
                                     <x-input-error for="plan" />
 
-                                    <!-- <select wire:model="panel" title="Panel" id="panel" class="block w-full text-gray-400 py-2 px-2 pr-8 leading-tight rounded focus:outline-none focus:border-gray-500" name="panel">
-                                            <option value="" selected>Seleccione el panel</option>    
-                                            <option value="15">15 días</option>
-                                            <option value="30">30 días</option>
-                                    </select>
-                                    <x-input-error for="panel" /> -->
                                     
                                 </div>
                             </div>
+
+                            <div class="form-group w-full mr-2">
+                                <label class="w-full text-justify">Plan</label>
+                                <select wire:model="type" title="Plan" id="type" class="block w-full text-gray-400 py-2 px-2 pr-8 leading-tight rounded focus:outline-none focus:border-gray-500" name="type">
+                                    <option value="" selected>Seleccione una opción</option>    
+                                    <option value="basico">Plan Básico</option>
+                                    <!-- <option value="premium">Plan Premium</option> -->
+                                </select>
+                                <x-input-error for="type" />
+                            </div>
+
 
                             <div class="flex justify-between mt-2">
                                 <div class="form-group w-full mr-2">

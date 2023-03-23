@@ -14,14 +14,15 @@ class ReportePago extends Component
 {
     use WithFileUploads;
 
-    public $file,$isopen = false, $plan,$comentario,$metodo_id,$payment_methods,$referencia,$fecha_pago;
+    public $type,$file,$isopen = false, $plan,$comentario,$metodo_id,$payment_methods,$referencia,$fecha_pago;
 
     protected $rules = [
         'plan' => 'required',
         'metodo_id' => 'required',
         'referencia' => 'required|numeric',
         'fecha_pago' => 'required',
-        'file' => 'required|image|max:2048'
+        'file' => 'required|image|max:2048',
+        'type' => 'required'
     ];
 
     public function open()
@@ -58,6 +59,9 @@ class ReportePago extends Component
         $new_pago->fecha_pago = $this->fecha_pago;
         $new_pago->payment_method_id = $this->metodo_id;
         $new_pago->comentario = $this->comentario;
+        $new_pago->type = $this->type;
+        if($this->type == 'basico' && $this->plan == '30') $new_pago->monto = '5';
+        if($this->type == 'basico' && $this->plan == '15') $new_pago->monto = '3';
         $new_pago->save();
 
         $user = User::where('id',Auth::id())->first();
@@ -70,12 +74,13 @@ class ReportePago extends Component
         $user->update([
             'status' => 'activo',
             'last_payment_date' => $proxima_fecha,
+            'type' => $this->type,
         ]);
 
         if($rol == '4') $user->roles()->sync(2);
 
         $this->emit('alert','Datos registrados correctamente');
-        $this->reset(['plan','file','comentario']);
+        $this->reset(['plan','file','comentario','type']);
         $this->isopen = false;  
 
         $this->emitTo('admin.pagos-pendientes','render');

@@ -137,6 +137,13 @@
      
   </blockquote>
 
+  <blockquote class="text-gray-400 flex">
+    <p class="mr-1">Haz click</p>
+     @livewire('info-metodos-pago') 
+     <p class="ml-1"> para ver los datos de nuestras cuentas</p>
+     
+  </blockquote>
+
   </div>
   @endif
 

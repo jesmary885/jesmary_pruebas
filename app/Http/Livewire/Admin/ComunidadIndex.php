@@ -50,45 +50,95 @@ class ComunidadIndex extends Component
             ->whereYear('email_verified_at', $ano)
             ->count();
 
-        $users_plan_7 = User::where('status','activo')
-            ->where('plan','7')
-            ->count();
         
-        $users_plan_15 = User::where('status','activo')
+        $users_plan_15_basic = User::where('status','activo')
             ->where('plan','15')
+            ->where('type','basico')
             ->count();
 
-        $users_plan_30 = User::where('status','activo')
-            ->where('plan','30')
+        $users_plan_15_premium = User::where('status','activo')
+            ->where('plan','15')
+            ->where('type','premium')
             ->count();
 
-        $ganancia_dia_7 = PagoRegistrosRecarga::where('status','verificado')
-            ->whereMonth('created_at', $mes)
-            ->whereDay('created_at', $dia)
-            ->whereYear('created_at', $ano)
-            ->where('plan','7')
-            ->sum('monto');
+        $users_plan_30_basic = User::where('status','activo')
+            ->where('plan','30')
+            ->where('type','basico')
+            ->count();
 
-        $ganancia_dia_15 = PagoRegistrosRecarga::where('status','verificado')
+        $users_plan_30_premium = User::where('status','activo')
+            ->where('plan','30')
+            ->where('type','premium')
+            ->count();
+
+        //GANANCIAS DEL DIA
+
+        $ganancia_dia_15_basic = PagoRegistrosRecarga::where('status','verificado')
             ->whereMonth('created_at', $mes)
             ->whereDay('created_at', $dia)
             ->whereYear('created_at', $ano)
             ->where('plan','15')
+            ->where('type','basico')
             ->sum('monto');
 
-        $ganancia_dia_30 = PagoRegistrosRecarga::where('status','verificado')
+        $ganancia_dia_30_basic = PagoRegistrosRecarga::where('status','verificado')
             ->whereMonth('created_at', $mes)
             ->whereDay('created_at', $dia)
             ->whereYear('created_at', $ano)
             ->where('plan','30')
+            ->where('type','basico')
+            ->sum('monto');
+
+        $ganancia_dia_15_premium = PagoRegistrosRecarga::where('status','verificado')
+            ->whereMonth('created_at', $mes)
+            ->whereDay('created_at', $dia)
+            ->whereYear('created_at', $ano)
+            ->where('plan','15')
+            ->where('type','premium')
+            ->sum('monto');
+
+        $ganancia_dia_30_premium = PagoRegistrosRecarga::where('status','verificado')
+            ->whereMonth('created_at', $mes)
+            ->whereDay('created_at', $dia)
+            ->whereYear('created_at', $ano)
+            ->where('plan','30')
+            ->where('type','premium')
+            ->sum('monto');
+
+        //GANANCIAS DEL MES
+
+        $ganancia_mes_15_basic = PagoRegistrosRecarga::where('status','verificado')
+            ->whereMonth('created_at', $mes)
+            ->whereYear('created_at', $ano)
+            ->where('plan','15')
+            ->where('type','basico')
+            ->sum('monto');
+
+        $ganancia_mes_30_basic = PagoRegistrosRecarga::where('status','verificado')
+            ->whereMonth('created_at', $mes)
+            ->whereYear('created_at', $ano)
+            ->where('plan','30')
+            ->where('type','basico')
+            ->sum('monto');
+
+        $ganancia_mes_15_premium = PagoRegistrosRecarga::where('status','verificado')
+            ->whereMonth('created_at', $mes)
+            ->whereYear('created_at', $ano)
+            ->where('plan','15')
+            ->where('type','premium')
+            ->sum('monto');
+
+        $ganancia_mes_30_premium = PagoRegistrosRecarga::where('status','verificado')
+            ->whereMonth('created_at', $mes)
+            ->whereYear('created_at', $ano)
+            ->where('plan','30')
+            ->where('type','premium')
             ->sum('monto');
 
         $users = User::where('type',null)
             ->paginate(15);
 
         
-        
-
-        return view('livewire.admin.comunidad-index',compact('users','users_activos','users_inactivos','registros_mes','registros_dias','users_plan_7','users_plan_15','users_plan_30','ganancia_dia_7','ganancia_dia_15','ganancia_dia_30','rol_user'));
+        return view('livewire.admin.comunidad-index',compact('users','users_activos','users_inactivos','registros_mes','registros_dias','users_plan_15_basic','users_plan_15_premium','users_plan_30_basic','users_plan_30_premium','ganancia_dia_15_basic','ganancia_dia_30_basic','rol_user','ganancia_dia_15_premium','ganancia_dia_30_premium','ganancia_mes_15_basic','ganancia_mes_30_basic','ganancia_mes_15_premium','ganancia_mes_30_premium'));
     }
 }
