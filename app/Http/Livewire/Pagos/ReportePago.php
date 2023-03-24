@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Pagos;
 use App\Models\PagoRegistrosRecarga;
 use App\Models\PaymentMethods;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithFileUploads;
 
@@ -49,6 +50,7 @@ class ReportePago extends Component
         $this->validate($rules);
 
         $fecha_actual = date("Y-m-d h:s");
+        $date = Carbon::now();
 
         $new_pago = new PagoRegistrosRecarga();
         $new_pago->user_id = Auth::id();
@@ -77,7 +79,6 @@ class ReportePago extends Component
         if($this->plan == '15'){
             $proxima_fecha = date("Y-m-d h:s",strtotime($fecha_actual."+ 15 days"));
             $plan_nuevo = '15';
-
         } 
         else{
             $proxima_fecha = date("Y-m-d h:s",strtotime($fecha_actual."+ 30 days"));
@@ -91,7 +92,9 @@ class ReportePago extends Component
             'plan' => $plan_nuevo
         ]);
 
-        if($rol == '4') $user->roles()->sync(2);
+        if($date->toTimeString() <= '21:00:00' && $date->toTimeString() >= '06:00:00' ){
+            if($rol == '4') $user->roles()->sync(2);
+        }
 
         $this->emit('alert','Datos registrados correctamente');
         $this->reset(['plan','file','comentario','type']);
@@ -100,7 +103,5 @@ class ReportePago extends Component
         $this->emitTo('admin.pagos-pendientes','render');
 
         return redirect()->to('/home');
-        
-
     }
 }

@@ -188,27 +188,52 @@ class SsidkrIndex extends Component
                             }
                         }
                         else{
+
+                            $basic_detectado_ = strpos($this->search, '**&basic=');
+
+                            $detect_basic_inicial= $basic_detectado_ + 9;
+                            $i_basic_detect = 0;
+                            $i_basic_busc_h = 0;
                             
-                            if((strpos($this->search, '**&basic=') != false)){
-                                $basic_detectado = strpos($this->search, '**&basic=');
-                                $this->psid_register_bh = substr($this->search,($basic_detectado - 22),5);
-                                $this->basic_register_bh = substr($this->search,($basic_detectado + 9));
-                                $this->type_basic = 1;
+                                do{
+                                    $detect_basic = substr($this->search, $detect_basic_inicial,1);
+                           
+                                    if($detect_basic == '&') $i_basic_busc_h = 1;
+                                    else{
+                                        $i_basic_detect ++;
+                                        $detect_basic_inicial = $detect_basic_inicial + 1;
+                                    }
 
-                                $nuevo_basic_registrado = 1;
+                                    if($i_basic_detect > 20){
+                                        $i_basic_busc_h = 1;
+                                    }
 
-                                $this->registro_basic();
-                            }
-                            else{
-                                if((strpos($this->search, '%2A%2A&basic=') != false)){
-                                
-                                    $basic_detectado = strpos($this->search, '%2A%2A&basic=');
+                                }
+                                while($i_basic_busc_h != 1);
+
+                            if($i_basic_detect > 8){
+                            
+                                if((strpos($this->search, '**&basic=') != false)){
+                                    $basic_detectado = strpos($this->search, '**&basic=');
                                     $this->psid_register_bh = substr($this->search,($basic_detectado - 22),5);
-                                    $this->basic_register_bh = substr($this->search,($basic_detectado + 13),5);
-                                    $this->type_basic = 2;
-                               
+                                    $this->basic_register_bh = substr($this->search,($basic_detectado + 9));
+                                    $this->type_basic = 1;
+
                                     $nuevo_basic_registrado = 1;
+
                                     $this->registro_basic();
+                                }
+                                else{
+                                    if((strpos($this->search, '%2A%2A&basic=') != false)){
+                                    
+                                        $basic_detectado = strpos($this->search, '%2A%2A&basic=');
+                                        $this->psid_register_bh = substr($this->search,($basic_detectado - 22),5);
+                                        $this->basic_register_bh = substr($this->search,($basic_detectado + 13),5);
+                                        $this->type_basic = 2;
+                                
+                                        $nuevo_basic_registrado = 1;
+                                        $this->registro_basic();
+                                    }
                                 }
                             }
                         }
@@ -576,11 +601,6 @@ class SsidkrIndex extends Component
                             $this->is_basic = "si";
                             $this->calc_link = 1;
                             if($jumper->psid == 'j1nB1') $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?rst=1&psid='.$psid_complete.'**&basic='.$jumper->basic.'&psid=j1nB';
-                            
-                             /*   if($jumper->psid == 'aAC6g'){
-                                if(session('pid')) $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?rst=1&psid='.session('pid').'**&basic=34334';
-                                else $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?rst=1&psid=(QUITA LOS PARENTESIS QUE RODEA ESTA FRASE Y COLOCA TU PID)**&basic=34334';
-                            }*/
 
                             elseif($jumper->psid == '1kY7h'){
                                 if(session('pid'))

@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Pagos;
 use App\Models\PagoRegistrosRecarga;
 use App\Models\PaymentMethods;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -52,6 +53,7 @@ class ReportaPagoAdelantado extends Component
     }
 
     public function save(){
+        $date = Carbon::now();
 
         $rules = $this->rules;
         $this->validate($rules);
@@ -115,13 +117,17 @@ class ReportaPagoAdelantado extends Component
                 'plan' => $plan_nuevo
             ]);
 
-            if($rol == '4') $user->roles()->sync(2);
+            if($date->toTimeString() <= '21:00:00' && $date->toTimeString() >= '06:00:00' ){
+                if($rol == '4') $user->roles()->sync(2);
+            }
 
         }
         else{
-            $user->update([
-                'balance' => $this->monto,
-            ]);
+            if($date->toTimeString() <= '21:00:00' && $date->toTimeString() >= '06:00:00' ){
+                $user->update([
+                    'balance' => $this->monto,
+                ]);
+            }
         }
 
         $this->emit('alert','Datos registrados correctamente');

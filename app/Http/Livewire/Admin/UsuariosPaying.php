@@ -34,6 +34,7 @@ class UsuariosPaying extends Component
     public function render()
     {
         $users = User::where('type','!=','gratis')
+        ->where('status','activo')
         ->latest('id')
         ->paginate(20);
         
