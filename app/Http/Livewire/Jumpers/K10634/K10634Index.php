@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Livewire\Jumpers\K1098;
+namespace App\Http\Livewire\Jumpers\K10634;
+
+use Livewire\Component;
 
 use App\Models\Antibot;
 use App\Models\Comments;
@@ -11,10 +13,9 @@ use App\Models\User_Links_Points;
 use Carbon\Carbon;
 use DateTime;
 use GuzzleHttp\Client;
-use Livewire\Component;
 use Livewire\WithPagination;
 
-class K1098Index extends Component
+class K10634Index extends Component
 {
     use WithPagination;
     protected $paginationTheme = "bootstrap";
@@ -34,9 +35,6 @@ class K1098Index extends Component
         $this->user = User::where('id',auth()->user()->id)->first();
     }
 
-
-
-
     public function numerologia(){
 
         $cant = Antibot::count();
@@ -44,7 +42,7 @@ class K1098Index extends Component
         $this->operacion = Antibot::where('id',$random)->first();
         $operacion_total = 'Resuelve esta operación matemática ('.$this->operacion->nro1.' + '.$this->operacion->nro2. ')';
 
-        $this->emit('numerologia',$operacion_total,'jumpers.k1098.k1098-index','verific');
+        $this->emit('numerologia',$operacion_total,'jumpers.k10634.k10634-index','verific');
     }
 
     public function verific($result){
@@ -53,17 +51,17 @@ class K1098Index extends Component
 
             $link_register = new Links_usados();
             $link_register->link = $this->search;
-            $link_register->k_detected  = 'K=1098';
+            $link_register->k_detected  = 'K=10634';
             $link_register->user_id  = $this->user->id;
             $link_register->save();
 
             try {
                 $client = new Client([
                     //'base_uri' => 'http://127.0.0.1:8000',
-                    'base_uri' => 'http://67.205.168.133/',
+                    'base_uri' => 'http://147.182.190.233/',
                 ]);
 
-                $resultado = $client->request('GET', '/k1098/1/'.$this->psid_buscar);
+                $resultado = $client->request('GET', '/k10634/1/'.$this->psid_buscar);
 
                 if($resultado->getStatusCode() == 200){
 
@@ -133,8 +131,8 @@ class K1098Index extends Component
                             $link->jumper = $url_detect;
                             $link->psid = substr($this->psid_buscar,0,5);
                             $link->user_id = auth()->user()->id;
-                            $link->jumper_type_id = 16;
-                            $link->k_detected = 'K=1098';
+                            $link->jumper_type_id = 26;
+                            $link->k_detected = 'K=10634';
                             $link->save();
 
                             $this->busqueda_link = Link::where('id',$link->id)->first();
@@ -198,8 +196,6 @@ class K1098Index extends Component
 
     public function render()
     {
-
-       
         $subs_psid = '0';
         $comments =0;
         $jumper = "";
@@ -222,9 +218,9 @@ class K1098Index extends Component
 
         if($long_psid>=5){
 
-            $busqueda_k1098_ = strpos($this->search, 'k=1098&');
+            $busqueda_k10634_ = strpos($this->search, 'k=10634&');
 
-            if($busqueda_k1098_ !== false){
+            if($busqueda_k10634_ !== false){
                 
                 $busqueda_ast_ = strpos($this->search, '**');
 
@@ -243,7 +239,7 @@ class K1098Index extends Component
                             if($this->jumper_list == 0){
 
                                 $link_register_search = Links_usados::where('link',$this->search)
-                                    ->where('k_detected','K=1098')
+                                    ->where('k_detected','K=10634')
                                     ->where('user_id',$this->user->id)
                                     ->count();
                              
@@ -259,7 +255,7 @@ class K1098Index extends Component
                                     $date_actual= $date->format('Y-m-d H:i:s');
                                     $date_actual_30 = $date->modify('-30 minute')->format('Y-m-d H:i:s');
 
-                                    $links_usados = Links_usados::where('k_detected','K=1098')
+                                    $links_usados = Links_usados::where('k_detected','K=10634')
                                         ->where('user_id',$this->user->id)
                                         ->whereBetween('created_at',[$date_actual_30,$date_actual])
                                         ->count();
@@ -372,7 +368,7 @@ class K1098Index extends Component
 
                                 $client = new Client([
                                     //'base_uri' => 'http://127.0.0.1:8000',
-                                    'base_uri' => 'http://67.205.168.133/',
+                                    'base_uri' => 'http://147.182.190.233/',
                                 ]);
             
                                 $resultado = $client->request('GET', '/k1098/1/'.$this->psid_buscar);
@@ -516,7 +512,7 @@ class K1098Index extends Component
 
        // session()->forget('search');
 
-        return view('livewire.jumpers.k1098.k1098-index',compact('jumper','comments','subs_psid','busqueda_link_def'));
+        return view('livewire.jumpers.k10634.k10634-index',compact('jumper','comments','subs_psid','busqueda_link_def'));
     }
 
     public function positivo($jumper_id){
@@ -564,7 +560,7 @@ class K1098Index extends Component
 
         }
 
-        $this->emitTo('jumpers.k1098.k1098-index','render');
+        $this->emitTo('jumpers.k10634.k10634-index','render');
 
         
 
@@ -614,7 +610,7 @@ class K1098Index extends Component
 
         }
 
-        $this->emitTo('jumpers.k1098.k1098-index','render');
+        $this->emitTo('jumpers.k10634.k10634-index','render');
 
         
     }
@@ -630,7 +626,7 @@ class K1098Index extends Component
 
             $this->reset(['comentario']);
 
-            $this->emitTo('jumpers.k1098.k1098-index','render');
+            $this->emitTo('jumpers.k10634.k10634-index','render');
         }
     }
 
@@ -640,6 +636,6 @@ class K1098Index extends Component
         $this->jumper_complete = [];
         session()->forget('search');
         $this->busqueda_link = "";
-        return redirect()->route('k1098.index');
+        return redirect()->route('k10634.index');
     }
 }

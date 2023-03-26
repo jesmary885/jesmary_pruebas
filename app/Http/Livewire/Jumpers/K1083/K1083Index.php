@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Jumpers\K1098;
+namespace App\Http\Livewire\Jumpers\K1083;
 
 use App\Models\Antibot;
 use App\Models\Comments;
@@ -14,12 +14,12 @@ use GuzzleHttp\Client;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class K1098Index extends Component
+class K1083Index extends Component
 {
     use WithPagination;
     protected $paginationTheme = "bootstrap";
 
-    public  $user,$jumper_complete = [], $operacion, $jumper_list = 0,$busqueda_link,$comment_new_psid_register,$pid_register_high,$psid_register_bh,$high_register_bh,$basic_register_bh,$posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $wix_detect = '0', $psid_register=0,$jumper_redirect,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$is_high,$is_basic,$calc_link,$jumper_select,$points_user_positive, $points_user_negative, $jumper_detect_k ='',$psid_buscar;
+    public  $user,$jumper_complete = [], $operacion, $jumper_list = 0,$busqueda_link,$comment_new_psid_register,$pid_register_high,$psid_register_bh,$high_register_bh,$basic_register_bh,$posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $wix_detect = '0', $psid_register=0,$jumper_redirect,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$is_high,$is_basic,$calc_link,$jumper_select,$points_user_positive, $points_user_negative, $jumper_detect_k ='',$psid_buscar,$serie_buscar;
 
     protected $listeners = ['render' => 'render', 'registro_psid' => 'registro_psid' , 'verific' => 'verific'];
     
@@ -34,9 +34,6 @@ class K1098Index extends Component
         $this->user = User::where('id',auth()->user()->id)->first();
     }
 
-
-
-
     public function numerologia(){
 
         $cant = Antibot::count();
@@ -44,7 +41,7 @@ class K1098Index extends Component
         $this->operacion = Antibot::where('id',$random)->first();
         $operacion_total = 'Resuelve esta operación matemática ('.$this->operacion->nro1.' + '.$this->operacion->nro2. ')';
 
-        $this->emit('numerologia',$operacion_total,'jumpers.k1098.k1098-index','verific');
+        $this->emit('numerologia',$operacion_total,'jumpers.k1083.k1083-index','verific');
     }
 
     public function verific($result){
@@ -53,17 +50,17 @@ class K1098Index extends Component
 
             $link_register = new Links_usados();
             $link_register->link = $this->search;
-            $link_register->k_detected  = 'K=1098';
+            $link_register->k_detected  = 'K=1083';
             $link_register->user_id  = $this->user->id;
             $link_register->save();
 
             try {
                 $client = new Client([
                     //'base_uri' => 'http://127.0.0.1:8000',
-                    'base_uri' => 'http://67.205.168.133/',
+                    'base_uri' => 'http://147.182.190.233/',
                 ]);
 
-                $resultado = $client->request('GET', '/k1098/1/'.$this->psid_buscar);
+                $resultado = $client->request('GET', '/k1083/1/'.$this->serie_buscar.'/'.$this->psid_buscar);
 
                 if($resultado->getStatusCode() == 200){
 
@@ -133,8 +130,8 @@ class K1098Index extends Component
                             $link->jumper = $url_detect;
                             $link->psid = substr($this->psid_buscar,0,5);
                             $link->user_id = auth()->user()->id;
-                            $link->jumper_type_id = 16;
-                            $link->k_detected = 'K=1098';
+                            $link->jumper_type_id = 25;
+                            $link->k_detected = 'K=1083';
                             $link->save();
 
                             $this->busqueda_link = Link::where('id',$link->id)->first();
@@ -198,8 +195,6 @@ class K1098Index extends Component
 
     public function render()
     {
-
-       
         $subs_psid = '0';
         $comments =0;
         $jumper = "";
@@ -222,9 +217,9 @@ class K1098Index extends Component
 
         if($long_psid>=5){
 
-            $busqueda_k1098_ = strpos($this->search, 'k=1098&');
+            $busqueda_k1083_ = strpos($this->search, 'k=1083&');
 
-            if($busqueda_k1098_ !== false){
+            if($busqueda_k1083_ !== false){
                 
                 $busqueda_ast_ = strpos($this->search, '**');
 
@@ -237,13 +232,52 @@ class K1098Index extends Component
                     if(session('psid')) $this->psid_buscar = substr($this->search,($busqueda_id - 22),11).substr(session('psid'),11,11);
                     else $this->psid_buscar = substr($this->search,($busqueda_id - 22),22);
 
+                    $busqueda_serie= strpos($this->search, '.com/');
+
+                        if($busqueda_serie != false){
+
+                            $posicion_serie = $busqueda_serie + 5;
+                            $i_serie = 0;
+                            $busq_serie_s = 0;
+                            
+                            do{
+                                $detect_serie= substr($this->search, $posicion_serie,1);
+        
+                                if($detect_serie == '/') $i_serie = 1;
+                                else{
+                                    $posicion_serie = $posicion_serie + 1;
+                                    $busq_serie_s ++;
+                                }
+
+                                if($busq_serie_s > 20){
+                                    $i_serie = 1;
+                                }
+        
+                            }while($i_serie != 1);
+
+                            $this->serie_buscar = substr($this->search,($busqueda_serie + 5),($posicion_serie - ($busqueda_serie + 5)));
+
+                           // dd($this->serie_buscar);
+                            /*if($busq_ids_s < 20)
+                                $this->ids_buscar = substr($this->search,($busqueda_ids + 4),($posicion_ids - ($busqueda_ids + 4)));
+
+                            else
+                                //$this->ids_buscar = substr($this->search,($busqueda_ids + 4),20);
+                                $this->jumper_detect = 3;*/
+                        }
+
+                        else{
+
+                            $this->jumper_detect = 3;
+                        }
+
                 
                         if($this->jumper_detect == 0){
 
                             if($this->jumper_list == 0){
 
                                 $link_register_search = Links_usados::where('link',$this->search)
-                                    ->where('k_detected','K=1098')
+                                    ->where('k_detected','K=1083')
                                     ->where('user_id',$this->user->id)
                                     ->count();
                              
@@ -259,7 +293,7 @@ class K1098Index extends Component
                                     $date_actual= $date->format('Y-m-d H:i:s');
                                     $date_actual_30 = $date->modify('-30 minute')->format('Y-m-d H:i:s');
 
-                                    $links_usados = Links_usados::where('k_detected','K=1098')
+                                    $links_usados = Links_usados::where('k_detected','K=1083')
                                         ->where('user_id',$this->user->id)
                                         ->whereBetween('created_at',[$date_actual_30,$date_actual])
                                         ->count();
@@ -372,7 +406,7 @@ class K1098Index extends Component
 
                                 $client = new Client([
                                     //'base_uri' => 'http://127.0.0.1:8000',
-                                    'base_uri' => 'http://67.205.168.133/',
+                                    'base_uri' => 'http://147.182.190.233/',
                                 ]);
             
                                 $resultado = $client->request('GET', '/k1098/1/'.$this->psid_buscar);
@@ -516,7 +550,7 @@ class K1098Index extends Component
 
        // session()->forget('search');
 
-        return view('livewire.jumpers.k1098.k1098-index',compact('jumper','comments','subs_psid','busqueda_link_def'));
+        return view('livewire.jumpers.k1083.k1083-index',compact('jumper','comments','subs_psid','busqueda_link_def'));
     }
 
     public function positivo($jumper_id){
@@ -564,7 +598,7 @@ class K1098Index extends Component
 
         }
 
-        $this->emitTo('jumpers.k1098.k1098-index','render');
+        $this->emitTo('jumpers.k1083.k1083-index','render');
 
         
 
@@ -614,7 +648,7 @@ class K1098Index extends Component
 
         }
 
-        $this->emitTo('jumpers.k1098.k1098-index','render');
+        $this->emitTo('jumpers.k1083.k1083-index','render');
 
         
     }
@@ -630,7 +664,7 @@ class K1098Index extends Component
 
             $this->reset(['comentario']);
 
-            $this->emitTo('jumpers.k1098.k1098-index','render');
+            $this->emitTo('jumpers.k1083.k1083-index','render');
         }
     }
 
@@ -640,6 +674,6 @@ class K1098Index extends Component
         $this->jumper_complete = [];
         session()->forget('search');
         $this->busqueda_link = "";
-        return redirect()->route('k1098.index');
+        return redirect()->route('k1083.index');
     }
 }
