@@ -29,4 +29,10 @@ class LinksGenerados extends Component
 
         return view('livewire.admin.links-generados',compact('jumpers','total'));
     }
+
+    public function ver_link($jumper){
+        $jump = Links_usados::where('id',$jumper)->first();
+
+        $this->emit('comment',$jump->link);
+    }
 }

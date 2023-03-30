@@ -13,14 +13,20 @@
                             <th class="text-center p">LINK</th>
                             <th class="text-center p">USUARIO</th>
                      
-                            </tr>
+                        </tr>
                         </thead>
                         <tbody>
                             @foreach ($jumpers as $jumper)
                                 <tr class="bg-gray-800 border-gray-700 hover:bg-gray-600">
                                   
                                     <td class="text-center py-3 px-2">{{$jumper->k_detected}}</td>
-                                    <td class=" text-justify py-3 px-2 ">{{$jumper->link}}</td>
+                                    <td class="text-center py-3 px-2">
+                                        <button class="text-blue-600 text-lg hover:text-green-900"
+                                        
+                                        wire:click="ver_link('{{$jumper->id}}')">
+                                        <i class="fas fa-eye"></i>
+                                        </button>
+                                    </td>
                                     <td class=" text-justify py-3 px-2 ">{{$jumper->user->username}}</td>
                                 
                                 </tr>
