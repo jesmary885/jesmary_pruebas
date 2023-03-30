@@ -44,7 +44,7 @@
 
         </div>
 
-        @if ($jumper_complete == [])
+        @if ($jumper_complete == "")
         <div class="flex justify-center">
             <div class="mt-4" wire:loading>
                 <div class="container2">

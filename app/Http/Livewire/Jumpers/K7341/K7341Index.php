@@ -56,6 +56,8 @@ class K7341Index extends Component
 
     public function jump(){
 
+        //dd( $this->jumper_complete);
+
         try {
             $client = new Client([
                 //'base_uri' => 'http://127.0.0.1:8000',
@@ -94,7 +96,7 @@ class K7341Index extends Component
         if(session('psid')) $this->psid_register = session('psid');
         if(session('search')) $this->search = session('search');
 
-        $this->jumper_detect = 0;
+        $this->jumper_detect = [];
         $this->busqueda_link = "";
 
         $this->user = User::where('id',auth()->user()->id)->first();
@@ -244,7 +246,7 @@ class K7341Index extends Component
                     }
 
                     $this->jumper_list = 1;
-                    $this->jumper_detect = 1;
+                   // $this->jumper_detect = 1;
 
                     if($this->jumper_complete == "" && $this->calculo == 0){
 

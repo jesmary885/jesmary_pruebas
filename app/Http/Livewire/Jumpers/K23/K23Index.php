@@ -73,10 +73,9 @@ class K23Index extends Component
             $link_register->save();
 
             try {
-
                 $client = new Client([
                     //'base_uri' => 'http://127.0.0.1:8000',
-                    'base_uri' => 'http://147.182.190.233',
+                    'base_uri' => 'http://146.190.74.228',
                 ]);
 
                 $resultado = $client->request('GET', '/k23/1/'.$this->ids_buscar.'/'.$this->psid_buscar.'/'.$this->k2_buscar.'/'.$this->pid_buscar);
