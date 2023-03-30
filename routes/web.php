@@ -6,6 +6,7 @@ use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JumpersController;
+use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\MarketplaceController;
 use App\Http\Controllers\PagoController;
 use App\Http\Controllers\PsidController;
@@ -32,7 +33,6 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
 Route::middleware(['auth','verified'])->group(function()
 {
     Route::middleware(['home'])->group(function(){
-        //home
         Route::get('/home', [HomeController::class,'index'])->name('home');
     });
 });
@@ -40,12 +40,22 @@ Route::middleware(['auth','verified'])->group(function()
 Route::middleware(['auth','verified'])->group(function()
 {
     Route::middleware(['active'])->group(function(){
+
+        Route::get('/logout', [LogoutController::class,'perform'])->name('logout.perform');
+
         //Jumpers
 
-        Route::get('k1083',[JumpersController::class,'k1083'])->name('k1083.index');
-        Route::get('k1091',[JumpersController::class,'k1091'])->name('k1091.index');
-        Route::get('k10634',[JumpersController::class,'k10634'])->name('k10634.index');
+        Route::get('k1083',[JumpersController::class,'k1083'])->name('k1083.index')->middleware('permission:menu.premium');
+        Route::get('k1091',[JumpersController::class,'k1091'])->name('k1091.index')->middleware('permission:menu.premium');
+        Route::get('k1000-PS',[JumpersController::class,'kmil_poderosa1'])->name('kmil_poderosa1.index')->middleware('permission:menu.premium');
+        Route::get('k1000-PM',[JumpersController::class,'kmil_poderosa2'])->name('kmil_poderosa2.index')->middleware('permission:menu.premium');
+        Route::get('k23-P',[JumpersController::class,'k23_poderosa'])->name('k23_poderosa.index')->middleware('permission:menu.premium');
+        Route::get('k2028',[JumpersController::class,'k2028'])->name('k2028.index')->middleware('permission:menu.premium');
+        Route::get('k5460',[JumpersController::class,'k5460'])->name('k5460.index')->middleware('permission:menu.premium');
+        Route::get('k6057',[JumpersController::class,'k6057'])->name('k6057.index')->middleware('permission:menu.premium');
+        Route::get('k2066',[JumpersController::class,'k2066'])->name('k2066.index')->middleware('permission:menu.premium');
 
+        
         Route::get('cint',[JumpersController::class,'cint'])->name('cint.index');
         Route::get('internals',[JumpersController::class,'internals'])->name('internals.index');
         Route::get('k1000',[JumpersController::class,'kmil'])->name('kmil.index');
@@ -65,9 +75,9 @@ Route::middleware(['auth','verified'])->group(function()
         Route::get('spectrum',[JumpersController::class,'spectrum'])->name('spectrum.index');
         Route::get('toluna',[JumpersController::class,'toluna'])->name('toluna.index');
         Route::get('ssidkr',[JumpersController::class,'ssidkr'])->name('ssidkr.index');
+        Route::get('k10634',[JumpersController::class,'k10634'])->name('k10634.index');
         Route::get('descalificador',[JumpersController::class,'descalificador'])->name('descalificador.index');
         Route::get('wix',[JumpersController::class,'wix'])->name('wix.index');
-        Route::get('k2066',[JumpersController::class,'k2066'])->name('k2066.index');
         //Route::get('k2001',[JumpersController::class,'k2001'])->name('k2001.index');
         Route::get('ktmr',[JumpersController::class,'ktmr'])->name('ktmr.index');
         Route::get('qt',[JumpersController::class,'qt'])->name('qt.index');
@@ -104,6 +114,9 @@ Route::middleware(['auth','verified'])->group(function()
 
         //Administración
 
+        
+
+        Route::get('admin_multilogin', [AdminController::class, 'multilogin'])->name('admin.multilogin.index')->middleware('permission:administracion_principal');
         Route::get('admin_comunidad', [AdminController::class, 'comunidad'])->name('admin.comunidad')->middleware('permission:otro.admin');
 
         Route::get('admin_users_paying', [AdminController::class, 'users_paying'])->name('admin.users_paying')->middleware('permission:administracion_principal');

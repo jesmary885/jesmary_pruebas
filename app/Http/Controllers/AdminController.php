@@ -10,6 +10,10 @@ class AdminController extends Controller
         return view('admin.users');
     }
 
+    public function multilogin(){
+        return view('admin.multilogin');
+    }
+
     public function users_paying(){
         return view('admin.users_paying');
 

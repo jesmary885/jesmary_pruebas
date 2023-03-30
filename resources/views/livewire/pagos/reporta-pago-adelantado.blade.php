@@ -31,8 +31,18 @@
                             <div class="form-group w-full mr-2">
                                 <select wire:model="type" title="Plan" id="type" class="block w-full text-gray-400 py-2 px-2 pr-8 leading-tight rounded focus:outline-none focus:border-gray-500" name="type">
                                         <option value="" selected>Seleccione una opción</option>    
+                                        <option value="premium">Plan Premium</option>
+                                </select>
+                                <x-input-error for="type" />
+                            </div>
+                            @endif
+
+                            @if($plan == "30")
+                            <div class="form-group w-full mr-2">
+                                <select wire:model="type" title="Plan" id="type" class="block w-full text-gray-400 py-2 px-2 pr-8 leading-tight rounded focus:outline-none focus:border-gray-500" name="type">
+                                        <option value="" selected>Seleccione una opción</option>    
                                         <option value="basico">Plan Básico</option>
-                                        <!-- <option value="premium">Plan Premium</option> -->
+                                        <option value="premium">Plan Premium</option>
                                 </select>
                                 <x-input-error for="type" />
                             </div>

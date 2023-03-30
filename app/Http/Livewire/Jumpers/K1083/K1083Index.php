@@ -257,13 +257,6 @@ class K1083Index extends Component
 
                             $this->serie_buscar = substr($this->search,($busqueda_serie + 5),($posicion_serie - ($busqueda_serie + 5)));
 
-                           // dd($this->serie_buscar);
-                            /*if($busq_ids_s < 20)
-                                $this->ids_buscar = substr($this->search,($busqueda_ids + 4),($posicion_ids - ($busqueda_ids + 4)));
-
-                            else
-                                //$this->ids_buscar = substr($this->search,($busqueda_ids + 4),20);
-                                $this->jumper_detect = 3;*/
                         }
 
                         else{

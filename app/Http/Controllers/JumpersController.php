@@ -148,7 +148,36 @@ class JumpersController extends Controller
         Excel::import(new CintImport(), $file);
 
         return redirect()->route('jumpers.cint.cint-index');
-
     }
+
+        public function kmil_poderosa1(){
+            return view('jumpers.kmil_poderosa');
+         
+        }
+
+        public function kmil_poderosa2(){
+            return view('jumpers.kmil_poderosa2');
+         
+        }
+
+        public function k23_poderosa(){
+            return view('jumpers.k23_poderosa');
+         
+        }
+
+        public function k2028(){
+            return view('jumpers.k2028');
+         
+        }
+
+        public function k5460(){
+            return view('jumpers.k5460');
+         
+        }
+
+        public function k6057(){
+            return view('jumpers.k6057');
+         
+        }
 
 }

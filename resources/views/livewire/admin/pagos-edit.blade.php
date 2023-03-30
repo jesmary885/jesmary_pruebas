@@ -31,6 +31,24 @@
                             </div>
                         </div>
 
+                        @if($status == '1')
+
+                            <div class="form-group">
+                                <label class="w-full text-justify">Confirma el tipo de pago recibido</label>
+
+                                <div class="custom-control custom-radio flex justify-start">
+                                    <input class="custom-control-input" type="radio" id="customRadio3" name="customRadio3" value="1" wire:model="type_confirmed">
+                                    <label for="customRadio3" class="custom-control-label text-md font-semibold text-gray-300">Plan Básico</label>
+                                </div>
+
+                                <div class="custom-control custom-radio flex justify-start">
+                                    <input class="custom-control-input custom-control-input-danger" type="radio" id="customRadio4" value="2" name="customRadio4" wire:model="type_confirmed">
+                                    <label for="customRadio4" class="custom-control-label text-md font-semibold text-gray-300">Plan Premium</label>
+                                </div>
+                            </div>
+
+                        @endif
+
                         <div class="form-group w-full mr-2">
                             <label class="w-full text-justify">Admin 2 que verifica</label>
                             <select wire:model="admin_verifi_id" title="Admin que verifica" class="block w-full text-gray-400 py-2 px-2 pr-8 leading-tight rounded focus:outline-none focus:border-gray-500">

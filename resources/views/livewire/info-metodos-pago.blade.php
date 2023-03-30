@@ -1,5 +1,5 @@
 <div>
-<button title="Reportar pago" type="submit" class="text-blue-500 font-bold underline ml-1"  wire:click="open"> AQUÍ </button> 
+<button title="Reportar pago" type="submit" class="text-blue-500 font-bold underline ml-1"  wire:click="open"> {{__('messages.aqui')}} </button> 
 
 
 @if ($isopen)
@@ -61,6 +61,17 @@
                         <div class="info-box-content">
                         <span class="info-box-number">BINANCE</span>
                         <span class="info-box-text">Pay ID= 445952798</span>
+                        </div>
+
+                        </div>
+
+                        <div class="info-box mb-3 bg-info">
+                        <span class="info-box-icon"><i class="fas fa-money-check"></i></span>
+                        <div class="info-box-content">
+                        <span class="info-box-number">PAYEER PAY</span>
+                        <span class="info-box-text">P1064078846</span>
+             
+
                         </div>
 
                         </div>

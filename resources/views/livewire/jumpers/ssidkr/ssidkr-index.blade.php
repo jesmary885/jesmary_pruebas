@@ -264,11 +264,9 @@
                             </div>
                         @endif
 
-                    @if ($k_detect == 'K=1000' || $k_detect == 'K=1092' || $k_detect == 'K=1098'|| $k_detect == 'K=2062' || $k_detect == 'K=2066' || $k_detect == 'K=3203' || $k_detect == 'K=7341' || $k_detect == 'K=23' || $k_detect == 'K=3906' || $k_detect == 'K=11052' || $k_detect == 'K=15293' || $k_detect == 'K=17564')
+                    @if ($k_detect == 'K=1092' || $k_detect == 'K=1098'|| $k_detect == 'K=2062' || $k_detect == 'K=2066' || $k_detect == 'K=3203' || $k_detect == 'K=7341' || $k_detect == 'K=23' || $k_detect == 'K=3906' || $k_detect == 'K=11052' || $k_detect == 'K=15293' || $k_detect == 'K=17564' || $k_detect == 'K=10634' || $k_detect == 'K=1083' || $k_detect == 'K=1091' || $k_detect == 'K=2028' || $k_detect == 'K=5460' || $k_detect == 'K=6057' )
                     <div>
-                        @if ($k_detect == 'K=1000')
-                        <a href={{$this->k1000()}}>
-                        @endif
+                        
                         @if ($k_detect == 'K=1092')
                         <a href={{$this->k1092()}}>
                         @endif
@@ -303,16 +301,58 @@
                         <a href={{$this->k17564()}}>
                         @endif
                        
-
+                        @if ($k_detect == 'K=10634')
+                        <a href={{$this->k10634()}}>
+                        @endif
+                        @if ($k_detect == 'K=1083')
+                        <a href={{$this->k1083()}}>
+                        @endif
+                        @if ($k_detect == 'K=1091')
+                        <a href={{$this->k1091()}}>
+                        @endif
+                        @if ($k_detect == 'K=2028')
+                        <a href={{$this->k2028()}}>
+                        @endif
+                        @if ($k_detect == 'K=5460')
+                        <a href={{$this->k5460()}}>
+                        @endif
+                        @if ($k_detect == 'K=6057')
+                        <a href={{$this->k6057()}}>
+                        @endif
                             <div class="small-box bg-success">
                                 <div class="inner">
-                                    <h3 class="text-md font-semibold">Dirígete a </h3>
-                                    <p>Sección "{{$k_detect}}"</p>
+
+                                
+
+                                    <h3 class="text-md font-semibold">{{$this->redireccionl()[1]}} </h3>
+                                    <p>{{$this->redireccionl()[2]}}</p>
+
                                 </div>
                                 <div class="icon">
                                     <i class="	far fa-heart"></i>
                                 </div>
-                                <p class="font-bold text-sm small-box-footer"> Haciendo clic aquí </p>
+                                <p class="font-bold text-sm small-box-footer">{{$this->redireccionl()[3]}} </p>
+                            </div>
+                        </a>
+                    </div>
+                    @endif
+
+                    @if ($k_detect == 'K=1000')
+                    <div>
+                       
+                        <a href={{$this->k1000()}}>
+                       
+                            <div class="small-box bg-success">
+                                <div class="inner">
+
+                                    <h3 class="text-md font-semibold">{{$this->redireccionk1000()[1]}} </h3>
+                                    <p>{{$this->redireccionk1000()[2]}}</p>
+
+                                </div>
+                                <div class="icon">
+                                    <i class="	far fa-heart"></i>
+                                </div>
+                                <p class="font-bold text-sm small-box-footer">{{$this->redireccionk1000()[3]}}</p>
                             </div>
                         </a>
                     </div>

@@ -10,7 +10,7 @@ class PagosEdit extends Component
 {
 
     public $isopen = false;
-    public $registro,$admin_verifi_id,$status,$users_admin;
+    public $registro,$admin_verifi_id,$status,$users_admin,$type_confirmed;
 
     public function open()
     {
@@ -63,8 +63,23 @@ class PagosEdit extends Component
                 $user_cliente->update([
                     'status' => 'activo',
                 ]);
+
+                if($this->type_confirmed == 1){
+                    $user_cliente->roles()->sync(2);
+
+                    $this->registro->update([
+                        'type' => 'basico',
+                    ]);
+                }
+                else{
+                    $user_cliente->roles()->sync(10);
+
+                    $this->registro->update([
+                        'type' => 'premium',
+                    ]);
+                }
     
-                $user_cliente->roles()->sync(2);
+                
             }
     
             else{

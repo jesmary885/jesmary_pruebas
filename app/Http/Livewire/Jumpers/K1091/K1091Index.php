@@ -443,7 +443,7 @@ class K1091Index extends Component
                                             $link->psid = substr($this->psid_buscar,0,5);
                                             $link->user_id = auth()->user()->id;
                                             $link->jumper_type_id = 16;
-                                            $link->k_detected = 'K=1098';
+                                            $link->k_detected = 'K=1091';
                                             $link->save();
         
                                             $this->busqueda_link = Link::where('id',$link->id)->first();

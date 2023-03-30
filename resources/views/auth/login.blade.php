@@ -54,6 +54,14 @@
                                 <p class="text-gray-400">¿Aún no posees una cuenta? <a href="#" class="text-sm text-blue-700 hover:text-blue-700">Registrate aquí</a></p>
                             </div>
 
+                            @if (session('info'))
+                                <div class="alert alert-success m-2 text-red-600">
+                                    <strong>{{session('info')}}</strong>
+                                </div>
+                            @endif
+
+                            
+
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
                                 <div class="space-y-6">
@@ -101,6 +109,7 @@
                                         <button type="submit" class="w-full flex justify-center bg-green-200  hover:bblue-700 text-gray-600 p-3  rounded-lg tracking-wide font-semibold  cursor-pointer transition ease-in duration-500">
                                             Login
                                         </button>
+
                                     </div>
                                 </div>
                             </form>
@@ -130,6 +139,12 @@
                             <div class="mb-7">
                                 <p class="text-gray-400">¿Aún no posees una cuenta? <a href="#" class="text-sm text-blue-700 hover:text-blue-700">Registrate aquí</a></p>
                             </div>
+
+                            @if (session('info'))
+                                <div class="alert alert-success m-2 text-red-600 ">
+                                    <strong>{{session('info')}}</strong>
+                                </div>
+                            @endif
 
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf

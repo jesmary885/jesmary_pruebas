@@ -303,7 +303,6 @@ return [
                     'icon'    => 'fas fa-users',
                     'icon_color' => 'red',
                     'can' => 'administracion_principal'
-                    
                 ],
                 [
                     'text' => 'Usuarios pagos',
@@ -313,12 +312,11 @@ return [
                     'can' => 'administracion_principal'
                 ],
                 [
-                    'text' => 'Usuarios Libres',
+                    'text' => 'Usuarios Gratis',
                     'route'  => 'admin.users_free',
                     'icon'    => 'fas fa-users',
                     'icon_color' => 'red',
                     'can' => 'administracion_principal'
-                    
                 ],
                 [
                     'text' => 'Jumpers',
@@ -335,13 +333,13 @@ return [
                     'icon'    => 'far fa-credit-card',
                     'can' => 'administracion_principal'
                 ],
-                [
-                    'text' => 'Ganancias',
-                    'route'  => 'admin.ganancias.index',
-                    'icon_color' => 'red',
-                    'icon'    => 'fas fa-heart',
-                    'can' => 'administracion_principal'
-                ],
+                // [
+                //     'text' => 'Ganancias',
+                //     'route'  => 'admin.ganancias.index',
+                //     'icon_color' => 'red',
+                //     'icon'    => 'fas fa-heart',
+                //     'can' => 'administracion_principal'
+                // ],
                 [
                     'text' => 'Comentarios',
                     'route'  => 'admin.comentarios.index',
@@ -349,6 +347,14 @@ return [
                     'icon'    => 'fab fa-facebook-messenger',
                     'can' => 'administracion_principal'
                 ],
+                [
+                    'text' => 'Usuarios Multilogin',
+                    'route'  => 'admin.multilogin.index',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-exclamation-triangle',
+                    'can' => 'administracion_principal'
+                ],
+
             ],
             
         ],
@@ -474,23 +480,10 @@ return [
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
                 ],
+
                 [
                     'text' => 'K1092',
                     'route'  => 'kmilnoventaydos.index',
-                    'can' => 'ssidkr.index',
-                    'icon_color' => 'red',
-                    'icon'    => '	fas fa-angle-right',
-                ],
-                [
-                    'text' => 'K1083',
-                    'route'  => 'k1083.index',
-                    'can' => 'ssidkr.index',
-                    'icon_color' => 'red',
-                    'icon'    => '	fas fa-angle-right',
-                ],
-                [
-                    'text' => 'K1091',
-                    'route'  => 'k1091.index',
                     'can' => 'ssidkr.index',
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
@@ -512,13 +505,6 @@ return [
                 [
                     'text' => 'K2062',
                     'route'  => 'kdosmilsesentaydos.index',
-                    'can' => 'ssidkr.index',
-                    'icon_color' => 'red',
-                    'icon'    => '	fas fa-angle-right',
-                ],
-                [
-                    'text' => 'K2066',
-                    'route'  => 'k2066.index',
                     'can' => 'ssidkr.index',
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
@@ -579,6 +565,82 @@ return [
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
                 ],
+            ],
+            
+        ],
+
+        [
+            'text'    => 'SSI PREMIUM',
+            'icon'    => 'fas fa-crown',
+            'can' => 'menu.premium',
+            'icon_color' => 'cyan',
+            'submenu' => [
+                [
+                    'text' => 'K1000 Selfserve',
+                    'route'  => 'kmil_poderosa1.index',
+                    'can' => 'menu.premium',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+                [
+                    'text' => 'K1000 MCG',
+                    'route'  => 'kmil_poderosa2.index',
+                    'can' => 'menu.premium',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+                [
+                    'text' => 'K1083',
+                    'route'  => 'k1083.index',
+                    'can' => 'menu.premium',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+                [
+                    'text' => 'K1091',
+                    'route'  => 'k1091.index',
+                    'can' => 'menu.premium',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+                [
+                    'text' => 'K2066',
+                    'route'  => 'k2066.index',
+                    'can' => 'menu.premium',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+                [
+                    'text' => 'K2028',
+                    'route'  => 'k2028.index',
+                    'can' => 'menu.premium',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+                [
+                    'text' => 'K23',
+                    'route'  => 'k23_poderosa.index',
+                    'can' => 'menu.premium',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+                [
+                    'text' => 'K5460',
+                    'route'  => 'k5460.index',
+                    'can' => 'menu.premium',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+
+                [
+                    'text' => 'K6057',
+                    'route'  => 'k6057.index',
+                    'can' => 'menu.premium',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+
+
             ],
             
         ],

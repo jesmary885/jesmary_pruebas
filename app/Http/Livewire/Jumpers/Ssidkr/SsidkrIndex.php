@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Jumpers\Ssidkr;
 
 use App\Models\Comments;
 use App\Models\Link;
+use App\Models\User;
 use App\Models\User_Links_Points;
 use GuzzleHttp\Client;
 use Livewire\Component;
@@ -14,7 +15,7 @@ class SsidkrIndex extends Component
     use WithPagination;
     protected $paginationTheme = "bootstrap";
 
-    public $type_basic,$descalific_active=0,$type,$jumper_complete_qt,$jumper_complete_sp,$comment_new_psid_register,$pid_register_high,$psid_register_bh,$high_register_bh,$basic_register_bh,$posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $wix_detect = '0', $psid_register=0,$jumper_redirect,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$is_high,$is_basic,$calc_link,$jumper_select,$points_user_positive, $points_user_negative, $router_cint_detect=0 ;
+    public $rol_user,$type_basic,$descalific_active=0,$type,$jumper_complete_qt,$jumper_complete_sp,$comment_new_psid_register,$pid_register_high,$psid_register_bh,$high_register_bh,$basic_register_bh,$posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $wix_detect = '0', $psid_register=0,$jumper_redirect,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$is_high,$is_basic,$calc_link,$jumper_select,$points_user_positive, $points_user_negative, $router_cint_detect=0 ;
 
     protected $listeners = ['render' => 'render', 'registro_psid' => 'registro_psid', 'descalificar' => 'descalificar'];
 
@@ -23,6 +24,9 @@ class SsidkrIndex extends Component
     ];
     
     public function mount(){
+
+        $user= User::where('id',auth()->id())->first();
+        $this->rol_user = $user->roles->first()->id;
         $this->jumper_2 = '';
         $this->user_auth =  auth()->user()->id;
  
@@ -50,8 +54,14 @@ class SsidkrIndex extends Component
     }
 
     public function k2066(){
-        session()->forget('search');
-        return 'k2066';
+        if($this->rol_user == 10 || $this->rol_user == 1 || $this->rol_user == 7 || $this->rol_user == 8 || $this->rol_user == 9){
+            session()->forget('search');
+            return 'k2066';
+        }
+        else{
+            return '#';
+        }
+        
     }
 
     public function router(){
@@ -60,8 +70,14 @@ class SsidkrIndex extends Component
     }
 
     public function k1000(){
-        session()->forget('search');
-        return 'k1000';
+        if($this->rol_user == 10 || $this->rol_user == 1 || $this->rol_user == 7 || $this->rol_user == 8 || $this->rol_user == 9){
+            session()->forget('search');
+            return '#';
+        }
+        else{
+            session()->forget('search');
+            return 'k1000';
+        }
     }
 
     public function k1092(){
@@ -82,7 +98,17 @@ class SsidkrIndex extends Component
     public function k23(){
         session()->forget('search');
         return 'k23';
+
+        if($this->rol_user == 10 || $this->rol_user == 1 || $this->rol_user == 7 || $this->rol_user == 8 || $this->rol_user == 9){
+            session()->forget('search');
+            return 'k23-P';
+        }
+        else{
+            session()->forget('search');
+            return 'k23';
+        }
     }
+
     public function k3906(){
         session()->forget('search');
         return 'k3906';
@@ -99,6 +125,108 @@ class SsidkrIndex extends Component
         session()->forget('search');
         return 'k17564';
     }
+
+    public function k10634(){
+        session()->forget('search');
+        return 'k10634';
+    }
+
+    public function k1083(){
+        if($this->rol_user == 10 || $this->rol_user == 1 || $this->rol_user == 7 || $this->rol_user == 8 || $this->rol_user == 9){
+            session()->forget('search');
+            return 'k1083';
+        }
+        else{
+            return '#';
+        }
+    }
+
+    public function k1091(){
+        if($this->rol_user == 10 || $this->rol_user == 1 || $this->rol_user == 7 || $this->rol_user == 8 || $this->rol_user == 9){
+            session()->forget('search');
+            return 'k1091';
+        }
+        else{
+            return '#';
+        }
+    }
+
+    public function k2028(){
+        if($this->rol_user == 10 || $this->rol_user == 1 || $this->rol_user == 7 || $this->rol_user == 8 || $this->rol_user == 9){
+            session()->forget('search');
+            return 'k2028';
+        }
+        else{
+            return '#';
+        }
+    }
+
+    public function k5460(){
+        if($this->rol_user == 10 || $this->rol_user == 1 || $this->rol_user == 7 || $this->rol_user == 8 || $this->rol_user == 9){
+            session()->forget('search');
+            return 'k5460';
+        }
+        else{
+            return '#';
+        }
+    }
+
+    public function k6057(){
+        if($this->rol_user == 10 || $this->rol_user == 1 || $this->rol_user == 7 || $this->rol_user == 8 || $this->rol_user == 9){
+            session()->forget('search');
+            return 'k6057';
+        }
+        else{
+            return '';
+        }
+    }
+
+    public function redireccionl(){
+
+        if($this->rol_user == 10 || $this->rol_user == 1 || $this->rol_user == 7 || $this->rol_user == 8 || $this->rol_user == 9){
+            return [
+                1 => "Dirígete a",
+                2 =>"Sección ". $this->k_detect,
+                3 =>"Haciendo clic aquí",
+            ];
+        }
+        else{
+            if($this->k_detect == 'K=2066' || $this->k_detect == 'K=1083' || $this->k_detect == 'K=1091' || $this->k_detect == 'K=2028' || $this->k_detect == 'K=5460' || $this->k_detect == 'K=6057'){
+                return [
+                    1 =>"Para acceder a esta sección",
+                    2 =>"debe adquirir el plan premium",
+                    3 => "-"
+                ];
+            }
+
+            else{
+                return [
+                    1 => "Dirígete a",
+                    2 =>"Sección ". $this->k_detect,
+                    3 =>"Haciendo clic aquí",
+                ];
+            }
+        }
+    }
+
+    public function redireccionk1000(){
+
+        if($this->rol_user == 10 || $this->rol_user == 1 || $this->rol_user == 7 || $this->rol_user == 8 || $this->rol_user == 9){
+            return [
+                1 => "Dirígete a",
+                2 =>"Sección K-1000 que corresponde",
+                3 =>"-",
+            ];
+        }
+        else{
+            return [
+                1 => "Dirígete a",
+                2 =>"Sección ". $this->k_detect,
+                3 =>"Haciendo clic aquí",
+            ];
+        }
+    }
+
 
     public function render()
     {

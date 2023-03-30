@@ -146,6 +146,10 @@
                         </th>
                         <th 
                             class="text-center">
+                            Tipo
+                        </th>
+                        <th 
+                            class="text-center">
                             Plan
                         </th>
                         <th 
@@ -197,6 +201,9 @@
                             
                             <td class="py-3 text-center font-medium whitespace-nowrap text-white">
                             {{\Carbon\Carbon::parse($registro->created_at)->format('d-m-Y h:i')}}
+                            </td>
+                            <td class="text-center">
+                            {{$registro->type}}
                             </td>
                             <td class="text-center">
                             {{$registro->plan}}
