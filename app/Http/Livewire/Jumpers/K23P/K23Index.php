@@ -888,7 +888,7 @@ class K23Index extends Component
                             do{
                                 $detect_elem1= substr($this->search, $posicion_elem1,1);
         
-                                if($detect_elem1 == '/' || $detect_elem1 == '&') $i_elem1 = 1;
+                                if($detect_elem1 == '/' || $detect_elem1 == '&' || $detect_elem1 == '?list') $i_elem1 = 1;
                                 else{
                                     $posicion_elem1 = $posicion_elem1 + 1;
                                     $busq_elem1 ++;
@@ -910,7 +910,7 @@ class K23Index extends Component
                                 do{
                                     $detect_elem2= substr($this->search, $posicion_elem2,1);
             
-                                    if($detect_elem2 == '/' || $detect_elem2 == '&') $i_elem2 = 1;
+                                    if($detect_elem2 == '/' || $detect_elem2 == '&' || $detect_elem2 == '?list') $i_elem2 = 1;
                                     else{
                                         $posicion_elem2 = $posicion_elem2 + 1;
                                         $busq_elem2 ++;
