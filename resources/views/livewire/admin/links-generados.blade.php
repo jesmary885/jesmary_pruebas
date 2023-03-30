@@ -11,6 +11,7 @@
                         <tr>
                             <th class="text-center py-3">K</th>
                             <th class="text-center p">LINK</th>
+                            <th class="text-center p">USUARIO</th>
                      
                             </tr>
                         </thead>
@@ -20,6 +21,7 @@
                                   
                                     <td class="text-center py-3 px-2">{{$jumper->k_detected}}</td>
                                     <td class=" text-justify py-3 px-2 ">{{$jumper->link}}</td>
+                                    <td class=" text-justify py-3 px-2 ">{{$jumper->user->username}}</td>
                                 
                                 </tr>
                             @endforeach
@@ -41,4 +43,23 @@
             @endif
                 
         </div>
+
+        @push('js')
+
+      
+
+        <script>
+            livewire.on('comment', function(ms){
+                    Swal.fire({
+                title: ms,
+                showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+                }
+                })
+            })
+        </script>
+    @endpush
 </div>

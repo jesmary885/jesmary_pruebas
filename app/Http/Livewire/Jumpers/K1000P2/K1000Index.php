@@ -8,6 +8,7 @@ use App\Models\Link;
 use App\Models\Links_usados;
 use App\Models\User;
 use App\Models\User_Links_Points;
+use DateTime;
 use GuzzleHttp\Client;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -850,6 +851,8 @@ class K1000Index extends Component
                             }while($i_elem2 != 1);
 
                             $this->elem2 = substr($this->search,($posicion_elem1 + 1),($posicion_elem2 - ($posicion_elem1 + 1)));
+
+               
 
                            /* if($detect_elem2 == '/'){
 
