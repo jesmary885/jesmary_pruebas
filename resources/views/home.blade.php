@@ -97,6 +97,8 @@
     @endif
   </div>
 
+  
+
   <div class="col-12 col-sm-6 col-md-3">
   @if($rol != '4')
   <a href="{{route('chat.index')}}">
@@ -129,6 +131,12 @@
   
   @if($rol == '4')
   <div>
+
+  @if (session('info'))
+    <div class="alert alert-success">
+        <strong>{{session('info')}}</strong>
+    </div>
+  @endif
 
   <blockquote class="text-gray-400 flex">
     <p class="mr-1">{{__('messages.su_cuenta_inactiva')}}</p>

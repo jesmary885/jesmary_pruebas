@@ -15,7 +15,7 @@ class ReportePago extends Component
 {
     use WithFileUploads;
 
-    public $type,$file,$isopen = false, $plan,$comentario,$metodo_id,$payment_methods,$referencia,$fecha_pago;
+    public $msj_aviso,$type,$file,$isopen = false, $plan,$comentario,$metodo_id,$payment_methods,$referencia,$fecha_pago;
 
     protected $rules = [
         'plan' => 'required',
@@ -37,6 +37,7 @@ class ReportePago extends Component
 
     public function mount(){
         $this->payment_methods = PaymentMethods::all();
+        $this->msj_aviso = 0;
     }
 
     public function render()
@@ -111,7 +112,14 @@ class ReportePago extends Component
                     if($rol == '4') $user->roles()->sync(2);
 
                 }
-                
+            }
+
+            else{
+
+                $msj = 'La activación automática esta programada entre 6:00 am y 9:00 pm hora Venezuela, espere que un administrador active su cuenta';
+                return redirect()->route("home")->with('info', $msj);
+
+               
             }
 
             $this->emit('alert','Datos registrados correctamente');

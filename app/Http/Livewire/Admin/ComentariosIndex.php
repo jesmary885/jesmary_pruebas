@@ -29,6 +29,7 @@ class ComentariosIndex extends Component
             $comentarios = Comments::whereHas('user',function(Builder $query){
                 $query->where('username','LIKE', '%' . $this->search . '%');
             })
+            ->latest('id')
             ->paginate(20);
         }
         
