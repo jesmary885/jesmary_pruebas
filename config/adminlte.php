@@ -603,13 +603,13 @@ return [
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
                 ],
-                [
+                /*[
                     'text' => 'K2066',
                     'route'  => 'k2066.index',
                     'can' => 'menu.premium',
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
-                ],
+                ],*/
                 [
                     'text' => 'K2028',
                     'route'  => 'k2028.index',

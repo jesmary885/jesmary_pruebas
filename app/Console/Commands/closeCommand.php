@@ -20,7 +20,7 @@ class closeCommand extends Command
 
         foreach($users as $user){
 
-            if($user->id != '5' &&
+            if($user->id != '1' &&
             $user->id != '2' &&
             $user->id != '3' &&
             $user->id != '4' &&
