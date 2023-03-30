@@ -18,7 +18,7 @@ class K23Index extends Component
     use WithPagination;
     protected $paginationTheme = "bootstrap";
 
-    public $user,$operacion,$jumper_complete = [],$jumper_list = 0,$busqueda_link,$comment_new_psid_register,$pid_register_high,$psid_register_bh,$high_register_bh,$basic_register_bh,$posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $wix_detect = '0', $psid_register=0,$jumper_redirect,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$is_high,$is_basic,$calc_link,$jumper_select,$points_user_positive, $points_user_negative, $jumper_detect_k ='',$pid_manual,$pid_detectado = 'si',$pid_buscar,$psid_buscar,$ids_buscar,$k2_buscar,$elem1,$elem2 ;
+    public $user,$operacion,$jumper_complete = [],$jumper_list = 0,$busqueda_link,$comment_new_psid_register,$pid_register_high,$psid_register_bh,$high_register_bh,$basic_register_bh,$posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $wix_detect = '0', $psid_register=0,$jumper_redirect,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$is_high,$is_basic,$calc_link,$jumper_select,$points_user_positive, $points_user_negative, $jumper_detect_k ='',$pid_manual,$pid_detectado = 'si',$pid_buscar,$psid_buscar,$ids_buscar,$k2_buscar,$elem1,$elem2,$elem3 ;
 
     protected $listeners = ['render' => 'render', 'registro_psid' => 'registro_psid','verific' => 'verific'];
     
@@ -85,7 +85,12 @@ class K23Index extends Component
 
                 }
                 else{
-                    $resultado = $client->request('GET', '/k23_s2/1/'.$this->ids_buscar.'/'.$this->psid_buscar.'/'.$this->k2_buscar.'/'.$this->pid_buscar.'/'.$this->elem1.'/'.$this->elem2);
+                    if($this->elem3 == 0){
+                        $resultado = $client->request('GET', '/k23_s2/1/'.$this->ids_buscar.'/'.$this->psid_buscar.'/'.$this->k2_buscar.'/'.$this->pid_buscar.'/'.$this->elem1.'/'.$this->elem2);
+                    }
+                    else{
+                        $resultado = $client->request('GET', '/k23_s3/1/'.$this->ids_buscar.'/'.$this->psid_buscar.'/'.$this->k2_buscar.'/'.$this->pid_buscar.'/'.$this->elem1.'/'.$this->elem2.'/'.$this->elem3);
+                    }
                 }
 
                 
@@ -923,6 +928,34 @@ class K23Index extends Component
                                 }while($i_elem2 != 1);
 
                                 $this->elem2 = substr($this->search,($posicion_elem1 + 1),($posicion_elem2 - ($posicion_elem1 + 1)));
+
+                                if($detect_elem2 == '/'){
+                                
+                                    $posicion_elem3 = $posicion_elem2 + 1;
+                                    $i_elem3 = 0;
+                                    $busq_elem3 = 0;
+
+                                    do{
+                                        $detect_elem3= substr($this->search, $posicion_elem3,1);
+                
+                                        if($detect_elem3 == '/' || $detect_elem3 == '&' || $detect_elem3 == '?') $i_elem3 = 1;
+                                        else{
+                                            $posicion_elem3 = $posicion_elem3 + 1;
+                                            $busq_elem3 ++;
+                                        }
+
+                                        if($busq_elem3 > 20){
+                                            $i_elem3 = 1;
+                                        }
+                
+                                    }while($i_elem3 != 1);
+
+                                    $this->elem3 = substr($this->search,($posicion_elem2 + 1),($posicion_elem3 - ($posicion_elem2 + 1)));
+                                }
+
+                                else{
+                                    $this->elem3 = 0;
+                                }
                             }
 
                             else{

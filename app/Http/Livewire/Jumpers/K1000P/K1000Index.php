@@ -846,7 +846,7 @@ class K1000Index extends Component
                             do{
                                 $detect_elem2= substr($this->search, $posicion_elem2,1);
         
-                                if($detect_elem2 == '/' || $detect_elem2 == '&' || $detect_elem2 == '?list') $i_elem2 = 1;
+                                if($detect_elem2 == '/' || $detect_elem2 == '&' || $detect_elem2 == '?') $i_elem2 = 1;
                                 else{
                                     $posicion_elem2 = $posicion_elem2 + 1;
                                     $busq_elem2 ++;
@@ -860,7 +860,7 @@ class K1000Index extends Component
 
                             $this->elem2 = substr($this->search,($posicion_elem1 + 1),($posicion_elem2 - ($posicion_elem1 + 1)));
 
-                            if($detect_elem2 == '/' || $detect_elem2 == '?list'){
+                            if($detect_elem2 == '/' || $detect_elem2 == '?'){
 
                                 $posicion_elem3 = $posicion_elem2 + 1;
                                 $i_elem3 = 0;
@@ -869,7 +869,7 @@ class K1000Index extends Component
                                 do{
                                     $detect_elem3= substr($this->search, $posicion_elem3,1);
             
-                                    if($detect_elem3 == '/' || $detect_elem3 == '&' || $detect_elem3 == '?list') $i_elem3 = 1;
+                                    if($detect_elem3 == '/' || $detect_elem3 == '&' || $detect_elem3 == '?') $i_elem3 = 1;
                                     else{
                                         $posicion_elem3 = $posicion_elem3 + 1;
                                         $busq_elem3 ++;
