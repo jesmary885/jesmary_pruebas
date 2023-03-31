@@ -47,7 +47,7 @@ class closeCommand extends Command
 
                 $user->update([
                     'type' => null,
-                    'status' => 'inactivo'
+                    'status' => 'activo'
                 ]);
 
             }
