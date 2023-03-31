@@ -35,7 +35,7 @@ class ReportaPagoAdelantado extends Component
     public function open()
     {
         $this->isopen = true;  
-        $this->emitTo('pid.register','render');
+        $this->emitTo('pagos.reporta-pago-adelantado','render');
     }
     public function close()
     {

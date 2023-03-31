@@ -20,14 +20,14 @@ class CreateNewUser implements CreatesNewUsers
      */
     public function create(array $input)
     {
-         Validator::make($input, [
-             'name' => ['required', 'string', 'max:255','unique:users'],
-             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-             'password' => $this->passwordRules(),
-             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
-         ])->validate();
+        Validator::make($input, [
+            'name' => ['required', 'string', 'max:255','unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => $this->passwordRules(),
+            'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
+        ])->validate();
 
-       return User::create([
+        return User::create([
             'name' => $input['name'],
             'username' => $input['name'],
             'status' => 'activo',
@@ -41,5 +41,8 @@ class CreateNewUser implements CreatesNewUsers
             'last_payment_date' => date('Y-m-d'),
            // 'type' => 'gratis',
         ])->assignRole('Inactivo');
+
+         
+       
     }
 }

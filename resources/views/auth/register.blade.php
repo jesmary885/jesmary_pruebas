@@ -49,6 +49,12 @@
 
                 <div class="mt-6">
                     <div class="mx-auto rounded-3xl">
+
+                    @if (session('info'))
+                                <div class="alert alert-success m-2 text-red-600">
+                                    <strong>{{session('info')}}</strong>
+                                </div>
+                            @endif
                         
                         <form method="POST" action="{{ route('register') }}">
                         @csrf
@@ -121,6 +127,12 @@
 
                 <div class="mt-6 w-3/4">
                     <div class="mx-auto rounded-3xl">
+
+                    @if (session('info'))
+                                <div class="alert alert-success m-2 text-red-600">
+                                    <strong>{{session('info')}}</strong>
+                                </div>
+                            @endif
                         
                     <form method="POST" action="{{ route('register') }}">
                         @csrf

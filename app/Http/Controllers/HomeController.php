@@ -26,7 +26,7 @@ class HomeController extends Controller
         $rol = $user->roles->first()->id;
 
         if($user->last_payment_date){
-            $fecha_actual = $date = Carbon::now();
+            $fecha_actual = Carbon::now();
             $corte = Carbon::parse($user->last_payment_date);
 
             $diasDiferencia = ($corte->diffInDays($fecha_actual) + 1);

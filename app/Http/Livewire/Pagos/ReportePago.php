@@ -22,7 +22,7 @@ class ReportePago extends Component
         'metodo_id' => 'required',
         'referencia' => 'required|numeric',
         'fecha_pago' => 'required',
-        'file' => 'required|image',
+        'file' => 'required',
         'type' => 'required'
     ];
 
@@ -104,7 +104,7 @@ class ReportePago extends Component
                 'plan' => $plan_nuevo
             ]);
 
-            if($date->toTimeString() <= '21:00:00' && $date->toTimeString() >= '06:00:00' ){
+           /* if($date->toTimeString() <= '21:05:00' && $date->toTimeString() >= '06:00:00' ){
                 if($this->type == 'premium'){
                     $user->roles()->sync(10);
                 }
@@ -114,13 +114,13 @@ class ReportePago extends Component
                 }
             }
 
-            else{
+            else{*/
 
                 $msj = 'La activación automática esta programada entre 6:00 am y 9:00 pm hora Venezuela, espere que un administrador active su cuenta';
                 return redirect()->route("home")->with('info', $msj);
 
                
-            }
+            //}
 
             $this->emit('alert','Datos registrados correctamente');
             $this->reset(['plan','file','comentario','type']);
