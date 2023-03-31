@@ -65,4 +65,6 @@ return [
     'para_disfrutar_servicios' => 'to enjoy our services',
     'ver_datos_cuentas' => 'to see the data of our accounts',
     'saldo_pagina' => 'balance on page',
+    'planes_precios' => 'Plans and prices',
+    'ver_datos_precios' => 'to see our plans and prices',
 ];

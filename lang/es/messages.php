@@ -64,9 +64,6 @@ return [
     'para_disfrutar_servicios' => 'para disfrutar de nuestros servicios',
     'ver_datos_cuentas' => 'para ver los datos de nuestras cuentas',
     'saldo_pagina' => 'Saldo en página',
-    'comentarios' => 'Comentarios',
-    'comentarios' => 'Comentarios',
-    'comentarios' => 'Comentarios',
-    'comentarios' => 'Comentarios',
-    
+    'planes_precios' => 'Planes y precios',
+    'ver_datos_precios' => 'para ver nuestros planes y precios',
 ];

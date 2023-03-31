@@ -138,10 +138,19 @@
     </div>
   @endif
 
+
+
   <blockquote class="text-gray-400 flex">
     <p class="mr-1">{{__('messages.su_cuenta_inactiva')}}</p>
      @livewire('pagos.reporte-pago') 
      <p class="ml-1"> {{__('messages.para_disfrutar_servicios')}}</p>
+     
+  </blockquote>
+
+  <blockquote class="text-gray-400 flex">
+    <p class="mr-1">Haz click</p>
+     @livewire('info-planes') 
+     <p class="ml-1"> {{__('messages.ver_datos_precios')}}</p>
      
   </blockquote>
 
