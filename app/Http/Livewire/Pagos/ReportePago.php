@@ -22,7 +22,7 @@ class ReportePago extends Component
         'metodo_id' => 'required',
         'referencia' => 'required|numeric',
         'fecha_pago' => 'required',
-        'file' => 'required|image|max:2048',
+        'file' => 'required|image',
         'type' => 'required'
     ];
 
