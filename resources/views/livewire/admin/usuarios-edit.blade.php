@@ -39,7 +39,7 @@
                                 </div>
                            
                                 <div class="form-group w-full">
-                                    <label class="w-full text-justify">Ultima fecha de pago</label>
+                                    <label class="w-full text-justify">Fecha de corte</label>
                                     <div>
                                         <div wire:ignore x-data="datepicker()">
                                             <div class="flex flex-col">

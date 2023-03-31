@@ -22,7 +22,7 @@ class LoginResponse implements LoginResponseContract
 
         if($user->last_logout){
             $date_last_login = new DateTime($user->last_logout);
-            $date_last_login_aumentada = $date_last_login->modify('+25 minute')->format('Y-m-d H:i:s');
+            $date_last_login_aumentada = $date_last_login->modify('+20 minute')->format('Y-m-d H:i:s');
             
 
             if($date_actual <= $date_last_login_aumentada){

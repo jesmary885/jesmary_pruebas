@@ -37,8 +37,8 @@ class CreateNewUser implements CreatesNewUsers
             'points_positive' => 0,
             'points_negative' => 0,
             'points_neutral' => 0,
-            'plan' => 30,
-            'last_payment_date' => date('Y-m-d'),
+            //'plan' => 30,
+            //'last_payment_date' => date('Y-m-d'),
            // 'type' => 'gratis',
         ])->assignRole('Inactivo');
 
