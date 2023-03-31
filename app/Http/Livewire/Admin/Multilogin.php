@@ -40,7 +40,7 @@ class Multilogin extends Component
     {
         
 
-        $users = User::paginate(25);
+        $users = User::get();
 
         return view('livewire.admin.multilogin',compact('users'));
     }

@@ -27,9 +27,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="card-footer">
-                            {{$users->links()}}
-                        </div>
+                        
             @endif
                 
             @endforeach
