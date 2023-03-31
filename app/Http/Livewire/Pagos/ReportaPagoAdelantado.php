@@ -125,7 +125,9 @@ class ReportaPagoAdelantado extends Component
                     'plan' => $plan_nuevo
                 ]);
     
-                if($date->toTimeString() <= '21:00:00' && $date->toTimeString() >= '06:00:00' ){
+                //if($date->toTimeString() <= '21:00:00' && $date->toTimeString() >= '06:00:00' ){
+
+                if($date->toTimeString() <= '23:59:00' && $date->toTimeString() >= '06:00:00' ){
                     
                     if($this->type == 'premium'){
                         $user->roles()->sync(10);
@@ -148,7 +150,7 @@ class ReportaPagoAdelantado extends Component
             $this->reset(['plan','file','comentario','type']);
             $this->isopen = false;  
     
-            $this->emit('volver');
+            return redirect()->to('/home');
         }
     }
 }
