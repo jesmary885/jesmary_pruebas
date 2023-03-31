@@ -101,7 +101,7 @@ class K1092Index extends Component
                     'base_uri' => 'http://209.94.57.88/',
                 ]);
         
-                $resultado = $client->request('GET', '/k1092/1/'.$this->psid_buscar.'/'.$this->pid_buscar.'/'.$this->hash_buscar);
+                $resultado = $client->request('GET', '/k1092/1/'.$this->psid_buscar);
         
                 if($resultado->getStatusCode() == 200){
         
@@ -819,7 +819,7 @@ class K1092Index extends Component
                         }
                     }
 
-                    $busqueda_hash= strpos($this->search, '&_s=');
+                   /* $busqueda_hash= strpos($this->search, '&_s=');
 
                         if($busqueda_hash != false){
 
@@ -833,7 +833,7 @@ class K1092Index extends Component
 
                         else{
                             $this->jumper_detect = 3;
-                        }
+                        }*/
 
                     if($this->jumper_detect == 0 && $this->pid_detectado == 'si'){
 
