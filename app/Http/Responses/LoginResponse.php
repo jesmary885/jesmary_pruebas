@@ -17,7 +17,7 @@ class LoginResponse implements LoginResponseContract
     public function toResponse($request): RedirectResponse {
 
         $user = User::where('id',auth()->user()->id)->first();
-       /* $date = new DateTime();
+        $date = new DateTime();
         $date_actual= $date->format('Y-m-d H:i:s');
 
         if($user->last_logout){
@@ -97,7 +97,7 @@ class LoginResponse implements LoginResponseContract
             }
         }
 
-        else{*/
+        else{
 
             if ($request->user()->status == 'activo') {
     
@@ -153,7 +153,7 @@ class LoginResponse implements LoginResponseContract
     
                 //return redirect('/login');
             }
-       // }
+        }
        
     }
 }
