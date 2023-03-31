@@ -24,7 +24,7 @@
                                 <tr class="bg-gray-800 border-gray-700 hover:bg-gray-600">
                                     <th class="py-3 text-center font-medium whitespace-nowrap text-white">{{$user->username}}</th>
                                     <td class="text-center">{{$user->balance}}</td>
-                                    <td class="text-center">{{$this->next_payment_date($user->last_payment_date, $user->plan)}}</td>
+                                    <td class="text-center">{{$user->last_payment_date}}</td>
                                     <td class="text-center">{{$user->plan}} días</td>
                                     @if($user->sales) <td class="text-center"> <i class="{{$this->reputation_vendedor($user->id)[1]}}"></i> <i class="{{$this->reputation_vendedor($user->id)[2]}}"></i> <i class="{{$this->reputation_vendedor($user->id)[3]}}"></i> <i class="{{$this->reputation_vendedor($user->id)[4]}}"></i> <i class="{{$this->reputation_vendedor($user->id)[5]}}"></i></td>
                                     @else <td class="text-center">Sin ventas registradas</td>
