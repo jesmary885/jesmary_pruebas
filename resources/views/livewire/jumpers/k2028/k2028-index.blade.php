@@ -252,7 +252,7 @@
 
       
 
-       
+   
         
         @if ($jumper_complete == [])
         <div class="flex justify-center">
