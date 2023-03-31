@@ -104,7 +104,7 @@ class ReportePago extends Component
                 'plan' => $plan_nuevo
             ]);
 
-            if($date->toTimeString() <= '23:59:00' && $date->toTimeString() >= '06:00:00' ){
+            if($date->toTimeString() <= '21:00:00' && $date->toTimeString() >= '06:00:00' ){
                 if($this->type == 'premium'){
                     $user->roles()->sync(10);
                 }
