@@ -355,6 +355,14 @@ return [
                     'can' => 'administracion_principal'
                 ],
 
+                [
+                    'text' => 'Modificaciones en usuarios',
+                    'route'  => 'admin.modificaciones',
+                    'icon_color' => 'red',
+                    'icon'    => 'fab fa-facebook-messenger',
+                    'can' => 'administracion_principal'
+                ],
+
             ],
             
         ],

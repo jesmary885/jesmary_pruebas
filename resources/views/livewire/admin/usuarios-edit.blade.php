@@ -82,6 +82,12 @@
 
                             </div>
 
+                            <div class="form-group mt-2">
+                                <label for="formGroupExampleInput2">Si realizas una modificación, escribe aquí el motivo</label>
+                                <textarea wire:model="comentario" id="formGroupExampleInput" class="form-control resize-none rounded" cols="80" rows="5"> </textarea>
+                                <x-input-error for="comentario" />
+                            </div>
+
                            
                     </div>
                     <div class="modal-footer">

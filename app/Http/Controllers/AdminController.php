@@ -10,6 +10,10 @@ class AdminController extends Controller
         return view('admin.users');
     }
 
+    public function modificaciones(){
+        return view('admin.modificaciones');
+    }
+
     public function multilogin(){
         return view('admin.multilogin');
     }

@@ -2,13 +2,14 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Models\Modificaciones;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Livewire\Component;
 
 class UsuariosEdit extends Component
 {
-    public $estado_id ="", $roles_id, $last_date, $plan, $balance;
+    public $estado_id ="", $roles_id, $last_date, $plan, $balance, $comentario;
     public $usuario;
     public $username, $roles, $email, $estado = 'inactivo', $password, $password_confirm;
 
@@ -19,6 +20,8 @@ class UsuariosEdit extends Component
         'estado' => 'required',
         'username' => 'required|max:30',
         'roles_id' => 'required',
+        'comentario' => 'required',
+
     ];
 
     public function mount(){
@@ -75,6 +78,12 @@ class UsuariosEdit extends Component
             'last_payment_date' => date("Y-m-d", strtotime($this->last_date)),
         ]);
         $this->usuario->roles()->sync($this->roles_id);
+
+        $user_mod = new Modificaciones();
+        $user_mod->user_id = $this->usuario->id;
+        $user_mod->admin_id = auth()->user()->id;
+        $user_mod->justificacion = $this->comentario;
+        $user_mod->save();
 
         $this->reset(['isopen']);
         $this->emitTo('admin.usuarios-index','render');

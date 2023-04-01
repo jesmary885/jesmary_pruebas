@@ -28,8 +28,6 @@ class HomeController extends Controller
         $user = User::where('id',auth()->user()->id)->first();
         $rol = $user->roles->first()->id;
 
-
-
         $pago_registrado = PagoRegistrosRecarga::where('user_id',$user->id)
             ->where('status','pendiente')
             ->count();
