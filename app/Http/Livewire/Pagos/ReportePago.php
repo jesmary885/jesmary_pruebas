@@ -116,7 +116,7 @@ class ReportePago extends Component
 
             else{*/
 
-                $msj = 'La activación automática esta programada entre 6:00 am y 9:00 pm hora Venezuela, espere que un administrador active su cuenta';
+                $msj = 'La activación automática no esta disponible por los momentos, espere que un administrador active su cuenta';
                 return redirect()->route("home")->with('info', $msj);
 
                

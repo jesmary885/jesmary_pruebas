@@ -148,7 +148,9 @@ class K1000Index extends Component
                                             }
         
                                             $link = new Link();
+                                            if($url_detect != 'https://dkr1.ssisurveys.com' && $url_detect != 'https://online.ssisurveys.com'  && $url_detect != 'https://online.surveynetwork.com' ){
                                             $link->jumper = $url_detect;
+                                            }
                                             $link->psid = substr($this->psid_buscar,0,5);
                                             $link->user_id = auth()->user()->id;
                                             $link->jumper_type_id = 5;
@@ -433,7 +435,9 @@ class K1000Index extends Component
                                                     }
                 
                                                     $link = new Link();
-                                                    $link->jumper = $url_detect;
+                                                    if($url_detect != 'https://dkr1.ssisurveys.com' && $url_detect != 'https://online.ssisurveys.com'  && $url_detect != 'https://online.surveynetwork.com' ){
+                                                        $link->jumper = $url_detect;
+                                                    }
                                                     $link->psid = substr($this->psid_buscar,0,5);
                                                     $link->user_id = auth()->user()->id;
                                                     $link->jumper_type_id = 5;
@@ -545,7 +549,9 @@ class K1000Index extends Component
                                                     }
                 
                                                     $link = new Link();
-                                                    $link->jumper = $url_detect;
+                                                    if($url_detect != 'https://dkr1.ssisurveys.com' && $url_detect != 'https://online.ssisurveys.com'  && $url_detect != 'https://online.surveynetwork.com' ){
+                                                        $link->jumper = $url_detect;
+                                                    }
                                                     $link->psid = substr($this->psid_buscar,0,5);
                                                     $link->user_id = auth()->user()->id;
                                                     $link->jumper_type_id = 5;
@@ -655,7 +661,9 @@ class K1000Index extends Component
                                              }
          
                                              $link = new Link();
-                                             $link->jumper = $url_detect;
+                                             if($url_detect != 'https://dkr1.ssisurveys.com' && $url_detect != 'https://online.ssisurveys.com'  && $url_detect != 'https://online.surveynetwork.com' ){
+                                                $link->jumper = $url_detect;
+                                             }
                                              $link->psid = substr($this->psid_buscar,0,5);
                                              $link->user_id = auth()->user()->id;
                                              $link->jumper_type_id = 5;
@@ -763,7 +771,9 @@ class K1000Index extends Component
                                                 }
             
                                                 $link = new Link();
-                                                $link->jumper = $url_detect;
+                                                if($url_detect != 'https://dkr1.ssisurveys.com' && $url_detect != 'https://online.ssisurveys.com'  && $url_detect != 'https://online.surveynetwork.com' ){
+                                                    $link->jumper = $url_detect;
+                                                }
                                                 $link->psid = substr($this->psid_buscar,0,5);
                                                 $link->user_id = auth()->user()->id;
                                                 $link->jumper_type_id = 5;

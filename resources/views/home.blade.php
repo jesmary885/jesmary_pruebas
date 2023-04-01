@@ -141,9 +141,12 @@
 
 
   <blockquote class="text-gray-400 flex">
+  @if($pago_registrado < 1)
     <p class="mr-1">{{__('messages.su_cuenta_inactiva')}}</p>
+   
      @livewire('pagos.reporte-pago') 
-     <p class="ml-1"> {{__('messages.para_disfrutar_servicios')}}</p>
+      <p class="ml-1"> {{__('messages.para_disfrutar_servicios')}}</p>
+     @endif
      
   </blockquote>
 

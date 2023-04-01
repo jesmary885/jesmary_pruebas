@@ -6,6 +6,7 @@ use App\Models\Antibot;
 use App\Models\Comments;
 use App\Models\Link;
 use App\Models\Links_usados;
+use App\Models\User;
 use App\Models\User_Links_Points;
 use DateTime;
 use GuzzleHttp\Client;
@@ -18,7 +19,7 @@ class K5460Index extends Component
     use WithPagination;
     protected $paginationTheme = "bootstrap";
 
-    public  $operacion,$jumper_complete = [],$jumper_list = 0,$busqueda_link,$comment_new_psid_register,$pid_register_high,$psid_register_bh,$high_register_bh,$basic_register_bh,$posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $wix_detect = '0', $psid_register=0,$jumper_redirect,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$is_high,$is_basic,$calc_link,$jumper_select,$points_user_positive, $points_user_negative, $jumper_detect_k ='',$psid_buscar;
+    public  $user,$operacion,$jumper_complete = [],$jumper_list = 0,$busqueda_link,$comment_new_psid_register,$pid_register_high,$psid_register_bh,$high_register_bh,$basic_register_bh,$posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $wix_detect = '0', $psid_register=0,$jumper_redirect,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$is_high,$is_basic,$calc_link,$jumper_select,$points_user_positive, $points_user_negative, $jumper_detect_k ='',$psid_buscar;
 
     protected $listeners = ['render' => 'render', 'registro_psid' => 'registro_psid' , 'verific' => 'verific'];
     
@@ -29,6 +30,8 @@ class K5460Index extends Component
         if(session('search')) $this->search = session('search');
         $this->jumper_detect = 0;
         $this->busqueda_link = "";
+
+        $this->user = User::where('id',auth()->user()->id)->first();
     }
 
     public function numerologia(){

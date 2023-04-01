@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Multilog;
+use App\Models\PagoRegistrosRecarga;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -21,12 +22,20 @@ class HomeController extends Controller
 
     public function index(){
 
+        $fecha_actual = Carbon::now();
+
         $mensaje = '';
         $user = User::where('id',auth()->user()->id)->first();
         $rol = $user->roles->first()->id;
 
+
+
+        $pago_registrado = PagoRegistrosRecarga::where('user_id',$user->id)
+            ->where('status','pendiente')
+            ->count();
+
         if($user->last_payment_date){
-            $fecha_actual = Carbon::now();
+            
             $corte = Carbon::parse($user->last_payment_date);
 
             $diasDiferencia = ($corte->diffInDays($fecha_actual) + 1);
@@ -42,7 +51,7 @@ class HomeController extends Controller
             }
         }
 
-        return view('home',compact('rol','mensaje'));
+        return view('home',compact('rol','mensaje','pago_registrado'));
     }
 
 }
