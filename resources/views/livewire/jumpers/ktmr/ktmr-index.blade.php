@@ -209,8 +209,7 @@
     Livewire.on('wait', function(){
 
         Swal.fire(
-        'El jumper será generado en aproximadamente 4 minutos',
-        'Espere pacientemente...',
+        'Su jumper se esta procesando',
         )
 
         livewire.emitTo('jumpers.ktmr.ktmr-index','jump')
