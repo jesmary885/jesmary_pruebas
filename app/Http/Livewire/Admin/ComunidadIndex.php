@@ -116,6 +116,7 @@ class ComunidadIndex extends Component
             ->where('type','premium')
             ->sum('monto');
 
+        $total_ganancia_dia = $ganancia_dia_30_premium + $ganancia_dia_15_premium + $ganancia_dia_30_basic;
         //GANANCIAS DEL MES
 
         $ganancia_mes_15_basic = PagoRegistrosRecarga::where('status','verificado')
@@ -145,6 +146,8 @@ class ComunidadIndex extends Component
             ->where('plan','30')
             ->where('type','premium')
             ->sum('monto');
+
+        $total_ganancia_mes = $ganancia_mes_30_premium + $ganancia_mes_15_premium + $ganancia_mes_30_basic;
 
         
         /////////////////// GANANCIA DE 1$ POR SUSCRIPTOR
@@ -184,6 +187,6 @@ class ComunidadIndex extends Component
             ->paginate(15);
 
         
-        return view('livewire.admin.comunidad-index',compact('users','users_activos','users_inactivos','registros_mes','registros_dias','users_plan_15_basic','users_plan_15_premium','users_plan_30_basic','users_plan_30_premium','ganancia_dia_15_basic','ganancia_dia_30_basic','rol_user','ganancia_dia_15_premium','ganancia_dia_30_premium','ganancia_mes_15_basic','ganancia_mes_30_basic','ganancia_mes_15_premium','ganancia_mes_30_premium','ganancia_mes_basic_15_suscriptor','ganancia_mes_basic_30_suscriptor','ganancia_mes_basic_total_suscriptor','ganancia_mes_premium_30_suscriptor','ganancia_mes_premium_15_suscriptor','ganancia_mes_premium_suscriptor_total'));
+        return view('livewire.admin.comunidad-index',compact('total_ganancia_dia','total_ganancia_mes','users','users_activos','users_inactivos','registros_mes','registros_dias','users_plan_15_basic','users_plan_15_premium','users_plan_30_basic','users_plan_30_premium','ganancia_dia_15_basic','ganancia_dia_30_basic','rol_user','ganancia_dia_15_premium','ganancia_dia_30_premium','ganancia_mes_15_basic','ganancia_mes_30_basic','ganancia_mes_15_premium','ganancia_mes_30_premium','ganancia_mes_basic_15_suscriptor','ganancia_mes_basic_30_suscriptor','ganancia_mes_basic_total_suscriptor','ganancia_mes_premium_30_suscriptor','ganancia_mes_premium_15_suscriptor','ganancia_mes_premium_suscriptor_total'));
     }
 }
