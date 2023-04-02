@@ -14,7 +14,7 @@ class UsuariosPaying extends Component
 
     protected $listeners = ['render' => 'render'];
 
-    public $search;
+    public $search, $vista_registros = 0,$total_registros;
 
     public function updatingSearch(){
         $this->resetPage();
@@ -33,14 +33,75 @@ class UsuariosPaying extends Component
 
     public function render()
     {
-        $users = User::where('type','!=','gratis')
-        ->where('status','activo')
-        ->latest('id')
-        ->paginate(20);
-        
-        $total = User::where('type','!=','gratis')
-        ->count();
+        if($this->vista_registros == 0){
 
-        return view('livewire.admin.usuarios-paying',compact('users','total'));
+            $users = User::where('username', 'LIKE', '%' . $this->search . '%')
+                ->where('type','!=','gratis')
+                ->where('status','activo')
+                ->permission('ssidkr.index')
+                ->latest('id')
+                ->paginate(20);
+            
+            $this->total_registros = User::where('type','!=','gratis')
+                ->where('status','activo')
+                ->permission('ssidkr.index')
+                ->count();
+        }
+
+        elseif($this->vista_registros == 1){
+
+                $users = User::where('username', 'LIKE', '%' . $this->search . '%')
+                    ->where('status','activo')
+                    ->where('type','basico')
+                    ->permission('ssidkr.index')
+                    ->latest('id')
+                    ->paginate(20);
+                
+                $this->total_registros = User::where('type','basico')
+                    ->where('status','activo')
+                    ->permission('ssidkr.index')
+                    ->count();
+            
+        }
+
+        elseif($this->vista_registros == 2){
+
+            $users = User::where('username', 'LIKE', '%' . $this->search . '%')
+                ->where('status','activo')
+                ->where('type','premium')
+                ->where('plan','15')
+                ->permission('menu.premium')
+                ->latest('id')
+                ->paginate(20);
+            
+            $this->total_registros = User::where('type','premium')
+                ->where('status','activo')
+                ->where('plan','15')
+                ->permission('menu.premium')
+                ->count();
+        
+    }
+
+    else{
+
+        $users = User::where('username', 'LIKE', '%' . $this->search . '%')
+                ->where('status','activo')
+                ->where('type','premium')
+                ->where('plan','30')
+                ->permission('menu.premium')
+                ->latest('id')
+                ->paginate(20);
+            
+            $this->total_registros = User::where('type','premium')
+                ->where('status','activo')
+                ->where('plan','30')
+                ->permission('menu.premium')
+                ->count();
+
+    }
+
+        
+
+        return view('livewire.admin.usuarios-paying',compact('users'));
     }
 }

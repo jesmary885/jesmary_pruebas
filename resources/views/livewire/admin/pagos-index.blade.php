@@ -1,5 +1,5 @@
 <div>
-<div class="card-header mb-10">
+    <div class="card-header mb-10">
         <div class="flex items-center">
             <h2 class="font-semibold text-lg text-gray-200 leading-tight">
                 Registros de pagos
