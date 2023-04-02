@@ -312,38 +312,7 @@
             @endif
         </div>
 
-        @if ($jumper_detect == 2)
-        <div>
-        <div class=" info-box bg-warning">
-                <span class="info-box-icon"><i class="fas fa-tag"></i></span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">Ha ocurrido un error. </span>
-                        <span class="info-box-number">Intentelo de nuevo...</span>
-                    </div>
-            </div>
 
-        </div>
-            
-
-        @endif
-
-        @if ($jumper_detect == 3)
-        <div>
-        <div class=" info-box bg-warning">
-                <span class="info-box-icon"><i class="fas fa-tag"></i></span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">Algo en su link no esta bien. </span>
-                        <span class="info-box-number">Copielo correctamente...</span>
-                    </div>
-            </div>
-
-        </div>
-            
-
-        @endif
-
-       
-        
         
     </div>
 

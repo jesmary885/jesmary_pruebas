@@ -32,6 +32,7 @@ class ComunidadIndex extends Component
 
         $users_activos = User::where('status','activo')
             ->where('type','!=','gratis')
+            ->permission('ssidkr.index')
             ->count();
 
         $users_inactivos = User::where('status','inactivo')
@@ -42,6 +43,8 @@ class ComunidadIndex extends Component
         ->whereYear('created_at', $ano)
         ->whereMonth('email_verified_at', $mes)
         ->whereYear('email_verified_at', $ano)
+        ->where('status','activo')
+        ->permission('ssidkr.index')
         ->count();
 
         $registros_dias = User::whereMonth('created_at', $mes)
@@ -50,27 +53,33 @@ class ComunidadIndex extends Component
             ->whereMonth('email_verified_at', $mes)
             ->whereDay('email_verified_at', $dia)
             ->whereYear('email_verified_at', $ano)
+            ->where('status','activo')
+            ->permission('ssidkr.index')
             ->count();
 
         
         $users_plan_15_basic = User::where('status','activo')
             ->where('plan','15')
             ->where('type','basico')
+            ->permission('ssidkr.index')
             ->count();
 
         $users_plan_15_premium = User::where('status','activo')
             ->where('plan','15')
             ->where('type','premium')
+            ->permission('menu.premium')
             ->count();
 
         $users_plan_30_basic = User::where('status','activo')
             ->where('plan','30')
             ->where('type','basico')
+            ->permission('ssidkr.index')
             ->count();
 
         $users_plan_30_premium = User::where('status','activo')
             ->where('plan','30')
             ->where('type','premium')
+            ->permission('menu.premium')
             ->count();
 
         //GANANCIAS DEL DIA

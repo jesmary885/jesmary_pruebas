@@ -19,7 +19,7 @@
                         <span class="info-box-text">0134-0197-7419-7202-9293</span>
                         <span class="info-box-text">Luz Marina Mata</span>
                         <span class="info-box-text">Ahorro</span>
-                        <span class="info-box-text">C.I. 4.909.173</span>
+                        <span class="info-box-text">Nro de cédula: 4.909.173</span>
                         </div>
 
                         </div>
@@ -30,7 +30,7 @@
                         <span class="info-box-number">PAGO MÓVIL</span>
                         <span class="info-box-text">BANESCO (0134)</span>
                         <span class="info-box-text">04148264029</span>
-                        <span class="info-box-text">C.I 4.909.173</span>
+                        <span class="info-box-text">Nro de cédula: 4.909.173</span>
 
                         </div>
 

@@ -100,7 +100,7 @@
                                     <div class="flex items-center justify-between">
 
                                         <div class="text-sm ml-auto">
-                                            <a href="#" class="text-p-blue-700 hover:text-p-blue-600">
+                                            <a href="{{ route('password.request') }}" class="text-p-blue-700 hover:text-p-blue-600">
                                                 Forgot your password?
                                             </a>
                                         </div>
@@ -183,7 +183,7 @@
                                     <div class="flex items-center justify-between">
 
                                         <div class="text-sm ml-auto">
-                                            <a href="#" class="text-p-blue-700 hover:text-p-blue-600">
+                                            <a href="{{ route('password.request') }}" class="text-p-blue-700 hover:text-p-blue-600">
                                                 Olvidate tu contraseña?
                                             </a>
                                         </div>
