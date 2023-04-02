@@ -908,7 +908,7 @@ class K1000Index extends Component
                             ->where('user_id',$this->user->id)
                             ->first();
 
-                            if($link_register_search){
+                            if($link_register_search > 2){
 
                                 $this->jumper_detect = 7;
                                 
