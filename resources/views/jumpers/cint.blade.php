@@ -18,11 +18,7 @@
     @endif
     
   
-
-    <div class="flex justify-center">
-    <h2 class="mt-4 text-gray-200 font-bold">*** PRÓXIMAMENTE ***</h2>
-
-    </div>
+    @livewire('jumpers.cint.cint-index') 
 
 @stop
 

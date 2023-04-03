@@ -39,14 +39,14 @@ class CintCreate extends Component
         if($jumper){
 
             $jumper->update([
-                'id_id' => $this->id_id,
+                'psid' => $this->id_id,
                 'user_id' => $user_auth,
                 'jumper_type_id' => 3,
             ]);
 
         }else{
             $link = new Link();
-            $link->id_id = $this->id_id;
+            $link->psid = $this->id_id;
             $link->jumper = $this->token;
             $link->user_id = $user_auth;
             $link->jumper_type_id = 3;

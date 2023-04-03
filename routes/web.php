@@ -56,7 +56,7 @@ Route::middleware(['auth','verified'])->group(function()
         Route::get('k2066',[JumpersController::class,'k2066'])->name('k2066.index')->middleware('permission:menu.premium');
 
         
-        Route::get('cint',[JumpersController::class,'cint'])->name('cint.index');
+        Route::get('cint',[JumpersController::class,'cint'])->name('cint.index')->middleware('permission:administracion_principal');
         Route::get('internals',[JumpersController::class,'internals'])->name('internals.index');
         Route::get('k1000',[JumpersController::class,'kmil'])->name('kmil.index');
         Route::get('k1092',[JumpersController::class,'kmilnoventaydos'])->name('kmilnoventaydos.index');
@@ -81,7 +81,7 @@ Route::middleware(['auth','verified'])->group(function()
         //Route::get('k2001',[JumpersController::class,'k2001'])->name('k2001.index');
         Route::get('ktmr',[JumpersController::class,'ktmr'])->name('ktmr.index');
         Route::get('qt',[JumpersController::class,'qt'])->name('qt.index');
-        Route::get('import_cint',[JumpersController::class,'import_cint'])->name('cint.import');
+        Route::post('import_cint',[JumpersController::class,'import_cint'])->name('cint.import');
 
         //Marketplace
         Route::get('marketplace',[MarketplaceController::class,'index'])->name('marketplace.index');

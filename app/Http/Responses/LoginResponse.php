@@ -24,7 +24,7 @@ class LoginResponse implements LoginResponseContract
             $date_last_login = new DateTime($user->last_logout);
             $date_last_login_aumentada = $date_last_login->modify('+20 minute')->format('Y-m-d H:i:s');
             
-
+            //cierro
             if($date_actual <= $date_last_login_aumentada){
 
                 $date_laa = new \Carbon\Carbon($date_last_login_aumentada);
@@ -65,20 +65,26 @@ class LoginResponse implements LoginResponseContract
                     $dia= date('d');
             
                     $ip_user = request()->ip();
-            
-                    $user_ip = Multilog::whereDay('created_at', $dia)
+
+                    if($user->id != 14 && $user->id != 22){
+
+                        $user_ip = Multilog::whereDay('created_at', $dia)
                         ->whereYear('created_at', $ano)
                         ->whereMonth('created_at', $mes)
                         ->where('user_id',$user->id)
                         ->where('ip',$ip_user)
                         ->first();
             
-                    if(!$user_ip){
-                        $multilog_ip = new Multilog();
-                        $multilog_ip->ip = $ip_user;
-                        $multilog_ip->user_id  = $user->id;
-                        $multilog_ip->save();
+                        if(!$user_ip){
+                            $multilog_ip = new Multilog();
+                            $multilog_ip->ip = $ip_user;
+                            $multilog_ip->user_id  = $user->id;
+                            $multilog_ip->save();
+                        }
+
                     }
+            
+                    
         
                     $user->session_id = Session::getId();
                     $user->save();
@@ -124,18 +130,21 @@ class LoginResponse implements LoginResponseContract
         
                 $ip_user = request()->ip();
         
-                $user_ip = Multilog::whereDay('created_at', $dia)
+                if($user->id != 14 && $user->id != 22){
+
+                    $user_ip = Multilog::whereDay('created_at', $dia)
                     ->whereYear('created_at', $ano)
                     ->whereMonth('created_at', $mes)
                     ->where('user_id',$user->id)
                     ->where('ip',$ip_user)
                     ->first();
         
-                if(!$user_ip){
-                    $multilog_ip = new Multilog();
-                    $multilog_ip->ip = $ip_user;
-                    $multilog_ip->user_id  = $user->id;
-                    $multilog_ip->save();
+                    if(!$user_ip){
+                        $multilog_ip = new Multilog();
+                        $multilog_ip->ip = $ip_user;
+                        $multilog_ip->user_id  = $user->id;
+                        $multilog_ip->save();
+                    }
                 }
     
                 $user->session_id = Session::getId();

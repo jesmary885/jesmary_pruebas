@@ -16,32 +16,12 @@ class CintImport implements ToModel, WithHeadingRow, WithBatchInserts, WithChunk
             return new Link([
             'psid'  => $row['psid'],
             'user_id'  => '2',
-            'jumper_type_id' => '3'
+            'jumper_type_id' => '3',
+            'jumper' => $row['jumper']
         ]);
     }
 
-  /*  $table->string('psid')->nullable();
-            $table->string('basic')->nullable();
-            $table->string('high')->nullable();
-            $table->string('pid')->nullable();
-            $table->string('panel')->nullable();
-            $table->string('observation')->nullable();
-            $table->string('id_id')->nullable();
-            $table->string('token')->nullable();
-            $table->string('jumper')->nullable();
-            $table->string('notch')->nullable();
-            $table->string('k_detected')->nullable();
-            $table->string('wix_detected')->nullable();
-            $table->string('negative_points')->nullable();
-            $table->string('positive_points')->nullable();
 
-    $table->unsignedBigInteger('jumper_type_id');
-            $table->foreign('jumper_type_id')->references('id')->on('jumper_types');
-
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');*/
-
-    
     public function batchSize(): int
     {
         return 1000;

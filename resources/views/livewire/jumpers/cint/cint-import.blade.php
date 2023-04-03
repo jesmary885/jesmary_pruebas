@@ -13,7 +13,7 @@
                     <div class="modal-body">
 
                         <form action="{{route('cint.import')}}" method="POST" enctype="multipart/form-data">
-
+                        @csrf
                         <input type="file" name="import_file">
                             <div class="flex justify-end mt-4">
                                 <div>

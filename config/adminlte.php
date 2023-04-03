@@ -657,7 +657,7 @@ return [
         [
             'text' => 'CINT',
             'route'  => 'cint.index',
-            'can' => 'cint.index',
+            'can' => 'administracion_principal',
             'icon'    => 'fas fa-search',
             'icon_color' => 'cyan',
         ],

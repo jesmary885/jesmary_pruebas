@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Jumpers\Cint;
 use App\Imports\CintImport;
 use App\Models\Comments;
 use App\Models\Link;
+use App\Models\User;
 use App\Models\User_Links_Points;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -14,17 +15,20 @@ use Maatwebsite\Excel\Facades\Excel;
 class CintIndex extends Component
 {
     use WithPagination;
-    
     protected $paginationTheme = "bootstrap";
 
-    public $no_detect,$file,$jumper_redirect,$link_complete_2,$search,$jumper_2,$points_user,$user_auth,$comentario,$calc_link,$jump;
+    public $busqueda_link,$rol_user,$type_basic,$descalific_active=0,$type,$jumper_complete_qt,$jumper_complete_sp,$comment_new_psid_register,$pid_register_high,$psid_register_bh,$high_register_bh,$basic_register_bh,$posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $wix_detect = '0', $psid_register=0,$jumper_redirect,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$is_high,$is_basic,$calc_link,$jumper_select,$points_user_positive, $points_user_negative, $router_cint_detect=0 ;
 
     protected $listeners = ['render' => 'render'];
+    
+    public function mount(){
 
+        $user= User::where('id',auth()->id())->first();
+        $this->rol_user = $user->roles->first()->id;
+        $this->jumper_2 = '';
+        $this->user_auth =  auth()->user()->id;
 
-
-    public function basic($jumper,$link_complete){
-        return redirect()->route('ssidkr.index', [$jumper,$link_complete]);
+        if(session('search')) $this->search = session('search');
     }
 
 
@@ -32,7 +36,7 @@ class CintIndex extends Component
     {
         $long_psid = strlen($this->search);
         $subs_psid = 0;
-        $jumper_complete = 0;
+        $jumper_complete = [];
         $comments ="";
         $jumper = "";
         $link_complete="";
@@ -42,188 +46,181 @@ class CintIndex extends Component
         $this->user_auth =  auth()->user()->id;
         $this->no_detect = 0;
 
-        if($this->jumper_redirect != 0){
-            $jumper = $this->jumper_redirect;
-            
-            if($this->jumper->jumper_type_id == 3){
-                
-                $link_complete = $this->link_complete_2;
-                $this->calc_link = 1;
-            } 
-           
+        if($long_psid>=5){
 
-            $this->jumper_2 = '1';
-            $user_point= User_Links_Points::where('link_id',$this->jumper->id)
-                    ->where('user_id',$this->user_auth)
-                    ->first();
-                    
-            $comments = Comments::where('link_id',$this->jumper->id)
-                    ->latest('id')
-                    ->paginate(5);
-                    
-            if($user_point) $this->points_user='si';
-            else $this->points_user='no';
+            $this->search = trim($this->search);
 
-            if($this->jumper->jumper_type_id == 1){
-                    $calc_link = 1;
-                    $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?rst=1&psid='.$link_complete.'**&basic='.$this->jumper->basic;
-            } 
+            $jumper = Link::where('psid',$this->search)
+                ->where('jumper_type_id','3')
+                ->first();
+
+            if($jumper){
+
+                $jumper_complete = $jumper->jumper;
+
+                $this->busqueda_link = $jumper;
+
+                $user_point= User_Links_Points::where('link_id',$jumper->id)
+                ->where('user_id',$this->user_auth)
+                ->first();
+                            
+                $comments = Comments::where('link_id',$jumper->id)
+                ->latest('id')
+                ->paginate(5);
+
+                if($user_point) {
+                  
+                    if($user_point->point == 'positive'){
                 
-            if($this->jumper->jumper_type_id == 2){
-                if(session('pid')){
-                    $this->calc_link = 1;
-                    $calculo_high_new = $this->calculo_high($this->jumper->id);
-                    $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?rst=1&psid='.$link_complete.'**&high='.$calculo_high_new;
+                        $this->points_user_positive='si';
+                        $this->points_user_negative='no';
+                        $this->points_user='si';
 
                     }
-                else{
-                    if($this->calc_link == 0){
-                        $jumper_complete = 'Ingrese su PID para calcular el valor high';
-                    }
+
                     else{
-                        //$calculo_high_new = $this->calculo_high($jumper->id);
-                        $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?rst=1&psid='.$link_complete.'**&high='.$this->calculo_high;
+                        $this->points_user_positive='no';
+                        $this->points_user_negative='si';
                     }
-                }
-            } 
-
-
-        
-        }
-        else{
-
-            if($long_psid >= 7){
-                $jumper = Link::where('id_id',$this->search)->first();
-
-                if($jumper){
-                    $jumper_complete = $jumper->jumper;
-                    $this->calc_link = 1;
-
-                    $this->jumper_2 = '1';
-                
-                    $user_point= User_Links_Points::where('link_id',$jumper->id)
-                        ->where('user_id',$this->user_auth)
-                        ->first();
-                                    
-                    $comments = Comments::where('link_id',$jumper->id)
-                        ->latest('id')
-                        ->paginate(5);
-                                    
-                    if($user_point) $this->points_user='si';
-                    else $this->points_user='no';
-                }
-                else{
-                    
-                    $busqueda_psid= strpos($this->search, 'psid'); 
-
-                    if($busqueda_psid !== false){ //si no tiene la palabra psid
-                      
-                        $subs_psid = substr($this->search,($busqueda_psid + 5),5);
-                        $subs_psid_sin_cortar = substr($this->search,($busqueda_psid + 5));
-                        $psid_complete = substr($subs_psid_sin_cortar,0,21);
-                    }
-
-                    else{ // busco los **
-                        $busqueda_id= strpos($this->search, '**');
-                        $subs_psid = substr($this->search,($busqueda_id - 22),5);
-                        $subs_psid_sin_cortar = substr($this->search,($busqueda_id - 22));
-                        $psid_complete = substr($subs_psid_sin_cortar,0,21);
-                    }
-
-
-                    $url_detect_com= strpos($this->search, '.com');
-                    $k_detect= strpos($this->search, '_k=');
-                    if($url_detect_com)$url_detect = substr($this->search,8,($url_detect_com-8)).'.com';
-                    else $url_detect = 'error';
-
-                    if($url_detect != 'dkr1.ssisurveys.com' && $url_detect != 'error'){
                         
-                        $link = new Link();
-                        $link->jumper = $url_detect;
-                        $link->psid = $subs_psid;
-                        $link->user_id = auth()->user()->id;
-                        $link->jumper_type_id = 15;
-                        if($k_detect) $link->k_detected = 'K='.substr($this->search,($k_detect + 3),4);
-                        $link->save();
-                    }
-
-                    else{
-            
-                        $this->no_detect = 1;
-                        $this->calc_link = 0;
-                    }
-
-
-                $this->jumper_2 = '';
-                 
                 }
-            }
-
-            
-
-            if($long_psid>70){
-                $subs_psid = substr($this->search,49,5);
-                $jumper = Link::where('psid',$subs_psid)->first();
-                if($jumper){
-
-                    if(session('psid')) $link_complete =substr($this->search,49,21).substr(session('psid'),21);
-                    else $link_complete = substr($this->search,49,22);
-
-                    if($jumper->jumper_type_id == 1){
-                    $this->jump = $jumper;
-                    $this->basic($jumper,$link_complete);
-                    }
+                else{
+                    $this->points_user_positive='no';
+                    $this->points_user_negative='no';
                 }
 
-                else $this->jumper_2 = '';
             }
-        
+
+            else{
+                $this->no_detect = 1;
+            }
         }
+
 
         return view('livewire.jumpers.cint.cint-index',compact('jumper_complete','jumper','comments','subs_psid'));
     }
 
     public function positivo($jumper_id){
-        $jumper_id = Link::where('id',$jumper_id)->first();
-        $new_points = $jumper_id->positive_points + 1;
 
-        $jumper_id->update([
-            'positive_points' => $new_points, 
-        ]);
+        $user_point= User_Links_Points::where('link_id',$jumper_id)
+            ->where('user_id',$this->user_auth)
+            ->first();
 
-        $links_points = new User_Links_Points();
-        $links_points->user_id = auth()->user()->id;
-        $links_points->link_id = $jumper_id->id;
-        $links_points->point = 'positive';
-        $links_points->save();
-        $this->emit('render', 'jumpers.ssidkr.ssidkr-index');
+        if($user_point){
+            $user_point->update([
+                'point' => 'positive'
+            ]);
+
+            $jumper_id = Link::where('id',$jumper_id)->first();
+
+            $new_points_positive = $jumper_id->positive_points + 1;
+            $new_points_negative = $jumper_id->negative_points - 1;
+
+            $jumper_id->update([
+                'positive_points' => $new_points_positive, 
+                'negative_points' => $new_points_negative, 
+            ]);
+
+            $this->points_user_positive='si';
+            $this->points_user_negative='no';
+
+        }
+        else{
+            $links_points = new User_Links_Points();
+            $links_points->user_id = auth()->user()->id;
+            $links_points->link_id = $jumper_id;
+            $links_points->point = 'positive';
+            $links_points->save();
+
+            $jumper_id = Link::where('id',$jumper_id)->first();
+
+            $new_points = $jumper_id->positive_points + 1;
+
+            $jumper_id->update([
+                'positive_points' => $new_points, 
+            ]);
+
+            $this->points_user_positive='si';
+            $this->points_user_negative='no';
+
+        }
+
+        $this->emitTo('jumpers.cint.cint-index','render');
+
+        
+
     }
 
     public function negativo($jumper_id){
-        $jumper_id = Link::where('id',$jumper_id)->first();
-        $new_points = $jumper_id->negative_points + 1;
+        $user_point= User_Links_Points::where('link_id',$jumper_id)
+            ->where('user_id',$this->user_auth)
+            ->first();
 
-        $jumper_id->update([
-            'negative_points' => $new_points, 
-        ]);
-        $links_points = new User_Links_Points();
-        $links_points->user_id = auth()->user()->id;
-        $links_points->link_id = $jumper_id->id;
-        $links_points->point = 'negative';
-        $links_points->save();
-        $this->emit('render', 'jumpers.ssidkr.ssidkr-index');
+        if($user_point){
+            $user_point->update([
+                'point' => 'negative'
+            ]);
+
+            $jumper_id = Link::where('id',$jumper_id)->first();
+
+            $new_points_positive = $jumper_id->positive_points - 1;
+            $new_points_negative = $jumper_id->negative_points + 1;
+
+            $jumper_id->update([
+                'positive_points' => $new_points_positive, 
+                'negative_points' => $new_points_negative, 
+            ]);
+
+            $this->points_user_positive='no';
+            $this->points_user_negative='si';
+
+        }
+        else{
+            $links_points = new User_Links_Points();
+            $links_points->user_id = auth()->user()->id;
+            $links_points->link_id = $jumper_id;
+            $links_points->point = 'negative';
+            $links_points->save();
+
+            $jumper_id = Link::where('id',$jumper_id)->first();
+
+            $new_points = $jumper_id->negative_points + 1;
+
+            $jumper_id->update([
+                'negative_points' => $new_points, 
+            ]);
+
+            $this->points_user_positive='no';
+            $this->points_user_negative='si';
+
+        }
+
+        $this->emitTo('jumpers.cint.cint-index','render');
+
+        
     }
 
-    public function comentar($jumper_id){
-        $jumper_id = Link::where('id',$jumper_id)->first();
-        $comment = new Comments();
-        $comment->comment = $this->comentario;
-        $comment->link_id = $jumper_id->id;
-        $comment->user_id = auth()->user()->id;
-        $comment->save();
+    public function comentar(){
+        if($this->comentario != ''){
+           
+            $comment = new Comments();
+            $comment->comment = $this->comentario;
+            $comment->link_id = $this->busqueda_link->id;
+            $comment->user_id = auth()->user()->id;
+            $comment->save();
 
-        $this->reset(['comentario']);
-        $this->emit('render', 'jumpers.ssidkr.ssidkr-index');
+            $this->reset(['comentario']);
+        }
+
+        $this->emitTo('jumpers.cint.cint-index','render');
+    }
+
+    public function clear(){
+        $this->reset(['search']);
+        session()->forget('search');
+        $this->busqueda_link = "";
+        return redirect()->route('cint.index');
+
     }
 
     
