@@ -57,7 +57,7 @@ class K1083Index extends Component
             try {
                 $client = new Client([
                     //'base_uri' => 'http://127.0.0.1:8000',
-                    'base_uri' => 'http://147.182.190.233/',
+                    'base_uri' => 'http://209.94.57.88/',
                 ]);
 
                 $resultado = $client->request('GET', '/k1083/1/'.$this->serie_buscar.'/'.$this->psid_buscar);

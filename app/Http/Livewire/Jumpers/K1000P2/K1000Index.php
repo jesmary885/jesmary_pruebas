@@ -71,7 +71,7 @@ class K1000Index extends Component
             $link_register->save();
 
             try {
-                $client = new Client(['base_uri' => 'http://147.182.190.233/',]);
+                $client = new Client(['base_uri' => 'http://209.94.57.88/',]);
 
                 //if($this->elem3 == 0){
                     $resultado = $client->request('GET', '/k1000_s4/1/'.$this->psid_buscar.'/'.$this->pid_buscar.'/'.$this->elem1.'/'.$this->elem2);

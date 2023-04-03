@@ -75,7 +75,7 @@ class K1000Index extends Component
 
             try {
                
-                $client = new Client(['base_uri' => 'http://147.182.190.233/',]);
+                $client = new Client(['base_uri' => 'http://209.94.57.88/',]);
 
                 if($this->elem3 == 0){
                    

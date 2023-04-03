@@ -52,7 +52,7 @@ class K5460Index extends Component
 
                 $client = new Client([
                     //'base_uri' => 'http://127.0.0.1:8000',
-                    'base_uri' => 'http://147.182.190.233',
+                    'base_uri' => 'http://209.94.57.88',
                 ]);
                 
                 $resultado = $client->request('GET', '/k5460/1/'.$this->psid_buscar);
