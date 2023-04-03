@@ -13,7 +13,7 @@ class CintImport implements ToModel, WithHeadingRow, WithBatchInserts, WithChunk
 {
     public function model(array $row)
     {
-            return new Link([
+        Link::create([
             'psid'  => $row['psid'],
             'user_id'  => '2',
             'jumper_type_id' => '3',
