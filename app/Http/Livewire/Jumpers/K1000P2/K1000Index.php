@@ -18,7 +18,7 @@ class K1000Index extends Component
     use WithPagination;
     protected $paginationTheme = "bootstrap";
 
-    public  $user,$jumper_complete = [],$jumper_list = 0,$busqueda_link,$comment_new_psid_register,$pid_register_high,$psid_register_bh,$high_register_bh,$basic_register_bh,$posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $wix_detect = '0', $psid_register=0,$jumper_redirect,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$is_high,$is_basic,$calc_link,$jumper_select,$points_user_positive, $points_user_negative, $jumper_detect_k ='',$pid_manual,$pid_detectado = 'si',$pid_buscar,$psid_buscar,$operacion,$elem1,$elem2,$elem3;
+    public  $user,$jumper_complete = [],$jumper_list = 0,$busqueda_link,$comment_new_psid_register,$pid_register_high,$psid_register_bh,$high_register_bh,$basic_register_bh,$posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $psid_register=0,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$calc_link,$jumper_select,$points_user_positive, $points_user_negative, $jumper_detect_k ='',$pid_manual,$pid_detectado = 'si',$pid_buscar,$operacion;
 
     protected $listeners = ['render' => 'render', 'registro_psid' => 'registro_psid', 'verific' => 'verific'];
     
@@ -70,11 +70,100 @@ class K1000Index extends Component
             $link_register->user_id  = $this->user->id;
             $link_register->save();
 
+            $busqueda_id= strpos($this->search, '**');
+                                    
+            if(session('psid')) $psid_buscar = substr($this->search,($busqueda_id - 22),11).substr(session('psid'),11,11);
+            else $psid_buscar = substr($this->search,($busqueda_id - 22),22);
+
+            $busqueda_selfserver= strpos($this->search, 'selfserve/');
+
+                    if($busqueda_selfserver != false){
+
+                            $posicion_elem1 = $busqueda_selfserver + 10;
+                            $i_elem1 = 0;
+                            $busq_elem1 = 0;
+                            
+                            do{
+                                $detect_elem1= substr($this->search, $posicion_elem1,1);
+        
+                                if($detect_elem1 == '/') $i_elem1 = 1;
+                                else{
+                                    $posicion_elem1 = $posicion_elem1 + 1;
+                                    $busq_elem1 ++;
+                                }
+
+                                if($busq_elem1 > 20){
+                                    $i_elem1 = 1;
+                                }
+        
+                            }while($i_elem1 != 1);
+
+                            $elem1 = substr($this->search,($busqueda_selfserver + 10),($posicion_elem1 - ($busqueda_selfserver + 10)));
+
+                            $posicion_elem2 = $posicion_elem1 + 1;
+                            $i_elem2 = 0;
+                            $busq_elem2 = 0;
+
+                            do{
+                                $detect_elem2= substr($this->search, $posicion_elem2,1);
+        
+                                if($detect_elem2 == '/' || $detect_elem2 == '&' || $detect_elem2 == '?') $i_elem2 = 1;
+                                else{
+                                    $posicion_elem2 = $posicion_elem2 + 1;
+                                    $busq_elem2 ++;
+                                }
+
+                                if($busq_elem2 > 20){
+                                    $i_elem2 = 1;
+                                }
+        
+                            }while($i_elem2 != 1);
+
+                            $elem2 = substr($this->search,($posicion_elem1 + 1),($posicion_elem2 - ($posicion_elem1 + 1)));
+
+               
+
+                           /* if($detect_elem2 == '/'){
+
+                                $posicion_elem3 = $posicion_elem2 + 1;
+                                $i_elem3 = 0;
+                                $busq_elem3 = 0;
+
+                                do{
+                                    $detect_elem3= substr($this->search, $posicion_elem3,1);
+            
+                                    if($detect_elem3 == '/' || $detect_elem3 == '&') $i_elem3 = 1;
+                                    else{
+                                        $posicion_elem3 = $posicion_elem3 + 1;
+                                        $busq_elem3 ++;
+                                    }
+
+                                    if($busq_elem3 > 20){
+                                        $i_elem3 = 1;
+                                    }
+            
+                                }while($i_elem3 != 1);
+
+                                $this->elem3 = substr($this->search,($posicion_elem2 + 1),($posicion_elem3 - ($posicion_elem2 + 1)));
+
+                            }
+
+                            else{
+
+                                $this->elem3 = 0;
+                            }*/
+                    }
+
+                    else{
+
+                        $this->jumper_detect = 3;
+                    }
+
             try {
                 $client = new Client(['base_uri' => 'http://209.94.57.88/',]);
 
                 //if($this->elem3 == 0){
-                    $resultado = $client->request('GET', '/k1000_s4/1/'.$this->psid_buscar.'/'.$this->pid_buscar.'/'.$this->elem1.'/'.$this->elem2);
+                    $resultado = $client->request('GET', '/k1000_s4/1/'.$psid_buscar.'/'.$this->pid_buscar.'/'.$elem1.'/'.$elem2);
 
                // }
 
@@ -87,7 +176,7 @@ class K1000Index extends Component
 
                     $this->jumper_complete = json_decode($resultado->getBody(),true);
 
-                    $this->busqueda_link = Link::where('psid',substr($this->psid_buscar,0,5))->first();
+                    $this->busqueda_link = Link::where('psid',substr($psid_buscar,0,5))->first();
 
                     if($this->busqueda_link){
                         $user_point= User_Links_Points::where('link_id',$this->busqueda_link->id)
@@ -151,7 +240,7 @@ class K1000Index extends Component
                                             if($url_detect != 'https://dkr1.ssisurveys.com' && $url_detect != 'https://online.ssisurveys.com'  && $url_detect != 'https://online.surveynetwork.com' ){
                                             $link->jumper = $url_detect;
                                             }
-                                            $link->psid = substr($this->psid_buscar,0,5);
+                                            $link->psid = substr($psid_buscar,0,5);
                                             $link->user_id = auth()->user()->id;
                                             $link->jumper_type_id = 5;
                                             $link->k_detected = 'K=1000';
@@ -230,7 +319,6 @@ class K1000Index extends Component
         $comments =0;
         $jumper = "";
         $link_complete="";
-        $this->psid_buscar = "";
         $this->pid_buscar = "";
         $busqueda_link_def = "";
         $this->no_jumpear = 0;
@@ -257,10 +345,8 @@ class K1000Index extends Component
                 if($busqueda_ast_ !== false){
                     $busqueda_id= strpos($this->search, '**');
                                     
-                    //$this->psid_buscar = substr($this->search,($busqueda_id - 22),22);
-
-                    if(session('psid')) $this->psid_buscar = substr($this->search,($busqueda_id - 22),11).substr(session('psid'),11,11);
-                    else $this->psid_buscar = substr($this->search,($busqueda_id - 22),22);
+                    if(session('psid')) $psid_buscar = substr($this->search,($busqueda_id - 22),11).substr(session('psid'),11,11);
+                    else $psid_buscar = substr($this->search,($busqueda_id - 22),22);
 
                     if(session('pid')){
                         $this->pid_buscar = session('pid');
@@ -373,7 +459,7 @@ class K1000Index extends Component
 
                                             $this->pid_detectado = 'no';
                                            
-                                            $this->busqueda_link = Link::where('psid',substr($this->psid_buscar,0,5))->first();
+                                            $this->busqueda_link = Link::where('psid',substr($psid_buscar,0,5))->first();
        
              
                                             if($this->busqueda_link){
@@ -438,7 +524,7 @@ class K1000Index extends Component
                                                     if($url_detect != 'https://dkr1.ssisurveys.com' && $url_detect != 'https://online.ssisurveys.com'  && $url_detect != 'https://online.surveynetwork.com' ){
                                                         $link->jumper = $url_detect;
                                                     }
-                                                    $link->psid = substr($this->psid_buscar,0,5);
+                                                    $link->psid = substr($psid_buscar,0,5);
                                                     $link->user_id = auth()->user()->id;
                                                     $link->jumper_type_id = 5;
                                                     $link->k_detected = 'K=1000';
@@ -487,7 +573,7 @@ class K1000Index extends Component
 
                                             $this->pid_detectado = 'no';
                                            
-                                            $this->busqueda_link = Link::where('psid',substr($this->psid_buscar,0,5))->first();
+                                            $this->busqueda_link = Link::where('psid',substr($psid_buscar,0,5))->first();
        
              
                                             if($this->busqueda_link){
@@ -552,7 +638,7 @@ class K1000Index extends Component
                                                     if($url_detect != 'https://dkr1.ssisurveys.com' && $url_detect != 'https://online.ssisurveys.com'  && $url_detect != 'https://online.surveynetwork.com' ){
                                                         $link->jumper = $url_detect;
                                                     }
-                                                    $link->psid = substr($this->psid_buscar,0,5);
+                                                    $link->psid = substr($psid_buscar,0,5);
                                                     $link->user_id = auth()->user()->id;
                                                     $link->jumper_type_id = 5;
                                                     $link->k_detected = 'K=1000';
@@ -598,7 +684,7 @@ class K1000Index extends Component
 
                             else{
                                 $this->pid_detectado = 'no';
-                                $this->busqueda_link = Link::where('psid',substr($this->psid_buscar,0,5))->first();
+                                $this->busqueda_link = Link::where('psid',substr($psid_buscar,0,5))->first();
          
                                 $busqueda_link_def =  $this->busqueda_link;
          
@@ -664,7 +750,7 @@ class K1000Index extends Component
                                              if($url_detect != 'https://dkr1.ssisurveys.com' && $url_detect != 'https://online.ssisurveys.com'  && $url_detect != 'https://online.surveynetwork.com' ){
                                                 $link->jumper = $url_detect;
                                              }
-                                             $link->psid = substr($this->psid_buscar,0,5);
+                                             $link->psid = substr($psid_buscar,0,5);
                                              $link->user_id = auth()->user()->id;
                                              $link->jumper_type_id = 5;
                                              $link->k_detected = 'K=1000';
@@ -708,7 +794,7 @@ class K1000Index extends Component
                         }
                         else{
                             $this->pid_detectado = 'no';
-                            $this->busqueda_link = Link::where('psid',substr($this->psid_buscar,0,5))->first();
+                            $this->busqueda_link = Link::where('psid',substr($psid_buscar,0,5))->first();
             
                             $busqueda_link_def =  $this->busqueda_link;
             
@@ -774,7 +860,7 @@ class K1000Index extends Component
                                                 if($url_detect != 'https://dkr1.ssisurveys.com' && $url_detect != 'https://online.ssisurveys.com'  && $url_detect != 'https://online.surveynetwork.com' ){
                                                     $link->jumper = $url_detect;
                                                 }
-                                                $link->psid = substr($this->psid_buscar,0,5);
+                                                $link->psid = substr($psid_buscar,0,5);
                                                 $link->user_id = auth()->user()->id;
                                                 $link->jumper_type_id = 5;
                                                 $link->k_detected = 'K=1000';
@@ -821,7 +907,7 @@ class K1000Index extends Component
                     if($busqueda_selfserver != false){
 
                             $posicion_elem1 = $busqueda_selfserver + 10;
-                            $i_elem1 = 0;
+                          /*  $i_elem1 = 0;
                             $busq_elem1 = 0;
                             
                             do{
@@ -839,7 +925,7 @@ class K1000Index extends Component
         
                             }while($i_elem1 != 1);
 
-                            $this->elem1 = substr($this->search,($busqueda_selfserver + 10),($posicion_elem1 - ($busqueda_selfserver + 10)));
+                            $elem1 = substr($this->search,($busqueda_selfserver + 10),($posicion_elem1 - ($busqueda_selfserver + 10)));
 
                             $posicion_elem2 = $posicion_elem1 + 1;
                             $i_elem2 = 0;
@@ -860,9 +946,7 @@ class K1000Index extends Component
         
                             }while($i_elem2 != 1);
 
-                            $this->elem2 = substr($this->search,($posicion_elem1 + 1),($posicion_elem2 - ($posicion_elem1 + 1)));
-
-               
+                            $elem2 = substr($this->search,($posicion_elem1 + 1),($posicion_elem2 - ($posicion_elem1 + 1)));*/
 
                            /* if($detect_elem2 == '/'){
 
@@ -936,7 +1020,7 @@ class K1000Index extends Component
                         }
 
                         else{
-                            $this->busqueda_link = Link::where('psid',substr($this->psid_buscar,0,5))->first();
+                            $this->busqueda_link = Link::where('psid',substr($psid_buscar,0,5))->first();
      
                             $busqueda_link_def =  $this->busqueda_link;
      
@@ -975,7 +1059,7 @@ class K1000Index extends Component
                     }
 
                     if($this->jumper_detect == 1){
-                        $this->busqueda_link = Link::where('psid',substr($this->psid_buscar,0,5))->first();
+                        $this->busqueda_link = Link::where('psid',substr($psid_buscar,0,5))->first();
      
                             $busqueda_link_def =  $this->busqueda_link;
      

@@ -19,7 +19,7 @@ class K1083Index extends Component
     use WithPagination;
     protected $paginationTheme = "bootstrap";
 
-    public  $user,$jumper_complete = [], $operacion, $jumper_list = 0,$busqueda_link,$comment_new_psid_register,$pid_register_high,$psid_register_bh,$high_register_bh,$basic_register_bh,$posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $wix_detect = '0', $psid_register=0,$jumper_redirect,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$is_high,$is_basic,$calc_link,$jumper_select,$points_user_positive, $points_user_negative, $jumper_detect_k ='',$psid_buscar,$serie_buscar;
+    public  $user,$jumper_complete = [], $operacion, $jumper_list = 0,$busqueda_link,$comment_new_psid_register,$pid_register_high,$psid_register_bh,$posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $wix_detect = '0', $psid_register=0,$jumper_redirect,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$is_high,$is_basic,$calc_link,$jumper_select,$points_user_positive, $points_user_negative, $jumper_detect_k ='';
 
     protected $listeners = ['render' => 'render', 'registro_psid' => 'registro_psid' , 'verific' => 'verific'];
     
@@ -54,19 +54,53 @@ class K1083Index extends Component
             $link_register->user_id  = $this->user->id;
             $link_register->save();
 
+
+            $busqueda_id= strpos($this->search, '**');
+
+            if(session('psid')) $psid_buscar = substr($this->search,($busqueda_id - 22),11).substr(session('psid'),11,11);
+            else $psid_buscar = substr($this->search,($busqueda_id - 22),22);
+
+                    $busqueda_serie= strpos($this->search, '.com/');
+
+                        if($busqueda_serie != false){
+
+                            $posicion_serie = $busqueda_serie + 5;
+                            $i_serie = 0;
+                            $busq_serie_s = 0;
+                            
+                            do{
+                                $detect_serie= substr($this->search, $posicion_serie,1);
+        
+                                if($detect_serie == '/') $i_serie = 1;
+                                else{
+                                    $posicion_serie = $posicion_serie + 1;
+                                    $busq_serie_s ++;
+                                }
+
+                                if($busq_serie_s > 20){
+                                    $i_serie = 1;
+                                }
+        
+                            }while($i_serie != 1);
+
+                            $serie_buscar = substr($this->search,($busqueda_serie + 5),($posicion_serie - ($busqueda_serie + 5)));
+
+                        }
+
+
             try {
                 $client = new Client([
                     //'base_uri' => 'http://127.0.0.1:8000',
                     'base_uri' => 'http://209.94.57.88/',
                 ]);
 
-                $resultado = $client->request('GET', '/k1083/1/'.$this->serie_buscar.'/'.$this->psid_buscar);
+                $resultado = $client->request('GET', '/k1083/1/'.$serie_buscar.'/'.$psid_buscar);
 
                 if($resultado->getStatusCode() == 200){
 
                     $this->jumper_complete = json_decode($resultado->getBody(),true);
 
-                    $this->busqueda_link = Link::where('psid',substr($this->psid_buscar,0,5))->first();
+                    $this->busqueda_link = Link::where('psid',substr($psid_buscar,0,5))->first();
 
                     if($this->busqueda_link){
                         $user_point= User_Links_Points::where('link_id',$this->busqueda_link->id)
@@ -128,7 +162,7 @@ class K1083Index extends Component
 
                             $link = new Link();
                             $link->jumper = $url_detect;
-                            $link->psid = substr($this->psid_buscar,0,5);
+                            $link->psid = substr($psid_buscar,0,5);
                             $link->user_id = auth()->user()->id;
                             $link->jumper_type_id = 25;
                             $link->k_detected = 'K=1083';
@@ -199,7 +233,7 @@ class K1083Index extends Component
         $comments =0;
         $jumper = "";
         $link_complete="";
-        $this->psid_buscar = "";
+        $psid_buscar = "";
         $pid_buscar = "";
         $busqueda_link_def = "";
      
@@ -229,8 +263,8 @@ class K1083Index extends Component
                                     
                     //$this->psid_buscar = substr($this->search,($busqueda_id - 22),22);
 
-                    if(session('psid')) $this->psid_buscar = substr($this->search,($busqueda_id - 22),11).substr(session('psid'),11,11);
-                    else $this->psid_buscar = substr($this->search,($busqueda_id - 22),22);
+                    if(session('psid')) $psid_buscar = substr($this->search,($busqueda_id - 22),11).substr(session('psid'),11,11);
+                    else $psid_buscar = substr($this->search,($busqueda_id - 22),22);
 
                     $busqueda_serie= strpos($this->search, '.com/');
 
@@ -255,7 +289,7 @@ class K1083Index extends Component
         
                             }while($i_serie != 1);
 
-                            $this->serie_buscar = substr($this->search,($busqueda_serie + 5),($posicion_serie - ($busqueda_serie + 5)));
+                            $serie_buscar = substr($this->search,($busqueda_serie + 5),($posicion_serie - ($busqueda_serie + 5)));
 
                         }
 
@@ -304,7 +338,7 @@ class K1083Index extends Component
                             }
 
                             else{
-                                $this->busqueda_link = Link::where('psid',substr($this->psid_buscar,0,5))->first();
+                                $this->busqueda_link = Link::where('psid',substr($psid_buscar,0,5))->first();
          
                                 $busqueda_link_def =  $this->busqueda_link;
          
@@ -343,7 +377,7 @@ class K1083Index extends Component
                         }
 
                         if($this->jumper_detect == 1){
-                            $this->busqueda_link = Link::where('psid',substr($this->psid_buscar,0,5))->first();
+                            $this->busqueda_link = Link::where('psid',substr($psid_buscar,0,5))->first();
          
                                 $busqueda_link_def =  $this->busqueda_link;
          
