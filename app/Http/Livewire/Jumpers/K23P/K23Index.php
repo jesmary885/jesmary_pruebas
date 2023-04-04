@@ -18,7 +18,7 @@ class K23Index extends Component
     use WithPagination;
     protected $paginationTheme = "bootstrap";
 
-    public $user,$operacion,$jumper_complete = [],$jumper_list = 0,$busqueda_link,$comment_new_psid_register,$pid_register_high,$psid_register_bh,$high_register_bh,$basic_register_bh,$posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $wix_detect = '0', $psid_register=0,$jumper_redirect,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$is_high,$is_basic,$calc_link,$jumper_select,$points_user_positive, $points_user_negative, $jumper_detect_k ='',$pid_manual,$pid_detectado = 'si',$pid_buscar,$psid_buscar,$ids_buscar,$k2_buscar,$elem1,$elem2,$elem3 ;
+    public $user,$operacion,$jumper_complete = [],$jumper_list = 0,$busqueda_link,$comment_new_psid_register,$pid_register_high,$psid_register_bh,$high_register_bh,$basic_register_bh,$posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $wix_detect = '0', $psid_register=0,$jumper_redirect,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$is_high,$is_basic,$calc_link,$jumper_select,$points_user_positive, $points_user_negative, $jumper_detect_k ='',$pid_manual,$pid_detectado = 'si',$pid_buscar ;
 
     protected $listeners = ['render' => 'render', 'registro_psid' => 'registro_psid','verific' => 'verific'];
     
@@ -72,6 +72,160 @@ class K23Index extends Component
             $link_register->k_detected  = 'K=23';
             $link_register->user_id  = $this->user->id;
             $link_register->save();
+            $busqueda_selfserver= strpos($this->search, 'selfserve/');
+
+                if($busqueda_selfserver != false){
+
+                                $posicion_elem1 = $busqueda_selfserver + 10;
+                                $i_elem1 = 0;
+                                $busq_elem1 = 0;
+                                
+                                do{
+                                    $detect_elem1= substr($this->search, $posicion_elem1,1);
+            
+                                    if($detect_elem1 == '/' || $detect_elem1 == '&' || $detect_elem1 == '?list') $i_elem1 = 1;
+                                    else{
+                                        $posicion_elem1 = $posicion_elem1 + 1;
+                                        $busq_elem1 ++;
+                                    }
+
+                                    if($busq_elem1 > 20){
+                                        $i_elem1 = 1;
+                                    }
+            
+                                }while($i_elem1 != 1);
+
+                                $elem1 = substr($this->search,($busqueda_selfserver + 10),($posicion_elem1 - ($busqueda_selfserver + 10)));
+
+                                if($detect_elem1 == '/'){
+                                    $posicion_elem2 = $posicion_elem1 + 1;
+                                    $i_elem2 = 0;
+                                    $busq_elem2 = 0;
+
+                                    do{
+                                        $detect_elem2= substr($this->search, $posicion_elem2,1);
+                
+                                        if($detect_elem2 == '/' || $detect_elem2 == '&' || $detect_elem2 == '?list') $i_elem2 = 1;
+                                        else{
+                                            $posicion_elem2 = $posicion_elem2 + 1;
+                                            $busq_elem2 ++;
+                                        }
+
+                                        if($busq_elem2 > 20){
+                                            $i_elem2 = 1;
+                                        }
+                
+                                    }while($i_elem2 != 1);
+
+                                    $elem2 = substr($this->search,($posicion_elem1 + 1),($posicion_elem2 - ($posicion_elem1 + 1)));
+
+                                    if($detect_elem2 == '/'){
+                                    
+                                        $posicion_elem3 = $posicion_elem2 + 1;
+                                        $i_elem3 = 0;
+                                        $busq_elem3 = 0;
+
+                                        do{
+                                            $detect_elem3= substr($this->search, $posicion_elem3,1);
+                    
+                                            if($detect_elem3 == '/' || $detect_elem3 == '&' || $detect_elem3 == '?') $i_elem3 = 1;
+                                            else{
+                                                $posicion_elem3 = $posicion_elem3 + 1;
+                                                $busq_elem3 ++;
+                                            }
+
+                                            if($busq_elem3 > 20){
+                                                $i_elem3 = 1;
+                                            }
+                    
+                                        }while($i_elem3 != 1);
+
+                                        $elem3 = substr($this->search,($posicion_elem2 + 1),($posicion_elem3 - ($posicion_elem2 + 1)));
+                                    }
+
+                                    else{
+                                        $elem3 = 0;
+                                    }
+                                }
+
+                                else{
+                                    $elem2 = 0;
+                                }
+                                
+
+                            
+                }
+
+                $busqueda_id= strpos($this->search, '**');
+
+                if(session('psid')) $psid_buscar = substr($this->search,($busqueda_id - 22),11).substr(session('psid'),11,11);
+                else $psid_buscar = substr($this->search,($busqueda_id - 22),22);
+
+                $busqueda_ids= strpos($this->search, 'IDS=');
+
+                if($busqueda_ids != false){
+
+                            $posicion_ids = $busqueda_ids + 4;
+                            $i_ids = 0;
+                            $busq_ids_s = 0;
+                            
+                            do{
+                                $detect_ids= substr($this->search, $posicion_ids,1);
+        
+                                if($detect_ids == '&') $i_ids = 1;
+                                else{
+                                    $posicion_ids = $posicion_ids + 1;
+                                    $busq_ids_s ++;
+                                }
+
+                                if($busq_ids_s > 20){
+                                    $i_ids = 1;
+                                }
+        
+                            }while($i_ids != 1);
+
+                            if($busq_ids_s < 20)
+                                $ids_buscar = substr($this->search,($busqueda_ids + 4),($posicion_ids - ($busqueda_ids + 4)));
+
+                            else
+                                //$this->ids_buscar = substr($this->search,($busqueda_ids + 4),20);
+                                $this->jumper_detect = 3;
+                }
+
+                $busqueda_k2= strpos($this->search, '&K2=');
+
+                if($busqueda_k2 != false){
+
+                            $posicion_k2 = $busqueda_k2 + 4;
+                            $i_k2 = 0;
+                            $busq_k2_s = 0;
+                            
+                            do{
+                                $detect_k2= substr($this->search, $posicion_k2,1);
+        
+                                if($detect_k2 == '&') $i_k2 = 1;
+                                else{
+                                    $posicion_k2 = $posicion_k2 + 1;
+                                    $busq_k2_s ++;
+                                }
+
+                                if($busq_k2_s > 20){
+                                    $i_k2 = 1;
+                                }
+        
+                            }while($i_k2 != 1);
+
+
+
+                            if($busq_k2_s < 20)
+                                $k2_buscar = substr($this->search,($busqueda_k2 + 4),($posicion_k2 - ($busqueda_k2 + 4)));
+
+                            else
+                                //$this->ids_buscar = substr($this->search,($busqueda_ids + 4),20);
+                                $this->jumper_detect = 3;
+                }
+
+
 
             try {
 
@@ -80,16 +234,16 @@ class K23Index extends Component
                     'base_uri' => 'http://147.182.190.233',
                 ]);
 
-                if($this->elem2 == 0){
-                    $resultado = $client->request('GET', '/k23_s2/1/'.$this->ids_buscar.'/'.$this->psid_buscar.'/'.$this->k2_buscar.'/'.$this->pid_buscar.'/'.$this->elem1);
+                if($elem2 == 0){
+                    $resultado = $client->request('GET', '/k23_s2/1/'.$ids_buscar.'/'.$psid_buscar.'/'.$k2_buscar.'/'.$this->pid_buscar.'/'.$elem1);
 
                 }
                 else{
-                    if($this->elem3 == 0){
-                        $resultado = $client->request('GET', '/k23_s2/1/'.$this->ids_buscar.'/'.$this->psid_buscar.'/'.$this->k2_buscar.'/'.$this->pid_buscar.'/'.$this->elem1.'/'.$this->elem2);
+                    if($elem3 == 0){
+                        $resultado = $client->request('GET', '/k23_s2/1/'.$ids_buscar.'/'.$psid_buscar.'/'.$k2_buscar.'/'.$this->pid_buscar.'/'.$elem1.'/'.$elem2);
                     }
                     else{
-                        $resultado = $client->request('GET', '/k23_s3/1/'.$this->ids_buscar.'/'.$this->psid_buscar.'/'.$this->k2_buscar.'/'.$this->pid_buscar.'/'.$this->elem1.'/'.$this->elem2.'/'.$this->elem3);
+                        $resultado = $client->request('GET', '/k23_s3/1/'.$ids_buscar.'/'.$psid_buscar.'/'.$k2_buscar.'/'.$this->pid_buscar.'/'.$elem1.'/'.$elem2.'/'.$elem3);
                     }
                 }
 
@@ -99,7 +253,7 @@ class K23Index extends Component
 
                     $this->jumper_complete = json_decode($resultado->getBody(),true);
 
-                    $this->busqueda_link = Link::where('psid',substr($this->psid_buscar,0,5))->first();
+                    $this->busqueda_link = Link::where('psid',substr($psid_buscar,0,5))->first();
 
                     if($this->busqueda_link){
                         $user_point= User_Links_Points::where('link_id',$this->busqueda_link->id)
@@ -161,7 +315,7 @@ class K23Index extends Component
 
                             $link = new Link();
                             $link->jumper = $url_detect;
-                            $link->psid = substr($this->psid_buscar,0,5);
+                            $link->psid = substr($psid_buscar,0,5);
                             $link->user_id = auth()->user()->id;
                             $link->jumper_type_id = 8;
                             $link->k_detected = 'K=23';
@@ -237,7 +391,7 @@ class K23Index extends Component
         $comments =0;
         $jumper = "";
         $link_complete="";
-        $this->psid_buscar = "";
+        $psid_buscar = "";
         $this->pid_buscar = "";
         $busqueda_link_def = "";
      
@@ -259,38 +413,14 @@ class K23Index extends Component
                 if($busqueda_ast_ !== false){
                     $busqueda_id= strpos($this->search, '**');
 
-                    if(session('psid')) $this->psid_buscar = substr($this->search,($busqueda_id - 22),11).substr(session('psid'),11,11);
-                    else $this->psid_buscar = substr($this->search,($busqueda_id - 22),22);
+                    if(session('psid')) $psid_buscar = substr($this->search,($busqueda_id - 22),11).substr(session('psid'),11,11);
+                    else $psid_buscar = substr($this->search,($busqueda_id - 22),22);
 
                         $busqueda_ids= strpos($this->search, 'IDS=');
 
                         if($busqueda_ids != false){
 
                             $posicion_ids = $busqueda_ids + 4;
-                            $i_ids = 0;
-                            $busq_ids_s = 0;
-                            
-                            do{
-                                $detect_ids= substr($this->search, $posicion_ids,1);
-        
-                                if($detect_ids == '&') $i_ids = 1;
-                                else{
-                                    $posicion_ids = $posicion_ids + 1;
-                                    $busq_ids_s ++;
-                                }
-
-                                if($busq_ids_s > 20){
-                                    $i_ids = 1;
-                                }
-        
-                            }while($i_ids != 1);
-
-                            if($busq_ids_s < 20)
-                                $this->ids_buscar = substr($this->search,($busqueda_ids + 4),($posicion_ids - ($busqueda_ids + 4)));
-
-                            else
-                                //$this->ids_buscar = substr($this->search,($busqueda_ids + 4),20);
-                                $this->jumper_detect = 3;
                         }
 
                         else{
@@ -304,32 +434,7 @@ class K23Index extends Component
                         if($busqueda_k2 != false){
 
                             $posicion_k2 = $busqueda_k2 + 4;
-                            $i_k2 = 0;
-                            $busq_k2_s = 0;
-                            
-                            do{
-                                $detect_k2= substr($this->search, $posicion_k2,1);
-        
-                                if($detect_k2 == '&') $i_k2 = 1;
-                                else{
-                                    $posicion_k2 = $posicion_k2 + 1;
-                                    $busq_k2_s ++;
-                                }
-
-                                if($busq_k2_s > 20){
-                                    $i_k2 = 1;
-                                }
-        
-                            }while($i_k2 != 1);
-
-
-
-                            if($busq_k2_s < 20)
-                                $this->k2_buscar = substr($this->search,($busqueda_k2 + 4),($posicion_k2 - ($busqueda_k2 + 4)));
-
-                            else
-                                //$this->ids_buscar = substr($this->search,($busqueda_ids + 4),20);
-                                $this->jumper_detect = 3;
+                       
                         }
 
                         else{
@@ -447,7 +552,7 @@ class K23Index extends Component
 
                                                 $this->pid_detectado = 'no';
                                                
-                                                $this->busqueda_link = Link::where('psid',substr($this->psid_buscar,0,5))->first();
+                                                $this->busqueda_link = Link::where('psid',substr($psid_buscar,0,5))->first();
            
                  
                                                 if($this->busqueda_link){
@@ -510,7 +615,7 @@ class K23Index extends Component
                     
                                                         $link = new Link();
                                                         $link->jumper = $url_detect;
-                                                        $link->psid = substr($this->psid_buscar,0,5);
+                                                        $link->psid = substr($psid_buscar,0,5);
                                                         $link->user_id = auth()->user()->id;
                                                         $link->jumper_type_id = 5;
                                                         $link->k_detected = 'K=1000';
@@ -559,7 +664,7 @@ class K23Index extends Component
 
                                                 $this->pid_detectado = 'no';
                                                
-                                                $this->busqueda_link = Link::where('psid',substr($this->psid_buscar,0,5))->first();
+                                                $this->busqueda_link = Link::where('psid',substr($psid_buscar,0,5))->first();
            
                  
                                                 if($this->busqueda_link){
@@ -622,7 +727,7 @@ class K23Index extends Component
                     
                                                         $link = new Link();
                                                         $link->jumper = $url_detect;
-                                                        $link->psid = substr($this->psid_buscar,0,5);
+                                                        $link->psid = substr($psid_buscar,0,5);
                                                         $link->user_id = auth()->user()->id;
                                                         $link->jumper_type_id = 5;
                                                         $link->k_detected = 'K=1000';
@@ -668,7 +773,7 @@ class K23Index extends Component
 
                                 else{
                                     $this->pid_detectado = 'no';
-                                    $this->busqueda_link = Link::where('psid',substr($this->psid_buscar,0,5))->first();
+                                    $this->busqueda_link = Link::where('psid',substr($psid_buscar,0,5))->first();
             
                                     $busqueda_link_def =  $this->busqueda_link;
             
@@ -732,7 +837,7 @@ class K23Index extends Component
             
                                                 $link = new Link();
                                                 $link->jumper = $url_detect;
-                                                $link->psid = substr($this->psid_buscar,0,5);
+                                                $link->psid = substr($psid_buscar,0,5);
                                                 $link->user_id = auth()->user()->id;
                                                 $link->jumper_type_id = 5;
                                                 $link->k_detected = 'K=1000';
@@ -776,7 +881,7 @@ class K23Index extends Component
                             }
                             else{
                                 $this->pid_detectado = 'no';
-                                $this->busqueda_link = Link::where('psid',substr($this->psid_buscar,0,5))->first();
+                                $this->busqueda_link = Link::where('psid',substr($psid_buscar,0,5))->first();
                 
                                 $busqueda_link_def =  $this->busqueda_link;
                 
@@ -840,7 +945,7 @@ class K23Index extends Component
                 
                                                     $link = new Link();
                                                     $link->jumper = $url_detect;
-                                                    $link->psid = substr($this->psid_buscar,0,5);
+                                                    $link->psid = substr($psid_buscar,0,5);
                                                     $link->user_id = auth()->user()->id;
                                                     $link->jumper_type_id = 5;
                                                     $link->k_detected = 'K=1000';
@@ -887,82 +992,6 @@ class K23Index extends Component
                         if($busqueda_selfserver != false){
 
                             $posicion_elem1 = $busqueda_selfserver + 10;
-                            $i_elem1 = 0;
-                            $busq_elem1 = 0;
-                            
-                            do{
-                                $detect_elem1= substr($this->search, $posicion_elem1,1);
-        
-                                if($detect_elem1 == '/' || $detect_elem1 == '&' || $detect_elem1 == '?list') $i_elem1 = 1;
-                                else{
-                                    $posicion_elem1 = $posicion_elem1 + 1;
-                                    $busq_elem1 ++;
-                                }
-
-                                if($busq_elem1 > 20){
-                                    $i_elem1 = 1;
-                                }
-        
-                            }while($i_elem1 != 1);
-
-                            $this->elem1 = substr($this->search,($busqueda_selfserver + 10),($posicion_elem1 - ($busqueda_selfserver + 10)));
-
-                            if($detect_elem1 == '/'){
-                                $posicion_elem2 = $posicion_elem1 + 1;
-                                $i_elem2 = 0;
-                                $busq_elem2 = 0;
-
-                                do{
-                                    $detect_elem2= substr($this->search, $posicion_elem2,1);
-            
-                                    if($detect_elem2 == '/' || $detect_elem2 == '&' || $detect_elem2 == '?list') $i_elem2 = 1;
-                                    else{
-                                        $posicion_elem2 = $posicion_elem2 + 1;
-                                        $busq_elem2 ++;
-                                    }
-
-                                    if($busq_elem2 > 20){
-                                        $i_elem2 = 1;
-                                    }
-            
-                                }while($i_elem2 != 1);
-
-                                $this->elem2 = substr($this->search,($posicion_elem1 + 1),($posicion_elem2 - ($posicion_elem1 + 1)));
-
-                                if($detect_elem2 == '/'){
-                                
-                                    $posicion_elem3 = $posicion_elem2 + 1;
-                                    $i_elem3 = 0;
-                                    $busq_elem3 = 0;
-
-                                    do{
-                                        $detect_elem3= substr($this->search, $posicion_elem3,1);
-                
-                                        if($detect_elem3 == '/' || $detect_elem3 == '&' || $detect_elem3 == '?') $i_elem3 = 1;
-                                        else{
-                                            $posicion_elem3 = $posicion_elem3 + 1;
-                                            $busq_elem3 ++;
-                                        }
-
-                                        if($busq_elem3 > 20){
-                                            $i_elem3 = 1;
-                                        }
-                
-                                    }while($i_elem3 != 1);
-
-                                    $this->elem3 = substr($this->search,($posicion_elem2 + 1),($posicion_elem3 - ($posicion_elem2 + 1)));
-                                }
-
-                                else{
-                                    $this->elem3 = 0;
-                                }
-                            }
-
-                            else{
-                                $this->elem2 = 0;
-                            }
-                            
-
                           
                         }
 
@@ -1014,7 +1043,7 @@ class K23Index extends Component
                                     }
         
                                     else{
-                                        $this->busqueda_link = Link::where('psid',substr($this->psid_buscar,0,5))->first();
+                                        $this->busqueda_link = Link::where('psid',substr($psid_buscar,0,5))->first();
                  
                                         $busqueda_link_def =  $this->busqueda_link;
                  
@@ -1046,7 +1075,6 @@ class K23Index extends Component
                                                     $this->points_user_positive='no';
                                                     $this->points_user_negative='no';
                                                 }
-                 
                                         }
                                     }
         
@@ -1056,7 +1084,7 @@ class K23Index extends Component
                             }
 
                             else{
-                                $this->busqueda_link = Link::where('psid',substr($this->psid_buscar,0,5))->first();
+                                $this->busqueda_link = Link::where('psid',substr($psid_buscar,0,5))->first();
          
                                 $busqueda_link_def =  $this->busqueda_link;
          
@@ -1097,7 +1125,7 @@ class K23Index extends Component
                         }
 
                         if($this->jumper_detect == 1){
-                            $this->busqueda_link = Link::where('psid',substr($this->psid_buscar,0,5))->first();
+                            $this->busqueda_link = Link::where('psid',substr($psid_buscar,0,5))->first();
          
                                 $busqueda_link_def =  $this->busqueda_link;
          

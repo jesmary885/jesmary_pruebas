@@ -53,7 +53,7 @@ class K2028Index extends Component
 
                 $client = new Client([
                     //'base_uri' => 'http://127.0.0.1:8000',
-                    'base_uri' => 'http://209.94.57.88',
+                    'base_uri' => 'http://147.182.190.233',
                 ]);
                 
                 $resultado = $client->request('GET', '/k2028/1/'.$this->psid_buscar);

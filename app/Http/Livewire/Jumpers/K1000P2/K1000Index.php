@@ -160,7 +160,7 @@ class K1000Index extends Component
                     }
 
             try {
-                $client = new Client(['base_uri' => 'http://209.94.57.88/',]);
+                $client = new Client(['base_uri' => 'http://147.182.190.233/',]);
 
                 //if($this->elem3 == 0){
                     $resultado = $client->request('GET', '/k1000_s4/1/'.$psid_buscar.'/'.$this->pid_buscar.'/'.$elem1.'/'.$elem2);
