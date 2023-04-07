@@ -20,7 +20,7 @@ class LoginResponse implements LoginResponseContract
         $date = new DateTime();
         $date_actual= $date->format('Y-m-d H:i:s');
 
-        if($user->dni){
+        if($user->telegram){
             if($user->last_logout){
                 $date_last_login = new DateTime($user->last_logout);
                 $date_last_login_aumentada = $date_last_login->modify('+20 minute')->format('Y-m-d H:i:s');
