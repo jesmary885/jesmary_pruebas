@@ -336,7 +336,7 @@
     </div>
 
     <h2 class="text-gray-200 font-bold p-2 text-lg">
-        GANANCIA DE 10$ POR SUSCRIPTOR
+        GANANCIA DE 12$ POR SUSCRIPTOR
     </h2>
 
     <div class="row">

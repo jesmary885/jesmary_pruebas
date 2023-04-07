@@ -30,7 +30,6 @@ class UsuariosIndex extends Component
         $users = User::where('username', 'LIKE', '%' . $this->search . '%')
         ->orwhere('email', 'LIKE', '%' . $this->search . '%')
         ->orwhere('telegram', 'LIKE', '%' . $this->search . '%')
-        ->orwhere('dni', 'LIKE', '%' . $this->search . '%')
         ->latest('id')
         ->paginate(20);
 

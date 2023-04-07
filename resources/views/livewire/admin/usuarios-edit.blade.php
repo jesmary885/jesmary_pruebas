@@ -31,17 +31,7 @@
                                     <input type="email" wire:model="email" class="form-control rounded" id="formGroupExampleInput">
                                 </div>
                             </div>
-                            <div class="flex justify-between">
-                                <div class="w-full mr-2">
-                                    <label class="w-full text-justify" >Telegram</label>
-                                    <input type="text" wire:model="telegram" class="form-control rounded" id="formGroupExampleInput">
-                                </div>
-
-                                <div class="w-full">
-                                    <label class="w-full text-justify">Cédula</label>
-                                    <input type="email" wire:model="cedula" class="form-control rounded" id="formGroupExampleInput">
-                                </div>
-                            </div>
+              
 
                             <div class="flex justify-between mt-2">
                                 <div class="form-group w-full mr-2">
