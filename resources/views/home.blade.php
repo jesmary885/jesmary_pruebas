@@ -154,7 +154,6 @@
                       <h2 class="font-semibold mb-2"><b>{{__('messages.datos_registrados')}}:</b></h2>
    
                       <ul class="ml-4 mb-0 fa-ul text-muted">
-                        <li class="medium"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span>{{__('messages.localidad')}}: {{$user->estado}} {{$user->municipio}} {{$user->parroquia}}</li>
                         <li class="medium mt-2"><span class="fa-li"><i class="fas fa-lg fa-address-book"></i></span> Telegram ID: {{$user->telegram}} </li>
                         <li class="medium mt-2"><span class="fa-li"><i class="fas fa-lg fa-laptop-code"></i></span> {{__('messages.direccion_ip')}}: {{$ip_user}} </li>
                         @if(($user->last_payment_date))

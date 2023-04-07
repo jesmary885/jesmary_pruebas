@@ -70,11 +70,6 @@
                             <x-input-error for="email" />
                         </div>
 
-                        <div class="mt-4">
-
-                            <input id="dni" class="w-full text-gray-600 text-sm px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400" type="number" name="dni" placeholder="Número de documento de identidad">
-                            <x-input-error for="dni" />
-                        </div>
 
                         <div class="form-group w-full mt-4">
                             <select wire:model="nacionalidad" title="Nacionalidad" id="nacionalidad" class="bg-gray-200 block text-sm w-full text-gray-600 py-3 px-4 pr-8 leading-tight rounded-lg focus:outline-none focus:border-gray-500" required  name="nacionalidad">
@@ -169,12 +164,6 @@
 
                             <input id="email" class="w-full text-gray-600 text-sm px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400" type="email" name="email" :value="old('email')" required  placeholder="Email">
                             <x-input-error for="email" />
-                        </div>
-
-                        <div class="mt-4">
-
-                            <input id="dni" class="w-full text-gray-600 text-sm px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400" type="number" name="dni" placeholder="Número de documento de identidad">
-                            <x-input-error for="dni" />
                         </div>
 
                         <div class="form-group w-full mt-4">

@@ -83,18 +83,6 @@
                             <x-input-error for="telegram" />
                         </div>
 
-                        <div class="mt-4">
-
-                            <input id="dni" class="w-full text-gray-600 text-sm px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400" type="number" name="dni" placeholder="Número de documento de identidad">
-                            <x-input-error for="dni" />
-                        </div>
-
-                        
-
-                        
-
-
-
                         <div class="flex items-center justify-end mt-6  ">
 
                             <button class="w-full flex justify-center bg-green-200  hover:blue-700 text-gray-600 p-3  rounded-lg tracking-wide font-semibold  cursor-pointer transition ease-in duration-500">
@@ -159,14 +147,6 @@
                         <div class="mt-4">
                             <input id="telegram" class="w-full text-gray-600 text-sm px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400" type="text" name="telegram" :value="old('telegram')" required autofocus autocomplete="name"  placeholder="Tu Telegram-ID (Registrado en QuerySet)">
                             <x-input-error for="telegram" />
-                        </div>
-
-                    
-
-                        <div class="mt-4">
-
-                            <input id="dni" class="w-full text-gray-600 text-sm px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400" type="number" name="dni" placeholder="Número de documento de identidad">
-                            <x-input-error for="dni" />
                         </div>
 
                 
