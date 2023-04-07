@@ -13,8 +13,6 @@ use Laravel\Jetstream\Jetstream;
 use Illuminate\Support\Str;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use MegaCreativo\API\CedulaVE;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 
 class RegisterController extends Controller
 {
@@ -35,11 +33,10 @@ class RegisterController extends Controller
 
     public function date_index(User $user){
 
-       
-
         $user_search = $user->username;
 
         $user_search_email = $user->email;
+
 
         return view('auth.register_dates',compact('user_search','user_search_email'));
     }
@@ -56,16 +53,7 @@ class RegisterController extends Controller
         
         $user_search = User::where('email',$request['email'])->first();
 
-       /* Session::flush();
-        Auth::logout();
-*/
-
-        $user_search->update([
-            'last_logout' => null,
-        ]);
-
         if($request['nacionalidad'] == 1){
-
 
             $dni = str_replace('.', '', $request['dni']);
 
@@ -74,7 +62,7 @@ class RegisterController extends Controller
             if($datos['status'] == 200){
 
                 $user_search->update([
-                    'dni' => $dni,
+                    'dni' => $datos['data']['dni'],
                     'name_user' => $datos['data']['name'],
                     'lastname_user' => $datos['data']['lastname'],
                     'estado' => $datos['data']['state'],
@@ -84,10 +72,23 @@ class RegisterController extends Controller
                     'nacionalidad' => 'Venezolana',
                 ]);
 
-                $user_search->assignRole($user_search->rol_name);
+                if($user_search->rol_name == 'Administrador'){
+                    $user_search->roles()->sync(1);
+                }
 
-                return redirect()->route("login_guest");
+                if($user_search->rol_name == 'Encuestador Premium'){
+                    $user_search->roles()->sync(10);
+                }
 
+                if($user_search->rol_name == 'Encuestador Basico'){
+                    $user_search->roles()->sync(2);
+                }
+
+                if($user_search->rol_name == 'Proveedor links'){
+                    $user_search->roles()->sync(7);
+                }
+
+                return redirect(route("home"));
             }
 
             else{
@@ -100,24 +101,28 @@ class RegisterController extends Controller
         else{
 
             $user_search->update([
-                'last_logout' => null,
-            ]);
-
-            $dni = str_replace('.', '', $request['dni']);
-
-            $user_search->update([
                 'dni' => $request['dni'],
                 'telegram' => $request['telegram'],
                 'nacionalidad' => 'Extranjera'
             ]);
 
-            $user_search->assignRole($user_search->rol_name);
+            if($user_search->rol_name == 'Administrador'){
+                $user_search->roles()->sync(1);
+            }
 
-           /* Session::flush();
-            Auth::logout();*/
-    
+            if($user_search->rol_name == 'Encuestador Premium'){
+                $user_search->roles()->sync(10);
+            }
 
-            return redirect()->route("login_guest");
+            if($user_search->rol_name == 'Encuestador Basico'){
+                $user_search->roles()->sync(2);
+            }
+
+            if($user_search->rol_name == 'Proveedor links'){
+                $user_search->roles()->sync(7);
+            }
+
+            return redirect(route("home"));
 
         }
 
