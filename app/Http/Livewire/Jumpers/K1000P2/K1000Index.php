@@ -121,37 +121,47 @@ class K1000Index extends Component
 
                             $elem2 = substr($this->search,($posicion_elem1 + 1),($posicion_elem2 - ($posicion_elem1 + 1)));
 
-               
-
-                           /* if($detect_elem2 == '/'){
+                            if($detect_elem2 == '/'){
 
                                 $posicion_elem3 = $posicion_elem2 + 1;
                                 $i_elem3 = 0;
                                 $busq_elem3 = 0;
-
+        
                                 do{
                                     $detect_elem3= substr($this->search, $posicion_elem3,1);
             
-                                    if($detect_elem3 == '/' || $detect_elem3 == '&') $i_elem3 = 1;
+                                    if($detect_elem3 == '/' || $detect_elem3 == '&' || $detect_elem3 == '?') $i_elem3 = 1;
                                     else{
                                         $posicion_elem3 = $posicion_elem3 + 1;
                                         $busq_elem3 ++;
                                     }
-
+        
                                     if($busq_elem3 > 20){
                                         $i_elem3 = 1;
                                     }
             
                                 }while($i_elem3 != 1);
+        
+                                $elem3 = substr($this->search,($posicion_elem2 + 1),($posicion_elem3 - ($posicion_elem2 + 1)));
+        
+                            }
+        
+                            else{
+        
+                                $elem3 = 0;
+                            }
 
-                                $this->elem3 = substr($this->search,($posicion_elem2 + 1),($posicion_elem3 - ($posicion_elem2 + 1)));
+                            $busqueda_hash= strpos($this->search, 'k=1000&_s=');
 
+
+                            if($busqueda_hash != false){
+                                $hash_buscar = substr($this->search,($busqueda_hash + 10 ));
                             }
 
                             else{
-
-                                $this->elem3 = 0;
-                            }*/
+                                $this->jumper_detect = 3;
+                            }
+                           
                     }
 
                     else{
@@ -162,15 +172,13 @@ class K1000Index extends Component
             try {
                 $client = new Client(['base_uri' => 'http://147.182.190.233/',]);
 
-                //if($this->elem3 == 0){
-                    $resultado = $client->request('GET', '/k1000_s4/1/'.$psid_buscar.'/'.$this->pid_buscar.'/'.$elem1.'/'.$elem2);
+                if($elem3 == 0){
+                    $resultado = $client->request('GET', '/k1000_s4/1/'.$psid_buscar.'/'.$this->pid_buscar.'/'.$elem1.'/'.$elem2.'/'.$hash_buscar);
+                }
 
-               // }
-
-               // else{
-                   // $resultado = $client->request('GET', '/k1000_s3/1/'.$this->psid_buscar.'/'.$this->pid_buscar.'/'.$this->elem1.'/'.$this->elem2.'/'.$this->elem3);
-               // }
-    
+                else{
+                    $resultado = $client->request('GET', '/k1000_s5/1/'.$psid_buscar.'/'.$this->pid_buscar.'/'.$elem1.'/'.$elem2.'/'.$elem3.'/'.$hash_buscar);
+                }
                
                 if($resultado->getStatusCode() == 200){
 

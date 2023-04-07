@@ -60,9 +60,9 @@ class K1083Index extends Component
             if(session('psid')) $psid_buscar = substr($this->search,($busqueda_id - 22),11).substr(session('psid'),11,11);
             else $psid_buscar = substr($this->search,($busqueda_id - 22),22);
 
-                    $busqueda_serie= strpos($this->search, '.com/');
+            $busqueda_serie= strpos($this->search, '.com/');
 
-                        if($busqueda_serie != false){
+            if($busqueda_serie != false){
 
                             $posicion_serie = $busqueda_serie + 5;
                             $i_serie = 0;
@@ -85,7 +85,17 @@ class K1083Index extends Component
 
                             $serie_buscar = substr($this->search,($busqueda_serie + 5),($posicion_serie - ($busqueda_serie + 5)));
 
-                        }
+            }
+
+            $busqueda_hash= strpos($this->search, 'k=1083&_s=');
+
+
+            if($busqueda_hash != false){
+                $hash_buscar = substr($this->search,($busqueda_hash + 10 ));
+            }
+            else{
+                $this->jumper_detect = 3;
+            }
 
 
             try {
@@ -94,11 +104,21 @@ class K1083Index extends Component
                     'base_uri' => 'http://147.182.190.233/',
                 ]);
 
-                $resultado = $client->request('GET', '/k1083/1/'.$serie_buscar.'/'.$psid_buscar);
+                $resultado = $client->request('GET', '/k1083/1/'.$serie_buscar.'/'.$psid_buscar.'/'.$hash_buscar);
+
+               
 
                 if($resultado->getStatusCode() == 200){
 
-                    $this->jumper_complete = json_decode($resultado->getBody(),true);
+                    $jump1 = json_decode($resultado->getBody(),true);
+
+                    $long_jump1 = strlen($jump1['jumper']);
+
+                    $this->jumper_complete = substr($jump1['jumper'],1,($long_jump1-2));
+
+                   /* dd($jump2);
+
+                    $this->jumper_complete = json_decode($resultado->getBody(),true);*/
 
                     $this->busqueda_link = Link::where('psid',substr($psid_buscar,0,5))->first();
 

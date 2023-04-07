@@ -7,6 +7,9 @@ use App\Models\PagoRegistrosRecarga;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+//require __DIR__.'/../src/CedulaVE.php';
+
+use MegaCreativo\API\CedulaVE;
 
 class HomeController extends Controller
 {
@@ -23,6 +26,8 @@ class HomeController extends Controller
     public function index(){
 
         $fecha_actual = Carbon::now();
+
+        $ip_user = request()->ip();
 
         $mensaje = '';
         $user = User::where('id',auth()->user()->id)->first();
@@ -49,7 +54,7 @@ class HomeController extends Controller
             }
         }
 
-        return view('home',compact('rol','mensaje','pago_registrado'));
+        return view('home',compact('rol','mensaje','pago_registrado','user','ip_user'));
     }
 
 }

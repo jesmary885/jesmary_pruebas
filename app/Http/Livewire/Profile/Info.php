@@ -6,7 +6,7 @@ use Livewire\Component;
 
 class Info extends Component
 {
-    public $plan, $next_payment, $balance;
+    public $plan, $next_payment, $balance, $last_payment_date;
 
     public function mount(){
         $this->plan = auth()->user()->plan;
@@ -15,6 +15,8 @@ class Info extends Component
         else $this->next_payment = date("d-m-Y",strtotime(auth()->user()->last_payment_date."+ 15 days"));
 
         $this->balance = auth()->user()->balance;
+
+        $this->last_payment_date = auth()->user()->last_payment_date;
     }
     public function render()
     {

@@ -264,7 +264,7 @@
                             </div>
                         @endif
 
-                    @if ($k_detect == 'K=1092' || $k_detect == 'K=1098'|| $k_detect == 'K=2062' || $k_detect == 'K=3203' || $k_detect == 'K=7341' || $k_detect == 'K=23' || $k_detect == 'K=3906' || $k_detect == 'K=11052' || $k_detect == 'K=15293' || $k_detect == 'K=17564' || $k_detect == 'K=10634' || $k_detect == 'K=1083' || $k_detect == 'K=1091' || $k_detect == 'K=2028' || $k_detect == 'K=5460' || $k_detect == 'K=6057' )
+                    @if ($k_detect == 'K=1093' || $k_detect == 'K=1092' || $k_detect == 'K=1098'|| $k_detect == 'K=2062' || $k_detect == 'K=3203' || $k_detect == 'K=7341' || $k_detect == 'K=23' || $k_detect == 'K=3906' || $k_detect == 'K=11052' || $k_detect == 'K=15293' || $k_detect == 'K=17564' || $k_detect == 'K=10634' || $k_detect == 'K=1083' || $k_detect == 'K=1091' || $k_detect == 'K=2028' || $k_detect == 'K=5460' || $k_detect == 'K=6057' )
                     <div>
                         
                         @if ($k_detect == 'K=1092')
@@ -316,6 +316,9 @@
                         @endif
                         @if ($k_detect == 'K=6057')
                         <a href={{$this->k6057()}}>
+                        @endif
+                        @if ($k_detect == 'K=1093')
+                        <a href={{$this->k1093()}}>
                         @endif
                             <div class="small-box bg-success">
                                 <div class="inner">

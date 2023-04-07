@@ -100,12 +100,14 @@ class PagosEdit extends Component
         }
 
         else{
-            $user_cliente = User::where('id',$this->registro->user_id)->first();
-            $balance_total = $user_cliente->balance + $this->registro->monto;
-    
-            $user_cliente->update([
-                'balance' => $balance_total,
-            ]);
+            if($this->status == '1'){
+                $user_cliente = User::where('id',$this->registro->user_id)->first();
+                $balance_total = $user_cliente->balance + $this->registro->monto;
+        
+                $user_cliente->update([
+                    'balance' => $balance_total,
+                ]);
+            }
         }
 
         

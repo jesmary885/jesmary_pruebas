@@ -12,6 +12,9 @@ use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
 use Illuminate\Support\Str;
 use Illuminate\Contracts\Auth\StatefulGuard;
+use MegaCreativo\API\CedulaVE;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class RegisterController extends Controller
 {
@@ -26,7 +29,105 @@ class RegisterController extends Controller
 
  
     public function index(){
+
         return view('auth.register');
+    }
+
+    public function date_index(User $user){
+
+       
+
+        $user_search = $user->username;
+
+        $user_search_email = $user->email;
+
+        return view('auth.register_dates',compact('user_search','user_search_email'));
+    }
+
+    public function date_create(Request $request){
+
+        $request->validate([
+            'telegram' => ['required','unique:users'],
+            'nacionalidad' => ['required'],
+            'dni' => ['required','unique:users'],
+            //'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
+        ]);
+
+        
+        $user_search = User::where('email',$request['email'])->first();
+
+        Session::flush();
+        Auth::logout();
+
+
+        $user_search->update([
+            'last_logout' => null,
+        ]);
+
+        if($request['nacionalidad'] == 1){
+
+
+
+            
+
+            $dni = str_replace('.', '', $request['dni']);
+
+            $datos = CedulaVE::info('V',$dni, false);
+
+            if($datos['status'] == 200){
+
+                $user_search->update([
+                    'dni' => $dni,
+                    'name_user' => $datos['data']['name'],
+                    'lastname_user' => $datos['data']['lastname'],
+                    'estado' => $datos['data']['state'],
+                    'municipio' => $datos['data']['municipality'],
+                    'parroquia' => $datos['data']['parish'],
+                    'telegram' => $request['telegram'],
+                    'nacionalidad' => 'Venezolana',
+                ]);
+
+                $user_search->assignRole($user_search->rol_name);
+
+                return redirect()->route("login_guest");
+
+             
+            }
+
+            else{
+
+                $msj = 'Su número de cédula no se encuentra en los registros, intentalo de nuevo o comunicate con un administrador';
+                return redirect()->route("register_dates.index",$user_search )->with('info', $msj);
+            }
+        }
+
+        else{
+
+            $user_search->update([
+                'last_logout' => null,
+            ]);
+
+            $dni = str_replace('.', '', $request['dni']);
+
+            $user_search->update([
+                'dni' => $request['dni'],
+                'telegram' => $request['telegram'],
+                'nacionalidad' => 'Extranjera'
+            ]);
+
+            $user_search->assignRole($user_search->rol_name);
+
+            Session::flush();
+            Auth::logout();
+    
+
+            return redirect()->route("login_guest");
+
+        }
+
+        
+
+        
     }
 
     public function create(Request $request){

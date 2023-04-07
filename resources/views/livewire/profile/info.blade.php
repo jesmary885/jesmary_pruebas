@@ -46,7 +46,7 @@
                     </p>
 
                     <p class="font-semibold text-gray-600">
-                        {{$next_payment }}.
+                        {{$last_payment_date }}.
                     </p>
 
                 </div>

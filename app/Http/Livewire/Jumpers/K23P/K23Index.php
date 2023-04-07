@@ -83,7 +83,7 @@ class K23Index extends Component
                                 do{
                                     $detect_elem1= substr($this->search, $posicion_elem1,1);
             
-                                    if($detect_elem1 == '/' || $detect_elem1 == '&' || $detect_elem1 == '?list') $i_elem1 = 1;
+                                    if($detect_elem1 == '/' || $detect_elem1 == '&' || $detect_elem1 == '?') $i_elem1 = 1;
                                     else{
                                         $posicion_elem1 = $posicion_elem1 + 1;
                                         $busq_elem1 ++;
@@ -105,7 +105,7 @@ class K23Index extends Component
                                     do{
                                         $detect_elem2= substr($this->search, $posicion_elem2,1);
                 
-                                        if($detect_elem2 == '/' || $detect_elem2 == '&' || $detect_elem2 == '?list') $i_elem2 = 1;
+                                        if($detect_elem2 == '/' || $detect_elem2 == '&' || $detect_elem2 == '?') $i_elem2 = 1;
                                         else{
                                             $posicion_elem2 = $posicion_elem2 + 1;
                                             $busq_elem2 ++;
@@ -225,7 +225,15 @@ class K23Index extends Component
                                 $this->jumper_detect = 3;
                 }
 
+                $busqueda_hash= strpos($this->search, 'k=23&_s=');
 
+
+                if($busqueda_hash != false){
+                    $hash_buscar = substr($this->search,($busqueda_hash + 8 ));
+                }
+                else{
+                    $this->jumper_detect = 3;
+                }
 
             try {
 
@@ -234,20 +242,19 @@ class K23Index extends Component
                     'base_uri' => 'http://147.182.190.233',
                 ]);
 
-                if($elem2 == 0){
-                    $resultado = $client->request('GET', '/k23_s2/1/'.$ids_buscar.'/'.$psid_buscar.'/'.$k2_buscar.'/'.$this->pid_buscar.'/'.$elem1);
+               /* if($elem2 == 0){
+                    $resultado = $client->request('GET', '/k23_s2/1/'.$ids_buscar.'/'.$psid_buscar.'/'.$k2_buscar.'/'.$this->pid_buscar.'/'.$elem1.'/'.$hash_buscar);
 
+                }
+                else{*/
+                if($elem3 == 0){
+                    $resultado = $client->request('GET', '/k23_s2/1/'.$ids_buscar.'/'.$psid_buscar.'/'.$k2_buscar.'/'.$this->pid_buscar.'/'.$elem1.'/'.$elem2.'/'.$hash_buscar);
                 }
                 else{
-                    if($elem3 == 0){
-                        $resultado = $client->request('GET', '/k23_s2/1/'.$ids_buscar.'/'.$psid_buscar.'/'.$k2_buscar.'/'.$this->pid_buscar.'/'.$elem1.'/'.$elem2);
-                    }
-                    else{
-                        $resultado = $client->request('GET', '/k23_s3/1/'.$ids_buscar.'/'.$psid_buscar.'/'.$k2_buscar.'/'.$this->pid_buscar.'/'.$elem1.'/'.$elem2.'/'.$elem3);
-                    }
+                    $resultado = $client->request('GET', '/k23_s3/1/'.$ids_buscar.'/'.$psid_buscar.'/'.$k2_buscar.'/'.$this->pid_buscar.'/'.$elem1.'/'.$elem2.'/'.$elem3.'/'.$hash_buscar);
                 }
+               // }
 
-                
 
                 if($resultado->getStatusCode() == 200){
 

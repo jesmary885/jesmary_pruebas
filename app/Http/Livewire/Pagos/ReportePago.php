@@ -78,12 +78,12 @@ class ReportePago extends Component
             } 
             if($this->type == 'premium' && $this->plan == '15'){
                 $new_pago->monto = '16';
-                $new_pago->pago_premium = '5';
+                $new_pago->pago_premium = '6';
                 $new_pago->pago_basico = '0.5';
             } 
             if($this->type == 'premium' && $this->plan == '30'){
                 $new_pago->monto = '30';
-                $new_pago->pago_premium = '10';
+                $new_pago->pago_premium = '12';
                 $new_pago->pago_basico = '1';
             } 
             $new_pago->save();

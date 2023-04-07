@@ -72,13 +72,23 @@ class K23Index extends Component
             $link_register->user_id  = $this->user->id;
             $link_register->save();
 
+            $busqueda_hash= strpos($this->search, 'k=23&_s=');
+
+
+            if($busqueda_hash != false){
+                $hash_buscar = substr($this->search,($busqueda_hash + 8 ));
+            }
+            else{
+                $this->jumper_detect = 3;
+            }
+
             try {
                 $client = new Client([
                     //'base_uri' => 'http://127.0.0.1:8000',
                     'base_uri' => 'http://146.190.74.228',
                 ]);
 
-                $resultado = $client->request('GET', '/k23/1/'.$this->ids_buscar.'/'.$this->psid_buscar.'/'.$this->k2_buscar.'/'.$this->pid_buscar);
+                $resultado = $client->request('GET', '/k23/1/'.$this->ids_buscar.'/'.$this->psid_buscar.'/'.$this->k2_buscar.'/'.$this->pid_buscar.'/'.$hash_buscar);
 
                 if($resultado->getStatusCode() == 200){
 

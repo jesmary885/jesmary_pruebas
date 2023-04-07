@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin;
 use App\Models\PagoRegistrosRecarga;
 use App\Models\User;
 use Livewire\Component;
+use Illuminate\Support\Facades\DB;
 
 class ComunidadIndex extends Component
 {
@@ -24,58 +25,81 @@ class ComunidadIndex extends Component
     public function buscar(){
 
         if($this->fecha_inicio && $this->fecha_fin){
+
+            $fecha_inicio = date("Y-m-d H:i", strtotime($this->fecha_inicio));
+            $fecha_fin = date("Y-m-d H:i", strtotime($this->fecha_fin));
+
             $this->carga_total = 1;
 
-            $this->ganancia_mes_30_basic=PagoRegistrosRecarga::where('status','verificado')
-            ->whereDate('created_at', '>=', $this->fecha_inicio)
-            ->whereDate('created_at', '<=', $this->fecha_fin)
-            ->where('plan','30')
-            ->where('type','basico')
-            ->sum('monto');
 
-            $this->ganancia_mes_15_premium=PagoRegistrosRecarga::where('status','verificado')
-            ->whereDate('created_at', '>=', $this->fecha_inicio)
-            ->whereDate('created_at', '<=', $this->fecha_fin)
-            ->where('plan','15')
-            ->where('type','premium')
-            ->sum('monto');
+            $ganancia_mes_30_basic_q = DB::select('SELECT sum(p.monto) as monto from pago_registros_recargas p
+            where p.created_at BETWEEN :fecha_inicioo AND :fecha_finn AND p.plan = "30" AND p.type = "basico" AND p.status = "verificado"'
+            ,array('fecha_inicioo' =>$fecha_inicio, 'fecha_finn' => $fecha_fin));
 
-            $this->ganancia_mes_30_premium=PagoRegistrosRecarga::where('status','verificado')
-            ->whereDate('created_at', '>=', $this->fecha_inicio)
-            ->whereDate('created_at', '<=', $this->fecha_fin)
-            ->where('plan','30')
-            ->where('type','premium')
-            ->sum('monto');
+            foreach($ganancia_mes_30_basic_q as $e){
+                $this->ganancia_mes_30_basic = $e->monto;
+            }
+
+            $ganancia_mes_15_premium_q = DB::select('SELECT sum(p.monto) as monto from pago_registros_recargas p
+            where p.created_at BETWEEN :fecha_inicioo AND :fecha_finn AND p.plan = "15" AND p.type = "premium" AND p.status = "verificado"'
+            ,array('fecha_inicioo' =>$fecha_inicio, 'fecha_finn' => $fecha_fin));
+
+            foreach($ganancia_mes_15_premium_q as $e){
+                $this->ganancia_mes_15_premium = $e->monto;
+            }
+
+            $ganancia_mes_30_premium_q = DB::select('SELECT sum(p.monto) as monto from pago_registros_recargas p
+            where p.created_at BETWEEN :fecha_inicioo AND :fecha_finn AND p.plan = "30" AND p.type = "premium" AND p.status = "verificado"'
+            ,array('fecha_inicioo' =>$fecha_inicio, 'fecha_finn' => $fecha_fin));
+
+            foreach($ganancia_mes_30_premium_q as $e){
+                $this->ganancia_mes_30_premium = $e->monto;
+            }
 
             $this->total_ganancia_mes= $this->ganancia_mes_30_premium + $this->ganancia_mes_15_premium + $this->ganancia_mes_30_basic;
 
-            $this->ganancia_mes_basic_15_suscriptor=PagoRegistrosRecarga::where('status','verificado')
-            ->whereDate('created_at', '>=', $this->fecha_inicio)
-            ->whereDate('created_at', '<=', $this->fecha_fin)
-            ->where('plan','15')
-            ->sum('pago_basico');
 
-            $this->ganancia_mes_basic_30_suscriptor=PagoRegistrosRecarga::where('status','verificado')
-            ->whereDate('created_at', '>=', $this->fecha_inicio)
-            ->whereDate('created_at', '<=', $this->fecha_fin)
-            ->where('plan','30')
-            ->sum('pago_basico');
+            ////////////////////////////////////////////////
+
+
+            $ganancia_mes_basic_15_suscriptor_q = DB::select('SELECT sum(p.pago_basico) as monto from pago_registros_recargas p
+            where p.created_at BETWEEN :fecha_inicioo AND :fecha_finn AND p.plan = "15" AND p.status = "verificado"'
+            ,array('fecha_inicioo' =>$fecha_inicio, 'fecha_finn' => $fecha_fin));
+
+            foreach($ganancia_mes_basic_15_suscriptor_q as $e){
+                $this->ganancia_mes_basic_15_suscriptor = $e->monto;
+            }
+
+            $ganancia_mes_basic_30_suscriptor_q = DB::select('SELECT sum(p.pago_basico) as monto from pago_registros_recargas p
+            where p.created_at BETWEEN :fecha_inicioo AND :fecha_finn AND p.plan = "30" AND p.status = "verificado"'
+            ,array('fecha_inicioo' =>$fecha_inicio, 'fecha_finn' => $fecha_fin));
+
+            foreach($ganancia_mes_basic_30_suscriptor_q as $e){
+                $this->ganancia_mes_basic_30_suscriptor = $e->monto;
+            }
+
 
             $this->ganancia_mes_basic_total_suscriptor= $this->ganancia_mes_basic_30_suscriptor + $this->ganancia_mes_basic_15_suscriptor;
 
-            $this->ganancia_mes_premium_15_suscriptor = PagoRegistrosRecarga::where('status','verificado')
-            ->whereDate('created_at', '>=', $this->fecha_inicio)
-            ->whereDate('created_at', '<=', $this->fecha_fin)
-            ->where('type','premium')
-            ->where('plan','15')
-            ->sum('pago_premium');
+            //////////////////////////////////////////
 
-            $this->ganancia_mes_premium_30_suscriptor = PagoRegistrosRecarga::where('status','verificado')
-            ->whereDate('created_at', '>=', $this->fecha_inicio)
-            ->whereDate('created_at', '<=', $this->fecha_fin)
-            ->where('type','premium')
-            ->where('plan','30')
-            ->sum('pago_premium');
+            
+            $ganancia_mes_premium_15_suscriptor_q = DB::select('SELECT sum(p.pago_premium) as monto from pago_registros_recargas p
+            where p.created_at BETWEEN :fecha_inicioo AND :fecha_finn AND p.plan = "15" AND p.status = "verificado" AND p.type = "premium"'
+            ,array('fecha_inicioo' =>$fecha_inicio, 'fecha_finn' => $fecha_fin));
+            
+            foreach($ganancia_mes_premium_15_suscriptor_q as $e){
+                $this->ganancia_mes_premium_15_suscriptor = $e->monto;
+            }
+
+            $ganancia_mes_premium_30_suscriptor_q = DB::select('SELECT sum(p.pago_premium) as monto from pago_registros_recargas p
+            where p.created_at BETWEEN :fecha_inicioo AND :fecha_finn AND p.plan = "30" AND p.status = "verificado" AND p.type = "premium"'
+            ,array('fecha_inicioo' =>$fecha_inicio, 'fecha_finn' => $fecha_fin));
+
+            foreach($ganancia_mes_premium_30_suscriptor_q as $e){
+                $this->ganancia_mes_premium_30_suscriptor = $e->monto;
+            }
+
 
             $this->ganancia_mes_premium_suscriptor_total = $this->ganancia_mes_premium_15_suscriptor + $this->ganancia_mes_premium_30_suscriptor;
         }

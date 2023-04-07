@@ -71,6 +71,28 @@
                         </div>
 
                         <div class="mt-4">
+
+                            <input id="dni" class="w-full text-gray-600 text-sm px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400" type="number" name="dni" required  placeholder="Número de documento de identidad">
+                            <x-input-error for="dni" />
+                        </div>
+
+                        <div class="form-group w-full mt-4">
+                            <select wire:model="nacionalidad" title="Nacionalidad" id="nacionalidad" class="bg-gray-200 block text-sm w-full text-gray-600 py-3 px-4 pr-8 leading-tight rounded-lg focus:outline-none focus:border-gray-500" required  name="nacionalidad">
+                                <option value="" selected>Nacionalidad</option>
+                                <option value="1">Venezolana</option>
+                                <option value="2">Extranjera</option>
+                            </select>
+                            <x-input-error for="nacionalidad" />
+                                    
+                        </div>
+                    
+
+                        <div class="mt-4">
+                            <input id="telegram" class="w-full text-gray-600 text-sm px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400" type="text" name="telegram" :value="old('telegram')" required autofocus autocomplete="name"  placeholder="Tu Telegram-ID (Registrado en QuerySet)">
+                            <x-input-error for="telegram" />
+                        </div>
+
+                        <div class="mt-4">
                             <input id="password" name="password" placeholder="Password" type="password" name="password" required autocomplete="new-password" class="text-sm text-gray-500 px-4 py-3 rounded-lg w-full bg-gray-200 focus:bg-gray-100 border border-gray-200 focus:outline-none focus:border-purple-400">
                             <x-input-error for="password" />
                         </div>
@@ -147,6 +169,28 @@
 
                             <input id="email" class="w-full text-gray-600 text-sm px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400" type="email" name="email" :value="old('email')" required  placeholder="Email">
                             <x-input-error for="email" />
+                        </div>
+
+                        <div class="mt-4">
+
+                            <input id="dni" class="w-full text-gray-600 text-sm px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400" type="number" name="dni" required  placeholder="Número de documento de identidad">
+                            <x-input-error for="dni" />
+                        </div>
+
+                        <div class="form-group w-full mt-4">
+                            <select wire:model="nacionalidad" title="Nacionalidad" required  id="nacionalidad" class="bg-gray-200 block text-sm w-full text-gray-600 py-3 px-4 pr-8 leading-tight rounded-lg focus:outline-none focus:border-gray-500" name="nacionalidad">
+                                <option value="" selected>Nacionalidad</option>
+                                <option value="1">Venezolana</option>
+                                <option value="2">Extranjera</option>
+                            </select>
+                            <x-input-error for="nacionalidad" />
+                                    
+                        </div>
+                    
+
+                        <div class="mt-4">
+                            <input id="telegram" class="w-full text-gray-600 text-sm px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400" type="text" name="telegram" :value="old('telegram')" required autofocus autocomplete="name"  placeholder="Tu Telegram-ID (Registrado en QuerySet)">
+                            <x-input-error for="telegram" />
                         </div>
 
                         <div class="mt-4">

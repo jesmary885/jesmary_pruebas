@@ -31,7 +31,18 @@
                                     <input type="email" wire:model="email" class="form-control rounded" id="formGroupExampleInput">
                                 </div>
                             </div>
-                            
+                            <div class="flex justify-between">
+                                <div class="w-full mr-2">
+                                    <label class="w-full text-justify" >Telegram</label>
+                                    <input type="text" wire:model="telegram" class="form-control rounded" id="formGroupExampleInput">
+                                </div>
+
+                                <div class="w-full">
+                                    <label class="w-full text-justify">Cédula</label>
+                                    <input type="email" wire:model="cedula" class="form-control rounded" id="formGroupExampleInput">
+                                </div>
+                            </div>
+
                             <div class="flex justify-between mt-2">
                                 <div class="form-group w-full mr-2">
                                     <label class="w-full text-justify">Balance</label>
@@ -72,7 +83,6 @@
                                     <label class="w-full text-justify">Plan</label>
                                     <select wire:model="plan" title="Plan" id="estado" class="block w-full text-gray-400 py-2 px-2 pr-8 leading-tight rounded focus:outline-none focus:border-gray-500" name="estado">
                                         <option value="" selected>Plan</option>
-                                        <option value="7">7 días</option>
                                         <option value="15">15 días</option>
                                         <option value="30">30 días</option>
                                     </select>

@@ -611,6 +611,14 @@ return [
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
                 ],
+                [
+                    'text' => 'K1093',
+                    'route'  => 'k1093.index',
+                    'can' => 'menu.premium',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+                
                 /*[
                     'text' => 'K2066',
                     'route'  => 'k2066.index',

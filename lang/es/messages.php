@@ -66,4 +66,12 @@ return [
     'saldo_pagina' => 'Saldo en página',
     'planes_precios' => 'Planes y precios',
     'ver_datos_precios' => 'para ver nuestros planes y precios',
+    'datos_registrados' => 'Tus datos registrados',
+    'localidad' => 'Localidad',
+    'direccion_ip' => 'Tu dirección IP',
+    'fecha_corte' => 'Fecha de corte',
+    'HOLA' => 'HOLA',
+    'tipo_pago'=> 'Tipo de pago',
+
+  
 ];

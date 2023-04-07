@@ -85,12 +85,12 @@ class ReportaPagoAdelantado extends Component
                     $new_pago->pago_basico = '1';
                 } 
                 if($this->type == 'premium' && $this->plan == '15'){
-                    $new_pago->monto = '15';
-                    $new_pago->pago_premium = '7.5';
+                    $new_pago->monto = '16';
+                    $new_pago->pago_premium = '6';
                 } 
                 if($this->type == 'premium' && $this->plan == '30'){
-                    $new_pago->monto = '25';
-                    $new_pago->pago_premium = '10';
+                    $new_pago->monto = '30';
+                    $new_pago->pago_premium = '12';
                 } 
             }
             if($this->plan == "balance"){
@@ -138,13 +138,13 @@ class ReportaPagoAdelantado extends Component
                 }
     
             }
-            else{
+           /* else{
                 if($date->toTimeString() <= '21:00:00' && $date->toTimeString() >= '06:00:00' ){
                     $user->update([
                         'balance' => $this->monto,
                     ]);
                 }
-            }
+            }*/
     
             $this->emit('alert','Datos registrados correctamente');
             $this->reset(['plan','file','comentario','type']);

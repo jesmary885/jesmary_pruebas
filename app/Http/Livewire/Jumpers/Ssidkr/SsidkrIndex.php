@@ -141,6 +141,16 @@ class SsidkrIndex extends Component
         }
     }
 
+    public function k1093(){
+        if($this->rol_user == 10 || $this->rol_user == 1 || $this->rol_user == 7 || $this->rol_user == 8 || $this->rol_user == 9){
+            session()->forget('search');
+            return 'k1093';
+        }
+        else{
+            return '#';
+        }
+    }
+
     public function k1091(){
         if($this->rol_user == 10 || $this->rol_user == 1 || $this->rol_user == 7 || $this->rol_user == 8 || $this->rol_user == 9){
             session()->forget('search');
@@ -624,6 +634,7 @@ class SsidkrIndex extends Component
                             elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '17564') $type_k = 21;
                             elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '2066') $type_k = 22;
                             elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '2001') $type_k = 23;
+                            elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '1093') $type_k = 30;
                             else  $type_k = 15;
 
                             $jumper->update(

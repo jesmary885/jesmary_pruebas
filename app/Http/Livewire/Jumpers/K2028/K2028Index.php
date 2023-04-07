@@ -49,6 +49,15 @@ class K2028Index extends Component
 
         if($result[0] == $this->operacion->resultado){
 
+            $busqueda_hash= strpos($this->search, 'k=2028&_s=');
+
+            if($busqueda_hash != false){
+                $hash_buscar = substr($this->search,($busqueda_hash + 10 ));
+            }
+            else{
+                $this->jumper_detect = 3;
+            }
+
             try {
 
                 $client = new Client([
@@ -56,17 +65,17 @@ class K2028Index extends Component
                     'base_uri' => 'http://147.182.190.233',
                 ]);
                 
-                $resultado = $client->request('GET', '/k2028/1/'.$this->psid_buscar);
+                $resultado = $client->request('GET', '/k2028/1/'.$this->psid_buscar.'/'.$hash_buscar);
 
                 if($resultado->getStatusCode() == 200){
         
-                                        $this->jumper_complete = json_decode($resultado->getBody(),true);
+                    $this->jumper_complete = json_decode($resultado->getBody(),true);
         
-                                        $this->busqueda_link = Link::where('psid',substr($this->psid_buscar,0,5))->first();
+                    $this->busqueda_link = Link::where('psid',substr($this->psid_buscar,0,5))->first();
             
-                                        $busqueda_link_def =  $this->busqueda_link;
+                    $busqueda_link_def =  $this->busqueda_link;
             
-                                        if($this->busqueda_link){
+                    if($this->busqueda_link){
                                             $user_point= User_Links_Points::where('link_id',$this->busqueda_link->id)
                                                 ->where('user_id',auth()->user()->id)
                                                 ->first();
@@ -95,8 +104,8 @@ class K2028Index extends Component
                                                     $this->points_user_negative='no';
                                                 }
             
-                                        }
-                                        else{
+                    }
+                    else{
                                             $url_detect_com= strpos($this->search, 'ttp');
             
                                             if($url_detect_com != false){
@@ -164,10 +173,10 @@ class K2028Index extends Component
                                                         $this->points_user_negative='no';
                                                     }
                                             }
-                                        }
+                    }
 
-                                        $this->jumper_list = 1;
-                                        $this->jumper_detect = 1;
+                    $this->jumper_list = 1;
+                    $this->jumper_detect = 1;
                 }
             }
             catch (\GuzzleHttp\Exception\RequestException $e) {

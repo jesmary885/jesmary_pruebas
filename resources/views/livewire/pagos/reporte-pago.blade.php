@@ -100,7 +100,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="formGroupExampleInput2">{{__('messages.comentarios')}}</label>
+                                <label for="formGroupExampleInput2">{{__('messages.Comentarios')}}</label>
                                 <textarea wire:model="comentario" id="formGroupExampleInput" class="form-control resize-none rounded" cols="80" rows="5"> </textarea>
                                 <x-input-error for="comentario" />
                             </div>

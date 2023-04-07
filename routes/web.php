@@ -10,6 +10,7 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\MarketplaceController;
 use App\Http\Controllers\PagoController;
 use App\Http\Controllers\PsidController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SobrenosotrosController;
 use App\Http\Livewire\Chat\ChatComponent;
@@ -21,6 +22,9 @@ use Illuminate\Support\Facades\Redirect;
 Route::get('/', function () {
     return view('auth.login');
 })->name('login_guest');
+
+Route::get('dates/{user}',[RegisterController::class,'date_index'])->name('register_dates.index');
+Route::post('dates',[RegisterController::class,'date_create'])->name('register_dates.create');
 
 
 /*
@@ -45,6 +49,7 @@ Route::middleware(['auth','verified'])->group(function()
 
         //Jumpers
 
+        Route::get('k1093',[JumpersController::class,'k1093'])->name('k1093.index')->middleware('permission:menu.premium');
         Route::get('k1083',[JumpersController::class,'k1083'])->name('k1083.index')->middleware('permission:menu.premium');
         Route::get('k1091',[JumpersController::class,'k1091'])->name('k1091.index')->middleware('permission:menu.premium');
         Route::get('k1000-PS',[JumpersController::class,'kmil_poderosa1'])->name('kmil_poderosa1.index')->middleware('permission:menu.premium');
