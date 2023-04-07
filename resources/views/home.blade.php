@@ -144,7 +144,7 @@
               <div class="col-12 col-sm-12 col-md-12 d-flex align-items-stretch flex-column">
                 <div class="card bg-light d-flex flex-fill">
                   <div class="card-header text-muted border-bottom-0">
-                  {{__('messages.HOLA')}}, {{$user->name_user}} {{$user->lastname_user}}
+                  {{__('messages.HOLA')}}, {{$user->username}}
                   </div>
                 </div>
                 <div class="card-body pt-0">

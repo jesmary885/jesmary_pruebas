@@ -46,7 +46,7 @@ class RegisterController extends Controller
         $request->validate([
             'telegram' => ['required','unique:users'],
             'nacionalidad' => ['required'],
-            'dni' => ['required','unique:users'],
+            //'dni' => ['required','unique:users'],
             //'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
         ]);
 
@@ -57,19 +57,89 @@ class RegisterController extends Controller
 
             $dni = str_replace('.', '', $request['dni']);
 
-            $datos = CedulaVE::info('V',$dni, false);
+            if($dni){
 
-            if($datos['status'] == 200){
+                $datos = CedulaVE::info('V',$dni, false);
+
+                if($datos['status'] == 200){
+
+                    $user_search->update([
+                        'dni' => $datos['data']['dni'],
+                        'name_user' => $datos['data']['name'],
+                        'lastname_user' => $datos['data']['lastname'],
+                        'estado' => $datos['data']['state'],
+                        'municipio' => $datos['data']['municipality'],
+                        'parroquia' => $datos['data']['parish'],
+                        'telegram' => $request['telegram'],
+                        'nacionalidad' => 'Venezolana',
+                    ]);
+
+                    if($user_search->rol_name == 'Administrador'){
+                        $user_search->roles()->sync(1);
+                    }
+
+                    if($user_search->rol_name == 'Encuestador Premium'){
+                        $user_search->roles()->sync(10);
+                    }
+
+                    if($user_search->rol_name == 'Encuestador Basico'){
+                        $user_search->roles()->sync(2);
+                    }
+
+                    if($user_search->rol_name == 'Proveedor links'){
+                        $user_search->roles()->sync(7);
+                    }
+
+                    return redirect(route("home"));
+                }
+
+                else{
+
+                    $msj = 'Su número de cédula no se encuentra en los registros, intentalo de nuevo o comunicate con un administrador';
+                    return redirect()->route("register_dates.index",$user_search )->with('info', $msj);
+                }
+
+            }
+
+            else{
 
                 $user_search->update([
-                    'dni' => $datos['data']['dni'],
-                    'name_user' => $datos['data']['name'],
-                    'lastname_user' => $datos['data']['lastname'],
-                    'estado' => $datos['data']['state'],
-                    'municipio' => $datos['data']['municipality'],
-                    'parroquia' => $datos['data']['parish'],
                     'telegram' => $request['telegram'],
                     'nacionalidad' => 'Venezolana',
+                ]);
+
+                if($user_search->rol_name == 'Administrador'){
+                    $user_search->roles()->sync(1);
+                }
+
+                if($user_search->rol_name == 'Encuestador Premium'){
+                    $user_search->roles()->sync(10);
+                }
+
+                if($user_search->rol_name == 'Encuestador Basico'){
+                    $user_search->roles()->sync(2);
+                }
+
+                if($user_search->rol_name == 'Proveedor links'){
+                    $user_search->roles()->sync(7);
+                }
+
+                return redirect(route("home"));
+
+            }
+
+        }
+
+        else{
+
+            $dni = str_replace('.', '', $request['dni']);
+
+            if($dni){
+
+                $user_search->update([
+                    'dni' => $request['dni'],
+                    'telegram' => $request['telegram'],
+                    'nacionalidad' => 'Extranjera'
                 ]);
 
                 if($user_search->rol_name == 'Administrador'){
@@ -93,36 +163,31 @@ class RegisterController extends Controller
 
             else{
 
-                $msj = 'Su número de cédula no se encuentra en los registros, intentalo de nuevo o comunicate con un administrador';
-                return redirect()->route("register_dates.index",$user_search )->with('info', $msj);
+                $user_search->update([
+                    'telegram' => $request['telegram'],
+                    'nacionalidad' => 'Extranjera'
+                ]);
+
+                if($user_search->rol_name == 'Administrador'){
+                    $user_search->roles()->sync(1);
+                }
+
+                if($user_search->rol_name == 'Encuestador Premium'){
+                    $user_search->roles()->sync(10);
+                }
+
+                if($user_search->rol_name == 'Encuestador Basico'){
+                    $user_search->roles()->sync(2);
+                }
+
+                if($user_search->rol_name == 'Proveedor links'){
+                    $user_search->roles()->sync(7);
+                }
+
+                return redirect(route("home"));
+
+
             }
-        }
-
-        else{
-
-            $user_search->update([
-                'dni' => $request['dni'],
-                'telegram' => $request['telegram'],
-                'nacionalidad' => 'Extranjera'
-            ]);
-
-            if($user_search->rol_name == 'Administrador'){
-                $user_search->roles()->sync(1);
-            }
-
-            if($user_search->rol_name == 'Encuestador Premium'){
-                $user_search->roles()->sync(10);
-            }
-
-            if($user_search->rol_name == 'Encuestador Basico'){
-                $user_search->roles()->sync(2);
-            }
-
-            if($user_search->rol_name == 'Proveedor links'){
-                $user_search->roles()->sync(7);
-            }
-
-            return redirect(route("home"));
 
         }
 

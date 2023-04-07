@@ -72,7 +72,7 @@
 
                         <div class="mt-4">
 
-                            <input id="dni" class="w-full text-gray-600 text-sm px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400" type="number" name="dni" required  placeholder="Número de documento de identidad">
+                            <input id="dni" class="w-full text-gray-600 text-sm px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400" type="number" name="dni" placeholder="Número de documento de identidad">
                             <x-input-error for="dni" />
                         </div>
 
@@ -173,7 +173,7 @@
 
                         <div class="mt-4">
 
-                            <input id="dni" class="w-full text-gray-600 text-sm px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400" type="number" name="dni" required  placeholder="Número de documento de identidad">
+                            <input id="dni" class="w-full text-gray-600 text-sm px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400" type="number" name="dni" placeholder="Número de documento de identidad">
                             <x-input-error for="dni" />
                         </div>
 
