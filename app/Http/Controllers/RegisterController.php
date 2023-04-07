@@ -56,9 +56,9 @@ class RegisterController extends Controller
         
         $user_search = User::where('email',$request['email'])->first();
 
-        Session::flush();
+       /* Session::flush();
         Auth::logout();
-
+*/
 
         $user_search->update([
             'last_logout' => null,
@@ -66,9 +66,6 @@ class RegisterController extends Controller
 
         if($request['nacionalidad'] == 1){
 
-
-
-            
 
             $dni = str_replace('.', '', $request['dni']);
 
@@ -91,7 +88,6 @@ class RegisterController extends Controller
 
                 return redirect()->route("login_guest");
 
-             
             }
 
             else{
@@ -117,8 +113,8 @@ class RegisterController extends Controller
 
             $user_search->assignRole($user_search->rol_name);
 
-            Session::flush();
-            Auth::logout();
+           /* Session::flush();
+            Auth::logout();*/
     
 
             return redirect()->route("login_guest");
