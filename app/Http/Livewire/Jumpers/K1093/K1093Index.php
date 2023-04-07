@@ -134,12 +134,14 @@ class K1093Index extends Component
                 $hash_buscar = substr($this->search,($busqueda_hash + 10 ));
             }
 
+            dd('/k1093/1/'.$this->pid_buscar.'/'.$psid_buscar.'/'.$this->pid_buscar.'/'.$surveyno_buscar.'/'.$spid_buscar.'/'.$hash_buscar);
+
 
     
             try {
                 $client = new Client(['base_uri' => 'http://147.182.190.233/',]);
 
-                $resultado = $client->request('GET', '/k1093/1/'.$this->pid_buscar.'/'.$psid_buscar.'/'.$this->pid_buscar.'/'.$surveyno_buscar.'/'.$spid_buscar.'/'.$hash_buscar);
+                $resultado = $client->request('GET', '/k1093/1/'.$this->pid_buscar.'/'.$psid_buscar.'/'.$surveyno_buscar.'/'.$spid_buscar.'/'.$hash_buscar);
 
 
                 if($resultado->getStatusCode() == 200){
