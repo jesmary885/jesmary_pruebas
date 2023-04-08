@@ -34,7 +34,7 @@ class CreateNewUser implements CreatesNewUsers
 
 
 
-                    return User::create([
+                   /* return User::create([
                         'name' => $input['name'],
                         'username' => $input['name'],
                         'telegram' => $input['telegram'],
@@ -46,7 +46,7 @@ class CreateNewUser implements CreatesNewUsers
                         'points_negative' => 0,
                         'points_neutral' => 0,
                         'nacionalidad' => 'Venezolana',
-                    ])->assignRole('Inactivo');
+                    ])->assignRole('Inactivo');*/
 
                 
 
@@ -55,7 +55,7 @@ class CreateNewUser implements CreatesNewUsers
         else{
 
 
-                return User::create([
+             /*   return User::create([
                     'username' => $input['name'],
                     'telegram' => $input['telegram'],
                     'status' => 'activo',
@@ -66,7 +66,7 @@ class CreateNewUser implements CreatesNewUsers
                     'points_negative' => 0,
                     'points_neutral' => 0,
                     'nacionalidad' => 'Extranjera',                
-                ])->assignRole('Inactivo');
+                ])->assignRole('Inactivo');*/
 
         }
     }
