@@ -68,7 +68,7 @@
                     <span class="info-box-icon"><i class="far fa-sad-tear"></i></span>
                         <div class="info-box-content">
                             <span class="info-box-text">Lo siento.</span>
-                            <span class="info-box-number">Ha ocurrido un error al generar el jumper...</span>
+                            <span class="info-box-number">Ha ocurrido un error al generar el jumper. Intentelo de nuevo</span>
                         </div>
                 </div>
 

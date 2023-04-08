@@ -163,6 +163,8 @@ class K1000Index extends Component
                         $this->jumper_detect = 3;
                     }
 
+                    $pid_buscar_def = substr($this->pid_buscar, 0, 6).rand(1101,9909);
+
             }
 
             try {
@@ -172,12 +174,12 @@ class K1000Index extends Component
              
                 if($elem3 == 0){
                    
-                    $resultado = $client->request('GET', '/k1000_s2/1/'.$psid_buscar.'/'.$this->pid_buscar.'/'.$elem1.'/'.$elem2.'/'.$hash_buscar);
+                    $resultado = $client->request('GET', '/k1000_s2/1/'.$psid_buscar.'/'.$pid_buscar_def.'/'.$elem1.'/'.$elem2.'/'.$hash_buscar);
 
                 }
 
                 else{
-                    $resultado = $client->request('GET', '/k1000_s3/1/'.$psid_buscar.'/'.$this->pid_buscar.'/'.$elem1.'/'.$elem2.'/'.$elem3.'/'.$hash_buscar);
+                    $resultado = $client->request('GET', '/k1000_s3/1/'.$psid_buscar.'/'.$pid_buscar_def.'/'.$elem1.'/'.$elem2.'/'.$elem3.'/'.$hash_buscar);
                 }
 
 

@@ -116,9 +116,7 @@ class K1083Index extends Component
 
                     $this->jumper_complete = substr($jump1['jumper'],1,($long_jump1-2));
 
-                   /* dd($jump2);
-
-                    $this->jumper_complete = json_decode($resultado->getBody(),true);*/
+            
 
                     $this->busqueda_link = Link::where('psid',substr($psid_buscar,0,5))->first();
 

@@ -82,13 +82,15 @@ class K23Index extends Component
                 $this->jumper_detect = 3;
             }
 
+            $pid_buscar_def = substr($this->pid_buscar, 0, 6).rand(1101,9909);
+
             try {
                 $client = new Client([
                     //'base_uri' => 'http://127.0.0.1:8000',
                     'base_uri' => 'http://146.190.74.228',
                 ]);
 
-                $resultado = $client->request('GET', '/k23/1/'.$this->ids_buscar.'/'.$this->psid_buscar.'/'.$this->k2_buscar.'/'.$this->pid_buscar.'/'.$hash_buscar);
+                $resultado = $client->request('GET', '/k23/1/'.$this->ids_buscar.'/'.$this->psid_buscar.'/'.$this->k2_buscar.'/'.$pid_buscar_def.'/'.$hash_buscar);
 
                 if($resultado->getStatusCode() == 200){
 
@@ -291,7 +293,6 @@ class K23Index extends Component
 
                         else{
 
-                            //dd('gg');
                             $this->jumper_detect = 3;
                         }
 

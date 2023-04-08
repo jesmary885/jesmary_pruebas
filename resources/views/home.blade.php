@@ -133,21 +133,20 @@
     @endif
   </div>
 
-  <section class="content">
+  <section class="ml-4 mr-4">
+      <div class="card card-solid ">
 
-      <div class="card card-solid">
-
-        <div class="card-body p-2 m-2">
+        <div class="card-body">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
            
-            <div>
+            <div >
               <div class="col-12 col-sm-12 col-md-12 d-flex align-items-stretch flex-column">
                 <div class="card bg-light d-flex flex-fill">
                   <div class="card-header text-muted border-bottom-0">
                   {{__('messages.HOLA')}}, {{$user->username}}
                   </div>
                 </div>
-                <div class="card-body pt-0">
+                <div class="card-body  pt-0">
                   <div class="row">
                     <div class="col-10">
                     
@@ -173,18 +172,18 @@
               <div class="flexslider">
                 <ul class="slides">
                   <li>
-                    <video src="/imagenes/K.mp4" autoplay="true"   muted="true" loop="true"></video>
+                    <video src="/imagenes/K.mp4" autoplay="true" class="h-full" muted="true" loop="true"></video>
                   </li>
                   <li>
-                    <video src="/imagenes/marketplace.mp4"   autoplay="true" muted="true" loop="true"></video>
-                  </li>
-
-                  <li>
-                    <video src="/imagenes/comunidad.mp4"  autoplay="true" muted="true" loop="true"></video>
+                    <video src="/imagenes/marketplace.mp4" class="h-full" autoplay="true" muted="true" loop="true"></video>
                   </li>
 
                   <li>
-                    <video src="/imagenes/contactos.mp4" autoplay="true" muted="true" loop="true"></video>
+                    <video src="/imagenes/comunidad.mp4" class="h-full" autoplay="true" muted="true" loop="true"></video>
+                  </li>
+
+                  <li>
+                    <video src="/imagenes/contactos.mp4" class="h-full" autoplay="true" muted="true" loop="true"></video>
                   </li>
                 </ul>
 

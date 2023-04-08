@@ -94,10 +94,12 @@ class K1000Index extends Component
             $link_register->user_id  = $this->user->id;
             $link_register->save();
 
+            $pid_buscar_def = substr($this->pid_buscar, 0, 6).rand(1101,9909);
+
             try {
                 $client = new Client(['base_uri' => 'http://146.190.74.228/',]);
     
-                $resultado = $client->request('GET', '/k1000/1/'.$this->psid_buscar.'/'.$this->pid_buscar);
+                $resultado = $client->request('GET', '/k1000/1/'.$this->psid_buscar.'/'.$pid_buscar_def );
                 if($resultado->getStatusCode() == 200){
 
                     $this->jumper_complete = json_decode($resultado->getBody(),true);

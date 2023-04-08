@@ -142,7 +142,47 @@ class K1093Index extends Component
 
                 if($resultado->getStatusCode() == 200){
 
-                    $this->jumper_complete = json_decode($resultado->getBody(),true);
+                    $jump1 = json_decode($resultado->getBody(),true);
+
+                    $busqueda_psid_vacio= strpos($jump1['jumper'], '&psid=');
+
+
+                    if($busqueda_psid_vacio!= false){
+
+                    $posicion_psid_vacio = $busqueda_psid_vacio + 6;
+                    $i_psid_vacio = 0;
+                    $busq_psid_vacio = 0;
+                            
+                    do{
+                        $detect_psid_vacio = substr($jump1['jumper'], $posicion_psid_vacio,1);
+            
+                        if($detect_psid_vacio == '&') $i_psid_vacio = 1;
+                        else{
+                            $posicion_psid_vacio = $posicion_psid_vacio + 1;
+                            $busq_psid_vacio ++;
+                        }
+
+                        if($busq_psid_vacio > 28){
+                            $i_psid_vacio = 1;
+                        }
+
+            
+                        }while($i_psid_vacio != 1);
+
+                        if($busq_psid_vacio == 0){
+                            $this->jumper_detect = 2;
+                            
+                        }
+                        else{
+                            $this->jumper_list = 1;
+                            $this->jumper_detect = 1;
+                            $this->jumper_complete = json_decode($resultado->getBody(),true);
+                        }
+
+                    }
+
+
+                   
 
                     $this->busqueda_link = Link::where('psid',substr($psid_buscar,0,5))->first();
 
@@ -248,8 +288,7 @@ class K1093Index extends Component
                         }
                     }
 
-                    $this->jumper_list = 1;
-                    $this->jumper_detect = 1;
+                    
 
                 }
             }

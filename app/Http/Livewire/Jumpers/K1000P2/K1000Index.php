@@ -169,15 +169,19 @@ class K1000Index extends Component
                         $this->jumper_detect = 3;
                     }
 
+
+                    $pid_buscar_def = substr($this->pid_buscar, 0, 6).rand(1101,9909);
+
+
             try {
                 $client = new Client(['base_uri' => 'http://147.182.190.233/',]);
 
                 if($elem3 == 0){
-                    $resultado = $client->request('GET', '/k1000_s4/1/'.$psid_buscar.'/'.$this->pid_buscar.'/'.$elem1.'/'.$elem2.'/'.$hash_buscar);
+                    $resultado = $client->request('GET', '/k1000_s4/1/'.$psid_buscar.'/'.$pid_buscar_def.'/'.$elem1.'/'.$elem2.'/'.$hash_buscar);
                 }
 
                 else{
-                    $resultado = $client->request('GET', '/k1000_s5/1/'.$psid_buscar.'/'.$this->pid_buscar.'/'.$elem1.'/'.$elem2.'/'.$elem3.'/'.$hash_buscar);
+                    $resultado = $client->request('GET', '/k1000_s5/1/'.$psid_buscar.'/'.$pid_buscar_def.'/'.$elem1.'/'.$elem2.'/'.$elem3.'/'.$hash_buscar);
                 }
                
                 if($resultado->getStatusCode() == 200){
