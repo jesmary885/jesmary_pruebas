@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Livewire\Cint\CintImport;
-use App\Imports\CintImport as ImportsCintImport;
+use App\Imports\DataCintImport;
 use App\Models\Link;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -143,16 +143,13 @@ class JumpersController extends Controller
 
      public function import_cint(Request $request){
 
-      
-
         $request->validate([
             'import_file' => 'required'
         ]);
      
-        
         $file = $request->file('import_file');
 
-        Excel::import(new ImportsCintImport, $file);
+        Excel::import(new DataCintImport, $file);
 
         return redirect()->route('cint.index');
     }

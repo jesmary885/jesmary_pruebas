@@ -634,7 +634,14 @@ class SsidkrIndex extends Component
                             elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '17564') $type_k = 21;
                             elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '2066') $type_k = 22;
                             elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '2001') $type_k = 23;
+                            elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '1091') $type_k = 24;
+                            elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '1083') $type_k = 25;
+                            elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '10634') $type_k = 26;
+                            elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '5460') $type_k = 27;
+                            elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '6057') $type_k = 28;
+                            elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '2028') $type_k = 29;
                             elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '1093') $type_k = 30;
+
                             else  $type_k = 15;
 
                             $jumper->update(

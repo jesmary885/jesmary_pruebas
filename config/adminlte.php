@@ -475,7 +475,7 @@ return [
                     'icon'    => '	fas fa-angle-right',
                 ],
                 [
-                    'text' => 'KTMR',
+                    'text' => 'KTRM',
                     'route'  => 'ktmr.index',
                     'can' => 'ssidkr.index',
                     'icon_color' => 'red',
