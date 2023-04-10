@@ -143,9 +143,9 @@ class JumpersController extends Controller
 
      public function import_cint(Request $request){
 
-        $request->validate([
+       /* $request->validate([
             'import_file' => 'required'
-        ]);
+        ]);*/
      
         $file = $request->file('import_file');
 

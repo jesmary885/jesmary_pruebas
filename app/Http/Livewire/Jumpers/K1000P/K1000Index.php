@@ -357,8 +357,6 @@ class K1000Index extends Component
                 if($busqueda_ast_ !== false){
                     $busqueda_id= strpos($this->search, '**');
                                     
-                    //$this->psid_buscar = substr($this->search,($busqueda_id - 22),22);
-
                     if(session('psid')) $psid_buscar = substr($this->search,($busqueda_id - 22),11).substr(session('psid'),11,11);
                     else $psid_buscar = substr($this->search,($busqueda_id - 22),22);
 
@@ -962,7 +960,7 @@ class K1000Index extends Component
 
                             $elem2 = substr($this->search,($posicion_elem1 + 1),($posicion_elem2 - ($posicion_elem1 + 1)));
 
-                            if($detect_elem2 == '/' || $detect_elem2 == '?'){
+                            if($detect_elem2 == '/'){
 
                                 $posicion_elem3 = $posicion_elem2 + 1;
                                 $i_elem3 = 0;
@@ -985,6 +983,8 @@ class K1000Index extends Component
 
                                 $elem3 = substr($this->search,($posicion_elem2 + 1),($posicion_elem3 - ($posicion_elem2 + 1)));
 
+                           
+
                             }
 
                             else{
@@ -997,6 +997,18 @@ class K1000Index extends Component
 
                         $this->jumper_detect = 3;
                     }
+
+                    $busqueda_hash= strpos($this->search, 'k=1000&_s=');
+
+
+                    if($busqueda_hash != false){
+                        $hash_buscar = substr($this->search,($busqueda_hash + 10 ));
+                    }
+                    else{
+                        $this->jumper_detect = 3;
+                    }
+
+
 
                     if($this->jumper_detect == 0 && $this->pid_detectado == 'si'){
 

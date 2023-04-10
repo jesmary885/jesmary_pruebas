@@ -13,7 +13,8 @@ class DataCintImport implements ToModel, WithHeadingRow, WithBatchInserts, WithC
 {
     public function model(array $row)
     {
-        
+
+
     Link::create([
         'psid'  => $row['psid'],
         'user_id'  => '2',
