@@ -511,8 +511,8 @@ class K23Index extends Component
                                                         $link->jumper = $url_detect;
                                                         $link->psid = substr($this->psid_buscar,0,5);
                                                         $link->user_id = auth()->user()->id;
-                                                        $link->jumper_type_id = 5;
-                                                        $link->k_detected = 'K=1000';
+                                                        $link->jumper_type_id = 8;
+                                                        $link->k_detected = 'K=23';
                                                         $link->save();
                     
                                                         $this->busqueda_link = Link::where('id',$link->id)->first();
@@ -623,8 +623,8 @@ class K23Index extends Component
                                                         $link->jumper = $url_detect;
                                                         $link->psid = substr($this->psid_buscar,0,5);
                                                         $link->user_id = auth()->user()->id;
-                                                        $link->jumper_type_id = 5;
-                                                        $link->k_detected = 'K=1000';
+                                                        $link->jumper_type_id = 8;
+                                                        $link->k_detected = 'K=23';
                                                         $link->save();
                     
                                                         $this->busqueda_link = Link::where('id',$link->id)->first();
@@ -733,8 +733,8 @@ class K23Index extends Component
                                                 $link->jumper = $url_detect;
                                                 $link->psid = substr($this->psid_buscar,0,5);
                                                 $link->user_id = auth()->user()->id;
-                                                $link->jumper_type_id = 5;
-                                                $link->k_detected = 'K=1000';
+                                                $link->jumper_type_id = 8;
+                                                $link->k_detected = 'K=23';
                                                 $link->save();
             
                                                 $this->busqueda_link = Link::where('id',$link->id)->first();
@@ -841,8 +841,8 @@ class K23Index extends Component
                                                     $link->jumper = $url_detect;
                                                     $link->psid = substr($this->psid_buscar,0,5);
                                                     $link->user_id = auth()->user()->id;
-                                                    $link->jumper_type_id = 5;
-                                                    $link->k_detected = 'K=1000';
+                                                    $link->jumper_type_id = 8;
+                                                    $link->k_detected = 'K=23';
                                                     $link->save();
                 
                                                     $this->busqueda_link = Link::where('id',$link->id)->first();

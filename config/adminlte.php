@@ -511,6 +511,13 @@ return [
                     'icon'    => '	fas fa-angle-right',
                 ],*/
                 [
+                    'text' => 'K2049',
+                    'route'  => 'k2049.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+                [
                     'text' => 'K2062',
                     'route'  => 'kdosmilsesentaydos.index',
                     'can' => 'ssidkr.index',
@@ -553,8 +560,22 @@ return [
                     'icon'    => '	fas fa-angle-right',
                 ],
                 [
+                    'text' => 'K10659',
+                    'route'  => 'k10659.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+                [
                     'text' => 'K11052',
                     'route'  => 'k11052.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+                [
+                    'text' => 'K11619',
+                    'route'  => 'k11619.index',
                     'can' => 'ssidkr.index',
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',

@@ -69,6 +69,7 @@ Route::middleware(['auth','verified'])->group(function()
         Route::get('k2062',[JumpersController::class,'kdosmilsesentaydos'])->name('kdosmilsesentaydos.index');
         Route::get('k23',[JumpersController::class,'kveintitres'])->name('kveintitres.index');
         Route::get('k3203',[JumpersController::class,'k3203'])->name('k3203.index');
+        Route::get('k2049',[JumpersController::class,'k2049'])->name('k2049.index');
         Route::get('k3906',[JumpersController::class,'k3906'])->name('k3906.index');
         Route::get('k11052',[JumpersController::class,'k11052'])->name('k11052.index');
         Route::get('k15293',[JumpersController::class,'k15293'])->name('k15293.index');
@@ -82,6 +83,9 @@ Route::middleware(['auth','verified'])->group(function()
         Route::get('toluna',[JumpersController::class,'toluna'])->name('toluna.index');
         Route::get('ssidkr',[JumpersController::class,'ssidkr'])->name('ssidkr.index');
         Route::get('k10634',[JumpersController::class,'k10634'])->name('k10634.index');
+        Route::get('k11619',[JumpersController::class,'k11619'])->name('k11619.index');
+        Route::get('k10659',[JumpersController::class,'k10659'])->name('k10659.index');
+
         Route::get('descalificador',[JumpersController::class,'descalificador'])->name('descalificador.index');
         Route::get('wix',[JumpersController::class,'wix'])->name('wix.index');
         //Route::get('k2001',[JumpersController::class,'k2001'])->name('k2001.index');

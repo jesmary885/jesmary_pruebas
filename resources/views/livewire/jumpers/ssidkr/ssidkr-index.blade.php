@@ -266,7 +266,7 @@
                             </div>
                         @endif
 
-                    @if ($k_detect == 'K=1093' || $k_detect == 'K=1092' || $k_detect == 'K=1098'|| $k_detect == 'K=2062' || $k_detect == 'K=3203' || $k_detect == 'K=23' || $k_detect == 'K=3906' || $k_detect == 'K=11052' || $k_detect == 'K=15293' || $k_detect == 'K=17564' || $k_detect == 'K=10634' || $k_detect == 'K=1083' || $k_detect == 'K=1091' || $k_detect == 'K=2028' || $k_detect == 'K=5460' || $k_detect == 'K=6057' )
+                    @if ($k_detect == 'K=2049' || $k_detect == 'K=11619' || $k_detect == 'K=10659'|| $k_detect == 'K=1093' || $k_detect == 'K=1092' || $k_detect == 'K=1098'|| $k_detect == 'K=2062' || $k_detect == 'K=3203' || $k_detect == 'K=23' || $k_detect == 'K=3906' || $k_detect == 'K=11052' || $k_detect == 'K=15293' || $k_detect == 'K=17564' || $k_detect == 'K=10634' || $k_detect == 'K=1083' || $k_detect == 'K=1091' || $k_detect == 'K=2028' || $k_detect == 'K=5460' || $k_detect == 'K=6057' )
                     <div>
                         
                         @if ($k_detect == 'K=1092')
@@ -299,7 +299,6 @@
                         @if ($k_detect == 'K=17564')
                         <a href={{$this->k17564()}}>
                         @endif
-                       
                         @if ($k_detect == 'K=10634')
                         <a href={{$this->k10634()}}>
                         @endif
@@ -320,6 +319,16 @@
                         @endif
                         @if ($k_detect == 'K=1093')
                         <a href={{$this->k1093()}}>
+                        @endif
+
+                        @if ($k_detect == 'K=10659')
+                        <a href={{$this->k10659()}}>
+                        @endif
+                        @if ($k_detect == 'K=11619')
+                        <a href={{$this->k11619()}}>
+                        @endif
+                        @if ($k_detect == 'K=2049')
+                        <a href={{$this->k2049()}}>
                         @endif
                             <div class="small-box bg-success">
                                 <div class="inner">

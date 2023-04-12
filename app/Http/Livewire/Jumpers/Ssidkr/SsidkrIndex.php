@@ -115,10 +115,26 @@ class SsidkrIndex extends Component
         }
     }
 
+    public function k2049(){
+        session()->forget('search');
+        return 'k2049';
+    }
+
+    public function k11619(){
+        session()->forget('search');
+        return 'k11619';
+    }
+
+    public function k10659(){
+        session()->forget('search');
+        return 'k10659';
+    }
+
     public function k3906(){
         session()->forget('search');
         return 'k3906';
     }
+
     public function k11052(){
         session()->forget('search');
         return 'k11052';

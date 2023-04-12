@@ -19,8 +19,20 @@ class JumpersController extends Controller
         return view('jumpers.k1083');
     }
 
+    public function k11619(){
+        return view('jumpers.k11619');
+    }
+
+    public function k10659(){
+        return view('jumpers.k10659');
+    }
+
     public function k1093(){
         return view('jumpers.k1093');
+    }
+
+    public function k2049(){
+        return view('jumpers.k2049');
     }
 
     public function k1091(){

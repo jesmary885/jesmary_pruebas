@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Jumpers\K7341P;
+namespace App\Http\Livewire\Jumpers\K11619;
 
 use App\Models\Antibot;
 use App\Models\Comments;
@@ -13,7 +13,7 @@ use GuzzleHttp\Client;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class K7341Index extends Component
+class K11619Index extends Component
 {
     use WithPagination;
     protected $paginationTheme = "bootstrap";
@@ -24,7 +24,7 @@ class K7341Index extends Component
 
     public function mount(){
         $this->user_auth =  auth()->user()->id;
-
+        if(session('pid')) $this->pid_new = session('pid');
         if(session('psid')) $this->psid_register = session('psid');
         if(session('search')) $this->search = session('search');
         $this->jumper_detect = 0;
@@ -40,7 +40,7 @@ class K7341Index extends Component
         $this->operacion = Antibot::where('id',$random)->first();
         $operacion_total = 'Resuelve esta operación matemática ('.$this->operacion->nro1.' + '.$this->operacion->nro2. ')';
 
-        $this->emit('numerologia',$operacion_total,'jumpers.k7341-p.k7341-index','verific');
+        $this->emit('numerologia',$operacion_total,'jumpers.k11619.k11619-index','verific');
     }
 
     public function verific($result){
@@ -49,7 +49,7 @@ class K7341Index extends Component
 
             $link_register = new Links_usados();
             $link_register->link = $this->search;
-            $link_register->k_detected  = 'K=7341';
+            $link_register->k_detected  = 'K=11619';
             $link_register->user_id  = $this->user->id;
             $link_register->save();
 
@@ -58,43 +58,52 @@ class K7341Index extends Component
             if(session('psid')) $psid_buscar = substr($this->search,($busqueda_id - 22),11).substr(session('psid'),11,11);
             else $psid_buscar = substr($this->search,($busqueda_id - 22),22);
 
-            $busqueda_project= strpos($this->search, 'I.Project=');
+            $busqueda_wix1= strpos($this->search, '.com/wix/');
 
-            if($busqueda_project != false){
-
-                $posicion_project = $busqueda_project + 10;
-                $i_project = 0;
-                $busq_project = 0;
-                            
+            if($busqueda_wix1 != false){
+                $posicion_wix1 = $busqueda_wix1 + 9;
+                $i_wix1 = 0;
+                $busq_wix1 = 0;
+                
                 do{
-                    $detect_project= substr($this->search, $posicion_project,1);
-        
-                    if($detect_project == '&') $i_project = 1;
+                    $detect_wix1= substr($this->search, $posicion_wix1,1);
+
+                    if($detect_wix1 == '/') $i_wix1 = 1;
                     else{
-                        $posicion_project = $posicion_project + 1;
-                        $busq_project ++;
+                        $posicion_wix1 = $posicion_wix1 + 1;
+                        $busq_wix1 ++;
                     }
 
-                    if($busq_project > 20){
-                        $i_project = 1;
+                    if($busq_wix1 > 20){
+                        $i_wix1 = 1;
                     }
-        
-                }
-                while($i_project != 1);
 
-                $project_buscar = substr($this->search,($busqueda_project + 10),($posicion_project - ($busqueda_project + 10)));
-            }
+                }while($i_wix1 != 1);
 
-            else{
-
-                $this->jumper_detect = 3;
-            }
-
-            $busqueda_hash= strpos($this->search, 'k=7341&_s=');
+                $wix1_buscar = substr($this->search,($busqueda_wix1 + 9),($posicion_wix1 - ($busqueda_wix1 + 9)));
 
 
-            if($busqueda_hash != false){
-                $hash_buscar = substr($this->search,($busqueda_hash + 10 ));
+                $posicion_wix2 = $posicion_wix1 + 1;
+                $i_wix2 = 0;
+                $busq_wix2 = 0;
+                
+                do{
+                    $detect_wix2= substr($this->search, $posicion_wix2,1);
+
+                    if($detect_wix2 == '.') $i_wix2 = 1;
+                    else{
+                        $posicion_wix2 = $posicion_wix2 + 1;
+                        $busq_wix2 ++;
+                    }
+
+                    if($busq_wix2 > 20){
+                        $i_wix2 = 1;
+                    }
+
+                }while($i_wix2 != 1);
+
+                $wix2_buscar = substr($this->search,($posicion_wix1 + 1),($posicion_wix2 - ($posicion_wix1 + 1)));
+
             }
             else{
                 $this->jumper_detect = 3;
@@ -103,10 +112,10 @@ class K7341Index extends Component
             try {
                 $client = new Client([
                     //'base_uri' => 'http://127.0.0.1:8000',
-                    'base_uri' => 'http://147.182.190.233/',
+                    'base_uri' => 'http://146.190.74.228/',
                 ]);
 
-                $resultado = $client->request('GET', '/k7341_s1/1/'.$psid_buscar.'/'.$project_buscar.'/'.$hash_buscar);
+                $resultado = $client->request('GET', '/k11619/1/'.$psid_buscar.'/'.$wix1_buscar.'/'.$wix2_buscar);
 
                 if($resultado->getStatusCode() == 200){
                     $this->jumper_detect = 1;
@@ -142,11 +151,12 @@ class K7341Index extends Component
                                $this->points_user_negative='no';
                            }
 
-                    }
-                    else{
-                        $url_detect_com= strpos($this->search, 'ttp');
+                        }
+                        else{
+                            $url_detect_com= strpos($this->search, 'ttp');
 
-                        if($url_detect_com != false){
+                            if($url_detect_com != false){
+
                                 $con_seguridad= strpos($this->search, 'ttps');
                                 $i = 0;
                                     
@@ -174,8 +184,8 @@ class K7341Index extends Component
                                 $link->jumper = $url_detect;
                                 $link->psid = substr($this->search,($busqueda_id - 22),5);
                                 $link->user_id = auth()->user()->id;
-                                $link->jumper_type_id = 9;
-                                $link->k_detected = 'K=7341';
+                                $link->jumper_type_id = 32;
+                                $link->k_detected = 'K=11619';
                                 $link->save();
 
                                 $this->busqueda_link = Link::where('id',$link->id)->first();
@@ -209,8 +219,8 @@ class K7341Index extends Component
                                     $this->points_user_positive='no';
                                     $this->points_user_negative='no';
                                 }
+                            }
                         }
-                    }
 
                      $this->jumper_list = 1;
                      $this->jumper_detect = 1;
@@ -259,9 +269,9 @@ class K7341Index extends Component
 
         if($long_psid>=5){
 
-            $busqueda_k7341_ = strpos($this->search, 'k=7341&');
+            $busqueda_k11619_ = strpos($this->search, 'k=11619&');
 
-            if($busqueda_k7341_ !== false){
+            if($busqueda_k11619_ !== false){
               
                 $busqueda_ast_ = strpos($this->search, '**');
             
@@ -271,42 +281,10 @@ class K7341Index extends Component
                     if(session('psid')) $psid_buscar = substr($this->search,($busqueda_id - 22),11).substr(session('psid'),11,11);
                     else $psid_buscar = substr($this->search,($busqueda_id - 22),22);
 
-                    $busqueda_project= strpos($this->search, 'I.Project=');
+                    $busqueda_wix= strpos($this->search, '.com/wix/');
 
-                    if($busqueda_project != false){
-
-                        $posicion_project = $busqueda_project + 10;
-                        $i_project = 0;
-                        $busq_project = 0;
-                            
-                        do{
-                            $detect_project= substr($this->search, $posicion_project,1);
-        
-                            if($detect_project == '&') $i_project = 1;
-                            else{
-                                $posicion_project = $posicion_project + 1;
-                                $busq_project ++;
-                            }
-
-                            if($busq_project > 20){
-                                $i_project = 1;
-                            }
-        
-                        }
-                        while($i_project != 1);
-
-                        $project_buscar = substr($this->search,($busqueda_project + 10),($posicion_project - ($busqueda_project + 10)));
-                    }
-
-                    else{
-
-                        $this->jumper_detect = 3;
-                    }
-
-                    $busqueda_hash= strpos($this->search, 'k=7341&_s=');
-
-                    if($busqueda_hash != false){
-                        $hash_buscar = substr($this->search,($busqueda_hash + 10 ));
+                    if($busqueda_wix != false){
+                        $wix_buscar = substr($this->search,($busqueda_wix + 10 ));
                     }
                     else{
                         $this->jumper_detect = 3;
@@ -315,15 +293,13 @@ class K7341Index extends Component
                     if($this->jumper_detect == 0){
                         if($this->jumper_list == 0){
                             $link_register_search = Links_usados::where('link',$this->search)
-                                ->where('k_detected','K=7341')
+                                ->where('k_detected','K=11619')
                                 ->where('user_id',$this->user->id)
                                 ->count();
                              
 
                             if($link_register_search > 3){
-
                                 $this->jumper_detect = 7;
-                                    
                             }
                         
                             else{
@@ -332,12 +308,12 @@ class K7341Index extends Component
                                 $date_actual= $date->format('Y-m-d H:i:s');
                                 $date_actual_30 = $date->modify('-30 minute')->format('Y-m-d H:i:s');
 
-                                $links_usados = Links_usados::where('k_detected','K=7341')
+                                $links_usados = Links_usados::where('k_detected','K=11619')
                                     ->where('user_id',$this->user->id)
                                     ->whereBetween('created_at',[$date_actual_30,$date_actual])
                                     ->count();
 
-                                if($links_usados <= 2){
+                                if($links_usados <= 6){
                                     $this->numerologia();
                                 }
                                 else{
@@ -436,7 +412,7 @@ class K7341Index extends Component
             $this->calc_link = 0;
         }
 
-        return view('livewire.jumpers.k7341-p.k7341-index',compact('jumper','comments','subs_psid','busqueda_link_def'));
+        return view('livewire.jumpers.k11619.k11619-index',compact('jumper','comments','subs_psid','busqueda_link_def'));
     }
 
     public function positivo($jumper_id){
@@ -484,9 +460,7 @@ class K7341Index extends Component
 
         }
 
-        $this->emitTo('jumpers.k7341-p.k7341-index','render');
-
-        
+        $this->emitTo('jumpers.k11619.k11619-index','render');
 
     }
 
@@ -534,7 +508,7 @@ class K7341Index extends Component
 
         }
 
-        $this->emitTo('jumpers.k7341-p.k7341-index','render');
+        $this->emitTo('jumpers.k11619.k11619-index','render');
     }
 
     public function comentar(){
@@ -548,7 +522,7 @@ class K7341Index extends Component
 
             $this->reset(['comentario']);
 
-            $this->emitTo('jumpers.k7341-p.k7341-index','render');
+            $this->emitTo('jumpers.k11619.k11619-index','render');
         }
     }
 
@@ -558,6 +532,6 @@ class K7341Index extends Component
         $this->jumper_complete = [];
         session()->forget('search');
         $this->busqueda_link = "";
-        return redirect()->route('k7341_poderosa.index');
+        return redirect()->route('k11619.index');
     }
 }
