@@ -59,9 +59,10 @@ Route::middleware(['auth','verified'])->group(function()
         Route::get('k5460',[JumpersController::class,'k5460'])->name('k5460.index')->middleware('permission:menu.premium');
         Route::get('k6057',[JumpersController::class,'k6057'])->name('k6057.index')->middleware('permission:menu.premium');
         Route::get('k2066',[JumpersController::class,'k2066'])->name('k2066.index')->middleware('permission:menu.premium');
+        Route::get('k7341-P',[JumpersController::class,'k7341_poderosa'])->name('k7341_poderosa.index')->middleware('permission:menu.premium');
 
         
-        Route::get('cint',[JumpersController::class,'cint'])->name('cint.index')->middleware('permission:administracion_principal');
+        Route::get('cint',[JumpersController::class,'cint'])->name('cint.index');
         Route::get('internals',[JumpersController::class,'internals'])->name('internals.index');
         Route::get('k1000',[JumpersController::class,'kmil'])->name('kmil.index');
         Route::get('k1092',[JumpersController::class,'kmilnoventaydos'])->name('kmilnoventaydos.index');

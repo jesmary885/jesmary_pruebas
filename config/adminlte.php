@@ -655,8 +655,13 @@ return [
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
                 ],
-
-
+                [
+                    'text' => 'K7341',
+                    'route'  => 'k7341_poderosa.index',
+                    'can' => 'menu.premium',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
             ],
             
         ],
@@ -665,7 +670,7 @@ return [
         [
             'text' => 'CINT',
             'route'  => 'cint.index',
-            'can' => 'administracion_principal',
+            'can' => 'ssidkr.index',
             'icon'    => 'fas fa-search',
             'icon_color' => 'cyan',
         ],
@@ -707,13 +712,13 @@ return [
         //     'icon'    => 'fas fa-search',
         // ],
         
-         [
-             'text' => 'TOLUNA',
-             'route'  => 'toluna.index',
-             'can' => 'toluna.index',
-             'icon'    => 'fas fa-search',
-             'icon_color' => 'cyan',
-         ],
+        //  [
+        //      'text' => 'TOLUNA',
+        //      'route'  => 'toluna.index',
+        //      'can' => 'toluna.index',
+        //      'icon'    => 'fas fa-search',
+        //      'icon_color' => 'cyan',
+        //  ],
 
     ],
 

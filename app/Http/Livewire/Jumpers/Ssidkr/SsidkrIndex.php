@@ -86,8 +86,14 @@ class SsidkrIndex extends Component
     }
 
     public function k7341(){
-        session()->forget('search');
-        return 'k7341';
+        if($this->rol_user == 10 || $this->rol_user == 1 || $this->rol_user == 7 || $this->rol_user == 8 || $this->rol_user == 9){
+            session()->forget('search');
+            return '#';
+        }
+        else{
+            session()->forget('search');
+            return 'k7341';
+        }
     }
 
     public function k1098(){
@@ -216,6 +222,24 @@ class SsidkrIndex extends Component
                     3 =>"Haciendo clic aquí",
                 ];
             }
+        }
+    }
+
+    public function redireccionk7341(){
+
+        if($this->rol_user == 10 || $this->rol_user == 1 || $this->rol_user == 7 || $this->rol_user == 8 || $this->rol_user == 9){
+            return [
+                1 => "Dirígete a",
+                2 =>"Sección K-7341 que corresponde",
+                3 =>"-",
+            ];
+        }
+        else{
+            return [
+                1 => "Dirígete a",
+                2 =>"Sección ". $this->k_detect,
+                3 =>"Haciendo clic aquí",
+            ];
         }
     }
 

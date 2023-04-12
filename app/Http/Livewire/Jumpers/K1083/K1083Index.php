@@ -106,8 +106,6 @@ class K1083Index extends Component
 
                 $resultado = $client->request('GET', '/k1083/1/'.$serie_buscar.'/'.$psid_buscar.'/'.$hash_buscar);
 
-               
-
                 if($resultado->getStatusCode() == 200){
 
                     $jump1 = json_decode($resultado->getBody(),true);
@@ -278,8 +276,6 @@ class K1083Index extends Component
                 
                 if($busqueda_ast_ !== false){
                     $busqueda_id= strpos($this->search, '**');
-                                    
-                    //$this->psid_buscar = substr($this->search,($busqueda_id - 22),22);
 
                     if(session('psid')) $psid_buscar = substr($this->search,($busqueda_id - 22),11).substr(session('psid'),11,11);
                     else $psid_buscar = substr($this->search,($busqueda_id - 22),22);
@@ -352,7 +348,6 @@ class K1083Index extends Component
                                         $this->jumper_detect = 6;
                                     }
                                 }
-
                             }
 
                             else{
@@ -432,8 +427,6 @@ class K1083Index extends Component
     
                         }
     
-                
-
                 }
                 else{
                     $this->jumper_detect = 3;
@@ -450,8 +443,6 @@ class K1083Index extends Component
         else{
             $this->calc_link = 0;
         }
-
-       // session()->forget('search');
 
         return view('livewire.jumpers.k1083.k1083-index',compact('jumper','comments','subs_psid','busqueda_link_def'));
     }
@@ -502,9 +493,6 @@ class K1083Index extends Component
         }
 
         $this->emitTo('jumpers.k1083.k1083-index','render');
-
-        
-
     }
 
     public function negativo($jumper_id){

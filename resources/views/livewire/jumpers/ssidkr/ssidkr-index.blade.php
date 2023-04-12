@@ -189,7 +189,7 @@
                                         <td class="text-center">{{$jumper->psid}}</td>
                                         <td class="text-center" :class="{'hidden': (is_high == 'no')}"> {{$calculo_high}}</td>
                                         <td class="text-center" :class="{'hidden': (is_basic == 'no')}">{{$jumper->basic}}</td>
-                                        <td class="text-center">{{$jumper->created_at->format('d/m/Y')}}</td>
+                                        <td class="text-center">{{\Carbon\Carbon::parse($jumper->created_at)->format('d-m-Y h:i')}}</td>
                                         <td class="text-center" :class="{'hidden': (is_high == 'no')}"> 
                                             <div class="flex justify-center">
                                         
@@ -217,6 +217,7 @@
                                                 class="py-2 px-3 text-md font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" 
                                                 x-bind:disabled="points_user_positive == 'si'"
                                                 wire:click="positivo('{{$jumper->id}}')"
+                                                wire:loading.attr="disabled"
                                                 title="Positivo">
                                                 <i class="font-semibold far fa-thumbs-up">{{$jumper->positive_points}}</i>
                                             </button>
@@ -226,6 +227,7 @@
                                                 class="py-2 px-3 text-md font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" 
                                                 x-bind:disabled="points_user_negative == 'si'"
                                                 wire:click="negativo('{{$jumper->id}}')"
+                                                wire:loading.attr="disabled"
                                                 title="Negativo">
                                                 <i class="font-semibold far fa-thumbs-down">{{$jumper->negative_points}}</i>
                                         </button>
@@ -264,7 +266,7 @@
                             </div>
                         @endif
 
-                    @if ($k_detect == 'K=1093' || $k_detect == 'K=1092' || $k_detect == 'K=1098'|| $k_detect == 'K=2062' || $k_detect == 'K=3203' || $k_detect == 'K=7341' || $k_detect == 'K=23' || $k_detect == 'K=3906' || $k_detect == 'K=11052' || $k_detect == 'K=15293' || $k_detect == 'K=17564' || $k_detect == 'K=10634' || $k_detect == 'K=1083' || $k_detect == 'K=1091' || $k_detect == 'K=2028' || $k_detect == 'K=5460' || $k_detect == 'K=6057' )
+                    @if ($k_detect == 'K=1093' || $k_detect == 'K=1092' || $k_detect == 'K=1098'|| $k_detect == 'K=2062' || $k_detect == 'K=3203' || $k_detect == 'K=23' || $k_detect == 'K=3906' || $k_detect == 'K=11052' || $k_detect == 'K=15293' || $k_detect == 'K=17564' || $k_detect == 'K=10634' || $k_detect == 'K=1083' || $k_detect == 'K=1091' || $k_detect == 'K=2028' || $k_detect == 'K=5460' || $k_detect == 'K=6057' )
                     <div>
                         
                         @if ($k_detect == 'K=1092')
@@ -276,7 +278,6 @@
                         @if ($k_detect == 'K=2062')
                         <a href={{$this->k2062()}}>
                         @endif
-                       
                         @if ($k_detect == 'K=23')
                         <a href={{$this->k23()}}>
                         @endif
@@ -354,6 +355,27 @@
                                     <i class="	far fa-heart"></i>
                                 </div>
                                 <p class="font-bold text-sm small-box-footer">{{$this->redireccionk1000()[3]}}</p>
+                            </div>
+                        </a>
+                    </div>
+                    @endif
+
+                    @if ($k_detect == 'K=7341')
+                    <div>
+                       
+                        <a href={{$this->k7341()}}>
+                       
+                            <div class="small-box bg-success">
+                                <div class="inner">
+
+                                    <h3 class="text-md font-semibold">{{$this->redireccionk7341()[1]}} </h3>
+                                    <p>{{$this->redireccionk7341()[2]}}</p>
+
+                                </div>
+                                <div class="icon">
+                                    <i class="	far fa-heart"></i>
+                                </div>
+                                <p class="font-bold text-sm small-box-footer">{{$this->redireccionk7341()[3]}}</p>
                             </div>
                         </a>
                     </div>

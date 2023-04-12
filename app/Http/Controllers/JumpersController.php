@@ -184,4 +184,8 @@ class JumpersController extends Controller
          
         }
 
+        public function k7341_poderosa(){
+            return view('jumpers.k7341_poderosa');
+        }
+
 }

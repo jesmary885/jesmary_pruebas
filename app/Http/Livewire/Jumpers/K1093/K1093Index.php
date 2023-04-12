@@ -606,7 +606,7 @@ class K1093Index extends Component
             }
 
             else{
-                $this->calc_link = 0;
+                $this->jumper_detect = 3;
             }
         }
         else{

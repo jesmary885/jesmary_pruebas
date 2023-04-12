@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Jumpers\K7341;
+namespace App\Http\Livewire\Jumpers\K7341P;
 
 use App\Models\Antibot;
 use App\Models\Comments;
@@ -24,7 +24,7 @@ class K7341Index extends Component
 
     public function mount(){
         $this->user_auth =  auth()->user()->id;
-        if(session('pid')) $this->pid_new = session('pid');
+
         if(session('psid')) $this->psid_register = session('psid');
         if(session('search')) $this->search = session('search');
         $this->jumper_detect = 0;
@@ -40,7 +40,7 @@ class K7341Index extends Component
         $this->operacion = Antibot::where('id',$random)->first();
         $operacion_total = 'Resuelve esta operación matemática ('.$this->operacion->nro1.' + '.$this->operacion->nro2. ')';
 
-        $this->emit('numerologia',$operacion_total,'jumpers.k7341.k7341-index','verific');
+        $this->emit('numerologia',$operacion_total,'jumpers.k7341-p.k7341-index','verific');
     }
 
     public function verific($result){
@@ -58,13 +58,55 @@ class K7341Index extends Component
             if(session('psid')) $psid_buscar = substr($this->search,($busqueda_id - 22),11).substr(session('psid'),11,11);
             else $psid_buscar = substr($this->search,($busqueda_id - 22),22);
 
+            $busqueda_project= strpos($this->search, 'I.Project=');
+
+            if($busqueda_project != false){
+
+                $posicion_project = $busqueda_project + 10;
+                $i_project = 0;
+                $busq_project = 0;
+                            
+                do{
+                    $detect_project= substr($this->search, $posicion_project,1);
+        
+                    if($detect_project == '&') $i_project = 1;
+                    else{
+                        $posicion_project = $posicion_project + 1;
+                        $busq_project ++;
+                    }
+
+                    if($busq_project > 20){
+                        $i_project = 1;
+                    }
+        
+                }
+                while($i_project != 1);
+
+                $project_buscar = substr($this->search,($busqueda_project + 10),($posicion_project - ($busqueda_project + 10)));
+            }
+
+            else{
+
+                $this->jumper_detect = 3;
+            }
+
+            $busqueda_hash= strpos($this->search, 'k=7341&_s=');
+
+
+            if($busqueda_hash != false){
+                $hash_buscar = substr($this->search,($busqueda_hash + 10 ));
+            }
+            else{
+                $this->jumper_detect = 3;
+            }
+
             try {
                 $client = new Client([
                     //'base_uri' => 'http://127.0.0.1:8000',
-                    'base_uri' => 'http://209.94.57.88/',
+                    'base_uri' => 'http://147.182.190.233/',
                 ]);
 
-                $resultado = $client->request('GET', '/k7341/1/'.$psid_buscar);
+                $resultado = $client->request('GET', '/k7341_s1/1/'.$psid_buscar.'/'.$project_buscar.'/'.$hash_buscar);
 
                 if($resultado->getStatusCode() == 200){
                     $this->jumper_detect = 1;
@@ -100,12 +142,11 @@ class K7341Index extends Component
                                $this->points_user_negative='no';
                            }
 
-                        }
-                        else{
-                            $url_detect_com= strpos($this->search, 'ttp');
+                    }
+                    else{
+                        $url_detect_com= strpos($this->search, 'ttp');
 
-                            if($url_detect_com != false){
-
+                        if($url_detect_com != false){
                                 $con_seguridad= strpos($this->search, 'ttps');
                                 $i = 0;
                                     
@@ -168,8 +209,8 @@ class K7341Index extends Component
                                     $this->points_user_positive='no';
                                     $this->points_user_negative='no';
                                 }
-                            }
                         }
+                    }
 
                      $this->jumper_list = 1;
                      $this->jumper_detect = 1;
@@ -194,8 +235,6 @@ class K7341Index extends Component
             $this->emit('error','Resultado incorrecto, intentalo de nuevo');
         }
     }
-  
-    
 
     public function render()
     {
@@ -231,6 +270,47 @@ class K7341Index extends Component
 
                     if(session('psid')) $psid_buscar = substr($this->search,($busqueda_id - 22),11).substr(session('psid'),11,11);
                     else $psid_buscar = substr($this->search,($busqueda_id - 22),22);
+
+                    $busqueda_project= strpos($this->search, 'I.Project=');
+
+                    if($busqueda_project != false){
+
+                        $posicion_project = $busqueda_project + 10;
+                        $i_project = 0;
+                        $busq_project = 0;
+                            
+                        do{
+                            $detect_project= substr($this->search, $posicion_project,1);
+        
+                            if($detect_project == '&') $i_project = 1;
+                            else{
+                                $posicion_project = $posicion_project + 1;
+                                $busq_project ++;
+                            }
+
+                            if($busq_project > 20){
+                                $i_project = 1;
+                            }
+        
+                        }
+                        while($i_project != 1);
+
+                        $project_buscar = substr($this->search,($busqueda_project + 10),($posicion_project - ($busqueda_project + 10)));
+                    }
+
+                    else{
+
+                        $this->jumper_detect = 3;
+                    }
+
+                    $busqueda_hash= strpos($this->search, 'k=7341&_s=');
+
+                    if($busqueda_hash != false){
+                        $hash_buscar = substr($this->search,($busqueda_hash + 10 ));
+                    }
+                    else{
+                        $this->jumper_detect = 3;
+                    }
 
                     if($this->jumper_detect == 0){
                         if($this->jumper_list == 0){
@@ -356,10 +436,8 @@ class K7341Index extends Component
             $this->calc_link = 0;
         }
 
-        return view('livewire.jumpers.k7341.k7341-index',compact('jumper','comments','subs_psid','busqueda_link_def'));
+        return view('livewire.jumpers.k7341-p.k7341-index',compact('jumper','comments','subs_psid','busqueda_link_def'));
     }
-
-   
 
     public function positivo($jumper_id){
 
@@ -406,7 +484,7 @@ class K7341Index extends Component
 
         }
 
-        $this->emitTo('jumpers.k7341.k7341-index','render');
+        $this->emitTo('jumpers.k7341-p.k7341-index','render');
 
         
 
@@ -456,7 +534,7 @@ class K7341Index extends Component
 
         }
 
-        $this->emitTo('jumpers.k7341.k7341-index','render');
+        $this->emitTo('jumpers.k7341-p.k7341-index','render');
     }
 
     public function comentar(){
@@ -470,7 +548,7 @@ class K7341Index extends Component
 
             $this->reset(['comentario']);
 
-            $this->emitTo('jumpers.k7341.k7341-index','render');
+            $this->emitTo('jumpers.k7341-p.k7341-index','render');
         }
     }
 
@@ -480,6 +558,6 @@ class K7341Index extends Component
         $this->jumper_complete = [];
         session()->forget('search');
         $this->busqueda_link = "";
-        return redirect()->route('ksietemilcuarentayuno.index');
+        return redirect()->route('k7341_poderosa.index');
     }
 }

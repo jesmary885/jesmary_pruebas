@@ -983,8 +983,6 @@ class K1000Index extends Component
 
                                 $elem3 = substr($this->search,($posicion_elem2 + 1),($posicion_elem3 - ($posicion_elem2 + 1)));
 
-                           
-
                             }
 
                             else{
