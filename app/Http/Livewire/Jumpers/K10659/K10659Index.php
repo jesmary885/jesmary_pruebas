@@ -105,6 +105,51 @@ class K10659Index extends Component
 
                 $wix2_buscar = substr($this->search,($posicion_wix1 + 1),($posicion_wix2 - ($posicion_wix1 + 1)));
 
+                $busqueda_wix3= strpos($this->search, '?r=');
+
+                if($busqueda_wix3 != false){
+                    $posicion_wix3 = $busqueda_wix3 + 3;
+                    $i_wix3 = 0;
+                    $busq_wix3 = 0;
+                    
+                    do{
+                        $detect_wix3= substr($this->search, $posicion_wix3,1);
+
+                        if($detect_wix3 == '&') $i_wix3 = 1;
+                        else{
+                            $posicion_wix3 = $posicion_wix3 + 1;
+                            $busq_wix3 ++;
+                        }
+
+                        if($busq_wix3 > 20){
+                            $i_wix3 = 1;
+                        }
+
+                    }while($i_wix3 != 1);
+
+                    $wix3_buscar = substr($this->search,($busqueda_wix3 + 3),($posicion_wix3 - ($busqueda_wix3 + 3)));
+
+                    $posicion_wix4 = $posicion_wix3 + 3;
+                    $i_wix4 = 0;
+                    $busq_wix4 = 0;
+                    
+                    do{
+                        $detect_wix4= substr($this->search, $posicion_wix4,1);
+
+                        if($detect_wix4 == '&') $i_wix4 = 1;
+                        else{
+                            $posicion_wix4 = $posicion_wix4 + 1;
+                            $busq_wix4 ++;
+                        }
+
+                        if($busq_wix4 > 20){
+                            $i_wix4 = 1;
+                        }
+
+                    }while($i_wix4 != 1);
+
+                    $wix4_buscar = substr($this->search,($posicion_wix3 + 3),($posicion_wix4 - ($posicion_wix3 + 3)));
+                }
             }
             else{
                 $this->jumper_detect = 3;
@@ -116,7 +161,7 @@ class K10659Index extends Component
                     'base_uri' => 'http://146.190.74.228/',
                 ]);
 
-                $resultado = $client->request('GET', '/k10659/1/'.$psid_buscar.'/'.$wix1_buscar.'/'.$wix2_buscar);
+                $resultado = $client->request('GET', '/k10659/1/'.$psid_buscar.'/'.$wix3_buscar.'/'.$wix4_buscar.'/'.$wix1_buscar.'/'.$wix2_buscar);
 
                 if($resultado->getStatusCode() == 200){
                     $this->jumper_detect = 1;
@@ -235,7 +280,7 @@ class K10659Index extends Component
                 if($e->hasResponse()){
                     if ($e->getResponse()->getStatusCode() !== '200'){
                         $error['response'] = $e->getResponse(); 
-                        $this->jumper_detect = 5;
+                        $this->jumper_detect = 2;
                     }
                 }
             }    
