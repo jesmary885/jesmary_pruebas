@@ -39,13 +39,15 @@ class K23Index extends Component
     ];
 
     public function jumpear(){
-       
-        $rules_pid = $this->rules_pid;
-        $this->validate($rules_pid);
 
-        $this->pid_buscar = $this->pid_manual;
+        if($this->jumper_detect == 0){
+            $rules_pid = $this->rules_pid;
+            $this->validate($rules_pid);
 
-        $this->numerologia();
+            $this->pid_buscar = $this->pid_manual;
+
+            $this->numerologia();
+        }
     }
 
     public function numerologia(){

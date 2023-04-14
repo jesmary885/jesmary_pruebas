@@ -1,7 +1,7 @@
 <div>
         <div class="card">
             <div class="card-header">
-                    <input wire:model="search" placeholder="Ingrese el nombre de la k que desee filtrar" class="form-control">
+                    <input wire:model="search" placeholder="Ingrese el nombre de la k que desee filtrar, ejemplo 1000" class="form-control">
            
             </div>
             @if ($jumpers->count())
@@ -32,7 +32,11 @@
                                         <i class="fas fa-eye"></i>
                                         </button>
                                     </td>
+                                    @if($jumper->user)
                                     <td class=" text-justify py-3 px-2 ">{{$jumper->user->username}}</td>
+                                    @else
+                                    <td class=" text-justify py-3 px-2 ">-</td>
+                                    @endif
                                 
                                 </tr>
                             @endforeach

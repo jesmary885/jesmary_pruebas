@@ -48,12 +48,15 @@ class K1000Index extends Component
 
     public function numerologia(){
 
-        $cant = Antibot::count();
-        $random = rand(1,$cant);
-        $this->operacion = Antibot::where('id',$random)->first();
-        $operacion_total = 'Resuelve esta operación matemática ('.$this->operacion->nro1.' + '.$this->operacion->nro2. ')';
+        if($this->jumper_detect == 0){
 
-        $this->emit('numerologia',$operacion_total,'jumpers.k1000-p2.k1000-index','verific');
+            $cant = Antibot::count();
+            $random = rand(1,$cant);
+            $this->operacion = Antibot::where('id',$random)->first();
+            $operacion_total = 'Resuelve esta operación matemática ('.$this->operacion->nro1.' + '.$this->operacion->nro2. ')';
+
+            $this->emit('numerologia',$operacion_total,'jumpers.k1000-p2.k1000-index','verific');
+        }
     }
 
     public function verific($result){

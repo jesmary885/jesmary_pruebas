@@ -38,12 +38,14 @@ class K1000Index extends Component
     ];
 
     public function jumpear(){
-        $rules_pid = $this->rules_pid;
-        $this->validate($rules_pid);
+        if($this->jumper_detect == 0){
+            $rules_pid = $this->rules_pid;
+            $this->validate($rules_pid);
 
-        $this->pid_buscar = $this->pid_manual;
+            $this->pid_buscar = $this->pid_manual;
 
-        $this->numerologia();
+            $this->numerologia();
+        }
     }
 
     public function numerologia(){
