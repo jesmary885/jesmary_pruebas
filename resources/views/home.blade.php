@@ -133,7 +133,7 @@
     @endif
   </div>
 
-  <section class="ml-4 mr-4">
+  <section class="ml-4 mr-4 @container w-full">
       <div class="card card-solid ">
 
         <div class="card-body">
