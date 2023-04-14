@@ -1258,20 +1258,26 @@ class SsidkrIndex extends Component
                 if($this->k_detect){
 
                     $busqueda_dkr1_ssi_ = strpos($this->search, '/dkr1.ssisurveys.com');
+                    $busqueda_dkr1_https_ = strpos($this->search, 'https://');
+                    $busqueda_dkr1_htt_ = strpos($this->search, 'http://');
 
                     if(!$busqueda_dkr1_ssi_){
-                        $link_register_search = Links_usados::where('link',$this->search)
+                        if($busqueda_dkr1_https_ !== false || $busqueda_dkr1_htt_ !== false){
+                            $link_register_search = Links_usados::where('link',$this->search)
                             ->where('k_detected',$this->k_detect)
                             ->first();
 
-                        if(!$link_register_search){
-                            $link_register = new Links_usados();
-                            $link_register->link = $this->search;
-                            $link_register->k_detected  = $this->k_detect;
-                            $link_register->user_id  = 0;
-                            $link_register->save();
+                            if(!$link_register_search){
+                                $link_register = new Links_usados();
+                                $link_register->link = $this->search;
+                                $link_register->k_detected  = $this->k_detect;
+                                $link_register->user_id  = 0;
+                                $link_register->save();
+
+                            }
 
                         }
+                        
                     }
                 }
         }
