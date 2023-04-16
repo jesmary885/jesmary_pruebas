@@ -133,6 +133,66 @@
     @endif
   </div>
 
+  @if($rol == '4')
+
+    <div class="ml-4 mr-4 mb-2 @container w-full">
+        <blockquote class="text-gray-400 flex">
+          @if($pago_registrado < 1)
+            <p class="mr-1">{{__('messages.su_cuenta_inactiva')}}</p>
+          
+            @livewire('pagos.reporte-pago') 
+              <p class="ml-1"> {{__('messages.para_disfrutar_servicios')}}</p>
+          @endif
+          
+        </blockquote>
+
+        <blockquote class="text-gray-400 flex">
+          <p class="mr-1">Haz click</p>
+          @livewire('info-planes') 
+          <p class="ml-1"> {{__('messages.ver_datos_precios')}}</p>
+          
+        </blockquote>
+
+        <blockquote class="text-gray-400 flex">
+          <p class="mr-1">Haz click</p>
+          @livewire('info-metodos-pago') 
+          <p class="ml-1"> {{__('messages.ver_datos_cuentas')}}</p>
+          
+        </blockquote>
+    </div>
+
+  @endif
+
+   @if($mensaje != '' && $rol != '4' && auth()->user()->type != 'gratis')
+   {{--
+  <div class="ml-4 mr-4 mb-2 @container w-full">
+
+      <blockquote class="text-gray-400 flex">
+        <p class="inline">
+        {{$mensaje}}
+        </p>
+      @livewire('pagos.reporte-pago')
+        
+      </blockquote>
+
+      <blockquote class="text-gray-400 flex">
+        <p class="mr-1">Haz click</p>
+        @livewire('info-planes') 
+        <p class="ml-1"> {{__('messages.ver_datos_precios')}}</p>
+        
+      </blockquote>
+
+      <blockquote class="text-gray-400 flex">
+        <p class="mr-1">Haz click</p>
+        @livewire('info-metodos-pago') 
+        <p class="ml-1"> {{__('messages.ver_datos_cuentas')}}</p>
+        
+      </blockquote>
+
+    </div>
+    --}}
+  @endif
+
   <section class="ml-4 mr-4 @container w-full">
       <div class="card card-solid ">
 
@@ -150,7 +210,7 @@
                   <div class="row">
                     <div class="col-10">
                     
-                      <h2 class="font-semibold mb-2"><b>{{__('messages.datos_registrados')}}:</b></h2>
+                      <h2 class="font-semibold mb-4"><b>{{__('messages.datos_registrados')}}:</b></h2>
    
                       <ul class="ml-4 mb-0 fa-ul text-muted">
                         <li class="medium mt-2"><span class="fa-li"><i class="fas fa-lg fa-address-book"></i></span> Telegram ID: {{$user->telegram}} </li>
@@ -214,51 +274,9 @@
       </div>
     @endif
 
-
-
-    <blockquote class="text-gray-400 flex">
-      @if($pago_registrado < 1)
-        <p class="mr-1">{{__('messages.su_cuenta_inactiva')}}</p>
-      
-        @livewire('pagos.reporte-pago') 
-          <p class="ml-1"> {{__('messages.para_disfrutar_servicios')}}</p>
-        @endif
-      
-    </blockquote>
-
-    <blockquote class="text-gray-400 flex">
-      <p class="mr-1">Haz click</p>
-      @livewire('info-planes') 
-      <p class="ml-1"> {{__('messages.ver_datos_precios')}}</p>
-      
-    </blockquote>
-
-    <blockquote class="text-gray-400 flex">
-      <p class="mr-1">Haz click</p>
-      @livewire('info-metodos-pago') 
-      <p class="ml-1"> {{__('messages.ver_datos_cuentas')}}</p>
-      
-    </blockquote>
-
   </div>
   @endif
 
-  @if($mensaje != '' && $rol != '4' && auth()->user()->type != 'gratis')
-    <div>
-
-      <blockquote class="text-gray-400 flex">
-        <p class="inline">
-        {{$mensaje}}
-        </p>
-      @livewire('pagos.reporte-pago')
-        
-      </blockquote>
-
-    </div>
-  @endif
-
-
-    
   
 
 </div>

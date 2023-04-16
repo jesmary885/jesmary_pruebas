@@ -112,10 +112,10 @@
 
 @if(auth()->user()->roles->first()->id == 1)
 <li class="nav-item dropdown">
-    <a class="nav-link" data-toggle="dropdown" href="#">
+     <a class="nav-link" data-toggle="dropdown" href="#">
         <i class="far fa-bell"></i>
         <span class="badge badge-danger navbar-badge"> @livewire('admin.pagos-pendientes')</span>
-    </a>
+    </a> 
     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
     <div class="dropdown-divider"></div>
@@ -146,12 +146,12 @@
     <ul class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
 
         <li class="user-footer">
-        @if(auth()->user()->roles->first()->id != 4)
+        <!-- @if(auth()->user()->roles->first()->id != 4)
         <a href="{{ route('reporte_pago') }}" class="btn btn-default btn-flat btn-block">
-                    <i class="far fa-credit-card text-green mr-2"></i>
-                    Reportar pago
-            </a>
-            @endif
+                <i class="far fa-credit-card text-green mr-2"></i>
+                Reportar pago
+        </a>
+        @endif -->
 
             <a href="{{ route('profile.show') }}" class="btn btn-default btn-flat btn-block">
                     <i class="fa fa-fw fa-user text-lightblue"></i>

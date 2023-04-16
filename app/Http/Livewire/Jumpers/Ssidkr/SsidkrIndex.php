@@ -1255,7 +1255,7 @@ class SsidkrIndex extends Component
                     }
                 }
 
-                if($this->k_detect){
+                /*if($this->k_detect){
 
                     $busqueda_dkr1_ssi_ = strpos($this->search, '/dkr1.ssisurveys.com');
                     $busqueda_dkr1_https_ = strpos($this->search, 'https://');
@@ -1279,7 +1279,7 @@ class SsidkrIndex extends Component
                         }
                         
                     }
-                }
+                }*/
         }
         
         else{

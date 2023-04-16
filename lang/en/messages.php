@@ -67,7 +67,7 @@ return [
     'saldo_pagina' => 'balance on page',
     'planes_precios' => 'Plans and prices',
     'ver_datos_precios' => 'to see our plans and prices',
-    'datos_registrados' => 'Your registered data',
+    'datos_registrados' => 'Your data in QuerySet',
     'localidad' => 'Location',
     'direccion_ip' => 'Your ip address',
     'fecha_corte' => 'Cutoff date',
