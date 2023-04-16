@@ -89,7 +89,7 @@
                 <div class=" info-box bg-warning">
                     <span class="info-box-icon"><i class="fas fa-info"></i></span>
                         <div class="info-box-content">
-                            <span class="info-box-text">Esta intentando generar más de 6 jumpers en menos de 30 min. </span>
+                            <span class="info-box-text">Esta intentando generar más de 3 jumpers en menos de 30 min. </span>
                             <span class="info-box-number">Intentelo luego.</span>
                         </div>
                 </div>

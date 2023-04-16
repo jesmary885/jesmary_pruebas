@@ -49,12 +49,6 @@ class K2066Index extends Component
 
         if($result[0] == $this->operacion->resultado){
 
-            $link_register = new Links_usados();
-            $link_register->link = $this->search;
-            $link_register->k_detected  = 'K=2066';
-            $link_register->user_id  = $this->user->id;
-            $link_register->save();
-
             try {
                 $client = new Client([
                     'base_uri' => 'http://209.94.57.88/',
@@ -63,12 +57,18 @@ class K2066Index extends Component
                 $resultado = $client->request('GET', '/k2066/1/'.$this->psid_buscar);
 
                 if($resultado->getStatusCode() == 200){
+
+                    $link_register = new Links_usados();
+                    $link_register->link = $this->search;
+                    $link_register->k_detected  = 'K=2066';
+                    $link_register->user_id  = $this->user->id;
+                    $link_register->save();
         
-                                        $this->jumper_complete = json_decode($resultado->getBody(),true);
+                    $this->jumper_complete = json_decode($resultado->getBody(),true);
         
-                                        $this->busqueda_link = Link::where('psid',substr($this->psid_buscar,0,5))->first();
+                    $this->busqueda_link = Link::where('psid',substr($this->psid_buscar,0,5))->first();
             
-                                        if($this->busqueda_link){
+                    if($this->busqueda_link){
                                             $user_point= User_Links_Points::where('link_id',$this->busqueda_link->id)
                                                 ->where('user_id',auth()->user()->id)
                                                 ->first();
@@ -97,8 +97,8 @@ class K2066Index extends Component
                                                     $this->points_user_negative='no';
                                                 }
             
-                                        }
-                                        else{
+                    }
+                    else{
                                             $url_detect_com= strpos($this->search, 'ttp');
             
                                             if($url_detect_com != false){
@@ -166,10 +166,10 @@ class K2066Index extends Component
                                                         $this->points_user_negative='no';
                                                     }
                                             }
-                                        }
+                    }
 
-                                        $this->jumper_list = 1;
-                                        $this->jumper_detect = 1;
+                    $this->jumper_list = 1;
+                    $this->jumper_detect = 1;
                 }
             }
             catch (\GuzzleHttp\Exception\RequestException $e) {
@@ -179,7 +179,9 @@ class K2066Index extends Component
 
                 if($e->hasResponse()){
                     if ($e->getResponse()->getStatusCode() !== '200'){
-                        try {
+                        $error['response'] = $e->getResponse(); 
+                        $this->jumper_detect = 5;
+                        /*try {
                             $client = new Client([
                                 'base_uri' => 'http://209.94.57.88/',
                             ]);
@@ -307,7 +309,7 @@ class K2066Index extends Component
                                     $this->jumper_detect = 2;
                                 }
                             }
-                        }
+                        }*/
                         
                     }
                 }
@@ -373,7 +375,7 @@ class K2066Index extends Component
                                     ->where('user_id',$this->user->id)
                                     ->first();
 
-                                if($link_register_search){
+                                if($link_register_search >= 2){
 
                                     $this->jumper_detect = 7;
                                     
@@ -384,12 +386,12 @@ class K2066Index extends Component
                                     $date_actual= $date->format('Y-m-d H:i:s');
                                     $date_actual_30 = $date->modify('-30 minute')->format('Y-m-d H:i:s');
 
-                                    $links_usados = Links_usados::where('k_detected','K=1098')
+                                    $links_usados = Links_usados::where('k_detected','K=2066')
                                         ->where('user_id',$this->user->id)
                                         ->whereBetween('created_at',[$date_actual_30,$date_actual])
                                         ->count();
 
-                                    if($links_usados <= 6){
+                                    if($links_usados <= 5){
                                         $this->numerologia();
                                     }
                                     else{
@@ -480,149 +482,7 @@ class K2066Index extends Component
 
                 }
                 else{
-                    $busqueda_psid_ = strpos($this->search, 'psid');
-            
-                    if($busqueda_psid_ !== false){
-                        $busqueda_psid= strpos($this->search, 'psid'); 
-                        //$this->psid_buscar = substr($this->search,($busqueda_psid + 5),22);
-
-                        if(session('psid'))$psid_complete = substr($this->search,($busqueda_psid + 5),11).substr(session('psid'),11,11);
-                        else  $this->psid_buscar = substr($this->search,($busqueda_psid + 5),22);
-    
-                        
-
-                            if($this->jumper_detect == 0){
-
-                                $client = new Client([
-                                    //'base_uri' => 'http://127.0.0.1:8000',
-                                    'base_uri' => 'http://209.94.57.88/',
-                                ]);
-            
-                                $resultado = $client->request('GET', '/2066/1/'.$this->psid_buscar);
-            
-                                if($resultado->getStatusCode() == 200){
-
-                                    $this->jumper_complete = json_decode($resultado->getBody(),true);
-        
-                                    $this->busqueda_link = Link::where('psid',substr($this->psid_buscar,0,5))->first();
-        
-                                    $busqueda_link_def =  $this->busqueda_link;
-        
-                                    if($this->busqueda_link){
-                                        $user_point= User_Links_Points::where('link_id',$this->busqueda_link->id)
-                                            ->where('user_id',auth()->user()->id)
-                                            ->first();
-                                                        
-                                        $comments = Comments::where('link_id',$this->busqueda_link->id)
-                                            ->latest('id')
-                                            ->paginate(5);
-                                                            
-                                            if($user_point) {
-                                                if($user_point->point == 'positive'){
-                                              
-                                                    $this->points_user_positive='si';
-                                                    $this->points_user_negative='no';
-                                                    $this->points_user='si';
-                        
-                                                }
-                        
-                                                else{
-                                                    $this->points_user_positive='no';
-                                                    $this->points_user_negative='si';
-                                                }
-                                                        
-                                            }
-                                            else{
-                                                $this->points_user_positive='no';
-                                                $this->points_user_negative='no';
-                                            }
-        
-                                    }
-                                    else{
-                                        $url_detect_com= strpos($this->search, 'ttp');
-        
-                                        if($url_detect_com != false){
-        
-                                            $con_seguridad= strpos($this->search, 'ttps');
-                                            $i = 0;
-                                                
-                                            do{
-                                                $detect= substr($this->search, $this->posicion,1);
-        
-                                                if($detect == '/') $i = 1;
-                                                else{
-                                                    $i = 0;
-                                                    $this->posicion = $this->posicion + 1;
-                                                }
-        
-                                            }
-                                            while($i != 1);
-        
-                                            if($con_seguridad != false){
-                                                $url_detect = 'https://'.substr($this->search,8,($this->posicion-8));
-                                            }
-        
-                                            else{
-                                                $url_detect = 'https://'.substr($this->search,7,($this->posicion-7));
-                                            }
-        
-                                            $link = new Link();
-                                            $link->jumper = $url_detect;
-                                            $link->psid = substr($this->psid_buscar,0,5);
-                                            $link->user_id = auth()->user()->id;
-                                            $link->jumper_type_id = 22;
-                                            $link->k_detected = 'K=2066';
-                                            $link->save();
-        
-                                            $this->busqueda_link = Link::where('id',$link->id)->first();
-        
-                                            $this->jumper_2 = '1';
-                                    
-                                            $user_point= User_Links_Points::where('link_id',$this->busqueda_link->id)
-                                                ->where('user_id',$this->user_auth)
-                                                ->first();
-                                                                
-                                            $comments = Comments::where('link_id',$this->busqueda_link->id)
-                                                ->latest('id')
-                                                ->paginate(5);
-                                                                
-                                                if($user_point) {
-                                                    if($user_point->point == 'positive'){
-                                                  
-                                                        $this->points_user_positive='si';
-                                                        $this->points_user_negative='no';
-                                                        $this->points_user='si';
-                            
-                                                    }
-                            
-                                                    else{
-                                                        $this->points_user_positive='no';
-                                                        $this->points_user_negative='si';
-                                                    }
-                                                            
-                                                }
-                                                else{
-                                                    $this->points_user_positive='no';
-                                                    $this->points_user_negative='no';
-                                                }
-                                        }
-                                    }
-        
-                                    $this->jumper_detect = 1;
-                                }
-    
-                                else{
-                                    $this->jumper_detect = 3;
-                                }
-    
-                            }
-                        }
-                        else{
-                            $this->jumper_detect = 3;
-                        }
-                    
-
-                    session()->forget('search');
+                    $this->jumper_detect = 3;
                 }
 
 

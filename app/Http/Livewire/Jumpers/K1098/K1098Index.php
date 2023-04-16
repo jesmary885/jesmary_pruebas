@@ -51,12 +51,6 @@ class K1098Index extends Component
 
         if($result[0] == $this->operacion->resultado){
 
-            $link_register = new Links_usados();
-            $link_register->link = $this->search;
-            $link_register->k_detected  = 'K=1098';
-            $link_register->user_id  = $this->user->id;
-            $link_register->save();
-
             try {
                 $client = new Client([
                     //'base_uri' => 'http://127.0.0.1:8000',
@@ -66,6 +60,12 @@ class K1098Index extends Component
                 $resultado = $client->request('GET', '/k1098/1/'.$this->psid_buscar);
 
                 if($resultado->getStatusCode() == 200){
+
+                    $link_register = new Links_usados();
+                    $link_register->link = $this->search;
+                    $link_register->k_detected  = 'K=1098';
+                    $link_register->user_id  = $this->user->id;
+                    $link_register->save();
 
                     $this->jumper_complete = json_decode($resultado->getBody(),true);
 
@@ -248,7 +248,7 @@ class K1098Index extends Component
                                     ->count();
                              
 
-                                if($link_register_search > 3){
+                                if($link_register_search >= 2){
 
                                     $this->jumper_detect = 7;
                                     
@@ -264,7 +264,7 @@ class K1098Index extends Component
                                         ->whereBetween('created_at',[$date_actual_30,$date_actual])
                                         ->count();
 
-                                    if($links_usados <= 6){
+                                    if($links_usados <= 5){
                                         $this->numerologia();
                                     }
                                     else{

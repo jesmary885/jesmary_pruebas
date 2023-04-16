@@ -240,7 +240,7 @@ class K7341Index extends Component
                                 ->count();
                              
 
-                            if($link_register_search > 3){
+                            if($link_register_search >= 2){
 
                                 $this->jumper_detect = 7;
                                     
@@ -257,7 +257,7 @@ class K7341Index extends Component
                                     ->whereBetween('created_at',[$date_actual_30,$date_actual])
                                     ->count();
 
-                                if($links_usados <= 6){
+                                if($links_usados <= 5){
                                     $this->numerologia();
                                 }
                                 else{

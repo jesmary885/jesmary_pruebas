@@ -42,7 +42,36 @@ class K1093Index extends Component
 
         $this->pid_buscar = $this->pid_manual;
 
-        $this->numerologia();
+        $link_register_search = Links_usados::where('link',$this->search)
+            ->where('k_detected','K=1093')
+            ->where('user_id',$this->user->id)
+            ->count();
+
+        if($link_register_search >= 2){
+
+            $this->jumper_detect = 7;
+                                
+        }
+        else{
+            $date = new DateTime();
+
+            $date_actual= $date->format('Y-m-d H:i:s');
+            $date_actual_30 = $date->modify('-30 minute')->format('Y-m-d H:i:s');
+
+            $links_usados = Links_usados::where('k_detected','K=1093')
+                ->where('user_id',$this->user->id)
+                ->whereBetween('created_at',[$date_actual_30,$date_actual])
+                ->count();
+
+            if($links_usados <= 5){
+                $this->numerologia();
+            }
+            else{
+                $alertas = $this->user->cant_links_jump_alert + 1;
+                $this->user->update(['cant_links_jump_alert'=>$alertas]);
+                $this->jumper_detect = 6;
+            }
+        }
     }
 
     public function numerologia(){
@@ -62,12 +91,6 @@ class K1093Index extends Component
             if($this->pid_manual){
                 $this->pid_buscar = $this->pid_manual;
             }
-
-            $link_register = new Links_usados();
-            $link_register->link = $this->search;
-            $link_register->k_detected  = 'K=1093';
-            $link_register->user_id  = $this->user->id;
-            $link_register->save();
 
             $busqueda_id= strpos($this->search, '**');
                                     
@@ -142,6 +165,12 @@ class K1093Index extends Component
 
                 if($resultado->getStatusCode() == 200){
 
+                    $link_register = new Links_usados();
+                    $link_register->link = $this->search;
+                    $link_register->k_detected  = 'K=1093';
+                    $link_register->user_id  = $this->user->id;
+                    $link_register->save();
+
                     $jump1 = json_decode($resultado->getBody(),true);
 
                     $busqueda_psid_vacio= strpos($jump1['jumper'], '&psid=');
@@ -181,8 +210,6 @@ class K1093Index extends Component
 
                     }
 
-
-                   
 
                     $this->busqueda_link = Link::where('psid',substr($psid_buscar,0,5))->first();
 
@@ -496,7 +523,7 @@ class K1093Index extends Component
                             ->where('user_id',$this->user->id)
                             ->count();
 
-                            if($link_register_search > 2){
+                            if($link_register_search >= 2){
 
                                 $this->jumper_detect = 7;
                                 
@@ -512,7 +539,7 @@ class K1093Index extends Component
                                     ->whereBetween('created_at',[$date_actual_30,$date_actual])
                                     ->count();
 
-                                if($links_usados <= 6){
+                                if($links_usados <= 5){
                                     $this->numerologia();
                                 }
                                 else{

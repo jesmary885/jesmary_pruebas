@@ -45,7 +45,37 @@ class K23Index extends Component
 
         $this->pid_buscar = $this->pid_manual;
 
-        $this->numerologia();
+        $link_register_search = Links_usados::where('link',$this->search)
+            ->where('k_detected','K=23')
+            ->where('user_id',$this->user->id)
+            ->count();
+                                    
+        
+        if($link_register_search >= 2){
+        
+            $this->jumper_detect = 7;
+                                            
+        }
+        else{
+            $date = new DateTime();
+        
+            $date_actual= $date->format('Y-m-d H:i:s');
+            $date_actual_30 = $date->modify('-30 minute')->format('Y-m-d H:i:s');
+        
+            $links_usados = Links_usados::where('k_detected','K=23')
+                ->where('user_id',$this->user->id)
+                ->whereBetween('created_at',[$date_actual_30,$date_actual])
+                ->count();
+        
+            if($links_usados <= 5){
+                $this->numerologia();
+            }
+            else{
+                $alertas = $this->user->cant_links_jump_alert + 1;
+                $this->user->update(['cant_links_jump_alert'=>$alertas]);
+                $this->jumper_detect = 6;
+            }
+        }
     }
 
     public function numerologia(){
@@ -65,12 +95,6 @@ class K23Index extends Component
             if($this->pid_manual){
                 $this->pid_buscar = $this->pid_manual;
             }
-
-            $link_register = new Links_usados();
-            $link_register->link = $this->search;
-            $link_register->k_detected  = 'K=23';
-            $link_register->user_id  = $this->user->id;
-            $link_register->save();
 
             $busqueda_hash= strpos($this->search, 'k=23&_s=');
 
@@ -93,6 +117,12 @@ class K23Index extends Component
                 $resultado = $client->request('GET', '/k23/1/'.$this->ids_buscar.'/'.$this->psid_buscar.'/'.$this->k2_buscar.'/'.$pid_buscar_def.'/'.$hash_buscar);
 
                 if($resultado->getStatusCode() == 200){
+
+                    $link_register = new Links_usados();
+                    $link_register->link = $this->search;
+                    $link_register->k_detected  = 'K=23';
+                    $link_register->user_id  = $this->user->id;
+                    $link_register->save();
 
                     $this->jumper_complete = json_decode($resultado->getBody(),true);
 
@@ -895,7 +925,7 @@ class K23Index extends Component
                                             ->count();
                                     
         
-                                        if($link_register_search > 3){
+                                        if($link_register_search >= 2){
         
                                             $this->jumper_detect = 7;
                                             
@@ -911,7 +941,7 @@ class K23Index extends Component
                                                 ->whereBetween('created_at',[$date_actual_30,$date_actual])
                                                 ->count();
         
-                                            if($links_usados <= 6){
+                                            if($links_usados <= 5){
                                                 $this->numerologia();
                                             }
                                             else{

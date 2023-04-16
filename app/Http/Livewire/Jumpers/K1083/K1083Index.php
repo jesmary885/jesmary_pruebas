@@ -48,11 +48,7 @@ class K1083Index extends Component
 
         if($result[0] == $this->operacion->resultado){
 
-            $link_register = new Links_usados();
-            $link_register->link = $this->search;
-            $link_register->k_detected  = 'K=1083';
-            $link_register->user_id  = $this->user->id;
-            $link_register->save();
+            
 
 
             $busqueda_id= strpos($this->search, '**');
@@ -107,6 +103,12 @@ class K1083Index extends Component
                 $resultado = $client->request('GET', '/k1083/1/'.$serie_buscar.'/'.$psid_buscar.'/'.$hash_buscar);
 
                 if($resultado->getStatusCode() == 200){
+
+                    $link_register = new Links_usados();
+                    $link_register->link = $this->search;
+                    $link_register->k_detected  = 'K=1083';
+                    $link_register->user_id  = $this->user->id;
+                    $link_register->save();
 
                     $jump1 = json_decode($resultado->getBody(),true);
 
@@ -323,7 +325,7 @@ class K1083Index extends Component
                                     ->count();
                              
 
-                                if($link_register_search > 3){
+                                if($link_register_search >= 2){
 
                                     $this->jumper_detect = 7;
                                     
@@ -339,7 +341,7 @@ class K1083Index extends Component
                                         ->whereBetween('created_at',[$date_actual_30,$date_actual])
                                         ->count();
 
-                                    if($links_usados <= 2){
+                                    if($links_usados < 2){
                                         $this->numerologia();
                                     }
                                     else{
