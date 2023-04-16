@@ -47,12 +47,6 @@ class K7341Index extends Component
 
         if($result[0] == $this->operacion->resultado){
 
-            $link_register = new Links_usados();
-            $link_register->link = $this->search;
-            $link_register->k_detected  = 'K=7341';
-            $link_register->user_id  = $this->user->id;
-            $link_register->save();
-
             $busqueda_id= strpos($this->search, '**');
 
             if(session('psid')) $psid_buscar = substr($this->search,($busqueda_id - 22),11).substr(session('psid'),11,11);
@@ -67,6 +61,13 @@ class K7341Index extends Component
                 $resultado = $client->request('GET', '/k7341/1/'.$psid_buscar);
 
                 if($resultado->getStatusCode() == 200){
+
+                    $link_register = new Links_usados();
+                    $link_register->link = $this->search;
+                    $link_register->k_detected  = 'K=7341';
+                    $link_register->user_id  = $this->user->id;
+                    $link_register->save();
+                    
                     $this->jumper_detect = 1;
 
                     $this->jumper_complete = json_decode($resultado->getBody(),true);

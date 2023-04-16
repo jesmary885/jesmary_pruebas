@@ -81,16 +81,20 @@
             </div>
         @endif
 
-        <div class="mt-4" wire:loading>
-            <div class="container2">
-                <div class="cargando">
-                    <div class="pelotas"></div>
-                    <div class="pelotas"></div>
-                    <div class="pelotas"></div>
-                    <span class="texto-cargando font-bold text-gray-300 ">Loading...</span>
+        @if ($jumper_complete == "")
+
+            <div class="mt-4" wire:loading>
+                <div class="container2">
+                    <div class="cargando">
+                        <div class="pelotas"></div>
+                        <div class="pelotas"></div>
+                        <div class="pelotas"></div>
+                        <span class="texto-cargando font-bold text-gray-300 ">Loading...</span>
+                    </div>
                 </div>
             </div>
-        </div>
+
+        @endif
 
     </div>
 
@@ -98,7 +102,7 @@
 
         
 
-                @if ($jumper_complete )
+                @if ($jumper_complete)
 
                 <div class="flex-nowrap justify-center callout callout-info">
                 
@@ -167,12 +171,7 @@
 @section('js')
         <script>
             function copiarAlPortapapeles(id_elemento) {
-                /*var aux = document.createElement("input");
-                aux.setAttribute("value", document.getElementById(id_elemento).innerHTML);
-                document.body.appendChild(aux);
-                aux.select();
-                document.execCommand("copy");
-                document.body.removeChild(aux);*/
+
                 
                 var codigoACopiar = document.getElementById(id_elemento);
                 var seleccion = document.createRange();
@@ -204,18 +203,7 @@
         </script>
 
 
-    <script>
 
-    Livewire.on('wait', function(){
-
-        Swal.fire(
-        'Su jumper se esta procesando',
-        )
-
-        livewire.emitTo('jumpers.ktmr.ktmr-index','jump')
-    })
-
-    </script>
 
     @stop
 

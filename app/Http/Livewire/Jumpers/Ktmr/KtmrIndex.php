@@ -29,7 +29,6 @@ class KtmrIndex extends Component
 
         $cant = Antibot::count();
         $random = rand(1,$cant);
-        $this->calculo = 1;
         $this->operacion = Antibot::where('id',$random)->first();
         $operacion_total = 'Resuelve esta operación matemática ('.$this->operacion->nro1.' + '.$this->operacion->nro2. ')';
 
@@ -40,13 +39,45 @@ class KtmrIndex extends Component
 
         if($result[0] == $this->operacion->resultado){
 
-            $link_register = new Links_usados();
-            $link_register->link = $this->search;
-            $link_register->k_detected  = 'KTMR';
-            $link_register->user_id  = $this->user->id;
-            $link_register->save();
+            try {
+  
+                $client = new Client([
+                    //'base_uri' => 'http://127.0.0.1:8000',
+                    'base_uri' => 'http://209.94.57.88/',
+                ]);
+    
+                $resultado = $client->request('GET', '/ktmr/1/'.$this->psid_buscar);
+    
+                if($resultado->getStatusCode() == 200){
 
-            $this->emit('wait');       
+                    $link_register = new Links_usados();
+                    $link_register->link = $this->search;
+                    $link_register->k_detected  = 'KTMR';
+                    $link_register->user_id  = $this->user->id;
+                    $link_register->save();
+
+                    $this->jumper_detect = 1;
+    
+                    $this->jumper_complete = json_decode($resultado->getBody(),true);
+                }
+    
+                else{
+                    $this->jumper_detect = 2;
+                }
+            }
+            catch (\GuzzleHttp\Exception\RequestException $e) {
+    
+                $error['error'] = $e->getMessage();
+                $error['request'] = $e->getRequest();
+
+                if($e->hasResponse()){
+                    if ($e->getResponse()->getStatusCode() !== '200'){
+                        $error['response'] = $e->getResponse(); 
+                        $this->jumper_detect = 2;
+                    }
+                }
+    
+            }
         }
 
         else{
@@ -57,74 +88,10 @@ class KtmrIndex extends Component
         }
     }
 
-    public function jump(){
-
-        try {
-  
-            $client = new Client([
-                //'base_uri' => 'http://127.0.0.1:8000',
-                'base_uri' => 'http://209.94.57.88/',
-            ]);
-
-            $resultado = $client->request('GET', '/ktmr/1/'.$this->psid_buscar);
-
-            if($resultado->getStatusCode() == 200){
-                $this->jumper_detect = 1;
-
-                $this->jumper_complete = json_decode($resultado->getBody(),true);
-            }
-
-            else{
-                $this->jumper_detect = 2;
-            }
-        }
-        catch (\GuzzleHttp\Exception\RequestException $e) {
-
-            $error['error'] = $e->getMessage();
-            $error['request'] = $e->getRequest();
-
-            if($e->hasResponse()){
-                try {
-  
-                        $client = new Client([
-                            //'base_uri' => 'http://127.0.0.1:8000',
-                            'base_uri' => 'http://209.94.57.88/',
-                        ]);
-            
-                        $resultado = $client->request('GET', '/ktmr/2/'.$this->psid_buscar);
-            
-                        if($resultado->getStatusCode() == 200){
-                            $this->jumper_detect = 1;
-            
-                            $this->jumper_complete = json_decode($resultado->getBody(),true);
-                        }
-            
-                        else{
-                            $this->jumper_detect = 3;
-                        }
-                }
-                catch (\GuzzleHttp\Exception\RequestException $e) {
-            
-                        $error['error'] = $e->getMessage();
-                        $error['request'] = $e->getRequest();
-            
-                        if($e->hasResponse()){
-                            if ($e->getResponse()->getStatusCode() !== '200'){
-                                $error['response'] = $e->getResponse(); 
-                                $this->jumper_detect = 2;
-                            }
-                        }
-                }
-            }
-        }
-    }
-
-
 
     public function render()
     {
-        //$this->jumper_complete = 0;
-        $link_complete = 0;
+        
 
         $this->search = trim($this->search); //quitando espacios en blancos al inicio y final
         $long_psid = strlen($this->search); //buscando cuantos caracteres tiene en total
@@ -136,7 +103,7 @@ class KtmrIndex extends Component
             if($busqueda_f_ != false) $this->psid_buscar= substr($this->search, $busqueda_f_ + 13);
             else $this->psid_buscar= $this->search;
 
-            if($this->jumper_complete == "" && $this->calculo == 0) {
+            if($this->jumper_complete == "") {
                 $link_register_search = Links_usados::where('link',$this->search)
                     ->where('k_detected','KTMR')
                     ->where('user_id',$this->user->id)
@@ -158,7 +125,7 @@ class KtmrIndex extends Component
                         ->whereBetween('created_at',[$date_actual_30,$date_actual])
                         ->count();
 
-                    if($links_usados <= 6){
+                    if($links_usados <= 5){
                         $this->numerologia();
                     }
                     else{
@@ -169,13 +136,22 @@ class KtmrIndex extends Component
                 }
             }
         }
+        else{
+            if($long_psid == 0){
+                $this->reset(['search']);
+                $this->jumper_complete = "";
+                session()->forget('search');
+                $this->busqueda_link = "";
+            }
         
+        }
+
         return view('livewire.jumpers.ktmr.ktmr-index');
     }
 
     public function clear(){
         $this->reset(['search']);
-        $this->jumper_complete = [];
+        $this->jumper_complete = "";
         session()->forget('search');
         $this->busqueda_link = "";
         return redirect()->route('ktmr.index');

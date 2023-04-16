@@ -339,10 +339,6 @@ class K7341Index extends Component
                                     ->whereBetween('created_at',[$date_actual_30,$date_actual])
                                     ->count();
 
-                               // dd($links_usados);
-
-
-
                                 if($links_usados <= 2){
                                     $this->numerologia();
                                 }

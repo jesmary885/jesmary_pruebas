@@ -68,9 +68,9 @@ class K1000Index extends Component
         $link_register_search = Links_usados::where('link',$this->search)
         ->where('k_detected','K=1000')
         ->where('user_id',$this->user->id)
-        ->first();
+        ->count();
 
-        if($link_register_search <= 1){
+        if($link_register_search >= 1){
 
             $this->jumper_detect = 7;
                                 
@@ -859,9 +859,9 @@ class K1000Index extends Component
                             $link_register_search = Links_usados::where('link',$this->search)
                             ->where('k_detected','K=1000')
                             ->where('user_id',$this->user->id)
-                            ->first();
+                            ->count();
 
-                            if($link_register_search <= 1){
+                            if($link_register_search >= 1){
 
                                 $this->jumper_detect = 7;
                                 
