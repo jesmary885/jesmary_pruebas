@@ -68,16 +68,37 @@ class UsuariosEdit extends Component
         $this->validate($rule_username);
 
         if($this->estado == 0) $estado = 'inactivo'; else $estado = 'activo';
+
+        
+        if($this->roles_id == '2'){
+            $this->usuario->update([
+                'name' => $this->username,
+                'username' => $this->username,
+                'email' => $this->email,
+                'status' => $estado,
+                'plan' => $this->plan,
+                'type' => 'basico',
+                'last_payment_date' => date("Y-m-d", strtotime($this->last_date)),
+            ]);
+
+        }
+
+        if($this->roles_id == '10'){
+            $this->usuario->update([
+                'name' => $this->username,
+                'username' => $this->username,
+                'email' => $this->email,
+                'status' => $estado,
+                'plan' => $this->plan,
+                'type' => 'premium',
+                'last_payment_date' => date("Y-m-d", strtotime($this->last_date)),
+            ]);
+
+        }
  
-        $this->usuario->update([
-            'name' => $this->username,
-            'username' => $this->username,
-            'email' => $this->email,
-            'status' => $estado,
-            'plan' => $this->plan,
-            'last_payment_date' => date("Y-m-d", strtotime($this->last_date)),
-        ]);
+       
         $this->usuario->roles()->sync($this->roles_id);
+
 
         $user_mod = new Modificaciones();
         $user_mod->user_id = $this->usuario->id;
