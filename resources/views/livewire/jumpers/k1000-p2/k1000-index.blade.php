@@ -92,9 +92,9 @@
             <div class="px-4">
                 <div class=" info-box bg-warning">
                     <span class="info-box-icon"><i class="fas fa-info"></i></span>
-                        <div class="info-box-content">
-                            <span class="info-box-text">Esta intentando generar más de 2 jumpers en menos de 30 min. </span>
-                            <span class="info-box-number">Intentelo luego.</span>
+                    <div class="info-box-content">
+                            <span class="info-box-text">Ya ha generado los tres(3) jumpers permitidos durante el día</span>
+                            
                         </div>
                 </div>
             </div>
@@ -129,7 +129,7 @@
 
                 @if ($jumper_complete)
 
-                <div class="flex-nowrap justify-center callout callout-info">
+                <div class="flex-nowrap justify-center callout callout-info w-full">
                 
                       
                     <p  class="text-blue-400 text-clip text-sm text-center font-bold mb-2" id="jumper_copy">{{$jumper_complete['jumper']}}</p>

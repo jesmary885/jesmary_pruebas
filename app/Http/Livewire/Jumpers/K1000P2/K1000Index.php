@@ -44,7 +44,7 @@ class K1000Index extends Component
         $this->pid_buscar = $this->pid_manual;
 
         $link_register_search = Links_usados::where('link',$this->search)
-        ->where('k_detected','K=1000')
+        ->where('k_detected','K=1000_NEW')
         ->where('user_id',$this->user->id)
         ->count();
 
@@ -57,12 +57,12 @@ class K1000Index extends Component
             $date_actual= $date->format('Y-m-d H:i:s');
             $date_actual_30 = $date->modify('-30 minute')->format('Y-m-d H:i:s');
 
-            $links_usados = Links_usados::where('k_detected','K=1000')
+            $links_usados = Links_usados::where('k_detected','K=1000_NEW')
                 ->where('user_id',$this->user->id)
                 ->whereBetween('created_at',[$date_actual_30,$date_actual])
                 ->count();
 
-            if($links_usados < 2){
+            if($links_usados <= 2){
                 $this->numerologia();
             }
             else{
@@ -201,18 +201,18 @@ class K1000Index extends Component
                 $client = new Client(['base_uri' => 'http://147.182.190.233/',]);
 
                 if($elem3 == 0){
-                    $resultado = $client->request('GET', '/k1000_s4/1/'.$psid_buscar.'/'.$pid_buscar_def.'/'.$elem1.'/'.$elem2.'/'.$hash_buscar);
+                    $resultado = $client->request('GET', '/k1000_s4/1/'.$psid_buscar.'/'.$pid_buscar_def.'/'.$elem1.'/'.$elem2);
                 }
 
                 else{
-                    $resultado = $client->request('GET', '/k1000_s5/1/'.$psid_buscar.'/'.$pid_buscar_def.'/'.$elem1.'/'.$elem2.'/'.$elem3.'/'.$hash_buscar);
+                    $resultado = $client->request('GET', '/k1000_s5/1/'.$psid_buscar.'/'.$pid_buscar_def.'/'.$elem1.'/'.$elem2.'/'.$elem3);
                 }
                
                 if($resultado->getStatusCode() == 200){
 
                     $link_register = new Links_usados();
                     $link_register->link = $this->search;
-                    $link_register->k_detected  = 'K=1000';
+                    $link_register->k_detected  = 'K=1000_NEW';
                     $link_register->user_id  = $this->user->id;
                     $link_register->save();
 
@@ -1040,11 +1040,11 @@ class K1000Index extends Component
 
                         if($this->jumper_list == 0){
                             $link_register_search = Links_usados::where('link',$this->search)
-                            ->where('k_detected','K=1000')
+                            ->where('k_detected','K=1000_NEW')
                             ->where('user_id',$this->user->id)
                             ->count();
 
-                            if($link_register_search >= 2){
+                            if($link_register_search >= 1){
 
                                 $this->jumper_detect = 7;
                                 
@@ -1053,14 +1053,14 @@ class K1000Index extends Component
                                 $date = new DateTime();
 
                                 $date_actual= $date->format('Y-m-d H:i:s');
-                                $date_actual_30 = $date->modify('-30 minute')->format('Y-m-d H:i:s');
+                              //  $date_actual_30 = $date->modify('-30 minute')->format('Y-m-d H:i:s');
 
-                                $links_usados = Links_usados::where('k_detected','K=1000')
+                                $links_usados = Links_usados::where('k_detected','K=1000_NEW')
                                     ->where('user_id',$this->user->id)
-                                    ->whereBetween('created_at',[$date_actual_30,$date_actual])
+                                    ->whereDate('created_at',$date_actual)
                                     ->count();
 
-                                if($links_usados < 2){
+                                if($links_usados <= 2){
                                     $this->numerologia();
                                 }
                                 else{
@@ -1154,7 +1154,7 @@ class K1000Index extends Component
             }
 
             else{
-                $this->calc_link = 0;
+                $this->jumper_detect = 3;
             }
         }
         else{

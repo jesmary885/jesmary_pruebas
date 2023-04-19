@@ -318,6 +318,15 @@ return [
                     'icon_color' => 'red',
                     'can' => 'administracion_principal'
                 ],
+
+                [
+                    'text' => 'Tasa de cambio',
+                    'route'  => 'admin.tasa_cambio',
+                    'icon'    => 'far fa-credit-card',
+                    'icon_color' => 'red',
+                    'can' => 'administracion_principal'
+                ],
+
                 [
                     'text' => 'Jumpers',
                     'route'  => 'admin.jumpers',
@@ -333,6 +342,7 @@ return [
                     'icon'    => 'far fa-credit-card',
                     'can' => 'administracion_principal'
                 ],
+
                 // [
                 //     'text' => 'Ganancias',
                 //     'route'  => 'admin.ganancias.index',
@@ -426,6 +436,14 @@ return [
                     'icon_color' => 'red',
                     'can' => 'otro.admin'
                 ],
+
+                [
+                    'text' => 'Cant de jumpers generados',
+                    'route'  => 'admin.jumper_dia',
+                    'icon'    => 'fas fa-server',
+                    'icon_color' => 'red',
+                    'can' => 'otro.admin'
+                ],
             ],
         ],
         
@@ -451,7 +469,7 @@ return [
         [
             'text' => 'Su cuenta esta inactiva',
             'can' => 'cuenta.inactiva',
-            'icon_color' => 'green',
+            'icon_color' => 'cyan',
             'icon'    => '	fas fa-sad-cry',
         ],
         [
@@ -475,7 +493,7 @@ return [
                     'icon'    => '	fas fa-angle-right',
                 ],
                 [
-                    'text' => 'KTRM',
+                    'text' => 'KTRMR',
                     'route'  => 'ktmr.index',
                     'can' => 'ssidkr.index',
                     'icon_color' => 'red',
@@ -490,6 +508,14 @@ return [
                 ],
 
                 [
+                    'text' => 'K1091',
+                    'route'  => 'k1091.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+
+                [
                     'text' => 'K1092',
                     'route'  => 'kmilnoventaydos.index',
                     'can' => 'ssidkr.index',
@@ -497,8 +523,22 @@ return [
                     'icon'    => '	fas fa-angle-right',
                 ],
                 [
+                    'text' => 'K1093',
+                    'route'  => 'k1093.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+                [
                     'text' => 'K1098',
                     'route'  => 'k1098.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+                [
+                    'text' => 'K2028',
+                    'route'  => 'k2028.index',
                     'can' => 'ssidkr.index',
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
@@ -525,6 +565,13 @@ return [
                     'icon'    => '	fas fa-angle-right',
                 ],
                 [
+                    'text' => 'K2066',
+                    'route'  => 'k2066.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+                [
                      'text' => 'K23',
                      'route'  => 'kveintitres.index',
                      'can' => 'ssidkr.index',
@@ -546,8 +593,37 @@ return [
                 //     'icon'    => '	fas fa-angle-right',
                 // ],
                 [
+                    'text' => 'K5460',
+                    'route'  => 'k5460.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+
+                [
+                    'text' => 'K6057',
+                    'route'  => 'k6057.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+                [
+                    'text' => 'K7341 New',
+                    'route'  => 'k7341_poderosa.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+                [
                     'text' => 'K7341',
                     'route'  => 'ksietemilcuarentayuno.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+                [
+                    'text' => 'K10611',
+                    'route'  => 'k10611.index',
                     'can' => 'ssidkr.index',
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
@@ -618,42 +694,14 @@ return [
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
                 ],
-                [
+                /*[
                     'text' => 'K1083',
                     'route'  => 'k1083.index',
                     'can' => 'menu.premium',
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
-                ],
-                [
-                    'text' => 'K1091',
-                    'route'  => 'k1091.index',
-                    'can' => 'menu.premium',
-                    'icon_color' => 'red',
-                    'icon'    => '	fas fa-angle-right',
-                ],
-                [
-                    'text' => 'K1093',
-                    'route'  => 'k1093.index',
-                    'can' => 'menu.premium',
-                    'icon_color' => 'red',
-                    'icon'    => '	fas fa-angle-right',
-                ],
-                
-                /*[
-                    'text' => 'K2066',
-                    'route'  => 'k2066.index',
-                    'can' => 'menu.premium',
-                    'icon_color' => 'red',
-                    'icon'    => '	fas fa-angle-right',
                 ],*/
-                [
-                    'text' => 'K2028',
-                    'route'  => 'k2028.index',
-                    'can' => 'menu.premium',
-                    'icon_color' => 'red',
-                    'icon'    => '	fas fa-angle-right',
-                ],
+               
                 [
                     'text' => 'K23',
                     'route'  => 'k23_poderosa.index',
@@ -661,28 +709,7 @@ return [
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
                 ],
-                [
-                    'text' => 'K5460',
-                    'route'  => 'k5460.index',
-                    'can' => 'menu.premium',
-                    'icon_color' => 'red',
-                    'icon'    => '	fas fa-angle-right',
-                ],
-
-                [
-                    'text' => 'K6057',
-                    'route'  => 'k6057.index',
-                    'can' => 'menu.premium',
-                    'icon_color' => 'red',
-                    'icon'    => '	fas fa-angle-right',
-                ],
-                [
-                    'text' => 'K7341',
-                    'route'  => 'k7341_poderosa.index',
-                    'can' => 'menu.premium',
-                    'icon_color' => 'red',
-                    'icon'    => '	fas fa-angle-right',
-                ],
+                
             ],
             
         ],

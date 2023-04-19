@@ -106,7 +106,7 @@ class K7341Index extends Component
 
                     $link_register = new Links_usados();
                     $link_register->link = $this->search;
-                    $link_register->k_detected  = 'K=7341';
+                    $link_register->k_detected  = 'K=7341_NEW';
                     $link_register->user_id  = $this->user->id;
                     $link_register->save();
 
@@ -317,12 +317,12 @@ class K7341Index extends Component
                     if($this->jumper_detect == 0){
                         if($this->jumper_list == 0){
                             $link_register_search = Links_usados::where('link',$this->search)
-                                ->where('k_detected','K=7341')
+                                ->where('k_detected','K=7341_NEW')
                                 ->where('user_id',$this->user->id)
                                 ->count();
                              
 
-                            if($link_register_search >= 2){
+                            if($link_register_search >= 1){
 
                                 $this->jumper_detect = 7;
                                     
@@ -334,7 +334,7 @@ class K7341Index extends Component
                                 $date_actual= $date->format('Y-m-d H:i:s');
                                 $date_actual_30 = $date->modify('-30 minute')->format('Y-m-d H:i:s');
 
-                                $links_usados = Links_usados::where('k_detected','K=7341')
+                                $links_usados = Links_usados::where('k_detected','K=7341_NEW')
                                     ->where('user_id',$this->user->id)
                                     ->whereBetween('created_at',[$date_actual_30,$date_actual])
                                     ->count();

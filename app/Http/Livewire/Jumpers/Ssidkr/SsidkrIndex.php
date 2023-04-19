@@ -165,66 +165,48 @@ class SsidkrIndex extends Component
     }
 
     public function k1093(){
-        if($this->rol_user == 10 || $this->rol_user == 1 || $this->rol_user == 7 || $this->rol_user == 8 || $this->rol_user == 9){
-            session()->forget('search');
-            return 'k1093';
-        }
-        else{
-            return '#';
-        }
+        session()->forget('search');
+        return 'k1093';
     }
 
     public function k1091(){
-        if($this->rol_user == 10 || $this->rol_user == 1 || $this->rol_user == 7 || $this->rol_user == 8 || $this->rol_user == 9){
-            session()->forget('search');
-            return 'k1091';
-        }
-        else{
-            return '#';
-        }
+        session()->forget('search');
+        return 'k1091';
     }
 
     public function k2028(){
-        if($this->rol_user == 10 || $this->rol_user == 1 || $this->rol_user == 7 || $this->rol_user == 8 || $this->rol_user == 9){
-            session()->forget('search');
-            return 'k2028';
-        }
-        else{
-            return '#';
-        }
+        session()->forget('search');
+        return 'k2028';
     }
 
     public function k5460(){
-        if($this->rol_user == 10 || $this->rol_user == 1 || $this->rol_user == 7 || $this->rol_user == 8 || $this->rol_user == 9){
-            session()->forget('search');
-            return 'k5460';
-        }
-        else{
-            return '#';
-        }
+       
+        session()->forget('search');
+        return 'k5460';
+       
     }
 
     public function k6057(){
-        if($this->rol_user == 10 || $this->rol_user == 1 || $this->rol_user == 7 || $this->rol_user == 8 || $this->rol_user == 9){
-            session()->forget('search');
-            return 'k6057';
-        }
-        else{
-            return '';
-        }
+        session()->forget('search');
+        return 'k6057';
+    }
+
+    public function k10611(){
+        session()->forget('search');
+        return 'k10611';
     }
 
     public function redireccionl(){
 
-        if($this->rol_user == 10 || $this->rol_user == 1 || $this->rol_user == 7 || $this->rol_user == 8 || $this->rol_user == 9){
+       // if($this->rol_user == 10 || $this->rol_user == 1 || $this->rol_user == 7 || $this->rol_user == 8 || $this->rol_user == 9){
             return [
                 1 => "Dirígete a",
                 2 =>"Sección ". $this->k_detect,
                 3 =>"Haciendo clic aquí",
             ];
-        }
+       /* }
         else{
-            if($this->k_detect == 'K=2066' || $this->k_detect == 'K=1083' || $this->k_detect == 'K=1091' || $this->k_detect == 'K=2028' || $this->k_detect == 'K=5460' || $this->k_detect == 'K=6057'){
+            if($this->k_detect == 'K=1083' || $this->k_detect == 'K=1091' || $this->k_detect == 'K=2028' || $this->k_detect == 'K=5460' || $this->k_detect == 'K=6057'){
                 return [
                     1 =>"Para acceder a esta sección",
                     2 =>"debe adquirir el plan premium",
@@ -239,25 +221,17 @@ class SsidkrIndex extends Component
                     3 =>"Haciendo clic aquí",
                 ];
             }
-        }
+        }*/
     }
 
     public function redireccionk7341(){
 
-        if($this->rol_user == 10 || $this->rol_user == 1 || $this->rol_user == 7 || $this->rol_user == 8 || $this->rol_user == 9){
-            return [
-                1 => "Dirígete a",
-                2 =>"Sección K-7341 que corresponde",
-                3 =>"-",
-            ];
-        }
-        else{
-            return [
-                1 => "Dirígete a",
-                2 =>"Sección ". $this->k_detect,
-                3 =>"Haciendo clic aquí",
-            ];
-        }
+        return [
+            1 => "Dirígete a",
+            2 =>"Sección K-7341 que corresponde",
+            3 =>"-",
+        ];
+       
     }
 
     public function redireccionk1000(){
@@ -682,6 +656,10 @@ class SsidkrIndex extends Component
                             elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '6057') $type_k = 28;
                             elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '2028') $type_k = 29;
                             elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '1093') $type_k = 30;
+                            elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '2049') $type_k = 31;
+                            elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '11619') $type_k = 32;
+                            elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '10659') $type_k = 33;
+                            elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '10611') $type_k = 34;
 
                             else  $type_k = 15;
 

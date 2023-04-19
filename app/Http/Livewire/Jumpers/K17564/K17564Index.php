@@ -69,11 +69,7 @@ class K17564Index extends Component
 
         if($result[0] == $this->operacion->resultado){
 
-            $link_register = new Links_usados();
-            $link_register->link = $this->search;
-            $link_register->k_detected  = 'K=17564';
-            $link_register->user_id  = $this->user->id;
-            $link_register->save();
+            
 
             try {
 
@@ -85,6 +81,12 @@ class K17564Index extends Component
                 $resultado = $client->request('GET', '/k17564/1/'.$this->psid_buscar.'/'.$this->hash_buscar);
 
                 if($resultado->getStatusCode() == 200){
+
+                    $link_register = new Links_usados();
+                    $link_register->link = $this->search;
+                    $link_register->k_detected  = 'K=17564';
+                    $link_register->user_id  = $this->user->id;
+                    $link_register->save();
 
                     $this->jumper_complete = json_decode($resultado->getBody(),true);
 
@@ -305,7 +307,7 @@ class K17564Index extends Component
                                     ->count();
                              
 
-                                if($link_register_search > 3){
+                                if($link_register_search >= 1){
 
                                     $this->jumper_detect = 7;
                                     
@@ -321,7 +323,7 @@ class K17564Index extends Component
                                         ->whereBetween('created_at',[$date_actual_30,$date_actual])
                                         ->count();
 
-                                    if($links_usados <= 6){
+                                    if($links_usados <= 5){
                                         $this->numerologia();
                                     }
                                     else{
@@ -330,7 +332,6 @@ class K17564Index extends Component
                                         $this->jumper_detect = 6;
                                     }
                                 }
-
                             }
 
                             else{
@@ -595,174 +596,7 @@ class K17564Index extends Component
             }
 
             else{
-                $this->calc_link = 0;
-
-                session(['search' =>  $this->search]);
-
-                $busqueda_id= strpos($this->search, '**');
-
-                if($busqueda_id !== false){
-
-                    $this->busqueda_link = Link::where('psid',substr($this->search,($busqueda_id - 22),5))->first();
-                }
-
-                else{
-                    if(strlen($this->search) < 24){
-                        $busqueda_psid_ =  substr($this->search,0,5);
-                        $this->busqueda_link = Link::where('psid',$busqueda_psid_)->first();
-                    }
-
-                    else{
-
-                        $busqueda_psid_ = strpos($this->search, 'psid');
-                
-                        if($busqueda_psid_ !== false){
-                        
-                            $this->busqueda_link = Link::where('psid',substr($this->search,($busqueda_psid_ + 5),5))->first();
-                        }
-                    }
-                }
-
-                
-                if($this->busqueda_link){
-                    $busqueda_k3203_ = strpos($this->search, 'k=3203&');
-                    $busqueda_k2062_ = strpos($this->search, 'k=2062&');
-                    $busqueda_k1092_ = strpos($this->search, 'k=1092&');
-                    $busqueda_k1000_ = strpos($this->search, 'k=1000&');
-
-                    if($busqueda_k3203_ == false && $busqueda_k2062_ == false && $busqueda_k1092_ == false && $busqueda_k1000_ == false ){
-
-                        if($this->busqueda_link->jumper_type_id == 1 || $this->busqueda_link->jumper_type_id == 2) {
-
-                            session(['search' =>  $this->search]);
-                            $this->basic();
-
-                        }
-
-                        
-                        elseif($this->busqueda_link->k_detected == 'K=7341'){
-                    
-
-                            $this->k_detect = 'k=7341';
-                            $this->jumper_detect_k = $this->busqueda_link->jumper;
-
-                            $user_point= User_Links_Points::where('link_id',$this->busqueda_link->id)
-                                ->where('user_id',auth()->user()->id)
-                                ->first();
-                                                            
-                            $comments = Comments::where('link_id',$this->busqueda_link->id)
-                                ->latest('id')
-                                ->paginate(5);
-                                                                
-                            if($user_point) {
-                                if($user_point->point == 'positive'){
-                                                    
-                                    $this->points_user_positive='si';
-                                    $this->points_user_negative='no';
-                                    $this->points_user='si';
-                                
-                                }
-                            
-                                else{
-                                    $this->points_user_positive='no';
-                                    $this->points_user_negative='si';
-                                }
-                                                            
-                            }
-                            else{
-                                $this->points_user_positive='no';
-                                $this->points_user_negative='no';
-                            }
-
-                            session()->forget('search');
-
-        
-                        }
-
-                        elseif($this->busqueda_link->k_detected == 'K=3203') {
-                            session(['search' =>  $this->search]);
-                            $this->k3203();
-                        }
-                        elseif($this->busqueda_link->k_detected == 'K=2062') {
-                            session(['search' =>  $this->search]);
-                            $this->k2062();
-                        }
-                        elseif($this->busqueda_link->k_detected == 'K=1092') {
-                            session(['search' =>  $this->search]);
-                            $this->k1092();
-                        }
-                        elseif($this->busqueda_link->k_detected == 'K=1000') {
-                            session(['search' =>  $this->search]);
-                            $this->k1000();
-                        }
-                        else{
-                       
-                            if($this->busqueda_link->k_detected){
-                        
-                                $this->k_detect = $this->busqueda_link->k_detected;
-                       
-                            }
-                            if($this->busqueda_link->jumper){
-                                $this->jumper_detect_k = $this->busqueda_link->jumper;
-                            }
-
-                            $user_point= User_Links_Points::where('link_id',$this->busqueda_link->id)
-                                ->where('user_id',auth()->user()->id)
-                                ->first();
-                                                            
-                            $comments = Comments::where('link_id',$this->busqueda_link->id)
-                                ->latest('id')
-                                ->paginate(5);
-                                                                
-                            if($user_point) {
-                                if($user_point->point == 'positive'){
-                                                    
-                                    $this->points_user_positive='si';
-                                    $this->points_user_negative='no';
-                                    $this->points_user='si';
-                                
-                                }
-                            
-                                else{
-                                    $this->points_user_positive='no';
-                                    $this->points_user_negative='si';
-                                }
-                                                            
-                            }
-                            else{
-                                $this->points_user_positive='no';
-                                $this->points_user_negative='no';
-                            }
-                            session()->forget('search');
-                        }
-                    }
-                    else{
-                        if($busqueda_k3203_  != false) {
-                            session()->forget('search');
-                            $this->k3203();
-                        }
-                        if($busqueda_k2062_  != false) {
-                            session()->forget('search');
-                            $this->k2062();
-                        }
-                        if($busqueda_k1092_ != false) {
-                            session()->forget('search');
-                            $this->k1092();
-                        }
-                        if($busqueda_k1000_  != false) {
-                            session()->forget('search');
-                            $this->k1000();
-                        }
-                       
-                    }
-                    
-                }
-
-                
-                else{
-                    $this->no_detect = 1;
-                    session()->forget('search');
-                }
+                $this->jumper_detect = 3;
             }
         }
         else{

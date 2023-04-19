@@ -129,7 +129,7 @@
 
                 @if ($jumper_complete)
 
-                <div class="flex-nowrap justify-center callout callout-info">
+                <div class="flex-nowrap justify-center callout callout-info w-full">
                 
                       
                     <p  class="text-blue-400 text-clip text-sm text-center font-bold mb-2" id="jumper_copy">{{$jumper_complete['jumper']}}</p>
@@ -171,7 +171,7 @@
                                     <td class="text-center"> 
                                             <div class="flex justify-center">
                                         
-                                                <div >
+                                                <div>
                                                     <input type="number" wire:model.defer="pid_manual" class="rounded-sm bg-light py-1 px-1"  placeholder="{{__('messages.ingrese_pdi')}}">
                                                     <x-input-error for="pid_manual" />
                                                 </div>

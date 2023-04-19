@@ -28,11 +28,11 @@
 
              @if($jumper_complete != 0 || $jumper != "")
              <div class="input-group-prepend show">
-                    <button type="button" class="btn btn-default dropdown-toggle bg-danger" data-toggle="dropdown" aria-expanded="true">
+                    <button type="button" class="btn btn-default dropdown-toggle btn-secondary" data-toggle="dropdown" aria-expanded="true">
                         Generadores
                     </button>
                     <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;">
-                        <div class=" hover:bg-red-600 w-full h-full ">
+                        <div class=" hover:bg-gray-700 w-full h-full ">
                             <button
                                 class="text-white text-xs font-bold ml-2 hover:text-slate-500" 
                                 wire:click="qt">
@@ -41,7 +41,7 @@
 
                         </div>
                         <div class="dropdown-divider"></div>
-                        <div class=" hover:bg-red-600 w-full h-full ">
+                        <div class=" hover:bg-gray-700 w-full h-full ">
                             <button
                                 class="text-white text-xs font-bold ml-2 hover:text-slate-500" 
                                 wire:click="sp">
@@ -101,7 +101,7 @@
 
                 <div class="flex-nowrap justify-center callout callout-info">
                     <div>
-                        <p class="text-blue-400 text-md text-center font-bold mb-1 " id="jumper_copy">{{$jumper_complete}}</p>
+                        <p class="text-cyan-400 text-md text-center font-bold mb-1 " id="jumper_copy">{{$jumper_complete}}</p>
                         
                     </div>
         @endif
@@ -110,7 +110,7 @@
                             <div>
                                 @if ($jumper_complete != 0 && $jumper != "" && $calc_link == 1 && $no_jumpear == 0)
                                     <div class="flex justify-center">
-                                    <button onclick="copiarAlPortapapeles('jumper_copy')" class="btn btn-sm btn-success text-bold" title="{{__('messages.copiar_portapapeles')}}" id="button_copy">Copiar</button> 
+                                    <button onclick="copiarAlPortapapeles('jumper_copy')" class="btn btn-sm bg-success rounded-lg text-bold" title="{{__('messages.copiar_portapapeles')}}" id="button_copy">Copiar</button> 
 
                                     </div>
                                 @endif
@@ -133,7 +133,7 @@
                         <p class="text-gray-100 text-sm text-center font-bold mb-1 mt-2" id="jumper_copy_qt">{{$jumper_complete_qt}}</p>
 
                         <div class="flex justify-center">
-                            <button onclick="copiarAlPortapapeles_qt('jumper_copy_qt')" class="btn btn-sm btn-success text-bold" title="{{__('messages.copiar_portapapeles')}}" id="button_copy_qt">Copiar</button> 
+                            <button onclick="copiarAlPortapapeles_qt('jumper_copy_qt')" class="btn btn-sm bg-success rounded-lg text-bold" title="{{__('messages.copiar_portapapeles')}}" id="button_copy_qt">Copiar</button> 
 
                         </div>
                         
@@ -154,7 +154,7 @@
                     <p class="text-gray-100 text-sm text-center font-bold mb-1 mt-2" id="jumper_copy_sp">{{$jumper_complete_sp}}</p>
 
                         <div class="flex justify-center">
-                            <button onclick="copiarAlPortapapeles_sp('jumper_copy_sp')" class="btn btn-sm btn-success text-bold" title="{{__('messages.copiar_portapapeles')}}" id="button_copy_sp">Copiar</button> 
+                            <button onclick="copiarAlPortapapeles_sp('jumper_copy_sp')" class="btn btn-sm bg-success rounded-lg text-bold" title="{{__('messages.copiar_portapapeles')}}" id="button_copy_sp">Copiar</button> 
 
                         </div>
                     </font></font>
@@ -214,7 +214,7 @@
                                             
                                         <td width="10px">
                                             <button
-                                                class="py-2 px-3 text-md font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" 
+                                                class="py-2 px-3 text-md font-medium text-center text-white bg-info rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" 
                                                 x-bind:disabled="points_user_positive == 'si'"
                                                 wire:click="positivo('{{$jumper->id}}')"
                                                 wire:loading.attr="disabled"
@@ -239,7 +239,7 @@
                                                 class="py-2 px-3 text-md font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" 
                                                 wire:click="descalificador()"
                                                 title="Descalificador">
-                                               DESCALIFICAR
+                                               Descalificar
                                             </button>
                                         </td>
                                     </tr>
@@ -266,9 +266,11 @@
                             </div>
                         @endif
 
-                    @if ($k_detect == 'K=2049' || $k_detect == 'K=11619' || $k_detect == 'K=10659'|| $k_detect == 'K=1093' || $k_detect == 'K=1092' || $k_detect == 'K=1098'|| $k_detect == 'K=2062' || $k_detect == 'K=3203' || $k_detect == 'K=23' || $k_detect == 'K=3906' || $k_detect == 'K=11052' || $k_detect == 'K=15293' || $k_detect == 'K=17564' || $k_detect == 'K=10634' || $k_detect == 'K=1083' || $k_detect == 'K=1091' || $k_detect == 'K=2028' || $k_detect == 'K=5460' || $k_detect == 'K=6057' )
+                    @if ($k_detect == 'K=10611' || $k_detect == 'K=2049' || $k_detect == 'K=11619' || $k_detect == 'K=10659'|| $k_detect == 'K=1093' || $k_detect == 'K=1092' || $k_detect == 'K=1098'|| $k_detect == 'K=2062' || $k_detect == 'K=3203' || $k_detect == 'K=23' || $k_detect == 'K=3906' || $k_detect == 'K=11052' || $k_detect == 'K=15293' || $k_detect == 'K=17564' || $k_detect == 'K=10634' || $k_detect == 'K=1083' || $k_detect == 'K=1091' || $k_detect == 'K=2028' || $k_detect == 'K=5460' || $k_detect == 'K=6057' )
                     <div>
-                        
+                        @if ($k_detect == 'K=10611')
+                        <a href={{$this->k10611()}}>
+                        @endif
                         @if ($k_detect == 'K=1092')
                         <a href={{$this->k1092()}}>
                         @endif
@@ -419,9 +421,9 @@
                                 <textarea wire:model.defer="comentario" class="form-control" id="formGroupExampleInput" name="comentario" cols="80" rows="2" placeholder="{{__('messages.comparte_experiencia')}}"></textarea>
                             </div>
 
-                            <div class="mt-3 mb-2">
+                            <div class="mt-3 mb-2 mr-2">
                             <button
-                                class="btn btn-primary" 
+                                class="btn bg-info" 
                                 wire:click="comentar('{{$jumper->id}}')"
                                 title="{{__('messages.Guardar')}}">
                                 {{__('messages.Guardar')}}

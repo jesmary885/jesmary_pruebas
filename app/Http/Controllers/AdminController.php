@@ -23,6 +23,14 @@ class AdminController extends Controller
 
     }
 
+    public function tasa_cambio(){
+        return view('admin.tasa_cambio');
+    }
+
+    public function jumper_dia(){
+        return view('admin.jumper_dia');
+    }
+
     public function comentarios(){
         return view('admin.comentarios');
 

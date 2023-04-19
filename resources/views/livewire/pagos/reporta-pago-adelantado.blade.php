@@ -4,56 +4,41 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title py-0 text-lg text-gray-300"> Reporte de pago</h5>
+                        <h5 class="modal-title py-0 text-lg text-gray-300"> {{__('messages.registro_pago')}}</h5>
                     </div>
                     <div class="modal-body">
                         <h2 class="text-sm ml-2 m-0 p-0 text-gray-300 font-semibold text-justify"><i class="fas fa-info-circle"></i> {{__('messages.Complete_todos_los_campos_y_presiona_Guardar')}}</h2> 
                 
                         <hr class="m-2 p-2">
 
-                            <div class="flex justify-between">
+                        <p class="info-box-text mb-2">PRECIO DE MEMBRESIA: </p>
+                        <p class="info-box-text"> - 10$ </p>
+                        <p class="info-box-text"> - {{10* $tasa_dia_dolar}} Bs. </p>
+                        <p class="info-box-text"> - {{round((10 / $tasa_dia_ltc),2)}} LTC.</p>
+
+                        <hr class="m-2 p-2">
+
+                            <div class="flex justify-between mt-0">
                                 
                                 <div class="form-group w-full">
                                     <label class="w-full text-justify">Motivo</label>
                                     <select wire:model="plan" title="Plan" id="estado" class="block w-full text-gray-400 py-2 px-2 pr-8 leading-tight rounded focus:outline-none focus:border-gray-500" name="estado">
-                                        <option value="" selected>Seleccione una opción</option>    
-                                        <option value="balance">Saldo en página</option>
-                                        <option value="15">Pago de plan - 15 días</option>
-                                        <option value="30">Pago de plan - 30 días</option>
+                                        <option value="" selected>{{__('messages.seleccione_opcion')}}</option>  
+                                        <option value="membresia">{{__('messages.pago_mensualidad')}}</option>  
+                                        <option value="balance">{{__('messages.add_saldo_pagina')}}</option>
                                     </select>
                                     <x-input-error for="plan" />
                                     
                                 </div>
                             </div>
 
-                            
-                            @if($plan == "15" || $plan == "30")
-                            <div class="form-group w-full mr-2">
-                                <select wire:model="type" title="Plan" id="type" class="block w-full text-gray-400 py-2 px-2 pr-8 leading-tight rounded focus:outline-none focus:border-gray-500" name="type">
-                                        <option value="" selected>Seleccione una opción</option>    
-                                        <option value="premium">Plan Premium</option>
-                                </select>
-                                <x-input-error for="type" />
-                            </div>
-                            @endif
-
-                            @if($plan == "30")
-                            <div class="form-group w-full mr-2">
-                                <select wire:model="type" title="Plan" id="type" class="block w-full text-gray-400 py-2 px-2 pr-8 leading-tight rounded focus:outline-none focus:border-gray-500" name="type">
-                                        <option value="" selected>Seleccione una opción</option>    
-                                        <option value="basico">Plan Básico</option>
-                                        <option value="premium">Plan Premium</option>
-                                </select>
-                                <x-input-error for="type" />
-                            </div>
-                            @endif
 
 
                             @if($plan == "balance")
                                 <div class="form-group w-full mr-2">
-                                    <label class="w-full text-justify">Monto:</label>
+                                    <label class="w-full text-justify">{{__('messages.monto')}}</label>
                                     <div class="flex ">
-                                        <input type="number" wire:model="monto" class="form-control rounded w-1/3" >
+                                        <input type="number" min="5" wire:model="monto" class="form-control rounded w-1/3" >
                                         <p class="text-gray-300 font-bold text-ms ml-2 mt-1">$</p>
                                     </div>
                                     
@@ -63,28 +48,29 @@
 
                          
                             <div class="form-group w-full mr-2">
-                                    <label for="formGroupExampleInput2 mb-2">Método de pago ha utilizar</label>
+                                    <label for="formGroupExampleInput2 mb-2">{{__('messages.metodo_pago_utilizar')}}</label>
                                         <select wire:model="metodo_id" class="form-control w-full">
-                                            <option value="" selected>Seleccione una opción</option>
-                                                @foreach ($payment_methods as $metodo)
+                                            <option value="" selected>{{__('messages.seleccione_opcion')}}</option>
+                                                @foreach ($this->verific() as $metodo)
                                                     <option value="{{$metodo->id}}">{{$metodo->name}}</option>
                                                 @endforeach
                                         </select>
                                     <x-input-error for="metodo_id" />
                             </div>
 
-
+                        @if($metodo_id != '1')  
                             <div class="form-group w-full mr-2">
-                                    <label class="w-full text-justify">Nro de referencia:</label>
+                                    <label class="w-full text-justify">{{__('messages.referencia_nro')}}</label>
                                     <div class="flex ">
                                         <input type="number" wire:model="referencia" class="form-control rounded" >
                                     </div>
                                     
                                     <x-input-error for="referencia" />
                             </div>
+                        @endif
 
                             <div class="form-group w-full">
-                                    <label class="w-full text-justify">Fecha de pago</label>
+                                    <label class="w-full text-justify">{{__('messages.fecha_pago')}}</label>
                                     <div>
                                         <div wire:ignore x-data="datepicker()">
                                             <div class="flex flex-col">
@@ -101,27 +87,37 @@
                                         </div>
                                     </div>
                             </div>
-                      
-                            <div class="w-full">
-                                <div class="flex">
-                                    <i class="fas fa-file-pdf mt-2 mr-2 text-gray-300"></i>
-                                    <h2 class="text-md inline mt-2 text-gray-300 mb-2">Adjunte la constancia de pago</h2>
-                                </div> 
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <input type="file" wire:model="file" id="file" class="block w-full text-base font-normal text-gray-300 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out focus:text-gray-300 focus:border-blue-600 focus:outline-none">
-                                        
-                                            <p class="text-gray-400 mt-2"></p>
-                                            <x-input-error for="file" />
+
+                            @if($metodo_id != '1')
+                                <div class="w-full">
+                                    <div class="flex">
+                                        <i class="	fas fa-file-image mt-2 mr-2 text-gray-300"></i>
+                                        <h2 class="text-md inline mt-2 text-gray-300 mb-2">{{__('messages.constancia_pago')}}</h2>
+                                    </div> 
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="w-50 h-50">         
+                                                @if ($file)
+                                                <img src="{{ $file->temporaryUrl() }}" width="100%" height="100%">
+                                                @endif
+                                            </div>
                                         </div>
-                                        
+
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <input type="file" wire:model="file" id="file" class="block w-full text-base font-normal text-gray-300 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out focus:text-gray-300 focus:border-blue-600 focus:outline-none" accept="image/*">
+                                                @error('file')
+                                                <small class="text-danger">{{$message}}</small>
+                                                @enderror
+                                                <p>Tipos de archivos permitidos: JPG, JPEG, PNG. Tamaño máximo 3MB.</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endif
 
                             <div class="form-group">
-                                <label for="formGroupExampleInput2">Comentarios</label>
+                                <label for="formGroupExampleInput2">{{__('messages.Comentarios')}}</label>
                                 <textarea wire:model="comentario" id="formGroupExampleInput" class="form-control resize-none rounded" cols="80" rows="5"> </textarea>
                                 <x-input-error for="comentario" />
                             </div>

@@ -85,7 +85,7 @@
     <div class="row">
 
 
-        <div class="col-lg-3 col-6">
+        {{--<div class="col-lg-3 col-6">
             <div class="small-box bg-success">
                 <div class="inner">
                     <h3>{{$users_plan_15_premium}}</h3>
@@ -96,7 +96,7 @@
                 </div>
                     <a href="# " class="small-box-footer">Más información<i class="fas fa-arrow-circle-right"></i></a>
             </div>
-        </div>
+        </div>--}}
 
         <div class="col-lg-3 col-6">
             <div class="small-box bg-success">
@@ -133,7 +133,7 @@
             </div>
         </div>
 
-        <div class="col-lg-3 col-6">
+        {{--<div class="col-lg-3 col-6">
             <div class="small-box bg-danger">
                 <div class="inner">
                     <h3>{{$ganancia_dia_15_premium}} $</h3>
@@ -144,7 +144,7 @@
                 </div>
                     <a href="# " class="small-box-footer">Más información<i class="fas fa-arrow-circle-right"></i></a>
             </div>
-        </div>
+        </div>--}}
 
         <div class="col-lg-3 col-6">
             <div class="small-box bg-danger">
@@ -244,7 +244,7 @@
             </div>
         </div>
 
-        <div class="col-lg-3 col-6">
+        {{--<div class="col-lg-3 col-6">
             <div class="small-box bg-danger">
                 <div class="inner">
                     <h3>{{$ganancia_mes_15_premium}} $</h3>
@@ -255,7 +255,7 @@
                 </div>
                     <a href="# " class="small-box-footer">Más información<i class="fas fa-arrow-circle-right"></i></a>
             </div>
-        </div>
+        </div>--}}
 
         <div class="col-lg-3 col-6">
             <div class="small-box bg-danger">
@@ -293,7 +293,7 @@
 
     <div class="row">
 
-        <div class="col-lg-3 col-6">
+        {{--<div class="col-lg-3 col-6">
             <div class="small-box bg-success">
                 <div class="inner">
                     <h3>{{$ganancia_mes_basic_15_suscriptor}} $</h3>
@@ -304,10 +304,10 @@
                 </div>
                     <a href="# " class="small-box-footer">Más información<i class="fas fa-arrow-circle-right"></i></a>
             </div>
-        </div>
+        </div>--}}
 
 
-        <div class="col-lg-3 col-6">
+        {{--<div class="col-lg-3 col-6">
             <div class="small-box bg-success">
                 <div class="inner">
                     <h3>{{$ganancia_mes_basic_30_suscriptor}} $</h3>
@@ -318,7 +318,7 @@
                 </div>
                     <a href="# " class="small-box-footer">Más información<i class="fas fa-arrow-circle-right"></i></a>
             </div>
-        </div>
+        </div>--}}
 
         <div class="col-lg-3 col-6">
             <div class="small-box bg-warning">
@@ -336,12 +336,12 @@
     </div>
 
     <h2 class="text-gray-200 font-bold p-2 text-lg">
-        GANANCIA DE 12$ POR SUSCRIPTOR
+        GANANCIA DE 4$ POR SUSCRIPTOR
     </h2>
 
     <div class="row">
 
-        <div class="col-lg-3 col-6">
+        {{--<div class="col-lg-3 col-6">
             <div class="small-box bg-green">
                 <div class="inner">
                     <h3>{{$ganancia_mes_premium_15_suscriptor}} $</h3>
@@ -352,9 +352,9 @@
                 </div>
                     <a href="# " class="small-box-footer">Más información<i class="fas fa-arrow-circle-right"></i></a>
             </div>
-        </div>
+        </div>--}}
 
-        <div class="col-lg-3 col-6">
+        {{--<div class="col-lg-3 col-6">
             <div class="small-box bg-green">
                 <div class="inner">
                     <h3>{{$ganancia_mes_premium_30_suscriptor}} $</h3>
@@ -365,7 +365,7 @@
                 </div>
                     <a href="# " class="small-box-footer">Más información<i class="fas fa-arrow-circle-right"></i></a>
             </div>
-        </div>
+        </div>--}}
 
         <div class="col-lg-3 col-6">
             <div class="small-box bg-warning">

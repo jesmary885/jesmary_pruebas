@@ -93,8 +93,8 @@
                 <div class=" info-box bg-warning">
                     <span class="info-box-icon"><i class="fas fa-info"></i></span>
                         <div class="info-box-content">
-                            <span class="info-box-text">Esta intentando generar más de 2 jumpers en menos de 30 min. </span>
-                            <span class="info-box-number">Intentelo luego.</span>
+                            <span class="info-box-text">Ya ha generado los tres(3) jumpers permitidos durante el día</span>
+                            
                         </div>
                 </div>
             </div>
@@ -129,7 +129,7 @@
 
                 @if ($jumper_complete)
 
-                <div class="flex-nowrap justify-center callout callout-info">
+                <div class="flex-nowrap justify-center callout callout-info w-full">
                 
                       
                     <p  class="text-blue-400 text-clip text-sm text-center font-bold mb-2" id="jumper_copy">{{$jumper_complete['jumper']}}</p>
@@ -217,7 +217,7 @@
 
                 </div>
 
-                <div class="grid md:grid-cols-3 gap-4 mt-4 card container">
+                <div class="grid md:grid-cols-3 gap-4 mt-4 card">
 
                 <aside class="md:col-span-1 p-2">
                     @if($jumper_detect_k  != '')
@@ -254,7 +254,7 @@
                                 <textarea wire:model.defer="comentario" class="form-control" id="formGroupExampleInput" name="comentario" cols="80" rows="2" placeholder="{{__('messages.comparte_experiencia')}}"></textarea>
                         </div>
 
-                        <div class="mt-3 mb-2">
+                        <div class="mt-3 mb-2 mr-2">
                             <button
                                 class="btn btn-primary" 
                                 wire:click="comentar('{{$busqueda_link->id}}')"
@@ -264,7 +264,7 @@
 
                         </div>
                     </div>
-                        <div class="card container ml-2">
+                        <div class="card container">
                             @if ($comments)
                                 @foreach ($comments as $comment)
                                     <div class="flex justify-between card-body">

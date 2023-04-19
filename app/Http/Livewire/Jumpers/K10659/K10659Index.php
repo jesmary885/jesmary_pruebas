@@ -348,7 +348,7 @@ class K10659Index extends Component
                                 ->count();
                              
 
-                            if($link_register_search >= 2){
+                            if($link_register_search >= 1){
 
                                 $this->jumper_detect = 7;
                                     

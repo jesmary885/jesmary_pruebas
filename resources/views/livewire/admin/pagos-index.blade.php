@@ -75,6 +75,7 @@
                             <select wire:model="vista_registros" id="vista_registros" class="form-control w-full" name="vista_registros">
                                 <option value="0">Pendientes</option>
                                 <option value="1">Verificados</option>
+                                <option value="2">Pagos no recibidos</option>
                             </select>
                         </div>
 
@@ -165,10 +166,7 @@
                             class="text-center">
                             Tipo
                         </th>
-                        <th 
-                            class="text-center">
-                            Plan
-                        </th>
+                       
                         <th 
                             class="text-center">
                             Método
@@ -222,9 +220,7 @@
                             <td class="text-center">
                             {{$registro->type}}
                             </td>
-                            <td class="text-center">
-                            {{$registro->plan}}
-                            </td>
+                           
                             <td class="text-center">
                             {{$registro->paymentMethod->name}}
                             </td>
@@ -252,6 +248,7 @@
                             -
                             @endif
                             </td>
+                            @if($registro->file)
                             <td class="text-center">
                                 <button class="text-green-600 text-lg hover:text-green-900"
                                     
@@ -259,6 +256,7 @@
                                     <i class="fas fa-download"></i>
                                 </button>
                             </td>
+                            @endif
 
                             @if ($registro->comentario != '')
                                 <td class="text-center">

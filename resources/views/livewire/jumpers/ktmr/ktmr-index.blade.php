@@ -104,21 +104,21 @@
 
                 @if ($jumper_complete)
 
-                <div class="flex-nowrap justify-center callout callout-info">
-                
-                      
-                    <p  class="text-blue-400 text-clip text-md text-center font-bold mb-2" id="jumper_copy">{{$jumper_complete['jumper']}}</p>
-
-                    <div class="flex justify-center">
-                        <button onclick="copiarAlPortapapeles('jumper_copy')" class="btn btn-sm btn-success text-bold" title="{{__('messages.copiar_portapapeles')}}" id="button_copy">Copiar</button> 
-                    </div>
-                            
+                    <div class="flex-nowrap justify-center callout callout-info">
                     
-                </div>
+                        
+                        <p  class="text-blue-400 text-clip text-md text-center font-bold mb-2" id="jumper_copy">{{$jumper_complete['jumper']}}</p>
+
+                        <div class="flex justify-center">
+                            <button onclick="copiarAlPortapapeles('jumper_copy')" class="btn btn-sm btn-success text-bold" title="{{__('messages.copiar_portapapeles')}}" id="button_copy">Copiar</button> 
+                        </div>
+                                
+                        
+                    </div>
 
                 @endif
 
-   
+    </div>
 
 
     <style>
@@ -168,7 +168,7 @@
      }
     </style>
 
-@section('js')
+    @section('js')
         <script>
             function copiarAlPortapapeles(id_elemento) {
 
@@ -201,9 +201,6 @@
                 toastr.success('Copy..')
             }
         </script>
-
-
-
 
     @stop
 

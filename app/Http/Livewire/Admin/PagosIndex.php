@@ -164,6 +164,65 @@ class PagosIndex extends Component
 
            
         }
+
+        if($this->vista_registros == 2){
+
+            if($this->buscador == 0){
+                $registros = PagoRegistrosRecarga::whereHas('user_cliente',function(Builder $query){
+                    $query->where('username','LIKE', '%' . $this->search . '%');
+                })
+                ->where('status','no_recibido')
+                ->latest('id')
+                ->paginate(15);
+
+                $total_registros = PagoRegistrosRecarga::whereHas('user_cliente',function(Builder $query){
+                    $query->where('username','LIKE', '%' . $this->search . '%');
+                })
+                ->where('status','no_recibido')
+                ->latest('id')
+                ->count();
+
+            }
+
+            elseif($this->buscador == 1){
+                $registros = PagoRegistrosRecarga::where('nro_referencia', 'LIKE', '%' . $this->search . '%')
+                    ->where('status','no_recibido')
+                    ->latest('id')
+                    ->paginate(15);
+
+                $total_registros = PagoRegistrosRecarga::where('nro_referencia', 'LIKE', '%' . $this->search . '%')
+                ->where('status','no_recibido')
+                ->latest('id')
+                ->count();
+                
+            }
+
+            else{
+
+                if($this->fecha_inicio && $this->fecha_fin){
+                    $fecha_inicio = date("Y-m-d",strtotime($this->fecha_inicio));
+                    $fecha_fin = date("Y-m-d",strtotime($this->fecha_fin));
+                    
+                    $registros = PagoRegistrosRecarga::where('status','no_recibido')
+                    ->whereBetween('created_at',[$fecha_inicio,$fecha_fin])
+                    ->latest('id')
+                    ->paginate(15);
+    
+                    $total_registros = PagoRegistrosRecarga::where('status','no_recibido')
+                    ->whereBetween('created_at',[$fecha_inicio,$fecha_fin])
+                    ->count();
+                }
+
+                else{
+                    $registros = [];
+
+                    $total_registros = 0;
+                }
+
+            }
+
+           
+        }
         return view('livewire.admin.pagos-index',compact('total_registros','registros'));
     }
 

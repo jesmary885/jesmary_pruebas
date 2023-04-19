@@ -44,7 +44,7 @@
     <li class="nav-item dropdown d-none d-md-block">
         <a href="#" class="nav-link dropdown-toggle text-gray-800 font-semibold" data-toggle="dropdown">
             @if(session('psid'))
-                <span class="text-green-600">
+                <span class=" text-cyan-500 font-bold">
                     PSID o perfil : {{session('psid')}}
                 </span>
             @else
@@ -54,11 +54,11 @@
         <ul class="dropdown-menu">
             @if(auth()->user()->roles->first()->id != 4)
                 @if(session('psid'))
-                    <a class="block dropdown-item " href="{{route('registro.psid')}}"> Cambiar PSID </a> 
-                    <a class="block dropdown-item " href="{{route('limpiar.psid')}}"> Limpiar</a> 
+                    <a class="block dropdown-item text-decoration-none" href="{{route('registro.psid')}}"> <span class=" text-gray-300 font-bold">Cambiar PSID </span></a> 
+                    <a class="block dropdown-item text-decoration-none" href="{{route('limpiar.psid')}}"> <span class=" text-gray-300 font-bold"> Limpiar </span></a> 
                   
                 @else
-                    <a class="block dropdown-item " href="{{route('registro.psid')}}"> Registrar PSID </a> 
+                    <a class="block dropdown-item " href="{{route('registro.psid')}}"><span class=" text-gray-300 font-bold"> Registrar PSID </span> </a> 
                 @endif
             @else
                 <a class="block dropdown-item " href="#"> Su cuenta esta inactiva </a> 
@@ -69,7 +69,7 @@
     <li class="nav-item dropdown d-none d-md-block">
         <a href="#" class="nav-link dropdown-toggle text-gray-800 font-semibold" data-toggle="dropdown">
             @if(session('pid'))
-                <span class="text-blue-600">
+                <span class="text-cyan-500 font-bold">
                     PID : {{session('pid')}}
                 </span>
             @else
@@ -79,10 +79,10 @@
         <ul class="dropdown-menu">
         @if(auth()->user()->roles->first()->id != 4)
             @if(session('pid'))
-                <a class="block dropdown-item " href="{{route('registro.pid')}}"> Cambiar PID </a> 
-                <a class="block dropdown-item " href="{{route('limpiar.pid')}}"> Limpiar</a> 
+                <a class="block dropdown-item " href="{{route('registro.pid')}}"> <span class=" text-gray-300 font-bold">Cambiar PID </span></a> 
+                <a class="block dropdown-item " href="{{route('limpiar.pid')}}"> <span class=" text-gray-300 font-bold">Limpiar</span></a> 
             @else
-                <a class="block dropdown-item " href="{{route('registro.pid')}}"> Registrar PID </a> 
+                <a class="block dropdown-item " href="{{route('registro.pid')}}"> <span class=" text-gray-300 font-bold">Registrar PID</span> </a> 
             @endif
         @else
                 <a class="block dropdown-item " href="#"> Su cuenta esta inactiva </a> 
@@ -146,12 +146,12 @@
     <ul class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
 
         <li class="user-footer">
-        <!-- @if(auth()->user()->roles->first()->id != 4)
+        @if(auth()->user()->roles->first()->id != 4)
         <a href="{{ route('reporte_pago') }}" class="btn btn-default btn-flat btn-block">
                 <i class="far fa-credit-card text-green mr-2"></i>
                 Reportar pago
         </a>
-        @endif -->
+        @endif
 
             <a href="{{ route('profile.show') }}" class="btn btn-default btn-flat btn-block">
                     <i class="fa fa-fw fa-user text-lightblue"></i>

@@ -35,7 +35,7 @@ class History extends Component
 
     public function calificacion($calificacion){
         if($calificacion == 'positive'){
-            return "font-semibold far fa-thumbs-up py-2 px-3 text-md font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800";
+            return "font-semibold far fa-thumbs-up py-2 px-3 text-md font-medium text-center text-white bg-info rounded-lg focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800";
 
         }
         else{

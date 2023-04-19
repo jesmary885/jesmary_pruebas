@@ -325,7 +325,7 @@ class K1083Index extends Component
                                     ->count();
                              
 
-                                if($link_register_search >= 2){
+                                if($link_register_search >= 1){
 
                                     $this->jumper_detect = 7;
                                     
@@ -333,15 +333,15 @@ class K1083Index extends Component
                                 else{
                                     $date = new DateTime();
 
-                                    $date_actual= $date->format('Y-m-d H:i:s');
-                                    $date_actual_30 = $date->modify('-30 minute')->format('Y-m-d H:i:s');
+                                    $date_actual= $date->format('Y-m-d');
+                                    //$date_actual_30 = $date->modify('-30 minute')->format('Y-m-d H:i:s');
 
                                     $links_usados = Links_usados::where('k_detected','K=1083')
                                         ->where('user_id',$this->user->id)
-                                        ->whereBetween('created_at',[$date_actual_30,$date_actual])
+                                        ->whereDate('created_at',$date_actual)
                                         ->count();
 
-                                    if($links_usados < 2){
+                                    if($links_usados <= 2){
                                         $this->numerologia();
                                     }
                                     else{

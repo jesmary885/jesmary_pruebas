@@ -129,7 +129,7 @@
 
                 @if ($jumper_complete)
 
-                <div class="flex-nowrap justify-center callout callout-info">
+                <div class="flex-nowrap justify-center callout callout-info w-full">
                 
                       
                     <p  class="text-blue-400 text-clip text-sm text-center font-bold mb-2" id="jumper_copy">{{$jumper_complete['jumper']}}</p>

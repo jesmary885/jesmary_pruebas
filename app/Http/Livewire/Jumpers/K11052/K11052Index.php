@@ -68,12 +68,6 @@ class K11052Index extends Component
 
         if($result[0] == $this->operacion->resultado){
 
-            $link_register = new Links_usados();
-            $link_register->link = $this->search;
-            $link_register->k_detected  = 'K=11052';
-            $link_register->user_id  = $this->user->id;
-            $link_register->save();
-
             $client = new Client([
                 //'base_uri' => 'http://127.0.0.1:8000',
                 'base_uri' => 'http://209.94.57.88/',
@@ -82,6 +76,12 @@ class K11052Index extends Component
             $resultado = $client->request('GET', '/k11052/1/'.$this->psid_buscar);
 
             if($resultado->getStatusCode() == 200){
+
+                $link_register = new Links_usados();
+                $link_register->link = $this->search;
+                $link_register->k_detected  = 'K=11052';
+                $link_register->user_id  = $this->user->id;
+                $link_register->save();
 
                 $this->jumper_complete = json_decode($resultado->getBody(),true);
 
@@ -253,7 +253,7 @@ class K11052Index extends Component
                                     ->count();
                              
 
-                                if($link_register_search > 3){
+                                if($link_register_search >= 1){
 
                                     $this->jumper_detect = 7;
                                     

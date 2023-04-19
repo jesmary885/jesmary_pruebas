@@ -8,6 +8,8 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
+use App\Models\Tasa_dia;
 
 use Livewire\Component;
 
@@ -15,15 +17,18 @@ class ReportePago extends Component
 {
     use WithFileUploads;
 
-    public $msj_aviso,$type,$file,$isopen = false, $plan,$comentario,$metodo_id,$payment_methods,$referencia,$fecha_pago;
+    public $tasa_dia_dolar,$tasa_dia_ltc,$msj_aviso,$type,$file,$isopen = false, $plan,$comentario,$metodo_id,$payment_methods,$referencia,$fecha_pago;
 
     protected $rules = [
-        'plan' => 'required',
         'metodo_id' => 'required',
         'referencia' => 'required|numeric',
         'fecha_pago' => 'required',
-        'file' => 'required',
-        'type' => 'required'
+        'file' => 'required|image',
+    ];
+
+    protected $rules_con_balance = [
+        'metodo_id' => 'required',
+        'fecha_pago' => 'required',
     ];
 
     public function open()
@@ -36,8 +41,21 @@ class ReportePago extends Component
     }
 
     public function mount(){
-        $this->payment_methods = PaymentMethods::all();
+        //$this->payment_methods = PaymentMethods::all();
         $this->msj_aviso = 0;
+        $this->tasa_dia_dolar = Tasa_dia::where('moneda','DOLAR')->first()->tasa;
+        $this->tasa_dia_ltc = Tasa_dia::where('moneda','LTC')->first()->tasa;
+    }
+
+    public function verific(){
+        $user = User::where('id',Auth::id())->first();
+
+        if($user->balance>=10){
+            return $this->payment_methods = PaymentMethods::all();
+        }
+        else{
+            return $this->payment_methods = PaymentMethods::where('id','!=','1')->get();
+        }
     }
 
     public function render()
@@ -47,62 +65,51 @@ class ReportePago extends Component
 
     public function save(){
 
-        $rules = $this->rules;
-        $this->validate($rules);
-
-        if($this->type == 'basico' && $this->plan == '15'){
-            return redirect()->to('/home');
+        if($this->metodo_id == 1){
+            $rules = $this->rules_con_balance;
+            $this->validate($rules);
+        }
+        else{
+            $rules = $this->rules;
+            $this->validate($rules);
+            
         }
 
+        $fecha_actual = date("Y-m-d h:s");
+        $date = Carbon::now();
 
-        else{
-            $fecha_actual = date("Y-m-d h:s");
-            $date = Carbon::now();
+        $user = User::where('id',Auth::id())->first();
+        $rol = $user->roles->first()->id;
+        
 
-            $user = User::where('id',Auth::id())->first();
-            $rol = $user->roles->first()->id;
-
-            $new_pago = new PagoRegistrosRecarga();
-            $new_pago->user_id = Auth::id();
-            $new_pago->file = $this->file->store('pagos_recargas');
-            $new_pago->plan = $this->plan;
-            $new_pago->status = 'pendiente';
+        $new_pago = new PagoRegistrosRecarga();
+        $new_pago->user_id = Auth::id();
+        if($this->metodo_id != 1){
+            $url = Storage::put('public/pagos_recargas', $this->file);
+            $new_pago->file = $url;
             $new_pago->nro_referencia = $this->referencia;
-            $new_pago->fecha_pago = $this->fecha_pago;
-            $new_pago->payment_method_id = $this->metodo_id;
-            $new_pago->comentario = $this->comentario;
-            $new_pago->type = $this->type;
-            if($this->type == 'basico' && $this->plan == '30'){
-                $new_pago->monto = '6';
-                $new_pago->pago_basico = '1';
-            } 
-            if($this->type == 'premium' && $this->plan == '15'){
-                $new_pago->monto = '16';
-                $new_pago->pago_premium = '6';
-                $new_pago->pago_basico = '0.5';
-            } 
-            if($this->type == 'premium' && $this->plan == '30'){
-                $new_pago->monto = '30';
-                $new_pago->pago_premium = '12';
-                $new_pago->pago_basico = '1';
-            } 
-            $new_pago->save();
+        }
+        
+        $new_pago->plan = '30';
+        $new_pago->status = 'pendiente';
+        $new_pago->fecha_pago = $this->fecha_pago;
+        $new_pago->payment_method_id = $this->metodo_id;
+        $new_pago->comentario = $this->comentario;
+        $new_pago->type = 'Membresia';
+        $new_pago->monto = '10';
+        $new_pago->pago_basico = '1';
+        $new_pago->pago_premium = '4';
+        $new_pago->save();
 
-            if($this->plan == '15'){
-                $proxima_fecha = date("Y-m-d h:s",strtotime($fecha_actual."+ 15 days"));
-                $plan_nuevo = '15';
-            } 
-            else{
-                $proxima_fecha = date("Y-m-d h:s",strtotime($fecha_actual."+ 30 days"));
-                $plan_nuevo = '30';
-            } 
-
-            $user->update([
-                'status' => 'activo',
-                'last_payment_date' => $proxima_fecha,
-                'type' => $this->type,
-                'plan' => $plan_nuevo
-            ]);
+        //$proxima_fecha = date("Y-m-d h:s",strtotime($fecha_actual."+ 30 days"));
+        $plan_nuevo = '30';
+        
+        $user->update([
+            'status' => 'activo',
+            //'last_payment_date' => $proxima_fecha,
+            'type' => $this->type,
+            'plan' => $plan_nuevo
+        ]);
 
            /* if($date->toTimeString() <= '21:05:00' && $date->toTimeString() >= '06:00:00' ){
                 if($this->type == 'premium'){
@@ -116,19 +123,15 @@ class ReportePago extends Component
 
             else{*/
 
-                $msj = 'La activación automática no esta disponible por los momentos, espere que un administrador active su cuenta';
-                return redirect()->route("home")->with('info', $msj);
+            $msj = 'La activación automática no esta disponible por los momentos, espere que un administrador active su cuenta';
+            return redirect()->route("home")->with('info', $msj);
 
-               
-            //}
 
             $this->emit('alert','Datos registrados correctamente');
             $this->reset(['plan','file','comentario','type']);
             $this->isopen = false;  
 
-           // $this->emitTo('admin.pagos-pendientes','render');
-
-            return redirect()->to('/home');
-        }
+            //eturn redirect()->to('/home');
+        
     }
 }

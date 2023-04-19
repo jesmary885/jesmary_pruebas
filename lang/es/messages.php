@@ -72,6 +72,9 @@ return [
     'fecha_corte' => 'Fecha de corte',
     'HOLA' => 'HOLA',
     'tipo_pago'=> 'Tipo de pago',
+    'pago_mensualidad' => 'Pago de mensualidad',
+    'add_saldo_pagina' => 'Agregar saldo en página',
+    'monto' => 'Monto'
 
   
 ];

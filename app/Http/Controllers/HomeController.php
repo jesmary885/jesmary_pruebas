@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Multilog;
 use App\Models\PagoRegistrosRecarga;
+use App\Models\Tasa_dia;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -35,26 +36,40 @@ class HomeController extends Controller
 
         $pago_registrado = PagoRegistrosRecarga::where('user_id',$user->id)
             ->where('status','pendiente')
+            ->orwhere('status','no_recibido')
             ->count();
 
         if($user->last_payment_date){
             
             $corte = Carbon::parse($user->last_payment_date);
 
-            $diasDiferencia = ($corte->diffInDays($fecha_actual) + 1);
+            $diasDiferencia = ($corte->diffInDays($fecha_actual));
 
-            if($diasDiferencia == 2){
-                $mensaje = "$user->username, te recordamos que el saldo de tu cuenta vence en 2 días, reporta tu pago";
+            if($corte <  $fecha_actual){
+                
+                    $mensaje = "$user->username, te recordamos que el saldo de tu cuenta ya ha vencido, reporta tu pago";
+                
+
             }
-            if($diasDiferencia == 1){
-                $mensaje = "$user->username, te recordamos que el saldo de tu cuenta vence en 1 día, reporta tu pago";
+            else{
+                if($diasDiferencia == 2){
+                    $mensaje = "$user->username, te recordamos que el saldo de tu cuenta vence en 2 días, reporta tu pago";
+                }
+                if($diasDiferencia == 1){
+                    $mensaje = "$user->username, te recordamos que el saldo de tu cuenta vence en 1 día, reporta tu pago";
+                }
+                if($diasDiferencia < 1){
+                    $mensaje = "$user->username, te recordamos que el saldo de tu cuenta vence hoy, reporta tu pago";
+                }
             }
-            if($diasDiferencia < 1){
-                $mensaje = "$user->username, te recordamos que el saldo de tu cuenta vence hoy, reporta tu pago";
-            }
+
+            
         }
 
-        return view('home',compact('rol','mensaje','pago_registrado','user','ip_user'));
+        $tasa_dia_dolar = Tasa_dia::where('moneda','DOLAR')->first()->tasa;
+        $tasa_dia_ltc = Tasa_dia::where('moneda','LTC')->first()->tasa;
+
+        return view('home',compact('rol','mensaje','pago_registrado','user','ip_user','tasa_dia_dolar','tasa_dia_ltc'));
     }
 
 }

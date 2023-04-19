@@ -248,7 +248,7 @@ class K1098Index extends Component
                                     ->count();
                              
 
-                                if($link_register_search >= 2){
+                                if($link_register_search >= 1){
 
                                     $this->jumper_detect = 7;
                                     
@@ -507,7 +507,7 @@ class K1098Index extends Component
             }
 
             else{
-                $this->calc_link = 0;
+                $this->jumper_detect = 3;
             }
         }
         else{

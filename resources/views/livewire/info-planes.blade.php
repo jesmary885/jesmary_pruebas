@@ -15,32 +15,17 @@
                         <div class="info-box mb-3 bg-info">
                         <span class="info-box-icon"><i class="fas fa-money-check"></i></span>
                         <div class="info-box-content">
-                        <span class="info-box-number">PLAN BÁSICO</span>
+                        <span class="info-box-number">PLAN GENERAL</span>
                         <span class="info-box-text">MODALIDAD 30 DÍAS</span>
-                        <span class="info-box-text">PRECIO: 6$</span>
+                        <p class="info-box-text mb-2 mt-2 font-bold">PRECIO: </p>
+                        <p class="info-box-text"> - 10$ </p>
+                        <p class="info-box-text"> - {{10* $tasa_dia_dolar}} Bs. </p>
+                        <p class="info-box-text"> - {{round((10 / $tasa_dia_ltc),2)}} LTC.</p>
+                       
                         </div>
 
                         </div>
 
-                        <div class="info-box mb-3 bg-info">
-                        <span class="info-box-icon"><i class="fas fa-money-check"></i></span>
-                        <div class="info-box-content">
-                        <span class="info-box-number">PLAN PREMIUM</span>
-                        <span class="info-box-text">MODALIDAD 15 DÍAS</span>
-                        <span class="info-box-text">PRECIO: 16$</span>
-                        </div>
-
-                        </div>
-
-                        <div class="info-box mb-3 bg-info">
-                        <span class="info-box-icon"><i class="fas fa-money-check"></i></span>
-                        <div class="info-box-content">
-                        <span class="info-box-number">PLAN PREMIUM</span>
-                        <span class="info-box-text">MODALIDAD 30 DÍAS</span>
-                        <span class="info-box-text">PRECIO: 30$</span>
-                        </div>
-
-                        </div>
 
                     </div>
                     <div class="modal-footer">

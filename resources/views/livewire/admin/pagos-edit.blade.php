@@ -34,16 +34,21 @@
                         @if($status == '1')
 
                             <div class="form-group">
-                                <label class="w-full text-justify">Confirma el tipo de pago recibido</label>
+                                <label class="text-sm ml-2 mb-2 text-gray-300 font-semibold w-full text-justify">Confirma el tipo de pago recibido</label>
 
-                                <div class="custom-control custom-radio flex justify-start">
+                                <div class="custom-control custom-radio flex justify-start mt-2">
                                     <input class="custom-control-input" type="radio" id="customRadio3" name="customRadio3" value="1" wire:model="type_confirmed">
-                                    <label for="customRadio3" class="custom-control-label text-md font-semibold text-gray-300">Plan Básico</label>
+                                    <label for="customRadio3" class="custom-control-label text-md font-semibold text-gray-300">Mensualidad básica</label>
                                 </div>
 
                                 <div class="custom-control custom-radio flex justify-start">
-                                    <input class="custom-control-input custom-control-input-danger" type="radio" id="customRadio4" value="2" name="customRadio4" wire:model="type_confirmed">
-                                    <label for="customRadio4" class="custom-control-label text-md font-semibold text-gray-300">Plan Premium</label>
+                                    <input class="custom-control-input" type="radio" id="customRadio4" value="2" name="customRadio4" wire:model="type_confirmed">
+                                    <label for="customRadio4" class="custom-control-label text-md font-semibold text-gray-300">Mensualidad premium</label>
+                                </div>
+
+                                <div class="custom-control custom-radio flex justify-start">
+                                    <input class="custom-control-input" type="radio" id="customRadio5" value="3" name="customRadio5" wire:model="type_confirmed">
+                                    <label for="customRadio5" class="custom-control-label text-md font-semibold text-gray-300">Saldo en página</label>
                                 </div>
                             </div>
 

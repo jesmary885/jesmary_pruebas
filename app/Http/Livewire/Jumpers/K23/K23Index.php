@@ -114,7 +114,7 @@ class K23Index extends Component
                     'base_uri' => 'http://146.190.74.228',
                 ]);
 
-                $resultado = $client->request('GET', '/k23/1/'.$this->ids_buscar.'/'.$this->psid_buscar.'/'.$this->k2_buscar.'/'.$pid_buscar_def.'/'.$hash_buscar);
+                $resultado = $client->request('GET', '/k23/1/'.$this->ids_buscar.'/'.$this->psid_buscar.'/'.$this->k2_buscar.'/'.$pid_buscar_def);
 
                 if($resultado->getStatusCode() == 200){
 
@@ -925,7 +925,7 @@ class K23Index extends Component
                                             ->count();
                                     
         
-                                        if($link_register_search >= 2){
+                                        if($link_register_search >= 1){
         
                                             $this->jumper_detect = 7;
                                             

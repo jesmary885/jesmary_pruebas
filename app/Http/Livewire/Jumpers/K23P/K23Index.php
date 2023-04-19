@@ -47,12 +47,12 @@ class K23Index extends Component
             $this->pid_buscar = $this->pid_manual;
 
             $link_register_search = Links_usados::where('link',$this->search)
-            ->where('k_detected','K=23')
+            ->where('k_detected','K=23_NEW')
             ->where('user_id',$this->user->id)
             ->count();
     
 
-            if($link_register_search >= 2){
+            if($link_register_search >= 1){
 
                 $this->jumper_detect = 7;
                 
@@ -61,15 +61,15 @@ class K23Index extends Component
             
                 $date = new DateTime();
 
-                $date_actual= $date->format('Y-m-d H:i:s');
-                $date_actual_30 = $date->modify('-30 minute')->format('Y-m-d H:i:s');
+                $date_actual= $date->format('Y-m-d');
+                //$date_actual_30 = $date->modify('-30 minute')->format('Y-m-d H:i:s');
 
-                $links_usados = Links_usados::where('k_detected','K=23')
+                $links_usados = Links_usados::where('k_detected','K=23_NEW')
                     ->where('user_id',$this->user->id)
-                    ->whereBetween('created_at',[$date_actual_30,$date_actual])
+                    ->wheredate('created_at',$date_actual)
                     ->count();
 
-                if($links_usados <= 1){
+                if($links_usados <= 2){
                     $this->numerologia();
                 }
                 else{
@@ -279,10 +279,10 @@ class K23Index extends Component
                 }
                 else{*/
                 if($elem3 == 0){
-                    $resultado = $client->request('GET', '/k23_s2/1/'.$ids_buscar.'/'.$psid_buscar.'/'.$k2_buscar.'/'.$pid_buscar_def.'/'.$elem1.'/'.$elem2.'/'.$hash_buscar);
+                    $resultado = $client->request('GET', '/k23_s2/1/'.$ids_buscar.'/'.$psid_buscar.'/'.$k2_buscar.'/'.$pid_buscar_def.'/'.$elem1.'/'.$elem2);
                 }
                 else{
-                    $resultado = $client->request('GET', '/k23_s3/1/'.$ids_buscar.'/'.$psid_buscar.'/'.$k2_buscar.'/'.$pid_buscar_def.'/'.$elem1.'/'.$elem2.'/'.$elem3.'/'.$hash_buscar);
+                    $resultado = $client->request('GET', '/k23_s3/1/'.$ids_buscar.'/'.$psid_buscar.'/'.$k2_buscar.'/'.$pid_buscar_def.'/'.$elem1.'/'.$elem2.'/'.$elem3);
                 }
                // }
 
@@ -291,7 +291,7 @@ class K23Index extends Component
 
                     $link_register = new Links_usados();
                     $link_register->link = $this->search;
-                    $link_register->k_detected  = 'K=23';
+                    $link_register->k_detected  = 'K=23_NEW';
                     $link_register->user_id  = $this->user->id;
                     $link_register->save();
 
@@ -1053,12 +1053,12 @@ class K23Index extends Component
                                         if($this->jumper_list == 0){
             
                                             $link_register_search = Links_usados::where('link',$this->search)
-                                            ->where('k_detected','K=23')
+                                            ->where('k_detected','K=23_NEW')
                                             ->where('user_id',$this->user->id)
                                             ->count();
                                     
         
-                                        if($link_register_search >= 2){
+                                        if($link_register_search >= 1){
         
                                             $this->jumper_detect = 7;
                                             
@@ -1070,12 +1070,12 @@ class K23Index extends Component
                                             $date_actual= $date->format('Y-m-d H:i:s');
                                             $date_actual_30 = $date->modify('-30 minute')->format('Y-m-d H:i:s');
         
-                                            $links_usados = Links_usados::where('k_detected','K=23')
+                                            $links_usados = Links_usados::where('k_detected','K=23_NEW')
                                                 ->where('user_id',$this->user->id)
                                                 ->whereBetween('created_at',[$date_actual_30,$date_actual])
                                                 ->count();
         
-                                            if($links_usados <= 1){
+                                            if($links_usados <= 2){
                                                 $this->numerologia();
                                             }
                                             else{

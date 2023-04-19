@@ -9,7 +9,7 @@
     @if($rol != '4')
     <a  href="{{route('marketplace.index')}}" >
     <div class="info-box flex">
-        <span class="info-box-icon bg-success elevation-1 flex">
+        <span class="info-box-icon bg-info elevation-1 flex">
           <i class="fas fa-shopping-cart"></i>
         </span>
         <div class="info-box-content flex">
@@ -22,7 +22,7 @@
 
     <a  href="#" >
     <div class="info-box flex">
-        <span class="info-box-icon bg-success elevation-1 flex">
+        <span class="info-box-icon bg-info elevation-1 flex">
           <i class="fas fa-shopping-cart"></i>
         </span>
         <div class="info-box-content flex">
@@ -43,7 +43,7 @@
   @if($rol != '4')
     <a href="{{route('marketplace_compras.index')}}">
       <div class="info-box flex">
-        <span class="info-box-icon bg-warning elevation-1 flex">
+        <span class="info-box-icon bg-danger elevation-1 flex">
           <i class="fa fa-shopping-basket text-white">
           </i>
         </span>
@@ -56,7 +56,7 @@
     @else 
     <a href="#">
       <div class="info-box flex">
-        <span class="info-box-icon bg-warning elevation-1 flex">
+        <span class="info-box-icon bg-danger elevation-1 flex">
           <i class="fas fa-users">
           </i>
         </span>
@@ -136,61 +136,85 @@
   @if($rol == '4')
 
     <div class="ml-4 mr-4 mb-2 @container w-full">
-        <blockquote class="text-gray-400 flex">
-          @if($pago_registrado < 1)
-            <p class="mr-1">{{__('messages.su_cuenta_inactiva')}}</p>
-          
-            @livewire('pagos.reporte-pago') 
-              <p class="ml-1"> {{__('messages.para_disfrutar_servicios')}}</p>
-          @endif
-          
-        </blockquote>
+      <div class="callout callout-info">
 
-        <blockquote class="text-gray-400 flex">
-          <p class="mr-1">Haz click</p>
-          @livewire('info-planes') 
-          <p class="ml-1"> {{__('messages.ver_datos_precios')}}</p>
-          
-        </blockquote>
+          <div class="text-gray-400 flex">
+            @if($pago_registrado < 1)
+              <p class="mr-1">{{__('messages.su_cuenta_inactiva')}}</p>
+            
+              @livewire('pagos.reporte-pago') 
+                <p class="ml-1"> {{__('messages.para_disfrutar_servicios')}}</p>
+            @endif
+            
+          </div>
 
-        <blockquote class="text-gray-400 flex">
-          <p class="mr-1">Haz click</p>
-          @livewire('info-metodos-pago') 
-          <p class="ml-1"> {{__('messages.ver_datos_cuentas')}}</p>
-          
-        </blockquote>
+          <div class="text-gray-400 flex">
+            <p class="mr-1">Haz click</p>
+            @livewire('info-planes') 
+            <p class="ml-1"> {{__('messages.ver_datos_precios')}}</p>
+            
+          </div>
+
+          <div class="text-gray-400 flex">
+            <p class="mr-1">Haz click</p>
+            @livewire('info-metodos-pago') 
+            <p class="ml-1"> {{__('messages.ver_datos_cuentas')}}</p>
+            
+          </div>
+
+        </div>
     </div>
 
   @endif
 
+  @if($rol == '4')
+  <div class="ml-4 mr-4 mb-2 @container w-full">   
+
+    @if (session('info'))
+      <div class="alert alert-info bg-info">
+          <strong>{{session('info')}}</strong>
+      </div>
+    @endif
+
+  </div>
+  @endif
+
    @if($mensaje != '' && $rol != '4' && auth()->user()->type != 'gratis')
-   {{--
+   
   <div class="ml-4 mr-4 mb-2 @container w-full">
 
-      <blockquote class="text-gray-400 flex">
-        <p class="inline">
-        {{$mensaje}}
-        </p>
-      @livewire('pagos.reporte-pago')
-        
-      </blockquote>
+      <div class="callout callout-info">
 
-      <blockquote class="text-gray-400 flex">
-        <p class="mr-1">Haz click</p>
-        @livewire('info-planes') 
-        <p class="ml-1"> {{__('messages.ver_datos_precios')}}</p>
-        
-      </blockquote>
+      @if($pago_registrado < 1)
 
-      <blockquote class="text-gray-400 flex">
-        <p class="mr-1">Haz click</p>
-        @livewire('info-metodos-pago') 
-        <p class="ml-1"> {{__('messages.ver_datos_cuentas')}}</p>
-        
-      </blockquote>
+        <div class="text-gray-400 flex">
+          <p class="inline">
+          {{$mensaje}}
+          </p>
+        @livewire('pagos.reporte-pago')
+          
+        </div>
+
+      @endif
+
+        <div class="text-gray-400 flex">
+          <p class="mr-1">Haz click</p>
+          @livewire('info-planes') 
+          <p class="ml-1"> {{__('messages.ver_datos_precios')}}</p>
+          
+        </div>
+
+        <div class="text-gray-400 flex">
+          <p class="mr-1">Haz click</p>
+          @livewire('info-metodos-pago') 
+          <p class="ml-1"> {{__('messages.ver_datos_cuentas')}}</p>
+          
+        </div>
+       
+      </div>
 
     </div>
-    --}}
+   
   @endif
 
   <section class="ml-4 mr-4 @container w-full">
@@ -210,15 +234,25 @@
                   <div class="row">
                     <div class="col-10">
                     
-                      <h2 class="font-semibold mb-4"><b>{{__('messages.datos_registrados')}}:</b></h2>
+                      {{-- <h2 class="font-semibold mb-4"><b>{{__('messages.datos_registrados')}}:</b></h2> --}}
    
                       <ul class="ml-4 mb-0 fa-ul text-muted">
-                        <li class="medium mt-2"><span class="fa-li"><i class="fas fa-lg fa-address-book"></i></span> Telegram ID: {{$user->telegram}} </li>
-                        <li class="medium mt-2"><span class="fa-li"><i class="fas fa-lg fa-laptop-code"></i></span> {{__('messages.direccion_ip')}}: {{$ip_user}} </li>
+                        <li class="medium mt-2"><span class="fa-li"><i class="fas fa-lg fa-address-book text-cyan-500 font-bold"></i></span> Telegram ID: {{$user->telegram}} </li>
+                        <li class="medium mt-2"><span class="fa-li"><i class="fas fa-lg fa-laptop-code text-cyan-500 font-bold"></i></span> {{__('messages.direccion_ip')}}: {{$ip_user}} </li>
                         @if(($user->last_payment_date))
-                        <li class="medium mt-2"><span class="fa-li"><i class="fas fa-lg fa-clock"></i></span> {{__('messages.fecha_corte')}}: {{\Carbon\Carbon::parse($user->last_payment_date)->format('d-m-Y')}} </li>
+                        <li class="medium mt-2"><span class="fa-li"><i class="fas fa-lg fa-clock text-cyan-500 font-bold"></i></span> {{__('messages.fecha_corte')}}: {{\Carbon\Carbon::parse($user->last_payment_date)->format('d-m-Y')}} </li>
                         @endif
+                        <li class="medium mt-2"><span class="fa-li"><i class="	fas fa-lg fa-money-bill-wave text-cyan-500 font-bold"></i></span> Saldo en página: {{$user->balance}} $ </li>
                       </ul>
+                      <hr class="m-2 ">
+
+                      <h2 class="mb-2 text-gray-200 font-bold "><b>Información del día:</b></h2>
+
+                      <ul class="ml-4 mb-0 fa-ul text-muted">
+
+                      <li class="medium mt-2"><span class="fa-li"><i class="	fas fa-lg fa-money-bill-wave text-cyan-500 font-bold"></i></span> Tasa de cambio: 1$ = {{$tasa_dia_dolar}} Bs. - 1LTC = {{$tasa_dia_ltc}} $  </li>
+                      </ul>
+
                     </div>
                     <div class="col-2 text-center">
                       <img src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}" class="rounded-full h-20 w-20 object-cover">
@@ -265,17 +299,7 @@
 
 </section>
   
-  @if($rol == '4')
-  <div>   
-
-    @if (session('info'))
-      <div class="alert alert-success">
-          <strong>{{session('info')}}</strong>
-      </div>
-    @endif
-
-  </div>
-  @endif
+  
 
   
 

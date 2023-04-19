@@ -73,4 +73,7 @@ return [
     'fecha_corte' => 'Cutoff date',
     'HOLA' => 'HELLO',
     'tipo_pago'=> 'Payment type',
+    'pago_mensualidad' => 'Monthly payment',
+    'add_saldo_pagina' => 'Add balance on page',
+    'monto' => 'Amount'
 ];
