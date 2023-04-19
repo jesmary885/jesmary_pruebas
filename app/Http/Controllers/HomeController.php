@@ -36,7 +36,10 @@ class HomeController extends Controller
 
         $pago_registrado = PagoRegistrosRecarga::where('user_id',$user->id)
             ->where('status','pendiente')
-            ->orwhere('status','no_recibido')
+            ->count();
+
+        $pago_registrado_no_recibido = PagoRegistrosRecarga::where('user_id',$user->id)
+            ->where('status','no_recibido')
             ->count();
 
         if($user->last_payment_date){
@@ -69,7 +72,7 @@ class HomeController extends Controller
         $tasa_dia_dolar = Tasa_dia::where('moneda','DOLAR')->first()->tasa;
         $tasa_dia_ltc = Tasa_dia::where('moneda','LTC')->first()->tasa;
 
-        return view('home',compact('rol','mensaje','pago_registrado','user','ip_user','tasa_dia_dolar','tasa_dia_ltc'));
+        return view('home',compact('pago_registrado_no_recibido','rol','mensaje','pago_registrado','user','ip_user','tasa_dia_dolar','tasa_dia_ltc'));
     }
 
 }

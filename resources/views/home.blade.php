@@ -139,7 +139,7 @@
       <div class="callout callout-info">
 
           <div class="text-gray-400 flex">
-            @if($pago_registrado < 1)
+            @if($pago_registrado < 1 && $pago_registrado_no_recibido < 1)
               <p class="mr-1">{{__('messages.su_cuenta_inactiva')}}</p>
             
               @livewire('pagos.reporte-pago') 
@@ -185,7 +185,7 @@
 
       <div class="callout callout-info">
 
-      @if($pago_registrado < 1)
+      @if($pago_registrado < 1 && $pago_registrado_no_recibido < 1)
 
         <div class="text-gray-400 flex">
           <p class="inline">
