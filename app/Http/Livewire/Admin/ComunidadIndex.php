@@ -63,7 +63,7 @@ class ComunidadIndex extends Component
 
 
             $ganancia_mes_basic_15_suscriptor_q = DB::select('SELECT sum(p.pago_basico) as monto from pago_registros_recargas p
-            where p.created_at BETWEEN :fecha_inicioo AND :fecha_finn AND p.plan = "15" AND p.payment_method_id != 1 AND p.status = "verificado"'
+            where p.created_at BETWEEN :fecha_inicioo AND :fecha_finn AND p.plan = "30" AND p.payment_method_id != 1 AND p.status = "verificado" AND p.type = "basico"'
             ,array('fecha_inicioo' =>$fecha_inicio, 'fecha_finn' => $fecha_fin));
 
             foreach($ganancia_mes_basic_15_suscriptor_q as $e){
@@ -71,7 +71,7 @@ class ComunidadIndex extends Component
             }
 
             $ganancia_mes_basic_30_suscriptor_q = DB::select('SELECT sum(p.pago_basico) as monto from pago_registros_recargas p
-            where p.created_at BETWEEN :fecha_inicioo AND :fecha_finn AND p.plan = "30" AND p.payment_method_id != 1 AND p.status = "verificado"'
+            where p.created_at BETWEEN :fecha_inicioo AND :fecha_finn AND p.plan = "30" AND p.payment_method_id != 1 AND p.status = "verificado" AND p.type = "premium"'
             ,array('fecha_inicioo' =>$fecha_inicio, 'fecha_finn' => $fecha_fin));
 
             foreach($ganancia_mes_basic_30_suscriptor_q as $e){
@@ -85,7 +85,7 @@ class ComunidadIndex extends Component
 
             
             $ganancia_mes_premium_15_suscriptor_q = DB::select('SELECT sum(p.pago_premium) as monto from pago_registros_recargas p
-            where p.created_at BETWEEN :fecha_inicioo AND :fecha_finn AND p.plan = "15" AND p.payment_method_id != 1  AND p.status = "verificado" AND p.type = "premium"'
+            where p.created_at BETWEEN :fecha_inicioo AND :fecha_finn AND p.plan = "30" AND p.payment_method_id != 1  AND p.status = "verificado" AND p.type = "basico"'
             ,array('fecha_inicioo' =>$fecha_inicio, 'fecha_finn' => $fecha_fin));
             
             foreach($ganancia_mes_premium_15_suscriptor_q as $e){
@@ -192,7 +192,7 @@ class ComunidadIndex extends Component
             ->whereDay('created_at', $dia)
             ->whereYear('created_at', $ano)
             ->where('payment_method_id','!=','1')
-            ->where('plan','15')
+            ->where('plan','30')
             ->where('type','premium')
             ->sum('monto');
 
