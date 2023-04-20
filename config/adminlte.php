@@ -444,6 +444,14 @@ return [
                     'icon_color' => 'red',
                     'can' => 'otro.admin'
                 ],
+
+                [
+                    'text' => 'TOLUNA',
+                    'route'  => 'toluna.index',
+                    'can' => 'otro.admin',
+                    'icon'    => 'fas fa-search',
+                    'icon_color' => 'cyan',
+              ],
             ],
         ],
         
@@ -760,13 +768,7 @@ return [
         //     'icon'    => 'fas fa-search',
         // ],
         
-        //  [
-        //      'text' => 'TOLUNA',
-        //      'route'  => 'toluna.index',
-        //      'can' => 'toluna.index',
-        //      'icon'    => 'fas fa-search',
-        //      'icon_color' => 'cyan',
-        //  ],
+        
 
     ],
 

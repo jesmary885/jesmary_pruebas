@@ -139,7 +139,6 @@ class ComunidadIndex extends Component
             ->whereDay('email_verified_at', $dia)
             ->whereYear('email_verified_at', $ano)
             ->where('status','activo')
-            ->permission('ssidkr.index')
             ->count();
 
         

@@ -79,7 +79,7 @@ Route::middleware(['auth','verified'])->group(function()
         Route::get('samplicio',[JumpersController::class,'samplicio'])->name('samplicio.index');
         Route::get('scube',[JumpersController::class,'scube'])->name('scube.index');
         Route::get('spectrum',[JumpersController::class,'spectrum'])->name('spectrum.index');
-        Route::get('toluna',[JumpersController::class,'toluna'])->name('toluna.index');
+        Route::get('toluna',[JumpersController::class,'toluna'])->name('toluna.index')->middleware('permission:otro.admin');
         Route::get('ssidkr',[JumpersController::class,'ssidkr'])->name('ssidkr.index');
         Route::get('k10634',[JumpersController::class,'k10634'])->name('k10634.index');
         Route::get('k11619',[JumpersController::class,'k11619'])->name('k11619.index');
@@ -127,7 +127,7 @@ Route::middleware(['auth','verified'])->group(function()
         Route::get('admin_comunidad', [AdminController::class, 'comunidad'])->name('admin.comunidad')->middleware('permission:otro.admin');
         Route::get('admin_modificaciones', [AdminController::class, 'modificaciones'])->name('admin.modificaciones')->middleware('permission:administracion_principal');
         Route::get('admin_tasa_cambio', [AdminController::class, 'tasa_cambio'])->name('admin.tasa_cambio')->middleware('permission:administracion_principal');
-        Route::get('admin_jumper_dia', [AdminController::class, 'jumper_dia'])->name('admin.jumper_dia')->middleware('permission:otro.admi');
+        Route::get('admin_jumper_dia', [AdminController::class, 'jumper_dia'])->name('admin.jumper_dia')->middleware('permission:otro.admin');
         Route::get('admin_users_paying', [AdminController::class, 'users_paying'])->name('admin.users_paying')->middleware('permission:administracion_principal');
         Route::get('admin_users_free', [AdminController::class, 'users_free'])->name('admin.users_free')->middleware('permission:administracion_principal');
         Route::get('admin_users', [AdminController::class, 'users'])->name('admin.users')->middleware('permission:administracion_principal');

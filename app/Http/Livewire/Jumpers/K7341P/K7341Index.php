@@ -24,7 +24,7 @@ class K7341Index extends Component
 
     public function mount(){
         $this->user_auth =  auth()->user()->id;
-
+        if(session('pid')) $this->pid_new = session('pid');
         if(session('psid')) $this->psid_register = session('psid');
         if(session('search')) $this->search = session('search');
         $this->jumper_detect = 0;
