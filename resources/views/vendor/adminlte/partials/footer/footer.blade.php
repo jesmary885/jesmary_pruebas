@@ -152,6 +152,15 @@
             </div>
         </div>
 
+    {{--    <div class="col-md-3 float-center">
+
+        <p><a 
+            style="background-color:green; color:white; text-decoration:none; border-radius: 5px; padding: .5em;"
+            href="{{route('login_spotify')}}"><i class="fas fa-music"></i>
+        </a></p>
+
+        </div>--}}
+
        
    
 

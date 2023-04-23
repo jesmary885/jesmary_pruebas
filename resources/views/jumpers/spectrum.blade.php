@@ -3,10 +3,10 @@
 
 <div class="flex justify-between">
     
-    <h1 class="text-lg ml-2"><i class="fas fa-th-list"></i> Spectrum</h1>
+<h1 class="text-lg font-weight-bold text-cyan-400"> <i class="fas fa-spinner mr-1 text-cyan-400"></i> Spectrum</h1>
 
     <div class="justify-end">
-       {{-- @livewire('jumpers.spectrum.spectrum-create') --}}
+       {{-- @livewire('jumpers.cint.cint-create') --}}
     </div>
 </div>
 
@@ -18,7 +18,8 @@
             <strong>{{session('info')}}</strong>
         </div>
     @endif
-    
+
+   
     @livewire('jumpers.spectrum.spectrum-index') 
 @stop
 
@@ -29,3 +30,4 @@
 @section('js')
     <script> console.log('Hi!'); </script>
 @stop
+

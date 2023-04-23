@@ -446,12 +446,29 @@ return [
                 ],
 
                 [
+                    'text' => 'Links de nuevas K',
+                    'route'  => 'admin.k_nuevas',
+                    'icon'    => 'fas fa-server',
+                    'icon_color' => 'red',
+                    'can' => 'otro.admin'
+                ],
+
+                [
                     'text' => 'TOLUNA',
                     'route'  => 'toluna.index',
                     'can' => 'otro.admin',
                     'icon'    => 'fas fa-search',
                     'icon_color' => 'cyan',
               ],
+
+               [
+                'text' => 'SAMPLICIO',
+                'route'  => 'samplicio.index',
+                'can' => 'otro.admin',
+                'icon_color' => 'cyan',
+                'icon'    => 'fas fa-search',
+                ],
+
             ],
         ],
         
@@ -746,13 +763,7 @@ return [
         //     'icon_color' => 'cyan',
         //     'icon'    => 'fas fa-search',
         // ],
-        // [
-        //     'text' => 'SAMPLICIO',
-        //     'route'  => 'samplicio.index',
-        //     'can' => 'samplicio.index',
-        //     'icon_color' => 'red',
-        //     'icon'    => 'fas fa-search',
-        // ],
+        
         // [
         //     'text' => 'SCUBE',
         //     'route'  => 'scube.index',

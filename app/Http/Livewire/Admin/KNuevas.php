@@ -6,7 +6,7 @@ use App\Models\Links_usados;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class LinksGenerados extends Component
+class KNuevas extends Component
 {
     use WithPagination;
     protected $paginationTheme = "bootstrap";
@@ -22,14 +22,14 @@ class LinksGenerados extends Component
     public function render()
     {
         $jumpers = Links_usados::where('k_detected', 'LIKE', '%' . $this->search . '%')
-        ->where('type',null)
+        ->where('type','nuevo')
         ->latest('id')
         ->paginate(25);
 
-        $total = Links_usados::where('type',null)
+        $total = Links_usados::where('type','nuevo')
         ->count();
 
-        return view('livewire.admin.links-generados',compact('jumpers','total'));
+        return view('livewire.admin.k-nuevas',compact('jumpers','total'));
     }
 
     public function ver_link($jumper){

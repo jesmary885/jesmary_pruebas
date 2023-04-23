@@ -68,9 +68,6 @@ class K17564Index extends Component
     public function verific($result){
 
         if($result[0] == $this->operacion->resultado){
-
-            
-
             try {
 
                 $client = new Client([
@@ -301,6 +298,8 @@ class K17564Index extends Component
 
                             if($this->jumper_list == 0){
 
+                                
+
                                 $link_register_search = Links_usados::where('link',$this->search)
                                     ->where('k_detected','K=17564')
                                     ->where('user_id',$this->user->id)
@@ -458,6 +457,8 @@ class K17564Index extends Component
     
    
                             if($this->jumper_detect == 0){
+
+                               
 
                                 $client = new Client([
                                    // 'base_uri' => 'http://127.0.0.1:8000',

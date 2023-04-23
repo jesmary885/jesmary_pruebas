@@ -23,6 +23,11 @@ class AdminController extends Controller
 
     }
 
+    public function k_nuevas(){
+        return view('admin.k_nuevas');
+
+    }
+
     public function tasa_cambio(){
         return view('admin.tasa_cambio');
     }

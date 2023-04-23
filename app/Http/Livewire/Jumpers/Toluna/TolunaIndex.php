@@ -44,21 +44,51 @@ class TolunaIndex extends Component
 
         if($result[0] == $this->operacion->resultado){
 
-            $busqueda_sname= strpos($this->search, '&sname=');
+            $busqueda_sname= strpos($this->search, 'sname=');
 
             if($busqueda_sname != false){
-                $sname_buscar = substr($this->search,($busqueda_sname + 7 ));
-            }
-            else{
-                $this->jumper_detect = 3;
-            }
+
+                $posicion_sname = $busqueda_sname + 6;
+     
+                $i_sname = 0;
+                $busq_sname = 0;
+                                
+                do{
+                    $detect_sname= substr($this->search, $posicion_sname,1);
+            
+                    if($detect_sname == '&') $i_sname = 1;
+                    else{
+                        $posicion_sname = $posicion_sname + 1;
+                        $busq_sname ++;
+                    }
+    
+                        if($busq_sname > 45){
+                            $i_sname = 1;
+                        }
+            
+                    }while($i_sname != 1);
+    
+                    if($busq_sname > 45){
+                        $sname_buscar = substr($this->search,($busqueda_sname + 6 ));
+                    }
+                    else{
+                        $sname_buscar = substr($this->search,($busqueda_sname + 6),($posicion_sname - ($busqueda_sname + 6)));
+                       
+                    }
+                }
+                else{
+                    $this->jumper_detect = 3;
+                }
 
 
-            $busqueda_gid= strpos($this->search, '&gid=');
+            $busqueda_gid= strpos($this->search, 'gid=');
+            $busqueda_GID= strpos($this->search, 'GID=');
 
-            if($busqueda_gid != false){
+            if($busqueda_gid != false || $busqueda_GID != false){
 
-                $posicion_gid = $busqueda_gid + 5;
+                if($busqueda_gid != false) $posicion_gid = $busqueda_gid + 4;
+                else $posicion_gid = $busqueda_GID + 4;
+
                 $i_gid = 0;
                 $busq_gid = 0;
                             
@@ -77,14 +107,24 @@ class TolunaIndex extends Component
         
                 }while($i_gid != 1);
 
-                $gid_buscar = substr($this->search,($busqueda_gid + 5),($posicion_gid - ($busqueda_gid + 5)));
+                if($busqueda_gid != false) $busqueda_gid = $busqueda_gid;
+                else $busqueda_gid = $busqueda_GID;
+
+                if($busq_gid > 20){
+                    if($busqueda_gid != false)
+                    $gid_buscar = substr($this->search,($busqueda_gid + 4));
+                   
+                }
+                else{
+                    $gid_buscar = substr($this->search,($busqueda_gid + 4),($posicion_gid - ($busqueda_gid + 4)));
+                    
+                }
 
             }
 
             else{
                 $this->jumper_detect = 3;
             }
-
 
             try {
                 $client = new Client([
@@ -254,7 +294,7 @@ class TolunaIndex extends Component
 
         if($long_psid>=5){
 
-            $busqueda_sname= strpos($this->search, '&sname=');
+            $busqueda_sname= strpos($this->search, 'sname=');
 
             if($this->jumper_detect == 0){
 

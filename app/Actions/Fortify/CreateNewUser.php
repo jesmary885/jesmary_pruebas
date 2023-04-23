@@ -44,12 +44,12 @@ class CreateNewUser implements CreatesNewUsers
                         'points_negative' => 0,
                         'points_neutral' => 0,
                         'nacionalidad' => 'Venezolana',
-                    ])->assignRole('Inactivo');
-
+                        ])->assignRole('Inactivo');
         }
 
         else{
                return User::create([
+                    'name' => $input['name'],
                     'username' => $input['name'],
                     'telegram' => $input['telegram'],
                     'status' => 'activo',

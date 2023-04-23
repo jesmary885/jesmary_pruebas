@@ -13,6 +13,7 @@ use App\Http\Controllers\PsidController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SobrenosotrosController;
+use App\Http\Controllers\SpotifyController;
 use App\Http\Livewire\Chat\ChatComponent;
 use App\Http\Livewire\Pid\Register;
 use App\Models\Marketplace;
@@ -121,19 +122,28 @@ Route::middleware(['auth','verified'])->group(function()
         //REPORTAR PAGO
         Route::get('reportar_pago',[PagoController::class,'index'])->name('reporte_pago');
 
+        //COMUNIDAD
+
+        Route::get('admin_links_gener', [AdminController::class, 'links_gener'])->name('admin.links_gener')->middleware('permission:otro.admin');
+        Route::get('admin_k_nuevas', [AdminController::class, 'k_nuevas'])->name('admin.k_nuevas')->middleware('permission:otro.admin');
+        Route::get('admin_comunidad', [AdminController::class, 'comunidad'])->name('admin.comunidad')->middleware('permission:otro.admin');
+        Route::get('admin_jumper_dia', [AdminController::class, 'jumper_dia'])->name('admin.jumper_dia')->middleware('permission:otro.admin');
+
         //Administración
 
+        Route::get('login_spotify', [SpotifyController::class, 'login'])->name('login_spotify');
+        Route::get('profile_spotify', [SpotifyController::class, 'getUser'])->name('profile_spotify');
+
         Route::get('admin_multilogin', [AdminController::class, 'multilogin'])->name('admin.multilogin.index')->middleware('permission:administracion_principal');
-        Route::get('admin_comunidad', [AdminController::class, 'comunidad'])->name('admin.comunidad')->middleware('permission:otro.admin');
         Route::get('admin_modificaciones', [AdminController::class, 'modificaciones'])->name('admin.modificaciones')->middleware('permission:administracion_principal');
         Route::get('admin_tasa_cambio', [AdminController::class, 'tasa_cambio'])->name('admin.tasa_cambio')->middleware('permission:administracion_principal');
-        Route::get('admin_jumper_dia', [AdminController::class, 'jumper_dia'])->name('admin.jumper_dia')->middleware('permission:otro.admin');
+
         Route::get('admin_users_paying', [AdminController::class, 'users_paying'])->name('admin.users_paying')->middleware('permission:administracion_principal');
         Route::get('admin_users_free', [AdminController::class, 'users_free'])->name('admin.users_free')->middleware('permission:administracion_principal');
         Route::get('admin_users', [AdminController::class, 'users'])->name('admin.users')->middleware('permission:administracion_principal');
         Route::get('admin_pagos', [AdminController::class, 'pagos'])->name('admin.pagos')->middleware('permission:administracion_principal');
         Route::get('admin_jumpers', [AdminController::class, 'jumpers'])->name('admin.jumpers')->middleware('permission:administracion_principal');
-        Route::get('admin_links_gener', [AdminController::class, 'links_gener'])->name('admin.links_gener')->middleware('permission:otro.admin');
+
         Route::get('admin_ganancias', [AdminController::class, 'ganancias'])->name('admin.ganancias.index')->middleware('permission:administracion_principal');
         Route::get('sales', [AdminController::class, 'sales'])->name('admin.sales')->middleware('permission:admin.sales');
         Route::get('marketplace_venta', [AdminController::class, 'marketplace'])->name('admin.marketplace')->middleware('permission:admin.sales');

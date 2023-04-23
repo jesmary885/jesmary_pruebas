@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Jumpers\Ssidkr;
 
 use App\Models\Comments;
+use App\Models\JumperType;
 use App\Models\Link;
 use App\Models\Links_usados;
 use App\Models\User;
@@ -1028,6 +1029,17 @@ class SsidkrIndex extends Component
                                     elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '17564') $type_k = 21;
                                     elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '2066') $type_k = 22;
                                     elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '2001') $type_k = 23;
+                                    elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '1091') $type_k = 24;
+                                    elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '1083') $type_k = 25;
+                                    elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '10634') $type_k = 26;
+                                    elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '5460') $type_k = 27;
+                                    elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '6057') $type_k = 28;
+                                    elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '2028') $type_k = 29;
+                                    elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '1093') $type_k = 30;
+                                    elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '2049') $type_k = 31;
+                                    elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '11619') $type_k = 32;
+                                    elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '10659') $type_k = 33;
+                                    elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '10611') $type_k = 34;
                                     else  $type_k = 15;
 
                             }
@@ -1233,31 +1245,39 @@ class SsidkrIndex extends Component
                     }
                 }
 
-                /*if($this->k_detect){
+                if($this->k_detect){
 
-                    $busqueda_dkr1_ssi_ = strpos($this->search, '/dkr1.ssisurveys.com');
-                    $busqueda_dkr1_https_ = strpos($this->search, 'https://');
-                    $busqueda_dkr1_htt_ = strpos($this->search, 'http://');
+                    $sin_k = ltrim($this->k_detect, 'K=');
+                    $k= 'K'.$sin_k;
 
-                    if(!$busqueda_dkr1_ssi_){
-                        if($busqueda_dkr1_https_ !== false || $busqueda_dkr1_htt_ !== false){
-                            $link_register_search = Links_usados::where('link',$this->search)
-                            ->where('k_detected',$this->k_detect)
-                            ->first();
+                    $links_guardados_types = JumperType::where('name',$k)
+                        ->first();
 
-                            if(!$link_register_search){
-                                $link_register = new Links_usados();
-                                $link_register->link = $this->search;
-                                $link_register->k_detected  = $this->k_detect;
-                                $link_register->user_id  = 0;
-                                $link_register->save();
-
+                    if(!$links_guardados_types){
+                        $busqueda_dkr1_ssi_ = strpos($this->search, '/dkr1.ssisurveys.com');
+                        $busqueda_dkr1_https_ = strpos($this->search, 'https://');
+                        $busqueda_dkr1_htt_ = strpos($this->search, 'http://');
+    
+                        if(!$busqueda_dkr1_ssi_){
+                            if($busqueda_dkr1_https_ !== false || $busqueda_dkr1_htt_ !== false){
+                                $link_register_search = Links_usados::where('link',$this->search)
+                                ->where('k_detected',$this->k_detect)
+                                ->first();
+    
+                                if(!$link_register_search){
+                                    $link_register = new Links_usados();
+                                    $link_register->link = $this->search;
+                                    $link_register->k_detected  = $this->k_detect;
+                                    $link_register->user_id  = 1;
+                                    $link_register->type  = 'nuevo';
+                                    $link_register->save();
+                                }
+    
                             }
-
+                            
                         }
-                        
                     }
-                }*/
+                }
         }
         
         else{
