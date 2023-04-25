@@ -8,10 +8,11 @@
 </head>
 <body>
     <h2>Perfil del Usuario</h2>
+
+    {{$profile['context']['uri']}}
+
+    <audio src='https://api.spotify.com/v1/artists/0EmeFodog0BfCgMzAIvKQp' controls="controls"  preload="none">
     
-
-    <p>Nombre: {{$profile['display_name']}} </p>
-
     
 </body>
 </html>

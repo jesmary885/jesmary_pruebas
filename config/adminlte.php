@@ -719,13 +719,13 @@ return [
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
                 ],
-                /*[
+                [
                     'text' => 'K1083',
                     'route'  => 'k1083.index',
                     'can' => 'menu.premium',
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
-                ],*/
+                ],
                
                 [
                     'text' => 'K23',

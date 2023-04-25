@@ -108,13 +108,44 @@ class K23Index extends Component
 
             $pid_buscar_def = substr($this->pid_buscar, 0, 6).rand(1101,9909);
 
+            $busqueda_chanel= strpos($this->search, 'channel=');
+
+            if($busqueda_chanel != false){
+
+                $posicion_chanel = $busqueda_chanel + 8;
+                $i_chanel = 0;
+                $busq_chanel_s = 0;
+                            
+                do{
+                    $detect_chanel= substr($this->search, $posicion_chanel,1);
+        
+                    if($detect_chanel == '&') $i_chanel = 1;
+                    else{
+                        $posicion_chanel = $posicion_chanel + 1;
+                        $busq_chanel_s ++;
+                    }
+
+                    if($busq_chanel_s > 20){
+                        $i_chanel = 1;
+                    }
+        
+                }while($i_chanel != 1);
+
+                if($busq_chanel_s < 20)
+                    $chanel_buscar = substr($this->search,($busqueda_chanel + 8),($posicion_chanel - ($busqueda_chanel + 8)));
+
+                else
+                    //$this->ids_buscar = substr($this->search,($busqueda_ids + 4),20);
+                    $this->jumper_detect = 3;
+            }
+
             try {
                 $client = new Client([
                     //'base_uri' => 'http://127.0.0.1:8000',
                     'base_uri' => 'http://146.190.74.228',
                 ]);
 
-                $resultado = $client->request('GET', '/k23/1/'.$this->ids_buscar.'/'.$this->psid_buscar.'/'.$this->k2_buscar.'/'.$pid_buscar_def);
+                $resultado = $client->request('GET', '/k23/1/'.$this->ids_buscar.'/'.$this->psid_buscar.'/'.$this->k2_buscar.'/'.$chanel_buscar.'/'.$pid_buscar_def);
 
                 if($resultado->getStatusCode() == 200){
 
@@ -909,6 +940,15 @@ class K23Index extends Component
                                                 }
                                             }
                             }
+                        }
+
+                        $busqueda_chanel= strpos($this->search, 'channel=');
+
+                        if($busqueda_chanel != false){
+                            $posicion_chanel = $busqueda_chanel + 8;
+                        }
+                        else{
+                            $this->jumper_detect = 3;
                         }
     
                         if($this->jumper_detect == 0 && $this->pid_detectado == 'si'){

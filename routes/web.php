@@ -133,6 +133,7 @@ Route::middleware(['auth','verified'])->group(function()
 
         Route::get('login_spotify', [SpotifyController::class, 'login'])->name('login_spotify');
         Route::get('profile_spotify', [SpotifyController::class, 'getUser'])->name('profile_spotify');
+        Route::get('music_spotify', [SpotifyController::class, 'getMusic'])->name('music_sp');
 
         Route::get('admin_multilogin', [AdminController::class, 'multilogin'])->name('admin.multilogin.index')->middleware('permission:administracion_principal');
         Route::get('admin_modificaciones', [AdminController::class, 'modificaciones'])->name('admin.modificaciones')->middleware('permission:administracion_principal');

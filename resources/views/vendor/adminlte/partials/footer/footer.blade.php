@@ -152,7 +152,7 @@
             </div>
         </div>
 
-    {{--    <div class="col-md-3 float-center">
+        {{--<div class="col-md-3 float-center">
 
         <p><a 
             style="background-color:green; color:white; text-decoration:none; border-radius: 5px; padding: .5em;"
@@ -160,6 +160,8 @@
         </a></p>
 
         </div>--}}
+
+       
 
        
    
@@ -193,6 +195,8 @@
         </div>
     
     </div>
+
+   
 
 
 
