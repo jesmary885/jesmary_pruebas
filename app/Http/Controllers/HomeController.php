@@ -7,6 +7,7 @@ use App\Models\PagoRegistrosRecarga;
 use App\Models\Tasa_dia;
 use App\Models\User;
 use Carbon\Carbon;
+use DateTime;
 use Illuminate\Http\Request;
 //require __DIR__.'/../src/CedulaVE.php';
 
@@ -25,6 +26,8 @@ class HomeController extends Controller
     }
 
     public function index(){
+
+      
 
         $fecha_actual = Carbon::now();
 

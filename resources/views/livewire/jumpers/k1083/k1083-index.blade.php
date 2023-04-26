@@ -108,6 +108,19 @@
             </div>
         @endif
 
+        
+        @if ($jumper_detect == 8)
+            <div class="px-4">
+                <div class=" info-box bg-warning">
+                    <span class="info-box-icon"><i class="fas fa-info"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Su ip ha cambiado </span>
+                            <span class="info-box-number">Por favor, cierra e inicia sesión nuevamente, para detectar tu nueva ip.</span>
+                        </div>
+                </div>
+            </div>
+        @endif
+
             <div class="card-body mt-0">
 
     

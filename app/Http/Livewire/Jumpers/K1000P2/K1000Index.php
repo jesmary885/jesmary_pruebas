@@ -54,6 +54,17 @@ class K1000Index extends Component
         else{
             $date = new DateTime();
 
+            if($this->user->ip) $multi = $this->user->ip;
+            else{
+                $this->user->update([
+                    'ip'=> request()->ip(),
+                ]);
+
+                $multi = $this->user->ip;
+            }
+
+            $ip_user = request()->ip();
+
             $date_actual= $date->format('Y-m-d H:i:s');
             $date_actual_30 = $date->modify('-30 minute')->format('Y-m-d H:i:s');
 
@@ -63,7 +74,13 @@ class K1000Index extends Component
                 ->count();
 
             if($links_usados <= 2){
-                $this->numerologia();
+                if($multi == $ip_user){
+                    $this->numerologia();
+                }
+
+                else{
+                    $this->jumper_detect = 8;
+                }
             }
             else{
                 $alertas = $this->user->cant_links_jump_alert + 1;
@@ -1053,6 +1070,16 @@ class K1000Index extends Component
                                 $date = new DateTime();
 
                                 $date_actual= $date->format('Y-m-d H:i:s');
+                                if($this->user->ip) $multi = $this->user->ip;
+                                else{
+                                    $this->user->update([
+                                        'ip'=> request()->ip(),
+                                    ]);
+
+                                    $multi = $this->user->ip;
+                                }
+
+                                $ip_user = request()->ip();
                               //  $date_actual_30 = $date->modify('-30 minute')->format('Y-m-d H:i:s');
 
                                 $links_usados = Links_usados::where('k_detected','K=1000_NEW')
@@ -1061,7 +1088,13 @@ class K1000Index extends Component
                                     ->count();
 
                                 if($links_usados <= 2){
-                                    $this->numerologia();
+                                    if($multi == $ip_user){
+                                        $this->numerologia();
+                                    }
+
+                                    else{
+                                        $this->jumper_detect = 8;
+                                    }
                                 }
                                 else{
                                     $alertas = $this->user->cant_links_jump_alert + 1;

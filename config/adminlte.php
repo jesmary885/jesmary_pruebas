@@ -699,44 +699,44 @@ return [
             
         ],
 
-        // [
-        //     'text'    => 'SSI PREMIUM',
-        //     'icon'    => 'fas fa-crown',
-        //     'can' => 'menu.premium',
-        //     'icon_color' => 'cyan',
-        //     'submenu' => [
-        //         [
-        //             'text' => 'K1000 Selfserve',
-        //             'route'  => 'kmil_poderosa1.index',
-        //             'can' => 'menu.premium',
-        //             'icon_color' => 'red',
-        //             'icon'    => 'fas fa-angle-right',
-        //         ],
-        //         [
-        //             'text' => 'K1000 MCG',
-        //             'route'  => 'kmil_poderosa2.index',
-        //             'can' => 'menu.premium',
-        //             'icon_color' => 'red',
-        //             'icon'    => '	fas fa-angle-right',
-        //         ],
-        //         [
-        //             'text' => 'K1083',
-        //             'route'  => 'k1083.index',
-        //             'can' => 'menu.premium',
-        //             'icon_color' => 'red',
-        //             'icon'    => '	fas fa-angle-right',
-        //         ],
+        [
+            'text'    => 'SSI PREMIUM',
+            'icon'    => 'fas fa-crown',
+            'can' => 'administracion_principal',
+            'icon_color' => 'cyan',
+            'submenu' => [
+                [
+                    'text' => 'K1000 Selfserve',
+                    'route'  => 'kmil_poderosa1.index',
+                    'can' => 'administracion_principal',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+                [
+                    'text' => 'K1000 MCG',
+                    'route'  => 'kmil_poderosa2.index',
+                    'can' => 'administracion_principal',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+                [
+                    'text' => 'K1083',
+                    'route'  => 'k1083.index',
+                    'can' => 'administracion_principal',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
                
-        //         [
-        //             'text' => 'K23',
-        //             'route'  => 'k23_poderosa.index',
-        //             'can' => 'menu.premium',
-        //             'icon_color' => 'red',
-        //             'icon'    => '	fas fa-angle-right',
-        //         ],
+                [
+                    'text' => 'K23',
+                    'route'  => 'k23_poderosa.index',
+                    'can' => 'administracion_principal',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
                 
-        //     ],            
-        // ],
+            ],            
+        ],
 
         
         [
