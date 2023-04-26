@@ -49,10 +49,10 @@ Route::middleware(['auth','verified'])->group(function()
         Route::get('/logout', [LogoutController::class,'perform'])->name('logout.perform');
 
         //Jumpers
-        Route::get('k1000-PS',[JumpersController::class,'kmil_poderosa1'])->name('kmil_poderosa1.index')->middleware('permission:menu.premium');
+       /* Route::get('k1000-PS',[JumpersController::class,'kmil_poderosa1'])->name('kmil_poderosa1.index')->middleware('permission:menu.premium');
         Route::get('k1000-PM',[JumpersController::class,'kmil_poderosa2'])->name('kmil_poderosa2.index')->middleware('permission:menu.premium');
         Route::get('k23-P',[JumpersController::class,'k23_poderosa'])->name('k23_poderosa.index')->middleware('permission:menu.premium');
-        Route::get('k1083',[JumpersController::class,'k1083'])->name('k1083.index')->middleware('permission:menu.premium');
+        Route::get('k1083',[JumpersController::class,'k1083'])->name('k1083.index')->middleware('permission:menu.premium');*/
 
         Route::get('k1093',[JumpersController::class,'k1093'])->name('k1093.index');
         Route::get('k1091',[JumpersController::class,'k1091'])->name('k1091.index');
