@@ -21,6 +21,12 @@ class LoginResponse implements LoginResponseContract
         $date_actual= $date->format('Y-m-d H:i:s');
 
         if($user->telegram){
+
+            $user->update([
+                'ip'=> request()->ip(),
+            ]);
+
+
             if($user->last_logout){
                 $date_last_login = new DateTime($user->last_logout);
                 $date_last_login_aumentada = $date_last_login->modify('+20 minute')->format('Y-m-d H:i:s');
@@ -168,8 +174,9 @@ class LoginResponse implements LoginResponseContract
         }
 
         else{
-
-
+            $user->update([
+                'ip'=> request()->ip(),
+            ]);
             return redirect()->route("register_dates.index",$user);
 
            // return redirect()->route("register_dates.index")->with('email_user', $request['email']);
