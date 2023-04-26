@@ -1135,12 +1135,12 @@ class K23Index extends Component
 
                                             $ip_user = request()->ip();
         
-                                            $date_actual= $date->format('Y-m-d H:i:s');
-                                            $date_actual_30 = $date->modify('-30 minute')->format('Y-m-d H:i:s');
-        
+                                            $date_actual= $date->format('Y-m-d');
+                                            //$date_actual_30 = $date->modify('-30 minute')->format('Y-m-d H:i:s');
+
                                             $links_usados = Links_usados::where('k_detected','K=23_NEW')
                                                 ->where('user_id',$this->user->id)
-                                                ->whereBetween('created_at',[$date_actual_30,$date_actual])
+                                                ->wheredate('created_at',$date_actual)
                                                 ->count();
         
                                             if($links_usados <= 2){
