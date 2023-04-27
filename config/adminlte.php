@@ -366,6 +366,14 @@ return [
                 ],
 
                 [
+                    'text' => 'Cant de Jump por usuarios',
+                    'route'  => 'admin.users_jump.index',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-users',
+                    'can' => 'administracion_principal'
+                ],
+
+                [
                     'text' => 'Modificaciones en usuarios',
                     'route'  => 'admin.modificaciones',
                     'icon_color' => 'red',
@@ -702,27 +710,27 @@ return [
         [
             'text'    => 'SSI PREMIUM',
             'icon'    => 'fas fa-crown',
-            'can' => 'administracion_principal',
+            'can' => 'menu.premium',
             'icon_color' => 'cyan',
             'submenu' => [
                 [
                     'text' => 'K1000 Selfserve',
                     'route'  => 'kmil_poderosa1.index',
-                    'can' => 'administracion_principal',
+                    'can' => 'menu.premium',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
                 [
                     'text' => 'K1000 MCG',
                     'route'  => 'kmil_poderosa2.index',
-                    'can' => 'administracion_principal',
+                    'can' => 'menu.premium',
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
                 ],
                 [
                     'text' => 'K1083',
                     'route'  => 'k1083.index',
-                    'can' => 'administracion_principal',
+                    'can' => 'menu.premium',
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
                 ],
@@ -730,7 +738,7 @@ return [
                 [
                     'text' => 'K23',
                     'route'  => 'k23_poderosa.index',
-                    'can' => 'administracion_principal',
+                    'can' => 'menu.premium',
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
                 ],

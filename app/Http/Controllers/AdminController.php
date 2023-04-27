@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+
+    public function users_jump(){
+        return view('admin.users_jump');
+    }
+
     public function users(){
         return view('admin.users');
     }

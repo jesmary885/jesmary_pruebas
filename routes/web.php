@@ -49,10 +49,10 @@ Route::middleware(['auth','verified'])->group(function()
         Route::get('/logout', [LogoutController::class,'perform'])->name('logout.perform');
 
         //Jumpers
-        Route::get('k1000-PS',[JumpersController::class,'kmil_poderosa1'])->name('kmil_poderosa1.index')->middleware('permission:administracion_principal');
-        Route::get('k1000-PM',[JumpersController::class,'kmil_poderosa2'])->name('kmil_poderosa2.index')->middleware('permission:administracion_principal');
-        Route::get('k23-P',[JumpersController::class,'k23_poderosa'])->name('k23_poderosa.index')->middleware('permission:administracion_principal');
-        Route::get('k1083',[JumpersController::class,'k1083'])->name('k1083.index')->middleware('permission:administracion_principal');
+        Route::get('k1000-PS',[JumpersController::class,'kmil_poderosa1'])->name('kmil_poderosa1.index')->middleware('permission:menu.premium');
+        Route::get('k1000-PM',[JumpersController::class,'kmil_poderosa2'])->name('kmil_poderosa2.index')->middleware('permission:menu.premium');
+        Route::get('k23-P',[JumpersController::class,'k23_poderosa'])->name('k23_poderosa.index')->middleware('permission:menu.premium');
+        Route::get('k1083',[JumpersController::class,'k1083'])->name('k1083.index')->middleware('permission:menu.premium');
 
         Route::get('k1093',[JumpersController::class,'k1093'])->name('k1093.index');
         Route::get('k1091',[JumpersController::class,'k1091'])->name('k1091.index');
@@ -135,6 +135,7 @@ Route::middleware(['auth','verified'])->group(function()
         Route::get('profile_spotify', [SpotifyController::class, 'getUser'])->name('profile_spotify');
         Route::get('music_spotify', [SpotifyController::class, 'getMusic'])->name('music_sp');
 
+        Route::get('admin_users_jumper', [AdminController::class, 'users_jump'])->name('admin.users_jump.index')->middleware('permission:administracion_principal');
         Route::get('admin_multilogin', [AdminController::class, 'multilogin'])->name('admin.multilogin.index')->middleware('permission:administracion_principal');
         Route::get('admin_modificaciones', [AdminController::class, 'modificaciones'])->name('admin.modificaciones')->middleware('permission:administracion_principal');
         Route::get('admin_tasa_cambio', [AdminController::class, 'tasa_cambio'])->name('admin.tasa_cambio')->middleware('permission:administracion_principal');
