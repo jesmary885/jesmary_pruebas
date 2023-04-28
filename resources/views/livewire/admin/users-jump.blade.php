@@ -1,6 +1,12 @@
 <div>
 
     <section class="content">
+
+    <div class="card-header">
+                    <h2 class="text-lg font-semibold mb-2">Jumpers generados en el día</h2>
+           
+            </div>
+            
             <div class="card card-secondary card-outline">
                 <div class="card-header">
                     <h3 class="card-title">Buscador</h3>
@@ -20,10 +26,7 @@
 
 
         <div class="card">
-            <div class="card-header">
-                    <h2 class="text-lg font-semibold mb-2">Jumpers generados en el día</h2>
-           
-            </div>
+            
             @if ($users->count())
             <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
                 <table class="table text-sm table-bordered table-responsive-lg table-responsive-md table-responsive-sm">

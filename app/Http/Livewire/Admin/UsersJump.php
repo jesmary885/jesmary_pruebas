@@ -45,12 +45,12 @@ class UsersJump extends Component
 
         $date_actual= $date->format('Y-m-d');
 
-        $cant_k1000 = Links_usados::where('user_id',$user)
+        $cant_k23 = Links_usados::where('user_id',$user)
             ->whereDate('created_at',$date_actual)
             ->where('k_detected','K=23_NEW')
             ->count();
 
-        return $cant_k1000;
+        return $cant_k23;
         
     }
 
@@ -60,12 +60,12 @@ class UsersJump extends Component
 
         $date_actual= $date->format('Y-m-d');
 
-        $cant_k1000 = Links_usados::where('user_id',$user)
+        $cant_k1083 = Links_usados::where('user_id',$user)
             ->whereDate('created_at',$date_actual)
             ->where('k_detected','K=1083')
             ->count();
 
-        return $cant_k1000;
+        return $cant_k1083;
         
     }
 
