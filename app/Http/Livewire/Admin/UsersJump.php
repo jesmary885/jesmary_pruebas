@@ -62,7 +62,7 @@ class UsersJump extends Component
 
         $cant_k1000 = Links_usados::where('user_id',$user)
             ->whereDate('created_at',$date_actual)
-            ->where('k_detected','K=1083_NEW')
+            ->where('k_detected','K=1083')
             ->count();
 
         return $cant_k1000;
@@ -73,7 +73,6 @@ class UsersJump extends Component
     {
 
         $users = User::where('username', 'LIKE', '%' . $this->search . '%')
-        ->where('type','!=','gratis')
         ->where('status','activo')
         ->permission('menu.premium')
         ->latest('id')

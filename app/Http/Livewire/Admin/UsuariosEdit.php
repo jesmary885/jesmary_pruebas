@@ -71,28 +71,53 @@ class UsuariosEdit extends Component
 
         
         if($this->roles_id == '2'){
-            $this->usuario->update([
-                'name' => $this->username,
-                'username' => $this->username,
-                'email' => $this->email,
-                'status' => $estado,
-                'plan' => $this->plan,
-                'type' => 'basico',
-                'last_payment_date' => date("Y-m-d", strtotime($this->last_date)),
-            ]);
+            if($this->usuario->type != 'gratis'){
+                $this->usuario->update([
+                    'name' => $this->username,
+                    'username' => $this->username,
+                    'email' => $this->email,
+                    'status' => $estado,
+                    'plan' => $this->plan,
+                    'type' => 'basico',
+                    'last_payment_date' => date("Y-m-d", strtotime($this->last_date)),
+                ]);
+            }
+            else{
+                $this->usuario->update([
+                    'name' => $this->username,
+                    'username' => $this->username,
+                    'email' => $this->email,
+                    'status' => $estado,
+                    'plan' => $this->plan,
+                    'last_payment_date' => date("Y-m-d", strtotime($this->last_date)),
+                ]);
+            }
 
         }
 
         if($this->roles_id == '10'){
-            $this->usuario->update([
-                'name' => $this->username,
-                'username' => $this->username,
-                'email' => $this->email,
-                'status' => $estado,
-                'plan' => $this->plan,
-                'type' => 'premium',
-                'last_payment_date' => date("Y-m-d", strtotime($this->last_date)),
-            ]);
+            if($this->usuario->type != 'gratis'){
+                $this->usuario->update([
+                    'name' => $this->username,
+                    'username' => $this->username,
+                    'email' => $this->email,
+                    'status' => $estado,
+                    'plan' => $this->plan,
+                    'type' => 'premium',
+                    'last_payment_date' => date("Y-m-d", strtotime($this->last_date)),
+                ]);
+            }
+
+            else{
+                $this->usuario->update([
+                    'name' => $this->username,
+                    'username' => $this->username,
+                    'email' => $this->email,
+                    'status' => $estado,
+                    'plan' => $this->plan,
+                    'last_payment_date' => date("Y-m-d", strtotime($this->last_date)),
+                ]);
+            }
 
         }
  

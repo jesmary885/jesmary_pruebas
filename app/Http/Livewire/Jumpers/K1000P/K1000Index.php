@@ -68,7 +68,7 @@ class K1000Index extends Component
 
                     $ip_user = request()->ip();
 
-                    $date_actual= $date->format('Y-m-d H:i:s');
+                    $date_actual= $date->format('Y-m-d');
                    // $date_actual_30 = $date->modify('-30 minute')->format('Y-m-d H:i:s');
 
                     $links_usados = Links_usados::where('k_detected','K=1000_NEW')
