@@ -6,7 +6,7 @@
                     <h2 class="text-lg font-semibold mb-2">Jumpers generados en el día</h2>
            
             </div>
-            
+
             <div class="card card-secondary card-outline">
                 <div class="card-header">
                     <h3 class="card-title">Buscador</h3>
@@ -52,6 +52,9 @@
                             @endforeach
                         </tbody>
                     </table>
+                </div>
+                <div class="card-footer">
+                    {{$users->links()}}
                 </div>
          
             @else
