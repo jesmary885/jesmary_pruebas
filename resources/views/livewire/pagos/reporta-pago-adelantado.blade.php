@@ -26,6 +26,9 @@
                                         <option value="" selected>{{__('messages.seleccione_opcion')}}</option>  
                                         <option value="membresia">{{__('messages.pago_mensualidad')}}</option>  
                                         <option value="balance">{{__('messages.add_saldo_pagina')}}</option>
+                                        @if($user_page->type == 'premium')
+                                        <option value="Pago_restante_premium">{{__('messages.add_pago_restante')}}</option>
+                                        @endif
                                     </select>
                                     <x-input-error for="plan" />
                                     

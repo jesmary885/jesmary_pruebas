@@ -65,7 +65,7 @@
     <div class="row">
 
         <div class="col-lg-3 col-6">
-            <div class="small-box bg-success">
+            <div class="small-box bg-info">
                 <div class="inner">
                     <h3>{{$users_plan_30_basic}}</h3>
                     <p class="sm:text-xs md:text-md font-bold">PLAN 30 DÍAS</p>
@@ -86,7 +86,7 @@
 
 
         {{--<div class="col-lg-3 col-6">
-            <div class="small-box bg-success">
+            <div class="small-box bg-info">
                 <div class="inner">
                     <h3>{{$users_plan_15_premium}}</h3>
                     <p class="sm:text-xs md:text-md font-bold">PLAN 15 DÍAS</p>
@@ -99,7 +99,7 @@
         </div>--}}
 
         <div class="col-lg-3 col-6">
-            <div class="small-box bg-success">
+            <div class="small-box bg-info">
                 <div class="inner">
                     <h3>{{$users_plan_30_premium}}</h3>
                     <p class="sm:text-xs md:text-md font-bold">PLAN 30 DÍAS</p>
@@ -121,7 +121,7 @@
     <div class="row">
 
         <div class="col-lg-3 col-6">
-            <div class="small-box bg-warning">
+            <div class="small-box bg-success">
                 <div class="inner">
                     <h3>{{$ganancia_dia_30_basic}} $</h3>
                     <p class="sm:text-xs md:text-md font-bold">PLAN BÁSICO</p>
@@ -133,21 +133,8 @@
             </div>
         </div>
 
-        {{--<div class="col-lg-3 col-6">
-            <div class="small-box bg-danger">
-                <div class="inner">
-                    <h3>{{$ganancia_dia_15_premium}} $</h3>
-                    <p class="sm:text-xs md:text-md font-bold">PLAN 15 DÍAS - PREMIUM</p>
-                </div>
-                <div class="icon">
-                    <i class="fas fa-hand-holding-heart"></i>
-                </div>
-                    <a href="# " class="small-box-footer">Más información<i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-        </div>--}}
-
         <div class="col-lg-3 col-6">
-            <div class="small-box bg-danger">
+            <div class="small-box bg-success">
                 <div class="inner">
                     <h3>{{$ganancia_dia_30_premium}} $</h3>
                     <p class="sm:text-xs md:text-md font-bold">PLAN 30 DÍAS - PREMIUM</p>
@@ -161,6 +148,32 @@
 
         <div class="col-lg-3 col-6">
             <div class="small-box bg-success">
+                <div class="inner">
+                    <h3>{{$ganancia_dia_5_premium}} $</h3>
+                    <p class="sm:text-xs md:text-md font-bold">RESTANTE PLAN PREMIUM</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-hand-holding-heart"></i>
+                </div>
+                    <a href="# " class="small-box-footer">Más información<i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-success">
+                <div class="inner">
+                    <h3>{{$ganancia_dia_saldo_pagina}} $</h3>
+                    <p class="sm:text-xs md:text-md font-bold">SALDOS EN PÁGINA</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-hand-holding-heart"></i>
+                </div>
+                    <a href="# " class="small-box-footer">Más información<i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-danger">
                 <div class="inner">
                     <h3>{{$total_ganancia_dia}} $</h3>
                     <p class="sm:text-xs md:text-md font-bold">TOTAL GANANCIA DEL DÍA</p>
@@ -232,7 +245,7 @@
     <div class="row">
 
         <div class="col-lg-3 col-6">
-            <div class="small-box bg-warning">
+            <div class="small-box bg-success">
                 <div class="inner">
                     <h3>{{$ganancia_mes_30_basic}} $</h3>
                     <p class="sm:text-xs md:text-md font-bold">PLAN BÁSICO</p>
@@ -244,24 +257,11 @@
             </div>
         </div>
 
-        {{--<div class="col-lg-3 col-6">
-            <div class="small-box bg-danger">
-                <div class="inner">
-                    <h3>{{$ganancia_mes_15_premium}} $</h3>
-                    <p class="sm:text-xs md:text-md font-bold">PLAN 15 DÍAS - PREMIUM</p>
-                </div>
-                <div class="icon">
-                    <i class="fas fa-hand-holding-heart"></i>
-                </div>
-                    <a href="# " class="small-box-footer">Más información<i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-        </div>--}}
-
         <div class="col-lg-3 col-6">
-            <div class="small-box bg-danger">
+            <div class="small-box bg-success">
                 <div class="inner">
                     <h3>{{$ganancia_mes_30_premium}} $</h3>
-                    <p class="sm:text-xs md:text-md font-bold">PLAN 30 DÍAS - PREMIUM</p>
+                    <p class="sm:text-xs md:text-md font-bold">PLAN PREMIUM</p>
                 </div>
                 <div class="icon">
                     <i class="fas fa-hand-holding-heart"></i>
@@ -272,6 +272,32 @@
 
         <div class="col-lg-3 col-6">
             <div class="small-box bg-success">
+                <div class="inner">
+                    <h3>{{$ganancia_mes_5_premium}} $</h3>
+                    <p class="sm:text-xs md:text-md font-bold">RESTANTE PLAN PREMIUM</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-hand-holding-heart"></i>
+                </div>
+                    <a href="# " class="small-box-footer">Más información<i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-success">
+                <div class="inner">
+                    <h3>{{$ganancia_saldos_pagina}} $</h3>
+                    <p class="sm:text-xs md:text-md font-bold">SALDOS EN PÁGINA</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-hand-holding-heart"></i>
+                </div>
+                    <a href="# " class="small-box-footer">Más información<i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-danger">
                 <div class="inner">
                     <h3>{{$total_ganancia_mes}} $</h3>
                     <p class="sm:text-xs md:text-md font-bold">TOTAL</p>
@@ -321,7 +347,7 @@
         </div>--}}
 
         <div class="col-lg-3 col-6">
-            <div class="small-box bg-warning">
+            <div class="small-box bg-success">
                 <div class="inner">
                     <h3>{{$ganancia_mes_basic_total_suscriptor}} $</h3>
                     <p class="sm:text-xs md:text-md font-bold">TOTAL</p>
@@ -367,8 +393,9 @@
             </div>
         </div>--}}
 
+
         <div class="col-lg-3 col-6">
-            <div class="small-box bg-warning">
+            <div class="small-box bg-success">
                 <div class="inner">
                     <h3>{{$ganancia_mes_premium_suscriptor_total}} $</h3>
                     <p class="sm:text-xs md:text-md font-bold">TOTAL</p>

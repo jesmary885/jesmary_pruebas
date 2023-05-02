@@ -50,6 +50,11 @@
                                     <input class="custom-control-input" type="radio" id="customRadio5" value="3" name="customRadio5" wire:model="type_confirmed">
                                     <label for="customRadio5" class="custom-control-label text-md font-semibold text-gray-300">Saldo en página</label>
                                 </div>
+
+                                <div class="custom-control custom-radio flex justify-start">
+                                    <input class="custom-control-input" type="radio" id="customRadio6" value="4" name="customRadio6" wire:model="type_confirmed">
+                                    <label for="customRadio6" class="custom-control-label text-md font-semibold text-gray-300">Monto adicional de plan premium (5$)</label>
+                                </div>
                             </div>
 
                         @endif

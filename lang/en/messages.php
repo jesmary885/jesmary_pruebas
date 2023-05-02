@@ -75,5 +75,6 @@ return [
     'tipo_pago'=> 'Payment type',
     'pago_mensualidad' => 'Monthly payment',
     'add_saldo_pagina' => 'Add balance on page',
-    'monto' => 'Amount'
+    'monto' => 'Amount',
+    'add_pago_restante' => 'Remaining payment of the premium plan',
 ];

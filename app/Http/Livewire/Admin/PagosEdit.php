@@ -56,56 +56,100 @@ class PagosEdit extends Component
 
         if($this->registro->plan != 'balance'){
             if($this->status == '1'){
-                $rules_type_confirmed = $this->rule_pago_recibido;
-                $this->validate($rules_type_confirmed);
 
-                $this->registro->update([
-                    'status' => 'verificado',
-                    'admin_first_id' => auth()->id(),
-                    'admin_second_id' => $this->admin_verifi_id
-                ]);
+                if($this->registro->type != 'Pago_restante_premium'){
+                    $rules_type_confirmed = $this->rule_pago_recibido;
+                    $this->validate($rules_type_confirmed);
+
+                    $this->registro->update([
+                        'status' => 'verificado',
+                        'admin_first_id' => auth()->id(),
+                        'admin_second_id' => $this->admin_verifi_id
+                    ]);
     
-                $user_cliente = User::where('id',$this->registro->user_id)->first();
-
-                $fecha_actual = date("Y-m-d h:s");
-                $proxima_fecha = date("Y-m-d h:s",strtotime($fecha_actual."+ 30 days"));
-
-
-                if($this->registro->payment_method_id == 1){
-
                     $user_cliente = User::where('id',$this->registro->user_id)->first();
-                    $balance_new = $user_cliente->balance - $this->registro->monto;
 
-                    $user_cliente->update([
-                        'status' => 'activo',
-                        'balance' => $balance_new,
-                        'last_payment_date' => $proxima_fecha,
-                    ]);
+                    $fecha_actual = date("Y-m-d h:s");
+                    $proxima_fecha = date("Y-m-d h:s",strtotime($fecha_actual."+ 30 days"));
 
+
+                    if($this->registro->payment_method_id == 1){
+                        
+
+                        $user_cliente = User::where('id',$this->registro->user_id)->first();
+                        $balance_new = $user_cliente->balance - $this->registro->monto;
+
+                        $user_cliente->update([
+                            'status' => 'activo',
+                            'balance' => $balance_new,
+                            'last_payment_date' => $proxima_fecha,
+                        ]);
+
+                        $this->registro->update([
+                            'monto' => '0',
+                     
+                        ]);
+
+                    }
+                    else{
+
+                        
+                        $user_cliente->update([
+                            'status' => 'activo',
+                            'last_payment_date' => $proxima_fecha,
+                        ]);
+                    }
+        
+
+                    if($this->type_confirmed == 1){
+                        $user_cliente->roles()->sync(2);
+
+                        $this->registro->update([
+                            'type' => 'basico',
+                        ]);
+                    }
+                    if($this->type_confirmed == 2){
+                        $user_cliente->roles()->sync(10);
+
+                        $this->registro->update([
+                            'type' => 'premium',
+                        ]);
+                    }
                 }
+
                 else{
+                    $rules_type_confirmed = $this->rule_pago_recibido;
+                    $this->validate($rules_type_confirmed);
 
-                    
-                    $user_cliente->update([
-                        'status' => 'activo',
-                        'last_payment_date' => $proxima_fecha,
+                    $this->registro->update([
+                        'status' => 'verificado',
+                        'admin_first_id' => auth()->id(),
+                        'admin_second_id' => $this->admin_verifi_id
                     ]);
-                }
     
+                    $user_cliente = User::where('id',$this->registro->user_id)->first();
 
-                if($this->type_confirmed == 1){
-                    $user_cliente->roles()->sync(2);
+                    if($this->registro->payment_method_id == 1){
 
-                    $this->registro->update([
-                        'type' => 'basico',
-                    ]);
-                }
-                else{
-                    $user_cliente->roles()->sync(10);
+                        $user_cliente = User::where('id',$this->registro->user_id)->first();
+                        $balance_new = $user_cliente->balance - $this->registro->monto;
 
-                    $this->registro->update([
-                        'type' => 'premium',
-                    ]);
+                        $user_cliente->update([
+                            'status' => 'activo',
+                            'balance' => $balance_new,
+                        ]);
+
+                        $this->registro->update([
+                            'monto' => '0',
+                     
+                        ]);
+
+                    }
+                    else{
+                        $user_cliente->update([
+                            'status' => 'activo',
+                        ]);
+                    }
                 }
             }
     

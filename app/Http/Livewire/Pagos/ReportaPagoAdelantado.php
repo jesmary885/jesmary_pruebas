@@ -17,7 +17,7 @@ class ReportaPagoAdelantado extends Component
 {
     use WithFileUploads;
 
-    public $tasa_dia_dolar,$tasa_dia_ltc,$monto,$isopen,$type,$file,$comentario,$plan,$metodo_id,$payment_methods,$referencia,$fecha_pago;
+    public $user_page,$tasa_dia_dolar,$tasa_dia_ltc,$monto,$isopen,$type,$file,$comentario,$plan,$metodo_id,$payment_methods,$referencia,$fecha_pago;
 
     protected $listeners = ['render' => 'render'];
 
@@ -51,6 +51,9 @@ class ReportaPagoAdelantado extends Component
 
     public function mount(){
         //$this->payment_methods = PaymentMethods::all();
+        $this->user_page = User::where('id',Auth::id())->first();
+
+
         $this->tasa_dia_dolar = Tasa_dia::where('moneda','DOLAR')->first()->tasa;
         $this->tasa_dia_ltc = Tasa_dia::where('moneda','LTC')->first()->tasa;
     }
@@ -78,17 +81,23 @@ class ReportaPagoAdelantado extends Component
     }
 
     public function save(){
-        $date = Carbon::now();
 
-        if($this->metodo_id == 1){
-            $rules = $this->rules_con_balance;
-            $this->validate($rules);
-        }
-        else{
-            $rules = $this->rules;
-            $this->validate($rules);
-            
-        }
+        $pago_registrado = PagoRegistrosRecarga::where('user_id',Auth::id())
+        ->where('status','pendiente')
+        ->count();
+
+        if($pago_registrado == 0){
+            $date = Carbon::now();
+
+            if($this->metodo_id == 1){
+                $rules = $this->rules_con_balance;
+                $this->validate($rules);
+            }
+            else{
+                $rules = $this->rules;
+                $this->validate($rules);
+                
+            }
 
             if($this->plan == "balance"){
                 $rule_monto = $this->rule_monto;
@@ -104,16 +113,24 @@ class ReportaPagoAdelantado extends Component
             
             if($this->plan == "membresia")
             {
+
                 $new_pago->type = 'Membresia';
-                $new_pago->monto = '10';
-                $new_pago->pago_basico = '1';
-                $new_pago->pago_premium = '4';
-                $new_pago->plan = '30';
+                    $new_pago->monto = '10';
+                    $new_pago->pago_basico = '1';
+                    $new_pago->pago_premium = '4';
+                    $new_pago->plan = '30';
             }
-            else{
+            elseif($this->plan == "balance"){
                 $new_pago->plan = 'balance';
                 $new_pago->type = 'Saldo en pagina';
                 $new_pago->monto = $this->monto;
+            }
+            else{
+                    $new_pago->type = 'Pago_restante_premium';
+                    $new_pago->monto = '5';
+                    $new_pago->pago_basico = '0';
+                    $new_pago->pago_premium = '2';
+                    $new_pago->plan = '30';
             }
             if($this->metodo_id != 1){
                 $url = Storage::put('public/pagos_recargas', $this->file);
@@ -155,10 +172,17 @@ class ReportaPagoAdelantado extends Component
             $this->reset(['plan','file','comentario','type']);
             $this->isopen = false;  
 
-            //$msj = 'La activación automática no esta disponible por los momentos, espere que un administrador active su cuenta';
             return redirect()->route("home");
-    
-            //return redirect()->to('/home');
-        
+
+        }
+
+        else{
+
+            $this->emit('error','Su operación no ha sido procesada, tiene un pago pendiente por verificar');
+            $this->reset(['plan','file','comentario','type']);
+            $this->isopen = false;  
+
+            return redirect()->route("home");
+        }
     }
 }

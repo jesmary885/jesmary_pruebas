@@ -80,7 +80,7 @@ class K23Index extends Component
                     ->wheredate('created_at',$date_actual)
                     ->count();
 
-                if($links_usados <= 2){
+                if($links_usados <= 4){
                     if($multi == $ip_user){
                         $this->numerologia();
                     }
@@ -283,11 +283,11 @@ class K23Index extends Component
 
                 $pid_buscar_def = substr($this->pid_buscar, 0, 6).rand(1101,9909);
 
-                $busqueda_chanel= strpos($this->search, 'channel=');
+                $busqueda_chanel= strpos($this->search, 'hannel=');
 
                 if($busqueda_chanel != false){
 
-                    $posicion_chanel = $busqueda_chanel + 8;
+                    $posicion_chanel = $busqueda_chanel + 7;
                     $i_chanel = 0;
                     $busq_chanel_s = 0;
                             
@@ -307,7 +307,7 @@ class K23Index extends Component
                         }while($i_chanel != 1);
 
                     if($busq_chanel_s < 20)
-                        $chanel_buscar = substr($this->search,($busqueda_chanel + 8),($posicion_chanel - ($busqueda_chanel + 8)));
+                        $chanel_buscar = substr($this->search,($busqueda_chanel + 7),($posicion_chanel - ($busqueda_chanel + 7)));
 
                     else
                         //$this->ids_buscar = substr($this->search,($busqueda_ids + 4),20);
@@ -1092,10 +1092,10 @@ class K23Index extends Component
                             $this->jumper_detect = 3;
                         }
 
-                        $busqueda_chanel= strpos($this->search, 'channel=');
+                        $busqueda_chanel= strpos($this->search, 'hannel=');
 
                         if($busqueda_chanel != false){
-                            $posicion_chanel = $busqueda_chanel + 8;
+                            $posicion_chanel = $busqueda_chanel + 7;
                         }
                         else{
                             $this->jumper_detect = 3;
@@ -1143,7 +1143,7 @@ class K23Index extends Component
                                                 ->wheredate('created_at',$date_actual)
                                                 ->count();
         
-                                            if($links_usados <= 2){
+                                            if($links_usados <= 4){
                                                 if($multi == $ip_user){
                                                     $this->numerologia();
                                                 }

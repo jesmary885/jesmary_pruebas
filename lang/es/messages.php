@@ -74,7 +74,7 @@ return [
     'tipo_pago'=> 'Tipo de pago',
     'pago_mensualidad' => 'Pago de mensualidad',
     'add_saldo_pagina' => 'Agregar saldo en página',
-    'monto' => 'Monto'
+    'monto' => 'Monto',
+    'add_pago_restante' => 'Pago restante de plan premium',
 
-  
 ];
