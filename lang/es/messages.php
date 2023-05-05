@@ -76,5 +76,7 @@ return [
     'add_saldo_pagina' => 'Agregar saldo en página',
     'monto' => 'Monto',
     'add_pago_restante' => 'Pago restante de plan premium',
+    'pago_mensualidad_basica' => 'Pago de membresia plan básico',
+    'pago_mensualidad_premium' => 'Pago de membresia plan premium',
 
 ];

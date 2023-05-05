@@ -128,6 +128,7 @@ Route::middleware(['auth','verified'])->group(function()
         Route::get('admin_k_nuevas', [AdminController::class, 'k_nuevas'])->name('admin.k_nuevas')->middleware('permission:otro.admin');
         Route::get('admin_comunidad', [AdminController::class, 'comunidad'])->name('admin.comunidad')->middleware('permission:otro.admin');
         Route::get('admin_jumper_dia', [AdminController::class, 'jumper_dia'])->name('admin.jumper_dia')->middleware('permission:otro.admin');
+        Route::get('k1020', [JumpersController::class, 'k1020'])->name('k1020.index')->middleware('permission:otro.admin');
 
         //Administración
 

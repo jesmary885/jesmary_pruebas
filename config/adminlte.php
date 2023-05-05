@@ -477,9 +477,19 @@ return [
                 'icon'    => 'fas fa-search',
                 ],
 
+                [
+                    'text' => 'K1020',
+                    'route'  => 'k1020.index',
+                    'can' => 'otro.admin',
+                    'icon_color' => 'cyan',
+                    'icon'    => 'fas fa-search',
+                ],
+
             ],
         ],
-        
+
+
+
         // Navbar items:
         // [
         //     'type'         => 'navbar-search',
@@ -746,6 +756,39 @@ return [
             ],            
         ],
 
+        [
+            'text'    => 'ESPECTRUM',
+            'icon'    => 'fas fa-search',
+            'can' => 'otro.admin',
+            'icon_color' => 'cyan',
+            'submenu' => [
+                [
+                    'text' => 'GENERADOR 1',
+                    'route'  => 'spectrum.index',
+                    'icon'    => '	fas fa-angle-right',
+                    'icon_color' => 'red',
+                    'can' => 'otro.admin'
+                ],
+
+                [
+                    'text' => 'GENERADOR 2',
+                    'icon'    => '	fas fa-angle-right',
+                    'icon_color' => 'red',
+                    'can' => 'otro.admin'
+                ],
+
+               
+
+                [
+                    'text' => 'GENERADOR 3',
+                    'can' => 'otro.admin',
+                    'icon'    => '	fas fa-angle-right',
+                    'icon_color' => 'cyan',
+              ],
+
+            ],
+        ],
+
         
         [
             'text' => 'CINT',
@@ -754,6 +797,8 @@ return [
             'icon'    => 'fas fa-search',
             'icon_color' => 'cyan',
         ],
+
+        
         // [
         //     'text' => 'INTERNALS',
         //     'route'  => 'internals.index',
@@ -778,13 +823,13 @@ return [
         //     'icon_color' => 'cyan',
         //     'icon'    => 'fas fa-search',
         // ],
-        // [
-        //     'text' => 'SPECTRUM',
-        //     'route'  => 'spectrum.index',
-        //     'can' => 'spectrum.index',
-        //     'icon_color' => 'red',
-        //     'icon'    => 'fas fa-search',
-        // ],
+        //  [
+        //      'text' => 'SPECTRUM',
+        //      'route'  => 'spectrum.index',
+        //      'can' => 'spectrum.index',
+        //      'icon_color' => 'cyan',
+        //      'icon'    => 'fas fa-search',
+        //  ],
         
         
 

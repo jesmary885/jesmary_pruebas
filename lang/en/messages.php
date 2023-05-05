@@ -77,4 +77,7 @@ return [
     'add_saldo_pagina' => 'Add balance on page',
     'monto' => 'Amount',
     'add_pago_restante' => 'Remaining payment of the premium plan',
+    'pago_mensualidad_basica' => 'basic plan membership payment',
+    'pago_mensualidad_premium' => 'premium plan membership payment',
+
 ];

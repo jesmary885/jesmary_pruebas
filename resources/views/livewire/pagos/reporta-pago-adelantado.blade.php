@@ -12,9 +12,21 @@
                         <hr class="m-2 p-2">
 
                         <p class="info-box-text mb-2">PRECIO DE MEMBRESIA: </p>
-                        <p class="info-box-text"> - 10$ </p>
-                        <p class="info-box-text"> - {{10* $tasa_dia_dolar}} Bs. </p>
-                        <p class="info-box-text"> - {{round((10 / $tasa_dia_ltc),2)}} LTC.</p>
+
+                        @if($user_page->type == 'premium')
+                            <p class="info-box-text"> Plan Básico </p>
+                            <p class="info-box-text"> - 10$ </p>
+                            <p class="info-box-text"> - {{10* $tasa_dia_dolar}} Bs. </p>
+                            <p class="info-box-text"> - {{round((10 / $tasa_dia_ltc),2)}} LTC.</p>
+                            <p class="info-box-text mt-2"> Plan Premium </p>
+                            <p class="info-box-text"> - 15$ </p>
+                            <p class="info-box-text"> - {{15* $tasa_dia_dolar}} Bs. </p>
+                            <p class="info-box-text"> - {{round((15 / $tasa_dia_ltc),2)}} LTC.</p>
+                        @else
+                            <p class="info-box-text"> - 10$ </p>
+                            <p class="info-box-text"> - {{10* $tasa_dia_dolar}} Bs. </p>
+                            <p class="info-box-text"> - {{round((10 / $tasa_dia_ltc),2)}} LTC.</p>
+                        @endif
 
                         <hr class="m-2 p-2">
 
@@ -24,11 +36,14 @@
                                     <label class="w-full text-justify">Motivo</label>
                                     <select wire:model="plan" title="Plan" id="estado" class="block w-full text-gray-400 py-2 px-2 pr-8 leading-tight rounded focus:outline-none focus:border-gray-500" name="estado">
                                         <option value="" selected>{{__('messages.seleccione_opcion')}}</option>  
-                                        <option value="membresia">{{__('messages.pago_mensualidad')}}</option>  
-                                        <option value="balance">{{__('messages.add_saldo_pagina')}}</option>
                                         @if($user_page->type == 'premium')
-                                        <option value="Pago_restante_premium">{{__('messages.add_pago_restante')}}</option>
+                                            <option value="membresia basica">{{__('messages.pago_mensualidad_basica')}}</option> 
+                                            <option value="membresia premium">{{__('messages.pago_mensualidad_premium')}}</option>  
+                                            <option value="Pago_restante_premium">{{__('messages.add_pago_restante')}}</option>
+                                        @else
+                                            <option value="membresia basica">{{__('messages.pago_mensualidad')}}</option> 
                                         @endif
+                                        <option value="balance">{{__('messages.add_saldo_pagina')}}</option>
                                     </select>
                                     <x-input-error for="plan" />
                                     

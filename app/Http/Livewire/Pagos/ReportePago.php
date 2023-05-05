@@ -17,7 +17,7 @@ class ReportePago extends Component
 {
     use WithFileUploads;
 
-    public $tasa_dia_dolar,$tasa_dia_ltc,$msj_aviso,$type,$file,$isopen = false, $plan,$comentario,$metodo_id,$payment_methods,$referencia,$fecha_pago;
+    public $monto_pago,$user_page,$tasa_dia_dolar,$tasa_dia_ltc,$msj_aviso,$type,$file,$isopen = false, $plan,$comentario,$metodo_id,$payment_methods,$referencia,$fecha_pago;
 
     protected $rules = [
         'metodo_id' => 'required',
@@ -41,7 +41,14 @@ class ReportePago extends Component
     }
 
     public function mount(){
-        //$this->payment_methods = PaymentMethods::all();
+        
+        $this->user_page = User::where('id',Auth::id())->first();
+
+        if($this->user_page->type == 'premium') $this->plan = "membresia premium";
+        else $this->plan = "membresia basica";
+
+        
+
         $this->msj_aviso = 0;
         $this->tasa_dia_dolar = Tasa_dia::where('moneda','DOLAR')->first()->tasa;
         $this->tasa_dia_ltc = Tasa_dia::where('moneda','LTC')->first()->tasa;
@@ -50,11 +57,22 @@ class ReportePago extends Component
     public function verific(){
         $user = User::where('id',Auth::id())->first();
 
-        if($user->balance>=10){
-            return $this->payment_methods = PaymentMethods::all();
+        if($this->plan == "membresia basica" ){
+            if($user->balance>=10){
+                return $this->payment_methods = PaymentMethods::all();
+            }
+            else{
+                return $this->payment_methods = PaymentMethods::where('id','!=','1')->get();
+            }
         }
-        else{
-            return $this->payment_methods = PaymentMethods::where('id','!=','1')->get();
+
+        if($this->plan == "membresia premium" ){
+            if($user->balance>=15){
+                return $this->payment_methods = PaymentMethods::all();
+            }
+            else{
+                return $this->payment_methods = PaymentMethods::where('id','!=','1')->get();
+            }
         }
     }
 
@@ -89,49 +107,104 @@ class ReportePago extends Component
             $new_pago->file = $url;
             $new_pago->nro_referencia = $this->referencia;
         }
-        
-        $new_pago->plan = '30';
-        $new_pago->status = 'pendiente';
+
+        if($this->plan == "membresia basica")
+        {
+            $new_pago->type = 'basico';
+
+            if($this->metodo_id == 1){
+                $new_pago->monto = '0';
+                $new_pago->status = 'verificado';
+            }
+            else{
+                $new_pago->monto = '10';
+                $new_pago->status = 'pendiente';
+            }
+
+            $new_pago->pago_basico = '1';
+            $new_pago->pago_premium = '4';
+            $new_pago->plan = '30';                
+        }
+
+        if($this->plan == "membresia premium")
+        {
+            $new_pago->type = 'premium';
+
+            if($this->metodo_id == 1) {
+                $new_pago->monto = '0';
+                $new_pago->status = 'verificado';
+            }
+            else{
+                $new_pago->monto = '15';
+                $new_pago->status = 'pendiente';
+            }
+
+                $new_pago->pago_basico = '1';
+                $new_pago->pago_premium = '6';
+                $new_pago->plan = '30';                
+            }
         $new_pago->fecha_pago = $this->fecha_pago;
         $new_pago->payment_method_id = $this->metodo_id;
         $new_pago->comentario = $this->comentario;
-        $new_pago->type = 'Membresia';
-        $new_pago->monto = '10';
-        $new_pago->pago_basico = '1';
-        $new_pago->pago_premium = '4';
         $new_pago->save();
 
-        //$proxima_fecha = date("Y-m-d h:s",strtotime($fecha_actual."+ 30 days"));
         $plan_nuevo = '30';
-        
-        $user->update([
-            'status' => 'activo',
-            //'last_payment_date' => $proxima_fecha,
-            'type' => $this->type,
-            'plan' => $plan_nuevo
-        ]);
 
-           /* if($date->toTimeString() <= '21:05:00' && $date->toTimeString() >= '06:00:00' ){
-                if($this->type == 'premium'){
-                    $user->roles()->sync(10);
-                }
-                else{
-                    if($rol == '4') $user->roles()->sync(2);
+        if($this->metodo_id == 1) {
+            $proxima_fecha = date("Y-m-d h:s",strtotime($fecha_actual."+ 30 days"));
 
-                }
+            if($this->plan == "membresia basica"){
+                $this->type = "basico";
+                $this->monto_pago = '10';
+                $user->roles()->sync(2);
+            } 
+
+            if($this->plan == "membresia premium") {
+                $this->type = "premium";
+                $this->monto_pago = '15';
+                $user->roles()->sync(10);
             }
 
-            else{*/
+            $balance_new = $user->balance - $this->monto_pago;
+
+            $user->update([
+                'status' => 'activo',
+                'last_payment_date' => $proxima_fecha,
+                'type' => $this->type,
+                'plan' => $plan_nuevo,
+                'balance' => $balance_new,
+            ]);
+
+            return redirect()->route("home");
+
+        }
+
+        else{
+            if($this->plan == "membresia basica"){
+                $this->type = "basico";
+            } 
+
+            if($this->plan == "membresia premium") {
+                $this->type = "premium";
+            }
+
+            $user->update([
+                'status' => 'activo',
+                'type' => $this->type,
+                'plan' => $plan_nuevo
+            ]);
 
             $msj = 'La activación automática no esta disponible por los momentos, espere que un administrador active su cuenta';
             return redirect()->route("home")->with('info', $msj);
+
+        }
 
 
             $this->emit('alert','Datos registrados correctamente');
             $this->reset(['plan','file','comentario','type']);
             $this->isopen = false;  
 
-            //eturn redirect()->to('/home');
-        
+           
+
     }
 }
