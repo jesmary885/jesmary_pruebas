@@ -661,6 +661,7 @@ class SsidkrIndex extends Component
                             elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '11619') $type_k = 32;
                             elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '10659') $type_k = 33;
                             elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '10611') $type_k = 34;
+                            elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '1020') $type_k = 38;
 
                             else  $type_k = 15;
 
@@ -1040,6 +1041,7 @@ class SsidkrIndex extends Component
                                     elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '11619') $type_k = 32;
                                     elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '10659') $type_k = 33;
                                     elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '10611') $type_k = 34;
+                                    elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '1020') $type_k = 38;
                                     else  $type_k = 15;
 
                             }
