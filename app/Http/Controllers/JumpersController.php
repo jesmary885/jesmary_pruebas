@@ -138,9 +138,22 @@ class JumpersController extends Controller
        
     }
 
+    public function spectrum2(){
+        return view('jumpers.spectrum2');
+       
+    }
+
+    public function spectrum3(){
+        return view('jumpers.spectrum3');
+       
+    }
+
     public function toluna(){
         return view('jumpers.toluna');
+    }
 
+    public function toluna2(){
+        return view('jumpers.toluna2');
     }
 
     public function ssidkr(){

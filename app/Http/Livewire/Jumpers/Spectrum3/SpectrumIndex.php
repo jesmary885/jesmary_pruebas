@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Jumpers\Spectrum;
+namespace App\Http\Livewire\Jumpers\Spectrum3;
 
 use App\Models\Antibot;
 use App\Models\Links_usados;
@@ -32,7 +32,7 @@ class SpectrumIndex extends Component
         $this->operacion = Antibot::where('id',$random)->first();
         $operacion_total = 'Resuelve esta operación matemática ('.$this->operacion->nro1.' + '.$this->operacion->nro2. ')';
 
-        $this->emit('numerologia',$operacion_total,'jumpers.spectrum.spectrum-index','verific');
+        $this->emit('numerologia',$operacion_total,'jumpers.spectrum3.spectrum-index','verific');
     }
 
     public function verific($result){
@@ -63,8 +63,6 @@ class SpectrumIndex extends Component
 
                 $elem1 = substr($this->search,($busqueda_trans + 14),($posicion_elem1 - ($busqueda_trans + 14)));
 
-            }
-
                 try {
     
                     $client = new Client([
@@ -72,7 +70,7 @@ class SpectrumIndex extends Component
                         'base_uri' => 'http://209.94.57.88/',
                     ]);
         
-                    $resultado = $client->request('GET', '/Spectrum/2/'.$elem1);
+                    $resultado = $client->request('GET','/Spectrum/4/'.$elem1);
         
                     if($resultado->getStatusCode() == 200){
 
@@ -104,7 +102,7 @@ class SpectrumIndex extends Component
                     }
         
                 }
-            
+            }
         }
 
         else{
@@ -122,9 +120,9 @@ class SpectrumIndex extends Component
 
         if($long_psid>5){
 
-            $busqueda_qualtric_ = strpos($this->search, 'ualtric');
+            $busqueda_selfserve_ = strpos($this->search, 'selfserve');
 
-            if($busqueda_qualtric_ !== false){
+            if($busqueda_selfserve_ !== false){
 
 
                     $busqueda_f_ = strpos($this->search, 'ransaction_id=');
@@ -192,7 +190,7 @@ class SpectrumIndex extends Component
             $this->calc_link = 0;
         }
 
-        return view('livewire.jumpers.spectrum.spectrum-index');
+        return view('livewire.jumpers.spectrum3.spectrum-index');
     }
 
     public function clear(){
@@ -200,6 +198,6 @@ class SpectrumIndex extends Component
         $this->jumper_complete = "";
         session()->forget('search');
         $this->busqueda_link = "";
-        return redirect()->route('spectrum.index');
+        return redirect()->route('spectrum3.index');
     }
 }

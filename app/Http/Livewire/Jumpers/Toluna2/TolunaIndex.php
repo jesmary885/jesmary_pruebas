@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Jumpers\Toluna;
+namespace App\Http\Livewire\Jumpers\Toluna2;
 
 use App\Models\Antibot;
 use App\Models\Comments;
@@ -37,7 +37,7 @@ class TolunaIndex extends Component
         $this->operacion = Antibot::where('id',$random)->first();
         $operacion_total = 'Resuelve esta operación matemática ('.$this->operacion->nro1.' + '.$this->operacion->nro2. ')';
 
-        $this->emit('numerologia',$operacion_total,'jumpers.toluna.toluna-index','verific');
+        $this->emit('numerologia',$operacion_total,'jumpers.toluna2.toluna-index','verific');
     }
 
     public function verific($result){
@@ -129,10 +129,10 @@ class TolunaIndex extends Component
             try {
                 $client = new Client([
                     //'base_uri' => 'http://127.0.0.1:8000',
-                    'base_uri' => 'http://67.205.168.133/',
+                    'base_uri' => 'http://209.94.57.88/',
                 ]);
 
-                $resultado = $client->request('GET', '/Toluna/1/'.$sname_buscar.'/'.$gid_buscar);
+                $resultado = $client->request('GET', '/Toluna/2/'.$sname_buscar.'/'.$gid_buscar);
 
                 if($resultado->getStatusCode() == 200){
 
@@ -280,7 +280,7 @@ class TolunaIndex extends Component
 
     public function render()
     {
-       
+        
         $comments =0;
         $jumper = "";
         $link_complete="";
@@ -381,7 +381,7 @@ class TolunaIndex extends Component
             $this->calc_link = 0;
         }
 
-        return view('livewire.jumpers.toluna.toluna-index',compact('jumper','comments'));
+        return view('livewire.jumpers.toluna2.toluna-index',compact('jumper','comments'));
     }
 
     public function positivo($jumper_id){
@@ -429,7 +429,7 @@ class TolunaIndex extends Component
 
         }
 
-        $this->emitTo('jumpers.toluna.toluna-index','render');
+        $this->emitTo('jumpers.toluna2.toluna-index','render');
     }
 
     public function negativo($jumper_id){
@@ -476,9 +476,7 @@ class TolunaIndex extends Component
 
         }
 
-        $this->emitTo('jumpers.toluna.toluna-index','render');
-
-        
+        return view('livewire.jumpers.toluna2.toluna-index');
     }
 
     public function comentar(){
@@ -492,7 +490,7 @@ class TolunaIndex extends Component
 
             $this->reset(['comentario']);
 
-            $this->emitTo('jumpers.toluna.toluna-index','render');
+            $this->emitTo('jumpers.toluna2.toluna-index','render');
         }
     }
 
@@ -502,6 +500,6 @@ class TolunaIndex extends Component
         $this->jumper_complete = "";
         session()->forget('search');
         $this->busqueda_link = "";
-        return redirect()->route('toluna.index');
+        return redirect()->route('toluna2.index');
     }
 }

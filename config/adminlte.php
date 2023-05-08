@@ -461,13 +461,7 @@ return [
                     'can' => 'otro.admin'
                 ],
 
-                [
-                    'text' => 'TOLUNA',
-                    'route'  => 'toluna.index',
-                    'can' => 'otro.admin',
-                    'icon'    => 'fas fa-search',
-                    'icon_color' => 'cyan',
-              ],
+               
 
                [
                 'text' => 'SAMPLICIO',
@@ -757,33 +751,59 @@ return [
         ],
 
         [
-            'text'    => 'ESPECTRUM',
+            'text'    => 'TOLUNA',
             'icon'    => 'fas fa-search',
-            'can' => 'otro.admin',
+            'can' => 'ssidkr.index',
             'icon_color' => 'cyan',
             'submenu' => [
                 [
-                    'text' => 'GENERADOR 1',
-                    'route'  => 'spectrum.index',
-                    'icon'    => '	fas fa-angle-right',
+                    'text' => 'Generador Qualtric 1',
+                    'route'  => 'toluna.index',
+                    'can' => 'ssidkr.index',
                     'icon_color' => 'red',
-                    'can' => 'otro.admin'
+                    'icon'    => 'fas fa-angle-right',
                 ],
 
                 [
-                    'text' => 'GENERADOR 2',
+                    'text' => 'Generador Qualtric 2',
+                    'route'  => 'toluna2.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+            ],
+        ],
+
+        [
+            'text'    => 'SPECTRUM',
+            'icon'    => 'fas fa-search',
+            'can' => 'ssidkr.index',
+            'icon_color' => 'cyan',
+            'submenu' => [
+                [
+                    'text' => 'Generador Qualtrics',
+                    'route'  => 'spectrum.index',
                     'icon'    => '	fas fa-angle-right',
                     'icon_color' => 'red',
-                    'can' => 'otro.admin'
+                    'can' => 'ssidkr.index',
+                ],
+
+                [
+                    'text' => 'Generador Voicefive',
+                    'icon'    => '	fas fa-angle-right',
+                    'route'  => 'spectrum2.index',
+                    'icon_color' => 'red',
+                    'can' => 'ssidkr.index',
                 ],
 
                
 
                 [
-                    'text' => 'GENERADOR 3',
-                    'can' => 'otro.admin',
+                    'text' => 'Generador Selfserve',
+                    'can' => 'ssidkr.index',
+                    'route'  => 'spectrum3.index',
                     'icon'    => '	fas fa-angle-right',
-                    'icon_color' => 'cyan',
+                    'icon_color' => 'red',
               ],
 
             ],

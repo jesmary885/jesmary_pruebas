@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Jumpers\Spectrum;
+namespace App\Http\Livewire\Jumpers\Spectrum2;
 
 use App\Models\Antibot;
 use App\Models\Links_usados;
@@ -11,6 +11,7 @@ use GuzzleHttp\Client;
 
 class SpectrumIndex extends Component
 {
+
     public $calc_link,$user,$calculo = 0, $jumper_complete = "", $search, $psid_register=0,$pid_new=0,$type, $jumper_detect = 0,$busqueda_link,$psid_buscar,$operacion;
 
     protected $listeners = ['render' => 'render', 'jumpear' => 'jumpear', 'verific' => 'verific', 'jump' => 'jump'];
@@ -32,17 +33,18 @@ class SpectrumIndex extends Component
         $this->operacion = Antibot::where('id',$random)->first();
         $operacion_total = 'Resuelve esta operación matemática ('.$this->operacion->nro1.' + '.$this->operacion->nro2. ')';
 
-        $this->emit('numerologia',$operacion_total,'jumpers.spectrum.spectrum-index','verific');
+        $this->emit('numerologia',$operacion_total,'jumpers.spectrum2.spectrum-index','verific');
     }
 
     public function verific($result){
 
         if($result[0] == $this->operacion->resultado){
 
-            $busqueda_trans= strpos($this->search, 'ransaction_id=');
 
-            if($busqueda_trans != false){
-                $posicion_elem1 = $busqueda_trans + 14;
+            $busqueda_vrid= strpos($this->search, 'rid=');
+
+            if($busqueda_vrid != false){
+                $posicion_elem1 = $busqueda_vrid + 4;
                 $i_elem1 = 0;
                 $busq_elem1 = 0;
                 
@@ -61,9 +63,33 @@ class SpectrumIndex extends Component
 
                 }while($i_elem1 != 1);
 
-                $elem1 = substr($this->search,($busqueda_trans + 14),($posicion_elem1 - ($busqueda_trans + 14)));
+                $elem1 = substr($this->search,($busqueda_vrid + 4),($posicion_elem1 - ($busqueda_vrid + 4)));
 
+                $busqueda_id= strpos($this->search, '&id=');
+
+            if($busqueda_id != false){
+                $posicion_elem2 = $busqueda_id + 4;
+                $i_elem2 = 0;
+                $busq_elem2 = 0;
+                
+                do{
+                    $detect_elem2= substr($this->search, $posicion_elem2,1);
+
+                    if($detect_elem2 == '&') $i_elem2 = 1;
+                    else{
+                        $posicion_elem2 = $posicion_elem2 + 1;
+                        $busq_elem1 ++;
+                    }
+
+                    if($busq_elem2 > 50){
+                        $i_elem2 = 1;
+                    }
+
+                }while($i_elem2 != 1);
+
+                $elem2 = substr($this->search,($busqueda_id + 4),($posicion_elem2 - ($busqueda_id + 4)));
             }
+
 
                 try {
     
@@ -72,7 +98,7 @@ class SpectrumIndex extends Component
                         'base_uri' => 'http://209.94.57.88/',
                     ]);
         
-                    $resultado = $client->request('GET', '/Spectrum/2/'.$elem1);
+                    $resultado = $client->request('GET', '/Spectrum/3/'.$elem1.'/'.$elem2);
         
                     if($resultado->getStatusCode() == 200){
 
@@ -104,7 +130,7 @@ class SpectrumIndex extends Component
                     }
         
                 }
-            
+            }
         }
 
         else{
@@ -115,64 +141,75 @@ class SpectrumIndex extends Component
         }
     }
 
+
     public function render()
     {
+        
         $this->search = trim($this->search); //quitando espacios en blancos al inicio y final
         $long_psid = strlen($this->search); //buscando cuantos caracteres tiene en total
 
         if($long_psid>5){
 
-            $busqueda_qualtric_ = strpos($this->search, 'ualtric');
+            $busqueda_oicefive_ = strpos($this->search, 'oicefive');
 
-            if($busqueda_qualtric_ !== false){
+            if($busqueda_oicefive_ !== false){
 
 
-                    $busqueda_f_ = strpos($this->search, 'ransaction_id=');
+                    $busqueda_f_ = strpos($this->search, 'rid=');
 
                     if($busqueda_f_ != false){
 
-                        if($this->jumper_complete == "") {
-                            $link_register_search = Links_usados::where('link',$this->search)
-                                ->where('k_detected','SPECTRUM')
-                                ->where('user_id',$this->user->id)
-                                ->first();
+                        $busqueda_id= strpos($this->search, '&id=');
 
-                            if($link_register_search){
+                        if($busqueda_f_ != false){
 
-                                $this->jumper_detect = 7;
-                                                
-                            }
-                            else{
-                                $date = new DateTime();
-
-                                $date_actual= $date->format('Y-m-d H:i:s');
-                                $date_actual_30 = $date->modify('-30 minute')->format('Y-m-d H:i:s');
-
-                                $links_usados = Links_usados::where('k_detected','SPECTRUM')
+                            if($this->jumper_complete == "") {
+                                $link_register_search = Links_usados::where('link',$this->search)
+                                    ->where('k_detected','SPECTRUM')
                                     ->where('user_id',$this->user->id)
-                                    ->whereBetween('created_at',[$date_actual_30,$date_actual])
-                                    ->count();
+                                    ->first();
 
-                                if($links_usados <= 5){
-                                    $this->numerologia();
+                                if($link_register_search){
+
+                                    $this->jumper_detect = 7;
+                                                    
                                 }
                                 else{
-                                    $alertas = $this->user->cant_links_jump_alert + 1;
-                                    $this->user->update(['cant_links_jump_alert'=>$alertas]);
-                                    $this->jumper_detect = 6;
+                                    $date = new DateTime();
+
+                                    $date_actual= $date->format('Y-m-d H:i:s');
+                                    $date_actual_30 = $date->modify('-30 minute')->format('Y-m-d H:i:s');
+
+                                    $links_usados = Links_usados::where('k_detected','SPECTRUM')
+                                        ->where('user_id',$this->user->id)
+                                        ->whereBetween('created_at',[$date_actual_30,$date_actual])
+                                        ->count();
+
+                                    if($links_usados <= 5){
+                                        $this->numerologia();
+                                    }
+                                    else{
+                                        $alertas = $this->user->cant_links_jump_alert + 1;
+                                        $this->user->update(['cant_links_jump_alert'=>$alertas]);
+                                        $this->jumper_detect = 6;
+                                    }
                                 }
                             }
-                        }
-                    
-                        else{
-                            if($long_psid == 0){
-                                $this->reset(['search']);
-                                $this->jumper_complete = "";
-                                session()->forget('search');
-                                $this->busqueda_link = "";
-                            }
+                        
+                            else{
+                                if($long_psid == 0){
+                                    $this->reset(['search']);
+                                    $this->jumper_complete = "";
+                                    session()->forget('search');
+                                    $this->busqueda_link = "";
+                                }
 
-                        } 
+                            } 
+                        }
+                        else{
+                            $this->jumper_detect = 3;
+                        }
+
                     }
 
 
@@ -192,7 +229,8 @@ class SpectrumIndex extends Component
             $this->calc_link = 0;
         }
 
-        return view('livewire.jumpers.spectrum.spectrum-index');
+
+        return view('livewire.jumpers.spectrum2.spectrum-index');
     }
 
     public function clear(){
@@ -200,6 +238,7 @@ class SpectrumIndex extends Component
         $this->jumper_complete = "";
         session()->forget('search');
         $this->busqueda_link = "";
-        return redirect()->route('spectrum.index');
+        return redirect()->route('spectrum2.index');
     }
+
 }

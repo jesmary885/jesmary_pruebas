@@ -81,6 +81,7 @@
             </div>
         @endif
 
+
         @if ($jumper_complete == "")
 
             <div class="mt-4" wire:loading>

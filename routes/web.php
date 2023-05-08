@@ -79,8 +79,11 @@ Route::middleware(['auth','verified'])->group(function()
         Route::get('prodege',[JumpersController::class,'prodege'])->name('prodege.index');
         Route::get('samplicio',[JumpersController::class,'samplicio'])->name('samplicio.index');
         Route::get('scube',[JumpersController::class,'scube'])->name('scube.index');
-        Route::get('spectrum',[JumpersController::class,'spectrum'])->name('spectrum.index');
-        Route::get('toluna',[JumpersController::class,'toluna'])->name('toluna.index')->middleware('permission:otro.admin');
+        Route::get('spectrum_1',[JumpersController::class,'spectrum'])->name('spectrum.index');
+        Route::get('spectrum_2',[JumpersController::class,'spectrum2'])->name('spectrum2.index');
+        Route::get('spectrum_3',[JumpersController::class,'spectrum3'])->name('spectrum3.index');
+        Route::get('toluna',[JumpersController::class,'toluna'])->name('toluna.index');
+        Route::get('toluna_2',[JumpersController::class,'toluna2'])->name('toluna2.index');
         Route::get('ssidkr',[JumpersController::class,'ssidkr'])->name('ssidkr.index');
         Route::get('k10634',[JumpersController::class,'k10634'])->name('k10634.index');
         Route::get('k11619',[JumpersController::class,'k11619'])->name('k11619.index');

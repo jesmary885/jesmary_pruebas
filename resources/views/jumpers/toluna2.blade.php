@@ -3,7 +3,8 @@
 
 <div class="flex justify-between">
     
-<h1 class="text-lg font-weight-bold text-cyan-400"> <i class="fas fa-spinner mr-1 text-cyan-400"></i> SPECTRUM QUALTRICS</h1>
+<h1 class="text-lg font-weight-bold text-cyan-400"> <i class="fas fa-spinner mr-1 text-cyan-400"></i> TOLUNA</h1>
+
 
 </div>
 
@@ -17,7 +18,7 @@
     @endif
 
    
-    @livewire('jumpers.spectrum.spectrum-index') 
+    @livewire('jumpers.toluna2.toluna-index') 
 @stop
 
 @section('css')
@@ -27,4 +28,3 @@
 @section('js')
     <script> console.log('Hi!'); </script>
 @stop
-
