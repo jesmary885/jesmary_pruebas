@@ -315,6 +315,16 @@ class K1083Index extends Component
                             $this->jumper_detect = 3;
                         }
 
+                        $busqueda_hash= strpos($this->search, 'k=1083&_s=');
+
+
+                        if($busqueda_hash != false){
+                            $hash_buscar = substr($this->search,($busqueda_hash + 10 ));
+                        }
+                        else{
+                            $this->jumper_detect = 3;
+                        }
+
                 
                         if($this->jumper_detect == 0){
 

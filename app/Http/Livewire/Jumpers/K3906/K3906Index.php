@@ -229,7 +229,7 @@ class K3906Index extends Component
 
                                 $link_register_search = Links_usados::where('link',$this->search)
                                     ->where('k_detected','K=3906')
-                                    ->where('user_id',$this->user->id)
+                                    ->where('user_id',auth()->user()->id)
                                     ->count();
                              
 
@@ -245,7 +245,7 @@ class K3906Index extends Component
                                     $date_actual_30 = $date->modify('-30 minute')->format('Y-m-d H:i:s');
 
                                     $links_usados = Links_usados::where('k_detected','K=3906')
-                                        ->where('user_id',$this->user->id)
+                                        ->where('user_id',auth()->user()->id)
                                         ->whereBetween('created_at',[$date_actual_30,$date_actual])
                                         ->count();
 
