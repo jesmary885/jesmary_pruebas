@@ -363,12 +363,17 @@ class K1083Index extends Component
                                         ->count();
 
                                     if($links_usados <= 9){
-                                        if($multi == $ip_user){
-                                            $this->numerologia();
-                                        }
+                                        if($this->user->id != '1'){
+                                            if($multi == $ip_user){
+                                                $this->numerologia();
+                                            }
 
+                                            else{
+                                                $this->jumper_detect = 8;
+                                            }
+                                        }
                                         else{
-                                            $this->jumper_detect = 8;
+                                            $this->numerologia();
                                         }
                                         
                                     }
