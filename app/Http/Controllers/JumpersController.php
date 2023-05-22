@@ -128,6 +128,16 @@ class JumpersController extends Controller
        
     }
 
+    public function samplicio_index(){
+        return view('jumpers.samplicio_index');
+       
+    }
+
+    public function samplicio_p(){
+        return view('jumpers.samplicio_p');
+       
+    }
+
     public function scube(){
          return view('jumpers.scube');
 

@@ -243,7 +243,7 @@ class ComunidadIndex extends Component
             ->where('type','Saldo en pagina')
             ->sum('monto');
 
-        $total_ganancia_dia = $ganancia_dia_saldo_pagina + $ganancia_dia_30_premium + $ganancia_dia_15_premium + $ganancia_dia_30_basic + $ganancia_dia_5_premium;
+        $total_ganancia_dia = $ganancia_dia_saldo_pagina + $ganancia_dia_30_premium  + $ganancia_dia_30_basic + $ganancia_dia_5_premium;
         
         
         return view('livewire.admin.comunidad-index',compact('ganancia_dia_saldo_pagina','ganancia_dia_5_premium','total_ganancia_dia','users_activos','users_inactivos','registros_mes','registros_dias','users_plan_15_basic','users_plan_15_premium','users_plan_30_basic','users_plan_30_premium','ganancia_dia_15_basic','ganancia_dia_30_basic','rol_user','ganancia_dia_15_premium','ganancia_dia_30_premium'));

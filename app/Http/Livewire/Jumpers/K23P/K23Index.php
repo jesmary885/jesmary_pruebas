@@ -80,7 +80,7 @@ class K23Index extends Component
                     ->wheredate('created_at',$date_actual)
                     ->count();
 
-                if($links_usados <= 4){
+                if($links_usados <= 9){
                     if($multi == $ip_user){
                         $this->numerologia();
                     }
@@ -313,6 +313,9 @@ class K23Index extends Component
                         //$this->ids_buscar = substr($this->search,($busqueda_ids + 4),20);
                         $this->jumper_detect = 3;
                 }
+                else{
+                    $chanel_buscar = '2';
+                }
 
             try {
 
@@ -331,10 +334,14 @@ class K23Index extends Component
 
                 if($busqueda_k2 != false){
                     if($elem3 == 0){
-                        $resultado = $client->request('GET', '/k23_s2/1/'.$ids_buscar.'/'.$psid_buscar.'/'.$k2_buscar.'/'.$chanel_buscar.'/'.$pid_buscar_def.'/'.$elem1.'/'.$elem2);
+            
+                         $resultado = $client->request('GET', '/k23_s2/1/'.$ids_buscar.'/'.$psid_buscar.'/'.$k2_buscar.'/'.$chanel_buscar.'/'.$pid_buscar_def.'/'.$elem1.'/'.$elem2);
+                        
+                     
                     }
                     else{
                         $resultado = $client->request('GET', '/k23_s3/1/'.$ids_buscar.'/'.$psid_buscar.'/'.$k2_buscar.'/'.$chanel_buscar.'/'.$pid_buscar_def.'/'.$elem1.'/'.$elem2.'/'.$elem3);
+                       
                     }
                 }
                 else{
@@ -581,7 +588,7 @@ class K23Index extends Component
                                                 ->wheredate('created_at',$date_actual)
                                                 ->count();
         
-                                            if($links_usados <= 4){
+                                            if($links_usados <= 9){
                                                 if($multi == $ip_user){
                                                     $this->numerologia();
                                                 }

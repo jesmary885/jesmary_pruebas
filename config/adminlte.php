@@ -461,16 +461,6 @@ return [
                     'can' => 'otro.admin'
                 ],
 
-               
-
-               [
-                'text' => 'SAMPLICIO',
-                'route'  => 'samplicio.index',
-                'can' => 'otro.admin',
-                'icon_color' => 'cyan',
-                'icon'    => 'fas fa-search',
-                ],
-
                 [
                     'text' => 'K1020',
                     'route'  => 'k1020.index',
@@ -751,26 +741,36 @@ return [
         ],
 
         [
-            'text'    => 'TOLUNA',
+            'text'    => 'SAMPLICIO',
             'icon'    => 'fas fa-search',
             'can' => 'ssidkr.index',
             'icon_color' => 'cyan',
             'submenu' => [
+               /* [
+                    'text' => 'Buscador principal',
+                    'route'  => 'samplicio2.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],*/
+
                 [
-                    'text' => 'Generador Qualtric 1',
-                    'route'  => 'toluna.index',
+                    'text' => 'Generador Premium',
+                    'route'  => 'samplicio_p.index',
                     'can' => 'ssidkr.index',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
 
                 [
-                    'text' => 'Generador Qualtric 2',
-                    'route'  => 'toluna2.index',
+                    'text' => 'Generador Centiment',
+                    'route'  => 'samplicio.index',
                     'can' => 'ssidkr.index',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
+
+               
             ],
         ],
 
@@ -808,6 +808,33 @@ return [
 
             ],
         ],
+
+
+        [
+            'text'    => 'TOLUNA',
+            'icon'    => 'fas fa-search',
+            'can' => 'ssidkr.index',
+            'icon_color' => 'cyan',
+            'submenu' => [
+                [
+                    'text' => 'Generador Qualtric 1',
+                    'route'  => 'toluna.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                [
+                    'text' => 'Generador Qualtric 2',
+                    'route'  => 'toluna2.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+            ],
+        ],
+
+        
 
         
         [

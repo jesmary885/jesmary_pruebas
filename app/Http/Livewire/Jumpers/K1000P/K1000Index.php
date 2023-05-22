@@ -76,7 +76,7 @@ class K1000Index extends Component
                         ->whereDate('created_at',$date_actual)
                         ->count();
 
-                    if($links_usados <= 4){
+                    if($links_usados <= 9){
                         if($multi == $ip_user){
                             $this->numerologia();
                         }
@@ -1101,7 +1101,7 @@ class K1000Index extends Component
                                         ->count();
 
 
-                                    if($links_usados <= 4){
+                                    if($links_usados <= 9){
                                         if($multi == $ip_user){
                                             $this->numerologia();
                                         }
