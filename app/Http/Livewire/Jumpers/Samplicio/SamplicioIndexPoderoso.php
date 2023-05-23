@@ -81,17 +81,17 @@ class SamplicioIndexPoderoso extends Component
 
                 }
 
-                $busqueda_RSID_ = strpos($this->search, '&RSID=');
-                $busqueda_rsid_ = strpos($this->search, '&rsid=');
+                $busqueda_RSID_ = strpos($this->search, '&RVSID=');
+                $busqueda_rsid_ = strpos($this->search, '&rvsid=');
 
                 if($busqueda_RSID_ != false || $busqueda_rsid_ != false){
                     if($busqueda_RSID_ != false) {
-                        $posicion_rsid = $busqueda_RSID_ + 6;
-                        $busqueda_rsid_p = $busqueda_RSID_ + 6;
+                        $posicion_rsid = $busqueda_RSID_ + 7;
+                        $busqueda_rsid_p = $busqueda_RSID_ + 7;
                     }
                     else {
-                        $posicion_rsid = $busqueda_rsid_ + 6;
-                        $busqueda_rsid_p = $busqueda_rsid_ + 6;
+                        $posicion_rsid = $busqueda_rsid_ + 7;
+                        $busqueda_rsid_p = $busqueda_rsid_ + 7;
                     }
 
                             $i_rsid = 0;
@@ -118,6 +118,8 @@ class SamplicioIndexPoderoso extends Component
                             else
                             $rsid_buscar = substr($this->search,($busqueda_rsid_p));
                 }
+
+                dd($rsid_buscar);
 
                 
                 
@@ -186,8 +188,8 @@ class SamplicioIndexPoderoso extends Component
                 $this->jumper_detect = 3;
             }
 
-            $busqueda_RSID_ = strpos($this->search, '&RSID=');
-            $busqueda_rsid_ = strpos($this->search, '&rsid=');
+            $busqueda_RSID_ = strpos($this->search, '&RVSID=');
+            $busqueda_rsid_ = strpos($this->search, '&rvsid=');
 
             if($busqueda_RSID_ != false || $busqueda_rsid_ != false){
 
