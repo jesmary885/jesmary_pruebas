@@ -51,7 +51,7 @@ class K2066Index extends Component
 
             try {
                 $client = new Client([
-                    'base_uri' => 'http://209.94.57.88/',
+                    'base_uri' => 'http://146.190.74.228/',
                 ]);
                 
                 $resultado = $client->request('GET', '/k2066/1/'.$this->psid_buscar);

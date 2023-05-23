@@ -119,9 +119,6 @@ class SamplicioIndexPoderoso extends Component
                             $rsid_buscar = substr($this->search,($busqueda_rsid_p));
                 }
 
-                dd($rsid_buscar);
-
-                
                 
                 $client = new Client([
                     //'base_uri' => 'http://127.0.0.1:8000',
