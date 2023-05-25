@@ -50,8 +50,17 @@ class KtmrIndex extends Component
     
                 if($resultado->getStatusCode() == 200){
 
+                    $link_fing = strpos($this->search, 'ingerprint/');
+
+                    if($link_fing){
+                        $fing = substr($this->search,($link_fing  + 11));
+                    }
+                    else{
+                        $fing = $this->search;
+                    }
+
                     $link_register = new Links_usados();
-                    $link_register->link = $this->search;
+                    $link_register->link = $fing;
                     $link_register->k_detected  = 'KTMR';
                     $link_register->user_id  = $this->user->id;
                     $link_register->save();
@@ -91,8 +100,6 @@ class KtmrIndex extends Component
 
     public function render()
     {
-        
-
         $this->search = trim($this->search); //quitando espacios en blancos al inicio y final
         $long_psid = strlen($this->search); //buscando cuantos caracteres tiene en total
 
@@ -103,8 +110,22 @@ class KtmrIndex extends Component
             if($busqueda_f_ != false) $this->psid_buscar= substr($this->search, $busqueda_f_ + 13);
             else $this->psid_buscar= $this->search;
 
+
+
             if($this->jumper_complete == "") {
-                $link_register_search = Links_usados::where('link',$this->search)
+
+                $link_fing = strpos($this->search, 'ingerprint/');
+
+                if($link_fing){
+                   
+    
+                    $fing = substr($this->search,($link_fing  + 11));
+                }
+                else{
+                    $fing = $this->search;
+                }
+
+                $link_register_search = Links_usados::where('link',$fing)
                     ->where('k_detected','KTMR')
                     ->where('user_id',$this->user->id)
                     ->first();
@@ -115,17 +136,18 @@ class KtmrIndex extends Component
                                     
                 }
                 else{
+
                     $date = new DateTime();
 
                     $date_actual= $date->format('Y-m-d H:i:s');
-                    $date_actual_30 = $date->modify('-30 minute')->format('Y-m-d H:i:s');
+                    $date_actual_30 = $date->modify('-20 minute')->format('Y-m-d H:i:s');
 
                     $links_usados = Links_usados::where('k_detected','KTMR')
                         ->where('user_id',$this->user->id)
                         ->whereBetween('created_at',[$date_actual_30,$date_actual])
                         ->count();
 
-                    if($links_usados <= 5){
+                    if($links_usados <= 4){
                         $this->numerologia();
                     }
                     else{
