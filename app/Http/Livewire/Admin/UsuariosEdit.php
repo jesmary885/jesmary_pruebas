@@ -67,7 +67,9 @@ class UsuariosEdit extends Component
 
         $this->validate($rule_username);
 
-        if($this->estado == 0) $estado = 'inactivo'; else $estado = 'activo';
+
+        if($this->estado == 0) $estado = 'inactivo'; 
+        else $estado = 'activo';
 
         
         if($this->roles_id == '2'){
@@ -93,6 +95,18 @@ class UsuariosEdit extends Component
                 ]);
             }
 
+        }
+
+        if($this->roles_id == '4'){
+            if($this->usuario->type != 'gratis'){
+                $this->usuario->update([
+                    'name' => $this->username,
+                    'username' => $this->username,
+                    'email' => $this->email,
+                    'status' => $estado,
+                    'plan' => $this->plan,
+                ]);
+            }
         }
 
         if($this->roles_id == '10'){

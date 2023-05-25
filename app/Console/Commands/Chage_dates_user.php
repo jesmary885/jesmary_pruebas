@@ -37,15 +37,18 @@ class Chage_dates_user extends Command
 
         foreach($users as $user){
 
-            $rol_name = $user->roles->first()->name;
-            $nueva_fecha_corte = date("Y-m-d h:s",strtotime($user->last_payment_date."+ 3 days"));
-            $user->update([
-                'rol_name' => $rol_name,
-                'last_payment_date' => $nueva_fecha_corte,
-                'last_logout' => null,
-            ]);
+            if($user->last_payment_date){
+                $nueva_fecha_corte = date("Y-m-d h:s",strtotime($user->last_payment_date."+ 2 days"));
+                
+                $user->update([
+                    'last_payment_date' => $nueva_fecha_corte,
+                ]);
 
-            $user->roles()->sync(4);
+            }
+
+            
+
+
         }
 
     }
