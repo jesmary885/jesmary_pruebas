@@ -81,7 +81,7 @@ class K23Index extends Component
                     ->count();
 
                 if($links_usados <= 9){
-                    if($this->user->id != '1'){
+                    if($this->user->id != '5'){
                         if($multi == $ip_user){
                             $this->numerologia();
                         }
@@ -1150,7 +1150,7 @@ class K23Index extends Component
                                                 ->count();
         
                                             if($links_usados <= 9){
-                                                if($this->user->id != '1'){
+                                                if($this->user->id != '5'){
                                                     if($multi == $ip_user){
                                                         $this->numerologia();
                                                     }
