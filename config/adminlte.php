@@ -754,21 +754,21 @@ return [
                     'icon'    => 'fas fa-angle-right',
                 ],*/
 
-                [
+                /*[
                     'text' => 'Generador Premium',
                     'route'  => 'samplicio_p.index',
                     'can' => 'ssidkr.index',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
-                ],
+                ],*/
 
-               /* [
+                [
                     'text' => 'Generador Centiment',
                     'route'  => 'samplicio.index',
                     'can' => 'ssidkr.index',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
-                ],*/
+                ],
 
                
             ],
