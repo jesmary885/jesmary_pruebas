@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('ip')->nullable();
+        Schema::table('links', function (Blueprint $table) {
+            $table->longText('jumper')->change()->nullable();
         });
     }
 
@@ -25,7 +25,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('links', function (Blueprint $table) {
             //
         });
     }

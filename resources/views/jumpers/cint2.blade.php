@@ -3,7 +3,7 @@
 
 <div class="flex justify-between">
     
-<h1 class="text-lg font-weight-bold text-cyan-400"> <i class="fas fa-spinner mr-1 text-cyan-400"></i> CINT PRINCIPAL</h1>
+<h1 class="text-lg font-weight-bold text-cyan-400"> <i class="fas fa-spinner mr-1 text-cyan-400"></i> CINT</h1>
 
     
 </div>
@@ -18,7 +18,7 @@
     @endif
     
   
-    @livewire('jumpers.cint.cint-index') 
+    @livewire('jumpers.cint.cint2-index') 
 
 @stop
 

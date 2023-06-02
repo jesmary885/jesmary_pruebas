@@ -107,10 +107,10 @@
     <div id="accordion">
         <div class="col-md-3 float-right">
             <div class="card card-info">
-                <div class="card-header py-0 bg-info" id="headingTwo">
-                    <h5 class="mb-0 ">
-                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo"
+                <div class="card-header py-0 bg-info collapsed cursor-pointer" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo"
                             aria-expanded="false" aria-controls="collapseTwo">
+                    <h5 class="mb-0 ">
+                        <button class="btn btn-link " >
                             <h3 class="card-title text-md hidden lg:block text-white font-semibold">
                                 <i class="fas fa-hourglass-start mr-1"></i>
                                 Cronómetro
@@ -152,14 +152,13 @@
             </div>
         </div>
 
-        {{--<div class="col-md-3 float-center">
+        
 
-        <p><a 
-            style="background-color:green; color:white; text-decoration:none; border-radius: 5px; padding: .5em;"
-            href="{{route('login_spotify')}}"><i class="fas fa-music"></i>
-        </a></p>
+        <div class="col-md-3 float-center">
 
-        </div>--}}
+     
+
+        </div>
 
        
 
@@ -168,7 +167,8 @@
 
         <div class="col-md-4 float-left">
             <div class="card card-info ">
-                <div class="card-header py-0 bg-info" id="headingTwo">
+                <div class="card-header py-0 bg-info collapsed cursor-pointer" data-toggle="collapse" data-target="#collapseTwo"
+                            aria-expanded="false" aria-controls="collapseTwo" id="headingTwo">
                     <h5 class="mb-0 ">
                         <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo"
                             aria-expanded="false" aria-controls="collapseTwo">

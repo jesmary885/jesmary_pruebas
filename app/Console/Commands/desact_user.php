@@ -42,6 +42,8 @@ class desact_user extends Command
                 if($corte <  $fecha_actual || $corte ==  $fecha_actual ){
                     if($user->type != 'gratis'){
                     $user->roles()->sync(4);
+
+                 
                 }
             }
         }

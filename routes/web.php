@@ -62,6 +62,7 @@ Route::middleware(['auth','verified'])->group(function()
         Route::get('k2066',[JumpersController::class,'k2066'])->name('k2066.index');
         Route::get('k7341-P',[JumpersController::class,'k7341_poderosa'])->name('k7341_poderosa.index');
         Route::get('cint',[JumpersController::class,'cint'])->name('cint.index');
+        Route::get('cint_2',[JumpersController::class,'cint2'])->name('cint2.index');
         Route::get('internals',[JumpersController::class,'internals'])->name('internals.index');
         Route::get('k1000',[JumpersController::class,'kmil'])->name('kmil.index');
         Route::get('k1092',[JumpersController::class,'kmilnoventaydos'])->name('kmilnoventaydos.index');

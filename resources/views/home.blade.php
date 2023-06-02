@@ -246,7 +246,7 @@
                       </ul>
                       <hr class="m-2 ">
 
-                      <h2 class="mb-2 text-gray-200 font-bold "><b>Información del día:</b></h2>
+                
 
                       <ul class="ml-4 mb-0 fa-ul text-muted">
 
@@ -255,7 +255,7 @@
 
                     </div>
                     <div class="col-2 text-center">
-                      <img src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}" class="rounded-full h-20 w-20 object-cover">
+                      <img src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}" class="dark:shadow-xl border-gray-800 rounded-full border-8 absolute h-20 w-20 object-cover">
                     </div>
                   </div>
                 </div>

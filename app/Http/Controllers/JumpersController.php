@@ -12,7 +12,10 @@ class JumpersController extends Controller
 {
     public function cint(){
         return view('jumpers.cint');
-        
+    }
+
+    public function cint2(){
+        return view('jumpers.cint2');
     }
 
     public function k1083(){

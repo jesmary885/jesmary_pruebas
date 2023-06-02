@@ -97,7 +97,7 @@ class K1093Index extends Component
             if(session('psid')) $psid_buscar = substr($this->search,($busqueda_id - 22),11).substr(session('psid'),11,11);
             else $psid_buscar = substr($this->search,($busqueda_id - 22),22);
 
-            $busqueda_surveyno= strpos($this->search, '?surveyno=');
+         /*   $busqueda_surveyno= strpos($this->search, '?surveyno=');
 
             if($busqueda_surveyno != false){
 
@@ -155,12 +155,12 @@ class K1093Index extends Component
 
             if($busqueda_hash != false){
                 $hash_buscar = substr($this->search,($busqueda_hash + 10 ));
-            }
+            }*/
 
             try {
                 $client = new Client(['base_uri' => 'http://147.182.190.233/',]);
 
-                $resultado = $client->request('GET', '/k1093/1/'.$this->pid_buscar.'/'.$psid_buscar.'/'.$surveyno_buscar.'/'.$spid_buscar);
+                $resultado = $client->request('GET', '/k1093/1/'.$psid_buscar);
 
 
                 if($resultado->getStatusCode() == 200){

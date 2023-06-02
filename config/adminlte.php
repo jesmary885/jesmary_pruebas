@@ -741,6 +741,30 @@ return [
         ],
 
         [
+            'text'    => 'CINT',
+            'icon'    => 'fas fa-search',
+            'can' => 'otro.admin',
+            'icon_color' => 'cyan',
+            'submenu' => [
+                [
+                    'text' => 'Buscador Nº 1',
+                    'route'  => 'cint.index',
+                    'can' => 'otro.admin',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                [
+                    'text' => 'Buscador Nº 2',
+                    'route'  => 'cint2.index',
+                    'can' => 'otro.admin',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+            ],
+        ],
+
+        [
             'text'    => 'SAMPLICIO',
             'icon'    => 'fas fa-search',
             'can' => 'ssidkr.index',
@@ -835,15 +859,6 @@ return [
         ],
 
         
-
-        
-        [
-            'text' => 'CINT',
-            'route'  => 'cint.index',
-            'can' => 'ssidkr.index',
-            'icon'    => 'fas fa-search',
-            'icon_color' => 'cyan',
-        ],
 
         
         // [

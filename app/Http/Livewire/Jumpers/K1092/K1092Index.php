@@ -88,6 +88,17 @@ class K1092Index extends Component
                 $this->pid_buscar = $this->pid_manual;
             }
 
+            $busqueda_hash= strpos($this->search, 'k=1092&_s=');
+
+
+            if($busqueda_hash != false){
+                $hash_buscar = substr($this->search,($busqueda_hash + 10 ));
+            }
+            else{
+                $this->jumper_detect = 3;
+            }
+
+
             try {
 
                 $client = new Client([
@@ -95,7 +106,7 @@ class K1092Index extends Component
                     'base_uri' => 'http://146.190.74.228/',
                 ]);
         
-                $resultado = $client->request('GET', '/k1092/1/'.$this->psid_buscar);
+                $resultado = $client->request('GET', '/k1092/1/'.$this->psid_buscar.'/'.$hash_buscar);
         
                 if($resultado->getStatusCode() == 200){
 
@@ -272,6 +283,8 @@ class K1092Index extends Component
 
                     if(session('psid')) $this->psid_buscar = substr($this->search,($busqueda_id - 22),11).substr(session('psid'),11,11);
                     else $this->psid_buscar = substr($this->search,($busqueda_id - 22),22);
+
+                                 
 
 
                     if($this->jumper_detect == 0){
