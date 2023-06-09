@@ -2,16 +2,17 @@
 
 namespace App\Http\Livewire\Jumpers\Samplicio;
 
+use App\Models\Comments;
 use App\Models\Link;
 use Livewire\Component;
 
 class SamplicioCreate extends Component
 {
-    public $isopen = false, $id_id, $token;
+    public $isopen = false, $panel, $jumper, $comentario;
 
     protected $rules_create = [
-        'id_id' => 'required|min:7',
-        'token' => 'required',
+        'panel' => 'required|min:7',
+        'jumper' => 'required',
     ];
 
     public function open()
@@ -22,6 +23,7 @@ class SamplicioCreate extends Component
     {
         $this->isopen = false;  
     }
+
 
     public function render()
     {
@@ -34,31 +36,24 @@ class SamplicioCreate extends Component
 
         $user_auth =  auth()->user()->id;
 
-        $jumper = Link::where('jumper',$this->token)->first();
-
-        if($jumper){
-
-            $jumper->update([
-                'psid' => $this->id_id,
-                'user_id' => $user_auth,
-                'jumper_type_id' => 11,
-            ]);
-
-        }else{
-            $link = new Link();
-            $link->psid = $this->id_id;
-            $link->jumper = $this->token;
-            $link->user_id = $user_auth;
-            $link->jumper_type_id = 11;
-            $link->save();
-
+        $link = new Link();
+        $link->panel = $this->panel;
+        $link->jumper = $this->jumper;
+        $link->user_id = $user_auth;
+        $link->jumper_type_id = 11;
+        $link->save();
+        
+        if($this->comentario != ''){
+            $comment = new Comments();
+            $comment->comment = $this->comentario;
+            $comment->link_id = $link->id;
+            $comment->user_id = $user_auth;
+            $comment->save();
         }
 
-        
-
-        $this->reset(['id','isopen','token']);
+        $this->reset(['panel','isopen','jumper','comentario']);
         $this->emit('alert','Datos registrados correctamente');
-        $this->emitTo('jumpers.samplicio.samplicio-index-principal','render');
+        $this->emitTo('jumpers.cint.cint-index','render');
     }
 
 }

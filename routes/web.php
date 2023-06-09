@@ -81,6 +81,7 @@ Route::middleware(['auth','verified'])->group(function()
         Route::get('samplicio_centiment',[JumpersController::class,'samplicio'])->name('samplicio.index');
         Route::get('samplicio_index',[JumpersController::class,'samplicio_index'])->name('samplicio2.index');
         Route::get('samplicio_p',[JumpersController::class,'samplicio_p'])->name('samplicio_p.index');
+        Route::get('samplicio_bz',[JumpersController::class,'samplicio_bz'])->name('samplicio_bz.index');
         Route::get('scube',[JumpersController::class,'scube'])->name('scube.index');
         Route::get('spectrum_1',[JumpersController::class,'spectrum'])->name('spectrum.index');
         Route::get('spectrum_2',[JumpersController::class,'spectrum2'])->name('spectrum2.index');

@@ -10,13 +10,8 @@
 @stop
 
 @section('content')
-<!-- 
-<div class=" grid grid-cols-3 gap-2 content-start mt-2 mb-4">
-  <div class="bg-info text-gray-500 font-bold text-sm p-1 rounded-sm ">Centiment</div>
 
-</div> -->
-
-   
     @livewire('jumpers.samplicio.samplicio-index') 
+    
 @stop
 

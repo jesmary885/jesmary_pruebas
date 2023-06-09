@@ -743,13 +743,13 @@ return [
         [
             'text'    => 'CINT',
             'icon'    => 'fas fa-search',
-            'can' => 'otro.admin',
+            'can' => 'ssidkr.index',
             'icon_color' => 'cyan',
             'submenu' => [
                 [
                     'text' => 'Buscador Nº 1',
                     'route'  => 'cint.index',
-                    'can' => 'otro.admin',
+                    'can' => 'ssidkr.index',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
@@ -757,7 +757,7 @@ return [
                 [
                     'text' => 'Buscador Nº 2',
                     'route'  => 'cint2.index',
-                    'can' => 'otro.admin',
+                    'can' => 'ssidkr.index',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
@@ -770,13 +770,13 @@ return [
             'can' => 'ssidkr.index',
             'icon_color' => 'cyan',
             'submenu' => [
-               /* [
+                [
                     'text' => 'Buscador principal',
                     'route'  => 'samplicio2.index',
                     'can' => 'ssidkr.index',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
-                ],*/
+                ],
 
                 /*[
                     'text' => 'Generador Premium',
@@ -785,6 +785,14 @@ return [
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],*/
+
+                [
+                    'text' => 'Generador BZ',
+                    'route'  => 'samplicio_bz.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
 
                 [
                     'text' => 'Generador Centiment',

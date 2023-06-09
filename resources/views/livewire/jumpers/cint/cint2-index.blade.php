@@ -22,9 +22,7 @@
                 @livewire('jumpers.cint.cint2-create')
             </div>
 
-            <div class="ml-2 mr-2 mt-1">
-                @livewire('jumpers.cint.cint-import')
-            </div>
+        
         </div>
 
         @if($jumpers != [])
