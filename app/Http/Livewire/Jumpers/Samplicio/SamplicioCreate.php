@@ -53,7 +53,7 @@ class SamplicioCreate extends Component
 
         $this->reset(['panel','isopen','jumper','comentario']);
         $this->emit('alert','Datos registrados correctamente');
-        $this->emitTo('jumpers.cint.cint-index','render');
+        $this->emitTo('jumpers.samplicio.samplicio-index-principal','render');
     }
 
 }

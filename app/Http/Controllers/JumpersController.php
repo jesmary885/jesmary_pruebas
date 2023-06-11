@@ -151,6 +151,11 @@ class JumpersController extends Controller
 
     }
 
+    public function spectrum_principal(){
+        return view('jumpers.spectrum_principal');
+       
+    }
+
     public function spectrum(){
         return view('jumpers.spectrum');
        

@@ -813,13 +813,19 @@ return [
             'icon_color' => 'cyan',
             'submenu' => [
                 [
+                    'text' => 'Buscador principal',
+                    'route'  => 'spectrum_principal.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+                [
                     'text' => 'Generador Qualtrics',
                     'route'  => 'spectrum.index',
                     'icon'    => '	fas fa-angle-right',
                     'icon_color' => 'red',
                     'can' => 'ssidkr.index',
                 ],
-
                 [
                     'text' => 'Generador Voicefive',
                     'icon'    => '	fas fa-angle-right',

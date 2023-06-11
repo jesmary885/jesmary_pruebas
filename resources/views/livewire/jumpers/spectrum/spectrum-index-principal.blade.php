@@ -19,7 +19,11 @@
 
 
             <div class="ml-2 mr-2 mt-1">
-                @livewire('jumpers.samplicio.samplicio-create')
+                @livewire('jumpers.spectrum.spectrum-create')
+            </div>
+
+            <div class="ml-2 mr-2 mt-1">
+                @livewire('jumpers.cint.cint-import')
             </div>
         
         </div>
@@ -225,5 +229,3 @@
     @stop
 
 </div>
-
-
