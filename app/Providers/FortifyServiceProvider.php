@@ -11,11 +11,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Fortify;
+use Illuminate\Support\Facades\Hash;
 
 use App\Http\Responses\RegisterResponse;
 use Laravel\Fortify\Contracts\RegisterResponse as RegisterResponseContract;
 
 use App\Http\Responses\LoginResponse;
+use App\Models\User;
 use Laravel\Fortify\Contracts\LoginResponse as LoginResponseContract;
 
 class FortifyServiceProvider extends ServiceProvider
@@ -42,8 +44,21 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
 
+        Fortify::authenticateUsing(function (Request $request) {
+            $user = User::where('email', $request->email)->first();
+
+            $request->validate([
+                'captcha' => 'required|captcha']);
+
+           
+                
+                return $user;
+            
+        });
+
         RateLimiter::for('login', function (Request $request) {
             $email = (string) $request->email;
+
 
             return Limit::perMinute(5)->by($email.$request->ip());
         });
@@ -53,6 +68,6 @@ class FortifyServiceProvider extends ServiceProvider
         });
 
         //$this->app->bind(RegisterResponseContract::class, RegisterResponse::class);
-        $this->app->bind(LoginResponseContract::class, LoginResponse::class);
+       // $this->app->bind(LoginResponseContract::class, LoginResponse::class);
     }
 }

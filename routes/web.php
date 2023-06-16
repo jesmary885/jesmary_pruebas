@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CaptchaServiceController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JumpersController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\MarketplaceController;
 use App\Http\Controllers\PagoController;
@@ -23,6 +25,10 @@ use Illuminate\Support\Facades\Redirect;
 Route::get('/', function () {
     return view('auth.login');
 })->name('login_guest');
+
+Route::post('log', [LoginController::class, 'authenticate'])->name('log');
+
+Route::get('/reload-captcha', [CaptchaServiceController::class, 'reloadCaptcha']);
 
 Route::get('dates/{user}',[RegisterController::class,'date_index'])->name('register_dates.index');
 Route::post('dates',[RegisterController::class,'date_create'])->name('register_dates.create');
@@ -55,12 +61,14 @@ Route::middleware(['auth','verified'])->group(function()
         Route::get('k1083',[JumpersController::class,'k1083'])->name('k1083.index')->middleware('permission:menu.premium');
 
         Route::get('k1093',[JumpersController::class,'k1093'])->name('k1093.index');
+        Route::get('k2000',[JumpersController::class,'k2000'])->name('k2000.index');
         Route::get('k1091',[JumpersController::class,'k1091'])->name('k1091.index');
         Route::get('k2028',[JumpersController::class,'k2028'])->name('k2028.index');
         Route::get('k5460',[JumpersController::class,'k5460'])->name('k5460.index');
         Route::get('k6057',[JumpersController::class,'k6057'])->name('k6057.index');
         Route::get('k2066',[JumpersController::class,'k2066'])->name('k2066.index');
         Route::get('k7341-P',[JumpersController::class,'k7341_poderosa'])->name('k7341_poderosa.index');
+        Route::get('k2066-P',[JumpersController::class,'k2066_poderosa'])->name('k2066_poderosa.index');
         Route::get('cint',[JumpersController::class,'cint'])->name('cint.index');
         Route::get('cint_2',[JumpersController::class,'cint2'])->name('cint2.index');
         Route::get('internals',[JumpersController::class,'internals'])->name('internals.index');
@@ -72,9 +80,13 @@ Route::middleware(['auth','verified'])->group(function()
         Route::get('k2049',[JumpersController::class,'k2049'])->name('k2049.index');
         Route::get('k3906',[JumpersController::class,'k3906'])->name('k3906.index');
         Route::get('k11052',[JumpersController::class,'k11052'])->name('k11052.index');
+        Route::get('k10125',[JumpersController::class,'k10125'])->name('k10125.index');
         Route::get('k15293',[JumpersController::class,'k15293'])->name('k15293.index');
         Route::get('k10611',[JumpersController::class,'k10611'])->name('k10611.index');
+        Route::get('k4453',[JumpersController::class,'k4453'])->name('k4453.index');
         Route::get('k17564',[JumpersController::class,'k17564'])->name('k17564.index');
+        Route::get('k3889',[JumpersController::class,'k3889'])->name('k3889.index');
+        Route::get('k11483',[JumpersController::class,'k11483'])->name('k11483.index');
         Route::get('k1098',[JumpersController::class,'k1098'])->name('k1098.index');
         Route::get('k7341',[JumpersController::class,'ksietemilcuarentayuno'])->name('ksietemilcuarentayuno.index');
         Route::get('prodege',[JumpersController::class,'prodege'])->name('prodege.index');

@@ -2,9 +2,13 @@
 @section('content_header')
 
 <div class="flex justify-between">
-<h1 class="text-lg font-weight-bold text-cyan-400"> <i class="fas fa-spinner mr-1 text-cyan-400"></i> K7341 New security</h1>
+    
+<h1 class="text-lg font-weight-bold text-cyan-400"> <i class="fas fa-spinner mr-1 text-cyan-400"></i> K4453</h1>
 
 
+    <div class="justify-end">
+       {{-- @livewire('jumpers.cint.cint-create') --}}
+    </div>
 </div>
 
 @stop
@@ -16,7 +20,7 @@
         </div>
     @endif
     
-    @livewire('jumpers.k7341-p.k7341-index') 
+    @livewire('jumpers.k4453.k4453-index') 
 @stop
 
 @section('css')

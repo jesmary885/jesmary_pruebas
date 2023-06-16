@@ -18,6 +18,7 @@
         "livewire/livewire": "^2.5",
         "maatwebsite/excel": "^3.1",
         "megacreativo/cedulave-api": "^1.1",
+        "mews/captcha": "^3.3",
         "pusher/pusher-php-server": "^7.2",
         "spatie/laravel-permission": "^5.7"
     },

@@ -182,7 +182,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
-
+        
         /*
          * Package Service Providers...
          */
@@ -198,6 +198,7 @@ return [
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Mews\Captcha\CaptchaServiceProvider::class,
         
 
     ],
@@ -215,6 +216,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Captcha' => Mews\Captcha\Facades\Captcha::class,
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 

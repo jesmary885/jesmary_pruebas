@@ -161,7 +161,7 @@ class SpectrumIndex extends Component
 
                         $busqueda_id= strpos($this->search, '&id=');
 
-                        if($busqueda_f_ != false){
+                        if($busqueda_id != false){
 
                             if($this->jumper_complete == "") {
                                 $link_register_search = Links_usados::where('link',$this->search)

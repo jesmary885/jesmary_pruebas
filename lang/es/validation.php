@@ -120,6 +120,7 @@ return [
     'unique' => 'El :attribute ya existe, cámbielo.',
     'uploaded' => 'The :attribute failed to upload.',
     'url' => 'The :attribute format is invalid.',
+    'captcha' => 'El :attribute es incorrecto.',
     'uuid' => 'The :attribute must be a valid UUID.',
 
     /*

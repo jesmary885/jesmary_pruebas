@@ -564,6 +564,15 @@ return [
                     'icon'    => '	fas fa-angle-right',
                 ],
                 [
+                    'text' => 'K2000',
+                    'route'  => 'k2000.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+
+
+                [
                     'text' => 'K2028',
                     'route'  => 'k2028.index',
                     'can' => 'ssidkr.index',
@@ -599,6 +608,13 @@ return [
                     'icon'    => '	fas fa-angle-right',
                 ],
                 [
+                    'text' => 'K2066 New security',
+                    'route'  => 'k2066_poderosa.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+                [
                      'text' => 'K23',
                      'route'  => 'kveintitres.index',
                      'can' => 'ssidkr.index',
@@ -619,6 +635,23 @@ return [
                 //     'icon_color' => 'red',
                 //     'icon'    => '	fas fa-angle-right',
                 // ],
+
+                [
+                    'text' => 'k3889',
+                    'route'  => 'k3889.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+
+                [
+                    'text' => 'k4453',
+                    'route'  => 'k4453.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+
                 [
                     'text' => 'K5460',
                     'route'  => 'k5460.index',
@@ -649,6 +682,14 @@ return [
                     'icon'    => '	fas fa-angle-right',
                 ],
                 [
+                    'text' => 'K10125',
+                    'route'  => 'k10125.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+
+                [
                     'text' => 'K10611',
                     'route'  => 'k10611.index',
                     'can' => 'ssidkr.index',
@@ -672,6 +713,13 @@ return [
                 [
                     'text' => 'K11052',
                     'route'  => 'k11052.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+                [
+                    'text' => 'K11483',
+                    'route'  => 'k11483.index',
                     'can' => 'ssidkr.index',
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',

@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use DateTime;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
 use Laravel\Fortify\Contracts\LogoutResponse as LogoutResponseContract;
 use Laravel\Fortify\Contracts\LoginResponse as LoginResponseContract;
@@ -15,6 +16,7 @@ use Laravel\Fortify\Contracts\LoginResponse as LoginResponseContract;
 class LoginResponse implements LoginResponseContract
 {
     public function toResponse($request): RedirectResponse {
+
 
         $user = User::where('id',auth()->user()->id)->first();
         $date = new DateTime();

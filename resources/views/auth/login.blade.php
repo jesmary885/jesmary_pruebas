@@ -9,6 +9,7 @@
     
 
     <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
   
@@ -18,15 +19,21 @@
     <link rel="stylesheet" href="{{ asset('vendor/login_banner/graphic.css') }}">
 
     <style>
+
+        body{
+            overflow-x: hidden;
+        }
         .Div_flotante{
         position: absolute;
-        bottom: 0px;
+        bottom: 0;
+        left:0; 
         width: 100%;
         height: 40px;
         text-align: center;
-        z-index:5;
 
         }
+
+
     </style>
     
 </head>
@@ -62,7 +69,7 @@
 
                             
 
-                            <form method="POST" action="{{ route('login') }}">
+                            <form method="POST" action="{{ route('log') }}">
                                 @csrf
                                 <div class="space-y-6">
                                                 
@@ -94,6 +101,27 @@
                                                 </svg>
 
                                             </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="captcha flex justify-between w-full">
+                                            <div class=" flex">
+                                                <span >{!! captcha_img('math') !!}</span>
+
+                                                <button type="button" id="reload_p" class="reload justify-center bg-red-500 px-4 text-2xl hover:blue-700 text-gray-100 rounded-lg tracking-wide font-bold  cursor-pointer ml-2 mr-2">
+                                                    &#x21bb;
+                                
+                                                </button>
+
+                                            </div>
+                                            
+                                            <div class="flex-1 w-full">
+                                        
+                                                <input id="captcha" type="text" class="w-full text-gray-600 text-sm px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400" placeholder="Enter Captcha" name="captcha">
+                                              
+                                            </div>
+                                        </div>
+                                        <x-input-error for="captcha" />
                                     </div>
 
 
@@ -146,7 +174,7 @@
                                 </div>
                             @endif
 
-                            <form method="POST" action="{{ route('login') }}">
+                            <form method="POST" action="{{ route('log') }}">
                                 @csrf
                                 <div class="space-y-6">
                                                 
@@ -179,6 +207,35 @@
                                             </div>
                                     </div>
 
+                                    <div>
+                                        <div class="captcha flex justify-between w-full">
+                                            <div class=" flex">
+                                                <span >{!! captcha_img('math') !!}</span>
+
+                                                <button type="button" id="reload" class="reload justify-center bg-red-500 px-4 text-2xl hover:blue-700 text-gray-100 rounded-lg tracking-wide font-bold  cursor-pointer ml-2 mr-2">
+                                                    &#x21bb;
+                                
+                                                </button>
+
+                                            </div>
+
+                                            <div class="flex-1 w-full">
+                                        
+                                                <input id="captcha" type="text" class="w-full text-gray-600 text-sm px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400" placeholder="Enter Captcha" name="captcha">
+                                        
+                                            </div>
+
+                                        </div>
+
+                                        <x-input-error for="captcha" />
+                                        
+                                    </div>
+
+                                   
+
+                                    
+                   
+
 
                                     <div class="flex items-center justify-between">
 
@@ -188,6 +245,11 @@
                                             </a>
                                         </div>
                                     </div>
+
+                                   
+
+                                    
+
                                     <div>
                                         <button type="submit" class="w-full flex justify-center bg-green-200  hover:blue-700 text-gray-600 p-3  rounded-lg tracking-wide font-semibold  cursor-pointer transition ease-in duration-500">
                                             Ingresar
@@ -202,14 +264,8 @@
                 
 
                 <div class="graphic w-full ">
-                
-                    <!-- <img class="graphic-man" src="/imagenes/man.png"> -->
 
-                    
-                
                     <div class="graphic-circles absolute hidden lg:block">
-                    
-                    
                         <img class="graphic-logo absolute" src="/imagenes/logo.png">
                         <img class="graphic-circle-1 absolute" src="/imagenes/internal-techs.png">
                         <img class="graphic-circle-2 absolute" src="/imagenes/external-new.png">
@@ -223,7 +279,7 @@
         
 
         <footer class="Div_flotante">
-            <div class="flex justify-center text-gray-300 text-xs">
+            <div class=" justify-center text-gray-300 text-xs">
                 <span>
                     Copyright © 2021-2023 <span class="text-blue-500 hover:text-blue-600"> QuerySet
                 </span>
@@ -234,7 +290,33 @@
         
 
     </section>
+
+    
+
 </body>
+    <script type="text/javascript">
+        $('#reload').click(function () {
+            $.ajax({
+                type: 'GET',
+                url: 'reload-captcha',
+                success: function (data) {
+                    $(".captcha span").html(data.captcha);
+                }   
+            });
+        });
+    </script>
+
+<script type="text/javascript">
+        $('#reload_p').click(function () {
+            $.ajax({
+                type: 'GET',
+                url: 'reload-captcha',
+                success: function (data) {
+                    $(".captcha span").html(data.captcha);
+                }   
+            });
+        });
+    </script>
 
 </html>
 
