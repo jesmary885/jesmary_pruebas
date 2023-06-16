@@ -215,7 +215,7 @@ class K2066Index extends Component
                             $link->jumper = $url_detect;
                             $link->psid = substr($this->psid_buscar,0,5);
                             $link->user_id = auth()->user()->id;
-                            $link->jumper_type_id = 39;
+                            $link->jumper_type_id = 22;
                             $link->k_detected = 'K=2066';
                             $link->save();
 

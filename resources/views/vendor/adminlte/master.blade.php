@@ -255,10 +255,12 @@
                 title: op,
                 input: 'text',
                 inputAttributes: {
-                    autocapitalize: 'off'
+                    autocapitalize: 'off',
+                    color:'#000000'
                 },
                 showCancelButton: true,
                 confirmButtonText: 'Enviar',
+                
 
                 allowOutsideClick: () => !Swal.isLoading()
             }).then((result) => {

@@ -122,6 +122,31 @@ class SsidkrIndex extends Component
         return 'k2049';
     }
 
+    public function k2000(){
+        session()->forget('search');
+        return 'k2000';
+    }
+
+    public function k10125(){
+        session()->forget('search');
+        return 'k10125';
+    }
+
+    public function k4453(){
+        session()->forget('search');
+        return 'k4453';
+    }
+
+    public function k3889(){
+        session()->forget('search');
+        return 'k3889';
+    }
+
+    public function k11483(){
+        session()->forget('search');
+        return 'k11483';
+    }
+
     public function k11619(){
         session()->forget('search');
         return 'k11619';
@@ -230,6 +255,16 @@ class SsidkrIndex extends Component
         return [
             1 => "Dirígete a",
             2 =>"Sección K-7341 que corresponde",
+            3 =>"-",
+        ];
+       
+    }
+
+    public function redireccionk2066(){
+
+        return [
+            1 => "Dirígete a",
+            2 =>"Sección K-2066 que corresponde",
             3 =>"-",
         ];
        
@@ -662,6 +697,12 @@ class SsidkrIndex extends Component
                             elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '10659') $type_k = 33;
                             elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '10611') $type_k = 34;
                             elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '1020') $type_k = 38;
+                            elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '2000') $type_k = 39;
+                            elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '10125') $type_k = 40;
+                            elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '4453') $type_k = 41;
+                            elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '3889') $type_k = 42;
+                            elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '11483') $type_k = 43;
+                            
 
                             else  $type_k = 15;
 
@@ -1042,6 +1083,11 @@ class SsidkrIndex extends Component
                                     elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '10659') $type_k = 33;
                                     elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '10611') $type_k = 34;
                                     elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '1020') $type_k = 38;
+                                    elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '2000') $type_k = 39;
+                                    elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '10125') $type_k = 40;
+                                    elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '4453') $type_k = 41;
+                                    elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '3889') $type_k = 42;
+                                    elseif((substr($this->search,($k_detect + 3),$this->posicion_total_k)) == '11483') $type_k = 43;
                                     else  $type_k = 15;
 
                             }
