@@ -59,6 +59,7 @@ Route::middleware(['auth','verified'])->group(function()
         Route::get('k1000-PM',[JumpersController::class,'kmil_poderosa2'])->name('kmil_poderosa2.index')->middleware('permission:menu.premium');
         Route::get('k23-P',[JumpersController::class,'k23_poderosa'])->name('k23_poderosa.index')->middleware('permission:menu.premium');
         Route::get('k1083',[JumpersController::class,'k1083'])->name('k1083.index')->middleware('permission:menu.premium');
+        Route::get('ktmr_ssi',[JumpersController::class,'ktmr_ssi'])->name('ktmr_ssi.index')->middleware('permission:menu.premium');
 
         Route::get('k1093',[JumpersController::class,'k1093'])->name('k1093.index');
         Route::get('k2000',[JumpersController::class,'k2000'])->name('k2000.index');
@@ -114,7 +115,7 @@ Route::middleware(['auth','verified'])->group(function()
         Route::get('wix',[JumpersController::class,'wix'])->name('wix.index');
         //Route::get('k2001',[JumpersController::class,'k2001'])->name('k2001.index');
         Route::get('ktmr',[JumpersController::class,'ktmr'])->name('ktmr.index');
-        Route::get('ktmr_ssi',[JumpersController::class,'ktmr_ssi'])->name('ktmr_ssi.index');
+        
         Route::get('qt',[JumpersController::class,'qt'])->name('qt.index');
         Route::post('import_cint',[JumpersController::class,'import_cint'])->name('cint.import');
 

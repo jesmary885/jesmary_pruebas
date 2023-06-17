@@ -129,6 +129,9 @@ class KtmrIndex extends Component
                     if(is_numeric(substr($this->search,($pid_calculate),($posicion_pid - ($pid_calculate)))))
                     $pid = substr($this->search,($pid_calculate),($posicion_pid - ($pid_calculate)));
                 }
+                else{
+                    $pid = substr($this->search,($pid_calculate));
+                }
             }
             else{
                 $pid = 0;
