@@ -520,12 +520,21 @@ return [
                     'icon'    => '	fas fa-angle-right',
                 ],
                 [
+                    'text' => 'KTRMR SSI',
+                    'route'  => 'ktmr_ssi.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+
+                [
                     'text' => 'KTRMR',
                     'route'  => 'ktmr.index',
                     'can' => 'ssidkr.index',
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
                 ],
+                
                 [
                     'text' => 'K1000',
                     'route'  => 'kmil.index',

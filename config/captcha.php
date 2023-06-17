@@ -2,15 +2,15 @@
 
 return [
     'disable' => env('CAPTCHA_DISABLE', false),
-    'characters' => ['2', '3', '4', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'j', 'm', 'n', 'p', 'q', 'r', 't', 'u', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'M', 'N', 'P', 'Q', 'R', 'T', 'U', 'X', 'Y', 'Z'],
+    'characters' => ['2', '3', '4', '6', '7', '8', '9','A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'M', 'N', 'P', 'Q', 'R', 'T', 'U', 'X', 'Y', 'Z'],
     'default' => [
         'length' => 9,
-        'width' => 46,
+        'width' => 180,
         'height' => 46,
         'quality' => 90,
-        'math' => false,
+        'math' => true,
         'expire' => 60,
-        'encrypt' => false,
+        'encrypt' => true,
     ],
     'math' => [
         'length' => 9,
@@ -18,11 +18,12 @@ return [
         'height' => 46,
         'quality' => 90,
         'math' => true,
+        'encrypt' => true,
     ],
 
     'flat' => [
-        'length' => 6,
-        'width' => 160,
+        'length' => 9,
+        'width' => 180,
         'height' => 46,
         'quality' => 90,
         'lines' => 6,

@@ -114,6 +114,7 @@ Route::middleware(['auth','verified'])->group(function()
         Route::get('wix',[JumpersController::class,'wix'])->name('wix.index');
         //Route::get('k2001',[JumpersController::class,'k2001'])->name('k2001.index');
         Route::get('ktmr',[JumpersController::class,'ktmr'])->name('ktmr.index');
+        Route::get('ktmr_ssi',[JumpersController::class,'ktmr_ssi'])->name('ktmr_ssi.index');
         Route::get('qt',[JumpersController::class,'qt'])->name('qt.index');
         Route::post('import_cint',[JumpersController::class,'import_cint'])->name('cint.import');
 
