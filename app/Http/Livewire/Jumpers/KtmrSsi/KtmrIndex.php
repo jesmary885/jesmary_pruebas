@@ -242,8 +242,28 @@ class KtmrIndex extends Component
                     else $this->psid_buscar = substr($this->search,($busqueda_id - 22),22);
                 }
 
+                $busqueda_DYN_ = strpos($this->search, '&DYN=');
+                $busqueda_dyn_ = strpos($this->search, '&dyn=');
 
-            if($this->jumper_complete == "") {
+                if($busqueda_DYN_ != false || $busqueda_dyn_ != false){
+                    if($busqueda_DYN_ != false) {
+                        $posicion_dyn = $busqueda_DYN_ + 5;
+                        $busqueda_dyn_p = $busqueda_DYN_ + 5;
+                    }
+                    else {
+                        $posicion_dyn = $busqueda_dyn_ + 5;
+                        $busqueda_dyn_p = $busqueda_dyn_ + 5;
+                    }
+                }
+
+                else{
+                    $this->jumper_detect = 3;
+                }
+                    
+
+
+
+            if($this->jumper_complete == "" && $this->jumper_detect == 0) {
 
 
 

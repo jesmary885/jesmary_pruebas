@@ -22,12 +22,10 @@ class LinksGenerados extends Component
     public function render()
     {
         $jumpers = Links_usados::where('k_detected', 'LIKE', '%' . $this->search . '%')
-        ->where('type',null)
         ->latest('id')
         ->paginate(25);
 
-        $total = Links_usados::where('type',null)
-        ->count();
+        $total = Links_usados::count();
 
         return view('livewire.admin.links-generados',compact('jumpers','total'));
     }

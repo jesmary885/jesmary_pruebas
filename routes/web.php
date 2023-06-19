@@ -62,6 +62,8 @@ Route::middleware(['auth','verified'])->group(function()
         Route::get('ktmr_ssi',[JumpersController::class,'ktmr_ssi'])->name('ktmr_ssi.index')->middleware('permission:menu.premium');
 
         Route::get('k1093',[JumpersController::class,'k1093'])->name('k1093.index');
+        Route::get('k7107',[JumpersController::class,'k7107'])->name('k7107.index');
+        Route::get('k5541',[JumpersController::class,'k5541'])->name('k5541.index');
         Route::get('k2000',[JumpersController::class,'k2000'])->name('k2000.index');
         Route::get('k1091',[JumpersController::class,'k1091'])->name('k1091.index');
         Route::get('k2028',[JumpersController::class,'k2028'])->name('k2028.index');
