@@ -879,6 +879,14 @@ return [
                     'icon'    => 'fas fa-angle-right',
                 ],
 
+                [
+                    'text' => 'Generador Torfacts o Wisesample',
+                    'route'  => 'samplicio_tw.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
                
             ],
         ],
