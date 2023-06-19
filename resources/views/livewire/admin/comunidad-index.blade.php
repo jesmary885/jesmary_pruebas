@@ -362,7 +362,7 @@
     </div>
 
     <h2 class="text-gray-200 font-bold p-2 text-lg">
-        GANANCIA DE 4$ POR SUSCRIPTOR
+        GANANCIA DE CHRISTIAN Y NELSON
     </h2>
 
     <div class="row">

@@ -67,7 +67,7 @@ class ReportePago extends Component
         }
 
         if($this->plan == "membresia premium" ){
-            if($user->balance>=15){
+            if($user->balance>=20){
                 return $this->payment_methods = PaymentMethods::all();
             }
             else{
@@ -135,12 +135,12 @@ class ReportePago extends Component
                 $new_pago->status = 'verificado';
             }
             else{
-                $new_pago->monto = '15';
+                $new_pago->monto = '20';
                 $new_pago->status = 'pendiente';
             }
 
                 $new_pago->pago_basico = '1';
-                $new_pago->pago_premium = '6';
+                $new_pago->pago_premium = '8';
                 $new_pago->plan = '30';                
             }
         $new_pago->fecha_pago = $this->fecha_pago;
@@ -161,7 +161,7 @@ class ReportePago extends Component
 
             if($this->plan == "membresia premium") {
                 $this->type = "premium";
-                $this->monto_pago = '15';
+                $this->monto_pago = '20';
                 $user->roles()->sync(10);
             }
 

@@ -19,9 +19,9 @@
                             <p class="info-box-text"> - {{10* $tasa_dia_dolar}} Bs. </p>
                             <p class="info-box-text"> - {{round((10 / $tasa_dia_ltc),2)}} LTC.</p>
                             <p class="info-box-text mt-2"> Plan Premium </p>
-                            <p class="info-box-text"> - 15$ </p>
-                            <p class="info-box-text"> - {{15* $tasa_dia_dolar}} Bs. </p>
-                            <p class="info-box-text"> - {{round((15 / $tasa_dia_ltc),2)}} LTC.</p>
+                            <p class="info-box-text"> - 20$ </p>
+                            <p class="info-box-text"> - {{20* $tasa_dia_dolar}} Bs. </p>
+                            <p class="info-box-text"> - {{round((20 / $tasa_dia_ltc),2)}} LTC.</p>
                         @else
                             <p class="info-box-text"> - 10$ </p>
                             <p class="info-box-text"> - {{10* $tasa_dia_dolar}} Bs. </p>

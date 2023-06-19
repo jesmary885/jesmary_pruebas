@@ -173,6 +173,11 @@ class JumpersController extends Controller
        
     }
 
+    public function samplicio_cash(){
+        return view('jumpers.samplicio_cash');
+    }
+
+
     public function samplicio_tw(){
         return view('jumpers.samplicio_tw');
        

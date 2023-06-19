@@ -872,12 +872,22 @@ return [
                 ],
 
                 [
+                    'text' => 'Generador Cash Your Opinions',
+                    'route'  => 'samplicio_cash.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                [
                     'text' => 'Generador Centiment',
                     'route'  => 'samplicio.index',
                     'can' => 'ssidkr.index',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
+
+                
 
                 [
                     'text' => 'Generador Torfacts o Wisesample',
@@ -887,7 +897,6 @@ return [
                     'icon'    => 'fas fa-angle-right',
                 ],
 
-               
             ],
         ],
 

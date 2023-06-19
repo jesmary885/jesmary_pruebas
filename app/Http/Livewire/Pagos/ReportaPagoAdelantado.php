@@ -79,7 +79,7 @@ class ReportaPagoAdelantado extends Component
         }
 
         elseif($this->plan == "membresia premium" ){
-            if($user->balance>=15){
+            if($user->balance>=20){
                 return $this->payment_methods = PaymentMethods::all();
             }
             else{
@@ -89,7 +89,7 @@ class ReportaPagoAdelantado extends Component
 
         else{
 
-            if($user->balance>=5){
+            if($user->balance>=10){
                 return $this->payment_methods = PaymentMethods::all();
             }
             else{
@@ -163,12 +163,12 @@ class ReportaPagoAdelantado extends Component
                     $new_pago->status = 'verificado';
                 }
                 else{
-                     $new_pago->monto = '15';
+                     $new_pago->monto = '20';
                      $new_pago->status = 'pendiente';
                 }
 
                 $new_pago->pago_basico = '1';
-                $new_pago->pago_premium = '6';
+                $new_pago->pago_premium = '8';
                 $new_pago->plan = '30';                
             }
             else{
@@ -177,12 +177,12 @@ class ReportaPagoAdelantado extends Component
                     $new_pago->status = 'verificado';
                 }
                 else{
-                     $new_pago->monto = '5';
+                     $new_pago->monto = '10';
                      $new_pago->status = 'pendiente';
                 }
                 $new_pago->type = 'Pago_restante_premium';
                 $new_pago->pago_basico = '0';
-                $new_pago->pago_premium = '2';
+                $new_pago->pago_premium = '4';
                 $new_pago->plan = '30';
             }
             if($this->metodo_id != 1){
@@ -222,7 +222,7 @@ class ReportaPagoAdelantado extends Component
                     } 
 
                     if($this->plan == "membresia premium") {
-                        $this->monto_pago = '15';
+                        $this->monto_pago = '20';
                         $this->type = "premium";
                         $user->roles()->sync(10);
 
@@ -238,7 +238,7 @@ class ReportaPagoAdelantado extends Component
                     }
 
                     if($this->plan == "Pago_restante_premium") {
-                        $this->monto_pago = '5';
+                        $this->monto_pago = '10';
                         $this->type = "premium";
 
                         $balance_new = $user->balance - $this->monto_pago;
