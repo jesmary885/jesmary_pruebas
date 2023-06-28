@@ -23,6 +23,10 @@ class ComunidadIndex extends Component
     $ganancia_mes_premium_suscriptor_total,
     $ganancia_mes_premium_5_suscriptor,
     $ganancia_saldos_pagina,
+    $ganancia_mes_10_premium,
+    $ganancia_mes_2_premium,
+    $ganancia_mes_premium_2_suscriptor,
+    $ganancia_mes_premium_10_suscriptor,
     $ganancia_mes_5_premium;
 
     public function buscar(){
@@ -51,20 +55,29 @@ class ComunidadIndex extends Component
                 $this->ganancia_mes_30_basic = $e->monto;
             }
 
-            $ganancia_mes_15_premium_q = DB::select('SELECT sum(p.monto) as monto from pago_registros_recargas p
-            where p.created_at BETWEEN :fecha_inicioo AND :fecha_finn AND p.plan = "15" AND p.type = "premium" AND  p.status = "verificado"'
-            ,array('fecha_inicioo' =>$fecha_inicio, 'fecha_finn' => $fecha_fin));
-
-            foreach($ganancia_mes_15_premium_q as $e){
-                $this->ganancia_mes_15_premium = $e->monto;
-            }
 
             $ganancia_mes_30_premium_q = DB::select('SELECT sum(p.monto) as monto from pago_registros_recargas p
-            where p.created_at BETWEEN :fecha_inicioo AND :fecha_finn AND p.plan = "30" AND p.type = "premium" AND p.status = "verificado"'
+            where p.created_at BETWEEN :fecha_inicioo AND :fecha_finn AND p.plan = "30" AND p.type = "premium 30" AND p.status = "verificado"'
             ,array('fecha_inicioo' =>$fecha_inicio, 'fecha_finn' => $fecha_fin));
 
             foreach($ganancia_mes_30_premium_q as $e){
                 $this->ganancia_mes_30_premium = $e->monto;
+            }
+
+            $ganancia_mes_10_premium_q = DB::select('SELECT sum(p.monto) as monto from pago_registros_recargas p
+            where p.created_at BETWEEN :fecha_inicioo AND :fecha_finn AND p.plan = "10" AND p.type = "premium 10" AND p.status = "verificado"'
+            ,array('fecha_inicioo' =>$fecha_inicio, 'fecha_finn' => $fecha_fin));
+
+            foreach($ganancia_mes_10_premium_q as $e){
+                $this->ganancia_mes_10_premium = $e->monto;
+            }
+
+            $ganancia_mes_2_premium_q = DB::select('SELECT sum(p.monto) as monto from pago_registros_recargas p
+            where p.created_at BETWEEN :fecha_inicioo AND :fecha_finn AND p.plan = "2" AND p.type = "premium 2" AND p.status = "verificado"'
+            ,array('fecha_inicioo' =>$fecha_inicio, 'fecha_finn' => $fecha_fin));
+
+            foreach($ganancia_mes_2_premium_q as $e){
+                $this->ganancia_mes_2_premium = $e->monto;
             }
 
             $ganancia_mes_premium_5_q = DB::select('SELECT sum(p.monto) as monto from pago_registros_recargas p
@@ -75,7 +88,7 @@ class ComunidadIndex extends Component
                 $this->ganancia_mes_5_premium = $e->monto;
             }
 
-            $this->total_ganancia_mes= $this->ganancia_saldos_pagina + $this->ganancia_mes_30_premium + $this->ganancia_mes_15_premium + $this->ganancia_mes_30_basic + $this->ganancia_mes_5_premium;
+            $this->total_ganancia_mes= $this->ganancia_saldos_pagina + $this->ganancia_mes_30_premium + $this->ganancia_mes_2_premium + $this->ganancia_mes_10_premium + $this->ganancia_mes_30_basic + $this->ganancia_mes_5_premium;
 
 
             ////////////////////////////////////////////////
@@ -90,7 +103,7 @@ class ComunidadIndex extends Component
             }
 
             $ganancia_mes_basic_30_suscriptor_q = DB::select('SELECT sum(p.pago_basico) as monto from pago_registros_recargas p
-            where p.created_at BETWEEN :fecha_inicioo AND :fecha_finn AND p.plan = "30" AND p.status = "verificado" AND p.type = "premium"'
+            where p.created_at BETWEEN :fecha_inicioo AND :fecha_finn AND p.plan = "30" AND p.status = "verificado" AND p.type = "premium 30"'
             ,array('fecha_inicioo' =>$fecha_inicio, 'fecha_finn' => $fecha_fin));
 
             foreach($ganancia_mes_basic_30_suscriptor_q as $e){
@@ -112,12 +125,30 @@ class ComunidadIndex extends Component
             }
 
             $ganancia_mes_premium_30_suscriptor_q = DB::select('SELECT sum(p.pago_premium) as monto from pago_registros_recargas p
-            where p.created_at BETWEEN :fecha_inicioo AND :fecha_finn AND p.plan = "30"  AND p.status = "verificado" AND p.type = "premium"'
+            where p.created_at BETWEEN :fecha_inicioo AND :fecha_finn AND p.plan = "30"  AND p.status = "verificado" AND p.type = "premium 30"'
             ,array('fecha_inicioo' =>$fecha_inicio, 'fecha_finn' => $fecha_fin));
 
             foreach($ganancia_mes_premium_30_suscriptor_q as $e){
                 $this->ganancia_mes_premium_30_suscriptor = $e->monto;
             }
+
+            $ganancia_mes_premium_10_suscriptor_q = DB::select('SELECT sum(p.pago_premium) as monto from pago_registros_recargas p
+            where p.created_at BETWEEN :fecha_inicioo AND :fecha_finn AND p.plan = "10"  AND p.status = "verificado" AND p.type = "premium 10"'
+            ,array('fecha_inicioo' =>$fecha_inicio, 'fecha_finn' => $fecha_fin));
+
+            foreach($ganancia_mes_premium_10_suscriptor_q as $e){
+                $this->ganancia_mes_premium_10_suscriptor = $e->monto;
+            }
+
+            $ganancia_mes_premium_2_suscriptor_q = DB::select('SELECT sum(p.pago_premium) as monto from pago_registros_recargas p
+            where p.created_at BETWEEN :fecha_inicioo AND :fecha_finn AND p.plan = "2"  AND p.status = "verificado" AND p.type = "premium 2"'
+            ,array('fecha_inicioo' =>$fecha_inicio, 'fecha_finn' => $fecha_fin));
+
+            foreach($ganancia_mes_premium_2_suscriptor_q as $e){
+                $this->ganancia_mes_premium_2_suscriptor = $e->monto;
+            }
+
+
 
             $ganancia_mes_premium_5_suscriptor_q = DB::select('SELECT sum(p.pago_premium) as monto from pago_registros_recargas p
             where p.created_at BETWEEN :fecha_inicioo AND :fecha_finn AND p.plan = "30"  AND p.status = "verificado" AND p.type = "Pago_restante_premium"'
@@ -128,7 +159,7 @@ class ComunidadIndex extends Component
             }
 
 
-            $this->ganancia_mes_premium_suscriptor_total = $this->ganancia_mes_premium_15_suscriptor + $this->ganancia_mes_premium_30_suscriptor + $this->ganancia_mes_premium_5_suscriptor;
+            $this->ganancia_mes_premium_suscriptor_total = $this->ganancia_mes_premium_15_suscriptor + $this->ganancia_mes_premium_30_suscriptor + $this->ganancia_mes_premium_10_suscriptor + $this->ganancia_mes_premium_2_suscriptor + $this->ganancia_mes_premium_5_suscriptor;
         }
 
     }
@@ -150,6 +181,10 @@ class ComunidadIndex extends Component
         $users_inactivos = User::where('status','inactivo')
             ->where('type','!=','gratis')
             ->count();
+
+        $users_inactivos_rol = User::where('type','!=','gratis')
+            ->permission('cuenta.inactiva')
+            ->count();
         
         $registros_mes = User::whereMonth('created_at', $mes)
         ->whereYear('created_at', $ano)
@@ -168,16 +203,21 @@ class ComunidadIndex extends Component
             ->where('status','activo')
             ->count();
 
-        
         $users_plan_15_basic = User::where('status','activo')
             ->where('plan','15')
             ->where('type','basico')
             ->permission('ssidkr.index')
             ->count();
 
-        $users_plan_15_premium = User::where('status','activo')
-            ->where('plan','15')
-            ->where('type','premium')
+        $users_plan_10_premium = User::where('status','activo')
+            ->where('plan','10')
+            ->where('type','premium 10')
+            ->permission('menu.premium')
+            ->count();
+
+        $users_plan_2_premium = User::where('status','activo')
+            ->where('plan','2')
+            ->where('type','premium 2')
             ->permission('menu.premium')
             ->count();
 
@@ -189,7 +229,7 @@ class ComunidadIndex extends Component
 
         $users_plan_30_premium = User::where('status','activo')
             ->where('plan','30')
-            ->where('type','premium')
+            ->where('type','premium 30')
             ->permission('menu.premium')
             ->count();
 
@@ -211,12 +251,20 @@ class ComunidadIndex extends Component
             ->where('type','basico')
             ->sum('monto');
 
-        $ganancia_dia_15_premium = PagoRegistrosRecarga::where('status','verificado')
+        $ganancia_dia_2_premium = PagoRegistrosRecarga::where('status','verificado')
             ->whereMonth('created_at', $mes)
             ->whereDay('created_at', $dia)
             ->whereYear('created_at', $ano)
-            ->where('plan','30')
-            ->where('type','premium')
+            ->where('plan','2')
+            ->where('type','premium 2')
+            ->sum('monto');
+
+        $ganancia_dia_10_premium = PagoRegistrosRecarga::where('status','verificado')
+            ->whereMonth('created_at', $mes)
+            ->whereDay('created_at', $dia)
+            ->whereYear('created_at', $ano)
+            ->where('plan','10')
+            ->where('type','premium 10')
             ->sum('monto');
 
         $ganancia_dia_30_premium = PagoRegistrosRecarga::where('status','verificado')
@@ -224,7 +272,7 @@ class ComunidadIndex extends Component
             ->whereDay('created_at', $dia)
             ->whereYear('created_at', $ano)
             ->where('plan','30')
-            ->where('type','premium')
+            ->where('type','premium 30')
             ->sum('monto');
 
         $ganancia_dia_5_premium = PagoRegistrosRecarga::where('status','verificado')
@@ -243,9 +291,9 @@ class ComunidadIndex extends Component
             ->where('type','Saldo en pagina')
             ->sum('monto');
 
-        $total_ganancia_dia = $ganancia_dia_saldo_pagina + $ganancia_dia_30_premium  + $ganancia_dia_30_basic + $ganancia_dia_5_premium;
+        $total_ganancia_dia = $ganancia_dia_saldo_pagina + $ganancia_dia_30_premium  + $ganancia_dia_30_basic + $ganancia_dia_5_premium + $ganancia_dia_10_premium + $ganancia_dia_2_premium;
         
         
-        return view('livewire.admin.comunidad-index',compact('ganancia_dia_saldo_pagina','ganancia_dia_5_premium','total_ganancia_dia','users_activos','users_inactivos','registros_mes','registros_dias','users_plan_15_basic','users_plan_15_premium','users_plan_30_basic','users_plan_30_premium','ganancia_dia_15_basic','ganancia_dia_30_basic','rol_user','ganancia_dia_15_premium','ganancia_dia_30_premium'));
+        return view('livewire.admin.comunidad-index',compact('users_inactivos_rol','users_plan_2_premium','ganancia_dia_saldo_pagina','ganancia_dia_5_premium','total_ganancia_dia','users_activos','users_inactivos','registros_mes','registros_dias','users_plan_15_basic','users_plan_10_premium','users_plan_30_basic','users_plan_30_premium','ganancia_dia_15_basic','ganancia_dia_30_basic','rol_user','ganancia_dia_10_premium','ganancia_dia_30_premium','ganancia_dia_2_premium'));
     }
 }

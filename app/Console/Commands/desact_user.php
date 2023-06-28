@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\User;
 use Carbon\Carbon;
+use DateTime;
 use Illuminate\Console\Command;
 
 class desact_user extends Command
@@ -33,17 +34,18 @@ class desact_user extends Command
 
         foreach($users as $user){
 
-            $fecha_actual = Carbon::now();
+            $date = new DateTime();
+            $fecha_actual = date("Y-m-d H:i:s");
+            $fecha_actual= new DateTime($fecha_actual);
+            $proxima_fecha= new DateTime($user->last_payment_date);
+            
+            //$corte = Carbon::parse($user->last_payment_date);
 
-            $corte = Carbon::parse($user->last_payment_date);
+           // $diasDiferencia = ($corte->diffInDays($fecha_actual));
 
-            $diasDiferencia = ($corte->diffInDays($fecha_actual));
-
-                if($corte <  $fecha_actual || $corte ==  $fecha_actual ){
+                if($fecha_actual > $proxima_fecha || $fecha_actual == $proxima_fecha ){
                     if($user->type != 'gratis'){
                     $user->roles()->sync(4);
-
-                 
                 }
             }
         }

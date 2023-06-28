@@ -36,8 +36,9 @@
                             <select wire:model="vista_registros" id="vista_registros" class="form-control w-full" name="vista_registros">
                                 <option value="0">Todos</option>
                                 <option value="1">Usuarios Básicos</option>
-                                <option value="2">Usuarios Premium - Plan 15</option>
-                                <option value="3">Usuarios Premium - Plan 30</option>
+                                <option value="2">Usuarios Premium - Plan 30</option>
+                                <option value="3">Usuarios Premium - Plan 10</option>
+                                <option value="4">Usuarios Premium - Plan 2</option>
                             </select>
                         </div>
 

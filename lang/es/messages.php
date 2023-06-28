@@ -77,6 +77,8 @@ return [
     'monto' => 'Monto',
     'add_pago_restante' => 'Pago restante de plan premium',
     'pago_mensualidad_basica' => 'Pago de membresia plan básico',
-    'pago_mensualidad_premium' => 'Pago de membresia plan premium',
+    'pago_mensualidad_premium' => 'Pago de membresia plan premium (30 days)',
+    'pago_mensualidad_premium_10' => 'Pago de membresia plan premium (10 días)',
+    'pago_mensualidad_premium_2' => 'Pago de membresia plan premium (2 días)',
 
 ];

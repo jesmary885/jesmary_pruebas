@@ -68,35 +68,53 @@ class UsuariosPaying extends Component
 
             $users = User::where('username', 'LIKE', '%' . $this->search . '%')
                 ->where('status','activo')
-                ->where('type','premium')
-                ->where('plan','15')
+                ->where('type','premium 30')
+                ->where('plan','30')
                 ->permission('menu.premium')
                 ->latest('id')
                 ->paginate(20);
             
-            $this->total_registros = User::where('type','premium')
+            $this->total_registros = User::where('type','premium 30')
                 ->where('status','activo')
-                ->where('plan','15')
+                ->where('plan','30')
                 ->permission('menu.premium')
                 ->count();
         
     }
 
+    elseif($this->vista_registros == 3){
+
+        $users = User::where('username', 'LIKE', '%' . $this->search . '%')
+            ->where('status','activo')
+            ->where('type','premium 10')
+            ->where('plan','10')
+            ->permission('menu.premium')
+            ->latest('id')
+            ->paginate(20);
+        
+        $this->total_registros = User::where('type','premium 10')
+            ->where('status','activo')
+            ->where('plan','10')
+            ->permission('menu.premium')
+            ->count();
+    
+    }
+
     else{
 
         $users = User::where('username', 'LIKE', '%' . $this->search . '%')
-                ->where('status','activo')
-                ->where('type','premium')
-                ->where('plan','30')
-                ->permission('menu.premium')
-                ->latest('id')
-                ->paginate(20);
-            
-            $this->total_registros = User::where('type','premium')
-                ->where('status','activo')
-                ->where('plan','30')
-                ->permission('menu.premium')
-                ->count();
+            ->where('status','activo')
+            ->where('type','premium 2')
+            ->where('plan','2')
+            ->permission('menu.premium')
+            ->latest('id')
+            ->paginate(20);
+        
+        $this->total_registros = User::where('type','premium 2')
+            ->where('status','activo')
+            ->where('plan','2')
+            ->permission('menu.premium')
+            ->count();
 
     }
 

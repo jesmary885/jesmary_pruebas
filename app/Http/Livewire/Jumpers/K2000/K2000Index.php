@@ -272,7 +272,7 @@ class K2000Index extends Component
                                         ->count();
 
                                     if($links_usados <= 4){
-                                        if($this->user->id != '1'){
+                                        if($this->user->id != '1' ||  $this->user->id != '1254'){
                                             if($multi == $ip_user){
                                                 $this->numerologia();
                                             }

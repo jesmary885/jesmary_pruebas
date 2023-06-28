@@ -15,15 +15,21 @@
 
                         <p class="info-box-text mb-2">PRECIO DE MEMBRESIA: </p>
 
-                        @if($user_page->type == 'premium')
+                        @if($user_page->type == 'premium 30' || $user_page->type == 'premium 10' || $user_page->type == 'premium 2' )
                             <p class="info-box-text"> Plan Básico </p>
                             <p class="info-box-text"> - 10$ </p>
                             <p class="info-box-text"> - {{10* $tasa_dia_dolar}} Bs. </p>
                             <p class="info-box-text"> - {{round((10 / $tasa_dia_ltc),2)}} LTC.</p>
-                            <p class="info-box-text mt-2"> Plan Premium </p>
-                            <p class="info-box-text"> - 20$ </p>
+                            <hr class="p-1 m-1 text-gray-100">
+                            <p class="info-box-text"> - Plan Premium (30 días) 20$ </p>
                             <p class="info-box-text"> - {{20* $tasa_dia_dolar}} Bs. </p>
                             <p class="info-box-text"> - {{round((20 / $tasa_dia_ltc),2)}} LTC.</p>
+                            <p class="info-box-text mt-2"> - Plan Premium (10 días) 10$ </p>
+                            <p class="info-box-text"> - {{10* $tasa_dia_dolar}} Bs. </p>
+                            <p class="info-box-text"> - {{round((10 / $tasa_dia_ltc),2)}} LTC.</p>
+                            <p class="info-box-text mt-2"> - Plan Premium (02 días) 3$ </p>
+                            <p class="info-box-text"> - {{3* $tasa_dia_dolar}} Bs. </p>
+                            <p class="info-box-text"> - {{round((3 / $tasa_dia_ltc),2)}} LTC.</p>
                         @else
                             <p class="info-box-text"> - 10$ </p>
                             <p class="info-box-text"> - {{10* $tasa_dia_dolar}} Bs. </p>
@@ -38,9 +44,11 @@
                                     <label class="w-full text-justify">Motivo</label>
                                     <select wire:model="plan" title="Plan" id="estado" class="block w-full text-gray-400 py-2 px-2 pr-8 leading-tight rounded focus:outline-none focus:border-gray-500" name="estado">
                                         <option value="" selected>{{__('messages.seleccione_opcion')}}</option>  
-                                        @if($user_page->type == 'premium')
+                                        @if($user_page->type == 'premium 30' || $user_page->type == 'premium 10' || $user_page->type == 'premium 2' )
                                             <option value="membresia basica">{{__('messages.pago_mensualidad_basica')}}</option> 
-                                            <option value="membresia premium">{{__('messages.pago_mensualidad_premium')}}</option>  
+                                            <option value="membresia premium_30">{{__('messages.pago_mensualidad_premium')}}</option>  
+                                            <option value="membresia premium_10">{{__('messages.pago_mensualidad_premium_10')}}</option>  
+                                            <option value="membresia premium_2">{{__('messages.pago_mensualidad_premium_2')}}</option>  
                                         @else
                                             <option value="membresia basica">{{__('messages.pago_mensualidad')}}</option> 
                                         @endif
@@ -69,10 +77,10 @@
                             <div class="form-group w-full mr-2">
                                     <label class="w-full text-justify">{{__('messages.referencia_nro')}}</label>
                                     <div class="flex ">
-                                        <input type="number" wire:model="referencia" class="form-control rounded" >
+                                        <input type="number" wire:model="nro_referencia" class="form-control rounded" >
                                     </div>
                                     
-                                    <x-input-error for="referencia" />
+                                    <x-input-error for="nro_referencia" />
                             </div>
 
                             @endif

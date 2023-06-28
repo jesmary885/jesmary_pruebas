@@ -33,7 +33,7 @@ class K1093Index extends Component
     }
 
     protected $rules_pid = [
-        'pid_manual' => 'required|min:8',
+        'pid_manual' => 'required|min:6',
     ];
 
     public function jumpear(){

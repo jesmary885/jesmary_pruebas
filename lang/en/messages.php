@@ -78,6 +78,8 @@ return [
     'monto' => 'Amount',
     'add_pago_restante' => 'Remaining payment of the premium plan',
     'pago_mensualidad_basica' => 'basic plan membership payment',
-    'pago_mensualidad_premium' => 'premium plan membership payment',
+    'pago_mensualidad_premium' => 'premium plan membership payment (30 days)',
+    'pago_mensualidad_premium_10' => 'premium plan membership payment (10 days)',
+    'pago_mensualidad_premium_2' => 'premium plan membership payment (2 days)',
 
 ];

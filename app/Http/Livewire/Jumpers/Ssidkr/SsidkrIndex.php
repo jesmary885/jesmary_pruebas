@@ -22,7 +22,7 @@ class SsidkrIndex extends Component
     protected $listeners = ['render' => 'render', 'registro_psid' => 'registro_psid', 'descalificar' => 'descalificar'];
 
     protected $rules_pid = [
-        'pid_new' => 'required|min:8',
+        'pid_new' => 'required|min:6',
     ];
     
     public function mount(){

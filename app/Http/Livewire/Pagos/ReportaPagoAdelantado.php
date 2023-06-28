@@ -24,7 +24,7 @@ class ReportaPagoAdelantado extends Component
     protected $rules = [
         'plan' => 'required',
         'metodo_id' => 'required',
-        'referencia' => 'required|numeric',
+        'referencia' => 'required|numeric|min:4|unique:pago_registros_recargas',
         'fecha_pago' => 'required',
         'file' => 'required|image',
     ];
@@ -78,8 +78,25 @@ class ReportaPagoAdelantado extends Component
             }
         }
 
-        elseif($this->plan == "membresia premium" ){
+        elseif($this->plan == "membresia premium_30" ){
             if($user->balance>=20){
+                return $this->payment_methods = PaymentMethods::all();
+            }
+            else{
+                return $this->payment_methods = PaymentMethods::where('id','!=','1')->get();
+            }
+        }
+
+        elseif($this->plan == "membresia premium_10" ){
+            if($user->balance>=10){
+                return $this->payment_methods = PaymentMethods::all();
+            }
+            else{
+                return $this->payment_methods = PaymentMethods::where('id','!=','1')->get();
+            }
+        }
+        elseif($this->plan == "membresia premium_2" ){
+            if($user->balance>=3){
                 return $this->payment_methods = PaymentMethods::all();
             }
             else{
@@ -104,166 +121,276 @@ class ReportaPagoAdelantado extends Component
         ->where('status','pendiente')
         ->count();
 
+        $pasa = 1;
+
         if($pago_registrado == 0){
 
-            $date = Carbon::now();
+            if($this->plan == "membresia premium_10"){
 
-            if($this->metodo_id == 1){
-                $rules = $this->rules_con_balance;
-                $this->validate($rules);
-            }
-            else{
-                $rules = $this->rules;
-                $this->validate($rules);
-                
+                $users_plan_10_premium = User::where('status','activo')
+                ->where('plan','10')
+                ->where('type','premium 10')
+                ->permission('menu.premium')
+                ->count();
+
+                if($users_plan_10_premium > 15){
+                    $this->emit('error','Su operación no ha sido procesada, en estos momentos no hay cupos disponibles para este plan');
+                    $this->isopen = false;  
+                    $pasa = 0;
+                }
+                else $pasa = 1;
+
             }
 
-            if($this->plan == "balance"){
-                $rule_monto = $this->rule_monto;
-                $this->validate($rule_monto);
+            elseif($this->plan == "membresia premium_2"){
+                $users_plan_2_premium = User::where('status','activo')
+                ->where('plan','2')
+                ->where('type','premium 2')
+                ->permission('menu.premium')
+                ->count();
+
+                if($users_plan_2_premium > 15){
+                    $this->emit('error','Su operación no ha sido procesada, en estos momentos no hay cupos disponibles para este plan');
+                    $this->isopen = false;  
+                    $pasa = 0;
+                }
+                else $pasa = 1;
+
             }
 
-            $fecha_actual = date("Y-m-d h:s");
-    
-            $new_pago = new PagoRegistrosRecarga();
-            $new_pago->user_id = Auth::id();
-            //$new_pago->nro_referencia = $this->referencia;
-            $new_pago->fecha_pago = $this->fecha_pago;
-            
-            if($this->plan == "membresia basica")
-            {
-                $new_pago->type = 'basico';
+            if($pasa == 1){
+
+                $date = Carbon::now();
 
                 if($this->metodo_id == 1){
-                    $new_pago->monto = '0';
-                    $new_pago->status = 'verificado';
+                    $rules = $this->rules_con_balance;
+                    $this->validate($rules);
                 }
                 else{
-                    $new_pago->monto = '10';
-                    $new_pago->status = 'pendiente';
-                }
-
-                $new_pago->pago_basico = '1';
-                $new_pago->pago_premium = '4';
-                $new_pago->plan = '30';                
-            }
-            elseif($this->plan == "balance"){
-                $new_pago->plan = 'balance';
-                $new_pago->type = 'Saldo en pagina';
-                $new_pago->monto = $this->monto;
-                $new_pago->status = 'pendiente';
-                
-            }
-            elseif($this->plan == "membresia premium")
-            {
-                $new_pago->type = 'premium';
-
-                if($this->metodo_id == 1) {
-                    $new_pago->monto = '0';
-                    $new_pago->status = 'verificado';
-                }
-                else{
-                     $new_pago->monto = '20';
-                     $new_pago->status = 'pendiente';
-                }
-
-                $new_pago->pago_basico = '1';
-                $new_pago->pago_premium = '8';
-                $new_pago->plan = '30';                
-            }
-            else{
-                if($this->metodo_id == 1) {
-                    $new_pago->monto = '0';
-                    $new_pago->status = 'verificado';
-                }
-                else{
-                     $new_pago->monto = '10';
-                     $new_pago->status = 'pendiente';
-                }
-                $new_pago->type = 'Pago_restante_premium';
-                $new_pago->pago_basico = '0';
-                $new_pago->pago_premium = '4';
-                $new_pago->plan = '30';
-            }
-            if($this->metodo_id != 1){
-                $url = Storage::put('public/pagos_recargas', $this->file);
-                $new_pago->file = $url;
-                $new_pago->nro_referencia = $this->referencia;
-            }
-            
-            $new_pago->comentario = $this->comentario;
-            $new_pago->payment_method_id = $this->metodo_id;
-            $new_pago->save();
-    
-            $user = User::where('id',Auth::id())->first();
-    
-            $rol = $user->roles->first()->id;
-    
-            if($this->plan == "membresia basica" || $this->plan == "membresia premium" || $this->plan == "Pago_restante_premium"){
-                $plan_nuevo = '30';
-
-                if($this->metodo_id == 1) {
-                    $proxima_fecha = date("Y-m-d h:s",strtotime($fecha_actual."+ 30 days"));
-
-                    if($this->plan == "membresia basica"){
-                        $this->monto_pago = '10';
-                        $this->type = "basico";
-                        $user->roles()->sync(2);
-
-                        $balance_new = $user->balance - $this->monto_pago;
-
-                        $user->update([
-                            'status' => 'activo',
-                            'last_payment_date' => $proxima_fecha,
-                            'type' => $this->type,
-                            'plan' => $plan_nuevo,
-                            'balance' => $balance_new,
-                        ]);
-                    } 
-
-                    if($this->plan == "membresia premium") {
-                        $this->monto_pago = '20';
-                        $this->type = "premium";
-                        $user->roles()->sync(10);
-
-                        $balance_new = $user->balance - $this->monto_pago;
-
-                        $user->update([
-                            'status' => 'activo',
-                            'last_payment_date' => $proxima_fecha,
-                            'type' => $this->type,
-                            'plan' => $plan_nuevo,
-                            'balance' => $balance_new,
-                        ]);
-                    }
-
-                    if($this->plan == "Pago_restante_premium") {
-                        $this->monto_pago = '10';
-                        $this->type = "premium";
-
-                        $balance_new = $user->balance - $this->monto_pago;
-
-                        $user->update([
-                            'balance' => $balance_new,
-                        ]);
-                    }
-                }
-                else{
+                    $rules = $this->rules;
+                    $this->validate($rules);
                     
-                    $user->update([
-                        'status' => 'activo',
-                        'type' => $this->type,
-                        'plan' => $plan_nuevo
-                    ]);
-
                 }
-    
-            }
-            $this->emit('alert','Datos registrados correctamente');
-            $this->reset(['plan','file','comentario','type']);
-            $this->isopen = false;  
 
-            return redirect()->route("home");
+                if($this->plan == "balance"){
+                    $rule_monto = $this->rule_monto;
+                    $this->validate($rule_monto);
+                }
+
+                $fecha_actual = date("Y-m-d H:s");
+        
+                $new_pago = new PagoRegistrosRecarga();
+                $new_pago->user_id = Auth::id();
+                //$new_pago->nro_referencia = $this->referencia;
+                $new_pago->fecha_pago = $this->fecha_pago;
+                
+                if($this->plan == "membresia basica")
+                {
+                    $new_pago->type = 'basico';
+
+                    if($this->metodo_id == 1){
+                        $new_pago->monto = '0';
+                        $new_pago->status = 'verificado';
+                    }
+                    else{
+                        $new_pago->monto = '10';
+                        $new_pago->status = 'pendiente';
+                    }
+
+                    $new_pago->pago_basico = '1';
+                    $new_pago->pago_premium = '4';
+                    $new_pago->plan = '30';                
+                }
+                elseif($this->plan == "balance"){
+                    $new_pago->plan = 'balance';
+                    $new_pago->type = 'Saldo en pagina';
+                    $new_pago->monto = $this->monto;
+                    $new_pago->status = 'pendiente';
+                    
+                }
+                elseif($this->plan == "membresia premium_30"){
+                    $new_pago->type = 'premium 30 dias';
+
+                    if($this->metodo_id == 1) {
+                        $new_pago->monto = '0';
+                        $new_pago->status = 'verificado';
+                    }
+                    else{
+                        $new_pago->monto = '20';
+                        $new_pago->status = 'pendiente';
+                    }
+
+                    $new_pago->pago_basico = '1';
+                    $new_pago->pago_premium = '8';
+                    $new_pago->plan = '30';                
+                }
+                elseif($this->plan == "membresia premium_10"){
+                    $new_pago->type = 'premium 10 dias';
+
+                    if($this->metodo_id == 1) {
+                        $new_pago->monto = '0';
+                        $new_pago->status = 'verificado';
+                    }
+                    else{
+                        $new_pago->monto = '10';
+                        $new_pago->status = 'pendiente';
+                    }
+
+                    $new_pago->pago_basico = '0';
+                    $new_pago->pago_premium = '4';
+                    $new_pago->plan = '10';                
+                }
+                elseif($this->plan == "membresia premium_2"){
+                    $new_pago->type = 'premium 2 dias';
+
+                    if($this->metodo_id == 1) {
+                        $new_pago->monto = '0';
+                        $new_pago->status = 'verificado';
+                    }
+                    else{
+                        $new_pago->monto = '3';
+                        $new_pago->status = 'pendiente';
+                    }
+
+                    $new_pago->pago_basico = '0';
+                    $new_pago->pago_premium = '1.2';
+                    $new_pago->plan = '2';                
+                }
+                else{
+                    if($this->metodo_id == 1) {
+                        $new_pago->monto = '0';
+                        $new_pago->status = 'verificado';
+                    }
+                    else{
+                        $new_pago->monto = '10';
+                        $new_pago->status = 'pendiente';
+                    }
+                    $new_pago->type = 'Pago_restante_premium';
+                    $new_pago->pago_basico = '0';
+                    $new_pago->pago_premium = '4';
+                    $new_pago->plan = '30';
+                }
+
+                if($this->metodo_id != 1){
+                    $url = Storage::put('public/pagos_recargas', $this->file);
+                    $new_pago->file = $url;
+                    $new_pago->nro_referencia = $this->referencia;
+                }
+                
+                $new_pago->comentario = $this->comentario;
+                $new_pago->payment_method_id = $this->metodo_id;
+                $new_pago->save();
+        
+                $user = User::where('id',Auth::id())->first();
+        
+                $rol = $user->roles->first()->id;
+        
+                if($this->plan == "membresia basica" || $this->plan == "membresia premium_30" || $this->plan == "membresia premium_10" || $this->plan == "membresia premium_2" || $this->plan == "Pago_restante_premium"){
+                
+                    if($this->metodo_id == 1) {
+                        $proxima_fecha = date("Y-m-d H:i:s",strtotime($fecha_actual."+ 30 days"));
+
+                        if($this->plan == "membresia basica"){
+                            $plan_nuevo = '30';
+                            $this->monto_pago = '10';
+                            $this->type = "basico";
+                            $user->roles()->sync(2);
+
+                            $balance_new = $user->balance - $this->monto_pago;
+
+                            $user->update([
+                                'status' => 'activo',
+                                'last_payment_date' => $proxima_fecha,
+                                'type' => $this->type,
+                                'plan' => $plan_nuevo,
+                                'balance' => $balance_new,
+                            ]);
+                        } 
+
+                        if($this->plan == "membresia premium_30") {
+                            $plan_nuevo = '30';
+                            $this->monto_pago = '20';
+                            $this->type = "premium 30";
+                            $user->roles()->sync(10);
+
+                            $balance_new = $user->balance - $this->monto_pago;
+
+                            $user->update([
+                                'status' => 'activo',
+                                'last_payment_date' => $proxima_fecha,
+                                'type' => $this->type,
+                                'plan' => $plan_nuevo,
+                                'balance' => $balance_new,
+                            ]);
+                        }
+
+                        if($this->plan == "membresia premium_10") {
+                            $plan_nuevo = '10';
+                            $this->monto_pago = '10';
+                            $this->type = "premium 10";
+                            $user->roles()->sync(10);
+
+                            $balance_new = $user->balance - $this->monto_pago;
+
+                            $user->update([
+                                'status' => 'activo',
+                                'last_payment_date' => $proxima_fecha,
+                                'type' => $this->type,
+                                'plan' => $plan_nuevo,
+                                'balance' => $balance_new,
+                            ]);
+                        }
+
+                        if($this->plan == "membresia premium_2") {
+                            $plan_nuevo = '2';
+                            $this->monto_pago = '3';
+                            $this->type = "premium 2";
+                            $user->roles()->sync(10);
+
+                            $balance_new = $user->balance - $this->monto_pago;
+
+                            $user->update([
+                                'status' => 'activo',
+                                'last_payment_date' => $proxima_fecha,
+                                'type' => $this->type,
+                                'plan' => $plan_nuevo,
+                                'balance' => $balance_new,
+                            ]);
+                        }
+
+                        if($this->plan == "Pago_restante_premium") {
+                            $this->monto_pago = '10';
+                            $this->type = "premium";
+                            $plan_nuevo = '30';
+
+                            $balance_new = $user->balance - $this->monto_pago;
+
+                            $user->update([
+                                'balance' => $balance_new,
+                            ]);
+                        }
+                    }
+                    else{
+                        if($this->plan == "membresia premium_30") $plan_nuevo = '30';
+                        if($this->plan == "membresia premium_10") $plan_nuevo = '10';
+                        if($this->plan == "membresia premium_2") $plan_nuevo = '2';
+                        else $plan_nuevo = '30';
+                        
+                        $user->update([
+                            'status' => 'activo',
+                            'type' => $this->type,
+                            'plan' => $plan_nuevo
+                        ]);
+
+                    }
+        
+                }
+                $this->emit('alert','Datos registrados correctamente');
+                $this->reset(['plan','file','comentario','type']);
+                $this->isopen = false;  
+
+                return redirect()->route("home");
+            }
 
         }
 

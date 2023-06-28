@@ -240,7 +240,7 @@
                         <li class="medium mt-2"><span class="fa-li"><i class="fas fa-lg fa-address-book text-cyan-500 font-bold"></i></span> Telegram ID: {{$user->telegram}} </li>
                         <li class="medium mt-2"><span class="fa-li"><i class="fas fa-lg fa-laptop-code text-cyan-500 font-bold"></i></span> {{__('messages.direccion_ip')}}: {{$ip_user}} </li>
                         @if(($user->last_payment_date))
-                        <li class="medium mt-2"><span class="fa-li"><i class="fas fa-lg fa-clock text-cyan-500 font-bold"></i></span> {{__('messages.fecha_corte')}}: {{\Carbon\Carbon::parse($user->last_payment_date)->format('d-m-Y')}} </li>
+                        <li class="medium mt-2"><span class="fa-li"><i class="fas fa-lg fa-clock text-cyan-500 font-bold"></i></span> {{__('messages.fecha_corte')}}: {{\Carbon\Carbon::parse($user->last_payment_date)->format('d-m-Y H:i:s')}} </li>
                         @endif
                         <li class="medium mt-2"><span class="fa-li"><i class="	fas fa-lg fa-money-bill-wave text-cyan-500 font-bold"></i></span> Saldo en página: {{$user->balance}} $ </li>
                       </ul>

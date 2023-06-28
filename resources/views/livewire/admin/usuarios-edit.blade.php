@@ -34,9 +34,18 @@
               
 
                             <div class="flex justify-between mt-2">
-                                <div class="form-group w-full mr-2">
-                                    <label class="w-full text-justify">Balance</label>
-                                    <input type="number" readonly wire:model="balance" class="form-control rounded" id="formGroupExampleInput">
+                                <div class="form-group w-full">
+                                    <label class="w-full text-justify">Plan</label>
+                                    <select wire:model="plan" title="Plan" id="estado" class="block w-full text-gray-400 py-2 px-2 pr-8 leading-tight rounded focus:outline-none focus:border-gray-500" name="estado">
+                                        <option value="" selected>Plan</option>
+                                        <option value="premium 30">Premium 30 días</option>
+                                        <option value="premium 10">Premium 10 días</option>
+                                        <option value="premium 2">Premium 2 días</option>
+                                        <option value="basico">Básico</option>
+                                        <option value="gratis">Usuario gratis</option>
+                                    </select>
+                                    <x-input-error for="plan" />
+                                    
                                 </div>
                            
                                 <div class="form-group w-full">
@@ -69,16 +78,7 @@
                                     </select>
                                     <x-input-error for="roles_id" />
                                 </div>
-                                <div class="form-group w-full">
-                                    <label class="w-full text-justify">Plan</label>
-                                    <select wire:model="plan" title="Plan" id="estado" class="block w-full text-gray-400 py-2 px-2 pr-8 leading-tight rounded focus:outline-none focus:border-gray-500" name="estado">
-                                        <option value="" selected>Plan</option>
-                                        <option value="15">15 días</option>
-                                        <option value="30">30 días</option>
-                                    </select>
-                                    <x-input-error for="plan" />
-                                    
-                                </div>
+                                
 
                             </div>
 

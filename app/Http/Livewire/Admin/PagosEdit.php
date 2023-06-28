@@ -69,9 +69,11 @@ class PagosEdit extends Component
     
                     $user_cliente = User::where('id',$this->registro->user_id)->first();
 
-                    $fecha_actual = date("Y-m-d h:s");
-                    $proxima_fecha = date("Y-m-d h:s",strtotime($fecha_actual."+ 30 days"));
+                    $fecha_actual = date("Y-m-d H:i:s");
 
+                    if($this->type_confirmed == 1 || $this->type_confirmed == 2) $proxima_fecha = date("Y-m-d H:i:s",strtotime($fecha_actual."+ 30 days"));
+                    if($this->type_confirmed == 3) $proxima_fecha = date("Y-m-d H:i:s",strtotime($fecha_actual."+ 10 days"));
+                    if($this->type_confirmed == 4) $proxima_fecha = date("Y-m-d H:i:s",strtotime($fecha_actual."+ 2 days"));
 
                     if($this->registro->payment_method_id == 1){
                         
@@ -93,7 +95,6 @@ class PagosEdit extends Component
                     }
                     else{
 
-                        
                         $user_cliente->update([
                             'status' => 'activo',
                             'last_payment_date' => $proxima_fecha,
@@ -112,7 +113,21 @@ class PagosEdit extends Component
                         $user_cliente->roles()->sync(10);
 
                         $this->registro->update([
-                            'type' => 'premium',
+                            'type' => 'premium 30',
+                        ]);
+                    }
+                    if($this->type_confirmed == 3){
+                        $user_cliente->roles()->sync(10);
+
+                        $this->registro->update([
+                            'type' => 'premium 10',
+                        ]);
+                    }
+                    if($this->type_confirmed == 4){
+                        $user_cliente->roles()->sync(10);
+
+                        $this->registro->update([
+                            'type' => 'premium 2',
                         ]);
                     }
                 }

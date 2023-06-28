@@ -43,17 +43,27 @@
 
                                 <div class="custom-control custom-radio flex justify-start">
                                     <input class="custom-control-input" type="radio" id="customRadio4" value="2" name="customRadio4" wire:model="type_confirmed">
-                                    <label for="customRadio4" class="custom-control-label text-md font-semibold text-gray-300">Mensualidad premium</label>
+                                    <label for="customRadio4" class="custom-control-label text-md font-semibold text-gray-300">Mensualidad premium (30 días)</label>
                                 </div>
 
                                 <div class="custom-control custom-radio flex justify-start">
-                                    <input class="custom-control-input" type="radio" id="customRadio5" value="3" name="customRadio5" wire:model="type_confirmed">
-                                    <label for="customRadio5" class="custom-control-label text-md font-semibold text-gray-300">Saldo en página</label>
+                                    <input class="custom-control-input" type="radio" id="customRadio5" value="3" name="customRadio4" wire:model="type_confirmed">
+                                    <label for="customRadio5" class="custom-control-label text-md font-semibold text-gray-300">Mensualidad premium (10 días)</label>
                                 </div>
 
                                 <div class="custom-control custom-radio flex justify-start">
-                                    <input class="custom-control-input" type="radio" id="customRadio6" value="4" name="customRadio6" wire:model="type_confirmed">
-                                    <label for="customRadio6" class="custom-control-label text-md font-semibold text-gray-300">Monto adicional de plan premium (5$)</label>
+                                    <input class="custom-control-input" type="radio" id="customRadio6" value="4" name="customRadio4" wire:model="type_confirmed">
+                                    <label for="customRadio6" class="custom-control-label text-md font-semibold text-gray-300">Mensualidad premium (02 días)</label>
+                                </div>
+
+                                <div class="custom-control custom-radio flex justify-start">
+                                    <input class="custom-control-input" type="radio" id="customRadio7" value="5" name="customRadio5" wire:model="type_confirmed">
+                                    <label for="customRadio7" class="custom-control-label text-md font-semibold text-gray-300">Saldo en página</label>
+                                </div>
+
+                                <div class="custom-control custom-radio flex justify-start">
+                                    <input class="custom-control-input" type="radio" id="customRadio8" value="6" name="customRadio6" wire:model="type_confirmed">
+                                    <label for="customRadio8" class="custom-control-label text-md font-semibold text-gray-300">Monto adicional de plan premium (10$)</label>
                                 </div>
                             </div>
 

@@ -12,43 +12,24 @@ use Illuminate\Support\Facades\Session;
 
 class Chage_dates_user extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
+
     protected $signature = 'change:dates_users';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Command description';
 
-    /**
-     * Execute the console command.
-     *
-     * @return int
-     */
     public function handle()
     {
         $users = User::all();
 
         foreach($users as $user){
-
             if($user->last_payment_date){
-                $nueva_fecha_corte = date("Y-m-d h:s",strtotime($user->last_payment_date."+ 2 days"));
+                $nueva_fecha_corte = date("Y-m-d H:s",strtotime($user->last_payment_date."+ 17 hours"));
                 
                 $user->update([
                     'last_payment_date' => $nueva_fecha_corte,
                 ]);
 
             }
-
-            
-
-
         }
 
     }

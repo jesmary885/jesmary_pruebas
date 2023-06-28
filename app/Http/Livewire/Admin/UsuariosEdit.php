@@ -22,6 +22,7 @@ class UsuariosEdit extends Component
         'roles_id' => 'required',
         'comentario' => 'required',
 
+
     ];
 
     public function mount(){
@@ -30,7 +31,7 @@ class UsuariosEdit extends Component
         if( $this->usuario->status =='activo') $this->estado=1 ; else $this->estado = 0;
         $this->last_date = $this->usuario->last_payment_date;
         $this->balance = $this->usuario->balance;
-        $this->plan = $this->usuario->plan;
+        $this->plan = $this->usuario->type;
         $this->roles_id = $this->usuario->roles->first()->id;
         $this->roles=Role::where('id','!=','1')->get();
         //$this->roles=Role::all();
@@ -79,8 +80,7 @@ class UsuariosEdit extends Component
                     'username' => $this->username,
                     'email' => $this->email,
                     'status' => $estado,
-                    'plan' => $this->plan,
-                    'type' => 'basico',
+                    'type' => $this->plan,
                     'last_payment_date' => date("Y-m-d", strtotime($this->last_date)),
                 ]);
             }
@@ -90,7 +90,7 @@ class UsuariosEdit extends Component
                     'username' => $this->username,
                     'email' => $this->email,
                     'status' => $estado,
-                    'plan' => $this->plan,
+                    'type' => $this->plan,
                     'last_payment_date' => date("Y-m-d", strtotime($this->last_date)),
                 ]);
             }
@@ -104,7 +104,7 @@ class UsuariosEdit extends Component
                     'username' => $this->username,
                     'email' => $this->email,
                     'status' => $estado,
-                    'plan' => $this->plan,
+                    'type' => $this->plan,
                 ]);
             }
         }
@@ -116,8 +116,7 @@ class UsuariosEdit extends Component
                     'username' => $this->username,
                     'email' => $this->email,
                     'status' => $estado,
-                    'plan' => $this->plan,
-                    'type' => 'premium',
+                    'type' => $this->plan,
                     'last_payment_date' => date("Y-m-d", strtotime($this->last_date)),
                 ]);
             }
@@ -128,7 +127,7 @@ class UsuariosEdit extends Component
                     'username' => $this->username,
                     'email' => $this->email,
                     'status' => $estado,
-                    'plan' => $this->plan,
+                    'type' => $this->plan,
                     'last_payment_date' => date("Y-m-d", strtotime($this->last_date)),
                 ]);
             }

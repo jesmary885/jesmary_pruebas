@@ -13,9 +13,14 @@ class Kernel extends ConsoleKernel
      * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
      * @return void
      */
+
+    protected $commands = [
+        'App\Console\Commands\desact_user',
+ 
+    ];
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command('fecha_corte:desact')->everyMinute(); // corte cada minuto
     }
 
     /**

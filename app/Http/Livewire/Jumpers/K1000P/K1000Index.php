@@ -34,7 +34,7 @@ class K1000Index extends Component
     }
 
     public $rules_pid = [
-        'pid_manual' => 'required|min:8',
+        'pid_manual' => 'required|min:6',
     ];
 
     public function jumpear(){
@@ -77,7 +77,7 @@ class K1000Index extends Component
                         ->count();
 
                     if($links_usados <= 9){
-                        if($this->user->id != '1'){
+                        if($this->user->id != '1' ||  $this->user->id != '1254'){
                             if($multi == $ip_user){
                                 $this->numerologia();
                             }
@@ -1107,7 +1107,7 @@ class K1000Index extends Component
 
 
                                     if($links_usados <= 9){
-                                        if($this->user->id != '1'){
+                                        if($this->user->id != '1' ||  $this->user->id != '1254'){
                                             if($multi == $ip_user){
                                                 $this->numerologia();
                                             }

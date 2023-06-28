@@ -124,7 +124,7 @@ class SamplicioTw extends Component
                     'base_uri' => 'http://147.182.190.233/',
                 ]);
     
-                $resultado = $client->request('GET', '/Samplicio_tf_ws/1/'.$ssid_buscar.'/'.$rvip_buscar);
+                $resultado = $client->request('GET', '/Samplicio_tf_ws/1/'.$rvip_buscar.'/'.$ssid_buscar);
     
                 if($resultado->getStatusCode() == 200){
 
