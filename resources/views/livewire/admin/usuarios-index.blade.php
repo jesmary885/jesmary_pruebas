@@ -30,7 +30,7 @@
                                     <td class="text-center">{{$user->telegram}}</td>
                                     <td class="text-center">{{$user->balance}}</td>
                                     
-                                    <td class="text-center">{{$user->last_payment_dase}}</td>
+                                    <td class="text-center">{{\Carbon\Carbon::parse($user->last_payment_date)->format('d-m-Y H:i:s')}}</td>
                                     <td class="text-center">{{$user->type}}</td>
                                     @if($user->sales) <td class="text-center"> <i class="{{$this->reputation_vendedor($user->id)[1]}}"></i> <i class="{{$this->reputation_vendedor($user->id)[2]}}"></i> <i class="{{$this->reputation_vendedor($user->id)[3]}}"></i> <i class="{{$this->reputation_vendedor($user->id)[4]}}"></i> <i class="{{$this->reputation_vendedor($user->id)[5]}}"></i></td>
                                     @else <td class="text-center">Sin ventas registradas</td>
