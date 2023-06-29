@@ -45,8 +45,12 @@ class ReportePago extends Component
         
         $this->user_page = User::where('id',Auth::id())->first();
 
-        if($this->user_page->type == 'premium') $this->plan = "membresia premium";
-        else $this->plan = "membresia basica";
+      /*  if($this->user_page->type == 'premium'){
+
+            $this->plan = "membresia premium 30";
+
+        } 
+        else $this->plan = "membresia basica";*/
 
         
 
@@ -58,15 +62,6 @@ class ReportePago extends Component
     public function verific(){
         $user = User::where('id',Auth::id())->first();
 
-        if($this->plan == "membresia basica" ){
-            if($user->balance>=10){
-                return $this->payment_methods = PaymentMethods::all();
-            }
-            else{
-                return $this->payment_methods = PaymentMethods::where('id','!=','1')->get();
-            }
-        }
-
         if($this->plan == "membresia premium_30" ){
             if($user->balance>=20){
                 return $this->payment_methods = PaymentMethods::all();
@@ -75,7 +70,7 @@ class ReportePago extends Component
                 return $this->payment_methods = PaymentMethods::where('id','!=','1')->get();
             }
         }
-        if($this->plan == "membresia premium_10" ){
+        elseif($this->plan == "membresia premium_10" ){
             if($user->balance>=10){
                 return $this->payment_methods = PaymentMethods::all();
             }
@@ -83,7 +78,7 @@ class ReportePago extends Component
                 return $this->payment_methods = PaymentMethods::where('id','!=','1')->get();
             }
         }
-        if($this->plan == "membresia premium_2" ){
+        elseif($this->plan == "membresia premium_2" ){
             if($user->balance>=3){
                 return $this->payment_methods = PaymentMethods::all();
             }
@@ -91,6 +86,17 @@ class ReportePago extends Component
                 return $this->payment_methods = PaymentMethods::where('id','!=','1')->get();
             }
         }
+
+        else{
+            if($user->balance>=10){
+                return $this->payment_methods = PaymentMethods::all();
+            }
+            else{
+                return $this->payment_methods = PaymentMethods::where('id','!=','1')->get();
+            }
+        }
+
+        
     }
 
     public function render()
@@ -316,7 +322,7 @@ class ReportePago extends Component
 
 
                 $this->emit('alert','Datos registrados correctamente');
-                $this->reset(['plan','file','comentario','type']);
+                $this->reset(['plan','file','comentario','type','nro_referencia']);
                 $this->isopen = false;  
 
         }

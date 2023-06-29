@@ -17,14 +17,14 @@ class ReportaPagoAdelantado extends Component
 {
     use WithFileUploads;
 
-    public $monto_pago,$user_page,$tasa_dia_dolar,$tasa_dia_ltc,$monto,$isopen,$type,$file,$comentario,$plan,$metodo_id,$payment_methods,$referencia,$fecha_pago;
+    public $monto_pago,$user_page,$tasa_dia_dolar,$tasa_dia_ltc,$monto,$isopen,$type,$file,$comentario,$plan,$metodo_id,$payment_methods,$nro_referencia,$fecha_pago;
 
     protected $listeners = ['render' => 'render'];
 
     protected $rules = [
         'plan' => 'required',
         'metodo_id' => 'required',
-        'referencia' => 'required|numeric|min:4|unique:pago_registros_recargas',
+        'nro_referencia' => 'required|numeric|min:4|unique:pago_registros_recargas',
         'fecha_pago' => 'required',
         'file' => 'required|image',
     ];
@@ -274,7 +274,7 @@ class ReportaPagoAdelantado extends Component
                 if($this->metodo_id != 1){
                     $url = Storage::put('public/pagos_recargas', $this->file);
                     $new_pago->file = $url;
-                    $new_pago->nro_referencia = $this->referencia;
+                    $new_pago->nro_referencia = $this->nro_referencia;
                 }
                 
                 $new_pago->comentario = $this->comentario;
@@ -386,7 +386,7 @@ class ReportaPagoAdelantado extends Component
         
                 }
                 $this->emit('alert','Datos registrados correctamente');
-                $this->reset(['plan','file','comentario','type']);
+                $this->reset(['plan','file','comentario','type','nro_referencia']);
                 $this->isopen = false;  
 
                 return redirect()->route("home");

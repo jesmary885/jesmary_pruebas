@@ -88,10 +88,10 @@
                             <div class="form-group w-full mr-2">
                                     <label class="w-full text-justify">{{__('messages.referencia_nro')}}</label>
                                     <div class="flex ">
-                                        <input type="number" wire:model="referencia" class="form-control rounded" >
+                                        <input type="number" wire:model="nro_referencia" class="form-control rounded" >
                                     </div>
                                     
-                                    <x-input-error for="referencia" />
+                                    <x-input-error for="nro_referencia" />
                             </div>
                         @endif
 
