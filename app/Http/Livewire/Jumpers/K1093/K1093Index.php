@@ -27,6 +27,7 @@ class K1093Index extends Component
         if(session('psid')) $this->psid_register = session('psid');
         if(session('search')) $this->search = session('search');
         $this->jumper_detect = 0;
+        $this->jumper_list = 0;
         $this->busqueda_link = "";
 
         $this->user = User::where('id',auth()->user()->id)->first();
@@ -758,6 +759,7 @@ class K1093Index extends Component
 
     public function clear(){
         $this->reset(['search']);
+        $this->jumper_detect = 0;
         $this->jumper_list = 0;
         $this->jumper_complete = [];
         session()->forget('search');
