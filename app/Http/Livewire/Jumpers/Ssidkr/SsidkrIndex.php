@@ -1771,8 +1771,9 @@ class SsidkrIndex extends Component
         $this->validate($rules_pid);
 
         $jumper_id = Link::where('id',$jumper_id)->first();
-        $this->calculo_high = $jumper_id->high - ($jumper_id->pid - $this->pid_new) * round(($jumper_id->high / $jumper_id->pid),0);
+        $calculo_high_inicial = $jumper_id->high - ($jumper_id->pid - $this->pid_new) * round(($jumper_id->high / $jumper_id->pid),0);
         $this->calc_link = 1;
+        $this->calculo_high = sprintf("%d", $calculo_high_inicial);
         return $this->calculo_high;
     }
 
