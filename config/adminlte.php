@@ -914,21 +914,20 @@ return [
                     'icon'    => 'fas fa-angle-right',
                 ],
                 [
+                    'text' => 'Generador Jdpoweronline',
+                    'can' => 'ssidkr.index',
+                    'route'  => 'spectrum4.index',
+                    'icon'    => '	fas fa-angle-right',
+                    'icon_color' => 'red',
+                ],
+
+                [
                     'text' => 'Generador Qualtrics',
                     'route'  => 'spectrum.index',
                     'icon'    => '	fas fa-angle-right',
                     'icon_color' => 'red',
                     'can' => 'ssidkr.index',
                 ],
-                [
-                    'text' => 'Generador Voicefive',
-                    'icon'    => '	fas fa-angle-right',
-                    'route'  => 'spectrum2.index',
-                    'icon_color' => 'red',
-                    'can' => 'ssidkr.index',
-                ],
-
-               
 
                 [
                     'text' => 'Generador Selfserve',
@@ -936,8 +935,18 @@ return [
                     'route'  => 'spectrum3.index',
                     'icon'    => '	fas fa-angle-right',
                     'icon_color' => 'red',
-              ],
+                ],
+                
+                [
+                    'text' => 'Generador Voicefive',
+                    'icon'    => '	fas fa-angle-right',
+                    'route'  => 'spectrum2.index',
+                    'icon_color' => 'red',
+                    'can' => 'ssidkr.index',
+                ],
+                
 
+                
             ],
         ],
 

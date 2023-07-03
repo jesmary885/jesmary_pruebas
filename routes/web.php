@@ -107,6 +107,7 @@ Route::middleware(['auth','verified'])->group(function()
         Route::get('spectrum_1',[JumpersController::class,'spectrum'])->name('spectrum.index');
         Route::get('spectrum_2',[JumpersController::class,'spectrum2'])->name('spectrum2.index');
         Route::get('spectrum_3',[JumpersController::class,'spectrum3'])->name('spectrum3.index');
+        Route::get('spectrum_4',[JumpersController::class,'spectrum4'])->name('spectrum4.index');
 
         Route::get('toluna',[JumpersController::class,'toluna'])->name('toluna.index');
         Route::get('toluna_2',[JumpersController::class,'toluna2'])->name('toluna2.index');

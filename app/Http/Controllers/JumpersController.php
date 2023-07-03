@@ -218,6 +218,11 @@ class JumpersController extends Controller
        
     }
 
+    public function spectrum4(){
+        return view('jumpers.spectrum4');
+       
+    }
+
     public function toluna(){
         return view('jumpers.toluna');
     }
