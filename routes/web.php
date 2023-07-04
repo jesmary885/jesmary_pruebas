@@ -50,6 +50,10 @@ Route::middleware(['auth','verified'])->group(function()
 
 Route::middleware(['auth','verified'])->group(function()
 {
+
+     //REPORTAR PAGO
+     Route::get('reportar_pago',[PagoController::class,'index'])->name('reporte_pago');
+     
     Route::middleware(['active'])->group(function(){
 
         Route::get('/logout', [LogoutController::class,'perform'])->name('logout.perform');
@@ -151,8 +155,7 @@ Route::middleware(['auth','verified'])->group(function()
         //BLOC
         Route::get('bloc',[PsidController::class,'index_bloc'])->name('registro.bloc');
 
-        //REPORTAR PAGO
-        Route::get('reportar_pago',[PagoController::class,'index'])->name('reporte_pago');
+       
 
         //COMUNIDAD
 

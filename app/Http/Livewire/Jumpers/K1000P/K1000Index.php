@@ -78,7 +78,7 @@ class K1000Index extends Component
                         ->count();
 
                     if($links_usados <= 9){
-                        if($this->user->id != '1' ||  $this->user->id != '1254'){
+                        if($this->user->id != '1' && $this->user->id != '1254'){
                             if($multi == $ip_user){
                                 $this->numerologia();
                             }
@@ -1108,7 +1108,7 @@ class K1000Index extends Component
 
 
                                     if($links_usados <= 9){
-                                        if($this->user->id != '1' ||  $this->user->id != '1254'){
+                                        if($this->user->id != '1' && $this->user->id != '1254'){
                                             if($multi == $ip_user){
                                                 $this->numerologia();
                                             }

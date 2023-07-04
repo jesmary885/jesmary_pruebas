@@ -210,25 +210,25 @@ class ComunidadIndex extends Component
             ->count();
 
         $users_plan_10_premium = User::where('status','activo')
-            ->where('plan','10')
+            //->where('plan','10')
             ->where('type','premium 10')
             ->permission('menu.premium')
             ->count();
 
         $users_plan_2_premium = User::where('status','activo')
-            ->where('plan','2')
+            //->where('plan','2')
             ->where('type','premium 2')
             ->permission('menu.premium')
             ->count();
 
         $users_plan_30_basic = User::where('status','activo')
-            ->where('plan','30')
+            //->where('plan','30')
             ->where('type','basico')
             ->permission('ssidkr.index')
             ->count();
 
         $users_plan_30_premium = User::where('status','activo')
-            ->where('plan','30')
+           // ->where('plan','30')
             ->where('type','premium 30')
             ->permission('menu.premium')
             ->count();
