@@ -83,10 +83,19 @@
             </div>
         @endif
 
-      
+        @if ($jumper_detect == 7)
+            <div class="px-4">
+                <div class=" info-box bg-warning">
+                    <span class="info-box-icon"><i class="fas fa-info"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Esta intentando generar el mismo link más de dos veces. </span>
+                            <span class="info-box-number">Intentelo de nuevo con otro link.</span>
+                        </div>
+                </div>
+            </div>
+        @endif
 
-       
-           
+        
             <div class="card-body mt-0">
 
     

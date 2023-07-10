@@ -18,7 +18,7 @@ class K1000Index extends Component
     use WithPagination;
     protected $paginationTheme = "bootstrap";
 
-    public  $user,$jumper_complete = [],$jumper_list = 0,$busqueda_link,$comment_new_psid_register,$pid_register_high,$psid_register_bh,$high_register_bh,$basic_register_bh,$posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $wix_detect = '0', $psid_register=0,$jumper_redirect,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$is_high,$is_basic,$calc_link,$jumper_select,$points_user_positive, $points_user_negative, $jumper_detect_k ='',$pid_manual,$pid_detectado = 'si',$pid_buscar,$operacion;
+    public  $total_jump_dia,$user,$jumper_complete = [],$jumper_list = 0,$busqueda_link,$comment_new_psid_register,$pid_register_high,$psid_register_bh,$high_register_bh,$basic_register_bh,$posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $wix_detect = '0', $psid_register=0,$jumper_redirect,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$is_high,$is_basic,$calc_link,$jumper_select,$points_user_positive, $points_user_negative, $jumper_detect_k ='',$pid_manual,$pid_detectado = 'si',$pid_buscar,$operacion;
 
     protected $listeners = ['render' => 'render', 'registro_psid' => 'registro_psid', 'verific' => 'verific'];
     
@@ -78,7 +78,7 @@ class K1000Index extends Component
                         ->count();
 
                     if($links_usados <= 9){
-                        if($this->user->id != '1' && $this->user->id != '1254'){
+                        if($this->user->id != '1' && $this->user->id != '1254' && $this->user->id != '154'){
                             if($multi == $ip_user){
                                 $this->numerologia();
                             }
@@ -397,6 +397,14 @@ class K1000Index extends Component
 
         $this->search = trim($this->search); //quitando espacios en blancos al inicio y final
         $long_psid = strlen($this->search); //buscando cuantos caracteres tiene en total
+
+        $date = new DateTime();
+        $date_actual= $date->format('Y-m-d');
+
+        $this->total_jump_dia = Links_usados::where('k_detected','K=1000_NEW')
+            ->where('user_id',$this->user->id)
+            ->whereDate('created_at',$date_actual)
+            ->count();
 
 
         if($long_psid>=5){
@@ -1083,8 +1091,8 @@ class K1000Index extends Component
                                     
                                 }
                                 else{
+                                    
                                     $date = new DateTime();
-
                                     $date_actual= $date->format('Y-m-d');
 
                                     if($this->user->ip) $multi = $this->user->ip;
@@ -1106,9 +1114,11 @@ class K1000Index extends Component
                                         ->whereDate('created_at',$date_actual)
                                         ->count();
 
+                                    $this->total_jump_dia = $links_usados;
+
 
                                     if($links_usados <= 9){
-                                        if($this->user->id != '1' && $this->user->id != '1254'){
+                                        if($this->user->id != '1' && $this->user->id != '1254' && $this->user->id != '154'){
                                             if($multi == $ip_user){
                                                 $this->numerologia();
                                             }

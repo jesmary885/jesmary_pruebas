@@ -30,6 +30,7 @@ class K6057Index extends Component
         if(session('psid')) $this->psid_register = session('psid');
         if(session('search')) $this->search = session('search');
         $this->jumper_detect = 0;
+        $this->jumper_list = 0;
         $this->busqueda_link = "";
 
         $this->user = User::where('id',auth()->user()->id)->first();
@@ -245,7 +246,7 @@ class K6057Index extends Component
                                     ->count();
                              
 
-                                if($link_register_search >= 1){
+                                if($link_register_search >= 2){
 
                                     $this->jumper_detect = 7;
                                     
@@ -286,6 +287,8 @@ class K6057Index extends Component
                                     $comments = Comments::where('link_id',$this->busqueda_link->id)
                                         ->latest('id')
                                         ->paginate(5);
+
+                                        dd($comments);
                                                              
                                         if($user_point) {
                                             if($user_point->point == 'positive'){
@@ -311,6 +314,45 @@ class K6057Index extends Component
                             }
 
                         }
+
+                        if($this->jumper_detect == 1){
+                            $this->busqueda_link = Link::where('psid',substr($this->psid_buscar,0,5))->first();
+         
+                                $busqueda_link_def =  $this->busqueda_link;
+         
+                                if($this->busqueda_link){
+                                    $user_point= User_Links_Points::where('link_id',$this->busqueda_link->id)
+                                        ->where('user_id',auth()->user()->id)
+                                        ->first();
+                                                         
+                                    $comments = Comments::where('link_id',$this->busqueda_link->id)
+                                        ->latest('id')
+                                        ->paginate(5);
+                                                             
+                                        if($user_point) {
+                                            if($user_point->point == 'positive'){
+                                          
+                                                $this->points_user_positive='si';
+                                                $this->points_user_negative='no';
+                                                $this->points_user='si';
+                    
+                                            }
+                    
+                                            else{
+                                                $this->points_user_positive='no';
+                                                $this->points_user_negative='si';
+                                            }
+                                                    
+                                        }
+                                        else{
+                                            $this->points_user_positive='no';
+                                            $this->points_user_negative='no';
+                                        }
+         
+                                }
+    
+                        }
+    
     
 
                 }
@@ -440,13 +482,16 @@ class K6057Index extends Component
             $comment->save();
 
             $this->reset(['comentario']);
+
+            $this->emitTo('jumpers.k6057.k6057-index','render');
         }
 
-        $this->emitTo('jumpers.k6057.k6057-index','render');
+        
     }
 
     public function clear(){
         $this->reset(['search']);
+        $this->jumper_detect = 0;
         $this->jumper_list = 0;
         $this->jumper_complete = [];
         session()->forget('search');

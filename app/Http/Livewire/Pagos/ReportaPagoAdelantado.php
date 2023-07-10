@@ -288,13 +288,15 @@ class ReportaPagoAdelantado extends Component
                 if($this->plan == "membresia basica" || $this->plan == "membresia premium_30" || $this->plan == "membresia premium_10" || $this->plan == "membresia premium_2" || $this->plan == "Pago_restante_premium"){
                 
                     if($this->metodo_id == 1) {
-                        $proxima_fecha = date("Y-m-d H:i:s",strtotime($fecha_actual."+ 30 days"));
+                        
 
                         if($this->plan == "membresia basica"){
                             $plan_nuevo = '30';
                             $this->monto_pago = '10';
                             $this->type = "basico";
                             $user->roles()->sync(2);
+
+                            $proxima_fecha = date("Y-m-d H:i:s",strtotime($fecha_actual."+ 30 days"));
 
                             $balance_new = $user->balance - $this->monto_pago;
 
@@ -308,6 +310,9 @@ class ReportaPagoAdelantado extends Component
                         } 
 
                         if($this->plan == "membresia premium_30") {
+
+                            $proxima_fecha = date("Y-m-d H:i:s",strtotime($fecha_actual."+ 30 days"));
+
                             $plan_nuevo = '30';
                             $this->monto_pago = '20';
                             $this->type = "premium 30";
@@ -325,6 +330,9 @@ class ReportaPagoAdelantado extends Component
                         }
 
                         if($this->plan == "membresia premium_10") {
+
+                            $proxima_fecha = date("Y-m-d H:i:s",strtotime($fecha_actual."+ 10 days"));
+
                             $plan_nuevo = '10';
                             $this->monto_pago = '10';
                             $this->type = "premium 10";
@@ -342,6 +350,9 @@ class ReportaPagoAdelantado extends Component
                         }
 
                         if($this->plan == "membresia premium_2") {
+
+                            $proxima_fecha = date("Y-m-d H:i:s",strtotime($fecha_actual."+ 2 days"));
+
                             $plan_nuevo = '2';
                             $this->monto_pago = '3';
                             $this->type = "premium 2";

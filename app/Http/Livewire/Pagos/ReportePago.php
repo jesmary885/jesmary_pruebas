@@ -244,9 +244,9 @@ class ReportePago extends Component
                 $new_pago->save();
 
                 if($this->metodo_id == 1) {
-                    $proxima_fecha = date("Y-m-d H:i:s",strtotime($fecha_actual."+ 30 days"));
-
+                    
                     if($this->plan == "membresia basica"){
+                        $proxima_fecha = date("Y-m-d H:i:s",strtotime($fecha_actual."+ 30 days"));
                         $plan_nuevo = '30';
                         $this->type = "basico";
                         $this->monto_pago = '10';
@@ -254,6 +254,7 @@ class ReportePago extends Component
                     } 
 
                     if($this->plan == "membresia premium_30") {
+                        $proxima_fecha = date("Y-m-d H:i:s",strtotime($fecha_actual."+ 30 days"));
                         $plan_nuevo = '30';
                         $this->type = "premium 30";
                         $this->monto_pago = '20';
@@ -261,13 +262,16 @@ class ReportePago extends Component
                     }
 
                     if($this->plan == "membresia premium_10") {
+                        $proxima_fecha = date("Y-m-d H:i:s",strtotime($fecha_actual."+ 10 days"));
                         $plan_nuevo = '10';
                         $this->type = "premium 10";
                         $this->monto_pago = '10';
                         $user->roles()->sync(10);
                     }
 
+
                     if($this->plan == "membresia premium_2") {
+                        $proxima_fecha = date("Y-m-d H:i:s",strtotime($fecha_actual."+ 2 days"));
                         $plan_nuevo = '2';
                         $this->type = "premium 2";
                         $this->monto_pago = '3';
