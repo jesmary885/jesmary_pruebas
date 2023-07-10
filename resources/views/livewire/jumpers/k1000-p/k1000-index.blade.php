@@ -2,7 +2,7 @@
 
 <div class="row">
 
-        <div class="col-12 col-sm-7 col-md-4">
+        <div class="col-12 col-sm-12 col-md-6">
         <div class="info-box mb-3">
         <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-calculator"></i></span>
         <div class="info-box-content">
