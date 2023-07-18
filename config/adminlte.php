@@ -609,13 +609,16 @@ return [
                     'can' => 'ssidkr.index',
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
+                    
                 ],
                 [
-                    'text' => 'K2066 New security',
+                    'text' => 'K2066',
                     'route'  => 'k2066_poderosa.index',
                     'can' => 'ssidkr.index',
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
+                    'label'       => 'New security',
+                    'label_color' => 'danger',
                 ],
                 [
                      'text' => 'K23',
@@ -804,6 +807,17 @@ return [
                     'can' => 'menu.premium',
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
+                    'label'       => 'With K2',
+                    'label_color' => 'danger',
+                ],
+
+                [
+                    'text' => 'K23',
+                    'route'  => 'k23_poderosa_SK2.index',
+                    'can' => 'menu.premium',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+
                 ],
 
                 [

@@ -157,7 +157,7 @@ class SpectrumIndex extends Component
                                     ->whereBetween('created_at',[$date_actual_30,$date_actual])
                                     ->count();
 
-                                if($links_usados <= 5){
+                                if($links_usados <= 2){
                                     $this->numerologia();
                                 }
                                 else{

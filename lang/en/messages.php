@@ -81,5 +81,7 @@ return [
     'pago_mensualidad_premium' => 'premium plan membership payment (30 days)',
     'pago_mensualidad_premium_10' => 'premium plan membership payment (10 days)',
     'pago_mensualidad_premium_2' => 'premium plan membership payment (2 days)',
+    'con_k2' => 'WITH K2',
+    'sin_k2' => 'WITHOUT K2',
 
 ];

@@ -13,7 +13,7 @@ use GuzzleHttp\Client;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class K23Index extends Component
+class K23IndexSinK2 extends Component
 {
     use WithPagination;
     protected $paginationTheme = "bootstrap";
@@ -111,7 +111,7 @@ class K23Index extends Component
         $this->operacion = Antibot::where('id',$random)->first();
         $operacion_total = 'Resuelve esta operación matemática ('.$this->operacion->nro1.' + '.$this->operacion->nro2. ')';
 
-        $this->emit('numerologia',$operacion_total,'jumpers.k23-p.k23-index','verific');
+        $this->emit('numerologia',$operacion_total,'jumpers.k23-p.k23-index-sin-k2','verific');
 
     }
 
@@ -213,115 +213,6 @@ class K23Index extends Component
                 if(session('psid')) $psid_buscar = substr($this->search,($busqueda_id - 22),11).substr(session('psid'),11,11);
                 else $psid_buscar = substr($this->search,($busqueda_id - 22),22);
 
-                $busqueda_ids= strpos($this->search, 'IDS=');
-
-                if($busqueda_ids != false){
-
-                            $posicion_ids = $busqueda_ids + 4;
-                            $i_ids = 0;
-                            $busq_ids_s = 0;
-                            
-                            do{
-                                $detect_ids= substr($this->search, $posicion_ids,1);
-        
-                                if($detect_ids == '&') $i_ids = 1;
-                                else{
-                                    $posicion_ids = $posicion_ids + 1;
-                                    $busq_ids_s ++;
-                                }
-
-                                if($busq_ids_s > 20){
-                                    $i_ids = 1;
-                                }
-        
-                            }while($i_ids != 1);
-
-                            if($busq_ids_s < 20)
-                                $ids_buscar = substr($this->search,($busqueda_ids + 4),($posicion_ids - ($busqueda_ids + 4)));
-
-                            else
-                                //$this->ids_buscar = substr($this->search,($busqueda_ids + 4),20);
-                                $this->jumper_detect = 3;
-                }
-
-                $busqueda_k2= strpos($this->search, '&K2=');
-
-                if($busqueda_k2 != false){
-
-                            $posicion_k2 = $busqueda_k2 + 4;
-                            $i_k2 = 0;
-                            $busq_k2_s = 0;
-                            
-                            do{
-                                $detect_k2= substr($this->search, $posicion_k2,1);
-        
-                                if($detect_k2 == '&') $i_k2 = 1;
-                                else{
-                                    $posicion_k2 = $posicion_k2 + 1;
-                                    $busq_k2_s ++;
-                                }
-
-                                if($busq_k2_s > 20){
-                                    $i_k2 = 1;
-                                }
-        
-                            }while($i_k2 != 1);
-
-
-
-                            if($busq_k2_s < 20)
-                                $k2_buscar = substr($this->search,($busqueda_k2 + 4),($posicion_k2 - ($busqueda_k2 + 4)));
-
-                            else
-                                //$this->ids_buscar = substr($this->search,($busqueda_ids + 4),20);
-                                $this->jumper_detect = 3;
-                }
-
-                $busqueda_hash= strpos($this->search, 'k=23&_s=');
-
-
-                if($busqueda_hash != false){
-                    $hash_buscar = substr($this->search,($busqueda_hash + 8 ));
-                }
-                else{
-                    $this->jumper_detect = 3;
-                }
-
-                $pid_buscar_def = substr($this->pid_buscar, 0, 6).rand(1101,9909);
-
-                $busqueda_chanel= strpos($this->search, 'hannel=');
-
-                if($busqueda_chanel != false){
-
-                    $posicion_chanel = $busqueda_chanel + 7;
-                    $i_chanel = 0;
-                    $busq_chanel_s = 0;
-                            
-                    do{
-                        $detect_chanel= substr($this->search, $posicion_chanel,1);
-        
-                        if($detect_chanel == '&') $i_chanel = 1;
-                        else{
-                            $posicion_chanel = $posicion_chanel + 1;
-                            $busq_chanel_s ++;
-                        }
-
-                        if($busq_chanel_s > 20){
-                            $i_chanel = 1;
-                        }
-        
-                        }while($i_chanel != 1);
-
-                    if($busq_chanel_s < 20)
-                        $chanel_buscar = substr($this->search,($busqueda_chanel + 7),($posicion_chanel - ($busqueda_chanel + 7)));
-
-                    else
-                        //$this->ids_buscar = substr($this->search,($busqueda_ids + 4),20);
-                        $this->jumper_detect = 3;
-                }
-                else{
-                    $chanel_buscar = '2';
-                }
 
             try {
 
@@ -330,23 +221,16 @@ class K23Index extends Component
                     'base_uri' => 'http://147.182.190.233',
                 ]);
 
-               /* if($elem2 == 0){
-                    $resultado = $client->request('GET', '/k23_s2/1/'.$ids_buscar.'/'.$psid_buscar.'/'.$k2_buscar.'/'.$this->pid_buscar.'/'.$elem1.'/'.$hash_buscar);
 
-                }
-                else{*/
 
                     if($elem3 == 0){
-            
-                         $resultado = $client->request('GET', '/k23_s2/1/'.$ids_buscar.'/'.$psid_buscar.'/'.$k2_buscar.'/'.$chanel_buscar.'/'.$pid_buscar_def.'/'.$elem1.'/'.$elem2);
-                        
-                     
+                         $resultado = $client->request('GET', '/k23_s2/2/'.$psid_buscar.'/'.$elem1.'/'.$elem2);
+
                     }
                     else{
-                        $resultado = $client->request('GET', '/k23_s3/1/'.$ids_buscar.'/'.$psid_buscar.'/'.$k2_buscar.'/'.$chanel_buscar.'/'.$pid_buscar_def.'/'.$elem1.'/'.$elem2.'/'.$elem3);
+                        $resultado = $client->request('GET', '/k23_s3/2/'.$psid_buscar.'/'.$elem1.'/'.$elem2.'/'.$elem3);
                        
                     }
-
 
 
                 if($resultado->getStatusCode() == 200){
@@ -493,6 +377,7 @@ class K23Index extends Component
 
     public function render()
     {
+
         $subs_psid = '0';
        
         $comments =0;
@@ -529,15 +414,14 @@ class K23Index extends Component
                         if(session('psid')) $this->psid_buscar = substr($this->search,($busqueda_id - 22),11).substr(session('psid'),11,11);
                         else $this->psid_buscar = substr($this->search,($busqueda_id - 22),22);
 
-             
-
                         $busqueda_k2= strpos($this->search, '&K2=');
 
-                        if($busqueda_k2 === false){
+                        if($busqueda_k2 !== false){
                             $this->jumper_detect = 3;
                         }
 
                         else{
+
                             $busqueda_selfserver= strpos($this->search, 'selfserve/');
 
                             if($busqueda_selfserver != false){
@@ -551,15 +435,7 @@ class K23Index extends Component
                                 $this->jumper_detect = 3;
                             }
 
-                            
-
-
-                            $busqueda_chanel= strpos($this->search, 'hannel=');
-
-                            if($busqueda_chanel != false){
-                                $posicion_chanel = $busqueda_chanel + 7;
-                            }
-                            
+                        
                             if(session('pid')){
                                 $this->pid_buscar = session('pid');
                             }
@@ -1106,6 +982,8 @@ class K23Index extends Component
                                 }
                             }
 
+
+
         
                             if($this->jumper_detect == 0 && $this->pid_detectado == 'si'){
 
@@ -1297,13 +1175,16 @@ class K23Index extends Component
                             }
 
                         }
-
+    
+        
+                        
                 session()->forget('search');
         }
         else{
             $this->calc_link = 0;
         }
-        return view('livewire.jumpers.k23-p.k23-index',compact('jumper','comments','subs_psid','busqueda_link_def'));
+
+        return view('livewire.jumpers.k23-p.k23-index-sin-k2',compact('jumper','comments','subs_psid','busqueda_link_def'));
     }
 
     public function positivo($jumper_id){
@@ -1351,7 +1232,7 @@ class K23Index extends Component
 
         }
 
-        $this->emitTo('jumpers.k23-p.k23-index','render');
+        $this->emitTo('jumpers.k23-p.k23-index-sin-k2','render');
 
         
 
@@ -1401,7 +1282,7 @@ class K23Index extends Component
 
         }
 
-        $this->emitTo('jumpers.k23-p.k23-index','render');
+        $this->emitTo('jumpers.k23-p.k23-index-sin-k2','render');
 
         
     }
@@ -1417,7 +1298,7 @@ class K23Index extends Component
 
             $this->reset(['comentario']);
 
-            $this->emitTo('jumpers.k23-p.k23-index','render');
+            $this->emitTo('jumpers.k23-p.k23-index-sin-k2','render');
         }
     }
 
@@ -1428,7 +1309,7 @@ class K23Index extends Component
         $this->jumper_complete = [];
         session()->forget('search');
         $this->busqueda_link = "";
-        return redirect()->route('k23_poderosa.index');
+        return redirect()->route('k23_poderosa_SK2.index');
 
     }
 }

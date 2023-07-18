@@ -3,7 +3,7 @@
 
 <div class="flex justify-between">
     
-<h1 class="text-lg font-weight-bold text-cyan-400"> <i class="fas fa-spinner mr-1 text-cyan-400"></i> K23 PREMIUM  <p class="text-lg text-red-500 inline font-bold ">({{__('messages.con_k2')}})</p></h1>
+    <h1 class="text-lg font-weight-bold text-cyan-400"> <i class="fas fa-spinner mr-1 text-cyan-400"></i> K23 PREMIUM <p class="text-lg text-red-500 inline font-bold ">({{__('messages.sin_k2')}})</p></h1>
 
    
 </div>
@@ -17,7 +17,7 @@
         </div>
     @endif
     
-    @livewire('jumpers.k23-p.k23-index') 
+    @livewire('jumpers.k23-p.k23-index-sin-k2') 
 @stop
 
 @section('css')

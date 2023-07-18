@@ -277,6 +277,13 @@ class JumpersController extends Controller
          
         }
 
+        public function k23_poderosa_SK2(){
+            return view('jumpers.k23_poderosa_SK2');
+         
+        }
+
+       
+
         public function k2028(){
             return view('jumpers.k2028');
          

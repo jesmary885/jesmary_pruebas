@@ -222,7 +222,7 @@ class ReportePago extends Component
             }
 
             if($this->plan == "membresia premium_2"){
-                $new_pago->type = 'premium 30 dias';
+                $new_pago->type = 'premium 3 dias';
 
                 if($this->metodo_id == 1) {
                     $new_pago->monto = '0';
