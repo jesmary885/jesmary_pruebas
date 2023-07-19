@@ -8,7 +8,9 @@ use Livewire\Component;
 
 class Cint2Create extends Component
 {
-    public $isopen = false, $panel, $jumper, $comentario;
+    public $isopen = false, $panel, $jumper;
+
+    public $comentario;
 
     protected $rules_create = [
         'panel' => 'required|min:7',
