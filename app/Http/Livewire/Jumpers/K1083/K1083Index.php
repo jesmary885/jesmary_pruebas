@@ -371,7 +371,7 @@ class K1083Index extends Component
                                         ->count();
 
                                     if($links_usados <= 9){
-                                        if($this->user->id != '1' && $this->user->id != '1254' && $this->user->id != '154'){
+                                        if($this->user->id != '1' && $this->user->id != '1254' && $this->user->id != '154' && $this->user->id != '30'){
                                             if($multi == $ip_user){
                                                 $this->numerologia();
                                             }

@@ -9,7 +9,7 @@ use GuzzleHttp\Client;
 class Wix extends Component
 {
 
-    public $jumper_complete , $search, $psid_register=0,$pid_new=0,$type, $jumper_detect = 0,$busqueda_link,$pid_manual,$pid_detectado = 'si',$pid_buscar,$psid_buscar,$ord_buscar;
+    public $panelid,$jumper_complete , $search, $psid_register=0,$pid_new=0,$type, $jumper_detect = 0,$busqueda_link,$pid_manual,$pid_detectado = 'si',$pid_buscar,$psid_buscar,$ord_buscar;
 
     protected $listeners = ['render' => 'render', 'registro_psid' => 'registro_psid'];
 
@@ -23,12 +23,42 @@ class Wix extends Component
 
         $this->pid_buscar = $this->pid_manual;
 
+        $busqueda_panelid= strpos($this->search, 'subpanelid=');
+
+        if($busqueda_panelid != false){
+
+            $posicion_panelid = $busqueda_panelid+ 1;
+            $i_panelid = 0;
+            $busq_panelid_s = 0;
+                            
+            do{
+                $detect_panelid= substr($this->search, $posicion_panelid,1);
+        
+                if($detect_panelid == '&' || $detect_panelid == '\\') $i_panelid = 1;
+                else{
+                    $posicion_panelid = $posicion_panelid + 1;
+                    $busq_panelid_s ++;
+                }
+
+                if($busq_panelid_s > 20){
+                    $i_panelid = 1;
+                }
+        
+            }while($i_panelid != 1);
+
+            if($busq_panelid_s < 20)
+                $panelid_buscar = substr($this->search,($busqueda_panelid + 1),($posicion_panelid - ($busqueda_panelid + 1)));
+
+            else
+                $panelid_buscar = substr($this->search,($busqueda_panelid + 1),20);
+        }
+
         $client = new Client([
             //'base_uri' => 'http://127.0.0.1:8000',
             'base_uri' => 'http://67.205.168.133/',
         ]);
 
-        $resultado = $client->request('GET', '/w/wix/'.$this->psid_buscar.'/'.$this->pid_buscar.'/'.$this->ord_buscar);
+        $resultado = $client->request('GET', '/w/wix/'.$this->psid_buscar.'/'.$this->pid_buscar.'/'.$this->ord_buscar.'/'.$panelid_buscar);
 
         if($resultado->getStatusCode() == 200){
 
@@ -93,6 +123,43 @@ class Wix extends Component
                    
                         $this->jumper_detect = 3;
                     }
+
+                    $busqueda_panelid= strpos($this->search, 'subpanelid=');
+
+                    if($busqueda_panelid != false){
+
+                        $posicion_panelid = $busqueda_panelid+ 1;
+                        $i_panelid = 0;
+                        $busq_panelid_s = 0;
+                                        
+                        do{
+                            $detect_panelid= substr($this->search, $posicion_panelid,1);
+                    
+                            if($detect_panelid == '&' || $detect_panelid == '\\') $i_panelid = 1;
+                            else{
+                                $posicion_panelid = $posicion_panelid + 1;
+                                $busq_panelid_s ++;
+                            }
+            
+                            if($busq_panelid_s > 20){
+                                $i_panelid = 1;
+                            }
+                    
+                        }while($i_panelid != 1);
+            
+                        if($busq_panelid_s < 20)
+                            $panelid_buscar = substr($this->search,($busqueda_panelid + 1),($posicion_panelid - ($busqueda_panelid + 1)));
+            
+                        else
+                            $panelid_buscar = substr($this->search,($busqueda_panelid + 1),20);
+                    }
+
+                    else{
+                   
+                        $this->jumper_detect = 3;
+                    }
+
+                    
 
 
                     if(session('pid')){
@@ -232,7 +299,8 @@ class Wix extends Component
                             'base_uri' => 'http://67.205.168.133/',
                         ]);
     
-                        $resultado = $client->request('GET', '/w/wix/'.$this->psid_buscar.'/'.$this->pid_buscar.'/'.$this->ord_buscar);
+                        $resultado = $client->request('GET', '/w/wix/'.$this->psid_buscar.'/'.$this->pid_buscar.'/'.$this->ord_buscar.'/'.$panelid_buscar);
+
     
                         if($resultado->getStatusCode() == 200){
                           
