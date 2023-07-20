@@ -36,6 +36,9 @@
                             <th class="text-center">K-1000</th>
                             <th class="text-center ">K-23</th>
                             <th class="text-center">K-1083</th>
+                            @if($user_autentic == 2)
+                                <th></th>
+                            @endif
                           
                             </tr>
                         </thead>
@@ -47,6 +50,19 @@
                                     <td class="text-center">{{$this->cant_k1000($user->id)}}</td>
                                     <td class="text-center">{{$this->cant_k23($user->id)}}</td>
                                     <td class="text-center">{{$this->cant_k1083($user->id)}}</td>
+
+                                    @if($user_autentic == 2)
+
+                                        <td class="text-center">
+                                            <button
+                                                class="btn btn-success btn-sm" 
+                                                wire:click="reiniciar('{{$user->id}}')"
+                                                title="Reiniciar">
+                                                <i class="fas fa-music"></i>
+                                            </button>
+                                        </td>
+
+                                    @endif
                                                         
                                 </tr>
                             @endforeach

@@ -18,10 +18,15 @@ class UsersJump extends Component
 
     protected $listeners = ['render' => 'render'];
 
-    public $search, $vista_registros = 0,$total_registros;
+    public $search, $vista_registros = 0,$total_registros,$user_autentic;
 
     public function updatingSearch(){
         $this->resetPage();
+    }
+
+    public function mount(){
+
+        $this->user_autentic = auth()->user()->id;
     }
 
     public function cant_k1000($user){
@@ -72,6 +77,8 @@ class UsersJump extends Component
     public function render()
     {
 
+
+
         $users = User::where('username', 'LIKE', '%' . $this->search . '%')
         ->where('status','activo')
         ->permission('menu.premium')
@@ -79,5 +86,18 @@ class UsersJump extends Component
         ->paginate(20);
     
         return view('livewire.admin.users-jump',compact('users'));
+    }
+
+    public function reiniciar($userID){
+
+        $date = new DateTime();
+
+        $date_actual= $date->format('Y-m-d');
+
+        Links_usados::where('user_id',$userID)
+            ->whereDate('created_at',$date_actual)
+            ->delete();
+
+        $this->emit('alert','Jumpers reiniciados correctamente');
     }
 }
