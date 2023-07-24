@@ -50,6 +50,15 @@
                     </p>
 
                 </div>
+
+                <div class="flex w-full">
+                    <div class="custom-control custom-switch"> 
+                        <input value="1" wire:model="estado" wire:click="update" type="checkbox" class="custom-control-input mt-1" id="customSwitch1">
+                        <label class="custom-control-label" for="customSwitch1">Activar membresia con saldo en página automáticamente</label>
+                    </div>
+                </div>
+
+        
             
         </div>
     </div>

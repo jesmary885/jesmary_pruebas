@@ -761,7 +761,7 @@ class SsidkrIndex extends Component
 
                     /////// aqui voy a buscar ese 3d% si esta voy a armar el jumper como me dijo jesus
 
-                    if((strpos($this->search, 'psid%3d') !== false)){
+                    /*if((strpos($this->search, 'psid%3d') !== false)){
                  
                         if((strpos($this->search, '**') != false)){
                             $this->calc_link = 1;
@@ -810,9 +810,9 @@ class SsidkrIndex extends Component
                                 }
                         
                         }
-                    }
+                    }*/
 
-                    else{
+                    //else{
             
                         if($jumper->jumper_type_id == 1){
                         
@@ -983,7 +983,7 @@ class SsidkrIndex extends Component
                             session()->forget('search');
                         } 
                         $this->jumper_redirect = [];
-                    }
+                    //}
                 } 
 
                 else {

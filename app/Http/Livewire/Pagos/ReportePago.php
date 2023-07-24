@@ -118,42 +118,66 @@ class ReportePago extends Component
 
         $pasa = 1;
 
-        if($this->plan == "membresia premium_10"){
-
-            $users_plan_10_premium = User::where('status','activo')
-            ->where('plan','10')
-            ->where('type','premium 10')
-            ->permission('menu.premium')
-            ->count();
-
-            if($users_plan_10_premium > 15){
-                $this->emit('error','Su operación no ha sido procesada, en estos momentos no hay cupos disponibles para este plan');
+        if($this->plan == "membresia premium_30"){
+            if(auth()->user()->type != 'premium 30'){
+                $this->emit('error','No estas autorizado para realizar un pago para el plan "PREMIUM 30 DÍAS"');
                 $this->isopen = false;  
                 $pasa = 0;
             }
             else $pasa = 1;
+        }
 
+        if($this->plan == "membresia premium_10"){
 
+            if(auth()->user()->type != 'premium 10'){
+                $this->emit('error','No estas autorizado para realizar un pago para el plan "PREMIUM 10 DÍAS"');
+                $this->isopen = false;  
+                $pasa = 0;
+            }
+
+            else{
+
+                $users_plan_10_premium = User::where('status','activo')
+                ->where('plan','10')
+                ->where('type','premium 10')
+                ->permission('menu.premium')
+                ->count();
+
+                if($users_plan_10_premium > 15){
+                    $this->emit('error','Su operación no ha sido procesada, en estos momentos no hay cupos disponibles para este plan');
+                    $this->isopen = false;  
+                    $pasa = 0;
+                }
+                else $pasa = 1;
+            }
         }
 
         elseif($this->plan == "membresia premium_2"){
-            $users_plan_2_premium = User::where('status','activo')
-            ->where('plan','2')
-            ->where('type','premium 2')
-            ->permission('menu.premium')
-            ->count();
 
-            if($users_plan_2_premium > 15){
-                $this->emit('error','Su operación no ha sido procesada, en estos momentos no hay cupos disponibles para este plan');
-                $this->isopen = false; 
-                $pasa = 0; 
+            if(auth()->user()->type != 'premium 2'){
+                $this->emit('error','No estas autorizado para realizar un pago para el plan "PREMIUM 2 DÍAS"');
+                $this->isopen = false;  
+                $pasa = 0;
             }
-            else $pasa = 1;
+
+            else{
+                $users_plan_2_premium = User::where('status','activo')
+                ->where('plan','2')
+                ->where('type','premium 2')
+                ->permission('menu.premium')
+                ->count();
+
+                if($users_plan_2_premium > 15){
+                    $this->emit('error','Su operación no ha sido procesada, en estos momentos no hay cupos disponibles para este plan');
+                    $this->isopen = false; 
+                    $pasa = 0; 
+                }
+                else $pasa = 1;
+            }
 
         }
 
         if($pasa == 1){
-
 
             $fecha_actual = date("Y-m-d h:s");
             $date = Carbon::now();

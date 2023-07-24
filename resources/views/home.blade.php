@@ -243,6 +243,11 @@
                         <li class="medium mt-2"><span class="fa-li"><i class="fas fa-lg fa-clock text-cyan-500 font-bold"></i></span> {{__('messages.fecha_corte')}}: {{\Carbon\Carbon::parse($user->last_payment_date)->format('d-m-Y H:i:s')}} </li>
                         @endif
                         <li class="medium mt-2"><span class="fa-li"><i class="	fas fa-lg fa-money-bill-wave text-cyan-500 font-bold"></i></span> Saldo en página: {{$user->balance}} $ </li>
+                        @if(($user->check_renovation) == 'si')
+                        <li class="medium mt-2"><span class="fa-li"><i class="fas fa-lg fa-check-circle text-green-500 font-bold "></i></span> Renovación automática con saldo en página activada <li class="medium mt-2"><span class="fa-li"></li>
+                        @else
+                        <li class="medium mt-2 text-red-400"><span class="fa-li"><i class="fas fa-lg fas fa-times text-red-500 font-bold "></i></span> Renovación automática con saldo en página desactivada <li class="medium mt-2"><span class="fa-li"></li>
+                        @endif
                       </ul>
                       <hr class="m-2 ">
 

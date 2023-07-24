@@ -125,37 +125,61 @@ class ReportaPagoAdelantado extends Component
 
         if($pago_registrado == 0){
 
-            if($this->plan == "membresia premium_10"){
-
-                $users_plan_10_premium = User::where('status','activo')
-                ->where('plan','10')
-                ->where('type','premium 10')
-                ->permission('menu.premium')
-                ->count();
-
-                if($users_plan_10_premium > 15){
-                    $this->emit('error','Su operación no ha sido procesada, en estos momentos no hay cupos disponibles para este plan');
+            if($this->plan == "membresia premium_30"){
+                if(auth()->user()->type != 'premium 30'){
+                    $this->emit('error','No estas autorizado para realizar un pago para el plan "PREMIUM 30 DÍAS"');
                     $this->isopen = false;  
                     $pasa = 0;
                 }
                 else $pasa = 1;
+            }
 
+            if($this->plan == "membresia premium_10" ){
+
+                if(auth()->user()->type != 'premium 10'){
+                    $this->emit('error','No estas autorizado para realizar un pago para el plan "PREMIUM 10 DÍAS"');
+                    $this->isopen = false;  
+                    $pasa = 0;
+                }
+
+                else{
+                    $users_plan_10_premium = User::where('status','activo')
+                        ->where('plan','10')
+                        ->where('type','premium 10')
+                        ->permission('menu.premium')
+                        ->count();
+
+                    if($users_plan_10_premium > 15){
+                        $this->emit('error','Su operación no ha sido procesada, en estos momentos no hay cupos disponibles para este plan');
+                        $this->isopen = false;  
+                        $pasa = 0;
+                    }
+                    else $pasa = 1;
+                }
             }
 
             elseif($this->plan == "membresia premium_2"){
-                $users_plan_2_premium = User::where('status','activo')
-                ->where('plan','2')
-                ->where('type','premium 2')
-                ->permission('menu.premium')
-                ->count();
 
-                if($users_plan_2_premium > 15){
-                    $this->emit('error','Su operación no ha sido procesada, en estos momentos no hay cupos disponibles para este plan');
+                if(auth()->user()->type != 'premium 2'){
+                    $this->emit('error','No estas autorizado para realizar un pago para el plan "PREMIUM 2 DÍAS"');
                     $this->isopen = false;  
                     $pasa = 0;
                 }
-                else $pasa = 1;
 
+                else{
+                    $users_plan_2_premium = User::where('status','activo')
+                    ->where('plan','2')
+                    ->where('type','premium 2')
+                    ->permission('menu.premium')
+                    ->count();
+
+                    if($users_plan_2_premium > 15){
+                        $this->emit('error','Su operación no ha sido procesada, en estos momentos no hay cupos disponibles para este plan');
+                        $this->isopen = false;  
+                        $pasa = 0;
+                    }
+                    else $pasa = 1;
+                }
             }
 
             if($pasa == 1){
@@ -184,8 +208,7 @@ class ReportaPagoAdelantado extends Component
                 //$new_pago->nro_referencia = $this->referencia;
                 $new_pago->fecha_pago = $this->fecha_pago;
                 
-                if($this->plan == "membresia basica")
-                {
+                if($this->plan == "membresia basica"){
                     $new_pago->type = 'basico';
 
                     if($this->metodo_id == 1){
@@ -216,14 +239,15 @@ class ReportaPagoAdelantado extends Component
                     if($this->metodo_id == 1) {
                         $new_pago->monto = '0';
                         $new_pago->status = 'verificado';
-                        $new_pago->pago_basico = '1';
-                        $new_pago->pago_premium = '8';
+                        $new_pago->pago_basico = '0';
+                        $new_pago->pago_premium = '0';
+                        
                     }
                     else{
                         $new_pago->monto = '20';
                         $new_pago->status = 'pendiente';
-                        $new_pago->pago_basico = '0';
-                        $new_pago->pago_premium = '0';
+                        $new_pago->pago_basico = '1';
+                        $new_pago->pago_premium = '8';
                     }
 
                     
@@ -255,13 +279,14 @@ class ReportaPagoAdelantado extends Component
                         $new_pago->monto = '0';
                         $new_pago->status = 'verificado';
                         $new_pago->pago_basico = '0';
-                        $new_pago->pago_premium = '1.2';
+                        $new_pago->pago_premium = '0';
                     }
                     else{
                         $new_pago->monto = '3';
                         $new_pago->status = 'pendiente';
                         $new_pago->pago_basico = '0';
-                        $new_pago->pago_premium = '0';
+                        $new_pago->pago_premium = '1.2';
+                        
                     }
 
                     

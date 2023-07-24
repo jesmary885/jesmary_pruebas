@@ -21,6 +21,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('fecha_corte:desact')->everyMinute(); // corte cada minuto
+        $schedule->command('renovation:membresia')->everyMinute(); // renovacion cada minuto
     }
 
     /**
