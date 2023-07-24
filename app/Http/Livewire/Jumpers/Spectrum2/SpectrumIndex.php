@@ -152,7 +152,9 @@ class SpectrumIndex extends Component
 
             $busqueda_oicefive_ = strpos($this->search, 'oicefive');
 
-            if($busqueda_oicefive_ !== false){
+            $busqueda_csurvey_ = strpos($this->search, 'csurvey');
+
+            if($busqueda_oicefive_ !== false || $busqueda_csurvey_ !== false){
 
 
                     $busqueda_f_ = strpos($this->search, 'rid=');
