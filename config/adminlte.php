@@ -958,9 +958,7 @@ return [
                     'icon_color' => 'red',
                     'can' => 'ssidkr.index',
                 ],
-                
 
-                
             ],
         ],
 

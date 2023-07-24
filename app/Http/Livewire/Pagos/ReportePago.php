@@ -176,14 +176,17 @@ class ReportePago extends Component
                 if($this->metodo_id == 1){
                     $new_pago->monto = '0';
                     $new_pago->status = 'verificado';
+                    $new_pago->pago_basico = '0';
+                    $new_pago->pago_premium = '0';
                 }
                 else{
                     $new_pago->monto = '10';
                     $new_pago->status = 'pendiente';
+                    $new_pago->pago_basico = '1';
+                    $new_pago->pago_premium = '4';
                 }
 
-                $new_pago->pago_basico = '1';
-                $new_pago->pago_premium = '4';
+                
                 $new_pago->plan = '30';                
             }
 
@@ -193,14 +196,17 @@ class ReportePago extends Component
                 if($this->metodo_id == 1) {
                     $new_pago->monto = '0';
                     $new_pago->status = 'verificado';
+                    $new_pago->pago_basico = '0';
+                    $new_pago->pago_premium = '0';
                 }
                 else{
                     $new_pago->monto = '20';
                     $new_pago->status = 'pendiente';
-                }
-
                     $new_pago->pago_basico = '1';
                     $new_pago->pago_premium = '8';
+                }
+
+                    
                     $new_pago->plan = '30';                
             }
 
@@ -210,14 +216,17 @@ class ReportePago extends Component
                 if($this->metodo_id == 1) {
                     $new_pago->monto = '0';
                     $new_pago->status = 'verificado';
+                    $new_pago->pago_basico = '0';
+                    $new_pago->pago_premium = '0';
                 }
                 else{
                     $new_pago->monto = '10';
                     $new_pago->status = 'pendiente';
-                }
-
                     $new_pago->pago_basico = '0';
                     $new_pago->pago_premium = '4';
+                }
+
+                    
                     $new_pago->plan = '10';                
             }
 
@@ -227,14 +236,15 @@ class ReportePago extends Component
                 if($this->metodo_id == 1) {
                     $new_pago->monto = '0';
                     $new_pago->status = 'verificado';
+                    $new_pago->pago_basico = '0';
+                    $new_pago->pago_premium = '0';
                 }
                 else{
                     $new_pago->monto = '3';
                     $new_pago->status = 'pendiente';
-                }
-
                     $new_pago->pago_basico = '0';
                     $new_pago->pago_premium = '1.2';
+                }
                     $new_pago->plan = '2';                
             }
 

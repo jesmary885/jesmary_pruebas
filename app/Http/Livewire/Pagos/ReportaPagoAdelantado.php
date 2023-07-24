@@ -191,14 +191,16 @@ class ReportaPagoAdelantado extends Component
                     if($this->metodo_id == 1){
                         $new_pago->monto = '0';
                         $new_pago->status = 'verificado';
+                        $new_pago->pago_basico = '0';
+                        $new_pago->pago_premium = '0';
                     }
                     else{
                         $new_pago->monto = '10';
                         $new_pago->status = 'pendiente';
+                        $new_pago->pago_basico = '1';
+                        $new_pago->pago_premium = '4';
                     }
 
-                    $new_pago->pago_basico = '1';
-                    $new_pago->pago_premium = '4';
                     $new_pago->plan = '30';                
                 }
                 elseif($this->plan == "balance"){
@@ -214,14 +216,17 @@ class ReportaPagoAdelantado extends Component
                     if($this->metodo_id == 1) {
                         $new_pago->monto = '0';
                         $new_pago->status = 'verificado';
+                        $new_pago->pago_basico = '1';
+                        $new_pago->pago_premium = '8';
                     }
                     else{
                         $new_pago->monto = '20';
                         $new_pago->status = 'pendiente';
+                        $new_pago->pago_basico = '0';
+                        $new_pago->pago_premium = '0';
                     }
 
-                    $new_pago->pago_basico = '1';
-                    $new_pago->pago_premium = '8';
+                    
                     $new_pago->plan = '30';                
                 }
                 elseif($this->plan == "membresia premium_10"){
@@ -230,14 +235,17 @@ class ReportaPagoAdelantado extends Component
                     if($this->metodo_id == 1) {
                         $new_pago->monto = '0';
                         $new_pago->status = 'verificado';
+                        $new_pago->pago_basico = '0';
+                        $new_pago->pago_premium = '0';
                     }
                     else{
                         $new_pago->monto = '10';
                         $new_pago->status = 'pendiente';
+                        $new_pago->pago_basico = '0';
+                        $new_pago->pago_premium = '4';
                     }
 
-                    $new_pago->pago_basico = '0';
-                    $new_pago->pago_premium = '4';
+                    
                     $new_pago->plan = '10';                
                 }
                 elseif($this->plan == "membresia premium_2"){
@@ -246,28 +254,34 @@ class ReportaPagoAdelantado extends Component
                     if($this->metodo_id == 1) {
                         $new_pago->monto = '0';
                         $new_pago->status = 'verificado';
+                        $new_pago->pago_basico = '0';
+                        $new_pago->pago_premium = '1.2';
                     }
                     else{
                         $new_pago->monto = '3';
                         $new_pago->status = 'pendiente';
+                        $new_pago->pago_basico = '0';
+                        $new_pago->pago_premium = '0';
                     }
 
-                    $new_pago->pago_basico = '0';
-                    $new_pago->pago_premium = '1.2';
+                    
                     $new_pago->plan = '2';                
                 }
                 else{
                     if($this->metodo_id == 1) {
                         $new_pago->monto = '0';
                         $new_pago->status = 'verificado';
+                        $new_pago->pago_basico = '0';
+                        $new_pago->pago_premium = '0';
                     }
                     else{
                         $new_pago->monto = '10';
                         $new_pago->status = 'pendiente';
+                        $new_pago->pago_basico = '0';
+                        $new_pago->pago_premium = '4';
                     }
                     $new_pago->type = 'Pago_restante_premium';
-                    $new_pago->pago_basico = '0';
-                    $new_pago->pago_premium = '4';
+                    
                     $new_pago->plan = '30';
                 }
 
