@@ -124,7 +124,21 @@ class ReportePago extends Component
                 $this->isopen = false;  
                 $pasa = 0;
             }
-            else $pasa = 1;
+            else{
+                $users_plan_30_premium = User::where('status','activo')
+                //->where('plan','10')
+                ->where('type','premium 30')
+                ->permission('menu.premium')
+                ->count();
+
+                if($users_plan_30_premium > 85){
+                    $this->emit('error','Su operación no ha sido procesada, en estos momentos no hay cupos disponibles para este plan');
+                    $this->isopen = false;  
+                    $pasa = 0;
+                }
+                else $pasa = 1;
+
+            }
         }
 
         if($this->plan == "membresia premium_10"){
@@ -138,12 +152,12 @@ class ReportePago extends Component
             else{
 
                 $users_plan_10_premium = User::where('status','activo')
-                ->where('plan','10')
+                //->where('plan','10')
                 ->where('type','premium 10')
                 ->permission('menu.premium')
                 ->count();
 
-                if($users_plan_10_premium > 15){
+                if($users_plan_10_premium > 25){
                     $this->emit('error','Su operación no ha sido procesada, en estos momentos no hay cupos disponibles para este plan');
                     $this->isopen = false;  
                     $pasa = 0;
@@ -152,7 +166,7 @@ class ReportePago extends Component
             }
         }
 
-        elseif($this->plan == "membresia premium_2"){
+        if($this->plan == "membresia premium_2"){
 
             if(auth()->user()->type != 'premium 2'){
                 $this->emit('error','No estas autorizado para realizar un pago para el plan "PREMIUM 2 DÍAS"');
@@ -162,12 +176,12 @@ class ReportePago extends Component
 
             else{
                 $users_plan_2_premium = User::where('status','activo')
-                ->where('plan','2')
+                //->where('plan','2')
                 ->where('type','premium 2')
                 ->permission('menu.premium')
                 ->count();
 
-                if($users_plan_2_premium > 15){
+                if($users_plan_2_premium > 30){
                     $this->emit('error','Su operación no ha sido procesada, en estos momentos no hay cupos disponibles para este plan');
                     $this->isopen = false; 
                     $pasa = 0; 

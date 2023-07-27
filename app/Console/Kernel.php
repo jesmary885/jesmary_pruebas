@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
 
     protected $commands = [
         'App\Console\Commands\desact_user',
+        'App\Console\Commands\RenovarMembresia',
  
     ];
     protected function schedule(Schedule $schedule)
