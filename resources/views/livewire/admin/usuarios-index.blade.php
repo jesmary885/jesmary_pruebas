@@ -14,7 +14,8 @@
                             <th class="text-center">Telegram</th>
                             <th class="text-center">Balance</th>
                             <th class="text-center ">Fecha de corte</th>
-                            <th class="text-center">Plan</th>
+                            <th class="text-center">Plan(días)</th>
+                            <th class="text-center">Plan </th>
                             <th class="text-center">Reputación(Vendedor)</th>
                             <th class="text-center">Rol</th>
                             <th class="text-center">Estado</th>
@@ -35,6 +36,7 @@
                                     @else
                                     <td class="text-center">Usuario sin pagos</td>
                                     @endif
+                                    <td class="text-center">{{$user->plan}}</td>
                                     <td class="text-center">{{$user->type}}</td>
                                     @if($user->sales) <td class="text-center"> <i class="{{$this->reputation_vendedor($user->id)[1]}}"></i> <i class="{{$this->reputation_vendedor($user->id)[2]}}"></i> <i class="{{$this->reputation_vendedor($user->id)[3]}}"></i> <i class="{{$this->reputation_vendedor($user->id)[4]}}"></i> <i class="{{$this->reputation_vendedor($user->id)[5]}}"></i></td>
                                     @else <td class="text-center">Sin ventas registradas</td>
