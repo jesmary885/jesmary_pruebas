@@ -63,7 +63,7 @@
 
                                 <div class="custom-control custom-radio flex justify-start">
                                     <input class="custom-control-input" type="radio" id="customRadio8" value="6" name="customRadio6" wire:model="type_confirmed">
-                                    <label for="customRadio8" class="custom-control-label text-md font-semibold text-gray-300">Monto adicional de plan premium (10$)</label>
+                                    <label for="customRadio8" class="custom-control-label text-md font-semibold text-gray-300">Monto adicional de plan premium (5$)</label>
                                 </div>
                             </div>
 

@@ -24,7 +24,7 @@ class ReportaPagoAdelantado extends Component
     protected $rules = [
         'plan' => 'required',
         'metodo_id' => 'required',
-        'nro_referencia' => 'required|numeric|min:4|unique:pago_registros_recargas',
+        'nro_referencia' => 'required|numeric|unique:pago_registros_recargas|min_digits:4',
         'fecha_pago' => 'required',
         'file' => 'required|image',
     ];
@@ -79,7 +79,7 @@ class ReportaPagoAdelantado extends Component
         }
 
         elseif($this->plan == "membresia premium_30" ){
-            if($user->balance>=20){
+            if($user->balance>=25){
                 return $this->payment_methods = PaymentMethods::all();
             }
             else{
@@ -138,7 +138,7 @@ class ReportaPagoAdelantado extends Component
                     ->permission('menu.premium')
                     ->count();
     
-                    if($users_plan_30_premium > 85){
+                    if($users_plan_30_premium >= 80){
                         $this->emit('error','Su operación no ha sido procesada, en estos momentos no hay cupos disponibles para este plan');
                         $this->isopen = false;  
                         $pasa = 0;
@@ -164,7 +164,7 @@ class ReportaPagoAdelantado extends Component
                     ->permission('menu.premium')
                     ->count();
     
-                    if($users_plan_10_premium > 25){
+                    if($users_plan_10_premium >= 15){
                         $this->emit('error','Su operación no ha sido procesada, en estos momentos no hay cupos disponibles para este plan');
                         $this->isopen = false;  
                         $pasa = 0;
@@ -188,7 +188,7 @@ class ReportaPagoAdelantado extends Component
                     ->permission('menu.premium')
                     ->count();
     
-                    if($users_plan_2_premium > 30){
+                    if($users_plan_2_premium >= 15){
                         $this->emit('error','Su operación no ha sido procesada, en estos momentos no hay cupos disponibles para este plan');
                         $this->isopen = false; 
                         $pasa = 0; 
@@ -260,10 +260,10 @@ class ReportaPagoAdelantado extends Component
                         
                     }
                     else{
-                        $new_pago->monto = '20';
+                        $new_pago->monto = '25';
                         $new_pago->status = 'pendiente';
                         $new_pago->pago_basico = '1';
-                        $new_pago->pago_premium = '8';
+                        $new_pago->pago_premium = '10';
                     }
 
                     
@@ -316,10 +316,10 @@ class ReportaPagoAdelantado extends Component
                         $new_pago->pago_premium = '0';
                     }
                     else{
-                        $new_pago->monto = '10';
+                        $new_pago->monto = '5';
                         $new_pago->status = 'pendiente';
                         $new_pago->pago_basico = '0';
-                        $new_pago->pago_premium = '4';
+                        $new_pago->pago_premium = '2';
                     }
                     $new_pago->type = 'Pago_restante_premium';
                     
@@ -343,7 +343,7 @@ class ReportaPagoAdelantado extends Component
                 if($this->plan == "membresia basica" || $this->plan == "membresia premium_30" || $this->plan == "membresia premium_10" || $this->plan == "membresia premium_2" || $this->plan == "Pago_restante_premium"){
                 
                     if($this->metodo_id == 1) {
-                        
+
 
                         if($this->plan == "membresia basica"){
                             $plan_nuevo = '30';
@@ -369,7 +369,7 @@ class ReportaPagoAdelantado extends Component
                             $proxima_fecha = date("Y-m-d H:i:s",strtotime($fecha_actual."+ 30 days"));
 
                             $plan_nuevo = '30';
-                            $this->monto_pago = '20';
+                            $this->monto_pago = '25';
                             $this->type = "premium 30";
                             $user->roles()->sync(10);
 
@@ -425,8 +425,8 @@ class ReportaPagoAdelantado extends Component
                         }
 
                         if($this->plan == "Pago_restante_premium") {
-                            $this->monto_pago = '10';
-                            $this->type = "premium";
+                            $this->monto_pago = '5';
+                            $this->type = "premium 30";
                             $plan_nuevo = '30';
 
                             $balance_new = $user->balance - $this->monto_pago;
@@ -437,10 +437,26 @@ class ReportaPagoAdelantado extends Component
                         }
                     }
                     else{
-                        if($this->plan == "membresia premium_30") $plan_nuevo = '30';
-                        if($this->plan == "membresia premium_10") $plan_nuevo = '10';
-                        if($this->plan == "membresia premium_2") $plan_nuevo = '2';
-                        else $plan_nuevo = '30';
+                        if($this->plan == "membresia premium_30"){
+                            $plan_nuevo = '30';
+                            $this->type = "premium 30";
+                        } 
+                        elseif($this->plan == "membresia premium_10"){
+                            $plan_nuevo = '10';
+                            $this->type = "premium 10";
+                        } 
+                        elseif($this->plan == "membresia premium_2"){
+                            $plan_nuevo = '2';
+                            $this->type = "premium 2";
+                        } 
+                        elseif($this->plan == "Pago_restante_premium") {
+                            $plan_nuevo = '30';
+                            $this->type = "premium 30";
+                        }
+                        else {
+                            $this->type = "basico";
+                            $plan_nuevo = '30';
+                        }
                         
                         $user->update([
                             'status' => 'activo',

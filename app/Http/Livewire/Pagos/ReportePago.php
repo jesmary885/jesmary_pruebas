@@ -21,7 +21,7 @@ class ReportePago extends Component
 
     protected $rules = [
         'metodo_id' => 'required',
-        'nro_referencia' => 'required|numeric|min:4|unique:pago_registros_recargas',
+        'nro_referencia' => 'required|numeric|unique:pago_registros_recargas||min_digits:4',
         'plan' => 'required',
         'fecha_pago' => 'required',
         'file' => 'required|image',
@@ -63,7 +63,7 @@ class ReportePago extends Component
         $user = User::where('id',Auth::id())->first();
 
         if($this->plan == "membresia premium_30" ){
-            if($user->balance>=20){
+            if($user->balance>=25){
                 return $this->payment_methods = PaymentMethods::all();
             }
             else{
@@ -131,7 +131,7 @@ class ReportePago extends Component
                 ->permission('menu.premium')
                 ->count();
 
-                if($users_plan_30_premium > 85){
+                if($users_plan_30_premium >= 80){
                     $this->emit('error','Su operación no ha sido procesada, en estos momentos no hay cupos disponibles para este plan');
                     $this->isopen = false;  
                     $pasa = 0;
@@ -157,7 +157,7 @@ class ReportePago extends Component
                 ->permission('menu.premium')
                 ->count();
 
-                if($users_plan_10_premium > 25){
+                if($users_plan_10_premium >= 15){
                     $this->emit('error','Su operación no ha sido procesada, en estos momentos no hay cupos disponibles para este plan');
                     $this->isopen = false;  
                     $pasa = 0;
@@ -181,7 +181,7 @@ class ReportePago extends Component
                 ->permission('menu.premium')
                 ->count();
 
-                if($users_plan_2_premium > 30){
+                if($users_plan_2_premium >= 15){
                     $this->emit('error','Su operación no ha sido procesada, en estos momentos no hay cupos disponibles para este plan');
                     $this->isopen = false; 
                     $pasa = 0; 
@@ -228,7 +228,7 @@ class ReportePago extends Component
                 $new_pago->plan = '30';                
             }
 
-            if($this->plan == "membresia premium_30"){
+            elseif($this->plan == "membresia premium_30"){
                 $new_pago->type = 'premium 30 dias';
 
                 if($this->metodo_id == 1) {
@@ -238,17 +238,17 @@ class ReportePago extends Component
                     $new_pago->pago_premium = '0';
                 }
                 else{
-                    $new_pago->monto = '20';
+                    $new_pago->monto = '25';
                     $new_pago->status = 'pendiente';
                     $new_pago->pago_basico = '1';
-                    $new_pago->pago_premium = '8';
+                    $new_pago->pago_premium = '10';
                 }
 
                     
                     $new_pago->plan = '30';                
             }
 
-            if($this->plan == "membresia premium_10"){
+            elseif($this->plan == "membresia premium_10"){
                 $new_pago->type = 'premium 10 dias';
 
                 if($this->metodo_id == 1) {
@@ -268,7 +268,7 @@ class ReportePago extends Component
                     $new_pago->plan = '10';                
             }
 
-            if($this->plan == "membresia premium_2"){
+            elseif($this->plan == "membresia premium_2"){
                 $new_pago->type = 'premium 2 dias';
 
                 if($this->metodo_id == 1) {
@@ -285,80 +285,113 @@ class ReportePago extends Component
                 }
                     $new_pago->plan = '2';                
             }
+            else{
+                if($this->metodo_id == 1) {
+                    $new_pago->monto = '0';
+                    $new_pago->status = 'verificado';
+                    $new_pago->pago_basico = '0';
+                    $new_pago->pago_premium = '0';
+                }
+                else{
+                    $new_pago->monto = '5';
+                    $new_pago->status = 'pendiente';
+                    $new_pago->pago_basico = '0';
+                    $new_pago->pago_premium = '2';
+                }
+                $new_pago->type = 'Pago_restante_premium';
+                
+                $new_pago->plan = '30';
+            }
 
                 $new_pago->fecha_pago = $this->fecha_pago;
                 $new_pago->payment_method_id = $this->metodo_id;
                 $new_pago->comentario = $this->comentario;
                 $new_pago->save();
 
-                if($this->metodo_id == 1) {
-                    
-                    if($this->plan == "membresia basica"){
-                        $proxima_fecha = date("Y-m-d H:i:s",strtotime($fecha_actual."+ 30 days"));
-                        $plan_nuevo = '30';
-                        $this->type = "basico";
-                        $this->monto_pago = '10';
-                        $user->roles()->sync(2);
-                    } 
+            if($this->metodo_id == 1) {
 
-                    if($this->plan == "membresia premium_30") {
-                        $proxima_fecha = date("Y-m-d H:i:s",strtotime($fecha_actual."+ 30 days"));
-                        $plan_nuevo = '30';
+                    if($this->plan == "Pago_restante_premium") {
+                        $this->monto_pago = '5';
                         $this->type = "premium 30";
-                        $this->monto_pago = '20';
-                        $user->roles()->sync(10);
+                        $plan_nuevo = '30';
+
+                        $balance_new = $user->balance - $this->monto_pago;
+
+                        $user->update([
+                            'balance' => $balance_new,
+                        ]);
                     }
 
-                    if($this->plan == "membresia premium_10") {
-                        $proxima_fecha = date("Y-m-d H:i:s",strtotime($fecha_actual."+ 10 days"));
-                        $plan_nuevo = '10';
-                        $this->type = "premium 10";
-                        $this->monto_pago = '10';
-                        $user->roles()->sync(10);
+                    else{
+                        if($this->plan == "membresia basica"){
+                            $proxima_fecha = date("Y-m-d H:i:s",strtotime($fecha_actual."+ 30 days"));
+                            $plan_nuevo = '30';
+                            $this->type = "basico";
+                            $this->monto_pago = '10';
+                            $user->roles()->sync(2);
+                        } 
+
+                        if($this->plan == "membresia premium_30") {
+                            $proxima_fecha = date("Y-m-d H:i:s",strtotime($fecha_actual."+ 30 days"));
+                            $plan_nuevo = '30';
+                            $this->type = "premium 30";
+                            $this->monto_pago = '25';
+                            $user->roles()->sync(10);
+                        }
+
+                        if($this->plan == "membresia premium_10") {
+                            $proxima_fecha = date("Y-m-d H:i:s",strtotime($fecha_actual."+ 10 days"));
+                            $plan_nuevo = '10';
+                            $this->type = "premium 10";
+                            $this->monto_pago = '10';
+                            $user->roles()->sync(10);
+                        }
+
+
+                        if($this->plan == "membresia premium_2") {
+                            $proxima_fecha = date("Y-m-d H:i:s",strtotime($fecha_actual."+ 2 days"));
+                            $plan_nuevo = '2';
+                            $this->type = "premium 2";
+                            $this->monto_pago = '3';
+                            $user->roles()->sync(10);
+                        }
+
+                        
+
+                        $balance_new = $user->balance - $this->monto_pago;
+
+                        $user->update([
+                            'status' => 'activo',
+                            'last_payment_date' => $proxima_fecha,
+                            'type' => $this->type,
+                            'plan' => $plan_nuevo,
+                            'balance' => $balance_new,
+                        ]);
                     }
-
-
-                    if($this->plan == "membresia premium_2") {
-                        $proxima_fecha = date("Y-m-d H:i:s",strtotime($fecha_actual."+ 2 days"));
-                        $plan_nuevo = '2';
-                        $this->type = "premium 2";
-                        $this->monto_pago = '3';
-                        $user->roles()->sync(10);
-                    }
-
-                    $balance_new = $user->balance - $this->monto_pago;
-
-                    $user->update([
-                        'status' => 'activo',
-                        'last_payment_date' => $proxima_fecha,
-                        'type' => $this->type,
-                        'plan' => $plan_nuevo,
-                        'balance' => $balance_new,
-                    ]);
 
                     return redirect()->route("home");
-
                 }
 
             else{
-                if($this->plan == "membresia basica"){
+                if($this->plan == "membresia premium_30"){
+                    $plan_nuevo = '30';
+                    $this->type = "premium 30";
+                } 
+                elseif($this->plan == "membresia premium_10"){
+                    $plan_nuevo = '10';
+                    $this->type = "premium 10";
+                } 
+                elseif($this->plan == "membresia premium_2"){
+                    $plan_nuevo = '2';
+                    $this->type = "premium 2";
+                } 
+                elseif($this->plan == "Pago_restante_premium") {
+                    $plan_nuevo = '30';
+                    $this->type = "premium 30";
+                }
+                else {
                     $this->type = "basico";
                     $plan_nuevo = '30';
-                } 
-
-                if($this->plan == "membresia premium_30") {
-                    $this->type = "premium 30";
-                    $plan_nuevo = '30';
-                }
-
-                if($this->plan == "membresia premium_10") {
-                    $this->type = "premium 10";
-                    $plan_nuevo = '10';
-                }
-
-                if($this->plan == "membresia premium_2") {
-                    $this->type = "premium 2";
-                    $plan_nuevo = '2';
                 }
 
                 $user->update([
