@@ -192,7 +192,6 @@ class ReportePago extends Component
         }
 
         if($pasa == 1){
-
             $fecha_actual = date("Y-m-d h:s");
             $date = Carbon::now();
 
