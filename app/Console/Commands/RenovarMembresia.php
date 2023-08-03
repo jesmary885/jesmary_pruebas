@@ -81,7 +81,7 @@ class RenovarMembresia extends Command
 
                 elseif ($user->type == 'premium 30' ){
 
-                    if($user->balance >= 20){ 
+                    if($user->balance >= 25){ 
 
                         $new_pago->type = 'premium 30 dias';
                         $new_pago->monto = '0';
@@ -93,7 +93,7 @@ class RenovarMembresia extends Command
                         $new_pago->save();
 
                         $plan_nuevo = '30';
-                        $monto_pago = '20';
+                        $monto_pago = '25';
                         $type = "premium 30";
                         $user->roles()->sync(10);
 
