@@ -157,7 +157,7 @@ class ReportePago extends Component
                 ->permission('menu.premium')
                 ->count();
 
-                if($users_plan_10_premium >= 25){
+                if($users_plan_10_premium >= 65){
                     $this->emit('error','Su operación no ha sido procesada, en estos momentos no hay cupos disponibles para este plan');
                     $this->isopen = false;  
                     $pasa = 0;
@@ -181,7 +181,7 @@ class ReportePago extends Component
                 ->permission('menu.premium')
                 ->count();
 
-                if($users_plan_2_premium >= 30){
+                if($users_plan_2_premium >= 50){
                     $this->emit('error','Su operación no ha sido procesada, en estos momentos no hay cupos disponibles para este plan');
                     $this->isopen = false; 
                     $pasa = 0; 
