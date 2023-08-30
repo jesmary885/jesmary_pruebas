@@ -123,7 +123,7 @@ class K1093Index extends Component
 
                 $surveyno_buscar = substr($this->search,($busqueda_surveyno + 10),($posicion_suveyno - ($busqueda_surveyno + 10)));
 
-            }
+            }*/
 
             $busqueda_spid= strpos($this->search, '&spid');
 
@@ -151,7 +151,7 @@ class K1093Index extends Component
 
             }
 
-            $busqueda_hash= strpos($this->search, 'k=1093&_s=');
+           /* $busqueda_hash= strpos($this->search, 'k=1093&_s=');
 
 
             if($busqueda_hash != false){
@@ -161,7 +161,7 @@ class K1093Index extends Component
             try {
                 $client = new Client(['base_uri' => 'http://147.182.190.233/',]);
 
-                $resultado = $client->request('GET', '/k1093/1/'.$psid_buscar);
+                $resultado = $client->request('GET', '/k1093/1/'.$spid_buscar.'/'.$psid_buscar.'/'.$this->pid_buscar);
 
 
                 if($resultado->getStatusCode() == 200){
@@ -454,8 +454,8 @@ class K1093Index extends Component
                                             }
                                             $link->psid = substr($psid_buscar,0,5);
                                             $link->user_id = auth()->user()->id;
-                                            $link->jumper_type_id = 5;
-                                            $link->k_detected = 'K=1000';
+                                            $link->jumper_type_id = 30;
+                                            $link->k_detected = 'K=1093';
                                             $link->save();
         
                                             $this->busqueda_link = Link::where('id',$link->id)->first();
