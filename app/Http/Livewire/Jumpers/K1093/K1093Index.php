@@ -125,7 +125,7 @@ class K1093Index extends Component
 
             }*/
 
-            $busqueda_spid= strpos($this->search, '&spid');
+           /* $busqueda_spid= strpos($this->search, '&spid');
 
             if($busqueda_spid != false){
                 $posicion_spid = $busqueda_spid + 6;
@@ -149,7 +149,7 @@ class K1093Index extends Component
 
                 $spid_buscar = substr($this->search,($busqueda_spid + 6 ),($posicion_spid - ($busqueda_spid + 6)));
 
-            }
+            }*/
 
            /* $busqueda_hash= strpos($this->search, 'k=1093&_s=');
 
@@ -172,7 +172,7 @@ class K1093Index extends Component
                     $link_register->user_id  = $this->user->id;
                     $link_register->save();
 
-                    $jump1 = json_decode($resultado->getBody(),true);
+                    /*$jump1 = json_decode($resultado->getBody(),true);
 
                     $busqueda_psid_vacio= strpos($jump1['jumper'], '&psid=');
 
@@ -209,7 +209,9 @@ class K1093Index extends Component
                             $this->jumper_complete = json_decode($resultado->getBody(),true);
                         }
 
-                    }
+                    }*/
+
+                    $this->jumper_complete = json_decode($resultado->getBody(),true);
 
 
                     $this->busqueda_link = Link::where('psid',substr($psid_buscar,0,5))->first();
