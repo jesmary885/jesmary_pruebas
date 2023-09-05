@@ -161,7 +161,7 @@ class K1093Index extends Component
             try {
                 $client = new Client(['base_uri' => 'http://147.182.190.233/',]);
 
-                $resultado = $client->request('GET', '/k1093/1/'.$spid_buscar.'/'.$psid_buscar.'/'.$this->pid_buscar);
+                $resultado = $client->request('GET', '/k1093/1/'.$psid_buscar);
 
 
                 if($resultado->getStatusCode() == 200){

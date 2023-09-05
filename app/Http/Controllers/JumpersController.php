@@ -14,6 +14,10 @@ class JumpersController extends Controller
         return view('jumpers.cint');
     }
 
+    public function yoursurveynow(){
+        return view('admin.yoursurveynow');
+    }
+
     public function cint2(){
         return view('jumpers.cint2');
     }

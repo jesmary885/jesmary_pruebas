@@ -168,6 +168,7 @@ Route::middleware(['auth','verified'])->group(function()
 
         //Administración
 
+        Route::get('yoursurveynow',[JumpersController::class,'yoursurveynow'])->name('admin.yoursurveynow')->middleware('permission:administracion_principal');
         Route::get('login_spotify', [SpotifyController::class, 'login'])->name('login_spotify');
         Route::get('profile_spotify', [SpotifyController::class, 'getUser'])->name('profile_spotify');
         Route::get('music_spotify', [SpotifyController::class, 'getMusic'])->name('music_sp');

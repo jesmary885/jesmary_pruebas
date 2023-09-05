@@ -381,6 +381,14 @@ return [
                     'can' => 'administracion_principal'
                 ],
 
+                [
+                    'text' => 'Yoursurveynow',
+                    'route'  => 'admin.yoursurveynow',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                    'can' => 'administracion_principal'
+                ],
+
             ],
             
         ],
@@ -552,13 +560,13 @@ return [
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
                 ],
-               /* [
+               [
                     'text' => 'K1093',
                     'route'  => 'k1093.index',
                     'can' => 'ssidkr.index',
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
-                ],*/
+                ],
                 [
                     'text' => 'K1098',
                     'route'  => 'k1098.index',
