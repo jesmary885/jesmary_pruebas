@@ -1,7 +1,7 @@
 <div>
     <div class="card">
         <div class="card-header row flex justify-between">
-            <div class="flex-grow-1"">
+            <div class="flex-grow-1">
                 <input wire:model="search" placeholder="Ingrese el nombre del marketplace a buscar" class="form-control">
             </div>
             @can('admin.sales')

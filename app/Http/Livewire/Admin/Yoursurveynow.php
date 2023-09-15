@@ -223,12 +223,12 @@ class Yoursurveynow extends Component
              
                 if($elem3 == 0){
                    
-                    $resultado = $client->request('GET', '/k1000_s2/1/'.$psid_buscar.'/'.$pid_buscar_def.'/'.$elem1.'/'.$elem2);
+                    $resultado = $client->request('GET', '/k1000_s2/2/'.$psid_buscar.'/'.$pid_buscar_def.'/'.$elem1.'/'.$elem2);
 
                 }
 
                 else{
-                    $resultado = $client->request('GET', '/k1000_s3/1/'.$psid_buscar.'/'.$pid_buscar_def.'/'.$elem1.'/'.$elem2.'/'.$elem3);
+                    $resultado = $client->request('GET', '/k1000_s3/2/'.$psid_buscar.'/'.$pid_buscar_def.'/'.$elem1.'/'.$elem2.'/'.$elem3);
                 }
 
 

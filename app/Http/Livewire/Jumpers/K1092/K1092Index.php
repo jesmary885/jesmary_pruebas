@@ -285,8 +285,14 @@ class K1092Index extends Component
                     if(session('psid')) $this->psid_buscar = substr($this->search,($busqueda_id - 22),11).substr(session('psid'),11,11);
                     else $this->psid_buscar = substr($this->search,($busqueda_id - 22),22);
 
-                                 
+                    $busqueda_hash= strpos($this->search, 'k=1092&_s=');
 
+                    if($busqueda_hash != false){
+                        $hash_buscar = substr($this->search,($busqueda_hash + 10 ));
+                    }
+                    else{
+                        $this->jumper_detect = 3;
+                    }
 
                     if($this->jumper_detect == 0){
 

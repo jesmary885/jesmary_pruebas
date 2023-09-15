@@ -59,10 +59,7 @@
                 
         </div>
 
-        @push('js')
-
-      
-
+    @push('js')
         <script>
             livewire.on('comment', function(ms){
                     Swal.fire({

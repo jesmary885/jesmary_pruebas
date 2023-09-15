@@ -317,6 +317,19 @@ class K2066Index extends Component
                     if(session('psid')) $this->psid_buscar = substr($this->search,($busqueda_id - 22),11).substr(session('psid'),11,11);
                     else $this->psid_buscar = substr($this->search,($busqueda_id - 22),22);
 
+                    $busqueda_morpace= strpos($this->search, 'morpace.com/');
+                    $busqueda_p= strpos($this->search, '?p=');
+                    $busqueda_project= strpos($this->search, 'I.Project=');
+
+                    if($busqueda_morpace != false || $busqueda_p != false || $busqueda_project != false){
+
+                    }
+
+                    else{
+
+                        $this->jumper_detect = 3;
+                    }
+
                 
                         if($this->jumper_detect == 0){
 

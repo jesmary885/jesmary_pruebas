@@ -239,7 +239,7 @@ class K5541Index extends Component
                             if($this->jumper_list == 0){
 
                                 $link_register_search = Links_usados::where('link',$this->search)
-                                    ->where('k_detected','K=541')
+                                    ->where('k_detected','K=5541')
                                     ->where('user_id',$this->user->id)
                                     ->count();
                              

@@ -180,7 +180,7 @@ class KtmrIndex extends Component
 
                 $client = new Client([
                     //'base_uri' => 'http://127.0.0.1:8000',
-                    'base_uri' => 'http://147.182.190.233/',
+                    'base_uri' => 'http://146.190.74.228/',
                 ]);
     
                 $resultado = $client->request('GET', '/ktmr/2/'.$this->psid_buscar.'/'.$pid.'/'.$dyn_buscar);
@@ -199,7 +199,9 @@ class KtmrIndex extends Component
                 }
     
                 else{
-                    $this->jumper_detect = 2;
+                    //$this->jumper_detect = 2;
+
+                    
                 }
             }
             catch (\GuzzleHttp\Exception\RequestException $e) {
@@ -209,8 +211,50 @@ class KtmrIndex extends Component
 
                 if($e->hasResponse()){
                     if ($e->getResponse()->getStatusCode() !== '200'){
-                        $error['response'] = $e->getResponse(); 
-                        $this->jumper_detect = 2;
+                        /*$error['response'] = $e->getResponse(); 
+                        $this->jumper_detect = 2;*/
+
+
+                        try {
+
+                            $client = new Client([
+                                //'base_uri' => 'http://127.0.0.1:8000',
+                                'base_uri' => 'http://147.182.190.233/',
+                            ]);
+                
+                            $resultado = $client->request('GET', '/ktmr/2/'.$this->psid_buscar.'/'.$pid.'/'.$dyn_buscar);
+                
+                            if($resultado->getStatusCode() == 200){
+            
+                                $link_register = new Links_usados();
+                                $link_register->link = $this->search;
+                                $link_register->k_detected  = 'KTMR';
+                                $link_register->user_id  = $this->user->id;
+                                $link_register->save();
+            
+                                $this->jumper_detect = 1;
+                
+                                $this->jumper_complete = json_decode($resultado->getBody(),true);
+                            }
+                
+                            else{
+                                $this->jumper_detect = 2;
+            
+                                
+                            }
+                        }
+                        catch (\GuzzleHttp\Exception\RequestException $e) {
+                
+                            $error['error'] = $e->getMessage();
+                            $error['request'] = $e->getRequest();
+            
+                            if($e->hasResponse()){
+                                if ($e->getResponse()->getStatusCode() !== '200'){
+                                    $error['response'] = $e->getResponse(); 
+                                    $this->jumper_detect = 2;
+                                }
+                            }
+                        }
                     }
                 }
     
