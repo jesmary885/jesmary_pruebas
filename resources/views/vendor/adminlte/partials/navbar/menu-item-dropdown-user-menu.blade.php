@@ -151,6 +151,11 @@
                 <i class="far fa-credit-card text-green mr-2"></i>
                 Reportar pago
         </a>
+
+        <a href="{{ route('ver_links_generados') }}" class="btn btn-default btn-flat btn-block">
+            <i class="	fas fa-redo-alt text-gray-500 mr-2"></i>
+                Jumpers generados
+        </a>
      
 
             <a href="{{ route('profile.show') }}" class="btn btn-default btn-flat btn-block">

@@ -1,19 +1,34 @@
-<div x-data="{jumper_2: @entangle('jumper_2'),points_user: @entangle('points_user'), is_high: @entangle('is_high'),is_basic: @entangle('is_basic'), calc_link: @entangle('calc_link'), pid: @entangle('pid_new'), psid: @entangle('psid_register'), jumper_detect: @entangle('jumper_detect'), no_detect: @entangle('no_detect'), k_detect: @entangle('k_detect'), no_jumpear: @entangle('no_jumpear'),points_user_positive: @entangle('points_user_positive'),points_user_negative: @entangle('points_user_negative')}">
+<div x-data="{canj: @entangle('canj'),jumper_2: @entangle('jumper_2'),points_user: @entangle('points_user'), is_high: @entangle('is_high'),is_basic: @entangle('is_basic'), calc_link: @entangle('calc_link'), pid: @entangle('pid_new'), psid: @entangle('psid_register'), jumper_detect: @entangle('jumper_detect'), no_detect: @entangle('no_detect'), k_detect: @entangle('k_detect'), no_jumpear: @entangle('no_jumpear'),points_user_positive: @entangle('points_user_positive'),points_user_negative: @entangle('points_user_negative')}">
 
+    <div class="callout callout-info"
+        :class="{'hidden': (canj == 0)}">
+        <h5 class="mb-1" ><i class="fas fa-info"></i>nformación</h5>
+        <p class="text-xs text-gray-300 text-justify">
+            Puedes canjear 1$ de tu saldo en página por 5 jumpers adicionales de K1083, haciendo click en el botón  Canjear 
+
+        </p>
+        
+    </div>
+    
     <div class="row">
-
-    <div class="col-12 col-sm-12 col-md-6">
-        <div class="info-box mb-3">
-        <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-calculator"></i></span>
-        <div class="info-box-content">
-        <span class="info-box-text">Jumpers K1083 generados en el día</span>
-        <span class="info-box-number text-lg">{{$total_jump_dia}}</span>
+        <div class="col-12 col-sm-12 col-md-6">
+            <div class="info-box mb-3">
+                <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-calculator"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Jumpers K1083 generados en el día</span>
+                    <span class="info-box-number text-lg">{{$total_jump_dia}}</span>
+                </div>
+                <div>
+                    <button type="submit"
+                            class="btn bg-info btn-md ml-2 mt-2"
+                            :class="{'hidden': (canj == 0)}"
+                            wire:click="canjear()" 
+                            title="Canjear saldo en página por 5 jumpers extras">
+                            <i class="fas fa-cash-register"></i> Canjear
+                    </button> 
+                </div>
+            </div>
         </div>
-
-        </div>
-
-        </div>
-
     </div>    
 
 <div class="card">

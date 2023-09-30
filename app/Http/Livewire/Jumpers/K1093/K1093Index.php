@@ -166,11 +166,16 @@ class K1093Index extends Component
 
                 if($resultado->getStatusCode() == 200){
 
+                    $this->jumper_complete = json_decode($resultado->getBody(),true);
+
                     $link_register = new Links_usados();
                     $link_register->link = $this->search;
                     $link_register->k_detected  = 'K=1093';
                     $link_register->user_id  = $this->user->id;
+                    $link_register->link_resultado = $this->jumper_complete['jumper'];
                     $link_register->save();
+
+                    
 
                     /*$jump1 = json_decode($resultado->getBody(),true);
 
@@ -211,7 +216,7 @@ class K1093Index extends Component
 
                     }*/
 
-                    $this->jumper_complete = json_decode($resultado->getBody(),true);
+                   
 
 
                     $this->busqueda_link = Link::where('psid',substr($psid_buscar,0,5))->first();

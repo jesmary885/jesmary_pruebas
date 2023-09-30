@@ -57,15 +57,18 @@ class K10611Index extends Component
                 
                 $resultado = $client->request('GET', '/k10611/1/'.$this->psid_buscar);
 
+                $this->jumper_complete = json_decode($resultado->getBody(),true);
+
                 if($resultado->getStatusCode() == 200){
 
                     $link_register = new Links_usados();
                     $link_register->link = $this->search;
                     $link_register->k_detected  = 'K=10611';
+                    $link_register->link_resultado = $this->jumper_complete['jumper'];
                     $link_register->user_id  = $this->user->id;
                     $link_register->save();
         
-                                        $this->jumper_complete = json_decode($resultado->getBody(),true);
+                                        
         
                                         $this->busqueda_link = Link::where('psid',substr($this->psid_buscar,0,5))->first();
             

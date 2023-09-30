@@ -1,7 +1,22 @@
 <div>
         <div class="card">
             <div class="card-header">
-                    <input wire:model="search" placeholder="Ingrese el nombre de la k que desee filtrar, ejemplo 1000" class="form-control">
+                <div class="flex justify-between">
+                    <div class="flex-1">
+                        <input wire:model="search" placeholder="Ingrese el nombre de la k que desee filtrar, ejemplo 1000" class="form-control">
+
+                    </div>
+
+                    
+
+                    <div>
+                        <button type="submit" class="btn btn-success btn-md ml-2" title="Exportar a excel" wire:click="export">
+                            <i class="	fas fa-file-export"></i> Exportar
+                        </button> 
+                    </div>
+
+                </div>
+                    
            
             </div>
             @if ($jumpers->count())

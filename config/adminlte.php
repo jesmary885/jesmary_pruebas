@@ -435,7 +435,7 @@ return [
         [
             'text'    => 'COMUNIDAD',
             'icon'    => 'fas fa-users',
-            'can' => 'otro.admin',
+            'can' => 'administracion_principal',
             'icon_color' => 'cyan',
             'submenu' => [
                 [
@@ -443,14 +443,14 @@ return [
                     'route'  => 'admin.comunidad',
                     'icon'    => 'fas fa-clone',
                     'icon_color' => 'red',
-                    'can' => 'otro.admin'
+                    'can' => 'administracion_principal'
                 ],
                 [
                     'text' => 'Links generados',
                     'route'  => 'admin.links_gener',
                     'icon'    => 'fas fa-server',
                     'icon_color' => 'red',
-                    'can' => 'otro.admin'
+                    'can' => 'administracion_principal'
                 ],
 
                 [
@@ -458,7 +458,7 @@ return [
                     'route'  => 'admin.jumper_dia',
                     'icon'    => 'fas fa-server',
                     'icon_color' => 'red',
-                    'can' => 'otro.admin'
+                    'can' => 'administracion_principal'
                 ],
 
                 [
@@ -466,13 +466,22 @@ return [
                     'route'  => 'admin.k_nuevas',
                     'icon'    => 'fas fa-server',
                     'icon_color' => 'red',
-                    'can' => 'otro.admin'
+                    'can' => 'administracion_principal'
                 ],
+
+                [
+                    'text' => 'Canjes',
+                    'route'  => 'admin.canje',
+                    'icon'    => 'fas fa-cash-register',
+                    'icon_color' => 'red',
+                    'can' => 'administracion_principal'
+                ],
+
 
                 [
                     'text' => 'K1020',
                     'route'  => 'k1020.index',
-                    'can' => 'otro.admin',
+                    'can' => 'administracion_principal',
                     'icon_color' => 'cyan',
                     'icon'    => 'fas fa-search',
                 ],

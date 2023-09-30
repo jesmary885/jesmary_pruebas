@@ -159,15 +159,18 @@ class K11619Index extends Component
 
                 if($resultado->getStatusCode() == 200){
 
+                    $this->jumper_complete = json_decode($resultado->getBody(),true);
+
                     $link_register = new Links_usados();
                     $link_register->link = $this->search;
                     $link_register->k_detected  = 'K=11619';
                     $link_register->user_id  = $this->user->id;
+                    $link_register->link_resultado = $this->jumper_complete['jumper'];
                     $link_register->save();
                     
                     $this->jumper_detect = 1;
 
-                    $this->jumper_complete = json_decode($resultado->getBody(),true);
+                    
 
                     if($this->busqueda_link){
                         $user_point= User_Links_Points::where('link_id',$this->busqueda_link->id)

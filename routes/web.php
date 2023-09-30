@@ -7,6 +7,7 @@ use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JumpersController;
+use App\Http\Controllers\LinksGenradosController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\MarketplaceController;
@@ -149,6 +150,10 @@ Route::middleware(['auth','verified'])->group(function()
         //PSID
         Route::get('register_psid',[PsidController::class,'index_psid'])->name('registro.psid');
         Route::get('limpiar_psid',[PsidController::class,'limpiar_psid'])->name('limpiar.psid');
+
+        //VER LINKS GENERADOS
+
+        Route::get('links_generados',[LinksGenradosController::class,'index'])->name('ver_links_generados');
        
         //PID
         Route::get('register_pid',[PsidController::class,'index_pid'])->name('registro.pid');
@@ -160,11 +165,12 @@ Route::middleware(['auth','verified'])->group(function()
 
         //COMUNIDAD
 
-        Route::get('admin_links_gener', [AdminController::class, 'links_gener'])->name('admin.links_gener')->middleware('permission:otro.admin');
-        Route::get('admin_k_nuevas', [AdminController::class, 'k_nuevas'])->name('admin.k_nuevas')->middleware('permission:otro.admin');
-        Route::get('admin_comunidad', [AdminController::class, 'comunidad'])->name('admin.comunidad')->middleware('permission:otro.admin');
-        Route::get('admin_jumper_dia', [AdminController::class, 'jumper_dia'])->name('admin.jumper_dia')->middleware('permission:otro.admin');
-        Route::get('k1020', [JumpersController::class, 'k1020'])->name('k1020.index')->middleware('permission:otro.admin');
+        Route::get('admin_links_gener', [AdminController::class, 'links_gener'])->name('admin.links_gener')->middleware('permission:administracion_principal');
+        Route::get('admin_k_nuevas', [AdminController::class, 'k_nuevas'])->name('admin.k_nuevas')->middleware('permission:administracion_principal');
+        Route::get('admin_comunidad', [AdminController::class, 'comunidad'])->name('admin.comunidad')->middleware('permission:administracion_principal');
+        Route::get('admin_jumper_dia', [AdminController::class, 'jumper_dia'])->name('admin.jumper_dia')->middleware('permission:administracion_principal');
+        Route::get('admin_canje', [AdminController::class, 'canje'])->name('admin.canje')->middleware('permission:administracion_principal');
+        Route::get('k1020', [JumpersController::class, 'k1020'])->name('k1020.index')->middleware('permission:administracion_principal');
 
         //Administración
 

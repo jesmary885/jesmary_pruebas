@@ -6,6 +6,7 @@ use App\Models\Antibot;
 use App\Models\Comments;
 use App\Models\Link;
 use App\Models\Links_usados;
+use App\Models\RecargaLink;
 use App\Models\User;
 use App\Models\User_Links_Points;
 use DateTime;
@@ -18,9 +19,9 @@ class K1000Index extends Component
     use WithPagination;
     protected $paginationTheme = "bootstrap";
 
-    public  $total_jump_dia,$user,$jumper_complete = [],$jumper_list = 0,$busqueda_link,$comment_new_psid_register,$pid_register_high,$psid_register_bh,$high_register_bh,$basic_register_bh,$posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $psid_register=0,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$calc_link,$jumper_select,$points_user_positive, $points_user_negative, $jumper_detect_k ='',$pid_manual,$pid_detectado = 'si',$pid_buscar,$operacion;
+    public  $recargas_user_dia,$canj=0,$total_jump_dia,$user,$jumper_complete = [],$jumper_list = 0,$busqueda_link,$comment_new_psid_register,$pid_register_high,$psid_register_bh,$high_register_bh,$basic_register_bh,$posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $psid_register=0,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$calc_link,$jumper_select,$points_user_positive, $points_user_negative, $jumper_detect_k ='',$pid_manual,$pid_detectado = 'si',$pid_buscar,$operacion;
 
-    protected $listeners = ['render' => 'render', 'registro_psid' => 'registro_psid', 'verific' => 'verific'];
+    protected $listeners = ['render' => 'render', 'registro_psid' => 'registro_psid', 'verific' => 'verific', 'confirmacion' => 'confirmacion'];
     
     public function mount(){
         $this->user_auth =  auth()->user()->id;
@@ -241,13 +242,14 @@ class K1000Index extends Component
                
                 if($resultado->getStatusCode() == 200){
 
+                    $this->jumper_complete = json_decode($resultado->getBody(),true);
+
                     $link_register = new Links_usados();
                     $link_register->link = $this->search;
+                    $link_register->link_resultado = $this->jumper_complete['jumper'];
                     $link_register->k_detected  = 'K=1000_NEW';
                     $link_register->user_id  = $this->user->id;
                     $link_register->save();
-
-                    $this->jumper_complete = json_decode($resultado->getBody(),true);
 
                     $this->busqueda_link = Link::where('psid',substr($psid_buscar,0,5))->first();
 
@@ -412,6 +414,17 @@ class K1000Index extends Component
             ->where('user_id',$this->user->id)
             ->whereDate('created_at',$date_actual)
             ->count();
+
+        if($this->total_jump_dia == 10) {
+            if($this->user->balance >= 1) {
+                $this->recargas_user_dia=RecargaLink::where('user_id',$this->user->id)
+                    ->where('k','K=1000_NEW')
+                    ->whereDate('created_at',$date_actual)
+                    ->count();
+                    
+                if($this->recargas_user_dia <= 1) $this->canj = 1;
+            }
+        }
 
 
         if($long_psid>=5){
@@ -1224,6 +1237,43 @@ class K1000Index extends Component
         return view('livewire.jumpers.k1000-p2.k1000-index',compact('jumper','comments','subs_psid','busqueda_link_def'));
     }
 
+    public function canjear(){
+        if($this->total_jump_dia == 10) {
+            if($this->user->balance >= 1) {
+                if($this->recargas_user_dia <= 1){
+                    $this->emit('canjear', '¿Esta seguro de realizar el canje?','jumpers.k1000-p2.k1000-index','confirmacion','El caje se ha realizado');
+                }
+            }
+        }
+    }
+
+    public function confirmacion(){
+
+        $date = new DateTime();
+        $date_actual= $date->format('Y-m-d');
+
+        $jumpers = Links_usados::where('k_detected','K=1000_NEW')
+            ->where('user_id',$this->user->id)
+            ->whereDate('created_at',$date_actual)
+            ->take('5')
+            ->delete();
+
+        $balance = $this->user->balance - 1;
+
+        $this->user->update([
+            'balance' => $balance
+        ]);
+
+        $recarga = new RecargaLink();
+        $recarga->k = 'K=1000_NEW';
+        $recarga->user_id = $this->user->id;
+        $recarga->save();
+
+        $this->canj = 0;
+
+        $this->emitTo('jumpers.k1000-p2.k1000-index','render');
+    }
+
     public function positivo($jumper_id){
 
         $user_point= User_Links_Points::where('link_id',$jumper_id)
@@ -1269,7 +1319,7 @@ class K1000Index extends Component
 
         }
 
-        $this->emitTo('jumpers.k1000-p.k1000-index','render');
+        $this->emitTo('jumpers.k1000-p2.k1000-index','render');
     }
 
     public function negativo($jumper_id){

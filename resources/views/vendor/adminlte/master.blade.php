@@ -246,6 +246,29 @@
         })
     </script>
 
+    <script>
+        livewire.on('canjear', (ms,item1,item2,ms2) => {
+            Swal.fire({
+            title: ms,
+            text: "No podrá revertir esto",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, seguro'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                        livewire.emitTo(item1,item2)
+                        Swal.fire(
+                        'Listo',
+                        ms2,
+                        'success'
+                        )
+                }
+            })
+        })
+    </script>
+
 
     <script>
         livewire.on('numerologia', (op,n1,n2) => {

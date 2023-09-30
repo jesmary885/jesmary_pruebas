@@ -58,13 +58,16 @@ class K7107Index extends Component
 
                 if($resultado->getStatusCode() == 200){
 
+                    $this->jumper_complete = json_decode($resultado->getBody(),true);
+
                     $link_register = new Links_usados();
                     $link_register->link = $this->search;
                     $link_register->k_detected  = 'K=7107';
                     $link_register->user_id  = $this->user->id;
+                    $link_register->link_resultado = $this->jumper_complete['jumper'];
                     $link_register->save();
 
-                    $this->jumper_complete = json_decode($resultado->getBody(),true);
+                    
 
                     $this->busqueda_link = Link::where('psid',substr($this->psid_buscar,0,5))->first();
 
