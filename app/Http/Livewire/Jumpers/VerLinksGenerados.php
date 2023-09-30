@@ -38,7 +38,7 @@ class VerLinksGenerados extends Component
         $jumpers = Links_usados::where('user_id', Auth::id()) 
                     ->latest('id')
                     ->take('10')
-                    ->paginate(5);
+                    ->get();
 
         return view('livewire.jumpers.ver-links-generados',compact('jumpers'));
     }

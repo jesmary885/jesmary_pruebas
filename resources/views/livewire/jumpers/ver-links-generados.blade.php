@@ -12,17 +12,25 @@
                             <table class="table text-sm table-bordered table-responsive-lg table-responsive-md table-responsive-sm">
                                 <thead class="text-xs uppercase bg-gray-700 text-gray-400">
                                     <tr>
+                                        <th class="text-center">Acción</th>
                                         <th class="text-center py-3">Fecha</th>
                                         <th class="text-center">Tipo de Jumper</th>
                                         <th class="text-center">Link inicial</th>
                                         <th class="text-center">Jumper generado</th>
                                
-                                        <th></th>
+                                        
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($jumpers as $jumper)
                                             <tr class="bg-gray-800 border-gray-700 hover:bg-gray-600">
+
+                                                <td class="text-center">
+
+                                                    <div class="flex justify-center">
+                                                        <button onclick="copiarAlPortapapeles('jumper_copy_{{$jumper->id}}')" class="btn btn-sm btn-success text-bold" title="{{__('messages.copiar_portapapeles')}}" id="button_copy">Copiar</button> 
+                                                    </div>
+                                                </td>
             
                                                 <td class="text-center">{{\Carbon\Carbon::parse($jumper->created_at)->format('d-m-Y H:i:s')}}</td>
                                                 <td class="text-center">{{$jumper->k_detected}}</td>
@@ -30,20 +38,13 @@
                                                 <td class="text-justify" id="jumper_copy_{{$jumper->id}}">{{$jumper->link_resultado}}</td>
 
                                                                 
-                                                <td class="text-center">
-
-                                                    <div class="flex justify-center">
-                                                        <button onclick="copiarAlPortapapeles('jumper_copy_{{$jumper->id}}')" class="btn btn-sm btn-success text-bold" title="{{__('messages.copiar_portapapeles')}}" id="button_copy">Copiar</button> 
-                                                    </div>
-                                                </td>
+                                                
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="card-footer">
-                                {{$jumpers->links()}}
-                            </div>
+                          
                         @else
                              <div class="card-body">
                                 <strong>No hay registros</strong>
