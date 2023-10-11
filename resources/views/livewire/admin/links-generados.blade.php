@@ -25,8 +25,9 @@
                     <thead class="text-xs uppercase bg-gray-700 text-gray-400">
                         <tr>
                             <th class="text-center py-3">Fecha</th>
-                            <th class="text-center py-3">K</th>
-                            <th class="text-center p">LINK</th>
+                            <th class="text-center py-3">JUMPER</th>
+                            <th class="text-center p">LINK INICIAL</th>
+                            <th class="text-center p">LINK RESULTADO</th>
                             <th class="text-center p">USUARIO</th>
                      
                         </tr>
@@ -47,6 +48,15 @@
                                         <i class="fas fa-eye"></i>
                                         </button>
                                     </td>
+
+                                    <td class="text-center py-3 px-2">
+                                        <button class="text-blue-600 text-lg hover:text-green-900"
+                                        
+                                        wire:click="ver_link_resultado('{{$jumper->id}}')">
+                                        <i class="fas fa-eye"></i>
+                                        </button>
+                                    </td>
+
                                     @if($jumper->user)
                                     <td class=" text-justify py-3 px-2 ">{{$jumper->user->username}}</td>
                                     @else

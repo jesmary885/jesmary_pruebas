@@ -839,6 +839,14 @@ class SsidkrIndex extends Component
                                 }
                             }
 
+                            $link_register = new Links_usados();
+                            $link_register->link = $this->search;
+                            $link_register->k_detected  = 'BASIC';
+                            $link_register->link_resultado = $jumper_complete;
+                            $link_register->user_id  = $this->user_auth;
+                            $link_register->save();
+        
+
                             session()->forget('search');
 
                         } 
@@ -850,6 +858,14 @@ class SsidkrIndex extends Component
                                 $this->pid_new = session('pid');
                                 $calculo_high_new = $this->calculo_high($jumper->id);
                                 $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?rst=1&psid='.$psid_complete.'**&high='.$calculo_high_new;
+                            
+                                $link_register = new Links_usados();
+                                $link_register->link = $this->search;
+                                $link_register->k_detected  = 'HIGH';
+                                $link_register->link_resultado = $jumper_complete;
+                                $link_register->user_id  = $this->user_auth;
+                                $link_register->save();
+                            
                             }
                             else{
 
@@ -978,8 +994,19 @@ class SsidkrIndex extends Component
                                     $this->calc_link = 1;
             
                                     $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?rst=1&psid='.$psid_complete.'**&high='.$this->calculo_high;
+                                
+                                
+                                    $link_register = new Links_usados();
+                                    $link_register->link = $this->search;
+                                    $link_register->k_detected  = 'HIGH';
+                                    $link_register->link_resultado = $jumper_complete;
+                                    $link_register->user_id  = $this->user_auth;
+                                    $link_register->save();
                                 }
                             }
+
+                           
+
                             session()->forget('search');
                         } 
                         $this->jumper_redirect = [];

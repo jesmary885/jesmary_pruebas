@@ -40,6 +40,12 @@ class LinksGenerados extends Component
         $this->emit('comment',$jump->link);
     }
 
+    public function ver_link_resultado($jumper){
+        $jump = Links_usados::where('id',$jumper)->first();
+
+        $this->emit('comment',$jump->link_resultado);
+    }
+
     public function export(){
 
         $links = Links_usados::where('k_detected', 'LIKE', '%' . $this->search . '%')
