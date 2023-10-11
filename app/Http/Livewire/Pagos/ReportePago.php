@@ -21,7 +21,7 @@ class ReportePago extends Component
 
     protected $rules = [
         'metodo_id' => 'required',
-        'nro_referencia' => 'required|numeric|unique:pago_registros_recargas||min_digits:4',
+        'nro_referencia' => 'required|numeric|unique:pago_registros_recargas|min_digits:6',
         'plan' => 'required',
         'fecha_pago' => 'required',
         'file' => 'required|image',

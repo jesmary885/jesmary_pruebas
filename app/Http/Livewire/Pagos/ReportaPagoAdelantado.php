@@ -24,7 +24,7 @@ class ReportaPagoAdelantado extends Component
     protected $rules = [
         'plan' => 'required',
         'metodo_id' => 'required',
-        'nro_referencia' => 'required|numeric|unique:pago_registros_recargas|min_digits:4',
+        'nro_referencia' => 'required|numeric|unique:pago_registros_recargas|min_digits:6',
         'fecha_pago' => 'required',
         'file' => 'required|image',
     ];

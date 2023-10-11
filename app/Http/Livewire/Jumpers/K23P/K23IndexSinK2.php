@@ -422,6 +422,10 @@ class K23IndexSinK2 extends Component
 
         if($long_psid>=5){
 
+            $busqueda_k23_ = strpos($this->search, 'k=23&');
+
+            if($busqueda_k23_ !== false){
+
                         $busqueda_id= strpos($this->search, '**');
 
                         if(session('psid')) $this->psid_buscar = substr($this->search,($busqueda_id - 22),11).substr(session('psid'),11,11);
@@ -1192,6 +1196,12 @@ class K23IndexSinK2 extends Component
         
                         
                 session()->forget('search');
+
+               
+            } 
+            else{
+                $this->jumper_detect = 3;
+            }
         }
         else{
             $this->calc_link = 0;

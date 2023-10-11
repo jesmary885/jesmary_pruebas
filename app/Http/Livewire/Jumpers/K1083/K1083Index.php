@@ -277,7 +277,7 @@ class K1083Index extends Component
             ->whereDate('created_at',$date_actual)
             ->count();
 
-        if($this->total_jump_dia == 4) {
+        if($this->total_jump_dia == 10) {
                 if($this->user->balance >= 1) {
                     $this->recargas_user_dia=RecargaLink::where('user_id',$this->user->id)
                         ->where('k','K=1083')
@@ -503,7 +503,7 @@ class K1083Index extends Component
     }
 
     public function canjear(){
-        if($this->total_jump_dia == 4) {
+        if($this->total_jump_dia == 10) {
             if($this->user->balance >= 1) {
                 if($this->recargas_user_dia <= 1){
                     $this->emit('canjear', '¿Esta seguro de realizar el canje?','jumpers.k1083.k1083-index','confirmacion','El caje se ha realizado');
