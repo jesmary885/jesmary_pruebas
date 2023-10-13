@@ -23,6 +23,8 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('fecha_corte:desact')->everyMinute(); // corte cada minuto
         $schedule->command('renovation:membresia')->everyMinute(); // renovacion cada minuto
+        $schedule->command('clear:jump')->dailyAt('00:00');
+    
     }
 
     /**
