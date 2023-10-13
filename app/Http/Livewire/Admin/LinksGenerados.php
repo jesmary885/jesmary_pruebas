@@ -48,9 +48,7 @@ class LinksGenerados extends Component
 
     public function export(){
 
-        $links = Links_usados::where('k_detected', 'LIKE', '%' . $this->search . '%')
-        ->latest('id')
-        ->get();
+        $links = Links_usados::all();
 
         return Excel::download(new LinksExport($links), 'Links_generados.xlsx');
 

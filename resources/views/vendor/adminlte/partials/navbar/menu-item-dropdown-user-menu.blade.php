@@ -146,20 +146,25 @@
     <ul class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
 
         <li class="user-footer">
+
+            <a href="{{ route('informacion') }}" class="btn btn-default btn-flat btn-block">
+                <i class="	fas fa-info text-cyan-500 mr-2"></i>
+                {{__('messages.informacion_interes')}}
+            </a>
     
         <a href="{{ route('reporte_pago') }}" class="btn btn-default btn-flat btn-block">
-                <i class="far fa-credit-card text-green mr-2"></i>
+                <i class="far fa-credit-card text-cyan-500 mr-2"></i>
                 Reportar pago
         </a>
 
         <a href="{{ route('ver_links_generados') }}" class="btn btn-default btn-flat btn-block">
-            <i class="	fas fa-redo-alt text-gray-500 mr-2"></i>
+            <i class="	fas fa-redo-alt text-cyan-500 mr-2"></i>
                 Jumpers generados
         </a>
-     
+
 
             <a href="{{ route('profile.show') }}" class="btn btn-default btn-flat btn-block">
-                    <i class="fa fa-fw fa-user text-lightblue"></i>
+                    <i class="fa fa-fw fa-user text-red"></i>
                     {{ __('adminlte::menu.profile') }}
             </a>
 

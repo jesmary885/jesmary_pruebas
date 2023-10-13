@@ -151,9 +151,12 @@ Route::middleware(['auth','verified'])->group(function()
         Route::get('register_psid',[PsidController::class,'index_psid'])->name('registro.psid');
         Route::get('limpiar_psid',[PsidController::class,'limpiar_psid'])->name('limpiar.psid');
 
-        //VER LINKS GENERADOS
+        //VER LINKS GENERADOS E INFORMACIOND E INTERES
 
         Route::get('links_generados',[LinksGenradosController::class,'index'])->name('ver_links_generados');
+        Route::get('informacion',[LinksGenradosController::class,'index_informacion'])->name('informacion');
+
+        Route::get('info',[LinksGenradosController::class,'info'])->name('info');
        
         //PID
         Route::get('register_pid',[PsidController::class,'index_pid'])->name('registro.pid');
