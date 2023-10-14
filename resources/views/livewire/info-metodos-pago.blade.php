@@ -190,7 +190,9 @@
 
     <script>
         Livewire.on('volver', function(){
-            window.history.back();      
+           // window.history.back();     
+            
+            window.location.href = "{{ route('home')}}";
         })
     </script>
 
