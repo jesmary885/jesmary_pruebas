@@ -155,13 +155,6 @@
             
           </div>
 
-          <div class="text-gray-400 flex">
-            <p class="mr-1">Haz click</p>
-            @livewire('info-metodos-pago') 
-            <p class="ml-1"> {{__('messages.ver_datos_cuentas')}}</p>
-            
-          </div>
-
         </div>
     </div>
 
@@ -201,13 +194,6 @@
           <p class="mr-1">Haz click</p>
           @livewire('info-planes') 
           <p class="ml-1"> {{__('messages.ver_datos_precios')}}</p>
-          
-        </div>
-
-        <div class="text-gray-400 flex">
-          <p class="mr-1">Haz click</p>
-          @livewire('info-metodos-pago') 
-          <p class="ml-1"> {{__('messages.ver_datos_cuentas')}}</p>
           
         </div>
        

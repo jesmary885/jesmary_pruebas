@@ -177,8 +177,6 @@
         })
     </script>
 
-
-
     <script>
         livewire.on('error', function(ms){
             toastr.options={

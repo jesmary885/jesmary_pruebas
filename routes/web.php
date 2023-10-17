@@ -54,6 +54,7 @@ Route::middleware(['auth','verified'])->group(function()
 
      //REPORTAR PAGO
      Route::get('reportar_pago',[PagoController::class,'index'])->name('reporte_pago');
+     Route::get('informacion',[LinksGenradosController::class,'index_informacion'])->name('informacion');
      
     Route::middleware(['active'])->group(function(){
 
@@ -154,7 +155,7 @@ Route::middleware(['auth','verified'])->group(function()
         //VER LINKS GENERADOS E INFORMACIOND E INTERES
 
         Route::get('links_generados',[LinksGenradosController::class,'index'])->name('ver_links_generados');
-        Route::get('informacion',[LinksGenradosController::class,'index_informacion'])->name('informacion');
+        
 
         Route::get('info',[LinksGenradosController::class,'info'])->name('info');
        
