@@ -81,7 +81,7 @@
                             
                                     <h3 class="timeline-header">BINANCE</h3>
                                     <div class="timeline-body">
-                                        <p class="info-box-text">Pay ID= 445952798</p>
+                                        <p class="info-box-text">Pay ID: 445952798</p>
                  
                                     </div>
                                     <div class="timeline-footer">
@@ -96,7 +96,7 @@
                             
                                     <h3 class="timeline-header">PAYEER PAY</h3>
                                     <div class="timeline-body">
-                                        <p class="info-box-text">Pay ID= P1064078846</p>
+                                        <p class="info-box-text">Pay ID: P1064078846</p>
                  
                                     </div>
                                     <div class="timeline-footer">
@@ -106,7 +106,7 @@
                             </div>
                             
                             <div class="time-label">
-                                <span class="bg-red">PLANES</span>
+                                <span class="bg-red">Planes</span>
                             </div>
                             
                             
