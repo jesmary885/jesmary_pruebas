@@ -67,6 +67,7 @@ Route::middleware(['auth','verified'])->group(function()
         Route::get('k23-P',[JumpersController::class,'k23_poderosa_SK2'])->name('k23_poderosa_SK2.index')->middleware('permission:menu.premium');
         Route::get('k1083',[JumpersController::class,'k1083'])->name('k1083.index')->middleware('permission:menu.premium');
         Route::get('ktmr_ssi',[JumpersController::class,'ktmr_ssi'])->name('ktmr_ssi.index')->middleware('permission:menu.premium');
+        Route::get('ipso',[JumpersController::class,'ipso'])->name('ipso.index')->middleware('permission:menu.premium');
 
         Route::get('k1093',[JumpersController::class,'k1093'])->name('k1093.index');
         Route::get('k7107',[JumpersController::class,'k7107'])->name('k7107.index');

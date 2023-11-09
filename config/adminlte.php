@@ -838,6 +838,15 @@ return [
                 ],
 
                 [
+                    'text' => 'IPSO INTERACTIVE',
+                    'route'  => 'ipso.index',
+                    'can' => 'menu.premium',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+
+                ],
+
+                [
                     'text' => 'KTRMR SSI',
                     'route'  => 'ktmr_ssi.index',
                     'can' => 'menu.premium',

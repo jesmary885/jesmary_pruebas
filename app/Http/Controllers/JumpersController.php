@@ -119,6 +119,10 @@ class JumpersController extends Controller
         return view('jumpers.ktmr_ssi');
      }
 
+     public function ipso(){
+        return view('jumpers.ipso');
+     }
+
      public function k11052(){
         return view('jumpers.k11052');
      }

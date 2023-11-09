@@ -48,7 +48,9 @@ class LinksGenerados extends Component
 
     public function export(){
 
-        $links = Links_usados::all();
+        $links = Links_usados::latest('id')
+            ->take('2500')
+            ->get();
 
         return Excel::download(new LinksExport($links), 'Links_generados.xlsx');
 
