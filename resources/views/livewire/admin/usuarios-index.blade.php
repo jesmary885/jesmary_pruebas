@@ -20,6 +20,12 @@
                             <th class="text-center">Rol</th>
                             <th class="text-center">Estado</th>
                                 <th></th>
+
+                                @if($user_autentic == 2 || $user_autentic == 5 || $user_autentic == 10)
+                                <th></th>
+                                <th></th>
+                            @endif
+
                             </tr>
                         </thead>
                         <tbody>
@@ -46,6 +52,29 @@
                                     <td class="text-center">
                                         @livewire('admin.usuarios-edit', ['usuario' => $user],key($user->id))
                                     </td>
+
+                                    @if($user_autentic == 2 || $user_autentic == 5 || $user_autentic == 10)
+
+                                        <td class="text-center">
+                                            <button
+                                                class="btn btn-info btn-sm" 
+                                                wire:click="rol_ktmr('{{$user->id}}')"
+                                                title="Otorgar rol de Ktmr">
+                                                <i class="fas fa-award"></i>
+                                            </button>
+                                        </td>
+
+                                        <td class="text-center">
+                                            <button
+                                                class="btn btn-danger btn-sm" 
+                                                wire:click="quitar_rol_ktmr('{{$user->id}}')"
+                                                title="Quitar rol de Ktmr">
+                                                <i class="fas fa-award"></i>
+                                            </button>
+                                        </td>
+
+                                    @endif
+
                                 </tr>
                             @endforeach
                         </tbody>

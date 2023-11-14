@@ -516,6 +516,60 @@ return [
             'icon_color' => 'cyan',
             'icon'    => '	fas fa-sad-cry',
         ],
+
+        [
+            'text'    => 'ADMIN KTMR',
+            'icon'    => 'fas fa-file-invoice-dollar fa-fw',
+            'can' => 'administracion.ktmr',
+            'icon_color' => 'cyan',
+            'submenu' => [
+                [
+                    'text' => 'USUARIOS',
+                    'route'  => 'ktrm.administracion.index',
+                    'can' => 'administracion.ktmr',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+                [
+                    'text' => 'CUENTAS REGISTRADAS',
+                    'route'  => 'ktrm.administracion_cuentas.index',
+                    'can' => 'administracion.ktmr',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+
+                
+            ],            
+        ],
+
+
+        [
+            'text'    => 'SECCIÓN KTMR',
+            'icon'    => 'fas fa-search',
+            'can' => 'menu.ktmr',
+            'icon_color' => 'cyan',
+            'submenu' => [
+                [
+                    'text' => 'GENERADOR',
+                    'route'  => 'ktmr.generador.index',
+                    'can' => 'menu.ktmr',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+                [
+                    'text' => 'CUENTAS REGISTRADAS',
+                    'route'  => 'ktmr.cuentas.index',
+                    'can' => 'menu.ktmr',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+
+                
+            ],            
+        ],
+
+
+
         [
             'text'    => 'SSI',
             'icon'    => 'fas fa-search',

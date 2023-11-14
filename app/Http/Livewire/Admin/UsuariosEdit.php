@@ -33,7 +33,9 @@ class UsuariosEdit extends Component
         $this->balance = $this->usuario->balance;
         $this->plan = $this->usuario->type;
         $this->roles_id = $this->usuario->roles->first()->id;
-        $this->roles=Role::where('id','!=','1')->get();
+        $this->roles=Role::where('id','!=','1')
+            ->where('id','!=','13')
+            ->get();
         //$this->roles=Role::all();
     }
 

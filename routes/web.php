@@ -7,6 +7,7 @@ use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JumpersController;
+use App\Http\Controllers\KtmrController;
 use App\Http\Controllers\LinksGenradosController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
@@ -201,6 +202,14 @@ Route::middleware(['auth','verified'])->group(function()
         Route::get('marketplace_compra', [AdminController::class, 'marketplace_compra'])->name('admin.marketplace.compra')->middleware('permission:admin.marketplace.compras');
         Route::resource('roles', RoleController::class)->only('index','edit','update','destroy','create','store')->names('admin.roles')->middleware('permission:admin.roles');
         Route::get('comentarios', [AdminController::class, 'comentarios'])->name('admin.comentarios.index')->middleware('permission:administracion_principal');
+    
+        //KTMR
+        Route::get('generador_ktmr', [KtmrController::class, 'generador'])->name('ktmr.generador.index')->middleware('permission:menu.ktmr');
+        Route::get('cuentas_registradas_ktmr', [KtmrController::class, 'cuentas'])->name('ktmr.cuentas.index')->middleware('permission:menu.ktmr');
+
+        Route::get('administracion_usuarios_ktmr', [KtmrController::class, 'administracion'])->name('ktrm.administracion.index')->middleware('permission:administracion.ktmr');
+        Route::get('administracion_cuentas_ktmr', [KtmrController::class, 'administracion_cuentas'])->name('ktrm.administracion_cuentas.index')->middleware('permission:administracion.ktmr');
+    
     });
 });
 

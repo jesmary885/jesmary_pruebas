@@ -154,7 +154,12 @@
                 <div class="content w-full md:ml-12 md:mt-12  2xl:ml-16 2xl:mt-28  ">
                     <!--Titulo-->
                     <h1 class=" title s-center">
-                        <span class="line-1"> Domina los Jumpers</span>
+                      
+                            <span class="line-1"> Domina los Jumper</span>
+                            <span class="line-1">s</span>
+
+                 
+                        
                         <br>
                         <span class="line-2">Con Queryset</span>
                     </h1>

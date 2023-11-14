@@ -13,10 +13,15 @@ class UsuariosIndex extends Component
 
     protected $listeners = ['render' => 'render'];
 
-    public $search;
+    public $search,$user_autentic;
 
     public function updatingSearch(){
         $this->resetPage();
+    }
+
+    public function mount(){
+
+        $this->user_autentic = auth()->user()->id;
     }
 
      //propiedad computada
@@ -102,5 +107,34 @@ class UsuariosIndex extends Component
                 4=> "fas fa-heart-broken text-md text-gray-400 mt-3 mr-2",
                 5=> "fas fa-heart-broken text-md text-gray-400 mt-3 mr-2"];
         }
+    }
+
+    public function rol_ktmr($userID){
+
+        $user = User::where('id',$userID)->first();
+        $roles_user = $user->roles->all();
+        $inactivo = 0;
+
+        foreach($roles_user as $rol){
+            if($rol->id == 4) $inactivo = 1;
+        }
+
+        $user->assignRole('Usuario Ktmr');
+
+        if($inactivo == 1) $user->roles()->detach(4);
+
+        $this->emit('alert','Rol agregado correctamente');
+    }
+
+    public function quitar_rol_ktmr($userID){
+
+        $user = User::where('id',$userID)->first();
+        $roles_user_cant = $user->roles->count();
+
+        if($roles_user_cant == 1) $user->assignRole('Inactivo');
+
+        $user->roles()->detach(12);
+        
+        $this->emit('alert','Rol ktmr eliminado correctamente');
     }
 }
