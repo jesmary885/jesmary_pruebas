@@ -385,7 +385,7 @@ return [
                     'text' => 'Yoursurveynow',
                     'route'  => 'admin.yoursurveynow',
                     'icon_color' => 'red',
-                    'icon'    => '	fas fa-angle-right',
+                    'icon'    => 'fas fa-crown',
                     'can' => 'administracion_principal'
                 ],
 
@@ -516,6 +516,8 @@ return [
             'icon_color' => 'cyan',
             'icon'    => '	fas fa-sad-cry',
         ],
+
+       
 
         [
             'text'    => 'ADMIN KTMR',
@@ -932,6 +934,31 @@ return [
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
+            ],
+        ],
+
+        [
+            'text'    => 'PRODEGE',
+            'icon'    => 'fas fa-search',
+            'can' => ['ssidkr.index'],
+            'icon_color' => 'cyan',
+            'submenu' => [
+                [
+                    'text' => 'Buscador principal',
+                    'route'  => 'prodege.index',
+                    'can' => ['ssidkr.index'],
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                [
+                    'text' => 'Generador',
+                    'route'  => 'prodege.generador',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
             ],
         ],
 

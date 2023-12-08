@@ -88,7 +88,7 @@ class ReportePago extends Component
         }
 
         else{
-            if($user->balance>=10){
+            if($user->balance>=6){
                 return $this->payment_methods = PaymentMethods::all();
             }
             else{
@@ -217,10 +217,10 @@ class ReportePago extends Component
                     $new_pago->pago_premium = '0';
                 }
                 else{
-                    $new_pago->monto = '10';
+                    $new_pago->monto = '6';
                     $new_pago->status = 'pendiente';
                     $new_pago->pago_basico = '1';
-                    $new_pago->pago_premium = '4';
+                    $new_pago->pago_premium = '2.4';
                 }
 
                 
@@ -326,7 +326,7 @@ class ReportePago extends Component
                             $proxima_fecha = date("Y-m-d H:i:s",strtotime($fecha_actual."+ 30 days"));
                             $plan_nuevo = '30';
                             $this->type = "basico";
-                            $this->monto_pago = '10';
+                            $this->monto_pago = '6';
                             $user->roles()->sync(2);
                         } 
 

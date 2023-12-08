@@ -11,7 +11,7 @@ use GuzzleHttp\Client;
 
 class KtmrIndex extends Component
 {
-    public $user,$calculo = 0, $jumper_complete = "", $search, $psid_register=0,$pid_new=0,$type, $jumper_detect = 0,$busqueda_link,$psid_buscar,$operacion;
+    public $limit, $user,$calculo = 0, $jumper_complete = "", $search, $psid_register=0,$pid_new=0,$type, $jumper_detect = 0,$busqueda_link,$psid_buscar,$operacion;
 
     protected $listeners = ['render' => 'render', 'jumpear' => 'jumpear', 'verific' => 'verific', 'jump' => 'jump'];
 
@@ -23,6 +23,9 @@ class KtmrIndex extends Component
         $this->busqueda_link = "";
 
         $this->user = User::where('id',auth()->user()->id)->first();
+
+        if($this->user->id == '1') $this->limit == 19;
+        else $this->limit == 9;
     }
     
     public function numerologia(){

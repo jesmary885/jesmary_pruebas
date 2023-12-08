@@ -3,11 +3,9 @@
 
 <div class="flex justify-between">
     
-    <h1 class="text-lg ml-2"><i class="fas fa-th-list"></i> Prodege</h1>
+<h1 class="text-lg font-weight-bold text-cyan-400"> <i class="fas fa-spinner mr-1 text-cyan-400"></i>generador Prodege</h1>
 
-    <div class="justify-end">
-       {{-- @livewire('jumpers.cint.cint-create') --}}
-    </div>
+
 </div>
 
 @stop
@@ -18,8 +16,9 @@
             <strong>{{session('info')}}</strong>
         </div>
     @endif
-    
-    @livewire('jumpers.prodege.prodege-index') 
+
+   
+    @livewire('jumpers.prodege.generador') 
 @stop
 
 @section('css')

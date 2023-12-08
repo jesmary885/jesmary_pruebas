@@ -70,7 +70,7 @@ class ReportaPagoAdelantado extends Component
 
 
         elseif($this->plan == "membresia basica" ){
-            if($user->balance>=10){
+            if($user->balance>=6){
                 return $this->payment_methods = PaymentMethods::all();
             }
             else{
@@ -233,10 +233,10 @@ class ReportaPagoAdelantado extends Component
                         $new_pago->pago_premium = '0';
                     }
                     else{
-                        $new_pago->monto = '10';
+                        $new_pago->monto = '6';
                         $new_pago->status = 'pendiente';
                         $new_pago->pago_basico = '1';
-                        $new_pago->pago_premium = '4';
+                        $new_pago->pago_premium = '2.4';
                     }
 
                     $new_pago->plan = '30';                
@@ -346,7 +346,7 @@ class ReportaPagoAdelantado extends Component
 
                         if($this->plan == "membresia basica"){
                             $plan_nuevo = '30';
-                            $this->monto_pago = '10';
+                            $this->monto_pago = '6';
                             $this->type = "basico";
                             $user->roles()->sync(2);
 

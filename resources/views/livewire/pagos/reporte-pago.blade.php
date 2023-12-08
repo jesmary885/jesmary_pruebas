@@ -17,7 +17,7 @@
 
                         @if($user_page->type == 'premium 30' || $user_page->type == 'premium 10' || $user_page->type == 'premium 2' )
                             <p class="info-box-text"> Plan Básico </p>
-                            <p class="info-box-text"> - 10$ </p>
+                            <p class="info-box-text"> - 6$ </p>
                             <p class="info-box-text"> - {{10* $tasa_dia_dolar}} Bs. </p>
                             <p class="info-box-text"> - {{round((10 / $tasa_dia_ltc),2)}} LTC.</p>
                             <hr class="p-1 m-1 text-gray-100">
@@ -31,7 +31,7 @@
                             <p class="info-box-text"> - {{3* $tasa_dia_dolar}} Bs. </p>
                             <p class="info-box-text"> - {{round((3 / $tasa_dia_ltc),2)}} LTC.</p>
                         @else
-                            <p class="info-box-text"> - 10$ </p>
+                            <p class="info-box-text"> - 6$ </p>
                             <p class="info-box-text"> - {{10* $tasa_dia_dolar}} Bs. </p>
                             <p class="info-box-text"> - {{round((10 / $tasa_dia_ltc),2)}} LTC.</p>
                         @endif

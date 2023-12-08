@@ -116,7 +116,7 @@
                             
                                     <h3 class="timeline-header">PLAN BÁSICO</h3>
                                     <div class="timeline-body">
-                                        <p class="info-box-text">Precio: 10$</p>
+                                        <p class="info-box-text">Precio: 6$</p>
                                         <p class="info-box-text">Tiempo: 30 DÍAS</p>
                  
                                     </div>

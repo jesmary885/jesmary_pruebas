@@ -101,7 +101,7 @@ Route::middleware(['auth','verified'])->group(function()
         Route::get('k11483',[JumpersController::class,'k11483'])->name('k11483.index');
         Route::get('k1098',[JumpersController::class,'k1098'])->name('k1098.index');
         Route::get('k7341',[JumpersController::class,'ksietemilcuarentayuno'])->name('ksietemilcuarentayuno.index');
-        Route::get('prodege',[JumpersController::class,'prodege'])->name('prodege.index');
+        //Route::get('prodege',[JumpersController::class,'prodege'])->name('prodege.index');
 
         Route::get('samplicio_centiment',[JumpersController::class,'samplicio'])->name('samplicio.index');
         Route::get('samplicio_index',[JumpersController::class,'samplicio_index'])->name('samplicio2.index');
@@ -109,6 +109,8 @@ Route::middleware(['auth','verified'])->group(function()
         Route::get('samplicio_bz',[JumpersController::class,'samplicio_bz'])->name('samplicio_bz.index');
         Route::get('samplicio_tw',[JumpersController::class,'samplicio_tw'])->name('samplicio_tw.index');
         Route::get('samplicio_cash',[JumpersController::class,'samplicio_cash'])->name('samplicio_cash.index');
+        Route::get('prodege_index',[JumpersController::class,'prodege_index'])->name('prodege.index');
+        Route::get('prodege_generador',[JumpersController::class,'prodege_generador'])->name('prodege.generador');
         
         Route::get('scube',[JumpersController::class,'scube'])->name('scube.index');
 

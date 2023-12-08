@@ -19,7 +19,7 @@ class IpsoIndex extends Component
     use WithPagination;
     protected $paginationTheme = "bootstrap";
 
-    public $recargas_user_dia,$canj=0,$total_jump_dia,$psid_buscar,$user,$operacion,$jumper_complete = [],$jumper_list = 0,$busqueda_link,$comment_new_psid_register,$pid_register_high,$psid_register_bh,$high_register_bh,$basic_register_bh,$posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $wix_detect = '0', $psid_register=0,$jumper_redirect,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$is_high,$is_basic,$calc_link,$jumper_select,$points_user_positive, $points_user_negative, $jumper_detect_k ='',$pid_manual,$pid_detectado = 'si',$pid_buscar ;
+    public $limit, $recargas_user_dia,$canj=0,$total_jump_dia,$psid_buscar,$user,$operacion,$jumper_complete = [],$jumper_list = 0,$busqueda_link,$comment_new_psid_register,$pid_register_high,$psid_register_bh,$high_register_bh,$basic_register_bh,$posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $wix_detect = '0', $psid_register=0,$jumper_redirect,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$is_high,$is_basic,$calc_link,$jumper_select,$points_user_positive, $points_user_negative, $jumper_detect_k ='',$pid_manual,$pid_detectado = 'si',$pid_buscar ;
 
     protected $listeners = ['render' => 'render', 'registro_psid' => 'registro_psid','verific' => 'verific', 'confirmacion' => 'confirmacion'];
     
@@ -34,6 +34,9 @@ class IpsoIndex extends Component
         $this->busqueda_link = "";
 
         $this->user = User::where('id',auth()->user()->id)->first();
+
+        if($this->user->id == '1') $this->limit == 19;
+        else $this->limit == 9;
     }
 
     protected $rules_pid = [
@@ -82,7 +85,7 @@ class IpsoIndex extends Component
                     ->wheredate('created_at',$date_actual)
                     ->count();
 
-                if($links_usados <= 9){
+                if($links_usados <= $this->limit){
                     if($this->user->id != '1' && $this->user->id !='1254' && $this->user->id != '154' && $this->user->id != '30' && $this->user->id != '1836' && $this->user->id != '1820'){
                         if($multi == $ip_user){
                             $this->numerologia();
@@ -931,7 +934,7 @@ class IpsoIndex extends Component
                                                     ->wheredate('created_at',$date_actual)
                                                     ->count();
             
-                                                if($links_usados <= 9){
+                                                if($links_usados <= $this->limit){
                                                     if($this->user->id != '1' && $this->user->id != '1254' && $this->user->id != '154' && $this->user->id != '30' && $this->user->id != '1836' && $this->user->id != '1820'){
                                                         if($multi == $ip_user){
                                                             $this->numerologia();

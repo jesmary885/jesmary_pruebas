@@ -22,6 +22,14 @@ class JumpersController extends Controller
         return view('jumpers.cint2');
     }
 
+    public function prodege_index(){
+        return view('jumpers.prodege_index');
+    }
+
+    public function prodege_generador(){
+        return view('jumpers.prodege_generador');
+    }
+
     public function k1083(){
         return view('jumpers.k1083');
     }
