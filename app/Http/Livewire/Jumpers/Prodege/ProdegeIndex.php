@@ -123,7 +123,7 @@ class ProdegeIndex extends Component
 
             if($url_detect != 0){
                 $jumpers = Link::where('panel', 'LIKE', '%' . $url_detect . '%') 
-                    ->where('jumper_type_id','3')
+                    ->where('jumper_type_id','10')
                     ->latest('id')
                     ->paginate(10);
 
@@ -145,7 +145,7 @@ class ProdegeIndex extends Component
             }
         }
 
-        return view('livewire.jumpers.prodege.prodege-index',compact('jumper_complete','comments','subs_psid'));
+        return view('livewire.jumpers.prodege.prodege-index',compact('jumpers'));
     }
 
     public function positivo($jumper_id){
