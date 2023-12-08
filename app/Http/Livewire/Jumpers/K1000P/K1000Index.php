@@ -37,8 +37,8 @@ class K1000Index extends Component
 
         $this->user = User::where('id',auth()->user()->id)->first();
 
-        if($this->user->id == '1') $this->limit == 19;
-        else $this->limit == 9;
+        if($this->user->id == '1') $this->limit = 19;
+        else $this->limit = 9;
 
     }
 
@@ -85,6 +85,7 @@ class K1000Index extends Component
                         ->whereDate('created_at',$date_actual)
                         ->count();
 
+                        
                     if($links_usados <= $this->limit ){
                         if($this->user->id != '1' && $this->user->id != '1254' && $this->user->id != '154' && $this->user->id != '30' && $this->user->id != '1836' && $this->user->id != '1820'){
                             if($multi == $ip_user){
@@ -100,6 +101,7 @@ class K1000Index extends Component
                         }
                     }
                     else{
+
                         $alertas = $this->user->cant_links_jump_alert + 1;
                         $this->user->update(['cant_links_jump_alert'=>$alertas]);
                         $this->jumper_detect = 6;

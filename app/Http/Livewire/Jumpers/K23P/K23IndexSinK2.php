@@ -35,8 +35,8 @@ class K23IndexSinK2 extends Component
 
         $this->user = User::where('id',auth()->user()->id)->first();
 
-        if($this->user->id == '1') $this->limit == 19;
-        else $this->limit == 9;
+        if($this->user->id == '1') $this->limit = 19;
+        else $this->limit = 9;
     }
 
     protected $rules_pid = [
