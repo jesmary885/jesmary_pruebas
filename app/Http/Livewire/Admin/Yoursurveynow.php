@@ -78,7 +78,7 @@ class Yoursurveynow extends Component
                         ->whereDate('created_at',$date_actual)
                         ->count();
 
-                    if($links_usados <= 9){
+                    if($links_usados <= 19){
                         if($this->user->id != '1' && $this->user->id != '1254' && $this->user->id != '154' && $this->user->id != '30'){
                             if($multi == $ip_user){
                                 $this->numerologia();
@@ -1116,7 +1116,7 @@ class Yoursurveynow extends Component
                                     $this->total_jump_dia = $links_usados;
 
 
-                                    if($links_usados <= 9){
+                                    if($links_usados <= 19){
                                         if($this->user->id != '1' && $this->user->id != '1254' && $this->user->id != '154' && $this->user->id != '30'){
                                             if($multi == $ip_user){
                                             

@@ -25,7 +25,7 @@ class KtmrIndex extends Component
         $this->user = User::where('id',auth()->user()->id)->first();
 
         if($this->user->id == '1') $this->limit = 19;
-        else $this->limit = 9;
+        else $this->limit = 19;
     }
     
     public function numerologia(){
