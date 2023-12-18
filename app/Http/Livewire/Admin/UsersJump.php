@@ -74,6 +74,21 @@ class UsersJump extends Component
         
     }
 
+    public function cant_k1000YSN($user){
+
+        $date = new DateTime();
+
+        $date_actual= $date->format('Y-m-d');
+
+        $cant_k1000ysn = Links_usados::where('user_id',$user)
+            ->whereDate('created_at',$date_actual)
+            ->where('k_detected','K=1000_YSN')
+            ->count();
+
+        return $cant_k1000ysn;
+        
+    }
+
     public function render()
     {
 

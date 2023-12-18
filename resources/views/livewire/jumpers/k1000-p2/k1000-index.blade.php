@@ -127,7 +127,7 @@
                 <div class=" info-box bg-warning">
                     <span class="info-box-icon"><i class="fas fa-info"></i></span>
                     <div class="info-box-content">
-                            <span class="info-box-text">Ya ha generado los diez(10) jumpers permitidos durante el día</span>
+                            <span class="info-box-text">Ya ha generado los veinte(20) jumpers permitidos durante el día</span>
                             
                         </div>
                 </div>

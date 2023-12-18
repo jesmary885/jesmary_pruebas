@@ -15,13 +15,23 @@ class CantJumperDia extends Component
 
         $date_actual= $date->format('Y-m-d');
 
-        $sin_k = ltrim($jump, 'K');
-        $k= 'K='.$sin_k;
+        if($jump == 'K=1000_YSN'){
 
-        $links_usados = Links_usados::where('k_detected',$k)
-                    ->wheredate('created_at',$date_actual)
-                    ->count();
+            $links_usados = Links_usados::where('k_detected','K=1000_YSN')
+                ->wheredate('created_at',$date_actual)
+                ->count();
+        }
+        else{
+            $sin_k = ltrim($jump, 'K');
+            $k= 'K='.$sin_k;
+    
+            $links_usados = Links_usados::where('k_detected',$k)
+                ->wheredate('created_at',$date_actual)
+                ->count();
 
+        }
+
+       
         return $links_usados;
 
     }

@@ -34,8 +34,10 @@
                         <tr>
                             <th class="text-center py-3">Username</th>
                             <th class="text-center">K-1000</th>
+                            <th class="text-center">K-1000 YSN</th>
                             <th class="text-center ">K-23</th>
                             <th class="text-center">K-1083</th>
+                           
                             @if($user_autentic == 2)
                                 <th></th>
                             @endif
@@ -48,6 +50,7 @@
                                 
                                     <td class="text-center">{{$user->name}}</td>
                                     <td class="text-center">{{$this->cant_k1000($user->id)}}</td>
+                                    <td class="text-center">{{$this->cant_k1000YSN($user->id)}}</td>
                                     <td class="text-center">{{$this->cant_k23($user->id)}}</td>
                                     <td class="text-center">{{$this->cant_k1083($user->id)}}</td>
 
