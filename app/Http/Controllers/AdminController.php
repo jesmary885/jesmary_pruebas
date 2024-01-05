@@ -19,6 +19,10 @@ class AdminController extends Controller
         return view('admin.modificaciones');
     }
 
+    public function cuentas_psid(){
+        return view('admin.cuentas_psid');
+    }
+
     public function canje(){
         return view('admin.canje');
     }

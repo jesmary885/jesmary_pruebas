@@ -320,6 +320,14 @@ return [
                 ],
 
                 [
+                    'text' => 'Cuentas de usuarios',
+                    'route'  => 'admin.cuentas_psid',
+                    'icon'    => 'fas fa-users',
+                    'icon_color' => 'red',
+                    'can' => 'administracion_principal'
+                ],
+
+                [
                     'text' => 'Tasa de cambio',
                     'route'  => 'admin.tasa_cambio',
                     'icon'    => 'far fa-credit-card',

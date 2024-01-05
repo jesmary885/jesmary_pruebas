@@ -1365,6 +1365,8 @@ class SsidkrIndex extends Component
                         }
                     }
                 }
+
+                dd($psid_complete);
         }
         
         else{

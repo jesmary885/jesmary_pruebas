@@ -58,96 +58,101 @@ class UsuariosEdit extends Component
         $rules = $this->rules;
         $this->validate($rules);
 
-        $rule_email = [
-            'email' => 'required|max:50|email|unique:users,email,' .$this->usuario->id,
-        ];
+        if(auth()->user()->id != 3){
 
-        $this->validate($rule_email);
-
-        $rule_username = [
-            'username' => 'required|max:30|unique:users,username,' .$this->usuario->id,
-        ];
-
-        $this->validate($rule_username);
-
-
-        if($this->estado == 0) $estado = 'inactivo'; 
-        else $estado = 'activo';
-
-        
-        if($this->roles_id == '2'){
-            if($this->usuario->type != 'gratis'){
-                $this->usuario->update([
-                    'name' => $this->username,
-                    'username' => $this->username,
-                    'email' => $this->email,
-                    'status' => $estado,
-                    'type' => $this->plan,
-                    'last_payment_date' => date("Y-m-d", strtotime($this->last_date)),
-                ]);
+            $rule_email = [
+                'email' => 'required|max:50|email|unique:users,email,' .$this->usuario->id,
+            ];
+    
+            $this->validate($rule_email);
+    
+            $rule_username = [
+                'username' => 'required|max:30|unique:users,username,' .$this->usuario->id,
+            ];
+    
+            $this->validate($rule_username);
+    
+    
+            if($this->estado == 0) $estado = 'inactivo'; 
+            else $estado = 'activo';
+    
+            
+            if($this->roles_id == '2'){
+                if($this->usuario->type != 'gratis'){
+                    $this->usuario->update([
+                        'name' => $this->username,
+                        'username' => $this->username,
+                        'email' => $this->email,
+                        'status' => $estado,
+                        'type' => $this->plan,
+                        'last_payment_date' => date("Y-m-d", strtotime($this->last_date)),
+                    ]);
+                }
+                else{
+                    $this->usuario->update([
+                        'name' => $this->username,
+                        'username' => $this->username,
+                        'email' => $this->email,
+                        'status' => $estado,
+                        'type' => $this->plan,
+                        'last_payment_date' => date("Y-m-d", strtotime($this->last_date)),
+                    ]);
+                }
+    
             }
-            else{
-                $this->usuario->update([
-                    'name' => $this->username,
-                    'username' => $this->username,
-                    'email' => $this->email,
-                    'status' => $estado,
-                    'type' => $this->plan,
-                    'last_payment_date' => date("Y-m-d", strtotime($this->last_date)),
-                ]);
+    
+            if($this->roles_id == '4'){
+                if($this->usuario->type != 'gratis'){
+                    $this->usuario->update([
+                        'name' => $this->username,
+                        'username' => $this->username,
+                        'email' => $this->email,
+                        'status' => $estado,
+                        'type' => $this->plan,
+                    ]);
+                }
             }
-
+    
+            if($this->roles_id == '10'){
+                if($this->usuario->type != 'gratis'){
+                    $this->usuario->update([
+                        'name' => $this->username,
+                        'username' => $this->username,
+                        'email' => $this->email,
+                        'status' => $estado,
+                        'type' => $this->plan,
+                        'last_payment_date' => date("Y-m-d", strtotime($this->last_date)),
+                    ]);
+                }
+    
+                else{
+                    $this->usuario->update([
+                        'name' => $this->username,
+                        'username' => $this->username,
+                        'email' => $this->email,
+                        'status' => $estado,
+                        'type' => $this->plan,
+                        'last_payment_date' => date("Y-m-d", strtotime($this->last_date)),
+                    ]);
+                }
+    
+            }
+     
+           
+            $this->usuario->roles()->sync($this->roles_id);
+    
+    
+            $user_mod = new Modificaciones();
+            $user_mod->user_id = $this->usuario->id;
+            $user_mod->admin_id = auth()->user()->id;
+            $user_mod->justificacion = $this->comentario;
+            $user_mod->save();
+    
+            $this->reset(['isopen']);
+            $this->emitTo('admin.usuarios-index','render');
+            $this->emit('alert','Datos modificados correctamente');
+            
         }
 
-        if($this->roles_id == '4'){
-            if($this->usuario->type != 'gratis'){
-                $this->usuario->update([
-                    'name' => $this->username,
-                    'username' => $this->username,
-                    'email' => $this->email,
-                    'status' => $estado,
-                    'type' => $this->plan,
-                ]);
-            }
-        }
-
-        if($this->roles_id == '10'){
-            if($this->usuario->type != 'gratis'){
-                $this->usuario->update([
-                    'name' => $this->username,
-                    'username' => $this->username,
-                    'email' => $this->email,
-                    'status' => $estado,
-                    'type' => $this->plan,
-                    'last_payment_date' => date("Y-m-d", strtotime($this->last_date)),
-                ]);
-            }
-
-            else{
-                $this->usuario->update([
-                    'name' => $this->username,
-                    'username' => $this->username,
-                    'email' => $this->email,
-                    'status' => $estado,
-                    'type' => $this->plan,
-                    'last_payment_date' => date("Y-m-d", strtotime($this->last_date)),
-                ]);
-            }
-
-        }
- 
-       
-        $this->usuario->roles()->sync($this->roles_id);
-
-
-        $user_mod = new Modificaciones();
-        $user_mod->user_id = $this->usuario->id;
-        $user_mod->admin_id = auth()->user()->id;
-        $user_mod->justificacion = $this->comentario;
-        $user_mod->save();
-
-        $this->reset(['isopen']);
-        $this->emitTo('admin.usuarios-index','render');
-        $this->emit('alert','Datos modificados correctamente');
     }
 }

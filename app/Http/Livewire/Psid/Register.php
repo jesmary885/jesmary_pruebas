@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Psid;
 
+use App\Models\CuentasPsid;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Register extends Component
@@ -52,5 +54,19 @@ class Register extends Component
         elseif($long_psid < 22){
             $this->emit('error','Faltan caracteres en su psid, intente de nuevo');
         }
+
+        $psid_save_total = substr($psid_total,17,5);
+
+        $buscar_psid_user = CuentasPsid::where('user_id',Auth::id())
+            ->where('psid',$psid_save_total)->count();
+        
+        if($buscar_psid_user == 0){
+            $psid_user_register= new CuentasPsid();
+            $psid_user_register->user_id = Auth::id();
+            $psid_user_register->psid = $psid_save_total;
+            $psid_user_register->save();
+        }
+
+
     }
 }

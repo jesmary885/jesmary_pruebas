@@ -191,6 +191,7 @@ Route::middleware(['auth','verified'])->group(function()
         Route::get('admin_multilogin', [AdminController::class, 'multilogin'])->name('admin.multilogin.index')->middleware('permission:administracion_principal');
         Route::get('admin_modificaciones', [AdminController::class, 'modificaciones'])->name('admin.modificaciones')->middleware('permission:administracion_principal');
         Route::get('admin_tasa_cambio', [AdminController::class, 'tasa_cambio'])->name('admin.tasa_cambio')->middleware('permission:administracion_principal');
+        Route::get('admin_cuentas_usuarios', [AdminController::class, 'cuentas_psid'])->name('admin.cuentas_psid')->middleware('permission:administracion_principal');
 
         Route::get('admin_users_paying', [AdminController::class, 'users_paying'])->name('admin.users_paying')->middleware('permission:administracion_principal');
         Route::get('admin_users_free', [AdminController::class, 'users_free'])->name('admin.users_free')->middleware('permission:administracion_principal');

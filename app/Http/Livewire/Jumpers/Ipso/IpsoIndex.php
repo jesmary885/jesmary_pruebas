@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Jumpers\Ipso;
 
 use App\Models\Antibot;
 use App\Models\Comments;
+use App\Models\CuentasPsid;
 use App\Models\Link;
 use App\Models\Links_usados;
 use App\Models\RecargaLink;
@@ -11,6 +12,7 @@ use App\Models\User;
 use App\Models\User_Links_Points;
 use DateTime;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -339,6 +341,18 @@ class IpsoIndex extends Component
 
                         if(session('psid')) $this->psid_buscar = substr($this->search,($busqueda_id - 22),11).substr(session('psid'),11,11);
                         else $this->psid_buscar = substr($this->search,($busqueda_id - 22),22);
+
+                        $psid_save_total  = substr($this->search,($busqueda_id - 5),5);
+
+                        $buscar_psid_user = CuentasPsid::where('user_id',Auth::id())
+                            ->where('psid',$psid_save_total)->count();
+                            
+                        if($buscar_psid_user == 0){
+                            $psid_user_register= new CuentasPsid();
+                            $psid_user_register->user_id = Auth::id();
+                            $psid_user_register->psid = $psid_save_total;
+                            $psid_user_register->save();
+                        }
 
 
                         if(session('pid')){
