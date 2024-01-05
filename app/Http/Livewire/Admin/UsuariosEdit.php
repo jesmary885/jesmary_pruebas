@@ -58,7 +58,7 @@ class UsuariosEdit extends Component
         $rules = $this->rules;
         $this->validate($rules);
 
-        if(auth()->user()->id != 3){
+        if(auth()->user()->id == 2){
 
             $rule_email = [
                 'email' => 'required|max:50|email|unique:users,email,' .$this->usuario->id,

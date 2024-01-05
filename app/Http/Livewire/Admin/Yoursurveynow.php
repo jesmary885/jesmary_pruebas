@@ -6,12 +6,14 @@ use Livewire\Component;
 
 use App\Models\Antibot;
 use App\Models\Comments;
+use App\Models\CuentasPsid;
 use App\Models\Link;
 use App\Models\Links_usados;
 use App\Models\User;
 use App\Models\User_Links_Points;
 use DateTime;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Auth;
 use Livewire\WithPagination;
 
 class Yoursurveynow extends Component
@@ -427,6 +429,21 @@ class Yoursurveynow extends Component
                                         
                         if(session('psid')) $psid_buscar = substr($this->search,($busqueda_id - 22),11).substr(session('psid'),11,11);
                         else $psid_buscar = substr($this->search,($busqueda_id - 22),22);
+
+                        
+                        $psid_save_total  = substr($this->search,($busqueda_id - 5),5);
+
+                        $buscar_psid_user = CuentasPsid::where('user_id',Auth::id())
+                            ->where('psid',$psid_save_total)->count();
+                        
+                        if($buscar_psid_user == 0){
+                            $psid_user_register= new CuentasPsid();
+                            $psid_user_register->user_id = Auth::id();
+                            $psid_user_register->psid = $psid_save_total;
+                            $psid_user_register->save();
+                        }
+
+
 
                         if(session('pid')){
                             $this->pid_buscar = session('pid');
