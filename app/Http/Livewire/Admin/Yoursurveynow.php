@@ -9,6 +9,7 @@ use App\Models\Comments;
 use App\Models\CuentasPsid;
 use App\Models\Link;
 use App\Models\Links_usados;
+use App\Models\Trabajadores;
 use App\Models\User;
 use App\Models\User_Links_Points;
 use DateTime;
@@ -434,13 +435,35 @@ class Yoursurveynow extends Component
                         $psid_save_total  = substr($this->search,($busqueda_id - 5),5);
 
                         $buscar_psid_user = CuentasPsid::where('user_id',Auth::id())
-                            ->where('psid',$psid_save_total)->count();
+                            ->where('psid',$psid_save_total)
+                            ->count();
                         
                         if($buscar_psid_user == 0){
-                            $psid_user_register= new CuentasPsid();
-                            $psid_user_register->user_id = Auth::id();
-                            $psid_user_register->psid = $psid_save_total;
-                            $psid_user_register->save();
+
+                            $buscar_psid_user_bt = CuentasPsid::where('psid',$psid_save_total)
+                            ->get();
+
+                            $trabajador_select = 0;
+
+                            
+
+                            foreach($buscar_psid_user_bt  as $bt){
+
+                                $buscar_lider_trabajador = Trabajadores::where('lider_id',Auth::id())
+                                    ->where('user_id',$bt->user_id)
+                                    ->first();
+
+                                if($buscar_lider_trabajador) $trabajador_select++;
+                            }
+
+                            if($trabajador_select == 0 ){
+                                $psid_user_register= new CuentasPsid();
+                                $psid_user_register->user_id = Auth::id();
+                                $psid_user_register->psid = $psid_save_total;
+                                $psid_user_register->save();
+                            }
+                            
+                            
                         }
 
 
