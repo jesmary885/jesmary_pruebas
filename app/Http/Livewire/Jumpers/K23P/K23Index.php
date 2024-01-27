@@ -147,7 +147,7 @@ class K23Index extends Component
                                         $busq_elem1 ++;
                                     }
 
-                                    if($busq_elem1 > 20){
+                                    if($busq_elem1 > 200){
                                         $i_elem1 = 1;
                                     }
             
@@ -169,7 +169,7 @@ class K23Index extends Component
                                             $busq_elem2 ++;
                                         }
 
-                                        if($busq_elem2 > 20){
+                                        if($busq_elem2 > 200){
                                             $i_elem2 = 1;
                                         }
                 
@@ -192,7 +192,7 @@ class K23Index extends Component
                                                 $busq_elem3 ++;
                                             }
 
-                                            if($busq_elem3 > 20){
+                                            if($busq_elem3 > 200){
                                                 $i_elem3 = 1;
                                             }
                     
@@ -236,13 +236,13 @@ class K23Index extends Component
                                     $busq_ids_s ++;
                                 }
 
-                                if($busq_ids_s > 20){
+                                if($busq_ids_s > 100){
                                     $i_ids = 1;
                                 }
         
                             }while($i_ids != 1);
 
-                            if($busq_ids_s < 20)
+                            if($busq_ids_s < 100)
                                 $ids_buscar = substr($this->search,($busqueda_ids + 4),($posicion_ids - ($busqueda_ids + 4)));
 
                             else
@@ -267,7 +267,7 @@ class K23Index extends Component
                                     $busq_k2_s ++;
                                 }
 
-                                if($busq_k2_s > 20){
+                                if($busq_k2_s > 100){
                                     $i_k2 = 1;
                                 }
         
@@ -275,7 +275,7 @@ class K23Index extends Component
 
 
 
-                            if($busq_k2_s < 20)
+                            if($busq_k2_s < 100)
                                 $k2_buscar = substr($this->search,($busqueda_k2 + 4),($posicion_k2 - ($busqueda_k2 + 4)));
 
                             else
@@ -312,13 +312,13 @@ class K23Index extends Component
                             $busq_chanel_s ++;
                         }
 
-                        if($busq_chanel_s > 20){
+                        if($busq_chanel_s > 100){
                             $i_chanel = 1;
                         }
         
                         }while($i_chanel != 1);
 
-                    if($busq_chanel_s < 20)
+                    if($busq_chanel_s < 100)
                         $chanel_buscar = substr($this->search,($busqueda_chanel + 7),($posicion_chanel - ($busqueda_chanel + 7)));
 
                     else

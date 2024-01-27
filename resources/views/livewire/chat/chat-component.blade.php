@@ -206,8 +206,21 @@
                 }
             }
         }
+
+       /* document.addEventListener('livewire:initialized', () => {
+             @this.on('scrollIntoView', (event) => {
+                document.getElementById('final').scrollIntoView(true); 
+                //element.scrollIntoView(true);
+                 });
+             });*/
+
+
         Livewire.on('scrollIntoView', function(){
+
+     
             document.getElementById('final').scrollIntoView(true);        
+
+            console.log(document.getElementById('final'))
         })
         
     </script>

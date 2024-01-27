@@ -147,7 +147,7 @@ class K23IndexSinK2 extends Component
                                         $busq_elem1 ++;
                                     }
 
-                                    if($busq_elem1 > 20){
+                                    if($busq_elem1 > 200){
                                         $i_elem1 = 1;
                                     }
             
@@ -169,7 +169,7 @@ class K23IndexSinK2 extends Component
                                             $busq_elem2 ++;
                                         }
 
-                                        if($busq_elem2 > 20){
+                                        if($busq_elem2 > 200){
                                             $i_elem2 = 1;
                                         }
                 
@@ -192,7 +192,7 @@ class K23IndexSinK2 extends Component
                                                 $busq_elem3 ++;
                                             }
 
-                                            if($busq_elem3 > 20){
+                                            if($busq_elem3 > 200){
                                                 $i_elem3 = 1;
                                             }
                     

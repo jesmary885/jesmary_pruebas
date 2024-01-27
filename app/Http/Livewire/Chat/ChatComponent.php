@@ -208,6 +208,4 @@ class ChatComponent extends Component
         }
         return view('livewire.chat.chat-component');
     }
-
-    
 }

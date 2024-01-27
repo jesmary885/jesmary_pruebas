@@ -94,7 +94,6 @@ class User extends Authenticatable implements MustVerifyEmail
     public function userPayments(){
         return $this->hasMany(UserPaymentMethods::class);
     }
-
     //Relacion muchos a muchos
     public function linkPoints(){
         return $this->belongsToMany(Link::class)->withPivot('point');
