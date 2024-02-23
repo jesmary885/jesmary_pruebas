@@ -389,56 +389,50 @@ return [
                     'can' => 'administracion_principal'
                 ],
 
-                [
-                    'text' => 'Yoursurveynow',
-                    'route'  => 'admin.yoursurveynow',
-                    'icon_color' => 'red',
-                    'icon'    => 'fas fa-crown',
-                    'can' => 'administracion_principal'
-                ],
+                
 
             ],
             
         ],
 
-        [
-            'text'    => 'SALE MARKET',
-            'icon'    => 'fas fa-cart-arrow-down',
-            'can' => 'admin.sales',
-            'icon_color' => 'cyan',
-            'submenu' => [
-                [
-                    'text' => 'Mi marketplace',
-                    'route'  => 'admin.marketplace',
-                    'icon'    => 'fas fa-box-open',
-                    'can' => 'admin.sales',
-                    'icon_color' => 'red',
-                ],
-                [
-                    'text' => 'Mis ventas',
-                    'route'  => 'admin.sales',
-                    'icon'    => 'fas fa-hand-holding-heart',
-                    'can' => 'admin.sales',
-                    'icon_color' => 'red',
-                ],
-            ],
-        ],
+        // [
+        //     'text'    => 'SALE MARKET',
+        //     'icon'    => 'fas fa-cart-arrow-down',
+        //     'can' => 'admin.sales',
+        //     'icon_color' => 'cyan',
+        //     'submenu' => [
+        //         [
+        //             'text' => 'Mi marketplace',
+        //             'route'  => 'admin.marketplace',
+        //             'icon'    => 'fas fa-box-open',
+        //             'can' => 'admin.sales',
+        //             'icon_color' => 'red',
+        //         ],
+        //         [
+        //             'text' => 'Mis ventas',
+        //             'route'  => 'admin.sales',
+        //             'icon'    => 'fas fa-hand-holding-heart',
+        //             'can' => 'admin.sales',
+        //             'icon_color' => 'red',
+        //         ],
+        //     ],
+        // ],
 
-        [
-            'text'    => 'SHOPPING MARKET',
-            'icon'    => 'fab fa-cc-amazon-pay',
-            'can' => 'admin.marketplace.compras',
-            'icon_color' => 'cyan',
-            'submenu' => [
-                [
-                    'text' => 'Mi marketplace',
-                    'route'  => 'admin.marketplace.compra',
-                    'icon'    => 'fas fa-box-open',
-                    'icon_color' => 'red',
-                    'can' => 'admin.marketplace.compras'
-                ],
-            ],
-        ],
+        // [
+        //     'text'    => 'SHOPPING MARKET',
+        //     'icon'    => 'fab fa-cc-amazon-pay',
+        //     'can' => 'admin.marketplace.compras',
+        //     'icon_color' => 'cyan',
+        //     'submenu' => [
+        //         [
+        //             'text' => 'Mi marketplace',
+        //             'route'  => 'admin.marketplace.compra',
+        //             'icon'    => 'fas fa-box-open',
+        //             'icon_color' => 'red',
+        //             'can' => 'admin.marketplace.compras'
+        //         ],
+        //     ],
+        // ],
 
         [
             'text'    => 'COMUNIDAD',
@@ -486,13 +480,13 @@ return [
                 ],
 
 
-                [
-                    'text' => 'K1020',
-                    'route'  => 'k1020.index',
-                    'can' => 'administracion_principal',
-                    'icon_color' => 'cyan',
-                    'icon'    => 'fas fa-search',
-                ],
+                // [
+                //     'text' => 'K1020',
+                //     'route'  => 'k1020.index',
+                //     'can' => 'administracion_principal',
+                //     'icon_color' => 'cyan',
+                //     'icon'    => 'fas fa-search',
+                // ],
 
             ],
         ],
@@ -527,57 +521,67 @@ return [
 
        
 
-        [
-            'text'    => 'ADMIN KTMR',
-            'icon'    => 'fas fa-file-invoice-dollar fa-fw',
-            'can' => 'administracion.ktmr',
-            'icon_color' => 'cyan',
-            'submenu' => [
-                [
-                    'text' => 'USUARIOS',
-                    'route'  => 'ktrm.administracion.index',
-                    'can' => 'administracion.ktmr',
-                    'icon_color' => 'red',
-                    'icon'    => 'fas fa-angle-right',
-                ],
-                [
-                    'text' => 'CUENTAS REGISTRADAS',
-                    'route'  => 'ktrm.administracion_cuentas.index',
-                    'can' => 'administracion.ktmr',
-                    'icon_color' => 'red',
-                    'icon'    => '	fas fa-angle-right',
-                ],
+        // [
+        //     'text'    => 'ADMIN KTMR',
+        //     'icon'    => 'fas fa-file-invoice-dollar fa-fw',
+        //     'can' => 'administracion.ktmr',
+        //     'icon_color' => 'cyan',
+        //     'submenu' => [
+        //         [
+        //             'text' => 'USUARIOS',
+        //             'route'  => 'ktrm.administracion.index',
+        //             'can' => 'administracion.ktmr',
+        //             'icon_color' => 'red',
+        //             'icon'    => 'fas fa-angle-right',
+        //         ],
+        //         [
+        //             'text' => 'CUENTAS REGISTRADAS',
+        //             'route'  => 'ktrm.administracion_cuentas.index',
+        //             'can' => 'administracion.ktmr',
+        //             'icon_color' => 'red',
+        //             'icon'    => '	fas fa-angle-right',
+        //         ],
 
                 
-            ],            
-        ],
+        //     ],            
+        // ],
+
+
+        // [
+        //     'text'    => 'SECCIÓN KTMR',
+        //     'icon'    => 'fas fa-search',
+        //     'can' => 'menu.ktmr',
+        //     'icon_color' => 'cyan',
+        //     'submenu' => [
+        //         [
+        //             'text' => 'GENERADOR',
+        //             'route'  => 'ktmr.generador.index',
+        //             'can' => 'menu.ktmr',
+        //             'icon_color' => 'red',
+        //             'icon'    => 'fas fa-angle-right',
+        //         ],
+        //         [
+        //             'text' => 'CUENTAS REGISTRADAS',
+        //             'route'  => 'ktmr.cuentas.index',
+        //             'can' => 'menu.ktmr',
+        //             'icon_color' => 'red',
+        //             'icon'    => '	fas fa-angle-right',
+        //         ],
+
+                
+        //     ],            
+        // ],
+
+
 
 
         [
-            'text'    => 'SECCIÓN KTMR',
-            'icon'    => 'fas fa-search',
-            'can' => 'menu.ktmr',
-            'icon_color' => 'cyan',
-            'submenu' => [
-                [
-                    'text' => 'GENERADOR',
-                    'route'  => 'ktmr.generador.index',
-                    'can' => 'menu.ktmr',
-                    'icon_color' => 'red',
-                    'icon'    => 'fas fa-angle-right',
-                ],
-                [
-                    'text' => 'CUENTAS REGISTRADAS',
-                    'route'  => 'ktmr.cuentas.index',
-                    'can' => 'menu.ktmr',
-                    'icon_color' => 'red',
-                    'icon'    => '	fas fa-angle-right',
-                ],
-
-                
-            ],            
+            'text' => 'YOURSURVEYNOW',
+            'route'  => 'admin.yoursurveynow',
+            'icon_color' => 'red',
+            'icon'    => 'fas fa-crown',
+            'can' => 'menu.yoursurveynow'
         ],
-
 
 
         [

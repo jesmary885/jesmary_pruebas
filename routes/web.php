@@ -52,7 +52,6 @@ Route::middleware(['auth','verified'])->group(function()
 
 Route::middleware(['auth','verified'])->group(function()
 {
-
      //REPORTAR PAGO
      Route::get('reportar_pago',[PagoController::class,'index'])->name('reporte_pago');
      Route::get('informacion',[LinksGenradosController::class,'index_informacion'])->name('informacion');
@@ -182,7 +181,7 @@ Route::middleware(['auth','verified'])->group(function()
 
         //Administración
 
-        Route::get('yoursurveynow',[JumpersController::class,'yoursurveynow'])->name('admin.yoursurveynow')->middleware('permission:administracion_principal');
+        Route::get('yoursurveynow',[JumpersController::class,'yoursurveynow'])->name('admin.yoursurveynow')->middleware('permission:menu.yoursurveynow');
         Route::get('login_spotify', [SpotifyController::class, 'login'])->name('login_spotify');
         Route::get('profile_spotify', [SpotifyController::class, 'getUser'])->name('profile_spotify');
         Route::get('music_spotify', [SpotifyController::class, 'getMusic'])->name('music_sp');
