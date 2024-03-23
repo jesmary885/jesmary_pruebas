@@ -327,6 +327,8 @@ return [
                     'can' => 'administracion_principal'
                 ],
 
+               
+
                 [
                     'text' => 'Tasa de cambio',
                     'route'  => 'admin.tasa_cambio',
@@ -491,8 +493,6 @@ return [
             ],
         ],
 
-
-
         // Navbar items:
         // [
         //     'type'         => 'navbar-search',
@@ -517,6 +517,30 @@ return [
             'can' => 'cuenta.inactiva',
             'icon_color' => 'cyan',
             'icon'    => '	fas fa-sad-cry',
+        ],
+
+        [
+            'text'    => 'GENERADORES SSI',
+            'icon'    => 'fas fa-search',
+            'can' => 'ssidkr.index',
+            'icon_color' => 'cyan',
+            'submenu' => [
+                [
+                    'text' => 'Generador QT & ER',
+                    'route'  => 'generador_qt.index',
+                    'can' => 'generador_sp.index',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                [
+                    'text' => 'Generador VO & OO',
+                    'route'  => 'generador_vo.index',
+                    'can' => 'generador_sp.index',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+            ],
         ],
 
        

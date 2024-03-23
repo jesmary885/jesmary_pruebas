@@ -35,6 +35,7 @@ class UsuariosEdit extends Component
         $this->roles_id = $this->usuario->roles->first()->id;
         $this->roles=Role::where('id','!=','1')
             ->where('id','!=','13')
+            ->where('id','!=','17')
             ->get();
         //$this->roles=Role::all();
     }

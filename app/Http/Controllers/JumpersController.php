@@ -319,4 +319,12 @@ class JumpersController extends Controller
             return view('jumpers.k7341_poderosa');
         }
 
+        public function generador_new_qt(){
+            return view('jumpers.generador_new_qt');
+        }
+
+        public function generador_new_vo(){
+            return view('jumpers.generador_new_vo');
+        }
+
 }

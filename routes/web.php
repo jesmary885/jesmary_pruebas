@@ -168,6 +168,13 @@ Route::middleware(['auth','verified'])->group(function()
         //BLOC
         Route::get('bloc',[PsidController::class,'index_bloc'])->name('registro.bloc');
 
+
+
+        ///////////////GENERADORES NUEVOS
+
+        Route::get('generador_p_qt',[JumpersController::class,'generador_new_qt'])->name('generador_qt.index');
+        Route::get('generador_p_vo',[JumpersController::class,'generador_new_vo'])->name('generador_vo.index');
+
        
 
         //COMUNIDAD

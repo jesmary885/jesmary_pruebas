@@ -40,7 +40,15 @@ class UsersJump extends Component
             ->where('k_detected','K=1000_NEW')
             ->count();
 
-        return $cant_k1000;
+        if($user == '2' || $user == '1345'){
+            if($cant_k1000 > 20) return '20';
+            else return $cant_k1000;
+        }
+        else{
+            return $cant_k1000;
+        }
+
+      
         
     }
 
@@ -55,8 +63,14 @@ class UsersJump extends Component
             ->where('k_detected','K=23_NEW')
             ->count();
 
-        return $cant_k23;
-        
+            if($user == '2' || $user == '1345'){
+                if($cant_k23 > 20) return '20';
+                else return $cant_k23;
+            }
+            else{
+                return $cant_k23;
+            }
+
     }
 
     public function cant_k1083($user){
@@ -70,8 +84,14 @@ class UsersJump extends Component
             ->where('k_detected','K=1083')
             ->count();
 
-        return $cant_k1083;
-        
+
+            if($user == '2' || $user == '1345'){
+                if($cant_k1083 > 20) return '20';
+                else return $cant_k1083;
+            }
+            else{
+                return $cant_k1083;
+            }
     }
 
     public function cant_k1000YSN($user){
@@ -85,7 +105,13 @@ class UsersJump extends Component
             ->where('k_detected','K=1000_YSN')
             ->count();
 
-        return $cant_k1000ysn;
+            if($user == '2' || $user == '1345'){
+                if($cant_k1000ysn > 20) return '20';
+                else return $cant_k1000ysn;
+            }
+            else{
+                return $cant_k1000ysn;
+            }
         
     }
 

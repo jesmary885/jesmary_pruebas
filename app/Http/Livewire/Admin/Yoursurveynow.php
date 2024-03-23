@@ -22,7 +22,7 @@ class Yoursurveynow extends Component
     use WithPagination;
     protected $paginationTheme = "bootstrap";
 
-    public  $total_jump_dia,$user,$jumper_complete = [],$jumper_list = 0,$busqueda_link,$comment_new_psid_register,$pid_register_high,$psid_register_bh,$high_register_bh,$basic_register_bh,$posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $wix_detect = '0', $psid_register=0,$jumper_redirect,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$is_high,$is_basic,$calc_link,$jumper_select,$points_user_positive, $points_user_negative, $jumper_detect_k ='',$pid_manual,$pid_detectado = 'si',$pid_buscar,$operacion;
+    public  $limit,$total_jump_dia,$user,$jumper_complete = [],$jumper_list = 0,$busqueda_link,$comment_new_psid_register,$pid_register_high,$psid_register_bh,$high_register_bh,$basic_register_bh,$posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $wix_detect = '0', $psid_register=0,$jumper_redirect,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$is_high,$is_basic,$calc_link,$jumper_select,$points_user_positive, $points_user_negative, $jumper_detect_k ='',$pid_manual,$pid_detectado = 'si',$pid_buscar,$operacion;
 
     protected $listeners = ['render' => 'render', 'registro_psid' => 'registro_psid', 'verific' => 'verific'];
     
@@ -36,6 +36,11 @@ class Yoursurveynow extends Component
         $this->busqueda_link = "";
 
         $this->user = User::where('id',auth()->user()->id)->first();
+
+        if($this->user->id == '2' || $this->user->id == '1345') $this->limit = 59;
+        elseif($this->user->id == '6' || $this->user->id == '55' || $this->user->id == '1885') $this->limit = 9;
+        else $this->limit = 19;
+
     }
 
     public $rules_pid = [
@@ -81,7 +86,7 @@ class Yoursurveynow extends Component
                         ->whereDate('created_at',$date_actual)
                         ->count();
 
-                    if($links_usados <= 19){
+                    if($links_usados <= $this->limit){
                         if($this->user->id != '1' && $this->user->id != '1254' && $this->user->id != '154' && $this->user->id != '30'){
                             if($multi == $ip_user){
                                 $this->numerologia();
@@ -1156,7 +1161,7 @@ class Yoursurveynow extends Component
                                     $this->total_jump_dia = $links_usados;
 
 
-                                    if($links_usados <= 19){
+                                    if($links_usados <= $this->limit){
                                         if($this->user->id != '1' && $this->user->id != '1254' && $this->user->id != '154' && $this->user->id != '30'){
                                             if($multi == $ip_user){
                                             

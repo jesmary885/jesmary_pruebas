@@ -36,7 +36,11 @@ class K1000Index extends Component
 
         $this->user = User::where('id',auth()->user()->id)->first();
 
+        /*if($this->user->id == '1') $this->limit = 19;
+        else $this->limit = 19;*/
+
         if($this->user->id == '1') $this->limit = 19;
+        //elseif($this->user->id == '6' || $this->user->id == '55' || $this->user->id == '1885') $this->limit = 9;
         else $this->limit = 19;
     }
 
