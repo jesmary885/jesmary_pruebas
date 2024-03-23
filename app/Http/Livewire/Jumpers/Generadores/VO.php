@@ -18,6 +18,11 @@ class VO extends Component
         'panel_search' => 'required',
     ];
 
+    public function mount(){
+
+        $this->jumper_complete = [];
+    }
+
     public function render()
     {
         return view('livewire.jumpers.generadores.v-o');
@@ -25,9 +30,10 @@ class VO extends Component
 
     public function generar(){
 
+
         $rules = $this->rules;
         $this->validate($rules);
-    
+
         
         try {
 
@@ -36,8 +42,11 @@ class VO extends Component
                 'base_uri' => 'http://146.190.74.228/',
             ]);
 
-            $resultado = $client->request('GET', '/abric/1/'.$this->psid_search.'/'.$this->panel_search);
 
+            $resultado = $client->request('GET', 'abrirc/1/'.$this->psid_search.'/'.$this->panel_search);
+
+
+            
             if($resultado->getStatusCode() == 200){
 
                 $this->jumper_complete = json_decode($resultado->getBody(),true);
@@ -46,7 +55,7 @@ class VO extends Component
             }
 
             else{
-                //$this->jumper_detect = 2;
+        
 
                 
             }
@@ -69,7 +78,7 @@ class VO extends Component
                             'base_uri' => 'http://146.190.74.228/',
                         ]);
             
-                        $resultado = $client->request('GET', '/abric_2/1/'.$this->psid_search.'/'.$this->panel_search);
+                        $resultado = $client->request('GET', 'abrirc_2/1/'.$this->psid_search.'/'.$this->panel_search);
             
                         if($resultado->getStatusCode() == 200){
         
@@ -92,7 +101,7 @@ class VO extends Component
                         if($e->hasResponse()){
                             if ($e->getResponse()->getStatusCode() !== '200'){
                                 $error['response'] = $e->getResponse(); 
-                                $this->jumper_detect = 2;
+                                //$this->jumper_detect = 2;
                             }
                         }
                     }

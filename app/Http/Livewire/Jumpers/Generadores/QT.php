@@ -10,7 +10,7 @@ class QT extends Component
 {
 
 
-    public $jumper_complete = "", $psid_search, $panel_search, $jumper_detect = 0;
+    public $jumper_complete = "", $psid_search, $panel_search, $jumper_detect;
 
     protected $listeners = ['render' => 'render'];
 
@@ -18,6 +18,11 @@ class QT extends Component
         'psid_search' => 'required',
         'panel_search' => 'required',
     ];
+
+    public function mount(){
+
+        $this->jumper_complete = [];
+    }
 
     public function render()
     {
@@ -29,8 +34,8 @@ class QT extends Component
 
         $rules = $this->rules;
         $this->validate($rules);
-    
-        
+
+  
         try {
 
             $client = new Client([
@@ -40,8 +45,6 @@ class QT extends Component
 
  
             $resultado = $client->request('GET', '/abrir_QT/1/'.$this->psid_search.'/'.$this->panel_search);
-
-
 
             if($resultado->getStatusCode() == 200){
 
@@ -71,12 +74,21 @@ class QT extends Component
     }
 
 
-    public function clear(){
+    public function clear_psid(){
         $this->reset(['psid_search']);
 
-        $this->jumper_complete = [];
+       // $this->jumper_complete = [];
 
-        return redirect()->route('generador_qt.index');
+       // return redirect()->route('generador_vo.index');
+
+    }
+
+    public function clear_panel(){
+        $this->reset(['panel_search']);
+
+       // $this->jumper_complete = [];
+
+       // return redirect()->route('generador_vo.index');
 
     }
 

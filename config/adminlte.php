@@ -522,7 +522,7 @@ return [
         [
             'text'    => 'GENERADORES SSI',
             'icon'    => 'fas fa-search',
-            'can' => 'ssidkr.index',
+            'can' => 'generador_sp.index',
             'icon_color' => 'cyan',
             'submenu' => [
                 [

@@ -8,7 +8,7 @@
                     <div >
 
                         <div class="input-group">
-                            <input wire:model="psid_search" placeholder="Ingrese su Psid" class="form-control w-full" aria-describedby="inputGroupPrepend" >
+                            <input wire:model.defer="psid_search" placeholder="Ingrese su Psid" class="form-control w-full" aria-describedby="inputGroupPrepend" >
 
                             @if($psid_search)
                             <button class="btn btn-md btn-outline-secondary input-group-text" id="inputGroupPrepend" wire:click="clear_psid" title="Borrar">
@@ -19,7 +19,7 @@
                         </div>
 
                         <div class="input-group">
-                            <input wire:model="panel_search" placeholder="Ingrese el Subpanel"  class="form-control w-full mt-2" aria-describedby="inputGroupPrepend" >
+                            <input wire:model.defer="panel_search" placeholder="Ingrese el Subpanel"  class="form-control w-full mt-2" aria-describedby="inputGroupPrepend" >
 
                             @if($panel_search)
                             <button class="btn btn-md btn-outline-secondary input-group-text mt-2" id="inputGroupPrepend" wire:click="clear_panel" title="Borrar">
@@ -37,6 +37,8 @@
                     </div>
                 </div>
             </div>
+
+
     
     
             @if ($jumper_complete == [])
