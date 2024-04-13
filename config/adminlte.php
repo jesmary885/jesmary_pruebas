@@ -522,13 +522,13 @@ return [
         [
             'text'    => 'GENERADORES SSI',
             'icon'    => 'fas fa-search',
-            'can' => 'generador_sp.index',
+            'can' => 'menu.premium',
             'icon_color' => 'cyan',
             'submenu' => [
                 [
                     'text' => 'Generador QT & ER',
                     'route'  => 'generador_qt.index',
-                    'can' => 'generador_sp.index',
+                    'can' => 'menu.premium',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
@@ -536,7 +536,7 @@ return [
                 [
                     'text' => 'Generador VO & OO',
                     'route'  => 'generador_vo.index',
-                    'can' => 'generador_sp.index',
+                    'can' => 'menu.premium',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
@@ -604,7 +604,7 @@ return [
             'route'  => 'admin.yoursurveynow',
             'icon_color' => 'red',
             'icon'    => 'fas fa-crown',
-            'can' => 'menu.yoursurveynow'
+            'can' => 'menu.premium',
         ],
 
 

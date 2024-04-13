@@ -101,7 +101,7 @@ class VO extends Component
                         if($e->hasResponse()){
                             if ($e->getResponse()->getStatusCode() !== '200'){
                                 $error['response'] = $e->getResponse(); 
-                                //$this->jumper_detect = 2;
+                                $this->jumper_detect = 2;
                             }
                         }
                     }

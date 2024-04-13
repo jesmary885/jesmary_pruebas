@@ -37,9 +37,11 @@ class Yoursurveynow extends Component
 
         $this->user = User::where('id',auth()->user()->id)->first();
 
-        if($this->user->id == '2' || $this->user->id == '1345') $this->limit = 59;
-        elseif($this->user->id == '6' || $this->user->id == '55' || $this->user->id == '1885') $this->limit = 9;
-        else $this->limit = 19;
+        if($this->user->id == '2' || $this->user->id == '1345') $this->limit = 59; //ERIK Y CHRISTIAN
+        elseif($this->user->id == '6' || $this->user->id == '55' || $this->user->id == '1885' || $this->user->id == '59') $this->limit = 9; //ESPOSAS
+        elseif($this->user->id == '438') $this->limit = 19; //NELSON
+        elseif($this->user->id == '1' || $this->user->id == '3' || $this->user->id == '4' || $this->user->id == '5' || $this->user->id == '7' || $this->user->id == '10') $this->limit = 19; //ADMINISTRADORES
+        else $this->limit = 4;
 
     }
 

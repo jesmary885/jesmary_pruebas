@@ -59,7 +59,7 @@ class UsuariosEdit extends Component
         $rules = $this->rules;
         $this->validate($rules);
 
-        if(auth()->user()->id == 2){
+        if(auth()->user()->id == 2 || auth()->user()->id == 1){
 
             $rule_email = [
                 'email' => 'required|max:50|email|unique:users,email,' .$this->usuario->id,
@@ -136,7 +136,6 @@ class UsuariosEdit extends Component
                         'last_payment_date' => date("Y-m-d", strtotime($this->last_date)),
                     ]);
                 }
-    
             }
      
            

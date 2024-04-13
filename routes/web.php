@@ -172,8 +172,8 @@ Route::middleware(['auth','verified'])->group(function()
 
         ///////////////GENERADORES NUEVOS
 
-        Route::get('generador_p_qt',[JumpersController::class,'generador_new_qt'])->name('generador_qt.index');
-        Route::get('generador_p_vo',[JumpersController::class,'generador_new_vo'])->name('generador_vo.index');
+        Route::get('generador_p_qt',[JumpersController::class,'generador_new_qt'])->name('generador_qt.index')->middleware('permission:menu.premium');
+        Route::get('generador_p_vo',[JumpersController::class,'generador_new_vo'])->name('generador_vo.index')->middleware('permission:menu.premium');
 
        
 
@@ -188,7 +188,7 @@ Route::middleware(['auth','verified'])->group(function()
 
         //Administración
 
-        Route::get('yoursurveynow',[JumpersController::class,'yoursurveynow'])->name('admin.yoursurveynow')->middleware('permission:menu.yoursurveynow');
+        Route::get('yoursurveynow',[JumpersController::class,'yoursurveynow'])->name('admin.yoursurveynow')->middleware('permission:menu.premium');
         Route::get('login_spotify', [SpotifyController::class, 'login'])->name('login_spotify');
         Route::get('profile_spotify', [SpotifyController::class, 'getUser'])->name('profile_spotify');
         Route::get('music_spotify', [SpotifyController::class, 'getMusic'])->name('music_sp');
