@@ -109,6 +109,10 @@ class UsersJump extends Component
                 if($cant_k1000ysn > 20) return '20';
                 else return $cant_k1000ysn;
             }
+            elseif($user == '268' || $user == '584' || $user == '746' || $user == '1901' || $user == '112' || $user == '14'){
+                if($cant_k1000ysn > 19) return '5';
+                else return $cant_k1000ysn;
+            }
             else{
                 return $cant_k1000ysn;
             }
