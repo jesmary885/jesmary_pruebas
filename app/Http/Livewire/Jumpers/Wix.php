@@ -58,7 +58,7 @@ class Wix extends Component
             'base_uri' => 'http://67.205.168.133/',
         ]);
 
-        $resultado = $client->request('GET', '/w/wix/'.$this->psid_buscar.'/'.$this->pid_buscar.'/'.$this->ord_buscar.'/'.$panelid_buscar);
+        $resultado = $client->request('GET', '/w/wix/'.$this->psid_buscar);
 
         if($resultado->getStatusCode() == 200){
 
@@ -299,7 +299,7 @@ class Wix extends Component
                             'base_uri' => 'http://67.205.168.133/',
                         ]);
     
-                        $resultado = $client->request('GET', '/w/wix/'.$this->psid_buscar.'/'.$this->pid_buscar.'/'.$this->ord_buscar.'/'.$panelid_buscar);
+                        $resultado = $client->request('GET', '/w/wix/'.$this->psid_buscar);
 
     
                         if($resultado->getStatusCode() == 200){
@@ -307,6 +307,8 @@ class Wix extends Component
                             $this->jumper_detect = 1;
 
                             $this->jumper_complete = json_decode($resultado->getBody(),true);
+
+                            dd($this->jumper_complete);
 
                         }
 

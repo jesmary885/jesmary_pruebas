@@ -662,8 +662,15 @@ return [
                     'icon'    => '	fas fa-angle-right',
                 ],
                [
-                    'text' => 'K1093',
+                    'text' => 'K1093 nielsen',
                     'route'  => 'k1093.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+                [
+                    'text' => 'k1093 beasurveytaker',
+                    'route'  => 'k1093_bea.index',
                     'can' => 'ssidkr.index',
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',

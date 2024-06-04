@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Jumpers\K1093;
 
+use Livewire\Component;
 use App\Models\Antibot;
 use App\Models\Comments;
 use App\Models\Link;
@@ -10,14 +11,14 @@ use App\Models\User;
 use App\Models\User_Links_Points;
 use DateTime;
 use GuzzleHttp\Client;
-use Livewire\Component;
 use Livewire\WithPagination;
-class K1093Index extends Component
+
+class K1093BeaIndex extends Component
 {
     use WithPagination;
     protected $paginationTheme = "bootstrap";
 
-    public  $user,$jumper_complete = [],$jumper_list = 0,$busqueda_link,$comment_new_psid_register,$pid_register_high,$psid_register_bh,$high_register_bh,$basic_register_bh,$posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $psid_register=0,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$calc_link,$jumper_select,$points_user_positive, $points_user_negative, $jumper_detect_k ='',$pid_manual,$pid_detectado = 'si',$pid_buscar,$operacion;
+    public  $pid_unico,$surveyno,$user,$jumper_complete = [],$jumper_list = 0,$busqueda_link,$comment_new_psid_register,$pid_register_high,$psid_register_bh,$high_register_bh,$basic_register_bh,$posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $psid_register=0,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$calc_link,$jumper_select,$points_user_positive, $points_user_negative, $jumper_detect_k ='',$pid_manual,$pid_detectado = 'si',$pid_buscar,$operacion;
 
     protected $listeners = ['render' => 'render', 'registro_psid' => 'registro_psid', 'verific' => 'verific'];
     
@@ -82,7 +83,7 @@ class K1093Index extends Component
         $this->operacion = Antibot::where('id',$random)->first();
         $operacion_total = 'Resuelve esta operación matemática ('.$this->operacion->nro1.' + '.$this->operacion->nro2. ')';
 
-        $this->emit('numerologia',$operacion_total,'jumpers.k1093.k1093-index','verific');
+        $this->emit('numerologia',$operacion_total,'jumpers.k1093.k1093-bea-index','verific');
     }
 
     public function verific($result){
@@ -98,70 +99,102 @@ class K1093Index extends Component
             if(session('psid')) $psid_buscar = substr($this->search,($busqueda_id - 22),11).substr(session('psid'),11,11);
             else $psid_buscar = substr($this->search,($busqueda_id - 22),22);
 
-         /*   $busqueda_surveyno= strpos($this->search, '?surveyno=');
+       
 
-            if($busqueda_surveyno != false){
+            $busqueda_spid= strpos($this->search, 'spid=');
 
-                $posicion_suveyno = $busqueda_surveyno + 10;
+            if($busqueda_spid != false){
+
+                $posicion_spid = $busqueda_spid + 5;
                 $i_elem1 = 0;
                 $busq_elem1 = 0;
                             
                 do{
-                    $detect_elem1= substr($this->search, $posicion_suveyno,1);
+                    $detect_elem1= substr($this->search, $posicion_spid,1);
         
                     if($detect_elem1 == '&') $i_elem1 = 1;
                     else{
-                        $posicion_suveyno = $posicion_suveyno + 1;
+                        $posicion_spid = $posicion_spid + 1;
                         $busq_elem1 ++;
                     }
 
-                    if($busq_elem1 > 20){
+                    if($busq_elem1 > 35){
                         $i_elem1 = 1;
                     }
         
                 }while($i_elem1 != 1);
 
-                $surveyno_buscar = substr($this->search,($busqueda_surveyno + 10),($posicion_suveyno - ($busqueda_surveyno + 10)));
+                $spid_buscar = substr($this->search,($busqueda_spid + 5),($posicion_spid - ($busqueda_spid + 5)));
 
-            }*/
 
-           /* $busqueda_spid= strpos($this->search, '&spid');
 
-            if($busqueda_spid != false){
-                $posicion_spid = $busqueda_spid + 6;
-                $i_elem2 = 0;
-                $busq_elem2 = 0;
+            }
+
+            $busqueda_surveyno= strpos($this->search, 'surveyno=');
+
+            if($busqueda_surveyno != false){
+
+                $posicion_surveyno = $busqueda_surveyno + 9;
+                $i_elem1 = 0;
+                $busq_elem1 = 0;
                             
                 do{
-                    $detect_elem2= substr($this->search, $posicion_spid,1);
+                    $detect_elem1= substr($this->search, $posicion_surveyno,1);
         
-                    if($detect_elem2 == '&') $i_elem2 = 1;
+                    if($detect_elem1 == '&') $i_elem1 = 1;
                     else{
-                        $posicion_spid = $posicion_spid + 1;
-                        $busq_elem2 ++;
+                        $posicion_surveyno = $posicion_surveyno + 1;
+                        $busq_elem1 ++;
                     }
 
-                    if($busq_elem2 > 20){
-                        $i_elem2 = 1;
+                    if($busq_elem1 > 35){
+                        $i_elem1 = 1;
                     }
         
-                }while($i_elem2 != 1);
+                }while($i_elem1 != 1);
 
-                $spid_buscar = substr($this->search,($busqueda_spid + 6 ),($posicion_spid - ($busqueda_spid + 6)));
+                $surveyno_buscar = substr($this->search,($busqueda_surveyno + 9),($posicion_surveyno - ($busqueda_surveyno + 9)));
 
-            }*/
+                
 
-           /* $busqueda_hash= strpos($this->search, 'k=1093&_s=');
+            }
 
 
-            if($busqueda_hash != false){
-                $hash_buscar = substr($this->search,($busqueda_hash + 10 ));
-            }*/
+            $busqueda_pid= strpos($this->search, '&PID=');
+
+            if($busqueda_pid != false){
+
+                $posicion_pid = $busqueda_pid + 5;
+                $i_elem1 = 0;
+                $busq_elem1 = 0;
+                            
+                do{
+                    $detect_elem1= substr($this->search, $posicion_pid,1);
+        
+                    if($detect_elem1 == '&') $i_elem1 = 1;
+                    else{
+                        $posicion_pid = $posicion_pid + 1;
+                        $busq_elem1 ++;
+                    }
+
+                    if($busq_elem1 > 35){
+                        $i_elem1 = 1;
+                    }
+        
+                }while($i_elem1 != 1);
+
+                $pid_buscar = substr($this->search,($busqueda_pid + 5),($posicion_pid - ($busqueda_pid + 5)));
+
+                
+
+            }
+
+
 
             try {
                 $client = new Client(['base_uri' => 'http://147.182.190.233/',]);
 
-                $resultado = $client->request('GET', '/k1093/1/'.$psid_buscar);
+                $resultado = $client->request('GET','/k1093_ns/2/'.$surveyno_buscar.'/'.$spid_buscar.'/'.$pid_buscar.'/'.$psid_buscar);
 
 
                 if($resultado->getStatusCode() == 200){
@@ -354,7 +387,6 @@ class K1093Index extends Component
       
     }
 
-
     public function render()
     {
         $subs_psid = '0';
@@ -383,6 +415,8 @@ class K1093Index extends Component
 
                 if($busqueda_ast_ !== false){
                     $busqueda_id= strpos($this->search, '**');
+
+                    $this->pid_unico = session('pid');
                                     
                     if(session('psid')) $psid_buscar = substr($this->search,($busqueda_id - 22),11).substr(session('psid'),11,11);
                     else $psid_buscar = substr($this->search,($busqueda_id - 22),22);
@@ -649,9 +683,9 @@ class K1093Index extends Component
             $this->calc_link = 0;
         }
 
-        return view('livewire.jumpers.k1093.k1093-index',compact('jumper','comments','subs_psid','busqueda_link_def'));
-    }
 
+        return view('livewire.jumpers.k1093.k1093-bea-index',compact('jumper','comments','subs_psid','busqueda_link_def'));
+    }
 
     public function positivo($jumper_id){
 
@@ -698,7 +732,7 @@ class K1093Index extends Component
 
         }
 
-        $this->emitTo('jumpers.k1093.k1093-index','render');
+        $this->emitTo('jumpers.k1093.k1093-bea-index','render');
     }
 
     public function negativo($jumper_id){
@@ -745,7 +779,7 @@ class K1093Index extends Component
 
         }
 
-        $this->emitTo('jumpers.k1093.k1093-index','render');
+        $this->emitTo('jumpers.k1093.k1093-bea-index','render');
 
         
     }
@@ -761,7 +795,7 @@ class K1093Index extends Component
 
             $this->reset(['comentario']);
 
-            $this->emitTo('jumpers.k1093.k1093-index','render');
+            $this->emitTo('jumpers.k1093.k1093-bea-index','render');
         }
     }
 
@@ -772,7 +806,7 @@ class K1093Index extends Component
         $this->jumper_complete = [];
         session()->forget('search');
         $this->busqueda_link = "";
-        return redirect()->route('k1093.index');
+        return redirect()->route('k1093_bea.index');
 
     }
 }
