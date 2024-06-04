@@ -308,7 +308,7 @@ class Wix extends Component
 
                             $this->jumper_complete = json_decode($resultado->getBody(),true);
 
-                            dd($this->jumper_complete);
+                           // dd($this->jumper_complete);
 
                         }
 

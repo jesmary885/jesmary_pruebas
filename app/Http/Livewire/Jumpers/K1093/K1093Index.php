@@ -378,6 +378,8 @@ class K1093Index extends Component
             $busqueda_k1093_ = strpos($this->search, 'k=1093&');
 
             if($busqueda_k1093_ !== false){
+
+
                 
                 $busqueda_ast_ = strpos($this->search, '**');
 
@@ -501,7 +503,7 @@ class K1093Index extends Component
                                     }
                     }
 
-                    $busqueda_surveyno= strpos($this->search, '?surveyno=');
+                   /* $busqueda_surveyno= strpos($this->search, '?surveyno=');
 
                     if($busqueda_surveyno != false){
 
@@ -512,9 +514,9 @@ class K1093Index extends Component
                     else{
 
                         $this->jumper_detect = 3;
-                    }
+                    }*/
 
-                    $busqueda_spid= strpos($this->search, '&spid');
+                   /* $busqueda_spid= strpos($this->search, '&spid');
 
                     if($busqueda_spid != false){
                             $posicion_elem1 = $busqueda_spid + 10;
@@ -522,7 +524,7 @@ class K1093Index extends Component
 
                     else{
                         $this->jumper_detect = 3;
-                    }
+                    }*/
 
                     if($this->jumper_detect == 0 && $this->pid_detectado == 'si'){
 
