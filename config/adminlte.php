@@ -519,29 +519,7 @@ return [
             'icon'    => '	fas fa-sad-cry',
         ],
 
-        [
-            'text'    => 'GENERADORES SSI',
-            'icon'    => 'fas fa-search',
-            'can' => 'menu.premium',
-            'icon_color' => 'cyan',
-            'submenu' => [
-                [
-                    'text' => 'Generador QT & ER',
-                    'route'  => 'generador_qt.index',
-                    'can' => 'menu.premium',
-                    'icon_color' => 'red',
-                    'icon'    => 'fas fa-angle-right',
-                ],
-
-                [
-                    'text' => 'Generador VO & OO',
-                    'route'  => 'generador_vo.index',
-                    'can' => 'menu.premium',
-                    'icon_color' => 'red',
-                    'icon'    => 'fas fa-angle-right',
-                ],
-            ],
-        ],
+        
 
        
 
@@ -607,6 +585,40 @@ return [
             'can' => 'menu.premium',
         ],
 
+        [
+            'text' => 'ENCUESTAR',
+            'route'  => 'encuestar.index',
+            'icon_color' => 'red',
+            'icon'    => '	fab fa-elementor',
+            'can' => 'menu.premium',
+        ],
+
+        [
+            'text'    => 'GENERADORES SSI',
+            'icon'    => 'fas fa-search',
+            'can' => 'menu.premium',
+            'icon_color' => 'red',
+            'submenu' => [
+                [
+                    'text' => 'Generador QT & ER',
+                    'route'  => 'generador_qt.index',
+                    'can' => 'menu.premium',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                [
+                    'text' => 'Generador VO & OO',
+                    'route'  => 'generador_vo.index',
+                    'can' => 'menu.premium',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+            ],
+        ],
+
+      
+
 
         [
             'text'    => 'SSI',
@@ -668,13 +680,7 @@ return [
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
                 ],
-                [
-                    'text' => 'k1093 beasurveytaker',
-                    'route'  => 'k1093_bea.index',
-                    'can' => 'ssidkr.index',
-                    'icon_color' => 'red',
-                    'icon'    => '	fas fa-angle-right',
-                ],
+               
                 [
                     'text' => 'K1098',
                     'route'  => 'k1098.index',
@@ -916,6 +922,14 @@ return [
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
                 ],
+
+                [
+                    'text' => 'k1093 beasurveytaker',
+                    'route'  => 'k1093_bea.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
                
                 [
                     'text' => 'K23',
@@ -1136,6 +1150,26 @@ return [
                 ],
             ],
         ],
+
+
+        [
+            'text'    => 'INTERNOS',
+            'icon'    => 'fas fa-search',
+            'can' => 'ssidkr.index',
+            'icon_color' => 'cyan',
+            'submenu' => [
+                [
+                    'text' => 'Buscador principal',
+                    'route'  => 'interno.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                
+            ],
+        ],
+
 
         
 

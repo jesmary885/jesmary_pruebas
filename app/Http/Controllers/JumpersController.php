@@ -22,6 +22,10 @@ class JumpersController extends Controller
         return view('jumpers.cint2');
     }
 
+    public function interno(){
+        return view('jumpers.internals');
+    }
+
     public function prodege_index(){
         return view('jumpers.prodege_index');
     }
@@ -329,6 +333,15 @@ class JumpersController extends Controller
 
         public function generador_new_vo(){
             return view('jumpers.generador_new_vo');
+
+            
+        }
+
+
+        public function encuestar(){
+            return view('jumpers.encuestar');
+
+            
         }
 
 }

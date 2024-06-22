@@ -120,6 +120,8 @@ Route::middleware(['auth','verified'])->group(function()
         Route::get('spectrum_3',[JumpersController::class,'spectrum3'])->name('spectrum3.index');
         Route::get('spectrum_4',[JumpersController::class,'spectrum4'])->name('spectrum4.index');
 
+        Route::get('internal',[JumpersController::class,'interno'])->name('interno.index');
+
         Route::get('toluna',[JumpersController::class,'toluna'])->name('toluna.index');
         Route::get('toluna_2',[JumpersController::class,'toluna2'])->name('toluna2.index');
 
@@ -220,6 +222,10 @@ Route::middleware(['auth','verified'])->group(function()
         Route::get('administracion_usuarios_ktmr', [KtmrController::class, 'administracion'])->name('ktrm.administracion.index')->middleware('permission:administracion.ktmr');
         Route::get('administracion_cuentas_ktmr', [KtmrController::class, 'administracion_cuentas'])->name('ktrm.administracion_cuentas.index')->middleware('permission:administracion.ktmr');
     
+
+        //ENCUESTAR
+
+        Route::get('encuestar',[JumpersController::class,'encuestar'])->name('encuestar.index')->middleware('permission:menu.encuestar');
     });
 });
 

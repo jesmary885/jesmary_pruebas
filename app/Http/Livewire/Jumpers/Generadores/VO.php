@@ -45,19 +45,12 @@ class VO extends Component
 
             $resultado = $client->request('GET', 'abrirc/1/'.$this->psid_search.'/'.$this->panel_search);
 
-
-            
             if($resultado->getStatusCode() == 200){
-
                 $this->jumper_complete = json_decode($resultado->getBody(),true);
-
-                //$this->jumper_detect = 1;
             }
 
             else{
-        
-
-                
+    
             }
         }
         catch (\GuzzleHttp\Exception\RequestException $e) {
@@ -68,7 +61,7 @@ class VO extends Component
             if($e->hasResponse()){
                 if ($e->getResponse()->getStatusCode() !== '200'){
                     /*$error['response'] = $e->getResponse(); 
-                    $this->jumper_detect = 2;*/
+                    $this->jumper_detect = 2;*/ 
 
 
                     try {

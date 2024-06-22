@@ -125,6 +125,8 @@ class SamplicioIndexPrincipal extends Component
 
             }
 
+            
+
             if($url_detect != 0){
                 $jumpers = Link::where('panel', 'LIKE', '%' . $url_detect . '%') 
                     ->where('jumper_type_id','11')
