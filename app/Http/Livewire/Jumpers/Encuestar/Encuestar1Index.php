@@ -115,6 +115,7 @@ class Encuestar1Index extends Component
         $rules = $this->rules;
         $this->validate($rules);
 
+        $this->reset(['jumper_search','respuesta']);
 
         try {
 

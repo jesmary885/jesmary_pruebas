@@ -590,7 +590,7 @@ return [
             'route'  => 'encuestar.index',
             'icon_color' => 'red',
             'icon'    => '	fab fa-elementor',
-            'can' => 'menu.premium',
+            'can' => 'menu.encuestar',
         ],
 
         [

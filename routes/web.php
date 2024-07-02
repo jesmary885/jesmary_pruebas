@@ -70,7 +70,7 @@ Route::middleware(['auth','verified'])->group(function()
         Route::get('ipso',[JumpersController::class,'ipso'])->name('ipso.index')->middleware('permission:menu.premium');
 
         Route::get('k1093',[JumpersController::class,'k1093'])->name('k1093.index');
-        Route::get('k1093_easurveytaker',[JumpersController::class,'k1093_bea'])->name('k1093_bea.index');
+        Route::get('k1093_easurveytaker',[JumpersController::class,'k1093_bea'])->name('k1093_bea.index')->middleware('permission:menu.premium');
         Route::get('k7107',[JumpersController::class,'k7107'])->name('k7107.index');
         Route::get('k5541',[JumpersController::class,'k5541'])->name('k5541.index');
         Route::get('k2000',[JumpersController::class,'k2000'])->name('k2000.index');

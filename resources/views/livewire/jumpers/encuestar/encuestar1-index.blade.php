@@ -102,7 +102,7 @@
                                           <div class="text-sm text-gray-500 font-semibold ">Puntuación</div>
                                           <div class="flex">
 
-                                            @if($tipo_total == 'si')
+                                            @if($this->tipo_total == 'si')
 
 
                                             <i class="font-semibold far fa-thumbs-up text-blue-600 mr-2">{{$this->positive($this->type($informacion_complete['jumper']))}}</i>
