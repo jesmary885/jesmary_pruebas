@@ -22,6 +22,8 @@ class JumpersController extends Controller
         return view('jumpers.cint2');
     }
 
+    
+
     public function interno(){
         return view('jumpers.internals');
     }
@@ -336,6 +338,20 @@ class JumpersController extends Controller
 
             
         }
+
+
+        public function k23_poderosa_v2(){
+            return view('jumpers.k23_poderosa_v2');
+        }
+
+        public function k1083_v2(){
+            return view('jumpers.k1083_v2');
+        }
+
+        public function detector(){
+            return view('jumpers.detector');
+        }
+
 
 
         public function encuestar(){

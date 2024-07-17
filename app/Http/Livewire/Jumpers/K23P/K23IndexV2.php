@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Jumpers\K23P;
 
+use Livewire\Component;
+
 use App\Models\Antibot;
 use App\Models\Comments;
 use App\Models\CuentasPsid;
@@ -13,10 +15,9 @@ use App\Models\User_Links_Points;
 use DateTime;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
-use Livewire\Component;
 use Livewire\WithPagination;
 
-class K23Index extends Component
+class K23IndexV2 extends Component
 {
     use WithPagination;
     protected $paginationTheme = "bootstrap";
@@ -118,7 +119,7 @@ class K23Index extends Component
         $this->operacion = Antibot::where('id',$random)->first();
         $operacion_total = 'Resuelve esta operación matemática ('.$this->operacion->nro1.' + '.$this->operacion->nro2. ')';
 
-        $this->emit('numerologia',$operacion_total,'jumpers.k23-p.k23-index','verific');
+        $this->emit('numerologia',$operacion_total,'jumpers.k23-p.k23-index-v2','verific');
 
     }
 
@@ -337,16 +338,20 @@ class K23Index extends Component
                     'base_uri' => 'http://147.182.190.233',
                 ]);
 
+               /* if($elem2 == 0){
+                    $resultado = $client->request('GET', '/k23_s2/1/'.$ids_buscar.'/'.$psid_buscar.'/'.$k2_buscar.'/'.$this->pid_buscar.'/'.$elem1.'/'.$hash_buscar);
 
+                }
+                else{*/
 
                     if($elem3 == 0){
             
-                         $resultado = $client->request('GET', '/k23_s2_k2_imperium/1/'.$ids_buscar.'/'.$psid_buscar.'/'.$k2_buscar.'/'.$chanel_buscar.'/'.$pid_buscar_def.'/'.$elem1.'/'.$elem2);
+                         $resultado = $client->request('GET', '/k23_s2/1/'.$ids_buscar.'/'.$psid_buscar.'/'.$k2_buscar.'/'.$chanel_buscar.'/'.$pid_buscar_def.'/'.$elem1.'/'.$elem2);
                         
                      
                     }
                     else{
-                        $resultado = $client->request('GET', '/k23_s2_k2_imperium/1/'.$ids_buscar.'/'.$psid_buscar.'/'.$k2_buscar.'/'.$chanel_buscar.'/'.$pid_buscar_def.'/'.$elem1.'/'.$elem2.'/'.$elem3);
+                        $resultado = $client->request('GET', '/k23_s3/1/'.$ids_buscar.'/'.$psid_buscar.'/'.$k2_buscar.'/'.$chanel_buscar.'/'.$pid_buscar_def.'/'.$elem1.'/'.$elem2.'/'.$elem3);
                        
                     }
 
@@ -497,6 +502,7 @@ class K23Index extends Component
 
     public function render()
     {
+
         $subs_psid = '0';
        
         $comments =0;
@@ -1344,14 +1350,15 @@ class K23Index extends Component
         else{
             $this->calc_link = 0;
         }
-        return view('livewire.jumpers.k23-p.k23-index',compact('jumper','comments','subs_psid','busqueda_link_def'));
+
+        return view('livewire.jumpers.k23-p.k23-index-v2',compact('jumper','comments','subs_psid','busqueda_link_def'));
     }
 
     public function canjear(){
         if($this->total_jump_dia == 10) {
             if($this->user->balance >= 1) {
                 if($this->recargas_user_dia <= 1){
-                    $this->emit('canjear', '¿Esta seguro de realizar el canje?','jumpers.k23-p.k23-index','confirmacion','El caje se ha realizado');
+                    $this->emit('canjear', '¿Esta seguro de realizar el canje?','jumpers.k23-p.k23-index-v2','confirmacion','El caje se ha realizado');
                 }
             }
         }
@@ -1381,7 +1388,7 @@ class K23Index extends Component
 
         $this->canj = 0;
 
-        $this->emitTo('jumpers.k23-p.k23-index','render');
+        $this->emitTo('jumpers.k23-p.k23-index-v2','render');
     }
 
     public function positivo($jumper_id){
@@ -1429,7 +1436,7 @@ class K23Index extends Component
 
         }
 
-        $this->emitTo('jumpers.k23-p.k23-index','render');
+        $this->emitTo('jumpers.k23-p.k23-index-v2','render');
 
         
 
@@ -1479,7 +1486,7 @@ class K23Index extends Component
 
         }
 
-        $this->emitTo('jumpers.k23-p.k23-index','render');
+        $this->emitTo('jumpers.k23-p.k23-index-v2','render');
 
         
     }
@@ -1495,7 +1502,7 @@ class K23Index extends Component
 
             $this->reset(['comentario']);
 
-            $this->emitTo('jumpers.k23-p.k23-index','render');
+            $this->emitTo('jumpers.k23-p.k23-index-v2','render');
         }
     }
 
@@ -1506,7 +1513,7 @@ class K23Index extends Component
         $this->jumper_complete = [];
         session()->forget('search');
         $this->busqueda_link = "";
-        return redirect()->route('k23_poderosa.index');
+        return redirect()->route('k23_poderosav2.index');
 
     }
 }

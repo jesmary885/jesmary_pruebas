@@ -150,20 +150,21 @@ class Encuestar1Index extends Component
             }
         }
     }
+
     public function generar(){
 
         try {
-        $client = new Client();
+            $client = new Client();
 
-        $response = $client->post('http://146.190.74.228/jumper_ssi/1/', [
-            'headers' => ['Content-Type' => 'application/json'],
-            'body' => json_encode([
-                'link' => $this->jumper_search
-            ])
-        ]);
+            $response = $client->post('http://146.190.74.228/jumper_ssi/1/', [
+                'headers' => ['Content-Type' => 'application/json'],
+                'body' => json_encode([
+                    'link' => $this->jumper_search
+                ])
+            ]);
 
-        
-        $this->respuesta = json_decode($response->getBody(),true);
+            
+            $this->respuesta = json_decode($response->getBody(),true);
 
         }
 

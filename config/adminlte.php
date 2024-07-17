@@ -902,23 +902,38 @@ return [
             'icon_color' => 'cyan',
             'submenu' => [
                 [
+                    'text' => 'Identificador de versión',
+                    'route'  => 'version.index',
+                    'can' => 'menu.premium.v2',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+                [
                     'text' => 'K1000 Selfserve',
                     'route'  => 'kmil_poderosa1.index',
                     'can' => 'menu.premium',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
-                [
+               /* [
                     'text' => 'K1000 MCG',
                     'route'  => 'kmil_poderosa2.index',
                     'can' => 'menu.premium',
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
-                ],
+                ],*/
                 [
-                    'text' => 'K1083',
+                    'text' => 'K1083 V1',
                     'route'  => 'k1083.index',
                     'can' => 'menu.premium',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+
+                [
+                    'text' => 'K1083 V2',
+                    'route'  => 'k1083v2.index',
+                    'can' => 'menu.premium.v2',
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
                 ],
@@ -932,9 +947,19 @@ return [
                 ],
                
                 [
-                    'text' => 'K23',
+                    'text' => 'K23 V1',
                     'route'  => 'k23_poderosa.index',
                     'can' => 'menu.premium',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                    'label'       => 'With K2',
+                    'label_color' => 'danger',
+                ],
+
+                [
+                    'text' => 'K23 V2',
+                    'route'  => 'k23_poderosav2.index',
+                    'can' => 'menu.premium.v2',
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
                     'label'       => 'With K2',

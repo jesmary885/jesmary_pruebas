@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Jumpers\K1083;
 
+use Livewire\Component;
+
 use App\Models\Antibot;
 use App\Models\Comments;
 use App\Models\CuentasPsid;
@@ -15,11 +17,11 @@ use Carbon\Carbon;
 use DateTime;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
-use Livewire\Component;
 use Livewire\WithPagination;
 
-class K1083Index extends Component
+class K1083IndexV2 extends Component
 {
+
     use WithPagination;
     protected $paginationTheme = "bootstrap";
 
@@ -53,7 +55,7 @@ class K1083Index extends Component
         $this->operacion = Antibot::where('id',$random)->first();
         $operacion_total = 'Resuelve esta operación matemática ('.$this->operacion->nro1.' + '.$this->operacion->nro2. ')';
 
-        $this->emit('numerologia',$operacion_total,'jumpers.k1083.k1083-index','verific');
+        $this->emit('numerologia',$operacion_total,'jumpers.k1083.k1083.k1083-index-v2','verific');
     }
 
     public function verific($result){
@@ -112,8 +114,7 @@ class K1083Index extends Component
                     'base_uri' => 'http://147.182.190.233/',
                 ]);
 
-
-                $resultado = $client->request('GET', '/k1083_imperium/1/'.$serie_buscar.'/'.$psid_buscar.'/'.$hash_buscar);
+                $resultado = $client->request('GET', '/k1083/1/'.$serie_buscar.'/'.$psid_buscar.'/'.$hash_buscar);
 
                 if($resultado->getStatusCode() == 200){
 
@@ -257,6 +258,7 @@ class K1083Index extends Component
        
         }
     }
+
 
     public function render()
     {
@@ -521,14 +523,15 @@ class K1083Index extends Component
             $this->calc_link = 0;
         }
 
-        return view('livewire.jumpers.k1083.k1083-index',compact('jumper','comments','subs_psid','busqueda_link_def'));
+
+        return view('livewire.jumpers.k1083.k1083-index-v2',compact('jumper','comments','subs_psid','busqueda_link_def'));
     }
 
     public function canjear(){
         if($this->total_jump_dia == 10) {
             if($this->user->balance >= 1) {
                 if($this->recargas_user_dia <= 1){
-                    $this->emit('canjear', '¿Esta seguro de realizar el canje?','jumpers.k1083.k1083-index','confirmacion','El caje se ha realizado');
+                    $this->emit('canjear', '¿Esta seguro de realizar el canje?','jumpers.k1083.k1083-index-v2','confirmacion','El caje se ha realizado');
                 }
             }
         }
@@ -558,7 +561,7 @@ class K1083Index extends Component
 
         $this->canj = 0;
 
-        $this->emitTo('jumpers.k1083.k1083-index','render');
+        $this->emitTo('jumpers.k1083.k1083-index-v2','render');
     }
 
     public function positivo($jumper_id){
@@ -606,7 +609,7 @@ class K1083Index extends Component
 
         }
 
-        $this->emitTo('jumpers.k1083.k1083-index','render');
+        $this->emitTo('jumpers.k1083.k1083-index-v2','render');
     }
 
     public function negativo($jumper_id){
@@ -653,7 +656,7 @@ class K1083Index extends Component
 
         }
 
-        $this->emitTo('jumpers.k1083.k1083-index','render');
+        $this->emitTo('jumpers.k1083.k1083-index-v2','render');
 
         
     }
@@ -669,7 +672,7 @@ class K1083Index extends Component
 
             $this->reset(['comentario']);
 
-            $this->emitTo('jumpers.k1083.k1083-index','render');
+            $this->emitTo('jumpers.k1083.k1083-index-v2','render');
         }
     }
 
@@ -680,6 +683,8 @@ class K1083Index extends Component
         $this->jumper_complete = [];
         session()->forget('search');
         $this->busqueda_link = "";
-        return redirect()->route('k1083.index');
+        return redirect()->route('k1083v2.index');
     }
+
+
 }
