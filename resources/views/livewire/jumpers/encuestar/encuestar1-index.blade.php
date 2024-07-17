@@ -1,8 +1,9 @@
 <div>
     <div class="card">
         <div class="card-header">
-            <div class="grid md:grid-cols-2 gap-2">
-                <div >
+            <div class="grid md:grid-cols-4 gap-2">
+                @if($estado == "")
+                <div class="col-span-2">
 
                     <div class="input-group">
                         <input wire:model.defer="psid_search" placeholder="Ingrese su Psid" class="form-control w-full" aria-describedby="inputGroupPrepend" >
@@ -15,13 +16,54 @@
                     </div>
                 </div>
 
+                @endif
+
+                @if($estado == "")
+
                 <div class="col-span-1 ">
                     <button type="submit" class="btn bg-info float-left mt-4 " wire:click="consultar">
                         <i class="fas fa-redo"></i> CONSULTAR
                     </button>
                 </div>
+
+                @endif
+
+                <div class="flex col-span-1 mt-4">
+                    <div class="custom-control custom-switch"> 
+                        <input value="1" wire:model.lazy="estado" type="checkbox" class="custom-control-input" id="customSwitch1">
+                        <label class="custom-control-label" for="customSwitch1">Habilitar jumper</label>
+                    </div>
+                </div>
+
             </div>
+
+
         </div>
+
+        @if($estado == "1")
+
+
+            <div class="input-group mt-2 px-2">
+                <input wire:model="jumper_search" placeholder="Ingrese el jumper de la encuesta" id="validationCustomUsername" class="form-control" aria-describedby="inputGroupPrepend" >
+                    @if($jumper_search)
+                            <div class="input-group-prepend ml-2">
+                                <button type="submit"  wire:click="generar"  class="btn btn-sm btn-warning text-bold" title="{{__('messages.copiar_portapapeles')}}" >Procesar jumper</button> 
+                            </div>
+                    @endif
+            </div>
+
+
+            @if ($respuesta)
+
+            <div class="mt-4 w-full">
+                <p  class="text-blue-400 text-clip text-sm text-center font-bold mb-2">{{$respuesta['jumper']}}</p>   
+            </div>
+
+            @endif
+        @endif
+
+
+
     
     
             @if ($informacion_complete == [])
@@ -43,7 +85,7 @@
 
                 <div class="card-body mt-0">
     
-                    @if ($informacion_complete)
+                    @if ($informacion_complete && $estado == "")
 
                         <div class="flex-nowrap justify-center callout callout-info w-full">
 

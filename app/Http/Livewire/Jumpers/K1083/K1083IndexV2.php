@@ -55,12 +55,14 @@ class K1083IndexV2 extends Component
         $this->operacion = Antibot::where('id',$random)->first();
         $operacion_total = 'Resuelve esta operación matemática ('.$this->operacion->nro1.' + '.$this->operacion->nro2. ')';
 
-        $this->emit('numerologia',$operacion_total,'jumpers.k1083.k1083.k1083-index-v2','verific');
+        $this->emit('numerologia',$operacion_total,'jumpers.k1083.k1083-index-v2','verific');
     }
 
     public function verific($result){
 
         if($result[0] == $this->operacion->resultado){
+
+
 
             
 
@@ -97,15 +99,27 @@ class K1083IndexV2 extends Component
 
             }
 
-            $busqueda_hash= strpos($this->search, 'k=1083&_s=');
 
+            $posicion_set = $posicion_serie + 1;
+            $i_set = 0;
+            $busq_set_s = 0;
+            
+            do{
+                $detect_set= substr($this->search, $posicion_set,1);
 
-            if($busqueda_hash != false){
-                $hash_buscar = substr($this->search,($busqueda_hash + 10 ));
-            }
-            else{
-                $this->jumper_detect = 3;
-            }
+                if($detect_set == '/') $i_set = 1;
+                else{
+                    $posicion_set = $posicion_set + 1;
+                    $busq_set_s ++;
+                }
+
+                if($busq_set_s > 20){
+                    $i_set = 1;
+                }
+
+            }while($i_set != 1);
+
+            $set_buscar = substr($this->search,($posicion_serie + 1),($posicion_set - ($posicion_serie + 1)));
 
 
             try {
@@ -114,7 +128,7 @@ class K1083IndexV2 extends Component
                     'base_uri' => 'http://147.182.190.233/',
                 ]);
 
-                $resultado = $client->request('GET', '/k1083/1/'.$serie_buscar.'/'.$psid_buscar.'/'.$hash_buscar);
+                $resultado = $client->request('GET', '/k1083/1/'.$serie_buscar.'/'.$psid_buscar.'/'.$set_buscar);
 
                 if($resultado->getStatusCode() == 200){
 

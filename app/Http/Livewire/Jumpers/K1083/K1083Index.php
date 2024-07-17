@@ -95,15 +95,26 @@ class K1083Index extends Component
 
             }
 
-            $busqueda_hash= strpos($this->search, 'k=1083&_s=');
+            $posicion_set = $posicion_serie + 1;
+            $i_set = 0;
+            $busq_set_s = 0;
+            
+            do{
+                $detect_set= substr($this->search, $posicion_set,1);
 
+                if($detect_set == '/') $i_set = 1;
+                else{
+                    $posicion_set = $posicion_set + 1;
+                    $busq_set_s ++;
+                }
 
-            if($busqueda_hash != false){
-                $hash_buscar = substr($this->search,($busqueda_hash + 10 ));
-            }
-            else{
-                $this->jumper_detect = 3;
-            }
+                if($busq_set_s > 20){
+                    $i_set = 1;
+                }
+
+            }while($i_set != 1);
+
+            $set_buscar = substr($this->search,($posicion_serie + 1),($posicion_set - ($posicion_serie + 1)));
 
 
             try {
@@ -113,7 +124,7 @@ class K1083Index extends Component
                 ]);
 
 
-                $resultado = $client->request('GET', '/k1083_imperium/1/'.$serie_buscar.'/'.$psid_buscar.'/'.$hash_buscar);
+                $resultado = $client->request('GET', '/k1083_imperium/1/'.$serie_buscar.'/'.$psid_buscar.'/'.$set_buscar);
 
                 if($resultado->getStatusCode() == 200){
 

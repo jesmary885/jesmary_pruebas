@@ -8,7 +8,7 @@ use GuzzleHttp\Client;
 
 class Encuestar1Index extends Component
 {
-    public $tipo_total,$respuesta = [],$jumper_complete = "", $psid_search, $panel_search, $jumper_detect, $informacion_complete ="", $jumper_search;
+    public $tipo_total,$respuesta = [],$jumper_complete = "", $psid_search, $panel_search, $jumper_detect, $informacion_complete ="", $jumper_search, $estado="";
 
     protected $listeners = ['render' => 'render'];
 
