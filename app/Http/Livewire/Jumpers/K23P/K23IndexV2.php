@@ -346,12 +346,12 @@ class K23IndexV2 extends Component
 
                     if($elem3 == 0){
             
-                         $resultado = $client->request('GET', '/k23_s2/1/'.$ids_buscar.'/'.$psid_buscar.'/'.$k2_buscar.'/'.$chanel_buscar.'/'.$pid_buscar_def.'/'.$elem1.'/'.$elem2);
+                         $resultado = $client->request('GET', '/k23_s2_k2/1/'.$ids_buscar.'/'.$psid_buscar.'/'.$k2_buscar.'/'.$chanel_buscar.'/'.$pid_buscar_def.'/'.$elem1.'/'.$elem2);
                         
                      
                     }
                     else{
-                        $resultado = $client->request('GET', '/k23_s3/1/'.$ids_buscar.'/'.$psid_buscar.'/'.$k2_buscar.'/'.$chanel_buscar.'/'.$pid_buscar_def.'/'.$elem1.'/'.$elem2.'/'.$elem3);
+                        $resultado = $client->request('GET', '/k23_s3_k2/1/'.$ids_buscar.'/'.$psid_buscar.'/'.$k2_buscar.'/'.$chanel_buscar.'/'.$pid_buscar_def.'/'.$elem1.'/'.$elem2.'/'.$elem3);
                        
                     }
 
