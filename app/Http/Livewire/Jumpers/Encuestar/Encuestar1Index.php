@@ -23,12 +23,23 @@ class Encuestar1Index extends Component
 
     public function mount(){
 
-        $this->jumper_complete = [];
+        $this->informacion_complete = [];
+        $this->respuesta = [];
     }
 
     public function render()
     {
         return view('livewire.jumpers.encuestar.encuestar1-index');
+    }
+
+    public function updatedEstado(){
+
+        $this->reset(['psid_search','panel_search']);
+        $this->informacion_complete = [];
+        $this->respuesta = [];
+        $this->emitTo('jumpers.encuestar.encuestar1-index','render');
+
+
     }
 
     public function type($jumper){
@@ -108,12 +119,22 @@ class Encuestar1Index extends Component
         }
     }
 
+    public function clear(){
+        $this->reset(['psid_search']);
+        $this->informacion_complete = [];
+        $this->respuesta = [];
+        $this->emitTo('jumpers.encuestar.encuestar1-index','render');
+    }
+
 
 
     public function consultar(){
 
         $rules = $this->rules;
         $this->validate($rules);
+   
+        $this->emitTo('jumpers.encuestar.encuestar1-index','render');
+  
 
         $this->reset(['jumper_search','respuesta']);
 
@@ -124,12 +145,16 @@ class Encuestar1Index extends Component
                 'base_uri' => 'http://146.190.74.228/',
             ]);
 
- 
-            $resultado = $client->request('GET', 'jumper_vo_er/1/'.$this->psid_search.'/'.$this->panel_search);
+            if($this->panel_search == '38') $resultado = $client->request('GET', 'datos_encuestas_qt/1/'.$this->psid_search.'/'.$this->panel_search);
+            else $resultado = $client->request('GET', 'jumper_vo_er/1/'.$this->psid_search.'/'.$this->panel_search);
 
             if($resultado->getStatusCode() == 200){
 
+              
+
                 $this->informacion_complete = json_decode($resultado->getBody(),true);
+
+        
 
             }
 
@@ -145,6 +170,8 @@ class Encuestar1Index extends Component
             if($e->hasResponse()){
                 if ($e->getResponse()->getStatusCode() !== '200'){
                     $error['response'] = $e->getResponse(); 
+
+              
                     $this->jumper_detect = 2;
                 }
             }

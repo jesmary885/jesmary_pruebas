@@ -63,10 +63,6 @@ class K1083IndexV2 extends Component
         if($result[0] == $this->operacion->resultado){
 
 
-
-            
-
-
             $busqueda_id= strpos($this->search, '**');
 
             if(session('psid')) $psid_buscar = substr($this->search,($busqueda_id - 22),11).substr(session('psid'),11,11);
@@ -128,7 +124,7 @@ class K1083IndexV2 extends Component
                     'base_uri' => 'http://147.182.190.233/',
                 ]);
 
-                $resultado = $client->request('GET', '/k1083/1/'.$serie_buscar.'/'.$psid_buscar.'/'.$set_buscar);
+                $resultado = $client->request('GET', '/k1083_sin_imperium/1/'.$serie_buscar.'/'.$psid_buscar.'/'.$set_buscar);
 
                 if($resultado->getStatusCode() == 200){
 
