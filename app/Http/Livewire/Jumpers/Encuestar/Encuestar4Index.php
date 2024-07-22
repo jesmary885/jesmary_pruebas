@@ -8,7 +8,7 @@ use GuzzleHttp\Client;
 
 class Encuestar4Index extends Component
 {
-    public $tipo_total,$respuesta = [],$jumper_complete = "", $psid_search, $panel_search, $jumper_detect, $informacion_complete ="", $jumper_search;
+    public $jumper_detect = 0, $tipo_total,$respuesta = [],$jumper_complete = "", $psid_search, $panel_search, $informacion_complete ="", $jumper_search, $estado="";
 
     protected $listeners = ['render' => 'render'];
 
@@ -23,12 +23,23 @@ class Encuestar4Index extends Component
 
     public function mount(){
 
-        $this->jumper_complete = [];
+        $this->informacion_complete = [];
+        $this->respuesta = [];
     }
 
     public function render()
     {
         return view('livewire.jumpers.encuestar.encuestar4-index');
+    }
+
+    public function updatedEstado(){
+
+        $this->reset(['psid_search','panel_search']);
+        $this->informacion_complete = [];
+        $this->respuesta = [];
+        $this->emitTo('jumpers.encuestar.encuestar4-index','render');
+
+
     }
 
     public function type($jumper){
@@ -108,15 +119,24 @@ class Encuestar4Index extends Component
         }
     }
 
+    public function clear(){
+        $this->reset(['psid_search']);
+        $this->informacion_complete = [];
+        $this->respuesta = [];
+        $this->emitTo('jumpers.encuestar.encuestar4-index','render');
+    }
+
 
 
     public function consultar(){
 
         $rules = $this->rules;
         $this->validate($rules);
+   
+       // $this->emitTo('jumpers.encuestar.encuestar1-index','render');
+  
 
-        $this->reset(['jumper_search','respuesta']);
-
+        //$this->reset(['jumper_search','respuesta']);
 
         try {
 
@@ -125,12 +145,24 @@ class Encuestar4Index extends Component
                 'base_uri' => 'http://146.190.74.228/',
             ]);
 
- 
-            $resultado = $client->request('GET', 'jumper_vo_er/1/'.$this->psid_search.'/'.$this->panel_search);
+            if($this->panel_search == '38') $resultado = $client->request('GET', 'datos_encuestas_qt/1/'.$this->psid_search.'/'.$this->panel_search);
+            else $resultado = $client->request('GET', 'jumper_vo_er/1/'.$this->psid_search.'/'.$this->panel_search);
 
             if($resultado->getStatusCode() == 200){
 
+
                 $this->informacion_complete = json_decode($resultado->getBody(),true);
+
+                $busqueda_https= strpos($this->informacion_complete['jumper'], 'ttps://');
+
+  
+
+                if($busqueda_https != false) $this->jumper_detect = 10;
+                else $this->jumper_detect = 1;
+
+
+
+        
 
             }
 
@@ -146,25 +178,28 @@ class Encuestar4Index extends Component
             if($e->hasResponse()){
                 if ($e->getResponse()->getStatusCode() !== '200'){
                     $error['response'] = $e->getResponse(); 
+
+              
                     $this->jumper_detect = 2;
                 }
             }
         }
     }
+
     public function generar(){
 
         try {
-        $client = new Client();
+            $client = new Client();
 
-        $response = $client->post('http://146.190.74.228/jumper_ssi/1/', [
-            'headers' => ['Content-Type' => 'application/json'],
-            'body' => json_encode([
-                'link' => $this->jumper_search
-            ])
-        ]);
+            $response = $client->post('http://146.190.74.228/jumper_ssi/1/', [
+                'headers' => ['Content-Type' => 'application/json'],
+                'body' => json_encode([
+                    'link' => $this->jumper_search
+                ])
+            ]);
 
-        
-        $this->respuesta = json_decode($response->getBody(),true);
+            
+            $this->respuesta = json_decode($response->getBody(),true);
 
         }
 
