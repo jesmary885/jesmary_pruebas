@@ -48,9 +48,22 @@
             @endif
         @endif
 
+        @if ($jumper_detect == 10)
+            <div class="px-4">
+                <div class=" info-box bg-info">
+                    <span class="info-box-icon"><i class="	fas fa-info"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Debes saltar la wix de la cuenta por la web, luego vuelve a intentarlo.</span>
+                         
+                        </div>
+                </div>
+
+            </div>
+        @endif
+
 
         <div class="card-body mt-0">
-            @if ($informacion_complete)
+            @if ($jumper_detect == 1)
                 <div class="flex-nowrap justify-center callout callout-info w-full">
                     <p class="text-blue-400 text-clip text-sm text-center font-bold mb-2" id="jumper_copy">{{$informacion_complete['jumper']}}</p>
                     <div class="flex justify-center mb-2">

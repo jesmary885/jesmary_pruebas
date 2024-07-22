@@ -8,7 +8,7 @@ use GuzzleHttp\Client;
 
 class Encuestar1Index extends Component
 {
-    public $tipo_total,$respuesta = [],$jumper_complete = "", $psid_search, $panel_search, $jumper_detect, $informacion_complete ="", $jumper_search, $estado="";
+    public $jumper_detect = 0, $tipo_total,$respuesta = [],$jumper_complete = "", $psid_search, $panel_search, $informacion_complete ="", $jumper_search, $estado="";
 
     protected $listeners = ['render' => 'render'];
 
@@ -133,10 +133,10 @@ class Encuestar1Index extends Component
         $rules = $this->rules;
         $this->validate($rules);
    
-        $this->emitTo('jumpers.encuestar.encuestar1-index','render');
+       // $this->emitTo('jumpers.encuestar.encuestar1-index','render');
   
 
-        $this->reset(['jumper_search','respuesta']);
+        //$this->reset(['jumper_search','respuesta']);
 
         try {
 
@@ -150,9 +150,17 @@ class Encuestar1Index extends Component
 
             if($resultado->getStatusCode() == 200){
 
-              
 
                 $this->informacion_complete = json_decode($resultado->getBody(),true);
+
+                $busqueda_https= strpos($this->informacion_complete['jumper'], 'ttps://');
+
+  
+
+                if($busqueda_https != false) $this->jumper_detect = 10;
+                else $this->jumper_detect = 1;
+
+
 
         
 
