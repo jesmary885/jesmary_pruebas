@@ -182,7 +182,7 @@ class Encuestar2Index extends Component
             ]);
 
             if($this->panel_search == '38') $resultado = $client->request('GET', 'datos_encuestas_qt/1/'.$this->psid_search.'/'.$this->panel_search);
-            else $resultado = $client->request('GET', 'jumper_vo_er/1/'.$this->psid_search.'/'.$this->panel_search);
+            else $resultado = $client->request('GET', 'datos_encuestas_vo_er/1/'.$this->psid_search.'/'.$this->panel_search);
 
             if($resultado->getStatusCode() == 200){
 
