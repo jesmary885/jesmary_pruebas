@@ -34,10 +34,13 @@
 
         @if($estado == "1")
             <div class="input-group mt-2 px-2">
-                <input wire:model="jumper_search" placeholder="Ingrese el jumper de la encuesta" id="validationCustomUsername" class="form-control" aria-describedby="inputGroupPrepend" >
+                <input wire:model="jumper_search" placeholder="Ingrese el jumper de la encuesta" id="validationCustomUsername" class="form-control mb-2" aria-describedby="inputGroupPrepend" >
+        
                 @if($jumper_search)
-                    <div class="input-group-prepend ml-2">
-                        <button type="submit"  wire:click="generar"  class="btn btn-sm btn-warning text-bold" title="{{__('messages.copiar_portapapeles')}}" >Procesar jumper</button> 
+                    <div class="input-group-prepend">
+                        <button class="btn btn-md btn-outline-secondary input-group-text mb-2" id="inputGroupPrepend" wire:click="clear" title="Borrar">
+                                <i class="fas fa-backspace"></i>
+                        </button>
                     </div>
                 @endif
             </div>
@@ -55,6 +58,19 @@
                         <div class="info-box-content">
                             <span class="info-box-text">Debes saltar la wix de la cuenta por la web, luego vuelve a intentarlo.</span>
                          
+                        </div>
+                </div>
+
+            </div>
+        @endif
+
+        @if ($jumper_detect == 2)
+            <div class="px-4">
+                <div class=" info-box bg-warning">
+                    <span class="info-box-icon"><i class="far fa-sad-tear"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Lo siento.</span>
+                            <span class="info-box-number">Ha ocurrido un error al generar el jumper...</span>
                         </div>
                 </div>
 
@@ -135,11 +151,13 @@
 
                         <div class="input-group mt-5">
                             <input wire:model="jumper_search" placeholder="Ingrese el jumper de la encuesta" id="validationCustomUsername" class="form-control" aria-describedby="inputGroupPrepend" >
-                                @if($jumper_search)
-                                    <div class="input-group-prepend ml-2">
-                                        <button type="submit"  wire:click="generar"  class="btn btn-sm btn-warning text-bold" title="{{__('messages.copiar_portapapeles')}}" >Procesar jumper</button> 
-                                        </div>
-                                @endif
+                            @if($jumper_search)
+                            <div class="input-group-prepend">
+                                <button class="btn btn-md btn-outline-secondary input-group-text" id="inputGroupPrepend" wire:click="clear" title="Borrar">
+                                        <i class="fas fa-backspace"></i>
+                                </button>
+                            </div>
+                        @endif
                         </div>
 
 
@@ -156,7 +174,7 @@
 
 
 
-        @if ($informacion_complete == [] && $respuesta == [])
+        @if ($informacion_complete == [] || $respuesta == [])
             <div class="flex justify-center ">
                 <div class="mt-4 mb-4" wire:loading>
                     <div class="container2">

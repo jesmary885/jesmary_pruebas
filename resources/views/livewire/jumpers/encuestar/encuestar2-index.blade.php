@@ -6,7 +6,7 @@
                     <div class="col-span-2">
                         <div class="input-group">
                             <input wire:model.defer="psid_search" placeholder="Ingrese su Psid" class="form-control w-full" aria-describedby="inputGroupPrepend" >
-  
+
                        
                         </div>
                         <div class="input-group">
@@ -14,7 +14,7 @@
                         </div>
                     </div>
                 @endif
-  
+
                 @if($estado == "")
                     <div class="col-span-1 ">
                         <button type="submit" class="btn bg-info float-left mt-4 " wire:click="consultar">
@@ -22,7 +22,7 @@
                         </button>
                     </div>
                 @endif
-  
+
                 <div class="flex col-span-1 mt-4">
                     <div class="custom-control custom-switch"> 
                         <input value="1" wire:model="estado" type="checkbox" class="custom-control-input" id="customSwitch2">
@@ -31,13 +31,16 @@
                 </div>
             </div>
         </div>
-  
+
         @if($estado == "1")
             <div class="input-group mt-2 px-2">
-                <input wire:model="jumper_search" placeholder="Ingrese el jumper de la encuesta" id="validationCustomUsername" class="form-control" aria-describedby="inputGroupPrepend" >
+                <input wire:model="jumper_search" placeholder="Ingrese el jumper de la encuesta" id="validationCustomUsername" class="form-control mb-2" aria-describedby="inputGroupPrepend" >
+        
                 @if($jumper_search)
-                    <div class="input-group-prepend ml-2">
-                        <button type="submit"  wire:click="generar"  class="btn btn-sm btn-warning text-bold" title="{{__('messages.copiar_portapapeles')}}" >Procesar jumper</button> 
+                    <div class="input-group-prepend">
+                        <button class="btn btn-md btn-outline-secondary input-group-text mb-2" id="inputGroupPrepend" wire:click="clear" title="Borrar">
+                                <i class="fas fa-backspace"></i>
+                        </button>
                     </div>
                 @endif
             </div>
@@ -47,7 +50,7 @@
                 </div>
             @endif
         @endif
-  
+
         @if ($jumper_detect == 10)
             <div class="px-4">
                 <div class=" info-box bg-info">
@@ -57,11 +60,24 @@
                          
                         </div>
                 </div>
-  
+
             </div>
         @endif
-  
-  
+
+        @if ($jumper_detect == 2)
+            <div class="px-4">
+                <div class=" info-box bg-warning">
+                    <span class="info-box-icon"><i class="far fa-sad-tear"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Lo siento.</span>
+                            <span class="info-box-number">Ha ocurrido un error al generar el jumper...</span>
+                        </div>
+                </div>
+
+            </div>
+        @endif
+
+
         <div class="card-body mt-0">
             @if ($jumper_detect == 1)
                 <div class="flex-nowrap justify-center callout callout-info w-full">
@@ -69,7 +85,7 @@
                     <div class="flex justify-center mb-2">
                         <button onclick="copiarAlPortapapeles('jumper_copy')" class="btn btn-sm btn-success text-bold" title="{{__('messages.copiar_portapapeles')}}" id="button_copy">Copiar</button>
                     </div>
-  
+
                         <div class="flex items-center bg-gray-200 text-gray-800 border rounded-md">
                             <div class=" w-full">
                                 <div class="grid sm:grid-cols-12 gap-4">
@@ -114,15 +130,15 @@
                                         <div class="flex flex-col flex-grow ml-4 mr-4">
                                           <div class="text-sm text-gray-500 font-semibold ">Puntuación</div>
                                           <div class="flex">
-  
+
                                             @if($this->tipo_total == 'si')
                                                 <i class="font-semibold far fa-thumbs-up text-blue-600 mr-2">{{$this->positive($this->type($informacion_complete['jumper']))}}</i>
-  
+
                                                 <i class="font-semibold far fa-thumbs-down text-red-600">{{$this->negative($this->type($informacion_complete['jumper']))}}</i>
                                             @else
-  
+
                                                 <p>-</p>
-  
+
                                             @endif
                                         </div>
                                         </div>
@@ -131,20 +147,22 @@
                                 </div>
                             </div>
                         </div>
-  
-  
+
+
                         <div class="input-group mt-5">
                             <input wire:model="jumper_search" placeholder="Ingrese el jumper de la encuesta" id="validationCustomUsername" class="form-control" aria-describedby="inputGroupPrepend" >
-                                @if($jumper_search)
-                                    <div class="input-group-prepend ml-2">
-                                        <button type="submit"  wire:click="generar"  class="btn btn-sm btn-warning text-bold" title="{{__('messages.copiar_portapapeles')}}" >Procesar jumper</button> 
-                                        </div>
-                                @endif
+                            @if($jumper_search)
+                            <div class="input-group-prepend">
+                                <button class="btn btn-md btn-outline-secondary input-group-text" id="inputGroupPrepend" wire:click="clear" title="Borrar">
+                                        <i class="fas fa-backspace"></i>
+                                </button>
+                            </div>
+                        @endif
                         </div>
-  
-  
+
+
                         @if ($respuesta)
-  
+
                             <div class="mt-4 w-full">
                                 <p  class="text-blue-400 text-clip text-sm text-center font-bold mb-2">{{$respuesta['jumper']}}</p>   
                             </div>
@@ -153,10 +171,10 @@
                 </div>
             @endif
         </div>
-  
-  
-  
-        @if ($informacion_complete == [] && $respuesta == [])
+
+
+
+        @if ($informacion_complete == [] || $respuesta == [])
             <div class="flex justify-center ">
                 <div class="mt-4 mb-4" wire:loading>
                     <div class="container2">
@@ -168,11 +186,11 @@
                         </div>
                     </div>
                 </div>
-  
+
             </div>
         
         @endif
-  
+
     </div>
     
         <style>
@@ -259,4 +277,4 @@
     
           
         @stop
-  </div>
+</div>

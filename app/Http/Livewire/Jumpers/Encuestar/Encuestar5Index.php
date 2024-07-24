@@ -29,13 +29,43 @@ class Encuestar5Index extends Component
 
     public function render()
     {
+        if($this->jumper_search){
+
+            try {
+                $client = new Client();
+    
+                $response = $client->post('http://146.190.74.228/jumper_ssi/1/', [
+                    'headers' => ['Content-Type' => 'application/json'],
+                    'body' => json_encode([
+                        'link' => $this->jumper_search
+                    ])
+                ]);
+    
+                $this->respuesta = json_decode($response->getBody(),true);
+    
+            }
+    
+            catch (\GuzzleHttp\Exception\RequestException $e) {
+                    
+                $error['error'] = $e->getMessage();
+                $error['request'] = $e->getRequest();
+    
+                if($e->getMessage()){
+                    if ($e->getResponse()->getStatusCode() !== '200'){
+                        $error['response'] = $e->getResponse(); 
+                        $this->jumper_detect = 2;
+                    }
+                }
+            }
+        }
+
         return view('livewire.jumpers.encuestar.encuestar5-index');
     }
 
 
     public function updatedEstado(){
 
-        $this->reset(['psid_search','panel_search']);
+        $this->reset(['psid_search','panel_search','jumper_search','respuesta','jumper_detect']);
         $this->informacion_complete = [];
         $this->respuesta = [];
         $this->emitTo('jumpers.encuestar.encuestar5-index','render');
@@ -94,7 +124,9 @@ class Encuestar5Index extends Component
             $subs_psid = substr($jumper,($busqueda_psid_ + 5),5);
 
             $busqueda = Link::where('psid',$subs_psid)->first();
-            return $busqueda->positive_points;
+
+            if($busqueda)return $busqueda->positive_points; 
+            else return '-';
         }
 
         else{
@@ -113,7 +145,10 @@ class Encuestar5Index extends Component
             $subs_psid = substr($jumper,($busqueda_psid_ + 5),5);
 
             $busqueda = Link::where('psid',$subs_psid)->first();
-            return $busqueda->negative_points;
+
+            if($busqueda) return $busqueda->negative_points;
+            else return '-';
+            
         }
         else{
             return '-';
@@ -121,10 +156,10 @@ class Encuestar5Index extends Component
     }
 
     public function clear(){
-        $this->reset(['psid_search']);
-        $this->informacion_complete = [];
+        $this->reset(['jumper_search','jumper_detect']);
+       // $this->informacion_complete = [];
         $this->respuesta = [];
-        $this->emitTo('jumpers.encuestar.encuestar5-index','render');
+        //$this->emitTo('jumpers.encuestar.encuestar1-index','render');
     }
 
 
@@ -137,7 +172,7 @@ class Encuestar5Index extends Component
        // $this->emitTo('jumpers.encuestar.encuestar1-index','render');
   
 
-        //$this->reset(['jumper_search','respuesta']);
+        $this->reset(['jumper_search','respuesta','jumper_detect']);
 
         try {
 
@@ -151,23 +186,22 @@ class Encuestar5Index extends Component
 
             if($resultado->getStatusCode() == 200){
 
-
                 $this->informacion_complete = json_decode($resultado->getBody(),true);
 
-                $busqueda_https= strpos($this->informacion_complete['jumper'], 'ttps://');
-
-  
-
-                if($busqueda_https != false) $this->jumper_detect = 10;
-                else $this->jumper_detect = 1;
+               
 
 
+                if(!$this->informacion_complete)  $this->jumper_detect = 2;
+                else{
+                    $busqueda_https= strpos($this->informacion_complete['jumper'], 'ttps://');
 
-        
-
+                    if($busqueda_https != false) $this->jumper_detect = 10;
+                    else $this->jumper_detect = 1;
+                }
             }
 
             else{
+
                 $this->jumper_detect = 2;
             }
         }
@@ -178,9 +212,10 @@ class Encuestar5Index extends Component
 
             if($e->hasResponse()){
                 if ($e->getResponse()->getStatusCode() !== '200'){
-                    $error['response'] = $e->getResponse(); 
 
-              
+      
+
+                    $error['response'] = $e->getResponse(); 
                     $this->jumper_detect = 2;
                 }
             }
