@@ -34,7 +34,7 @@ class Encuestar4Index extends Component
             try {
                 $client = new Client();
     
-                $response = $client->post('http://146.190.74.228/jumper_ssi/1/', [
+                $response = $client->post('http://67.205.168.133/jumper_ssi/1/', [
                     'headers' => ['Content-Type' => 'application/json'],
                     'body' => json_encode([
                         'link' => $this->jumper_search
@@ -177,7 +177,7 @@ class Encuestar4Index extends Component
 
             $client = new Client([
                 //'base_uri' => 'http://127.0.0.1:8000',
-                'base_uri' => 'http://146.190.74.228/',
+                'base_uri' => 'http://67.205.168.133/',
             ]);
 
             if($this->panel_search == '38') $resultado = $client->request('GET', 'datos_encuestas_qt/1/'.$this->psid_search.'/'.$this->panel_search);
@@ -226,7 +226,7 @@ class Encuestar4Index extends Component
         try {
             $client = new Client();
 
-            $response = $client->post('http://146.190.74.228/jumper_ssi/1/', [
+            $response = $client->post('http://67.205.168.133/jumper_ssi/1/', [
                 'headers' => ['Content-Type' => 'application/json'],
                 'body' => json_encode([
                     'link' => $this->jumper_search

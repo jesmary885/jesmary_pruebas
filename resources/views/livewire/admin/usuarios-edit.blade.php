@@ -22,7 +22,7 @@
                         </div>
                             <div class="flex justify-between">
                                 <div class="w-full mr-2">
-                                    <label class="w-full text-justify" >Username</label>
+                                    <label class="w-full  text-justify" >Username</label>
                                     <input type="text" wire:model="username" class="form-control rounded" id="formGroupExampleInput">
                                 </div>
 
