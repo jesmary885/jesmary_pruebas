@@ -22,6 +22,10 @@ class JumpersController extends Controller
         return view('jumpers.cint2');
     }
 
+    public function bitlab(){
+        return view('jumpers.bitlab');
+    }
+
     
 
     public function interno(){

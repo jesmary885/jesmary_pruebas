@@ -640,6 +640,14 @@ return [
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
                 ],
+
+                [
+                    'text' => 'SALTADOR BITLAB',
+                    'route'  => 'bitlab.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                ],
                 
 
                 [

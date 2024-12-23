@@ -136,6 +136,8 @@ Route::middleware(['auth','verified'])->group(function()
 
         Route::get('descalificador',[JumpersController::class,'descalificador'])->name('descalificador.index');
         Route::get('wix',[JumpersController::class,'wix'])->name('wix.index');
+
+        Route::get('bitlab',[JumpersController::class,'bitlab'])->name('bitlab.index');
         //Route::get('k2001',[JumpersController::class,'k2001'])->name('k2001.index');
         Route::get('ktmr',[JumpersController::class,'ktmr'])->name('ktmr.index');
         
