@@ -642,15 +642,6 @@ return [
                 ],
 
                 [
-                    'text' => 'SALTADOR BITLAB',
-                    'route'  => 'bitlab.index',
-                    'can' => 'ssidkr.index',
-                    'icon_color' => 'red',
-                    'icon'    => '	fas fa-angle-right',
-                ],
-                
-
-                [
                     'text' => 'KTRMR',
                     'route'  => 'ktmr.index',
                     'can' => 'ssidkr.index',
@@ -1203,43 +1194,14 @@ return [
             ],
         ],
 
+        [
+            'text' => 'SALTADOR BITLAB',
+            'route'  => 'bitlab.index',
+            'can' => 'ssidkr.index',
+            'icon_color' => 'cyan',
+            'icon'    => 'fas fa-search',
+        ],
 
-        
-
-        
-        // [
-        //     'text' => 'INTERNALS',
-        //     'route'  => 'internals.index',
-        //     'can' => 'internals.index',
-        //     'icon_color' => 'red',
-        //     'icon'    => 'fas fa-search',
-        // ],
-        
-        
-        // [
-        //     'text' => 'PRODEGE',
-        //     'route'  => 'prodege.index',
-        //     'can' => 'prodege.index',
-        //     'icon_color' => 'cyan',
-        //     'icon'    => 'fas fa-search',
-        // ],
-        
-        // [
-        //     'text' => 'SCUBE',
-        //     'route'  => 'scube.index',
-        //     'can' => 'scube.index',
-        //     'icon_color' => 'cyan',
-        //     'icon'    => 'fas fa-search',
-        // ],
-        //  [
-        //      'text' => 'SPECTRUM',
-        //      'route'  => 'spectrum.index',
-        //      'can' => 'spectrum.index',
-        //      'icon_color' => 'cyan',
-        //      'icon'    => 'fas fa-search',
-        //  ],
-        
-        
 
     ],
 
