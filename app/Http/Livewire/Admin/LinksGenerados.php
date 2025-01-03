@@ -26,10 +26,12 @@ class LinksGenerados extends Component
     public function render()
     {
         $jumpers = Links_usados::where('k_detected', 'LIKE', '%' . $this->search . '%')
-        ->latest('id')
-        ->paginate(25);
+            ->where('k_detected','!=','BITLAB')
+            ->latest('id')
+            ->paginate(25);
 
-        $total = Links_usados::count();
+        $total = Links_usados::where('k_detected','!=','BITLAB')
+            ->count();
 
         return view('livewire.admin.links-generados',compact('jumpers','total'));
     }
@@ -49,6 +51,7 @@ class LinksGenerados extends Component
     public function export(){
 
         $links = Links_usados::latest('id')
+            ->where('k_detected','!=','BITLAB')
             ->take('2500')
             ->get();
 

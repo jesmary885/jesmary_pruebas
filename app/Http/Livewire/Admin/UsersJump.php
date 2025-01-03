@@ -122,9 +122,7 @@ class UsersJump extends Component
     public function render()
     {
 
-
-
-        $users = User::where('username', 'LIKE', '%' . $this->search . '%')
+        $users = User::where('username', 'LIKE', '%' . $this->search . '%') 
         ->where('status','activo')
         ->permission('menu.premium')
         ->where('id','!=','174')

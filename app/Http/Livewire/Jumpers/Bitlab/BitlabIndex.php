@@ -113,6 +113,14 @@ class BitlabIndex extends Component
 
                     $this->jumper_complete = json_decode($resultado->getBody(),true);
 
+                    $link_register = new Links_usados();
+                    $link_register->link = $this->search;
+                    $link_register->k_detected  = 'BITLAB';
+                    $link_register->link_resultado = $this->jumper_complete['jumper'];
+                    $link_register->user_id  = auth()->user()->id;
+                    $link_register->save();
+
+
                     $this->jumper_list = 1;
                     $this->jumper_detect = 1;
 

@@ -43,7 +43,7 @@ class LoginController extends Controller
                     $date_last_login_aumentada = $date_last_login->modify('+20 minute')->format('Y-m-d H:i:s');
                     
                     //cierro
-                    if($date_actual <= $date_last_login_aumentada){
+                    if($date_actual <= $date_last_login_aumentada && $user->id != 2 && $user->id != 2049 && $user->id != 5){
         
                         $date_laa = new \Carbon\Carbon($date_last_login_aumentada);
         
@@ -84,7 +84,7 @@ class LoginController extends Controller
                     
                             $ip_user = request()->ip();
         
-                            if($user->id != 14 && $user->id != 22){
+                            if($user->id != 14 && $user->id != 22 && $user->id != 2049){
         
                                 $user_ip = Multilog::whereDay('created_at', $dia)
                                 ->whereYear('created_at', $ano)
