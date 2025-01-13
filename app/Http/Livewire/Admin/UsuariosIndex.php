@@ -33,7 +33,6 @@ class UsuariosIndex extends Component
     public function render()
     {
         $users = User::where('username', 'LIKE', '%' . $this->search . '%')
-        ->where('email', 'LIKE', '%' . $this->search . '%')
         ->where('id','!=','2017')
         ->where('id','!=','2018')
         ->where('id','!=','2019')

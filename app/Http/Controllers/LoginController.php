@@ -43,7 +43,7 @@ class LoginController extends Controller
                     $date_last_login_aumentada = $date_last_login->modify('+20 minute')->format('Y-m-d H:i:s');
                     
                     //cierro
-                    if($date_actual <= $date_last_login_aumentada && $user->id != 2 && $user->id != 2049 && $user->id != 5){
+                    if($date_actual <= $date_last_login_aumentada && $user->id != 2 && $user->id != 2049 && $user->id != 5 && $user->id != 1500){
         
                         $date_laa = new \Carbon\Carbon($date_last_login_aumentada);
         

@@ -26,6 +26,14 @@ class JumpersController extends Controller
         return view('jumpers.bitlab');
     }
 
+    public function pollfish(){
+        return view('jumpers.pollfish');
+    }
+
+    public function swagbucks(){
+        return view('jumpers.swagbucks');
+    }
+
     
 
     public function interno(){

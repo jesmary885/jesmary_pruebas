@@ -1194,13 +1194,42 @@ return [
             ],
         ],
 
+
         [
-            'text' => 'SALTADOR BITLAB',
-            'route'  => 'bitlab.index',
+            'text'    => 'SALTADORES',
+            'icon'    => 'fas fa-crown',
             'can' => 'ssidkr.index',
             'icon_color' => 'cyan',
-            'icon'    => 'fas fa-search',
+            'submenu' => [
+                [
+                    'text' => 'BITLAB',
+                    'route'  => 'bitlab.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'cyan',
+                    'icon'    => 'fas fa-search',
+                ],
+                [
+                    'text' => 'POLLFISH',
+                    'route'  => 'pollfish.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'cyan',
+                    'icon'    => 'fas fa-search',
+                ],
+                [
+                    'text' => 'SWAGBUCKS',
+                    'route'  => 'swagbucks.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'cyan',
+                    'icon'    => 'fas fa-search',
+                ],
+
+                
+            ],
         ],
+
+
+
+        
 
 
     ],
