@@ -46,7 +46,7 @@ class PollfishIndex extends Component
         $this->operacion = Antibot::where('id',$random)->first();
         $operacion_total = 'Resuelve esta operación matemática ('.$this->operacion->nro1.' + '.$this->operacion->nro2. ')';
 
-        $this->emit('numerologia',$operacion_total,'jumpers.pollfish.pollfish-index','verific');
+        $this->emit('numerologia',$operacion_total,'jumpers.pollfish-index','verific');
     }
 
     public function verific($result){

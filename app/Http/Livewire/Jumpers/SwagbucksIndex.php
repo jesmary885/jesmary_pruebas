@@ -45,7 +45,7 @@ class SwagbucksIndex extends Component
         $this->operacion = Antibot::where('id',$random)->first();
         $operacion_total = 'Resuelve esta operación matemática ('.$this->operacion->nro1.' + '.$this->operacion->nro2. ')';
 
-        $this->emit('numerologia',$operacion_total,'jumpers.swagbucks.swagbucks-index','verific');
+        $this->emit('numerologia',$operacion_total,'jumpers.swagbucks-index','verific');
     }
 
     public function verific($result){
