@@ -64,6 +64,7 @@ class LoginController extends Controller
                             $request->session()->regenerate();
                 
                             $previous_session = Auth::User()->session_id;
+                            
                             if ($previous_session) {
         
                                 $date = Carbon::now();
