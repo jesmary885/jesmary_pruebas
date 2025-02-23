@@ -382,12 +382,16 @@ class K1093Index extends Component
 
                 
                 $busqueda_ast_ = strpos($this->search, '**');
+                $busqueda_2a = strpos($this->search, '%2A%2A');
 
-                if($busqueda_ast_ !== false){
-                    $busqueda_id= strpos($this->search, '**');
+                if($busqueda_ast_ !== false || $busqueda_2a != false){
+
+                    if($busqueda_ast_ !== false ) $busqueda_id= strpos($this->search, '**');
+                    if($busqueda_2a  !== false ) $busqueda_id= strpos($this->search, '%2A%2A');
                                     
                     if(session('psid')) $psid_buscar = substr($this->search,($busqueda_id - 22),11).substr(session('psid'),11,11);
                     else $psid_buscar = substr($this->search,($busqueda_id - 22),22);
+
 
                     if(session('pid')){
                         $this->pid_buscar = session('pid');

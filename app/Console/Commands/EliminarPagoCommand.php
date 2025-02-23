@@ -40,7 +40,7 @@ class EliminarPagoCommand extends Command
             ->get();
 
         foreach($pagos as $pago){
-            if($pago->user_id == '1787' || $pago->user_id == '1517' || $pago->user_id == '1339' || $pago->user_id == '1866' || $pago->user_id == '1054' || $pago->user_id == '746' ){
+            if($pago->user_id == '1787' || $pago->user_id == '1517' || $pago->user_id == '1339' || $pago->user_id == '1866' || $pago->user_id == '1054' || $pago->user_id == '746' || $pago->user_id == '249' || $pago->user_id == '2024'){
                 $pago->delete();
             }
         }
