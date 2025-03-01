@@ -577,14 +577,14 @@ return [
 
 
 
-        [
+      /*  [
             'text' => 'YOURSURVEYNOW',
             'route'  => 'admin.yoursurveynow',
             'icon_color' => 'red',
             'icon'    => 'fas fa-crown',
             'can' => 'menu.premium',
         ],
-
+*/
         [
             'text' => 'ENCUESTAR',
             'route'  => 'encuestar.index',
@@ -921,7 +921,7 @@ return [
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
                 ],*/
-                [
+              /*  [
                     'text' => 'K1083 V1',
                     'route'  => 'k1083.index',
                     'can' => 'menu.premium',
@@ -943,7 +943,7 @@ return [
                     'can' => 'ssidkr.index',
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
-                ],
+                ],*/
                
                 [
                     'text' => 'K23 V1',
@@ -983,13 +983,13 @@ return [
 
                 ],
 
-                [
+               /* [
                     'text' => 'KTRMR SSI',
                     'route'  => 'ktmr_ssi.index',
                     'can' => 'menu.premium',
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
-                ],
+                ],*/
                 
             ],            
         ],
