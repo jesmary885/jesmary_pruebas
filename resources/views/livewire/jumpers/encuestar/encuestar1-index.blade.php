@@ -118,7 +118,7 @@
                                         </div>
                                         <div class="flex flex-col flex-grow ml-4">
                                           <div class="text-sm text-gray-500 font-bold">Tipo</div>
-                                          <div class=" text-sm">{{$this->type($informacion_complete['jumper'])}}</div>
+                                          <div class=" text-sm">{{$this->type($informacion_complete['Survey'])}}</div>
                                         </div>
                                       </div>
                                     </div>
