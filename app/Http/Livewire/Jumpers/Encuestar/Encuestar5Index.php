@@ -181,23 +181,23 @@ class Encuestar5Index extends Component
                 'base_uri' => 'http://67.205.168.133/',
             ]);
 
-            if($this->panel_search == '38') $resultado = $client->request('GET', 'datos_encuestas_qt/1/'.$this->psid_search.'/'.$this->panel_search);
-            else $resultado = $client->request('GET', 'datos_encuestas_vo_er/1/'.$this->psid_search.'/'.$this->panel_search);
-
+            $resultado = $client->request('GET', 'datos_encuestas_qt_update/1/'.$this->psid_search.'/'.$this->panel_search);
+            //     else $resultado = $client->request('GET', 'datos_encuestas_vo_er/1/'.$this->psid_search.'/'.$this->panel_search);
+     
             if($resultado->getStatusCode() == 200){
-
+     
                 $this->informacion_complete = json_decode($resultado->getBody(),true);
-
-               
-
-
-                if(!$this->informacion_complete)  $this->jumper_detect = 2;
-                else{
-                    $busqueda_https= strpos($this->informacion_complete['jumper'], 'ttps://');
-
-                    if($busqueda_https != false) $this->jumper_detect = 10;
-                    else $this->jumper_detect = 1;
-                }
+     
+                    
+     
+     
+                     if(!$this->informacion_complete)  $this->jumper_detect = 2;
+                     else{
+                         $busqueda_https= strpos($this->informacion_complete['Survey'], 'ttps://');
+     
+                         if($busqueda_https != false) $this->jumper_detect = 10;
+                         else $this->jumper_detect = 1;
+                     }
             }
 
             else{

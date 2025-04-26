@@ -81,7 +81,7 @@
         <div class="card-body mt-0">
             @if ($jumper_detect == 1)
                 <div class="flex-nowrap justify-center callout callout-info w-full">
-                    <p class="text-blue-400 text-clip text-sm text-center font-bold mb-2" id="jumper_copy">{{$informacion_complete['jumper']}}</p>
+                    <p class="text-blue-400 text-clip text-sm text-center font-bold mb-2" id="jumper_copy">{{$informacion_complete['Survey']}}</p>
                     <div class="flex justify-center mb-2">
                         <button onclick="copiarAlPortapapeles('jumper_copy')" class="btn btn-sm btn-success text-bold" title="{{__('messages.copiar_portapapeles')}}" id="button_copy">Copiar</button>
                     </div>
@@ -132,9 +132,9 @@
                                           <div class="flex">
 
                                             @if($this->tipo_total == 'si')
-                                                <i class="font-semibold far fa-thumbs-up text-blue-600 mr-2">{{$this->positive($this->type($informacion_complete['jumper']))}}</i>
+                                                <i class="font-semibold far fa-thumbs-up text-blue-600 mr-2">{{$this->positive($this->type($informacion_complete['Survey']))}}</i>
 
-                                                <i class="font-semibold far fa-thumbs-down text-red-600">{{$this->negative($this->type($informacion_complete['jumper']))}}</i>
+                                                <i class="font-semibold far fa-thumbs-down text-red-600">{{$this->negative($this->type($informacion_complete['Survey']))}}</i>
                                             @else
 
                                                 <p>-</p>
