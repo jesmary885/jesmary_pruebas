@@ -181,8 +181,8 @@ class Encuestar5Index extends Component
                 'base_uri' => 'http://67.205.168.133/',
             ]);
 
-            $resultado = $client->request('GET', 'datos_encuestas_qt_update/1/'.$this->psid_search.'/'.$this->panel_search);
-            //     else $resultado = $client->request('GET', 'datos_encuestas_vo_er/1/'.$this->psid_search.'/'.$this->panel_search);
+            if ($this->panel_search == 179 || $this->panel_search == 30) $resultado = $client->request('GET', 'datos_encuestas_vo_oo/1/'.$this->psid_search.'/'.$this->panel_search);
+         else $resultado = $client->request('GET', 'datos_encuestas_qt_update/1/'.$this->psid_search.'/'.$this->panel_search);
      
             if($resultado->getStatusCode() == 200){
      
