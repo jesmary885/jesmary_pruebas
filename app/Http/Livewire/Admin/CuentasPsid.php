@@ -76,6 +76,9 @@ class CuentasPsid extends Component
 
         $users = User::where('status','activo')
             ->where('id','!=','174')
+            ->where('id','!=','2204')
+            ->where('id','!=','2205')
+            ->where('id','!=','2206')
             ->permission('menu.premium')
             ->get();
 

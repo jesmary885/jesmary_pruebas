@@ -126,6 +126,9 @@ class UsersJump extends Component
         ->where('status','activo')
         ->permission('menu.premium')
         ->where('id','!=','174')
+        ->where('id','!=','2204')
+        ->where('id','!=','2205')
+        ->where('id','!=','2206')
         ->latest('id')
         ->paginate(20);
     

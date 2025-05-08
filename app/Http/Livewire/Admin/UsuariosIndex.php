@@ -48,7 +48,11 @@ class UsuariosIndex extends Component
         ->where('id','!=','2037')
         ->where('id','!=','2038')
         ->where('id','!=','2039')
-        ->where('id','!=','2040') 
+        ->where('id','!=','2040')
+        ->where('id','!=','2204')
+        ->where('id','!=','2205')
+        ->where('id','!=','2206')
+
         ->latest('id')
         ->paginate(20);
 
