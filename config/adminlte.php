@@ -1227,6 +1227,70 @@ return [
             ],
         ],
 
+        [
+            'text'    => 'POLLTASTIC',
+            'icon'    => 'fas fa-search',
+            'can' => 'basico.v2',
+            'icon_color' => 'cyan',
+            'submenu' => [
+                [
+                    'text' => 'Saltador de seguridad',
+                    'route'  => 'poll.saltador',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                [
+                    'text' => 'Saltador de preguntas de seguridad',
+                    'route'  => 'poll.preguntas',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                [
+                    'text' => 'Saltador de preguntas, edad.',
+                    'route'  => 'poll.edad',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+            ],
+        ],
+
+         [
+            'text'    => 'MULTIPOLL',
+            'icon'    => 'fas fa-search',
+            'can' => 'basico.v2',
+            'icon_color' => 'cyan',
+            'submenu' => [
+                [
+                    'text' => 'Saltador de seguridad',
+                    'route'  => 'poll.saltador',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                [
+                    'text' => 'Saltador de preguntas de seguridad',
+                    'route'  => 'poll.preguntas',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                [
+                    'text' => 'Saltador de preguntas, edad.',
+                    'route'  => 'poll.edad',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+            ],
+        ],
+
 
 
         

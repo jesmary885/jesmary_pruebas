@@ -10,6 +10,18 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class JumpersController extends Controller
 {
+    public function pollsaltador(){
+        return view('poll.saltador');
+    }
+
+    public function pollpreguntas(){
+        return view('poll.preguntas');
+    }
+
+    public function polledad(){
+        return view('poll.edad');
+    }
+
     public function cint(){
         return view('jumpers.cint');
     }
