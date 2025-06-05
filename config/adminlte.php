@@ -1259,7 +1259,7 @@ return [
             ],
         ],
 
-         [
+        /*[
             'text'    => 'MULTIPOLL',
             'icon'    => 'fas fa-search',
             'can' => 'basico.v2',
@@ -1289,7 +1289,7 @@ return [
                     'icon'    => 'fas fa-angle-right',
                 ],
             ],
-        ],
+        ],*/
 
 
 

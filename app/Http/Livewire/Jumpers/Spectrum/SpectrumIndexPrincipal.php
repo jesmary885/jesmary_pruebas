@@ -127,7 +127,7 @@ class SpectrumIndexPrincipal extends Component
             }
 
             if($url_detect != 0){
-                $jumpers = Link::where('panel', 'LIKE', '%' . $url_detect . '%') 
+                $jumpers = Link::where('panel', 'LIKE', '%' . $this->search . '%') 
                     ->where('jumper_type_id','13')
                     ->latest('id')
                     ->paginate(10);

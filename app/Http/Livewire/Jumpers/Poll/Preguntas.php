@@ -83,7 +83,16 @@ class Preguntas extends Component
 
             if($resultado->getStatusCode() == 200){
 
-                $this->jumper_complete = json_decode($resultado->getBody(),true);
+                $value = json_decode($resultado->getBody(),true);
+
+                if (isset($value ['Survey'])) {
+
+                    $this->jumper_complete = $value ['Survey'];
+
+                } elseif (isset($value ['jumper'])) {
+
+                    $this->jumper_complete = $value ['jumper'];
+                }
 
          
                 

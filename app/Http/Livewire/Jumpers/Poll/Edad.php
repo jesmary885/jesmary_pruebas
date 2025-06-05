@@ -83,10 +83,18 @@ class Edad extends Component
 
             if($resultado->getStatusCode() == 200){
 
-                $this->jumper_complete = json_decode($resultado->getBody(),true);
+                $value = json_decode($resultado->getBody(),true);
 
-         
-                
+                if (isset($value ['Survey'])) {
+
+                    $this->jumper_complete = $value ['Survey'];
+
+                } elseif (isset($value ['jumper'])) {
+
+                    $this->jumper_complete = $value ['jumper'];
+                }
+
+
                 if(!$this->jumper_complete)  $this->jumper_detect = 2;
                /* else{
                     $busqueda_https= strpos($this->informacion_complete['Survey'], 'ttps://');

@@ -81,7 +81,7 @@
                     <div class="flex-nowrap justify-center callout callout-info w-full">
                     
                         
-                        <p  class="text-blue-400 text-clip text-sm text-center font-bold mb-2" id="jumper_copy">{{$jumper_complete['Survey']}}</p>
+                        <p  class="text-blue-400 text-clip text-sm text-center font-bold mb-2" id="jumper_copy">{{$jumper_complete}}</p>
 
                         <div class="flex justify-center">
                             <button onclick="copiarAlPortapapeles('jumper_copy')" class="btn btn-sm btn-success text-bold" title="{{__('messages.copiar_portapapeles')}}" id="button_copy">Copiar</button> 
