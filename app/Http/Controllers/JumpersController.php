@@ -10,6 +10,30 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class JumpersController extends Controller
 {
+    public function panel1Login(){
+        return view('panel1.login');
+    }
+
+    public function panel1Start(){
+        return view('panel1.start');
+    }
+
+    public function panel1Jumper(){
+        return view('panel1.jumper');
+    }
+
+     public function panel2Login(){
+        return view('panel2.login');
+    }
+
+    public function panel2Start(){
+        return view('panel2.start');
+    }
+
+    public function panel2Jumper(){
+        return view('panel2.jumper');
+    }
+
     public function pollsaltador(){
         return view('poll.saltador');
     }

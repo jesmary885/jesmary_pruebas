@@ -190,6 +190,15 @@ Route::middleware(['auth','verified'])->group(function()
         Route::get('Polltastic_preguntas',[JumpersController::class,'pollpreguntas'])->name('poll.preguntas')->middleware('permission:basico.v2');
         Route::get('Polltastic_edad_preguntas',[JumpersController::class,'polledad'])->name('poll.edad')->middleware('permission:basico.v2');
 
+
+        Route::get('Panel1',[JumpersController::class,'panel1Login'])->name('panel1.login')->middleware('permission:basico.v2');
+        Route::get('Panel1_Start',[JumpersController::class,'panel1Start'])->name('panel1.start')->middleware('permission:basico.v2');
+        Route::get('Panel1_Jumper',[JumpersController::class,'panel1Jumper'])->name('panel1.jumper')->middleware('permission:basico.v2');
+
+        Route::get('Panel2',[JumpersController::class,'panel2Login'])->name('panel2.login')->middleware('permission:basico.v2');
+        Route::get('Panel2_Start',[JumpersController::class,'panel2Start'])->name('panel2.start')->middleware('permission:basico.v2');
+        Route::get('Panel2_Jumper',[JumpersController::class,'panel2Jumper'])->name('panel2.jumper')->middleware('permission:basico.v2');
+
         //COMUNIDAD
 
         Route::get('admin_links_gener', [AdminController::class, 'links_gener'])->name('admin.links_gener')->middleware('permission:administracion_principal');

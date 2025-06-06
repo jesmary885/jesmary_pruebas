@@ -1,29 +1,26 @@
 <div>
     <div class="card">
-
         <div class="card-header">
-
-            <div class="flex justify-between mt-4 " >
-
-                <div class="input-group">
-                    <input wire:model.defer="search" placeholder="Introduzca el jumper" id="validationCustomUsername" class="form-control" aria-describedby="inputGroupPrepend" >
-                        @if($search)
-                                <div class="input-group-prepend">
-                                    <button class="btn btn-md btn-outline-secondary input-group-text" id="inputGroupPrepend" wire:click="clear" title="Borrar">
-                                            <i class="fas fa-backspace"></i>
-                                    </button>
-                                </div>
-                        @endif
+            <div>
+                <div class="w-1/3">
+                    <input wire:model.defer="email" type="email" placeholder="Introduzca el correo electrónico" id="validationCustomUsername" class="form-control" aria-describedby="inputGroupPrepend" >
                 </div>
 
-                <div >
-                        <button type="submit" class="btn bg-info  ml-2 " wire:click="procesar">
-                            PROCESAR
-                        </button>
+                <div class="w-1/3 mt-2" >
+
+                    <input wire:model.defer="contrasena" placeholder="Introduzca la contraseña" id="validationCustomUsername" class="form-control" aria-describedby="inputGroupPrepend" >
+
+                </div>
+
+                <div class="mt-6" >
+                    <button type="submit" class="btn bg-info " wire:click="procesar">
+                        PROCESAR
+                    </button>
                 </div>
             </div>
 
         </div>
+        
 
 
 
@@ -73,31 +70,52 @@
         @endif
 
 
+        @if($jumper_complete)
 
-            <div class="card-body mt-0">
+            <div class="card m-4">
+                <div class="card-header">
+                        <p  class="text-gray-100 text-clip text-md font-bold m-1">BALANCE DE LA CUENTA: {{$jumper_complete['Balance de la cuenta']}}</p>
+            
+                </div>
+    
+                <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
+                    <table class="table text-sm table-bordered table-responsive-lg table-responsive-md table-responsive-sm">
+                        <thead class="text-xs uppercase bg-gray-700 text-gray-400">
+                            <tr>
+                                <th class="text-center"></th>
+                                <th class="text-center">Tiempo</th>
+                                <th class="text-center">Monto</th>
+                                <th class="text-center">Jumper</th>
 
-                @if ($jumper_complete)
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($jumper_complete['surveys'] as $registro)
+                                    <tr class="bg-gray-800 border-gray-700 hover:bg-gray-600">
 
-                    <div class="flex-nowrap justify-center callout callout-info w-full">
-                    
-                        
-                        <p  class="text-blue-400 text-clip text-sm text-center font-bold mb-2" id="jumper_copy">{{$jumper_complete}}</p>
+                                        <th class="py-3 text-center font-medium whitespace-nowrap text-white">
+                                        
+                                            <div class="flex justify-center">
+                                                <button onclick="copiarAlPortapapeles('jumper_copy_{{ $loop->index }}')" class="btn btn-sm btn-success text-bold" title="{{__('messages.copiar_portapapeles')}}" id="button_copy">Copiar</button> 
+                                            </div>
 
-                        <div class="flex justify-center">
-                            <button onclick="copiarAlPortapapeles('jumper_copy')" class="btn btn-sm btn-success text-bold" title="{{__('messages.copiar_portapapeles')}}" id="button_copy">Copiar</button> 
-                        </div>
-                                
-                        
-                    </div>
+                                        </th>
+                                        <td class="text-center">{{$registro['survey_time']}}</td>
+                                        <td class="text-center">{{$registro['payout']}}</td>
 
-                @endif
-
+                                    
+                                        <td><p  class="text-blue-400 text-clip text-sm font-bold mb-2" id="jumper_copy_{{ $loop->index }}">{{$registro['survey']}}</p></td>
+                                    
 
 
-        
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                    </table>
+                </div>
+            </div>
 
-       
-
+        @endif
 
     </div>
 

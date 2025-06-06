@@ -1236,7 +1236,7 @@ return [
                 [
                     'text' => 'Saltador de seguridad',
                     'route'  => 'poll.saltador',
-                    'can' => 'ssidkr.index',
+                    'can' => 'basico.v2',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
@@ -1244,7 +1244,7 @@ return [
                 [
                     'text' => 'Saltador de preguntas de seguridad',
                     'route'  => 'poll.preguntas',
-                    'can' => 'ssidkr.index',
+                    'can' => 'basico.v2',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
@@ -1252,45 +1252,78 @@ return [
                 [
                     'text' => 'Saltador de preguntas, edad.',
                     'route'  => 'poll.edad',
-                    'can' => 'ssidkr.index',
+                    'can' => 'basico.v2',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
             ],
         ],
 
-        /*[
-            'text'    => 'MULTIPOLL',
+    
+
+        [
+            'text'    => 'PANEL 1',
             'icon'    => 'fas fa-search',
             'can' => 'basico.v2',
             'icon_color' => 'cyan',
             'submenu' => [
                 [
-                    'text' => 'Saltador de seguridad',
-                    'route'  => 'poll.saltador',
-                    'can' => 'ssidkr.index',
+                    'text' => 'login',
+                    'route'  => 'panel1.login',
+                    'can' => 'basico.v2',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
 
                 [
-                    'text' => 'Saltador de preguntas de seguridad',
-                    'route'  => 'poll.preguntas',
-                    'can' => 'ssidkr.index',
+                    'text' => 'Start',
+                    'route'  => 'panel1.start',
+                    'can' => 'basico.v2',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
 
                 [
-                    'text' => 'Saltador de preguntas, edad.',
-                    'route'  => 'poll.edad',
-                    'can' => 'ssidkr.index',
+                    'text' => 'Jumper',
+                    'route'  => 'panel1.jumper',
+                    'can' => 'basico.v2',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
             ],
-        ],*/
+        ],
 
+        [
+            'text'    => 'PANEL 2',
+            'icon'    => 'fas fa-search',
+            'can' => 'basico.v2',
+            'icon_color' => 'cyan',
+            'submenu' => [
+                [
+                    'text' => 'login',
+                    'route'  => 'panel2.login',
+                    'can' => 'basico.v2',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                [
+                    'text' => 'Start',
+                    'route'  => 'panel2.start',
+                    'can' => 'basico.v2',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                [
+                    'text' => 'Jumper',
+                    'route'  => 'panel2.jumper',
+                    'can' => 'basico.v2',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+            ],
+        ],
 
 
         

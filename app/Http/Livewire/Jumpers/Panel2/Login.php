@@ -1,37 +1,37 @@
 <?php
 
-namespace App\Http\Livewire\Jumpers\Poll;
+namespace App\Http\Livewire\Jumpers\Panel2;
 
 use App\Models\User;
 use Livewire\Component;
 use GuzzleHttp\Client;
 use Livewire\WithPagination;
 
-class Preguntas extends Component
+class Login extends Component
 {
     use WithPagination;
     protected $paginationTheme = "bootstrap";
 
-    public  $user,$jumper_complete = [],$jumper_detect = 0, $search, $edad;
+    public  $user,$jumper_complete = [],$jumper_detect = 0, $email, $contrasena, $balance;
 
     protected $listeners = ['render' => 'render'];
 
     protected $rules = [
-        'search' => 'required',
-        'edad' => 'required',
+        'email' => 'required',
+        'contrasena' => 'required',
     ];
     
     public function mount(){
 
 
-        if(session('search')) $this->search = session('search');
+      //  if(session('search')) $this->search = session('search');
         $this->jumper_detect = 0;
 
         $this->user = User::where('id',auth()->user()->id)->first();
     }
 
     public function clear(){
-        $this->reset(['search','edad']);
+        $this->reset(['email','contrasena']);
        // $this->informacion_complete = [];
         $this->jumper_complete = [];
         //$this->emitTo('jumpers.encuestar.encuestar1-index','render');
@@ -44,55 +44,30 @@ class Preguntas extends Component
 
          try {
 
+            http://146.190.74.228/Panel_polls/1/email/password
             $client = new Client([
                 //'base_uri' => 'http://127.0.0.1:8000',
-                'base_uri' => 'http://67.205.168.133/',
+                'base_uri' => 'http://147.182.190.233/',
             ]);
 
-            $busqueda_surv= strpos($this->search, '/surveyRedirect/');
 
-            if($busqueda_surv != false){
-                $posicion_elem1 = $busqueda_surv + 16;
-                $i_elem1 = 0;
-                $busq_elem1 = 0;
 
-                do{
-                    $detect_elem1= substr($this->search, $posicion_elem1,1);
-            
-                    if($detect_elem1 == '?') $i_elem1 = 1;
-                    else{
-                        $posicion_elem1 = $posicion_elem1 + 1;
-                        $busq_elem1 ++;
-                    }
-
-                    if($busq_elem1 > 300){
-                        $i_elem1 = 2;
-                    }
-            
-                }while($i_elem1 == 0 );
-
-                if($i_elem1 == 1) $surv = substr($this->search,($busqueda_surv + 16),($posicion_elem1 - ($busqueda_surv + 16)));
-                else $surv = substr($this->search,($posicion_elem1 ));
-
-            }
-
-       
      
-         $resultado = $client->request('GET', 'Pollstatic_screen_questions/1/'.$surv.'/'.$this->edad);
+         $resultado = $client->request('GET', 'Golden_survey/1/'.$this->email.'/'.$this->contrasena);
 
 
             if($resultado->getStatusCode() == 200){
 
-                $value = json_decode($resultado->getBody(),true);
+                $this->jumper_complete = json_decode($resultado->getBody(),true);
 
-                if (isset($value ['Survey'])) {
+  
 
-                    $this->jumper_complete = $value ['Survey'];
+                foreach($this->jumper_complete as $registro){
 
-                } elseif (isset($value ['jumper'])) {
-
-                    $this->jumper_complete = $value ['jumper'];
+                    $this->balance = $registro['Balance de la cuenta'];
                 }
+
+            
 
          
                 
@@ -129,6 +104,6 @@ class Preguntas extends Component
 
     public function render()
     {
-        return view('livewire.jumpers.poll.preguntas');
+        return view('livewire.jumpers.panel2.login');
     }
 }
