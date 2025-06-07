@@ -78,7 +78,7 @@ class Rex extends Component
             
                 }while($i_a == 0 );
 
-                if($i_a == 1) $o = substr($this->search,($busqueda_a + 11),($posicion_a - ($busqueda_a + 11)));
+                if($i_a == 1) $a = substr($this->search,($busqueda_a + 11),($posicion_a - ($busqueda_a + 11)));
                 else $a = substr($this->search,($posicion_a ));
             }
 
@@ -185,15 +185,20 @@ class Rex extends Component
                         $busq_s ++;
                     }
 
-                    if($busq_s > 300){
+                    if($busq_s > 500){
                         $i_s = 2;
                     }
             
                 }while($i_s == 0 );
 
                 if($i_s == 1) $s = substr($this->search,($busqueda_s + 10),($posicion_s - ($busqueda_s + 10)));
-                else $s = substr($this->search,($posicion_s ));
+                else{
+
+                    $s = substr($this->search,($busqueda_s + 10));
+                } 
             }
+
+
 
      
          $resultado = $client->request('GET', 'inbrain_rex/1/'.$a.'/'.$ch.'/'.$sd.'/'.$tt.'/'.$s);
