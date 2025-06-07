@@ -1259,6 +1259,46 @@ return [
             ],
         ],
 
+        [
+            'text'    => 'INBRAIN',
+            'icon'    => 'fas fa-search',
+            'can' => 'basico.v2',
+            'icon_color' => 'cyan',
+            'submenu' => [
+                [
+                    'text' => 'InBrain Rex',
+                    'route'  => 'inbrain.rex',
+                    'can' => 'basico.v2',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                [
+                    'text' => 'InBrain saltador profiled',
+                    'route'  => 'inbrain.profiled',
+                    'can' => 'basico.v2',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                [
+                    'text' => 'InBrain saltador wix',
+                    'route'  => 'inbrain.wix',
+                    'can' => 'basico.v2',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                [
+                    'text' => 'InBrain saltador start',
+                    'route'  => 'inbrain.start',
+                    'can' => 'basico.v2',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+            ],
+        ],
+
     
 
         [

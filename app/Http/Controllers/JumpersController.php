@@ -10,6 +10,23 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class JumpersController extends Controller
 {
+
+
+
+    public function inbrainrex(){
+        return view('inbrain.rex');
+    }
+    public function inbrainprofiled(){
+        return view('inbrain.profiled');
+    }
+    public function inbrainwix(){
+        return view('inbrain.wix');
+    }
+    public function inbrainstart(){
+        return view('inbrain.start');
+    }
+
+
     public function panel1Login(){
         return view('panel1.login');
     }

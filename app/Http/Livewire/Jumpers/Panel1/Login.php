@@ -35,6 +35,8 @@ class Login extends Component
         $this->reset(['email','contrasena']);
        // $this->informacion_complete = [];
         $this->jumper_complete = [];
+
+         $this->jumper_detect = 0;
         //$this->emitTo('jumpers.encuestar.encuestar1-index','render');
     }
 

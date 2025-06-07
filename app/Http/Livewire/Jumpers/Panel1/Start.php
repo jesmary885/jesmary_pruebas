@@ -34,6 +34,8 @@ class Start extends Component
         $this->reset(['search']);
        // $this->informacion_complete = [];
         $this->jumper_complete = [];
+
+        $this->jumper_detect = 0;
         //$this->emitTo('jumpers.encuestar.encuestar1-index','render');
     }
 
@@ -41,6 +43,8 @@ class Start extends Component
 
         $rules = $this->rules;
         $this->validate($rules);
+
+        $this->jumper_detect = 0;
 
 
          try {
@@ -81,6 +85,7 @@ class Start extends Component
 
         ///////BUSQUEDA P //////////////////////////////////////////////////////////////////////////////
 
+       
             $busqueda_p= strpos($this->search, '&p=');
 
             if($busqueda_p != false){
@@ -106,6 +111,8 @@ class Start extends Component
                 if($i_p == 1) $p = substr($this->search,($busqueda_p + 3),($posicion_p - ($busqueda_p + 3)));
                 else $p = substr($this->search,($posicion_p ));
             }
+
+          
 
             ///////BUSQUEDA C //////////////////////////////////////////////////////////////////////////////
 
@@ -135,6 +142,7 @@ class Start extends Component
                 else $c = substr($this->search,($posicion_c ));
             }
 
+
              ///////BUSQUEDA U //////////////////////////////////////////////////////////////////////////////
 
             $busqueda_u= strpos($this->search, '&u=');
@@ -162,6 +170,8 @@ class Start extends Component
                 if($i_u == 1) $u = substr($this->search,($busqueda_u + 3),($posicion_u - ($busqueda_u + 3)));
                 else $u = substr($this->search,($posicion_u ));
             }
+
+         
 
             ///////BUSQUEDA S //////////////////////////////////////////////////////////////////////////////
 
@@ -191,6 +201,8 @@ class Start extends Component
                 else $s = substr($this->search,($posicion_s ));
             }
 
+          
+
              ///////BUSQUEDA L //////////////////////////////////////////////////////////////////////////////
 
             $busqueda_l= strpos($this->search, '&l=');
@@ -209,15 +221,14 @@ class Start extends Component
                         $busq_l ++;
                     }
 
-                    if($busq_l > 300){
-                        $i_l = 2;
-                    }
+
             
                 }while($i_l == 0 );
 
                 if($i_l == 1) $l = substr($this->search,($busqueda_l + 3),($posicion_l - ($busqueda_l + 3)));
                 else $l = substr($this->search,($posicion_l ));
             }
+
 
             ///////BUSQUEDA R //////////////////////////////////////////////////////////////////////////////
 
@@ -347,6 +358,8 @@ class Start extends Component
 
                 $value = json_decode($resultado->getBody(),true);
 
+                
+
                 if (isset($value ['Encuesta'])) {
 
                     $this->jumper_complete = $value ['Encuesta'];
@@ -363,10 +376,13 @@ class Start extends Component
 
             else{
 
+                dd($resultado->getStatusCode() );
+
                 $this->jumper_detect = 2;
             }
         }
         catch (\GuzzleHttp\Exception\RequestException $e) {
+
             
             $error['error'] = $e->getMessage();
             $error['request'] = $e->getRequest();

@@ -33,6 +33,8 @@ class Start extends Component
     public function clear(){
         $this->reset(['search']);
        // $this->informacion_complete = [];
+
+        $this->jumper_detect = 0;
         $this->jumper_complete = [];
         //$this->emitTo('jumpers.encuestar.encuestar1-index','render');
     }
@@ -41,6 +43,8 @@ class Start extends Component
 
         $rules = $this->rules;
         $this->validate($rules);
+
+
 
 
          try {
@@ -198,6 +202,7 @@ class Start extends Component
                 $i_l = 0;
                 $busq_l = 0;
 
+                
                 do{
                     $detect_l= substr($this->search, $posicion_l,1);
             
@@ -205,10 +210,6 @@ class Start extends Component
                     else{
                         $posicion_l = $posicion_l + 1;
                         $busq_l ++;
-                    }
-
-                    if($busq_l > 300){
-                        $i_l = 2;
                     }
             
                 }while($i_l == 0 );
@@ -341,6 +342,8 @@ class Start extends Component
 
             
          $resultado = $client->request('GET', 'Startg/1/'.$e.'/'.$p.'/'.$c.'/'.$u.'/'.$s.'/'.$l.'/'.$r.'/'.$t.'/'.$o.'/'.$prcr.'/'.$h);
+
+        
 
             if($resultado->getStatusCode() == 200){
 

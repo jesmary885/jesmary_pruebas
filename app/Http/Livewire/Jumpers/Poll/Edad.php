@@ -32,6 +32,8 @@ class Edad extends Component
     }
 
     public function clear(){
+
+         $this->jumper_detect = 0;
         $this->reset(['search','edad']);
        // $this->informacion_complete = [];
         $this->jumper_complete = [];
