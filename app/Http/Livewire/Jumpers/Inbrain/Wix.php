@@ -22,7 +22,8 @@ class Wix extends Component
     protected $listeners = ['render' => 'render'];
 
     protected $rules = [
-        'search' => 'required',
+        'psid' => 'required',
+        'sub' => 'required',
     ];
     
      protected $rules_2 = [
@@ -32,6 +33,18 @@ class Wix extends Component
 
 
         $this->user = User::where('id',auth()->user()->id)->first();
+
+        $this->respuesta = [];
+    }
+
+     public function updatedEstado(){
+
+        $this->reset(['psid','sub','jumper_complete','respuesta','jumper_detect','jumper_search']);
+      //  $this->informacion_complete = [];
+        $this->respuesta = [];
+        $this->emitTo('jumpers.inbrain.wix','render');
+
+
     }
 
     public function clear(){
@@ -42,7 +55,9 @@ class Wix extends Component
          $this->jumper_detect = 0;
         //$this->emitTo('jumpers.encuestar.encuestar1-index','render');
     }
-    public function consultar(){
+    
+    public function con(){
+
 
         $rules_2 = $this->rules_2;
         $this->validate($rules_2);
@@ -51,7 +66,7 @@ class Wix extends Component
         try {
                 $client = new Client();
     
-                $response = $client->post('http://67.205.168.133/inbrain_jumper/1/', [
+                $response = $client->post('http://147.182.190.233/inbrain_jumper/1/', [
                     'headers' => ['Content-Type' => 'application/json'],
                     'body' => json_encode([
                         'link' => $this->jumper_search
@@ -98,6 +113,8 @@ class Wix extends Component
 
                 $value = json_decode($resultado->getBody(),true);
 
+
+
                 if (isset($value ['survey_link'])) {
 
                     if (isset($value ['monto'])) {
@@ -114,6 +131,8 @@ class Wix extends Component
                         $this->opcion = 4;
                     }
                 }
+
+                $this->jumper_detect = 0;
 
 
 

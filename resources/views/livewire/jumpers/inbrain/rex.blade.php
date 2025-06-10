@@ -97,10 +97,11 @@
                             <table class="table text-sm table-bordered table-responsive-lg table-responsive-md table-responsive-sm">
                                 <thead class="text-xs uppercase bg-gray-700 text-gray-400">
                                     <tr>
+                                       
+                                        <th class="text-center">Tiempo</th>
                                         @if($opcion == 3)
-                                            <th class="text-center">Tiempo</th>
-                                        @endif
                                         <th class="text-center">Monto</th>
+                                        @endif
                                         <th class="text-center">Tipo</th>
                                         <th class="text-center">Puntuación</th>
                                         
@@ -112,15 +113,17 @@
                    
                                             <tr class="bg-gray-800 border-gray-700 hover:bg-gray-600">
 
-                                                @if($opcion == 3)
+                                              
 
                                                  <td class="text-center">{{$time}}</td>
 
-                                                 @endif
+                                                 
 
+                                                @if($opcion == 3)
                                                 <td class="text-center">{{$monto}}</td>
-                                                <td class="text-center">{{$registro['payout']}}</td>
-                                                <td class="text-center">{{ $this->type($informacion_complete[$jumper_complete]) }}</td>
+                                                @endif
+                        
+                                                <td class="text-center">{{ $this->type($jumper_complete) }}</td>
 
                                                   @if($this->tipo_total == 'si')
                                                 <i class="font-semibold far fa-thumbs-up text-blue-600 mr-2">{{$this->positive($this->type($jumper_complete))}}</i>
@@ -128,7 +131,7 @@
                                                 <i class="font-semibold far fa-thumbs-down text-red-600">{{$this->negative($this->type($jumper_complete))}}</i>
                                                 @else
 
-                                                    <p>-</p>
+                            
 
                                                 @endif
                                             

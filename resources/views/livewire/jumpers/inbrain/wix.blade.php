@@ -3,44 +3,84 @@
 
         <div class="card-header">
 
-            <div>
-                <div class="w-1/3">
-                    <input wire:model.defer="psid" placeholder="Introduzca el psid" id="validationCustomUsername" class="form-control" aria-describedby="inputGroupPrepend" >
-                </div>
+            
+            <div class="grid md:grid-cols-4 gap-2">
 
-                <div class="w-1/3 mt-2" >
+                @if($estado == "")
 
-                    <input wire:model.defer="sub" placeholder="Introduzca el Subpanel" id="validationCustomUsername" class="form-control" aria-describedby="inputGroupPrepend" >
+                
 
-                </div>
+                    <div class="col-span-2">
+                        <div class="w-full">
+                            <input wire:model.defer="psid" placeholder="Introduzca el psid" id="validationCustomUsername" class="form-control" aria-describedby="inputGroupPrepend" >
+                        </div>
 
-                <div class="mt-6" >
-                    <button type="submit" class="btn bg-info " wire:click="procesar">
-                        PROCESAR
-                    </button>
-                </div>
-            </div>
+                        <div class="w-full mt-2" >
 
-        </div>
+                            <input wire:model.defer="sub" placeholder="Introduzca el Subpanel" id="validationCustomUsername" class="form-control" aria-describedby="inputGroupPrepend" >
 
+                        </div>
+                    </div>
+                @endif
 
+                @if($estado == "")
+                    <div class="col-span-1 ">
 
-        @if ($jumper_complete == [])
-        <div class="flex justify-center">
-            <div class="mt-4" wire:loading>
-                <div class="container2">
-                    <div class="cargando">
-                        <div class="pelotas"></div>
-                        <div class="pelotas"></div>
-                        <div class="pelotas"></div>
-                        <span class="texto-cargando font-bold text-gray-300 ">Loading...</span>
+                        <div class="mt-6" >
+                            <button type="submit" class="btn bg-info " wire:click="procesar">
+                                PROCESAR
+                            </button>
+                        </div>
+                    </div>
+                @endif
+
+                <div class="flex col-span-1 mt-4">
+                    <div class="custom-control custom-switch"> 
+                        <input value="1" wire:model="estado" type="checkbox" class="custom-control-input" id="customSwitch1">
+                        <label class="custom-control-label" for="customSwitch1">Habilitar jumper</label>
                     </div>
                 </div>
+
             </div>
 
         </div>
-        
+
+        @if($estado == "1")
+
+         <div class="input-group p-3 mt-2">
+                <input wire:model.defer="jumper_search" placeholder="Ingrese el jumper de la encuesta" class="form-control" aria-describedby="inputGroupPrepend" >
+                @if($jumper_search)
+                    <div class="input-group-prepend">
+                        <button class="btn btn-md btn-outline-secondary input-group-text" id="inputGroupPrepend" wire:click="clear" title="Borrar">
+                            <i class="fas fa-backspace"></i>
+                        </button>
+                    </div>
+                @endif
+                                
+                <div>
+                    <button type="submit" class="btn bg-info ml-2 " wire:click="con">
+                        CONSULTAR
+                    </button>
+
+                </div>
+                               
+            </div>
+
+
+             @if ($respuesta)
+
+                <div class="mt-4 w-full">
+                    <p  class="text-blue-400 text-sm text-center font-bold mb-2">{{$respuesta['jumper']}}</p>   
+                </div>
+                
+            @endif
+        </div>
+
         @endif
+    
+
+
+
 
         @if ($jumper_detect == 2)
             <div class="px-4">
@@ -82,21 +122,23 @@
                         <p  class="text-blue-400 text-clip text-sm text-center font-bold mb-2" id="jumper_copy">{{$jumper_complete}}</p>
 
                         <div class="flex justify-center">
-                            <button onclick="copiarAlPortapapeles('jumper_copy')" class="btn btn-sm btn-success text-bold" title="{{__('messages.copiar_portapapeles')}}" id="button_copy">Copiar</button> 
+                            <button onclick="copiarAlPortapapeles('jumper_copy')" class="btn btn-sm btn-success text-bold" title="{{__('messages.copiar_portapapeles')}}" id="button_copy">Copiar</button>
                         </div>
-                                
+                             
                         
                     </div>
 
 
-                        <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
+                        <div class="relative shadow-md sm:rounded-lg">
+
                             <table class="table text-sm table-bordered table-responsive-lg table-responsive-md table-responsive-sm">
                                 <thead class="text-xs uppercase bg-gray-700 text-gray-400">
                                     <tr>
+                                    
+                                        <th class="text-center">Tiempo</th>
                                         @if($opcion == 3)
-                                            <th class="text-center">Tiempo</th>
-                                        @endif
                                         <th class="text-center">Monto</th>
+                                         @endif
                                         <th class="text-center">Tipo</th>
                                         <th class="text-center">Puntuación</th>
                                         
@@ -106,15 +148,17 @@
                    
                                             <tr class="bg-gray-800 border-gray-700 hover:bg-gray-600">
 
-                                                @if($opcion == 3)
 
                                                  <td class="text-center">{{$time}}</td>
 
-                                                 @endif
 
-                                                <td class="text-center">{{$monto}}</td>
-                                                <td class="text-center">{{$registro['payout']}}</td>
-                                                <td class="text-center">{{ $this->type($informacion_complete[$jumper_complete]) }}</td>
+                                                @if($opcion == 3)
+
+                                                    <td class="text-center">{{$monto}}</td>
+
+                                                @endif
+                        
+                                                <td class="text-center">{{ $this->type($jumper_complete) }}</td>
 
                                                   @if($this->tipo_total == 'si')
                                                 <i class="font-semibold far fa-thumbs-up text-blue-600 mr-2">{{$this->positive($this->type($jumper_complete))}}</i>
@@ -122,7 +166,7 @@
                                                 <i class="font-semibold far fa-thumbs-down text-red-600">{{$this->negative($this->type($jumper_complete))}}</i>
                                                 @else
 
-                                                    <p>-</p>
+                                                    
 
                                                 @endif
 
@@ -132,32 +176,53 @@
                             </table>
 
                             <div class="input-group mt-5">
-                                <input wire:model="jumper_search" placeholder="Ingrese el jumper de la encuesta" id="validationCustomUsername" class="form-control" aria-describedby="inputGroupPrepend" >
-                                <div class="mt-6" >
-                                    <button type="submit" class="btn bg-info " wire:click="consultar">
-                                        CONSULTAR
-                                    </button>
-                                </div>
-                                @if($jumper_search)
+                                <input wire:model.defer="jumper_search" placeholder="Ingrese el jumper de la encuesta" class="form-control" aria-describedby="inputGroupPrepend" >
+                                 @if($jumper_search)
                                 <div class="input-group-prepend">
                                     <button class="btn btn-md btn-outline-secondary input-group-text" id="inputGroupPrepend" wire:click="clear" title="Borrar">
                                             <i class="fas fa-backspace"></i>
                                     </button>
                                 </div>
                                 @endif
+                                
+                                <div>
+                                    <button type="submit" class="btn bg-info ml-2 " wire:click="con">
+                                        CONSULTAR
+                                    </button>
+
+                                </div>
+                               
                             </div>
 
 
                             @if ($respuesta)
 
                                 <div class="mt-4 w-full">
-                                    <p  class="text-blue-400 text-clip text-sm text-center font-bold mb-2">{{$respuesta['jumper']}}</p>   
+                                    <p  class="text-blue-400 text-sm text-center font-bold mb-2">{{$respuesta['jumper']}}</p>   
                                 </div>
                 
                             @endif
                         </div>
 
                 @endif
+
+                
+        @if ($jumper_complete == [] || $respuesta == [])
+        <div class="flex justify-center">
+            <div class="mt-4" wire:loading>
+                <div class="container2">
+                    <div class="cargando">
+                        <div class="pelotas"></div>
+                        <div class="pelotas"></div>
+                        <div class="pelotas"></div>
+                        <span class="texto-cargando font-bold text-gray-300 ">Loading...</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+        @endif
 
 
     </div>

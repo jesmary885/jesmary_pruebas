@@ -97,10 +97,11 @@
                             <table class="table text-sm table-bordered table-responsive-lg table-responsive-md table-responsive-sm">
                                 <thead class="text-xs uppercase bg-gray-700 text-gray-400">
                                     <tr>
-                                        @if($opcion == 3)
-                                            <th class="text-center">Tiempo</th>
-                                        @endif
+                                    
+                                        <th class="text-center">Tiempo</th>
+                                         @if($opcion == 4)
                                         <th class="text-center">Monto</th>
+                                        @endif
                                         <th class="text-center">Tipo</th>
                                         <th class="text-center">Puntuación</th>
                                         
@@ -112,15 +113,19 @@
                    
                                             <tr class="bg-gray-800 border-gray-700 hover:bg-gray-600">
 
-                                                @if($opcion == 3)
+                                        
 
-                                                 <td class="text-center">{{$time}}</td>
+                                                <td class="text-center">{{$time}}</td>
 
-                                                 @endif
+                                                 
+
+                                                @if($opcion == 4)
 
                                                 <td class="text-center">{{$monto}}</td>
-                                                <td class="text-center">{{$registro['payout']}}</td>
-                                                <td class="text-center">{{ $this->type($informacion_complete[$jumper_complete]) }}</td>
+
+                                                @endif
+                                     
+                                                <td class="text-center">{{ $this->type($jumper_complete) }}</td>
 
                                                   @if($this->tipo_total == 'si')
                                                 <i class="font-semibold far fa-thumbs-up text-blue-600 mr-2">{{$this->positive($this->type($jumper_complete))}}</i>
@@ -142,26 +147,29 @@
                             </table>
 
                             <div class="input-group mt-5">
-                                <input wire:model="jumper_search" placeholder="Ingrese el jumper de la encuesta" id="validationCustomUsername" class="form-control" aria-describedby="inputGroupPrepend" >
-                                <div class="mt-6" >
-                                    <button type="submit" class="btn bg-info " wire:click="consultar">
-                                        CONSULTAR
-                                    </button>
-                                </div>
-                                @if($jumper_search)
+                                <input wire:model.defer="jumper_search" placeholder="Ingrese el jumper de la encuesta" class="form-control" aria-describedby="inputGroupPrepend" >
+                                 @if($jumper_search)
                                 <div class="input-group-prepend">
                                     <button class="btn btn-md btn-outline-secondary input-group-text" id="inputGroupPrepend" wire:click="clear" title="Borrar">
                                             <i class="fas fa-backspace"></i>
                                     </button>
                                 </div>
                                 @endif
+                                
+                                <div>
+                                    <button type="submit" class="btn bg-info ml-2 " wire:click="con">
+                                        CONSULTAR
+                                    </button>
+
+                                </div>
+                               
                             </div>
 
 
                             @if ($respuesta)
 
                                 <div class="mt-4 w-full">
-                                    <p  class="text-blue-400 text-clip text-sm text-center font-bold mb-2">{{$respuesta['jumper']}}</p>   
+                                    <p  class="text-blue-400 text-sm text-center font-bold mb-2">{{$respuesta['jumper']}}</p>   
                                 </div>
                 
                             @endif

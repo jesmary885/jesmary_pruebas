@@ -76,7 +76,7 @@
 
             <div class="card-body mt-0">
 
-                @if ($jumper_complete)
+                @if ($respuesta)
 
                     <div class="flex-nowrap justify-center callout callout-info w-full">
                     
