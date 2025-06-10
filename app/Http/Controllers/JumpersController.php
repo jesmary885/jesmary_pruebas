@@ -398,6 +398,10 @@ class JumpersController extends Controller
             return view('jumpers.generador_new_qt');
         }
 
+         public function generador_new_qt_2(){
+            return view('jumpers.generador_new_qt_2');
+        }
+
         public function generador_new_vo(){
             return view('jumpers.generador_new_vo');
 
