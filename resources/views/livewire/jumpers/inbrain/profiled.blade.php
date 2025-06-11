@@ -6,7 +6,7 @@
             <div class="flex justify-between mt-4 " >
 
                 <div class="input-group">
-                    <input wire:model.defer="search" placeholder="Introduzca el jumper" id="validationCustomUsername" class="form-control" aria-describedby="inputGroupPrepend" >
+                    <input wire:model.defer="search" placeholder="Introduzca el pstart" id="validationCustomUsername" class="form-control" aria-describedby="inputGroupPrepend" >
                         @if($search)
                                 <div class="input-group-prepend">
                                     <button class="btn btn-md btn-outline-secondary input-group-text" id="inputGroupPrepend" wire:click="clear" title="Borrar">

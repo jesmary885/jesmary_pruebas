@@ -183,9 +183,9 @@ Route::middleware(['auth','verified'])->group(function()
 
         ///////////////GENERADORES NUEVOS
 
-        Route::get('generador_p_qt',[JumpersController::class,'generador_new_qt'])->name('generador_qt.index')->middleware('permission:menu.premium');
+        Route::get('generador_pstart',[JumpersController::class,'generador_new_qt'])->name('generador_qt.index')->middleware('permission:menu.premium');
         Route::get('generador_p_qt_2',[JumpersController::class,'generador_new_qt_2'])->name('generador_qt_2.index')->middleware('permission:menu.premium');
-        Route::get('generador_p_vo',[JumpersController::class,'generador_new_vo'])->name('generador_vo.index')->middleware('permission:menu.premium');
+      //  Route::get('generador_p_vo',[JumpersController::class,'generador_new_vo'])->name('generador_vo.index')->middleware('permission:menu.premium');
 
         Route::get('Polltastic',[JumpersController::class,'pollsaltador'])->name('poll.saltador')->middleware('permission:basico.v2');
         Route::get('Polltastic_preguntas',[JumpersController::class,'pollpreguntas'])->name('poll.preguntas')->middleware('permission:basico.v2');

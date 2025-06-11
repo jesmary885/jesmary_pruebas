@@ -9,19 +9,34 @@ use GuzzleHttp\Client;
 class QT extends Component
 {
 
+    protected $paginationTheme = "bootstrap";
 
-    public $jumper_complete = "", $psid_search, $panel_search, $jumper_detect;
+    public  $user,$jumper_detect = 0, $search, $opcion = 0;
+
+    public  $tipo_total,$respuesta = [],$jumper_complete = [], $psid_search, $panel_search, $informacion_complete ="", $jumper_search, $estado="";
 
     protected $listeners = ['render' => 'render'];
 
     protected $rules = [
-        'psid_search' => 'required',
-        'panel_search' => 'required',
+        'search' => 'required',
     ];
-
+    
     public function mount(){
 
+
+        if(session('search')) $this->search = session('search');
+        $this->jumper_detect = 0;
+
+        $this->user = User::where('id',auth()->user()->id)->first();
+    }
+
+    public function clear(){
+        $this->reset(['search']);
+       // $this->informacion_complete = [];
         $this->jumper_complete = [];
+
+         $this->jumper_detect = 0;
+        //$this->emitTo('jumpers.encuestar.encuestar1-index','render');
     }
 
     public function render()
@@ -30,7 +45,7 @@ class QT extends Component
     }
 
     
-    public function generar(){
+    public function procesar(){
 
         $rules = $this->rules;
         $this->validate($rules);
@@ -40,19 +55,26 @@ class QT extends Component
   
         try {
 
+
             $client = new Client([
                 //'base_uri' => 'http://127.0.0.1:8000',
                 'base_uri' => 'http://67.205.168.133/',
             ]);
 
  
-            $resultado = $client->request('GET', '/abrir_QT/1/'.$this->psid_search.'/'.$this->panel_search);
+            $resultado = $client->request('GET', '/QT_pstart_web/1/'.$this->search);
 
             if($resultado->getStatusCode() == 200){
 
-                $this->jumper_complete = json_decode($resultado->getBody(),true);
+                 $value = json_decode($resultado->getBody(),true);
 
-                //$this->jumper_detect = 1;
+
+                if ($value['encuesta'] == 'El pstart no contiene &sfcSessionID ') $this->opcion = 2;
+                else{
+
+                    $this->jumper_complete = $value ['encuesta'];
+                    $this->opcion = 1;
+                }
             }
 
             else{

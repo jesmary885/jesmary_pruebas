@@ -600,28 +600,26 @@ return [
             'icon_color' => 'red',
             'submenu' => [
                 [
-                    'text' => 'Generador QT & ER',
+                    'text' => 'Pstart_web_QT',
                     'route'  => 'generador_qt.index',
                     'can' => 'menu.premium',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
 
-                [
-                    'text' => 'Generador VO & OO',
-                    'route'  => 'generador_vo.index',
-                    'can' => 'menu.premium',
-                    'icon_color' => 'red',
-                    'icon'    => 'fas fa-angle-right',
-                ],
+                // [
+                //     'text' => 'Generador VO & OO',
+                //     'route'  => 'generador_vo.index',
+                //     'can' => 'menu.premium',
+                //     'icon_color' => 'red',
+                //     'icon'    => 'fas fa-angle-right',
+                // ],
 
                 [
-                    'text' => 'Generador QT',
+                    'text' => 'Premium',
                     'route'  => 'generador_qt_2.index',
                     'can' => 'menu.premium',
                     'icon_color' => 'red',
-                    'label'       => 'Versión 2',
-                    'label_color' => 'danger',
                     'icon'    => 'fas fa-angle-right',
                 ],
             ],
