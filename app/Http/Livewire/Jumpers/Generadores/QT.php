@@ -46,28 +46,35 @@ class QT extends Component
 
     
     public function procesar(){
-
+    
         $rules = $this->rules;
         $this->validate($rules);
 
         $this->reset(['jumper_detect']);
 
+
   
         try {
+          
 
+             $client = new Client();
 
-            $client = new Client([
-                //'base_uri' => 'http://127.0.0.1:8000',
-                'base_uri' => 'http://67.205.168.133/',
+            $resultado = $client->post('http://67.205.168.133/QT_pstart_web/1/', [
+                'headers' => ['Content-Type' => 'application/json'],
+                'body' => json_encode([
+                    'link' => $this->search
+                ])
             ]);
 
- 
-            $resultado = $client->request('GET', '/QT_pstart_web/1/'.$this->search);
+
 
             if($resultado->getStatusCode() == 200){
 
+               // dd(json_decode($resultado->getBody()));
+
                  $value = json_decode($resultado->getBody(),true);
 
+   
 
                 if ($value['encuesta'] == 'El pstart no contiene &sfcSessionID ') $this->opcion = 2;
                 else{
