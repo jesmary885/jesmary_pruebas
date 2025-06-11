@@ -73,6 +73,7 @@
         @endif
 
 
+        @if($jumper_complete)
 
             <div class="card-body mt-0">
 
@@ -104,7 +105,9 @@
                 @endif
 
 
-    </div>
+            </div>
+
+        @endif
 
     <style>
      
