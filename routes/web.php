@@ -200,10 +200,10 @@ Route::middleware(['auth','verified'])->group(function()
         Route::get('Panel2_Start',[JumpersController::class,'panel2Start'])->name('panel2.start')->middleware('permission:basico.v2');
         Route::get('Panel2_Jumper',[JumpersController::class,'panel2Jumper'])->name('panel2.jumper')->middleware('permission:basico.v2');
 
-        Route::get('Inbrain_rex',[JumpersController::class,'inbrainrex'])->name('inbrain.rex')->middleware('permission:basico.v2');
-        Route::get('Inbrain_profiled',[JumpersController::class,'inbrainprofiled'])->name('inbrain.profiled')->middleware('permission:basico.v2');
-        Route::get('Inbrain_wix',[JumpersController::class,'inbrainwix'])->name('inbrain.wix')->middleware('permission:basico.v2');
-        Route::get('Inbrain_start',[JumpersController::class,'inbrainstart'])->name('inbrain.start')->middleware('permission:basico.v2');
+        Route::get('Inbrain_rex',[JumpersController::class,'inbrainrex'])->name('inbrain.rex');
+        Route::get('Inbrain_profiled',[JumpersController::class,'inbrainprofiled'])->name('inbrain.profiled');
+        Route::get('Inbrain_wix',[JumpersController::class,'inbrainwix'])->name('inbrain.wix');
+        Route::get('Inbrain_start',[JumpersController::class,'inbrainstart'])->name('inbrain.start');
 
         //COMUNIDAD
 
