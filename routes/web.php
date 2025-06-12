@@ -187,23 +187,23 @@ Route::middleware(['auth','verified'])->group(function()
         Route::get('generador_p_qt_2',[JumpersController::class,'generador_new_qt_2'])->name('generador_qt_2.index')->middleware('permission:menu.premium');
       //  Route::get('generador_p_vo',[JumpersController::class,'generador_new_vo'])->name('generador_vo.index')->middleware('permission:menu.premium');
 
-        Route::get('Polltastic',[JumpersController::class,'pollsaltador'])->name('poll.saltador')->middleware('permission:basico.v2');
-        Route::get('Polltastic_preguntas',[JumpersController::class,'pollpreguntas'])->name('poll.preguntas')->middleware('permission:basico.v2');
-        Route::get('Polltastic_edad_preguntas',[JumpersController::class,'polledad'])->name('poll.edad')->middleware('permission:basico.v2');
+        Route::get('Polltastic',[JumpersController::class,'pollsaltador'])->name('poll.saltador')->middleware('permission:menu.premium');
+        Route::get('Polltastic_preguntas',[JumpersController::class,'pollpreguntas'])->name('poll.preguntas')->middleware('permission:menu.premium');
+        Route::get('Polltastic_edad_preguntas',[JumpersController::class,'polledad'])->name('poll.edad')->middleware('permission:menu.premium');
 
 
-        Route::get('Panel1',[JumpersController::class,'panel1Login'])->name('panel1.login')->middleware('permission:basico.v2');
-        Route::get('Panel1_Start',[JumpersController::class,'panel1Start'])->name('panel1.start')->middleware('permission:basico.v2');
-        Route::get('Panel1_Jumper',[JumpersController::class,'panel1Jumper'])->name('panel1.jumper')->middleware('permission:basico.v2');
+        Route::get('Panel1',[JumpersController::class,'panel1Login'])->name('panel1.login')->middleware('permission:menu.premium');
+        Route::get('Panel1_Start',[JumpersController::class,'panel1Start'])->name('panel1.start')->middleware('permission:menu.premium');
+        Route::get('Panel1_Jumper',[JumpersController::class,'panel1Jumper'])->name('panel1.jumper')->middleware('permission:menu.premium');
 
-        Route::get('Panel2',[JumpersController::class,'panel2Login'])->name('panel2.login')->middleware('permission:basico.v2');
-        Route::get('Panel2_Start',[JumpersController::class,'panel2Start'])->name('panel2.start')->middleware('permission:basico.v2');
-        Route::get('Panel2_Jumper',[JumpersController::class,'panel2Jumper'])->name('panel2.jumper')->middleware('permission:basico.v2');
+        Route::get('Panel2',[JumpersController::class,'panel2Login'])->name('panel2.login')->middleware('permission:menu.premium');
+        Route::get('Panel2_Start',[JumpersController::class,'panel2Start'])->name('panel2.start')->middleware('permission:menu.premium');
+        Route::get('Panel2_Jumper',[JumpersController::class,'panel2Jumper'])->name('panel2.jumper')->middleware('permission:menu.premium');
 
-        Route::get('Inbrain_rex',[JumpersController::class,'inbrainrex'])->name('inbrain.rex');
-        Route::get('Inbrain_profiled',[JumpersController::class,'inbrainprofiled'])->name('inbrain.profiled');
-        Route::get('Inbrain_wix',[JumpersController::class,'inbrainwix'])->name('inbrain.wix');
-        Route::get('Inbrain_start',[JumpersController::class,'inbrainstart'])->name('inbrain.start');
+        Route::get('Inbrain_rex',[JumpersController::class,'inbrainrex'])->name('inbrain.rex')->middleware('permission:menu.premium');
+        Route::get('Inbrain_profiled',[JumpersController::class,'inbrainprofiled'])->name('inbrain.profiled')->middleware('permission:menu.premium');
+        Route::get('Inbrain_wix',[JumpersController::class,'inbrainwix'])->name('inbrain.wix')->middleware('permission:menu.premium');
+        Route::get('Inbrain_start',[JumpersController::class,'inbrainstart'])->name('inbrain.start')->middleware('permission:menu.premium');
 
         //COMUNIDAD
 

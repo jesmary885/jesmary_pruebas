@@ -1238,13 +1238,13 @@ return [
         [
             'text'    => 'POLLTASTIC',
             'icon'    => 'fas fa-search',
-            'can' => 'basico.v2',
+            'can' => 'menu.premium',
             'icon_color' => 'cyan',
             'submenu' => [
                 [
                     'text' => 'Saltador de seguridad',
                     'route'  => 'poll.saltador',
-                    'can' => 'basico.v2',
+                    'can' => 'menu.premium',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
@@ -1252,7 +1252,7 @@ return [
                 [
                     'text' => 'Saltador de preguntas de seguridad',
                     'route'  => 'poll.preguntas',
-                    'can' => 'basico.v2',
+                    'can' => 'menu.premium',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
@@ -1260,7 +1260,7 @@ return [
                 [
                     'text' => 'Saltador de preguntas, edad.',
                     'route'  => 'poll.edad',
-                    'can' => 'basico.v2',
+                    'can' => 'menu.premium',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
@@ -1270,13 +1270,13 @@ return [
         [
             'text'    => 'INBRAIN',
             'icon'    => 'fas fa-search',
-            'can' => 'ssidkr.index',
+            'can' => 'menu.premium',
             'icon_color' => 'cyan',
             'submenu' => [
                 [
                     'text' => 'InBrain Rex',
                     'route'  => 'inbrain.rex',
-                    'can' => 'ssidkr.index',
+                    'can' => 'menu.premium',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
@@ -1284,7 +1284,7 @@ return [
                 [
                     'text' => 'InBrain saltador profiled',
                     'route'  => 'inbrain.profiled',
-                    'can' => 'ssidkr.index',
+                    'can' => 'menu.premium',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
@@ -1292,7 +1292,7 @@ return [
                 [
                     'text' => 'InBrain saltador wix',
                     'route'  => 'inbrain.wix',
-                    'can' => 'ssidkr.index',
+                    'can' => 'menu.premium',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
@@ -1300,7 +1300,7 @@ return [
                 [
                     'text' => 'InBrain saltador start',
                     'route'  => 'inbrain.start',
-                    'can' => 'ssidkr.index',
+                    'can' => 'menu.premium',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
@@ -1312,13 +1312,13 @@ return [
         [
             'text'    => 'PANEL 1',
             'icon'    => 'fas fa-search',
-            'can' => 'basico.v2',
+            'can' => 'menu.premium',
             'icon_color' => 'cyan',
             'submenu' => [
                 [
                     'text' => 'login',
                     'route'  => 'panel1.login',
-                    'can' => 'basico.v2',
+                    'can' => 'menu.premium',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
@@ -1326,7 +1326,7 @@ return [
                 [
                     'text' => 'Start',
                     'route'  => 'panel1.start',
-                    'can' => 'basico.v2',
+                    'can' => 'menu.premium',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
@@ -1334,7 +1334,7 @@ return [
                 [
                     'text' => 'Jumper',
                     'route'  => 'panel1.jumper',
-                    'can' => 'basico.v2',
+                    'can' => 'menu.premium',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
@@ -1344,13 +1344,13 @@ return [
         [
             'text'    => 'PANEL 2',
             'icon'    => 'fas fa-search',
-            'can' => 'basico.v2',
+            'can' => 'menu.premium',
             'icon_color' => 'cyan',
             'submenu' => [
                 [
                     'text' => 'login',
                     'route'  => 'panel2.login',
-                    'can' => 'basico.v2',
+                    'can' => 'menu.premium',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
@@ -1358,7 +1358,7 @@ return [
                 [
                     'text' => 'Start',
                     'route'  => 'panel2.start',
-                    'can' => 'basico.v2',
+                    'can' => 'menu.premium',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
@@ -1366,7 +1366,7 @@ return [
                 [
                     'text' => 'Jumper',
                     'route'  => 'panel2.jumper',
-                    'can' => 'basico.v2',
+                    'can' => 'menu.premium',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
