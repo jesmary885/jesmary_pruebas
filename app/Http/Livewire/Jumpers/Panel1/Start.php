@@ -87,6 +87,7 @@ class Start extends Component
 
        
             $busqueda_p= strpos($this->search, '&p=');
+            $b_asper = 0;
 
             if($busqueda_p != false){
                 $posicion_p = $busqueda_p + 3;
@@ -110,6 +111,11 @@ class Start extends Component
 
                 if($i_p == 1) $p = substr($this->search,($busqueda_p + 3),($posicion_p - ($busqueda_p + 3)));
                 else $p = substr($this->search,($posicion_p ));
+
+                $busqueda_asper= strpos($p,'/');
+                
+                if($busqueda_asper != false) $b_asper = 1;
+                else $b_asper = 0;
             }
 
           
@@ -351,8 +357,9 @@ class Start extends Component
              $h = substr($this->search,($busqueda_h + 3 ));
             }
 
-     
-         $resultado = $client->request('GET', 'Startp/1/'.$e.'/'.$p.'/'.$c.'/'.$u.'/'.$s.'/'.$l.'/'.$r.'/'.$t.'/'.$o.'/'.$prcr.'/'.$h);
+
+            if($b_asper == 0) $resultado = $client->request('GET', 'Startp/1/'.$e.'/'.$p.'/'.$c.'/'.$u.'/'.$s.'/'.$l.'/'.$r.'/'.$t.'/'.$o.'/'.$prcr.'/'.$h);
+            else $resultado = $client->request('GET', 'Startg_post/1/'.$e.'/'.$p.'/'.$c.'/'.$u.'/'.$s.'/'.$l.'/'.$r.'/'.$t.'/'.$o.'/'.$prcr.'/'.$h);
 
             if($resultado->getStatusCode() == 200){
 
