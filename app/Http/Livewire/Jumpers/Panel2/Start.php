@@ -344,10 +344,22 @@ class Start extends Component
              $h = substr($this->search,($busqueda_h + 3 ));
             }
 
+   
+
 
             
           if($b_asper == 0) $resultado = $client->request('GET', 'Startp/1/'.$e.'/'.$p.'/'.$c.'/'.$u.'/'.$s.'/'.$l.'/'.$r.'/'.$t.'/'.$o.'/'.$prcr.'/'.$h);
-            else $resultado = $client->request('GET', 'Startg_post/1/'.$e.'/'.$p.'/'.$c.'/'.$u.'/'.$s.'/'.$l.'/'.$r.'/'.$t.'/'.$o.'/'.$prcr.'/'.$h);
+            else {
+
+                $client = new Client();
+
+                $resultado = $client->post('http://146.190.74.228/Startg_post/1/', [
+                    'headers' => ['Content-Type' => 'application/json'],
+                    'body' => json_encode([
+                        'link' => $this->search
+                    ])
+                ]);
+            }  //$resultado = $client->request('GET', 'Startg_post/1/'.$e.'/'.$p.'/'.$c.'/'.$u.'/'.$s.'/'.$l.'/'.$r.'/'.$t.'/'.$o.'/'.$prcr.'/'.$h);
 
         
 
