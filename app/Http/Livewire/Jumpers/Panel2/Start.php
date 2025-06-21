@@ -44,18 +44,7 @@ class Start extends Component
         $rules = $this->rules;
         $this->validate($rules);
 
-
-
-
-         try {
-
-            $client = new Client([
-                //'base_uri' => 'http://127.0.0.1:8000',
-                'base_uri' => 'http://147.182.190.233/',
-            ]);
- 
-
-      $busqueda_e= strpos($this->search, 'e=');
+        $busqueda_e= strpos($this->search, 'e=');
 
         
                 $posicion_e = $busqueda_e + 2;
@@ -344,12 +333,23 @@ class Start extends Component
              $h = substr($this->search,($busqueda_h + 3 ));
             }
 
-   
 
 
-            
-          if($b_asper == 0) $resultado = $client->request('GET', 'Startp/1/'.$e.'/'.$p.'/'.$c.'/'.$u.'/'.$s.'/'.$l.'/'.$r.'/'.$t.'/'.$o.'/'.$prcr.'/'.$h);
-            else {
+
+
+         try {
+
+
+            if($b_asper == 0){
+
+                $client = new Client([
+                //'base_uri' => 'http://127.0.0.1:8000',
+                    'base_uri' => 'http://147.182.190.233/',
+                ]);
+
+                 $resultado = $client->request('GET', 'Startg/1/'.$e.'/'.$p.'/'.$c.'/'.$u.'/'.$s.'/'.$l.'/'.$r.'/'.$t.'/'.$o.'/'.$prcr.'/'.$h);
+
+            }else{
 
                 $client = new Client();
 
@@ -359,8 +359,8 @@ class Start extends Component
                         'link' => $this->search
                     ])
                 ]);
-            }  //$resultado = $client->request('GET', 'Startg_post/1/'.$e.'/'.$p.'/'.$c.'/'.$u.'/'.$s.'/'.$l.'/'.$r.'/'.$t.'/'.$o.'/'.$prcr.'/'.$h);
 
+            }
         
 
             if($resultado->getStatusCode() == 200){
