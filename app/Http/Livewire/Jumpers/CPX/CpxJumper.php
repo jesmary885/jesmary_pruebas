@@ -52,10 +52,9 @@ class CpxJumper extends Component
 
             $client = new Client();
 
-            http://146.190.74.228/cpx_jumper_freecash/1/
 
 
-                $resultado = $client->post('http://146.190.74.228/cpx_jumper_freecash//1/', [
+                $resultado = $client->post('http://146.190.74.228/cpx_jumper_freecash/1/', [
                     'headers' => ['Content-Type' => 'application/json'],
                     'body' => json_encode([
                         'link' => $this->link
