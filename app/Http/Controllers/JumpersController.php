@@ -12,6 +12,21 @@ class JumpersController extends Controller
 {
 
 
+    public function cpxListar(){
+        return view('cpx.listar');
+    }
+    public function cpxGenerar(){
+        return view('cpx.generar');
+    }
+
+    public function cpxCalificador(){
+        return view('cpx.calificador');
+    }
+    public function cpxJumper(){
+        return view('cpx.jumper');
+    }
+
+
 
     public function inbrainrex(){
         return view('inbrain.rex');

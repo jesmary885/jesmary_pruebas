@@ -902,6 +902,46 @@ return [
             
         ],
 
+         [
+            'text'    => 'CPX Freecash',
+            'icon'    => 'fas fa-search',
+            'can' => 'premium.vip',
+            'icon_color' => 'cyan',
+            'submenu' => [
+                [
+                    'text' => 'Listar encuestas',
+                    'route'  => 'cpxListar',
+                    'can' => 'premium.vip',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                 [
+                    'text' => 'Calificador de encuesta',
+                    'route'  => 'cpxCalificador',
+                    'can' => 'premium.vip',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                [
+                    'text' => 'Generador de encuesta',
+                    'route'  => 'cpxGenerar',
+                    'can' => 'premium.vip',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                [
+                    'text' => 'Jumper',
+                    'route'  => 'cpxJumper',
+                    'can' => 'premium.vip',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+            ],
+        ],
+
         [
             'text'    => 'SSI PREMIUM',
             'icon'    => 'fas fa-crown',
