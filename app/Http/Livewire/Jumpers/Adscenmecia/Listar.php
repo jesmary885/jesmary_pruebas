@@ -1,25 +1,26 @@
 <?php
 
-namespace App\Http\Livewire\Jumpers\CPX;
+namespace App\Http\Livewire\Jumpers\Adscenmecia;
+
 
 use App\Models\User;
 use Livewire\Component;
 use GuzzleHttp\Client;
 use Livewire\WithPagination;
 
-class CpxListar extends Component
+class Listar extends Component
 {
 
+    
      use WithPagination;
     protected $paginationTheme = "bootstrap";
 
-    public  $user,$jumper_complete = [],$jumper_detect = 0, $app_id, $link;
+    public  $user,$jumper_complete = [],$jumper_detect = 0, $type, $link;
 
     protected $listeners = ['render' => 'render'];
 
     protected $rules = [
-        'app_id' => 'required',
-        'link' => 'required',
+        'type' => 'required',
     ];
     
     public function mount(){
@@ -49,27 +50,29 @@ class CpxListar extends Component
 
         try {
 
-            $client = new Client();
+            $client = new Client([
+                //'base_uri' => 'http://127.0.0.1:8000',
+                'base_uri' => 'http://67.205.168.133/',
+            ]);
 
-            
+            if($this->type == 'Inbrain') $codigo = '5140414';
+            elseif($this->type == 'Bitlabs') $codigo = '5064420';
+            elseif($this->type == 'CInt') $codigo = '45003';
+            elseif($this->type == 'cpx') $codigo = '5000313';
+            elseif($this->type == 'Opinion Network') $codigo = '5326343';
+            elseif($this->type == 'Toluna') $codigo = '2951652';
+            elseif($this->type == 'Grabpoints') $codigo = '5968664';
+            elseif($this->type == 'Uniflow') $codigo = '5231984';
+            elseif($this->type == 'ipso') $codigo = '5040990';
+            else $codigo = '5905064';
 
 
-                $resultado = $client->post('http://146.190.74.228/cpx_surveys_freecash/1/'.$this->app_id, [
-                    'headers' => ['Content-Type' => 'application/json'],
-                    'body' => json_encode([
-                        'link' => $this->link
-                    ])
-                ]);
+            $resultado = $client->request('GET', 'Adscendmedia_encuestas/1/'.$codigo);
 
-     
             if($resultado->getStatusCode() == 200){
-
-
-               $this->jumper_complete = json_decode($resultado->getBody(),true);
-
-                if(!$this->jumper_complete)  $this->jumper_detect = 2;
-
+                $this->jumper_complete = json_decode($resultado->getBody(),true);
             }
+
 
             else{
 
@@ -94,6 +97,6 @@ class CpxListar extends Component
 
     public function render()
     {
-        return view('livewire.jumpers.c-p-x.cpx-listar');
+        return view('livewire.jumpers.adscenmecia.listar');
     }
 }

@@ -7,7 +7,7 @@ use Livewire\Component;
 use GuzzleHttp\Client;
 use Livewire\WithPagination;
 
-class CpxListar extends Component
+class CpxListar2 extends Component
 {
 
      use WithPagination;
@@ -51,10 +51,7 @@ class CpxListar extends Component
 
             $client = new Client();
 
-            
-
-
-                $resultado = $client->post('http://146.190.74.228/cpx_surveys_freecash/1/'.$this->app_id, [
+                $resultado = $client->post('http://146.190.74.228/cpx_surveys_freecash_limitado/1/'.$this->app_id, [
                     'headers' => ['Content-Type' => 'application/json'],
                     'body' => json_encode([
                         'link' => $this->link
@@ -94,6 +91,6 @@ class CpxListar extends Component
 
     public function render()
     {
-        return view('livewire.jumpers.c-p-x.cpx-listar');
+        return view('livewire.jumpers.c-p-x.cpx-listar2');
     }
 }

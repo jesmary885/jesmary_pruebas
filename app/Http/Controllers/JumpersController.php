@@ -15,6 +15,11 @@ class JumpersController extends Controller
     public function cpxListar(){
         return view('cpx.listar');
     }
+
+    public function cpxListar_2(){
+        return view('cpx.listar_2');
+    }
+
     public function cpxGenerar(){
         return view('cpx.generar');
     }
@@ -24,6 +29,16 @@ class JumpersController extends Controller
     }
     public function cpxJumper(){
         return view('cpx.jumper');
+    }
+
+
+    
+
+    public function AdscenmeciaListar(){
+        return view('Adscenmecia.listar');
+    }
+    public function Adscenmecia_saltador(){
+        return view('Adscenmecia.saltador');
     }
 
 

@@ -903,7 +903,7 @@ return [
         ],
 
          [
-            'text'    => 'CPX Freecash',
+            'text'    => 'CPX',
             'icon'    => 'fas fa-search',
             'can' => 'premium.vip',
             'icon_color' => 'cyan',
@@ -911,6 +911,16 @@ return [
                 [
                     'text' => 'Listar encuestas',
                     'route'  => 'cpxListar',
+                    'can' => 'premium.vip',
+                    'icon_color' => 'red',
+                    'label'       => '1',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                  [
+                    'text' => 'Listar encuestas',
+                    'label'       => '2',
+                    'route'  => 'cpxListar_2',
                     'can' => 'premium.vip',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
@@ -939,6 +949,32 @@ return [
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
+            ],
+        ],
+
+          [
+            'text'    => 'ADSCENMEDIA',
+            'icon'    => 'fas fa-search',
+            'can' => 'premium.vip',
+            'icon_color' => 'cyan',
+            'submenu' => [
+                [
+                    'text' => 'Listar encuestas',
+                    'route'  => 'AdscenmeciaListar',
+                    'can' => 'premium.vip',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                 [
+                    'text' => 'Saltador',
+                    'route'  => 'AdscenmeciaSaltador',
+                    'can' => 'premium.vip',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+        
             ],
         ],
 

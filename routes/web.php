@@ -206,9 +206,13 @@ Route::middleware(['auth','verified'])->group(function()
         Route::get('Inbrain_start',[JumpersController::class,'inbrainstart'])->name('inbrain.start')->middleware('permission:menu.premium');
 
         Route::get('Cpx_listar',[JumpersController::class,'cpxListar'])->name('cpxListar')->middleware('permission:premium.vip');
+        Route::get('Cpx_listar_2',[JumpersController::class,'cpxListar_2'])->name('cpxListar_2')->middleware('permission:premium.vip');
         Route::get('Cpx_generar',[JumpersController::class,'cpxGenerar'])->name('cpxGenerar')->middleware('permission:premium.vip');
         Route::get('Cpx_calificador',[JumpersController::class,'cpxCalificador'])->name('cpxCalificador')->middleware('permission:premium.vip');
         Route::get('Cpx_jumper',[JumpersController::class,'cpxJumper'])->name('cpxJumper')->middleware('permission:premium.vip');
+
+         Route::get('Adscenmecia_listar',[JumpersController::class,'AdscenmeciaListar'])->name('AdscenmeciaListar')->middleware('permission:premium.vip');
+          Route::get('Adscenmecia_saltador',[JumpersController::class,'Adscenmecia_saltador'])->name('AdscenmeciaSaltador')->middleware('permission:premium.vip');
 
         //COMUNIDAD
 
