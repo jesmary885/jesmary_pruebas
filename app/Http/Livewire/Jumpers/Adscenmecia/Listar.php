@@ -15,19 +15,24 @@ class Listar extends Component
      use WithPagination;
     protected $paginationTheme = "bootstrap";
 
-    public  $user,$jumper_complete = [],$jumper_detect = 0, $type, $link;
+    public  $user,$jumper_complete = [],$jumper_detect = 0, $type, $link, $encuentas_act;
 
     protected $listeners = ['render' => 'render'];
 
     protected $rules = [
         'type' => 'required',
     ];
+
+     public function updatedType(){
+        $this->jumper_complete = [];
+    }
     
     public function mount(){
 
 
       //  if(session('search')) $this->search = session('search');
         $this->jumper_detect = 0;
+         $this->jumper_complete = [];
 
         $this->user = User::where('id',auth()->user()->id)->first();
     }
@@ -42,11 +47,12 @@ class Listar extends Component
     }
 
     public function procesar(){
-
   
 
         $rules = $this->rules;
         $this->validate($rules);
+
+         $this->jumper_detect = 0;
 
         try {
 
@@ -70,7 +76,12 @@ class Listar extends Component
             $resultado = $client->request('GET', 'Adscendmedia_encuestas/1/'.$codigo);
 
             if($resultado->getStatusCode() == 200){
+
+               
                 $this->jumper_complete = json_decode($resultado->getBody(),true);
+
+                 if($this->jumper_complete['surveys'] == "No se encontraron Encuestas") $this->encuentas_act = 0;
+                 else $this->encuentas_act = 1;
             }
 
 
@@ -91,7 +102,10 @@ class Listar extends Component
                     $this->jumper_detect = 2;
                 }
             }
+
+             
         }
+
     }
 
 

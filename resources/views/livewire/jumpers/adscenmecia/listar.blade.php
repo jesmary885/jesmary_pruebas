@@ -10,7 +10,7 @@
                     <div class="col-span-3">
                         <div class="form-group w-full">
                                   
-                                    <select wire:model.defer="type" title="type" id="type" class="block w-full text-gray-400 py-2 px-2 pr-8 leading-tight rounded focus:outline-none focus:border-gray-500" name="estado">
+                                    <select wire:model="type" title="type" id="type" class="block w-full text-gray-400 py-2 px-2 pr-8 leading-tight rounded focus:outline-none focus:border-gray-500" name="estado">
                                         <option value="" selected>Seleccione un enrutador</option>
                                         <option value="Inbrain">Inbrain</option>
                                         <option value="Bitlabs">Bitlabs</option>
@@ -34,6 +34,8 @@
             </div>
 
         </div>
+
+        
 
         <div class="card-footer">
             <div>
@@ -99,6 +101,8 @@
         @if($jumper_complete)
             <div class="card">
 
+                @if($encuentas_act == 1)
+
                 <div class="card-body mt-0">
                         <div class="card m-4">
             
@@ -147,6 +151,19 @@
                     
 
                 </div>
+
+                @else 
+
+                <div class="card-body mt-0 justify-center text-center">
+                 
+
+                    <p class=" font-bold " >No se encontraron encuestas</p>
+
+                    
+
+                </div>
+
+                @endif
             </div>
 
         @endif

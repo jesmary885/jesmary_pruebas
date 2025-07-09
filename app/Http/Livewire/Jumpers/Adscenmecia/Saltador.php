@@ -223,18 +223,23 @@ class Saltador extends Component
                 $xt = substr($this->search,($posicion_xt ));
             }
 
+
         try {
 
-              $client = new Client([
-                //'base_uri' => 'http://127.0.0.1:8000',
-                'base_uri' => 'http://67.205.168.133/',
-            ]);
 
 
-            $resultado = $client->request('GET', 'Saltador_adscendmedia/1/'.$aff.'/'.$camp.'/'.$from.'/'.$prod.'/'.$sub.'/'.$prod_ch.'/'.$xt);
+             $client = new Client();
+
+                $resultado = $client->post('http://67.205.168.133/Saltador_adscendmedia/1/', [
+                    'headers' => ['Content-Type' => 'application/json'],
+                    'body' => json_encode([
+                        'link' => $this->search
+                    ])
+                ]);
+
 
             if($resultado->getStatusCode() == 200){
-                $this->jumper_complete = json_decode($resultado->getBody(),true);
+               $this->jumper_complete = json_decode($resultado->getBody(),true);
             }
 
 
