@@ -74,7 +74,7 @@ class CpxCalificador extends Component
                     ->whereBetween('created_at',[$date_actual_30,$date_actual])
                     ->count();
 
-                if($links_usados <= 5){
+                if($links_usados <= 8){
                     $this->jumper_complete = json_decode($resultado->getBody(),true);
 
                     $link_register = new Links_usados();
