@@ -1282,27 +1282,27 @@ return [
         [
             'text'    => 'SALTADORES',
             'icon'    => 'fas fa-crown',
-            'can' => 'ssidkr.index',
+            'can' => 'premium.vip',
             'icon_color' => 'cyan',
             'submenu' => [
                 [
                     'text' => 'BITLAB',
                     'route'  => 'bitlab.index',
-                    'can' => 'ssidkr.index',
+                    'can' => 'premium.vip',
                     'icon_color' => 'cyan',
                     'icon'    => 'fas fa-search',
                 ],
                 [
                     'text' => 'POLLFISH',
                     'route'  => 'pollfish.index',
-                    'can' => 'ssidkr.index',
+                    'can' => 'premium.vip',
                     'icon_color' => 'cyan',
                     'icon'    => 'fas fa-search',
                 ],
                 [
                     'text' => 'SWAGBUCKS',
                     'route'  => 'swagbucks.index',
-                    'can' => 'ssidkr.index',
+                    'can' => 'premium.vip',
                     'icon_color' => 'cyan',
                     'icon'    => 'fas fa-search',
                 ],
@@ -1314,13 +1314,13 @@ return [
         [
             'text'    => 'POLLTASTIC',
             'icon'    => 'fas fa-search',
-            'can' => 'menu.premium',
+            'can' => 'premium.vip',
             'icon_color' => 'cyan',
             'submenu' => [
                 [
                     'text' => 'Saltador de seguridad',
                     'route'  => 'poll.saltador',
-                    'can' => 'menu.premium',
+                    'can' => 'premium.vip',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
@@ -1328,7 +1328,7 @@ return [
                 [
                     'text' => 'Saltador de preguntas de seguridad',
                     'route'  => 'poll.preguntas',
-                    'can' => 'menu.premium',
+                    'can' => 'premium.vip',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
@@ -1336,7 +1336,7 @@ return [
                 [
                     'text' => 'Saltador de preguntas, edad.',
                     'route'  => 'poll.edad',
-                    'can' => 'menu.premium',
+                    'can' => 'premium.vip',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
@@ -1346,13 +1346,13 @@ return [
         [
             'text'    => 'INBRAIN',
             'icon'    => 'fas fa-search',
-            'can' => 'menu.premium',
+            'can' => 'premium.vip',
             'icon_color' => 'cyan',
             'submenu' => [
                 [
                     'text' => 'InBrain Rex',
                     'route'  => 'inbrain.rex',
-                    'can' => 'menu.premium',
+                    'can' => 'premium.vip',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
@@ -1360,7 +1360,7 @@ return [
                 [
                     'text' => 'InBrain saltador profiled',
                     'route'  => 'inbrain.profiled',
-                    'can' => 'menu.premium',
+                    'can' => 'premium.vip',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
@@ -1368,7 +1368,7 @@ return [
                 [
                     'text' => 'InBrain saltador wix',
                     'route'  => 'inbrain.wix',
-                    'can' => 'menu.premium',
+                    'can' => 'premium.vip',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
@@ -1376,7 +1376,7 @@ return [
                 [
                     'text' => 'InBrain saltador start',
                     'route'  => 'inbrain.start',
-                    'can' => 'menu.premium',
+                    'can' => 'premium.vip',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
@@ -1388,13 +1388,13 @@ return [
         [
             'text'    => 'PANEL 1',
             'icon'    => 'fas fa-search',
-            'can' => 'menu.premium',
+            'can' => 'premium.vip',
             'icon_color' => 'cyan',
             'submenu' => [
                 [
                     'text' => 'login',
                     'route'  => 'panel1.login',
-                    'can' => 'menu.premium',
+                    'can' => 'premium.vip',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
@@ -1402,7 +1402,7 @@ return [
                 [
                     'text' => 'Start',
                     'route'  => 'panel1.start',
-                    'can' => 'menu.premium',
+                    'can' => 'premium.vip',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
@@ -1410,7 +1410,7 @@ return [
                 [
                     'text' => 'Jumper',
                     'route'  => 'panel1.jumper',
-                    'can' => 'menu.premium',
+                    'can' => 'premium.vip',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
@@ -1420,13 +1420,13 @@ return [
         [
             'text'    => 'PANEL 2',
             'icon'    => 'fas fa-search',
-            'can' => 'menu.premium',
+            'can' => 'premium.vip',
             'icon_color' => 'cyan',
             'submenu' => [
                 [
                     'text' => 'login',
                     'route'  => 'panel2.login',
-                    'can' => 'menu.premium',
+                    'can' => 'premium.vip',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
@@ -1434,7 +1434,7 @@ return [
                 [
                     'text' => 'Start',
                     'route'  => 'panel2.start',
-                    'can' => 'menu.premium',
+                    'can' => 'premium.vip',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
@@ -1442,7 +1442,7 @@ return [
                 [
                     'text' => 'Jumper',
                     'route'  => 'panel2.jumper',
-                    'can' => 'menu.premium',
+                    'can' => 'premium.vip',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
