@@ -1274,23 +1274,7 @@ return [
             ],
         ],
 
-        [
-            'text'    => 'RESEARCH.ROIROCKET',
-            'icon'    => 'fas fa-search',
-            'can' => 'ssidkr.index',
-            'icon_color' => 'cyan',
-            'submenu' => [
-                [
-                    'text' => 'Buscador principal',
-                    'route'  => 'research.index',
-                    'can' => 'ssidkr.index',
-                    'icon_color' => 'red',
-                    'icon'    => 'fas fa-angle-right',
-                ],
-
-                
-            ],
-        ],
+     
 
 
 
@@ -1322,6 +1306,24 @@ return [
                     'icon'    => 'fas fa-angle-right',
                 ],
 
+            ],
+        ],
+
+           [
+            'text'    => 'RESEARCH.ROIROCKET',
+            'icon'    => 'fas fa-search',
+            'can' => 'ssidkr.index',
+            'icon_color' => 'cyan',
+            'submenu' => [
+                [
+                    'text' => 'Buscador principal',
+                    'route'  => 'research.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                
             ],
         ],
 
