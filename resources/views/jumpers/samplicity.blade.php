@@ -3,13 +3,9 @@
 
 <div class="flex justify-between">
     
-    
-    <h1 class="text-lg font-weight-bold text-cyan-400"> <i class="fas fa-spinner mr-1 text-cyan-400"></i> INTERNALS</h1>
+    <h1 class="text-lg font-weight-bold text-cyan-400"> <i class="fas fa-spinner mr-1 text-cyan-400"></i> Samplicity</h1>
 
 
-    {{-- <div class="ml-2 mr-2 mt-1">
-        @livewire('jumpers.cint.cint-import')
-    </div> --}}
 </div>
 
 @stop
@@ -21,7 +17,7 @@
         </div>
     @endif
     
-    @livewire('jumpers.internal.internal-index') 
+    @livewire('jumpers.samplicity.samplicity-index') 
 @stop
 
 @section('css')

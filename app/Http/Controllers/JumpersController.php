@@ -32,6 +32,36 @@ class JumpersController extends Controller
     }
 
 
+
+    public function paradigsample(){
+        return view('jumpers.paradigsample');
+    }
+    public function invite(){
+        return view('jumpers.invite');
+    }
+    public function edgeapi(){
+        return view('jumpers.edgeapi');
+    }
+    public function research(){
+        return view('jumpers.research');
+    }
+    public function samplecube(){
+        return view('jumpers.samplecube');
+    }
+    public function samplicity(){
+        return view('jumpers.samplicity');
+    }
+    public function sayso(){
+        return view('jumpers.sayso');
+    }
+    public function opinion(){
+        return view('jumpers.opinion');
+    }
+    public function survey_emirs(){
+        return view('jumpers.survey_emirs');
+    }
+
+
     
 
     public function AdscenmeciaListar(){

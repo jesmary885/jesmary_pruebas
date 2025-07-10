@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Http\Livewire\Jumpers\Internal;
+namespace App\Http\Livewire\Jumpers\Samplecube;
 
 use Livewire\Component;
 use App\Models\Link;
 use App\Models\Comments;
 
-class InternalCreate extends Component
+class SamplecubeCreate extends Component
 {
-
     public $isopen = false, $panel, $jumper, $comentario;
 
     protected $rules_create = [
@@ -36,7 +35,7 @@ class InternalCreate extends Component
         $link->panel = $this->panel;
         $link->jumper = $this->jumper;
         $link->user_id = $user_auth;
-        $link->jumper_type_id = 4;
+        $link->jumper_type_id = 53;
         $link->save();
         
         if($this->comentario != ''){
@@ -49,11 +48,13 @@ class InternalCreate extends Component
 
         $this->reset(['panel','isopen','jumper','comentario']);
         $this->emit('alert','Datos registrados correctamente');
-        $this->emitTo('jumpers.internal.internal-index','render');
+        $this->emitTo('jumpers.samplecube.samplecube-index','render');
     }
 
-     public function render()
+
+
+    public function render()
     {
-        return view('livewire.jumpers.internal.internal-create');
+        return view('livewire.jumpers.samplecube.samplecube-create');
     }
 }

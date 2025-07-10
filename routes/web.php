@@ -24,6 +24,8 @@ use App\Models\Marketplace;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Redirect;
 
+use function Ramsey\Uuid\v1;
+
 Route::get('/', function () {
     return view('auth.login');
 })->name('login_guest');
@@ -128,6 +130,16 @@ Route::middleware(['auth','verified'])->group(function()
 
         Route::get('toluna',[JumpersController::class,'toluna'])->name('toluna.index');
         Route::get('toluna_2',[JumpersController::class,'toluna2'])->name('toluna2.index');
+
+        Route::get('paradigsample',[JumpersController::class,'paradigsample'])->name('paradigsample.index');
+        Route::get('invite.mindsharesurvey',[JumpersController::class,'invite'])->name('invite.index');
+        Route::get('edgeapi',[JumpersController::class,'edgeapi'])->name('edgeapi.index');
+        Route::get('research.roirocket',[JumpersController::class,'research'])->name('research.index');
+        Route::get('samplecube',[JumpersController::class,'samplecube'])->name('samplecube.index');
+        Route::get('samplicity',[JumpersController::class,'samplicity'])->name('samplicity.index');
+        Route::get('sayso',[JumpersController::class,'sayso'])->name('sayso.index');
+        Route::get('opinion',[JumpersController::class,'opinion'])->name('opinion.index');
+        Route::get('survey_emirs',[JumpersController::class,'survey_emirs'])->name('survey_emirs.index');
 
         Route::get('ssidkr',[JumpersController::class,'ssidkr'])->name('ssidkr.index');
         Route::get('k10634',[JumpersController::class,'k10634'])->name('k10634.index');

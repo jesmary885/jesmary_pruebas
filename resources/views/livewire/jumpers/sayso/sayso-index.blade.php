@@ -18,9 +18,9 @@
             </div>
 
 
-            {{-- <div class="ml-2 mr-2 mt-1">
-                @livewire('jumpers.internal.internal-create') 
-            </div> --}}
+            <div class="ml-2 mr-2 mt-1">
+                @livewire('jumpers.sayso.sayso-create') 
+            </div>
         
         </div>
 
@@ -225,4 +225,3 @@
     @stop
 
 </div>
-

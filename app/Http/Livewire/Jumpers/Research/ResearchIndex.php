@@ -1,21 +1,18 @@
 <?php
 
-namespace App\Http\Livewire\Jumpers\Samplicio;
+namespace App\Http\Livewire\Jumpers\Research;
 
-use App\Imports\CintImport;
+use Livewire\Component;
 use App\Models\Comments;
 use App\Models\Link;
 use App\Models\User;
 use App\Models\User_Links_Points;
-use Livewire\WithFileUploads;
 use Livewire\WithPagination;
-use Maatwebsite\Excel\Facades\Excel;
 
-use Livewire\Component;
-
-class SamplicioIndexPrincipal extends Component
+class ResearchIndex extends Component
 {
-    use WithPagination;
+
+     use WithPagination;
     protected $paginationTheme = "bootstrap";
 
     public $busqueda_link,$rol_user,$type_basic,$descalific_active=0,$type,$jumper_complete_qt,$jumper_complete_sp,$comment_new_psid_register,$pid_register_high,$psid_register_bh,$high_register_bh,$basic_register_bh,$posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $wix_detect = '0', $psid_register=0,$jumper_redirect,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$is_high,$is_basic,$calc_link,$jumper_select,$points_user_positive, $points_user_negative, $router_cint_detect ;
@@ -34,8 +31,143 @@ class SamplicioIndexPrincipal extends Component
         if(session('search')) $this->search = session('search');
     }
 
-    public function render()
+   
+
+    public function positivo($jumper_id){
+
+        $user_point= User_Links_Points::where('link_id',$jumper_id)
+            ->where('user_id',$this->user_auth)
+            ->first();
+
+        if($user_point){
+            if($user_point->point != 'positive'){
+                $user_point->update([
+                    'point' => 'positive'
+                ]);
+
+                $jumper_id = Link::where('id',$jumper_id)->first();
+
+                $new_points_positive = $jumper_id->positive_points + 1;
+                $new_points_negative = $jumper_id->negative_points - 1;
+
+                $jumper_id->update([
+                    'positive_points' => $new_points_positive, 
+                    'negative_points' => $new_points_negative, 
+                ]);
+
+                $this->points_user_positive='si';
+                $this->points_user_negative='no';
+            }
+
+        }
+        else{
+            $links_points = new User_Links_Points();
+            $links_points->user_id = auth()->user()->id;
+            $links_points->link_id = $jumper_id;
+            $links_points->point = 'positive';
+            $links_points->save();
+
+            $jumper_id = Link::where('id',$jumper_id)->first();
+
+            $new_points = $jumper_id->positive_points + 1;
+
+            $jumper_id->update([
+                'positive_points' => $new_points, 
+            ]);
+
+            $this->points_user_positive='si';
+            $this->points_user_negative='no';
+
+        }
+
+        $this->emitTo('jumpers.research.research-index','render');
+
+        
+
+    }
+
+    public function negativo($jumper_id){
+        $user_point= User_Links_Points::where('link_id',$jumper_id)
+            ->where('user_id',$this->user_auth)
+            ->first();
+
+        if($user_point){
+            if($user_point->point != 'negative'){
+                $user_point->update([
+                    'point' => 'negative'
+                ]);
+
+                $jumper_id = Link::where('id',$jumper_id)->first();
+
+                $new_points_positive = $jumper_id->positive_points - 1;
+                $new_points_negative = $jumper_id->negative_points + 1;
+
+                $jumper_id->update([
+                    'positive_points' => $new_points_positive, 
+                    'negative_points' => $new_points_negative, 
+                ]);
+
+                $this->points_user_positive='no';
+                $this->points_user_negative='si';
+            }
+
+        }
+        else{
+            $links_points = new User_Links_Points();
+            $links_points->user_id = auth()->user()->id;
+            $links_points->link_id = $jumper_id;
+            $links_points->point = 'negative';
+            $links_points->save();
+
+            $jumper_id = Link::where('id',$jumper_id)->first();
+
+            $new_points = $jumper_id->negative_points + 1;
+
+            $jumper_id->update([
+                'negative_points' => $new_points, 
+            ]);
+
+            $this->points_user_positive='no';
+            $this->points_user_negative='si';
+
+        }
+
+        $this->emitTo('jumpers.research.research-index','render');
+
+        
+    }
+
+    public function comentar(){
+        if($this->comentario != ''){
+           
+            $comment = new Comments();
+            $comment->comment = $this->comentario;
+            $comment->link_id = $this->busqueda_link->id;
+            $comment->user_id = auth()->user()->id;
+            $comment->save();
+
+            $this->reset(['comentario']);
+        }
+
+        $this->emitTo('jumpers.research.research-index','render');
+    }
+
+    public function clear(){
+        $this->reset(['search']);
+        session()->forget('search');
+        $this->busqueda_link = "";
+        return redirect()->route('research.index');
+    }
+
+     public function render()
     {
+
+         $long_psid = strlen($this->search);
+        $subs_psid = 0;
+        $jumper_complete = "";
+        $comments ="";
+        $jumpers = [];
+        
         $long_psid = strlen($this->search);
         $subs_psid = 0;
         $jumper_complete = "";
@@ -129,20 +261,12 @@ class SamplicioIndexPrincipal extends Component
 
             if($url_detect != 0){
 
-
-                if (!empty($this->search)) {
-                    $searchTerm = '%' . str_replace(' ', '%', trim($this->search)) . '%';
-
-
-                    $jumpers = Link::where('panel', 'LIKE', $searchTerm) 
-                                    ->where('jumper_type_id','11')
-                                    ->latest('id')
-                                    ->paginate(10);
-                }
-
-
-
-                
+            
+                $jumpers = Link::where('panel', 'LIKE', '%' . $this->search . '%') 
+                    ->where('jumper_type_id','52')
+                    ->latest('id')
+                    ->paginate(10);
+                    
 
    
                 if($jumpers->isEmpty()){
@@ -162,133 +286,9 @@ class SamplicioIndexPrincipal extends Component
             }
         }
 
-        return view('livewire.jumpers.samplicio.samplicio-index-principal',compact('jumpers'));
+
+        return view('livewire.jumpers.research.research-index',compact('jumpers'));
     }
+    
 
-    public function positivo($jumper_id){
-
-        $user_point= User_Links_Points::where('link_id',$jumper_id)
-            ->where('user_id',$this->user_auth)
-            ->first();
-
-        if($user_point){
-            if($user_point->point != 'positive'){
-                $user_point->update([
-                    'point' => 'positive'
-                ]);
-
-                $jumper_id = Link::where('id',$jumper_id)->first();
-
-                $new_points_positive = $jumper_id->positive_points + 1;
-                $new_points_negative = $jumper_id->negative_points - 1;
-
-                $jumper_id->update([
-                    'positive_points' => $new_points_positive, 
-                    'negative_points' => $new_points_negative, 
-                ]);
-
-                $this->points_user_positive='si';
-                $this->points_user_negative='no';
-            }
-
-        }
-        else{
-            $links_points = new User_Links_Points();
-            $links_points->user_id = auth()->user()->id;
-            $links_points->link_id = $jumper_id;
-            $links_points->point = 'positive';
-            $links_points->save();
-
-            $jumper_id = Link::where('id',$jumper_id)->first();
-
-            $new_points = $jumper_id->positive_points + 1;
-
-            $jumper_id->update([
-                'positive_points' => $new_points, 
-            ]);
-
-            $this->points_user_positive='si';
-            $this->points_user_negative='no';
-
-        }
-
-        $this->emitTo('jumpers.samplicio.samplicio-index-principal','render');
-
-        
-
-    }
-
-    public function negativo($jumper_id){
-        $user_point= User_Links_Points::where('link_id',$jumper_id)
-            ->where('user_id',$this->user_auth)
-            ->first();
-
-        if($user_point){
-            if($user_point->point != 'negative'){
-                $user_point->update([
-                    'point' => 'negative'
-                ]);
-
-                $jumper_id = Link::where('id',$jumper_id)->first();
-
-                $new_points_positive = $jumper_id->positive_points - 1;
-                $new_points_negative = $jumper_id->negative_points + 1;
-
-                $jumper_id->update([
-                    'positive_points' => $new_points_positive, 
-                    'negative_points' => $new_points_negative, 
-                ]);
-
-                $this->points_user_positive='no';
-                $this->points_user_negative='si';
-            }
-
-        }
-        else{
-            $links_points = new User_Links_Points();
-            $links_points->user_id = auth()->user()->id;
-            $links_points->link_id = $jumper_id;
-            $links_points->point = 'negative';
-            $links_points->save();
-
-            $jumper_id = Link::where('id',$jumper_id)->first();
-
-            $new_points = $jumper_id->negative_points + 1;
-
-            $jumper_id->update([
-                'negative_points' => $new_points, 
-            ]);
-
-            $this->points_user_positive='no';
-            $this->points_user_negative='si';
-
-        }
-
-        $this->emitTo('jumpers.samplicio.samplicio-index-principal','render');
-
-        
-    }
-
-    public function comentar(){
-        if($this->comentario != ''){
-           
-            $comment = new Comments();
-            $comment->comment = $this->comentario;
-            $comment->link_id = $this->busqueda_link->id;
-            $comment->user_id = auth()->user()->id;
-            $comment->save();
-
-            $this->reset(['comentario']);
-        }
-
-        $this->emitTo('jumpers.samplicio.samplicio-index-principal','render');
-    }
-
-    public function clear(){
-        $this->reset(['search']);
-        session()->forget('search');
-        $this->busqueda_link = "";
-        return redirect()->route('samplicio2.index');
-
-    }
 }

@@ -493,12 +493,7 @@ return [
             ],
         ],
 
-        // Navbar items:
-        // [
-        //     'type'         => 'navbar-search',
-        //     'text'         => 'search',
-        //     'topnav_right' => true,
-        // ],
+
          [
              'type'         => 'fullscreen-widget',
              'topnav_right' => true,
@@ -519,60 +514,7 @@ return [
             'icon'    => '	fas fa-sad-cry',
         ],
 
-        
 
-       
-
-        // [
-        //     'text'    => 'ADMIN KTMR',
-        //     'icon'    => 'fas fa-file-invoice-dollar fa-fw',
-        //     'can' => 'administracion.ktmr',
-        //     'icon_color' => 'cyan',
-        //     'submenu' => [
-        //         [
-        //             'text' => 'USUARIOS',
-        //             'route'  => 'ktrm.administracion.index',
-        //             'can' => 'administracion.ktmr',
-        //             'icon_color' => 'red',
-        //             'icon'    => 'fas fa-angle-right',
-        //         ],
-        //         [
-        //             'text' => 'CUENTAS REGISTRADAS',
-        //             'route'  => 'ktrm.administracion_cuentas.index',
-        //             'can' => 'administracion.ktmr',
-        //             'icon_color' => 'red',
-        //             'icon'    => '	fas fa-angle-right',
-        //         ],
-
-                
-        //     ],            
-        // ],
-
-
-        // [
-        //     'text'    => 'SECCIÓN KTMR',
-        //     'icon'    => 'fas fa-search',
-        //     'can' => 'menu.ktmr',
-        //     'icon_color' => 'cyan',
-        //     'submenu' => [
-        //         [
-        //             'text' => 'GENERADOR',
-        //             'route'  => 'ktmr.generador.index',
-        //             'can' => 'menu.ktmr',
-        //             'icon_color' => 'red',
-        //             'icon'    => 'fas fa-angle-right',
-        //         ],
-        //         [
-        //             'text' => 'CUENTAS REGISTRADAS',
-        //             'route'  => 'ktmr.cuentas.index',
-        //             'can' => 'menu.ktmr',
-        //             'icon_color' => 'red',
-        //             'icon'    => '	fas fa-angle-right',
-        //         ],
-
-                
-        //     ],            
-        // ],
 
 
 
@@ -632,7 +574,7 @@ return [
             'text'    => 'SSI',
             'icon'    => 'fas fa-search',
             'can' => 'ssidkr.index',
-            'icon_color' => 'cyan',
+            'icon_color' => 'red',
             'submenu' => [
                 [
                     'text' => 'SSI DKR',
@@ -903,86 +845,10 @@ return [
         ],
 
          [
-            'text'    => 'CPX',
-            'icon'    => 'fas fa-search',
-            'can' => 'premium.vip',
-            'icon_color' => 'cyan',
-            'submenu' => [
-                [
-                    'text' => 'Listar encuestas',
-                    'route'  => 'cpxListar',
-                    'can' => 'premium.vip',
-                    'icon_color' => 'red',
-                    'label'       => '1',
-                    'icon'    => 'fas fa-angle-right',
-                ],
-
-                  [
-                    'text' => 'Listar encuestas',
-                    'label'       => '2',
-                    'route'  => 'cpxListar_2',
-                    'can' => 'premium.vip',
-                    'icon_color' => 'red',
-                    'icon'    => 'fas fa-angle-right',
-                ],
-
-                 [
-                    'text' => 'Calificador de encuesta',
-                    'route'  => 'cpxCalificador',
-                    'can' => 'premium.vip',
-                    'icon_color' => 'red',
-                    'icon'    => 'fas fa-angle-right',
-                ],
-
-                [
-                    'text' => 'Generador de encuesta',
-                    'route'  => 'cpxGenerar',
-                    'can' => 'premium.vip',
-                    'icon_color' => 'red',
-                    'icon'    => 'fas fa-angle-right',
-                ],
-
-                [
-                    'text' => 'Jumper',
-                    'route'  => 'cpxJumper',
-                    'can' => 'premium.vip',
-                    'icon_color' => 'red',
-                    'icon'    => 'fas fa-angle-right',
-                ],
-            ],
-        ],
-
-          [
-            'text'    => 'ADSCENMEDIA',
-            'icon'    => 'fas fa-search',
-            'can' => 'premium.vip',
-            'icon_color' => 'cyan',
-            'submenu' => [
-                [
-                    'text' => 'Listar encuestas',
-                    'route'  => 'AdscenmeciaListar',
-                    'can' => 'premium.vip',
-                    'icon_color' => 'red',
-                    'icon'    => 'fas fa-angle-right',
-                ],
-
-                 [
-                    'text' => 'Saltador',
-                    'route'  => 'AdscenmeciaSaltador',
-                    'can' => 'premium.vip',
-                    'icon_color' => 'red',
-                    'icon'    => 'fas fa-angle-right',
-                ],
-
-        
-            ],
-        ],
-
-        [
             'text'    => 'SSI PREMIUM',
             'icon'    => 'fas fa-crown',
             'can' => 'menu.premium',
-            'icon_color' => 'cyan',
+            'icon_color' => 'red',
             'submenu' => [
                 [
                     'text' => 'Identificador de versión',
@@ -1078,6 +944,84 @@ return [
             ],            
         ],
 
+         [
+            'text'    => 'ADSCENMEDIA',
+            'icon'    => 'fas fa-search',
+            'can' => 'premium.vip',
+            'icon_color' => 'cyan',
+            'submenu' => [
+                [
+                    'text' => 'Listar encuestas',
+                    'route'  => 'AdscenmeciaListar',
+                    'can' => 'premium.vip',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                 [
+                    'text' => 'Saltador',
+                    'route'  => 'AdscenmeciaSaltador',
+                    'can' => 'premium.vip',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+        
+            ],
+        ],
+
+
+         [
+            'text'    => 'CPX',
+            'icon'    => 'fas fa-search',
+            'can' => 'premium.vip',
+            'icon_color' => 'cyan',
+            'submenu' => [
+                [
+                    'text' => 'Listar encuestas',
+                    'route'  => 'cpxListar',
+                    'can' => 'premium.vip',
+                    'icon_color' => 'red',
+                    'label'       => '1',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                  [
+                    'text' => 'Listar encuestas',
+                    'label'       => '2',
+                    'route'  => 'cpxListar_2',
+                    'can' => 'premium.vip',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                 [
+                    'text' => 'Calificador de encuesta',
+                    'route'  => 'cpxCalificador',
+                    'can' => 'premium.vip',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                [
+                    'text' => 'Generador de encuesta',
+                    'route'  => 'cpxGenerar',
+                    'can' => 'premium.vip',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                [
+                    'text' => 'Jumper',
+                    'route'  => 'cpxJumper',
+                    'can' => 'premium.vip',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+            ],
+        ],
+
+
         [
             'text'    => 'CINT',
             'icon'    => 'fas fa-search',
@@ -1103,162 +1047,22 @@ return [
         ],
 
         [
-            'text'    => 'PRODEGE',
-            'icon'    => 'fas fa-search',
-            'can' => ['ssidkr.index'],
-            'icon_color' => 'cyan',
-            'submenu' => [
-                [
-                    'text' => 'Buscador principal',
-                    'route'  => 'prodege.index',
-                    'can' => ['ssidkr.index'],
-                    'icon_color' => 'red',
-                    'icon'    => 'fas fa-angle-right',
-                ],
-
-                [
-                    'text' => 'Generador',
-                    'route'  => 'prodege.generador',
-                    'can' => 'ssidkr.index',
-                    'icon_color' => 'red',
-                    'icon'    => 'fas fa-angle-right',
-                ],
-
-            ],
-        ],
-
-        [
-            'text'    => 'SAMPLICIO',
+            'text'    => 'EDGEAPI',
             'icon'    => 'fas fa-search',
             'can' => 'ssidkr.index',
             'icon_color' => 'cyan',
             'submenu' => [
                 [
                     'text' => 'Buscador principal',
-                    'route'  => 'samplicio2.index',
-                    'can' => 'ssidkr.index',
-                    'icon_color' => 'red',
-                    'icon'    => 'fas fa-angle-right',
-                ],
-
-                /*[
-                    'text' => 'Generador Premium',
-                    'route'  => 'samplicio_p.index',
-                    'can' => 'ssidkr.index',
-                    'icon_color' => 'red',
-                    'icon'    => 'fas fa-angle-right',
-                ],*/
-
-                [
-                    'text' => 'Generador BZ',
-                    'route'  => 'samplicio_bz.index',
-                    'can' => 'ssidkr.index',
-                    'icon_color' => 'red',
-                    'icon'    => 'fas fa-angle-right',
-                ],
-
-                [
-                    'text' => 'Generador Cash Your Opinions',
-                    'route'  => 'samplicio_cash.index',
-                    'can' => 'ssidkr.index',
-                    'icon_color' => 'red',
-                    'icon'    => 'fas fa-angle-right',
-                ],
-
-                [
-                    'text' => 'Generador Centiment',
-                    'route'  => 'samplicio.index',
+                    'route'  => 'edgeapi.index',
                     'can' => 'ssidkr.index',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
 
                 
-
-                [
-                    'text' => 'Generador Torfacts o Wisesample',
-                    'route'  => 'samplicio_tw.index',
-                    'can' => 'ssidkr.index',
-                    'icon_color' => 'red',
-                    'icon'    => 'fas fa-angle-right',
-                ],
-
             ],
         ],
-
-        [
-            'text'    => 'SPECTRUM',
-            'icon'    => 'fas fa-search',
-            'can' => 'ssidkr.index',
-            'icon_color' => 'cyan',
-            'submenu' => [
-                [
-                    'text' => 'Buscador principal',
-                    'route'  => 'spectrum_principal.index',
-                    'can' => 'ssidkr.index',
-                    'icon_color' => 'red',
-                    'icon'    => 'fas fa-angle-right',
-                ],
-                [
-                    'text' => 'Generador Jdpoweronline',
-                    'can' => 'ssidkr.index',
-                    'route'  => 'spectrum4.index',
-                    'icon'    => '	fas fa-angle-right',
-                    'icon_color' => 'red',
-                ],
-
-                [
-                    'text' => 'Generador Qualtrics',
-                    'route'  => 'spectrum.index',
-                    'icon'    => '	fas fa-angle-right',
-                    'icon_color' => 'red',
-                    'can' => 'ssidkr.index',
-                ],
-
-                [
-                    'text' => 'Generador Selfserve',
-                    'can' => 'ssidkr.index',
-                    'route'  => 'spectrum3.index',
-                    'icon'    => '	fas fa-angle-right',
-                    'icon_color' => 'red',
-                ],
-                
-                [
-                    'text' => 'Generador Voicefive',
-                    'icon'    => '	fas fa-angle-right',
-                    'route'  => 'spectrum2.index',
-                    'icon_color' => 'red',
-                    'can' => 'ssidkr.index',
-                ],
-
-            ],
-        ],
-
-
-        [
-            'text'    => 'TOLUNA',
-            'icon'    => 'fas fa-search',
-            'can' => 'ssidkr.index',
-            'icon_color' => 'cyan',
-            'submenu' => [
-                [
-                    'text' => 'Generador Qualtric 1',
-                    'route'  => 'toluna.index',
-                    'can' => 'ssidkr.index',
-                    'icon_color' => 'red',
-                    'icon'    => 'fas fa-angle-right',
-                ],
-
-                [
-                    'text' => 'Generador Qualtric 2',
-                    'route'  => 'toluna2.index',
-                    'can' => 'ssidkr.index',
-                    'icon_color' => 'red',
-                    'icon'    => 'fas fa-angle-right',
-                ],
-            ],
-        ],
-
 
         [
             'text'    => 'INTERNOS',
@@ -1278,70 +1082,7 @@ return [
             ],
         ],
 
-
-        [
-            'text'    => 'SALTADORES',
-            'icon'    => 'fas fa-crown',
-            'can' => 'premium.vip',
-            'icon_color' => 'cyan',
-            'submenu' => [
-                [
-                    'text' => 'BITLAB',
-                    'route'  => 'bitlab.index',
-                    'can' => 'premium.vip',
-                    'icon_color' => 'cyan',
-                    'icon'    => 'fas fa-search',
-                ],
-                [
-                    'text' => 'POLLFISH',
-                    'route'  => 'pollfish.index',
-                    'can' => 'premium.vip',
-                    'icon_color' => 'cyan',
-                    'icon'    => 'fas fa-search',
-                ],
-                [
-                    'text' => 'SWAGBUCKS',
-                    'route'  => 'swagbucks.index',
-                    'can' => 'premium.vip',
-                    'icon_color' => 'cyan',
-                    'icon'    => 'fas fa-search',
-                ],
-
-                
-            ],
-        ],
-
-        [
-            'text'    => 'POLLTASTIC',
-            'icon'    => 'fas fa-search',
-            'can' => 'premium.vip',
-            'icon_color' => 'cyan',
-            'submenu' => [
-                [
-                    'text' => 'Saltador de seguridad',
-                    'route'  => 'poll.saltador',
-                    'can' => 'premium.vip',
-                    'icon_color' => 'red',
-                    'icon'    => 'fas fa-angle-right',
-                ],
-
-                [
-                    'text' => 'Saltador de preguntas de seguridad',
-                    'route'  => 'poll.preguntas',
-                    'can' => 'premium.vip',
-                    'icon_color' => 'red',
-                    'icon'    => 'fas fa-angle-right',
-                ],
-
-                [
-                    'text' => 'Saltador de preguntas, edad.',
-                    'route'  => 'poll.edad',
-                    'can' => 'premium.vip',
-                    'icon_color' => 'red',
-                    'icon'    => 'fas fa-angle-right',
-                ],
-            ],
-        ],
+   
 
         [
             'text'    => 'INBRAIN',
@@ -1383,9 +1124,43 @@ return [
             ],
         ],
 
-    
+             [
+            'text'    => 'MINDSHARESURVEY',
+            'icon'    => 'fas fa-search',
+            'can' => 'ssidkr.index',
+            'icon_color' => 'cyan',
+            'submenu' => [
+                [
+                    'text' => 'Buscador principal',
+                    'route'  => 'invite.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                
+            ],
+        ],
 
         [
+            'text'    => 'OPINION NETWORK',
+            'icon'    => 'fas fa-search',
+            'can' => 'ssidkr.index',
+            'icon_color' => 'cyan',
+            'submenu' => [
+                [
+                    'text' => 'Buscador principal',
+                    'route'  => 'opinion.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                
+            ],
+        ],
+
+         [
             'text'    => 'PANEL 1',
             'icon'    => 'fas fa-search',
             'can' => 'premium.vip',
@@ -1448,6 +1223,351 @@ return [
                 ],
             ],
         ],
+
+        [
+            'text'    => 'PARADIGSAMPLE',
+            'icon'    => 'fas fa-search',
+            'can' => 'ssidkr.index',
+            'icon_color' => 'cyan',
+            'submenu' => [
+                [
+                    'text' => 'Buscador principal',
+                    'route'  => 'paradigsample.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                
+            ],
+        ],
+
+           [
+            'text'    => 'POLLTASTIC',
+            'icon'    => 'fas fa-search',
+            'can' => 'premium.vip',
+            'icon_color' => 'cyan',
+            'submenu' => [
+                [
+                    'text' => 'Saltador de seguridad',
+                    'route'  => 'poll.saltador',
+                    'can' => 'premium.vip',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                [
+                    'text' => 'Saltador de preguntas de seguridad',
+                    'route'  => 'poll.preguntas',
+                    'can' => 'premium.vip',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                [
+                    'text' => 'Saltador de preguntas, edad.',
+                    'route'  => 'poll.edad',
+                    'can' => 'premium.vip',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+            ],
+        ],
+
+        [
+            'text'    => 'RESEARCH.ROIROCKET',
+            'icon'    => 'fas fa-search',
+            'can' => 'ssidkr.index',
+            'icon_color' => 'cyan',
+            'submenu' => [
+                [
+                    'text' => 'Buscador principal',
+                    'route'  => 'research.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                
+            ],
+        ],
+
+
+
+        
+
+    
+
+       
+
+        [
+            'text'    => 'PRODEGE',
+            'icon'    => 'fas fa-search',
+            'can' => ['ssidkr.index'],
+            'icon_color' => 'cyan',
+            'submenu' => [
+                [
+                    'text' => 'Buscador principal',
+                    'route'  => 'prodege.index',
+                    'can' => ['ssidkr.index'],
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                [
+                    'text' => 'Generador',
+                    'route'  => 'prodege.generador',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+            ],
+        ],
+
+        [
+            'text'    => 'SAMPLECUBE',
+            'icon'    => 'fas fa-search',
+            'can' => 'ssidkr.index',
+            'icon_color' => 'cyan',
+            'submenu' => [
+                [
+                    'text' => 'Buscador principal',
+                    'route'  => 'samplecube.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                
+            ],
+        ],
+
+        [
+            'text'    => 'SAMPLICITY',
+            'icon'    => 'fas fa-search',
+            'can' => 'ssidkr.index',
+            'icon_color' => 'cyan',
+            'submenu' => [
+                [
+                    'text' => 'Buscador principal',
+                    'route'  => 'samplicity.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                
+            ],
+        ],
+
+        [
+            'text'    => 'SAMPLICIO',
+            'icon'    => 'fas fa-search',
+            'can' => 'ssidkr.index',
+            'icon_color' => 'cyan',
+            'submenu' => [
+                [
+                    'text' => 'Buscador principal',
+                    'route'  => 'samplicio2.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                /*[
+                    'text' => 'Generador Premium',
+                    'route'  => 'samplicio_p.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],*/
+
+                [
+                    'text' => 'Generador BZ',
+                    'route'  => 'samplicio_bz.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                [
+                    'text' => 'Generador Cash Your Opinions',
+                    'route'  => 'samplicio_cash.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                [
+                    'text' => 'Generador Centiment',
+                    'route'  => 'samplicio.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                
+
+                [
+                    'text' => 'Generador Torfacts o Wisesample',
+                    'route'  => 'samplicio_tw.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+            ],
+        ],
+
+        
+        [
+            'text'    => 'SALTADORES',
+            'icon'    => 'fas fa-crown',
+            'can' => 'premium.vip',
+            'icon_color' => 'cyan',
+            'submenu' => [
+                [
+                    'text' => 'BITLAB',
+                    'route'  => 'bitlab.index',
+                    'can' => 'premium.vip',
+                    'icon_color' => 'cyan',
+                    'icon'    => 'fas fa-search',
+                ],
+                [
+                    'text' => 'POLLFISH',
+                    'route'  => 'pollfish.index',
+                    'can' => 'premium.vip',
+                    'icon_color' => 'cyan',
+                    'icon'    => 'fas fa-search',
+                ],
+                [
+                    'text' => 'SWAGBUCKS',
+                    'route'  => 'swagbucks.index',
+                    'can' => 'premium.vip',
+                    'icon_color' => 'cyan',
+                    'icon'    => 'fas fa-search',
+                ],
+
+                
+            ],
+        ],
+
+        [
+            'text'    => 'SAYSO',
+            'icon'    => 'fas fa-search',
+            'can' => 'ssidkr.index',
+            'icon_color' => 'cyan',
+            'submenu' => [
+                [
+                    'text' => 'Buscador principal',
+                    'route'  => 'sayso.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                
+            ],
+        ],
+
+        [
+            'text'    => 'SPECTRUM',
+            'icon'    => 'fas fa-search',
+            'can' => 'ssidkr.index',
+            'icon_color' => 'cyan',
+            'submenu' => [
+                [
+                    'text' => 'Buscador principal',
+                    'route'  => 'spectrum_principal.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+                [
+                    'text' => 'Generador Jdpoweronline',
+                    'can' => 'ssidkr.index',
+                    'route'  => 'spectrum4.index',
+                    'icon'    => '	fas fa-angle-right',
+                    'icon_color' => 'red',
+                ],
+
+                [
+                    'text' => 'Generador Qualtrics',
+                    'route'  => 'spectrum.index',
+                    'icon'    => '	fas fa-angle-right',
+                    'icon_color' => 'red',
+                    'can' => 'ssidkr.index',
+                ],
+
+                [
+                    'text' => 'Generador Selfserve',
+                    'can' => 'ssidkr.index',
+                    'route'  => 'spectrum3.index',
+                    'icon'    => '	fas fa-angle-right',
+                    'icon_color' => 'red',
+                ],
+                
+                [
+                    'text' => 'Generador Voicefive',
+                    'icon'    => '	fas fa-angle-right',
+                    'route'  => 'spectrum2.index',
+                    'icon_color' => 'red',
+                    'can' => 'ssidkr.index',
+                ],
+
+            ],
+        ],
+
+         [
+            'text'    => 'SURVEY EMI-RS',
+            'icon'    => 'fas fa-search',
+            'can' => 'ssidkr.index',
+            'icon_color' => 'cyan',
+            'submenu' => [
+                [
+                    'text' => 'Buscador principal',
+                    'route'  => 'survey_emirs.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                
+            ],
+        ],
+
+
+        [
+            'text'    => 'TOLUNA',
+            'icon'    => 'fas fa-search',
+            'can' => 'ssidkr.index',
+            'icon_color' => 'cyan',
+            'submenu' => [
+                [
+                    'text' => 'Generador Qualtric 1',
+                    'route'  => 'toluna.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                [
+                    'text' => 'Generador Qualtric 2',
+                    'route'  => 'toluna2.index',
+                    'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+            ],
+        ],
+
+
+     
+
+
+
+     
 
 
         
