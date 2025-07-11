@@ -164,9 +164,39 @@ class Rex extends Component
 
                 if($i_tt == 1) $tt = substr($this->search,($busqueda_tt + 10),($posicion_tt - ($busqueda_tt + 10)));
                 else $tt = substr($this->search,($posicion_tt ));
+            }else{
+
+                 $busqueda_ttt= strpos($this->search, '×tamp=');
+
+                if($busqueda_ttt != false){
+                    $posicion_ttt = $busqueda_ttt + 7;
+                    $i_ttt = 0;
+                    $busq_ttt = 0;
+
+                    do{
+                        $detect_ttt= substr($this->search, $posicion_ttt,1);
+                
+                        if($detect_ttt == '&') $i_ttt = 1;
+                        else{
+                            $posicion_ttt = $posicion_ttt + 1;
+                            $busq_ttt ++;
+                        }
+
+                        if($busq_ttt > 300){
+                            $i_ttt = 2;
+                        }
+                
+                    }while($i_ttt == 0 );
+
+                    if($i_ttt == 1) $tt = substr($this->search,($busqueda_ttt + 7),($posicion_ttt - ($busqueda_ttt + 7)));
+                    else $tt = substr($this->search,($posicion_ttt ));
+                }
+
             }
 
             ////////////////////////////////////////////////
+
+    
 
 
             $busqueda_s= strpos($this->search, 'signature=');
