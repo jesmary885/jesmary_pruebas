@@ -109,7 +109,7 @@ class UsersJump extends Component
                 if($cant_k1000ysn > 20) return '20';
                 else return $cant_k1000ysn;
             }
-            elseif($user == '268' || $user == '584' || $user == '746' || $user == '1901' || $user == '112' || $user == '14' || $user == '92' || $user == '1500' || $user == '239' || $user == '174'){
+            elseif($user == '268' || $user == '584' || $user == '746' || $user == '1901' || $user == '112' || $user == '14' || $user == '92' || $user == '1500' || $user == '239'){
                 if($cant_k1000ysn > 5) return '5';
                 else return $cant_k1000ysn;
             }
@@ -125,7 +125,6 @@ class UsersJump extends Component
         $users = User::where('username', 'LIKE', '%' . $this->search . '%') 
         ->where('status','activo')
         ->permission('menu.premium')
-        ->where('id','!=','174')
         ->where('id','!=','2204')
         ->where('id','!=','2205')
         ->where('id','!=','2206')

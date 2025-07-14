@@ -109,7 +109,6 @@
                                             <th class="text-center"></th>
             
                                             <th class="text-center">ID</th>
-                                            <th class="text-center">Pago</th>
                                             <th class="text-center">tiempo</th>
 
                                             </tr>
@@ -127,7 +126,6 @@
                                                     </th>
 
                                                     <td class="text-center" ><p  class="text-blue-400 font-bold " id="jumper_copy_{{ $loop->index }}"> {{$registro['id']}}</p></td>
-                                                    <td class="text-center">{{$registro['payout']}}</td>
                                                     <td class="text-center">{{$registro['loi']}} min.</td>
 
                                                 </tr>
