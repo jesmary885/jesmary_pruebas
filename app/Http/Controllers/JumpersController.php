@@ -24,6 +24,8 @@ class JumpersController extends Controller
         return view('cpx.generar');
     }
 
+
+
     public function cpxCalificador(){
         return view('cpx.calificador');
     }
@@ -89,6 +91,12 @@ class JumpersController extends Controller
 
     public function panel1Login(){
         return view('panel1.login');
+    }
+
+    
+
+    public function panel3Login(){
+        return view('panel3.login');
     }
 
     public function panel1Start(){

@@ -212,6 +212,8 @@ Route::middleware(['auth','verified'])->group(function()
         Route::get('Panel2_Start',[JumpersController::class,'panel2Start'])->name('panel2.start')->middleware('permission:menu.premium');
         Route::get('Panel2_Jumper',[JumpersController::class,'panel2Jumper'])->name('panel2.jumper')->middleware('permission:menu.premium');
 
+        Route::get('Panel3',[JumpersController::class,'panel3Login'])->name('panel3.login')->middleware('permission:premium.admin');
+
         Route::get('Inbrain_rex',[JumpersController::class,'inbrainrex'])->name('inbrain.rex')->middleware('permission:menu.premium');
         Route::get('Inbrain_profiled',[JumpersController::class,'inbrainprofiled'])->name('inbrain.profiled')->middleware('permission:menu.premium');
         Route::get('Inbrain_wix',[JumpersController::class,'inbrainwix'])->name('inbrain.wix')->middleware('permission:menu.premium');

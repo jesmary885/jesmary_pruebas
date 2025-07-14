@@ -1225,6 +1225,24 @@ return [
         ],
 
         [
+            'text'    => 'PANEL 3',
+            'icon'    => 'fas fa-search',
+            'can' => 'premium.admin',
+            'icon_color' => 'cyan',
+            'submenu' => [
+                [
+                    'text' => 'login',
+                    'route'  => 'panel3.login',
+                    'can' => 'premium.admin',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+             
+            ],
+        ],
+
+        [
             'text'    => 'PARADIGSAMPLE',
             'icon'    => 'fas fa-search',
             'can' => 'ssidkr.index',
