@@ -535,6 +535,24 @@ return [
             'can' => 'menu.encuestar',
         ],
 
+         [
+            'text'    => 'numeros',
+            'icon'    => 'fas fa-search',
+            'can' => 'numeros.pva',
+            'icon_color' => 'cyan',
+            'submenu' => [
+                [
+                    'text' => 'Buscador principal',
+                    'route'  => 'numero.index',
+                    'can' => 'numeros.pva',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                
+            ],
+        ],
+
         [
             'text'    => 'GENERADORES SSI',
             'icon'    => 'fas fa-search',

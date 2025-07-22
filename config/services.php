@@ -30,5 +30,8 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
+    'pvadeals' => [
+     'api_key' => env('PVADEALS_API_KEY'),
+    ],
 
 ];

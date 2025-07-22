@@ -24,6 +24,10 @@ class JumpersController extends Controller
         return view('cpx.generar');
     }
 
+     public function numero(){
+        return view('numero.index');
+    }
+
 
 
     public function cpxCalificador(){

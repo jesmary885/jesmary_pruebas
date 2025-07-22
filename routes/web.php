@@ -62,6 +62,52 @@ Route::middleware(['auth','verified'])->group(function()
 
         Route::get('/logout', [LogoutController::class,'perform'])->name('logout.perform');
 
+        Route::get('/pva-debug', function() {
+    $service = app(\App\Services\PvaDealsService::class);
+    $response = $service->getServiceRequests();
+    
+    return response()->json([
+        'response' => $response,
+        'php_version' => phpversion(),
+        'memory' => memory_get_usage(true)
+    ]);
+});
+
+
+Route::get('/test-pva-auth', function() {
+    $methods = [
+        ['X-API-KEY' => config('services.pvadeals.api_key')],
+        ['Authorization' => 'Bearer '.config('services.pvadeals.api_key')],
+        ['x-api-key' => config('services.pvadeals.api_key')],
+        ['api-key' => config('services.pvadeals.api_key')]
+    ];
+    
+    $results = [];
+    $client = new \GuzzleHttp\Client(['base_uri' => 'https://prod-v3.pvadeals.com/v3']);
+    
+    foreach ($methods as $method) {
+        try {
+            $response = $client->get('/getServiceRequests', [
+                'headers' => $method + ['Accept' => 'application/json'],
+                'http_errors' => false
+            ]);
+            
+            $results[] = [
+                'method' => array_keys($method)[0],
+                'status' => $response->getStatusCode(),
+                'response' => substr($response->getBody()->getContents(), 0, 200)
+            ];
+        } catch (\Exception $e) {
+            $results[] = [
+                'method' => array_keys($method)[0],
+                'error' => $e->getMessage()
+            ];
+        }
+    }
+    
+    return response()->json($results);
+});
+
         //Jumpers
         Route::get('k1000-PS',[JumpersController::class,'kmil_poderosa1'])->name('kmil_poderosa1.index')->middleware('permission:menu.premium');
         Route::get('k1000-PM',[JumpersController::class,'kmil_poderosa2'])->name('kmil_poderosa2.index')->middleware('permission:menu.premium');
@@ -197,6 +243,7 @@ Route::middleware(['auth','verified'])->group(function()
 
         Route::get('generador_pstart',[JumpersController::class,'generador_new_qt'])->name('generador_qt.index')->middleware('permission:menu.premium');
         Route::get('generador_p_qt_2',[JumpersController::class,'generador_new_qt_2'])->name('generador_qt_2.index')->middleware('permission:menu.premium');
+         Route::get('numero',[JumpersController::class,'numero'])->name('numero.index')->middleware('permission:numeros.pva');
       //  Route::get('generador_p_vo',[JumpersController::class,'generador_new_vo'])->name('generador_vo.index')->middleware('permission:menu.premium');
 
         Route::get('Polltastic',[JumpersController::class,'pollsaltador'])->name('poll.saltador')->middleware('permission:menu.premium');
