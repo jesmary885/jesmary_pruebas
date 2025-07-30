@@ -3,11 +3,25 @@
 
         <div class="card-body">
 
+                <div class="w-full flex mt-1" >
+
+                            <input wire:model.defer="link" placeholder="Introduzca el link" class="form-control w-full" >
+
+                            @if($link)
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-md btn-outline-secondary input-group-text" id="inputGroupPrepend" wire:click="clear" title="Borrar">
+                                            <i class="fas fa-backspace"></i>
+                                    </button>
+                                </div>
+                            @endif
+
+            </div>
+
             
-            <div class="grid md:grid-cols-4 gap-2">
+            <div class="grid md:grid-cols-4 gap-2 mt-2">
 
 
-                    <div class="col-span-3">
+                    <div class="col-span-1">
                         <div class="form-group w-full">
                                   
                                     <select wire:model="type" title="type" id="type" class="block w-full text-gray-400 py-2 px-2 pr-8 leading-tight rounded focus:outline-none focus:border-gray-500" name="estado">
@@ -30,8 +44,12 @@
 
                 
                     </div>
+
+                   
    
             </div>
+
+         
 
         </div>
 

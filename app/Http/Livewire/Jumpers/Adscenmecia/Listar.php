@@ -15,7 +15,7 @@ class Listar extends Component
      use WithPagination;
     protected $paginationTheme = "bootstrap";
 
-    public  $user,$jumper_complete = [],$jumper_detect = 0, $type, $link, $encuentas_act;
+    public  $user,$jumper_complete = [],$jumper_detect = 0, $type, $link, $encuentas_actk;
 
     protected $listeners = ['render' => 'render'];
 
@@ -56,10 +56,6 @@ class Listar extends Component
 
         try {
 
-            $client = new Client([
-                //'base_uri' => 'http://127.0.0.1:8000',
-                'base_uri' => 'http://67.205.168.133/',
-            ]);
 
             if($this->type == 'Inbrain') $codigo = '5140414';
             elseif($this->type == 'Bitlabs') $codigo = '5064420';
@@ -72,8 +68,15 @@ class Listar extends Component
             elseif($this->type == 'ipso') $codigo = '5040990';
             else $codigo = '5905064';
 
+             $client = new Client();
 
-            $resultado = $client->request('GET', 'Adscendmedia_encuestas/1/'.$codigo);
+                $resultado = $client->post('http://67.205.168.133/Adscendmedia_encuestas/1/'.$codigo, [
+                    'headers' => ['Content-Type' => 'application/json'],
+                    'body' => json_encode([
+                        'link' => $this->link
+                    ])
+                ]);
+
 
             if($resultado->getStatusCode() == 200){
 
