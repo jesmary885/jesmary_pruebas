@@ -16,6 +16,11 @@ class JumpersController extends Controller
         return view('cpx.listar');
     }
 
+    public function spectrum_ssi(){
+
+        return view('jumpers.spectrum_ssi');
+    }
+
     public function cpxListar_2(){
         return view('cpx.listar_2');
     }

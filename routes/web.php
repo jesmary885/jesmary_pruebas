@@ -109,6 +109,7 @@ Route::get('/test-pva-auth', function() {
 });
 
         //Jumpers
+         Route::get('SPECTRUM-SSI',[JumpersController::class,'spectrum_ssi'])->name('spectrum_ssi.index')->middleware('permission:menu.premium');
         Route::get('k1000-PS',[JumpersController::class,'kmil_poderosa1'])->name('kmil_poderosa1.index')->middleware('permission:menu.premium');
         Route::get('k1000-PM',[JumpersController::class,'kmil_poderosa2'])->name('kmil_poderosa2.index')->middleware('permission:menu.premium');
         Route::get('k23-P-K2',[JumpersController::class,'k23_poderosa'])->name('k23_poderosa.index')->middleware('permission:menu.premium');

@@ -875,6 +875,16 @@ return [
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
+
+                 [
+                    'text' => 'Ipso Interactive',
+                    'route'  => 'ipso.index',
+                    'can' => 'menu.premium',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+
+                ],
+
                 [
                     'text' => 'K1000 Selfserve',
                     'route'  => 'kmil_poderosa1.index',
@@ -942,9 +952,11 @@ return [
 
                 ],
 
-                [
-                    'text' => 'IPSO INTERACTIVE',
-                    'route'  => 'ipso.index',
+               
+
+                 [
+                    'text' => 'Spectrum SSI',
+                    'route'  => 'spectrum_ssi.index',
                     'can' => 'menu.premium',
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',

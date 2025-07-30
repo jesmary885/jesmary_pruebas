@@ -216,15 +216,7 @@ class K1000Index extends Component
                         $elem3 = 0;
                     }
 
-                    $busqueda_hash= strpos($this->search, 'k=1000&_s=');
-
-
-                    if($busqueda_hash != false){
-                        $hash_buscar = substr($this->search,($busqueda_hash + 10 ));
-                    }
-                    else{
-                        $this->jumper_detect = 3;
-                    }
+                    
 
                     $pid_buscar_def = substr($this->pid_buscar, 0, 6).rand(1101,9909);
 
