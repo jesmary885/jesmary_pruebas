@@ -21,6 +21,12 @@ class CantJumperDia extends Component
                 ->wheredate('created_at',$date_actual)
                 ->count();
         }
+        elseif($jump == 'k-spectrum'){
+
+            $links_usados = Links_usados::where('k_detected','k-spectrum')
+                ->wheredate('created_at',$date_actual)
+                ->count();
+        }
         else{
             $sin_k = ltrim($jump, 'K');
             $k= 'K='.$sin_k;
