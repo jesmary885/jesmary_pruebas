@@ -3,6 +3,19 @@
 
         <div class="card-body">
 
+            <div class="row">
+                <div class="col-14 col-sm-14 col-md-14">
+                    <div class="info-box mb-3">
+                        <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-calculator"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Jumpers Spectrum SSI generados en el día</span>
+                            <span class="info-box-number text-lg">{{$total_jump_dia}}</span>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
             
             <div class="grid md:grid-cols-4 gap-2">
 
@@ -56,6 +69,18 @@
                         </div>
                 </div>
 
+            </div>
+        @endif
+
+         @if ($jumper_detect == 15)
+            <div class="px-4">
+                <div class=" info-box bg-warning">
+                    <span class="info-box-icon"><i class="fas fa-info"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Ya ha generado los veinte(20) jumpers permitidos durante el día</span>
+                            
+                        </div>
+                </div>
             </div>
         @endif
 
