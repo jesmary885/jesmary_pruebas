@@ -663,6 +663,14 @@ return [
                     'icon'    => '	fas fa-angle-right',
                 ],
 
+                //   [
+                //     'text' => 'K2027',
+                //     'route'  => 'k2027.index',
+                //     'can' => 'ssidkr.index',
+                //     'icon_color' => 'red',
+                //     'icon'    => '	fas fa-angle-right',
+                // ],
+
 
                 [
                     'text' => 'K2028',
@@ -780,20 +788,20 @@ return [
                     'icon'    => '	fas fa-angle-right',
                 ],
 
-                [
-                    'text' => 'K7341 New',
-                    'route'  => 'k7341_poderosa.index',
-                    'can' => 'ssidkr.index',
-                    'icon_color' => 'red',
-                    'icon'    => '	fas fa-angle-right',
-                ],
-                [
-                    'text' => 'K7341',
-                    'route'  => 'ksietemilcuarentayuno.index',
-                    'can' => 'ssidkr.index',
-                    'icon_color' => 'red',
-                    'icon'    => '	fas fa-angle-right',
-                ],
+                // [
+                //     'text' => 'K7341 New',
+                //     'route'  => 'k7341_poderosa.index',
+                //     'can' => 'ssidkr.index',
+                //     'icon_color' => 'red',
+                //     'icon'    => '	fas fa-angle-right',
+                // ],
+                // [
+                //     'text' => 'K7341',
+                //     'route'  => 'ksietemilcuarentayuno.index',
+                //     'can' => 'ssidkr.index',
+                //     'icon_color' => 'red',
+                //     'icon'    => '	fas fa-angle-right',
+                // ],
                 [
                     'text' => 'K10125',
                     'route'  => 'k10125.index',
@@ -1089,6 +1097,25 @@ return [
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
+
+                
+            ],
+        ],
+
+        [
+            'text'    => 'HERRAMIENTAS',
+            'icon'    => 'fas fa-search',
+            'can' => 'premium.vip',
+            'icon_color' => 'cyan',
+            'submenu' => [
+                [
+                    'text' => 'Calculadora de extensión',
+                    'route'  => 'c.extension',
+                    'can' => 'premium.vip',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+        
 
                 
             ],
@@ -1503,6 +1530,27 @@ return [
             ],
         ],
 
+          
+        [
+            'text'    => 'SURVEY JUNKIE',
+            'icon'    => 'fas fa-crown',
+            'can' => 'premium.admin',
+            'icon_color' => 'cyan',
+            'submenu' => [
+                [
+                    'text' => 'Spectrum',
+                    'route'  => 'spectrum.sj',
+                    'can' => 'premium.admin',
+                       'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+        
+
+                
+            ],
+        ],
+
+
         [
             'text'    => 'SAYSO',
             'icon'    => 'fas fa-search',
@@ -1542,13 +1590,13 @@ return [
                     'icon_color' => 'red',
                 ],
 
-                [
-                    'text' => 'Generador Qualtrics',
-                    'route'  => 'spectrum.index',
-                    'icon'    => '	fas fa-angle-right',
-                    'icon_color' => 'red',
-                    'can' => 'ssidkr.index',
-                ],
+                // [
+                //     'text' => 'Generador Qualtrics',
+                //     'route'  => 'spectrum.index',
+                //     'icon'    => '	fas fa-angle-right',
+                //     'icon_color' => 'red',
+                //     'can' => 'ssidkr.index',
+                // ],
 
                 [
                     'text' => 'Generador Selfserve',
@@ -1558,14 +1606,32 @@ return [
                     'icon_color' => 'red',
                 ],
                 
+                // [
+                //     'text' => 'Generador Voicefive',
+                //     'icon'    => '	fas fa-angle-right',
+                //     'route'  => 'spectrum2.index',
+                //     'icon_color' => 'red',
+                //     'can' => 'ssidkr.index',
+                // ],
+
+            ],
+        ],
+
+        [
+            'text'    => 'SURVEY DASHMR',
+            'icon'    => 'fas fa-search',
+            'can' => 'ssidkr.index',
+            'icon_color' => 'cyan',
+            'submenu' => [
                 [
-                    'text' => 'Generador Voicefive',
-                    'icon'    => '	fas fa-angle-right',
-                    'route'  => 'spectrum2.index',
-                    'icon_color' => 'red',
+                    'text' => 'Buscador principal',
+                    'route'  => 'survey_dashmr.index',
                     'can' => 'ssidkr.index',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
                 ],
 
+                
             ],
         ],
 

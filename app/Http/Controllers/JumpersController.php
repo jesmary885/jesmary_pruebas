@@ -21,8 +21,25 @@ class JumpersController extends Controller
         return view('jumpers.spectrum_ssi');
     }
 
+
+    public function calculadorae(){
+
+        return view('herramientas.extension');
+    }
+
+
+    public function spectrum_sj(){
+
+        return view('jumpers.spectrum_sj');
+
+    }
+
     public function cpxListar_2(){
         return view('cpx.listar_2');
+    }
+
+    public function survey_dashmr(){
+        return view('jumpers.survey_dashmr');
     }
 
     public function cpxGenerar(){
@@ -216,6 +233,10 @@ class JumpersController extends Controller
 
     public function k2049(){
         return view('jumpers.k2049');
+    }
+
+    public function k2027(){
+        return view('jumpers.k2027');
     }
 
     public function k1091(){

@@ -125,6 +125,7 @@ Route::get('/test-pva-auth', function() {
         Route::get('k1093',[JumpersController::class,'k1093'])->name('k1093.index');
         Route::get('k1093_easurveytaker',[JumpersController::class,'k1093_bea'])->name('k1093_bea.index')->middleware('permission:menu.premium');
         Route::get('k7107',[JumpersController::class,'k7107'])->name('k7107.index');
+        Route::get('k2027',[JumpersController::class,'k2027'])->name('k2027.index');
         Route::get('k5541',[JumpersController::class,'k5541'])->name('k5541.index');
         Route::get('k2000',[JumpersController::class,'k2000'])->name('k2000.index');
         Route::get('k1091',[JumpersController::class,'k1091'])->name('k1091.index');
@@ -164,6 +165,9 @@ Route::get('/test-pva-auth', function() {
         Route::get('samplicio_cash',[JumpersController::class,'samplicio_cash'])->name('samplicio_cash.index');
         Route::get('prodege_index',[JumpersController::class,'prodege_index'])->name('prodege.index');
         Route::get('prodege_generador',[JumpersController::class,'prodege_generador'])->name('prodege.generador');
+        Route::get('survey_dashmr',[JumpersController::class,'survey_dashmr'])->name('survey_dashmr.index');
+
+        
         
         Route::get('scube',[JumpersController::class,'scube'])->name('scube.index');
 
@@ -195,6 +199,13 @@ Route::get('/test-pva-auth', function() {
 
         Route::get('descalificador',[JumpersController::class,'descalificador'])->name('descalificador.index');
         Route::get('wix',[JumpersController::class,'wix'])->name('wix.index');
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+         Route::get('spectrum_sj',[JumpersController::class,'spectrum_sj'])->name('spectrum.sj')->middleware('permission:premium.admin');
+
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////
 
         Route::get('bitlab',[JumpersController::class,'bitlab'])->name('bitlab.index');
         Route::get('pollfish',[JumpersController::class,'pollfish'])->name('pollfish.index');
@@ -272,6 +283,8 @@ Route::get('/test-pva-auth', function() {
         Route::get('Cpx_generar',[JumpersController::class,'cpxGenerar'])->name('cpxGenerar')->middleware('permission:premium.vip');
         Route::get('Cpx_calificador',[JumpersController::class,'cpxCalificador'])->name('cpxCalificador')->middleware('permission:premium.vip');
         Route::get('Cpx_jumper',[JumpersController::class,'cpxJumper'])->name('cpxJumper')->middleware('permission:premium.vip');
+
+        Route::get('calculadoraExtension',[JumpersController::class,'calculadorae'])->name('c.extension')->middleware('permission:premium.vip');
 
          Route::get('Adscenmecia_listar',[JumpersController::class,'AdscenmeciaListar'])->name('AdscenmeciaListar')->middleware('permission:premium.vip');
           Route::get('Adscenmecia_saltador',[JumpersController::class,'Adscenmecia_saltador'])->name('AdscenmeciaSaltador')->middleware('permission:premium.vip');

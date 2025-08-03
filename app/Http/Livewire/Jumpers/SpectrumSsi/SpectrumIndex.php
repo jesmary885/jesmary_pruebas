@@ -4,59 +4,139 @@ namespace App\Http\Livewire\Jumpers\SpectrumSsi;
 
 use Livewire\Component;
 
+use App\Models\Antibot;
+use App\Models\Comments;
+use App\Models\CuentasPsid;
+use App\Models\Link;
 use App\Models\Links_usados;
+use App\Models\RecargaLink;
 use App\Models\User;
+use App\Models\User_Links_Points;
 use DateTime;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Auth;
 use Livewire\WithPagination;
 
 class SpectrumIndex extends Component
 {
 
-    use WithPagination;
+     use WithPagination;
     protected $paginationTheme = "bootstrap";
 
-    public  $user,$jumper_complete = [],$total_jump_dia,$jumper_detect = 0, $app_id, $link, $survery_id;
+    public  $limit,$recargas_user_dia,$canj=0,$total_jump_dia,$user,$jumper_complete = [],$jumper_list = 0,$busqueda_link,$comment_new_psid_register,$pid_register_high,$psid_register_bh,$high_register_bh,$basic_register_bh,$posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $wix_detect = '0', $psid_register=0,$jumper_redirect,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$is_high,$is_basic,$calc_link,$jumper_select,$points_user_positive, $points_user_negative, $jumper_detect_k ='',$pid_manual,$pid_detectado = 'si',$pid_buscar,$operacion;
 
-    protected $listeners = ['render' => 'render'];
-
-    protected $rules = [
-        'link' => 'required',
-    ];
+    protected $listeners = ['render' => 'render', 'registro_psid' => 'registro_psid', 'verific' => 'verific', 'confirmacion' => 'confirmacion'];
     
     public function mount(){
-
-
-      //  if(session('search')) $this->search = session('search');
+        $this->user_auth =  auth()->user()->id;
+        if(session('pid')) $this->pid_new = session('pid');
+        if(session('psid')) $this->psid_register = session('psid');
+        if(session('search')) $this->search = session('search');
+        $this->jumper_list = 0;
         $this->jumper_detect = 0;
+        $this->busqueda_link = "";
+
+        
 
         $this->user = User::where('id',auth()->user()->id)->first();
 
-          
+       /* if($this->user->id == '1') $this->limit = 19;
+        else $this->limit = 19;*/
+
+        if($this->user->id == '1') $this->limit = 19;
+       // elseif($this->user->id == '6' || $this->user->id == '55' || $this->user->id == '1885') $this->limit = 9;
+        else $this->limit = 19;
+
     }
 
-    public function clear(){
-        $this->reset(['link']);
-       // $this->informacion_complete = [];
-        $this->jumper_complete = [];
+    public $rules_pid = [
+        'pid_manual' => 'required|min:6',
+    ];
 
-         $this->jumper_detect = 0;
-        //$this->emitTo('jumpers.encuestar.encuestar1-index','render');
+    public function jumpear(){
+        if($this->jumper_detect == 0){
+            $rules_pid = $this->rules_pid;
+            $this->validate($rules_pid);
+
+            $this->pid_buscar = $this->pid_manual;
+
+            $link_register_search = Links_usados::where('link',$this->search)
+                ->where('k_detected','k-spectrum')
+                ->where('user_id',$this->user->id)
+                ->count();
+
+                if($link_register_search  >= 1){
+
+                    $this->jumper_detect = 7;
+                                    
+                }
+                else{
+                    $date = new DateTime();
+
+                    if($this->user->ip) $multi = $this->user->ip;
+                    else{
+                        $this->user->update([
+                            'ip'=> request()->ip(),
+                        ]);
+
+                        $multi = $this->user->ip;
+                    }
+
+                    $ip_user = request()->ip();
+
+                    $date_actual= $date->format('Y-m-d');
+                   // $date_actual_30 = $date->modify('-30 minute')->format('Y-m-d H:i:s');
+
+                    $links_usados = Links_usados::where('k_detected','k-spectrum')
+                        ->where('user_id',$this->user->id)
+                        ->whereDate('created_at',$date_actual)
+                        ->count();
+
+                        
+                    if($links_usados <= $this->limit ){
+                        if($this->user->id != '1' && $this->user->id != '1254' && $this->user->id != '154' && $this->user->id != '30' && $this->user->id != '1836' && $this->user->id != '1820'){
+                            if($multi == $ip_user){
+                                $this->numerologia();
+                            }
+
+                            else{
+                                $this->jumper_detect = 8;
+                            }
+                        }
+                        else{
+                            $this->numerologia();
+                        }
+                    }
+                    else{
+
+                        $alertas = $this->user->cant_links_jump_alert + 1;
+                        $this->user->update(['cant_links_jump_alert'=>$alertas]);
+                        $this->jumper_detect = 6;
+                    }
+                }
+        }
     }
 
-    public function procesar(){
+    public function numerologia(){
 
-  
+        $cant = Antibot::count();
+        $random = rand(1,$cant);
+        $this->operacion = Antibot::where('id',$random)->first();
+        $operacion_total = 'Resuelve esta operación matemática ('.$this->operacion->nro1.' + '.$this->operacion->nro2. ')';
 
-        $rules = $this->rules;
-        $this->validate($rules);
+        $this->emit('numerologia',$operacion_total,'jumpers.spectrum-ssi.spectrum-index','verific');
+    }
 
-         $busqueda_id= strpos($this->link, '**');
+    public function verific($result){
 
-            if(session('psid')) $psid_buscar = substr($this->link,($busqueda_id - 22),11).substr(session('psid'),11,11);
-            else $psid_buscar = substr($this->link,($busqueda_id - 22),22); 
+        if($result[0] == $this->operacion->resultado){
 
-              $busqueda_e= strpos($this->link, 'respondent_id=');
+              $busqueda_id= strpos($this->search, '**');
+
+            if(session('psid')) $psid_buscar = substr($this->search,($busqueda_id - 22),11).substr(session('psid'),11,11);
+            else $psid_buscar = substr($this->search,($busqueda_id - 22),22); 
+
+              $busqueda_e= strpos($this->search, 'respondent_id=');
 
         
                 $posicion_e = $busqueda_e + 14;
@@ -64,7 +144,7 @@ class SpectrumIndex extends Component
                 $busq_e = 0;
 
                 do{
-                    $detect_e= substr($this->link, $posicion_e,1);
+                    $detect_e= substr($this->search, $posicion_e,1);
             
                     if($detect_e == '&') $i_e = 1;
                     else{
@@ -78,85 +158,499 @@ class SpectrumIndex extends Component
             
                 }while($i_e == 0 );
 
-                if($i_e == 1) $e = substr($this->link,($busqueda_e + 14),($posicion_e - ($busqueda_e + 14)));
-                else $e = substr($this->link,($posicion_e ));
-
-        $date = new DateTime();
-
-        $date_actual= $date->format('Y-m-d');
-            
-        $this->total_jump_dia = Links_usados::where('k_detected','k-spectrum')
-            ->where('user_id',$this->user->id)
-            ->whereDate('created_at',$date_actual)
-            ->count();
-
-        if($this->total_jump_dia <= 19){
-
-            try {
+                if($i_e == 1) $e = substr($this->search,($busqueda_e + 14),($posicion_e - ($busqueda_e + 14)));
+                else $e = substr($this->search,($posicion_e ));
 
 
-                    $client = new Client([
-                        'base_uri' => 'http://67.205.168.133/',
-                    ]);
-
-                    $resultado = $client->request('GET', 'spectrum_ssi/1/'.$psid_buscar.'/'.$e);
+           
 
         
+
+            try {
+               
+                $client = new Client(['base_uri' => 'http://67.205.168.133/',]);
+
+
+                $resultado = $client->request('GET', 'spectrum_ssi/1/'.$psid_buscar.'/'.$e);
+
+
                 if($resultado->getStatusCode() == 200){
 
-                
-                        $this->jumper_complete = json_decode($resultado->getBody(),true);
+                    $this->jumper_complete = json_decode($resultado->getBody(),true);
 
-                        $link_register = new Links_usados();
-                        $link_register->link = $this->link;
-                        $link_register->k_detected  = 'k-spectrum';
-                        $link_register->user_id  = $this->user->id;
-                        $link_register->link_resultado = $this->jumper_complete['jumper'];
-                        $link_register->save();
+                    $link_register = new Links_usados();
+                    $link_register->link = $this->search;
+                    $link_register->link_resultado = $this->jumper_complete['jumper'];
+                    $link_register->k_detected  = 'k-spectrum';
+                    $link_register->user_id  = $this->user->id;
+                    $link_register->save();
 
-                }
+                    $this->busqueda_link = Link::where('psid',substr($psid_buscar,0,5))->first();
 
-                else{
+                    if($this->busqueda_link){
+                        $user_point= User_Links_Points::where('link_id',$this->busqueda_link->id)
+                            ->where('user_id',auth()->user()->id)
+                            ->first();
+                                                        
+                        $comments = Comments::where('link_id',$this->busqueda_link->id)
+                            ->latest('id')
+                            ->paginate(5);
+                                                            
+                            if($user_point) {
+                                if($user_point->point == 'positive'){
+                                                
+                                    $this->points_user_positive='si';
+                                    $this->points_user_negative='no';
+                                    $this->points_user='si';
+                            
+                                }
+                        
+                                else{
+                                    $this->points_user_positive='no';
+                                    $this->points_user_negative='si';
+                                }
+                                                        
+                            }
+                            else{
+                            $this->points_user_positive='no';
+                            $this->points_user_negative='no';
+                            }
+        
+                    }
+                    else{
+                        $url_detect_com= strpos($this->search, 'ttp');
+        
+                        if($url_detect_com != false){
+        
+                                            $con_seguridad= strpos($this->search, 'ttps');
+                                            $i = 0;
+                                                
+                                            do{
+                                                $detect= substr($this->search, $this->posicion,1);
+        
+                                                if($detect == '/') $i = 1;
+                                                else{
+                                                    $i = 0;
+                                                    $this->posicion = $this->posicion + 1;
+                                                }
+        
+                                            }
+                                            while($i != 1);
+        
+                                            if($con_seguridad != false){
+                                                $url_detect = 'https://'.substr($this->search,8,($this->posicion-8));
+                                            }
+        
+                                            else{
+                                                $url_detect = 'https://'.substr($this->search,7,($this->posicion-7));
+                                            }
 
-                    $this->jumper_detect = 2;
+                                            $link = new Link();
+                                            if($url_detect != 'https://dkr1.ssisurveys.com' && $url_detect != 'https://online.ssisurveys.com'  && $url_detect != 'https://online.surveynetwork.com' ){
+                                                $link->jumper = $url_detect;
+                                            }
+                                            $link->psid = substr($psid_buscar,0,5);
+                                            $link->user_id = auth()->user()->id;
+                                            $link->jumper_type_id = 58;
+                                            $link->k_detected = 'k-spectrum';
+                                            $link->save();
+        
+                                            $this->busqueda_link = Link::where('id',$link->id)->first();
+        
+                                            $this->jumper_2 = '1';
+                                    
+                                            $user_point= User_Links_Points::where('link_id',$this->busqueda_link->id)
+                                                ->where('user_id',$this->user_auth)
+                                                ->first();
+                                                                
+                                            $comments = Comments::where('link_id',$this->busqueda_link->id)
+                                                ->latest('id')
+                                                ->paginate(5);
+                                                                
+                                                if($user_point) {
+                                                    if($user_point->point == 'positive'){
+                                                
+                                                        $this->points_user_positive='si';
+                                                        $this->points_user_negative='no';
+                                                        $this->points_user='si';
+                            
+                                                    }
+                            
+                                                    else{
+                                                        $this->points_user_positive='no';
+                                                        $this->points_user_negative='si';
+                                                    }
+                                                            
+                                                }
+                                                else{
+                                                    $this->points_user_positive='no';
+                                                    $this->points_user_negative='no';
+                                                }
+                        }
+                    }
+
+                    $this->jumper_list = 1;
+                    $this->jumper_detect = 1;
+
                 }
             }
             catch (\GuzzleHttp\Exception\RequestException $e) {
-                
+           
                 $error['error'] = $e->getMessage();
                 $error['request'] = $e->getRequest();
 
                 if($e->hasResponse()){
                     if ($e->getResponse()->getStatusCode() !== '200'){
 
-    
-
                         $error['response'] = $e->getResponse(); 
                         $this->jumper_detect = 2;
                     }
                 }
             }
-
         }
 
         else{
 
-            $this->jumper_detect = 15;
+            $this->reset(['operacion']);
+
+            $this->emit('error','Resultado incorrecto, intentalo de nuevo');
+       
         }
+
+      
     }
+
+
 
     public function render()
     {
 
+         $subs_psid = '0';
+        $comments =0;
+        $jumper = "";
+        $link_complete="";
+        $psid_buscar = "";
+        $pid_buscar = "";
+        $busqueda_link_def = "";
+        $this->no_jumpear = 0;
+        $this->k_detect = '0';
+        //$this->jumper_detect = 0;
+        //$this->busqueda_link = "";
+        $this->no_detect = '0';
+        $this->comment_new_psid_register = '';
+        $this->posicion = 8; //me esta buscand a partir de https://
+
+        $this->search = trim($this->search); //quitando espacios en blancos al inicio y final
+        $long_psid = strlen($this->search); //buscando cuantos caracteres tiene en total
+
         $date = new DateTime();
+        $date_actual= $date->format('Y-m-d');
 
-                $date_actual= $date->format('Y-m-d');
-            
-                $this->total_jump_dia = Links_usados::where('k_detected','k-spectrum')
-                    ->where('user_id',$this->user->id)
-                    ->whereDate('created_at',$date_actual)
-                    ->count();
+        $this->total_jump_dia = Links_usados::where('k_detected','k-spectrum')
+            ->where('user_id',$this->user->id)
+            ->whereDate('created_at',$date_actual)
+            ->count();
 
-        return view('livewire.jumpers.spectrum-ssi.spectrum-index');
+        if($long_psid>=5){
+
+        
+
+            $busqueda_link_https = strpos($this->search, 'https://');
+            $busqueda_link_http = strpos($this->search, 'http://');
+          
+                    
+                    $busqueda_ast_ = strpos($this->search, '**');
+
+                    
+                    if($busqueda_ast_ !== false){
+                        $busqueda_id= strpos($this->search, '**');
+                                        
+                        if(session('psid')) $psid_buscar = substr($this->search,($busqueda_id - 22),11).substr(session('psid'),11,11);
+                        else $psid_buscar = substr($this->search,($busqueda_id - 22),22);
+
+                        $psid_save_total  = substr($this->search,($busqueda_id - 5),5);
+
+                        $buscar_psid_user = CuentasPsid::where('user_id',Auth::id())
+                            ->where('psid',$psid_save_total)->count();
+                        
+                        if($buscar_psid_user == 0){
+                            $psid_user_register= new CuentasPsid();
+                            $psid_user_register->user_id = Auth::id();
+                            $psid_user_register->psid = $psid_save_total;
+                            $psid_user_register->save();
+                        }
+
+
+                        if($this->jumper_detect == 0){
+
+                            if($this->jumper_list == 0){
+                                $link_register_search = Links_usados::where('link',$this->search)
+                                ->where('k_detected','k-spectrum')
+                                ->where('user_id',$this->user->id)
+                                ->count();
+
+                                if($link_register_search  >= 1){
+
+                                    $this->jumper_detect = 7;
+                                    
+                                }
+                                else{
+                                    
+                                    $date = new DateTime();
+                                    $date_actual= $date->format('Y-m-d');
+
+                                    if($this->user->ip) $multi = $this->user->ip;
+                                    else{
+                                        $this->user->update([
+                                            'ip'=> request()->ip(),
+                                        ]);
+
+                                        $multi = $this->user->ip;
+                                    }
+
+                                    $ip_user = request()->ip();
+
+                                    $date_actual= $date->format('Y-m-d');
+                                // $date_actual_30 = $date->modify('-30 minute')->format('Y-m-d H:i:s');
+
+                                    $links_usados = Links_usados::where('k_detected','k-spectrum')
+                                        ->where('user_id',$this->user->id)
+                                        ->whereDate('created_at',$date_actual)
+                                        ->count();
+
+                                    $this->total_jump_dia = $links_usados;
+
+
+                                    if($links_usados <= $this->limit ){
+                                        if($this->user->id != '1' && $this->user->id != '1254' && $this->user->id != '154' && $this->user->id != '30' && $this->user->id != '1836' && $this->user->id != '1820'){
+                                            if($multi == $ip_user){
+                                                $this->numerologia();
+                                            }
+
+                                            else{
+                                                $this->jumper_detect = 8;
+                                            }
+                                        }
+                                        else{
+                                            $this->numerologia();
+                                        }
+                                    }
+                                    else{
+                                        $alertas = $this->user->cant_links_jump_alert + 1;
+                                        $this->user->update(['cant_links_jump_alert'=>$alertas]);
+                                        $this->jumper_detect = 6;
+                                    }
+                                }
+                            }
+
+                            else{
+                                $this->busqueda_link = Link::where('psid',substr($psid_buscar,0,5))->first();
+        
+                                $busqueda_link_def =  $this->busqueda_link;
+        
+                                if($this->busqueda_link){
+                                    $user_point= User_Links_Points::where('link_id',$this->busqueda_link->id)
+                                        ->where('user_id',auth()->user()->id)
+                                        ->first();
+                                                        
+                                    $comments = Comments::where('link_id',$this->busqueda_link->id)
+                                        ->latest('id')
+                                        ->paginate(5);
+                                                            
+                                        if($user_point) {
+                                            if($user_point->point == 'positive'){
+                                        
+                                                $this->points_user_positive='si';
+                                                $this->points_user_negative='no';
+                                                $this->points_user='si';
+                    
+                                            }
+                    
+                                            else{
+                                                $this->points_user_positive='no';
+                                                $this->points_user_negative='si';
+                                            }
+                                                    
+                                        }
+                                        else{
+                                            $this->points_user_positive='no';
+                                            $this->points_user_negative='no';
+                                        }
+        
+                                }
+                            }
+
+                        }
+
+                        if($this->jumper_detect == 1){
+                            $this->busqueda_link = Link::where('psid',substr($psid_buscar,0,5))->first();
+        
+                                $busqueda_link_def =  $this->busqueda_link;
+        
+                                if($this->busqueda_link){
+                                    $user_point= User_Links_Points::where('link_id',$this->busqueda_link->id)
+                                        ->where('user_id',auth()->user()->id)
+                                        ->first();
+                                                        
+                                    $comments = Comments::where('link_id',$this->busqueda_link->id)
+                                        ->latest('id')
+                                        ->paginate(5);
+                                                            
+                                        if($user_point) {
+                                            if($user_point->point == 'positive'){
+                                        
+                                                $this->points_user_positive='si';
+                                                $this->points_user_negative='no';
+                                                $this->points_user='si';
+                    
+                                            }
+                    
+                                            else{
+                                                $this->points_user_positive='no';
+                                                $this->points_user_negative='si';
+                                            }
+                                                    
+                                        }
+                                        else{
+                                            $this->points_user_positive='no';
+                                            $this->points_user_negative='no';
+                                        }
+        
+                                }
+
+                        }
+
+                    }
+
+                    session()->forget('search');
+        }
+        else{
+            $this->calc_link = 0;
+        }
+
+        return view('livewire.jumpers.spectrum-ssi.spectrum-index',compact('jumper','comments','subs_psid','busqueda_link_def'));
+    }
+
+       public function positivo($jumper_id){
+
+        $user_point= User_Links_Points::where('link_id',$jumper_id)
+            ->where('user_id',$this->user_auth)
+            ->first();
+
+        if($user_point){
+            $user_point->update([
+                'point' => 'positive'
+            ]);
+
+            $jumper_id = Link::where('id',$jumper_id)->first();
+
+            $new_points_positive = $jumper_id->positive_points + 1;
+            $new_points_negative = $jumper_id->negative_points - 1;
+
+            $jumper_id->update([
+                'positive_points' => $new_points_positive, 
+                'negative_points' => $new_points_negative, 
+            ]);
+
+            $this->points_user_positive='si';
+            $this->points_user_negative='no';
+
+        }
+        else{
+            $links_points = new User_Links_Points();
+            $links_points->user_id = auth()->user()->id;
+            $links_points->link_id = $jumper_id;
+            $links_points->point = 'positive';
+            $links_points->save();
+
+            $jumper_id = Link::where('id',$jumper_id)->first();
+
+            $new_points = $jumper_id->positive_points + 1;
+
+            $jumper_id->update([
+                'positive_points' => $new_points, 
+            ]);
+
+            $this->points_user_positive='si';
+            $this->points_user_negative='no';
+
+        }
+
+        $this->emitTo('jumpers.spectrum-ssi.spectrum-index','render');
+    }
+
+    public function negativo($jumper_id){
+        $user_point= User_Links_Points::where('link_id',$jumper_id)
+            ->where('user_id',$this->user_auth)
+            ->first();
+
+        if($user_point){
+            $user_point->update([
+                'point' => 'negative'
+            ]);
+
+            $jumper_id = Link::where('id',$jumper_id)->first();
+
+            $new_points_positive = $jumper_id->positive_points - 1;
+            $new_points_negative = $jumper_id->negative_points + 1;
+
+            $jumper_id->update([
+                'positive_points' => $new_points_positive, 
+                'negative_points' => $new_points_negative, 
+            ]);
+
+            $this->points_user_positive='no';
+            $this->points_user_negative='si';
+
+        }
+        else{
+            $links_points = new User_Links_Points();
+            $links_points->user_id = auth()->user()->id;
+            $links_points->link_id = $jumper_id;
+            $links_points->point = 'negative';
+            $links_points->save();
+
+            $jumper_id = Link::where('id',$jumper_id)->first();
+
+            $new_points = $jumper_id->negative_points + 1;
+
+            $jumper_id->update([
+                'negative_points' => $new_points, 
+            ]);
+
+            $this->points_user_positive='no';
+            $this->points_user_negative='si';
+
+        }
+
+        $this->emitTo('jumpers.spectrum-ssi.spectrum-index','render');
+
+        
+    }
+
+    public function comentar(){
+        if($this->comentario != ''){
+           
+            $comment = new Comments();
+            $comment->comment = $this->comentario;
+            $comment->link_id = $this->busqueda_link->id;
+            $comment->user_id = auth()->user()->id;
+            $comment->save();
+
+            $this->reset(['comentario']);
+
+            $this->emitTo('jumpers.spectrum-ssi.spectrum-index','render');
+        }
+    }
+
+    public function clear(){
+        $this->reset(['search']);
+        $this->jumper_list = 0;
+        $this->jumper_detect = 0;
+        $this->jumper_complete = [];
+        session()->forget('search');
+        $this->busqueda_link = "";
+        return redirect()->route('spectrum_ssi.index');
+
     }
 }
