@@ -663,13 +663,13 @@ return [
                     'icon'    => '	fas fa-angle-right',
                 ],
 
-                //   [
-                //     'text' => 'K2027',
-                //     'route'  => 'k2027.index',
-                //     'can' => 'ssidkr.index',
-                //     'icon_color' => 'red',
-                //     'icon'    => '	fas fa-angle-right',
-                // ],
+                  [
+                     'text' => 'KNAVIGATOR',
+                     'route'  => 'k2027.index',
+                     'can' => 'ssidkr.index',
+                     'icon_color' => 'red',
+                     'icon'    => '	fas fa-angle-right',
+                 ],
 
 
                 [
