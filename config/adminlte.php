@@ -1144,13 +1144,13 @@ return [
         [
             'text'    => 'INBRAIN',
             'icon'    => 'fas fa-search',
-            'can' => 'premium.vip',
+            'can' => 'menu.premium',
             'icon_color' => 'cyan',
             'submenu' => [
                 [
                     'text' => 'InBrain Rex',
                     'route'  => 'inbrain.rex',
-                    'can' => 'premium.vip',
+                    'can' => 'menu.premium',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
@@ -1158,7 +1158,7 @@ return [
                 [
                     'text' => 'InBrain saltador profiled',
                     'route'  => 'inbrain.profiled',
-                    'can' => 'premium.vip',
+                    'can' => 'menu.premium',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
@@ -1166,7 +1166,7 @@ return [
                 [
                     'text' => 'InBrain saltador wix',
                     'route'  => 'inbrain.wix',
-                    'can' => 'premium.vip',
+                    'can' => 'menu.premium',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
@@ -1174,7 +1174,7 @@ return [
                 [
                     'text' => 'InBrain saltador start',
                     'route'  => 'inbrain.start',
-                    'can' => 'premium.vip',
+                    'can' => 'menu.premium',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
