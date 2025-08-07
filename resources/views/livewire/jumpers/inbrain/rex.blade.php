@@ -126,9 +126,11 @@
                                                 <td class="text-center">{{ $this->type($jumper_complete) }}</td>
 
                                                   @if($this->tipo_total == 'si')
-                                                <i class="font-semibold far fa-thumbs-up text-blue-600 mr-2">{{$this->positive($this->type($jumper_complete))}}</i>
+                                                  <td class="text-center">
+                                                        <i class="font-semibold far fa-thumbs-up text-blue-600 mr-2">{{$this->positive($this->type($jumper_complete))}}</i>
 
-                                                <i class="font-semibold far fa-thumbs-down text-red-600">{{$this->negative($this->type($jumper_complete))}}</i>
+                                                        <i class="font-semibold far fa-thumbs-down text-red-600">{{$this->negative($this->type($jumper_complete))}}</i>
+                                                </td>
                                                 @else
 
                             

@@ -162,6 +162,7 @@
 
             <div class="card-body mt-0">
 
+
                 @if ($jumper_complete)
 
                 <div class="flex-nowrap justify-center callout callout-info w-full">
