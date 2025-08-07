@@ -3,7 +3,7 @@
 
 <div class="flex justify-between">
     
-    <h1 class="text-lg font-weight-bold text-cyan-400"> <i class="fas fa-spinner mr-1 text-cyan-400"></i> K2027</h1>
+    <h1 class="text-lg font-weight-bold text-cyan-400"> <i class="fas fa-spinner mr-1 text-cyan-400"></i> KNAVIGATOR</h1>
 
    
 </div>

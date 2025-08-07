@@ -67,10 +67,11 @@ class K2027Index extends Component
 
                 if($resultado->getStatusCode() == 200){
 
+                     $this->jumper_complete = json_decode($resultado->getBody(),true);
+
                     if($this->jumper_complete)
                     {
-                        $this->jumper_complete = json_decode($resultado->getBody(),true);
-
+                
                         $link_register = new Links_usados();
                         $link_register->link = $this->search;
                         $link_register->k_detected  = 'K=2027';
@@ -236,9 +237,6 @@ class K2027Index extends Component
 
         if($long_psid>=5){
 
-            $busqueda_k1098_ = strpos($this->search, 'k=2027&');
-
-            if($busqueda_k1098_ !== false){
                 
                 $busqueda_ast_ = strpos($this->search, '**');
 
@@ -375,11 +373,9 @@ class K2027Index extends Component
                 }
 
                 session()->forget('search');
-            }
+            
 
-            else{
-                $this->jumper_detect = 3;
-            }
+          
         }
         else{
             $this->calc_link = 0;
