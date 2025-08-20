@@ -23,6 +23,7 @@
                                         <option value="Cupo gratis">Cupo gratis</option>
                                         <option value="Trabajador  SSI">Trabajador SSI</option>
                                         <option value="Trabajador GPT">Trabajador GPT</option>
+                                        <option value="Registrador de data">Registrador de data</option>
                     
                                     </select>
                                     <x-input-error for="rol" />
