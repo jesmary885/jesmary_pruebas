@@ -21,8 +21,8 @@
                                     <select wire:model="rol" title="rol" id="estado" class="block w-full text-gray-400 py-2 px-2 pr-8 leading-tight rounded focus:outline-none focus:border-gray-500" name="estado">
                                         <option value="" selected>Rol</option>
                                         <option value="Cupo gratis">Cupo gratis</option>
-                                        <option value="Trabajador">Trabajador SSI</option>
-                                        <option value="Trabajador">Trabajador GPT</option>
+                                        <option value="Trabajador  SSI">Trabajador SSI</option>
+                                        <option value="Trabajador GPT">Trabajador GPT</option>
                     
                                     </select>
                                     <x-input-error for="rol" />
