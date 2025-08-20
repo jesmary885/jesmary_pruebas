@@ -78,6 +78,9 @@ class CuentasPsid extends Component
             ->where('id','!=','2204')
             ->where('id','!=','2205')
             ->where('id','!=','2206')
+            ->where('id','!=','249')
+            ->where('id','!=','2024')
+            ->where('id','!=','509')
             ->permission('menu.premium')
             ->get();
 

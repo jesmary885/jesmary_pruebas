@@ -54,14 +54,17 @@ class Login extends Component
             ]);
 
 
-
      
          $resultado = $client->request('GET', 'coolsurvey_survey/1/'.$this->email.'/'.$this->contrasena);
+
+
 
 
             if($resultado->getStatusCode() == 200){
 
                 $this->jumper_complete = json_decode($resultado->getBody(),true);
+
+           
 
   
 

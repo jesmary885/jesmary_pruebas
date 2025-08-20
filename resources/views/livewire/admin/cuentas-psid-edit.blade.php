@@ -21,7 +21,8 @@
                                     <select wire:model="rol" title="rol" id="estado" class="block w-full text-gray-400 py-2 px-2 pr-8 leading-tight rounded focus:outline-none focus:border-gray-500" name="estado">
                                         <option value="" selected>Rol</option>
                                         <option value="Cupo gratis">Cupo gratis</option>
-                                        <option value="Trabajador">Trabajador</option>
+                                        <option value="Trabajador">Trabajador SSI</option>
+                                        <option value="Trabajador">Trabajador GPT</option>
                     
                                     </select>
                                     <x-input-error for="rol" />
@@ -35,6 +36,9 @@
                                                 @foreach ($users_admin as $admin)
                                             <option value="{{$admin->id}}">{{$admin->name}}</option>
                                             @endforeach
+                                            <option value="45">Hugo</option>
+                                            <option value="10">El Lobo</option>
+                                            <option value="7">Miguel</option>
                                         </select>
                                         <x-input-error for="admin" />
                                 </div>
