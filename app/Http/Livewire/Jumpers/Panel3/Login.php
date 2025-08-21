@@ -13,7 +13,7 @@ class Login extends Component
     use WithPagination;
     protected $paginationTheme = "bootstrap";
 
-    public  $user,$jumper_complete = [],$jumper_detect = 0, $email, $contrasena, $balance;
+    public  $user,$jumper_complete = [],$jumper_detect = 0, $email, $contrasena, $balance, $url;
 
     protected $listeners = ['render' => 'render'];
 
@@ -64,19 +64,21 @@ class Login extends Component
 
                 $this->jumper_complete = json_decode($resultado->getBody(),true);
 
-           
+                if (isset($this->jumper_complete[0]) && isset($this->jumper_complete[0]['url'])){
+                    
+                    foreach($this->jumper_complete as $registro){
 
-  
+                        $this->balance = $registro['Balance de la cuenta'];
+                    }
 
-                foreach($this->jumper_complete as $registro){
-
-                    $this->balance = $registro['Balance de la cuenta'];
+                    $this->url = 1;
                 }
+                else $this->url = 2;  
 
-            
+    
 
-         
-                
+
+
                 if(!$this->jumper_complete)  $this->jumper_detect = 2;
                /* else{
                     $busqueda_https= strpos($this->informacion_complete['Survey'], 'ttps://');

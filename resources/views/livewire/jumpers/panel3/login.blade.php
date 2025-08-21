@@ -73,10 +73,13 @@
         @if($jumper_complete)
 
             <div class="card m-4">
-                <div class="card-header">
-                        <p  class="text-gray-100 text-clip text-md font-bold m-1">BALANCE DE LA CUENTA: {{$balance}}</p>
-            
-                </div>
+                @if($url == 1)
+                    <div class="card-header">
+                            <p  class="text-gray-100 text-clip text-md font-bold m-1">BALANCE DE LA CUENTA: {{$balance}}</p>
+                
+                    </div>
+
+                
     
                 <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
                     <table class="table text-sm table-bordered table-responsive-lg table-responsive-md table-responsive-sm">
@@ -113,6 +116,21 @@
                             </tbody>
                     </table>
                 </div>
+
+                @endif
+
+                @if($url == 2)
+
+                 <div class="card-header">
+                        <p  class="text-gray-100 text-clip text-md font-bold m-1">BALANCE DE LA CUENTA: {{$jumper_complete['Balance de la cuenta']}}</p>
+
+                        <p  class="text-gray-100 text-clip text-md font-bold m-1 mt-3">USER ID: {{$jumper_complete['user_id']}}</p>
+            
+                </div>
+
+                    
+
+                @endif
             </div>
 
         @endif
