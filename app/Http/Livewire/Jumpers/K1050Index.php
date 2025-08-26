@@ -140,7 +140,7 @@ class K1050Index extends Component
 
             $pid_buscar_def = $this->pid_buscar;
 
-            $hash = CuentaK::where('pid',$pid_buscar_def)->first()->hash;
+            $hash = CuentaK::where('pid',$pid_buscar_def)->first();
 
             if($hash){
 
@@ -151,7 +151,7 @@ class K1050Index extends Component
                     'base_uri' => 'http://67.205.168.133',
                 ]);
 
-                $resultado = $client->request('GET', '/k1050/1/'.$psid_buscar.'/'.$pid_buscar_def.'/'.$hash);
+                $resultado = $client->request('GET', '/k1050/1/'.$psid_buscar.'/'.$pid_buscar_def.'/'.$hash->hash);
 
                     if($resultado->getStatusCode() == 200){
 
@@ -280,7 +280,7 @@ class K1050Index extends Component
                     if($e->hasResponse()){
                         if ($e->getResponse()->getStatusCode() !== '200'){
                             $error['response'] = $e->getResponse(); 
-                            $this->jumper_detect = 5;
+                            $this->jumper_detect = 2;
                         }
                     }
                 }
@@ -289,7 +289,7 @@ class K1050Index extends Component
 
             else{
 
-                $this->emit('error','Error, comunicate con un administrador');
+                $this->jumper_detect = 9;
             }
 
         }

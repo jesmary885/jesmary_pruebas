@@ -138,6 +138,19 @@
             </div>
         @endif
 
+        
+        @if ($jumper_detect == 9)
+            <div class="px-4">
+                <div class=" info-box bg-warning">
+                    <span class="info-box-icon"><i class="far fa-sad-tear"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Lo siento!, ha ocurrido un error.</span>
+                            <span class="info-box-number">Comunícate con un administrador</span>
+                        </div>
+                </div>
+
+            </div>
+        @endif
        
            
             <div class="card-body mt-0">
