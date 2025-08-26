@@ -391,10 +391,75 @@ return [
                     'can' => 'administracion_principal'
                 ],
 
+
                 
 
             ],
             
+        ],
+
+        [
+            'text'    => 'ADMIN VIP',
+            'icon'    => 'fas fa-crown',
+            'can' => 'premium.admin',
+            'icon_color' => 'cyan',
+            'submenu' => [
+                  [
+                    'text' => 'K1050',
+                    'route'  => 'kmil_cincuenta.index',
+                    'can' => 'premium.admin',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                
+                 [
+                    'text' => 'Registro de cuentas',
+                    'route'  => 'admin.registroc',
+                    'icon'    => 'fas fa-server',
+                    'icon_color' => 'red',
+                    'can' => 'premium.admin'
+                ],
+
+                [
+                    'text'    => 'PANEL 3',
+                    'icon'    => 'fas fa-search',
+                    'can' => 'premium.admin',
+                    'icon_color' => 'cyan',
+                    'submenu' => [
+                        [
+                            'text' => 'login',
+                            'route'  => 'panel3.login',
+                            'can' => 'premium.admin',
+                            'icon_color' => 'red',
+                            'icon'    => 'fas fa-angle-right',
+                        ],
+
+                    
+                    ],
+                ],
+
+                [
+                    'text'    => 'SURVEY JUNKIE',
+                    'icon'    => 'fas fa-crown',
+                    'can' => 'premium.admin',
+                    'icon_color' => 'cyan',
+                    'submenu' => [
+                        [
+                            'text' => 'Spectrum',
+                            'route'  => 'spectrum.sj',
+                            'can' => 'premium.admin',
+                            'icon_color' => 'red',
+                            'icon'    => 'fas fa-angle-right',
+                        ],
+                
+
+                        
+                    ],
+                ],
+
+                
+            ],
         ],
 
         // [
@@ -900,6 +965,8 @@ return [
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
+
+              
                /* [
                     'text' => 'K1000 MCG',
                     'route'  => 'kmil_poderosa2.index',
@@ -1281,23 +1348,7 @@ return [
             ],
         ],
 
-        [
-            'text'    => 'PANEL 3',
-            'icon'    => 'fas fa-search',
-            'can' => 'premium.admin',
-            'icon_color' => 'cyan',
-            'submenu' => [
-                [
-                    'text' => 'login',
-                    'route'  => 'panel3.login',
-                    'can' => 'premium.admin',
-                    'icon_color' => 'red',
-                    'icon'    => 'fas fa-angle-right',
-                ],
-
-             
-            ],
-        ],
+       
 
         [
             'text'    => 'PARADIGSAMPLE',
@@ -1531,24 +1582,7 @@ return [
         ],
 
           
-        [
-            'text'    => 'SURVEY JUNKIE',
-            'icon'    => 'fas fa-crown',
-            'can' => 'premium.admin',
-            'icon_color' => 'cyan',
-            'submenu' => [
-                [
-                    'text' => 'Spectrum',
-                    'route'  => 'spectrum.sj',
-                    'can' => 'premium.admin',
-                       'icon_color' => 'red',
-                    'icon'    => 'fas fa-angle-right',
-                ],
-        
-
-                
-            ],
-        ],
+      
 
 
         [

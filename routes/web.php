@@ -109,11 +109,12 @@ Route::get('/test-pva-auth', function() {
 });
 
         //Jumpers
-         Route::get('SPECTRUM-SSI',[JumpersController::class,'spectrum_ssi'])->name('spectrum_ssi.index')->middleware('permission:menu.premium');
+        Route::get('SPECTRUM-SSI',[JumpersController::class,'spectrum_ssi'])->name('spectrum_ssi.index')->middleware('permission:menu.premium');
         Route::get('k1000-PS',[JumpersController::class,'kmil_poderosa1'])->name('kmil_poderosa1.index')->middleware('permission:menu.premium');
         Route::get('k1000-PM',[JumpersController::class,'kmil_poderosa2'])->name('kmil_poderosa2.index')->middleware('permission:menu.premium');
         Route::get('k23-P-K2',[JumpersController::class,'k23_poderosa'])->name('k23_poderosa.index')->middleware('permission:menu.premium');
         Route::get('k23-P',[JumpersController::class,'k23_poderosa_SK2'])->name('k23_poderosa_SK2.index')->middleware('permission:menu.premium');
+        Route::get('k1050',[JumpersController::class,'kmil_cincuenta'])->name('kmil_cincuenta.index')->middleware('permission:premium.admin');
         Route::get('k1083',[JumpersController::class,'k1083'])->name('k1083.index')->middleware('permission:menu.premium');
         Route::get('ktmr_ssi',[JumpersController::class,'ktmr_ssi'])->name('ktmr_ssi.index')->middleware('permission:menu.premium');
         Route::get('ipso',[JumpersController::class,'ipso'])->name('ipso.index')->middleware('permission:menu.premium');
@@ -316,6 +317,9 @@ Route::get('/test-pva-auth', function() {
         Route::get('admin_users', [AdminController::class, 'users'])->name('admin.users')->middleware('permission:administracion_principal');
         Route::get('admin_pagos', [AdminController::class, 'pagos'])->name('admin.pagos')->middleware('permission:administracion_principal');
         Route::get('admin_jumpers', [AdminController::class, 'jumpers'])->name('admin.jumpers')->middleware('permission:administracion_principal');
+        Route::get('admin_registroc', [AdminController::class, 'registroc'])->name('admin.registroc')->middleware('permission:premium.admin');
+
+
 
         Route::get('admin_ganancias', [AdminController::class, 'ganancias'])->name('admin.ganancias.index')->middleware('permission:administracion_principal');
         Route::get('sales', [AdminController::class, 'sales'])->name('admin.sales')->middleware('permission:admin.sales');

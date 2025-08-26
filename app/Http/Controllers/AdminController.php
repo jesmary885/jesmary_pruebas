@@ -11,6 +11,10 @@ class AdminController extends Controller
         return view('admin.users_jump');
     }
 
+    public function registroc(){
+        return view('admin.registroc');
+    }
+
     public function users(){
         return view('admin.users');
     }
