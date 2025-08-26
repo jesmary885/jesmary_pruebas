@@ -66,7 +66,7 @@
 
         @else
             <div class="px-6 py-4 justify-center mt-4 text-center w-full">
-                ---No hay cuentas registradas por tu usuario---
+                ---No hay cuentas registradas---
             </div>
         @endif
 
