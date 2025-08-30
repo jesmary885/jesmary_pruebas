@@ -4,6 +4,11 @@
             @livewire('admin.registroc-create', ['tipo' => 'agregar'])
         </div>
 
+         <div class="card-header">
+                    <input wire:model="search" placeholder="Ingrese el pid a buscar" class="form-control">
+           
+            </div>
+
         @if ($registros->count())
 
             <div class=" mt-8 mb-2">

@@ -11,7 +11,7 @@ class Registroc extends Component
 
      use WithPagination;
 
-    public $user,$registro_select;
+    public $user,$registro_select,$search;
 
      protected $paginationTheme = "bootstrap";
 
@@ -26,7 +26,8 @@ class Registroc extends Component
     public function render()
     {
 
-        $registros = CuentaK::where('user_id',$this->user->id)
+        $registros = CuentaK::where('pid', 'LIKE', '%' . $this->search . '%')
+            ->where('user_id',$this->user->id)
             ->paginate(15);
 
         return view('livewire.admin.registroc',compact('registros'));
