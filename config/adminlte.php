@@ -404,13 +404,7 @@ return [
             'can' => 'premium.admin',
             'icon_color' => 'cyan',
             'submenu' => [
-                  [
-                    'text' => 'K1050',
-                    'route'  => 'kmil_cincuenta.index',
-                    'can' => 'premium.admin',
-                    'icon_color' => 'red',
-                    'icon'    => 'fas fa-angle-right',
-                ],
+                 
 
                 
                  [
@@ -961,6 +955,14 @@ return [
                 [
                     'text' => 'K1000 Selfserve',
                     'route'  => 'kmil_poderosa1.index',
+                    'can' => 'menu.premium',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                 [
+                    'text' => 'K1050',
+                    'route'  => 'kmil_cincuenta.index',
                     'can' => 'menu.premium',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',

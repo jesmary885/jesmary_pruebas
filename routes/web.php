@@ -114,7 +114,7 @@ Route::get('/test-pva-auth', function() {
         Route::get('k1000-PM',[JumpersController::class,'kmil_poderosa2'])->name('kmil_poderosa2.index')->middleware('permission:menu.premium');
         Route::get('k23-P-K2',[JumpersController::class,'k23_poderosa'])->name('k23_poderosa.index')->middleware('permission:menu.premium');
         Route::get('k23-P',[JumpersController::class,'k23_poderosa_SK2'])->name('k23_poderosa_SK2.index')->middleware('permission:menu.premium');
-        Route::get('k1050',[JumpersController::class,'kmil_cincuenta'])->name('kmil_cincuenta.index')->middleware('permission:premium.admin');
+        Route::get('k1050',[JumpersController::class,'kmil_cincuenta'])->name('kmil_cincuenta.index')->middleware('permission:menu.premium');
         Route::get('k1083',[JumpersController::class,'k1083'])->name('k1083.index')->middleware('permission:menu.premium');
         Route::get('ktmr_ssi',[JumpersController::class,'ktmr_ssi'])->name('ktmr_ssi.index')->middleware('permission:menu.premium');
         Route::get('ipso',[JumpersController::class,'ipso'])->name('ipso.index')->middleware('permission:menu.premium');
