@@ -108,7 +108,7 @@ class Index extends Component
         }else{
 
             $registros = Numeros::where('numero', 'LIKE', '%' . $this->search . '%')
-            ->where('user_id',$this->lider)
+            //->where('user_id',$this->lider)
             ->paginate(15);
 
 
