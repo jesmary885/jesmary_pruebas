@@ -595,21 +595,12 @@ return [
         ],
 
          [
-            'text'    => 'numeros',
-            'icon'    => 'fas fa-search',
+            'text'    => 'STR NUMBERS',
+            'icon'    => '	fas fa-tty',
             'can' => 'numeros.pva',
-            'icon_color' => 'cyan',
-            'submenu' => [
-                [
-                    'text' => 'Buscador principal',
-                    'route'  => 'numero.index',
-                    'can' => 'numeros.pva',
-                    'icon_color' => 'red',
-                    'icon'    => 'fas fa-angle-right',
-                ],
-
-                
-            ],
+            'icon_color' => 'red',
+             'route'  => 'numero.index',
+                        
         ],
 
         [

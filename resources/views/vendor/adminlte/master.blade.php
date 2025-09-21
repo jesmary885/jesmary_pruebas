@@ -270,6 +270,37 @@
         })
     </script>
 
+     <script>
+        livewire.on('alert3', (msj) => {
+
+              Swal.fire({
+                title: msj,
+                showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+                }
+
+        })
+        })
+    </script>
+
+       <script>
+        livewire.on('alert4', (msj) => {
+
+            Swal.fire({
+                title: '¡Atención!',
+                text: msj,
+                icon: "info"
+            });
+
+        })
+    </script>
+
+
+    
+
     {{-- Custom Scripts --}}
     @yield('adminlte_js')
 </body>

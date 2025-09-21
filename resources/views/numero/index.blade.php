@@ -3,7 +3,7 @@
 
 <div class="flex justify-between">
     
-    <h1 class="text-lg ml-2"><i class="fas fa-cart-arrow-down"></i>numero</h1>
+    <h1 class="text-lg ml-2"><i class="fas fa-tty "></i> STR NUMBERS</h1>
 
 </div>
 

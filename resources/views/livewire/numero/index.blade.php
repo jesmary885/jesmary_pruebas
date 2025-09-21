@@ -1,143 +1,80 @@
-<div class="container mx-auto p-4"
-     x-data="numberActivator({{ $checkInterval * 1000 }})"
-     x-init="init">
+<div class="container" >
+    <div>
 
-    <div class="max-w-md mx-auto bg-white rounded-lg shadow-md p-6">
-        <h2 class="text-xl font-semibold mb-4">Activar Número y Recibir Mensajes</h2>
-        
-        <!-- Campo para ingresar número -->
-        <div class="mb-4">
-            <label for="phoneNumber" class="block text-sm font-medium text-gray-700 mb-1">
-                Número de teléfono (ej: +1234567890)
-            </label>
-            <div class="flex gap-2">
-                <input
-                    wire:model="phoneNumber"
-                    type="text"
-                    id="phoneNumber"
-                    placeholder="+1234567890"
-                    class="flex-1 border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    @if($isLoading) disabled @endif
-                >
-                <button
-                    wire:click="activateNumber"
-                    wire:loading.attr="disabled"
-                    class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded disabled:opacity-50"
-                >
-                    <span wire:loading.remove>Activar</span>
-                    <span wire:loading wire:target="activateNumber">Procesando...</span>
-                </button>
+         <div class="card-header">
+                    <input wire:model="search" placeholder="Ingrese el número a buscar" class="form-control">
             </div>
-            @error('phoneNumber') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-        </div>
-        
-        <!-- Estado de activación -->
-        @if($activationStatus)
-            <div class="p-3 mb-4 rounded 
-                @if(str_contains($activationStatus, 'Error')) bg-red-100 text-red-800
-                @elseif($isActive) bg-green-100 text-green-800
-                @else bg-blue-100 text-blue-800 @endif">
-                {{ $activationStatus }}
-                @if($isLoading)
-                <div class="inline-block ml-2 animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-blue-500"></div>
-                @endif
+
+        @if ($registros->count())
+
+            <div class=" mt-8 mb-2">
+                <h3 class="font-semibold text-lg text-gray-200 leading-tight mb-3">REGISTRO NÚMEROS</h3>
             </div>
-        @endif
-        
-        <!-- Mensajes recibidos -->
-        @if($isActive && $serviceId)
-            <div class="border-t pt-4">
-                <h3 class="text-lg font-medium mb-2">Mensajes Recibidos</h3>
-                
-                @if(count($messages) > 0)
-                    <div class="space-y-3 max-h-60 overflow-y-auto">
-                        @foreach($messages as $message)
-                            <div class="border-b pb-3 last:border-b-0">
-                                <p class="text-sm text-gray-500">{{ $message['createdAt'] ?? 'Fecha desconocida' }}</p>
-                                <p class="font-medium">{{ $message['smsText'] ?? 'Sin texto' }}</p>
-                                @if($message['smsCode'] ?? false)
-                                    <p class="text-sm text-gray-600 mt-1">
-                                        Código: <span class="font-mono bg-gray-100 px-2 py-1 rounded">{{ $message['smsCode'] }}</span>
-                                    </p>
-                                @endif
-                            </div>
+
+              <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
+                <table class="table text-sm table-bordered table-responsive-lg table-responsive-md table-responsive-sm">
+                    <thead class="text-xs uppercase bg-gray-700 text-gray-400">
+                            <tr>
+                           
+                                <th class="text-center py-3 text-white text-md">
+                                    Número
+                                </th>
+
+                                 <th class="text-center py-3 text-white text-md">
+                                    Panel
+                                </th>
+                             
+                                <th class="text-center py-3 text-white text-md">
+
+                                    Activar
+                                </th>
+
+                            </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach ($registros as $registro)
+                             <tr class="bg-gray-800 border-gray-700 hover:bg-gray-600">
+                                <td class="py-3 text-center font-medium whitespace-nowrap text-white">
+                                    {{$registro->numero}}
+                                </td>
+
+                                <td class="py-3 text-center font-medium whitespace-nowrap text-white">
+                                    {{$registro->type}}
+                                </td>
+
+                            
+
+                                
+
+
+                                <td class="text-center">
+                                    <button class="text-green-600 text-xl hover:text-green-400"
+                                        
+                                    wire:click="Activar('{{$registro->id}}')">
+                                    <i class="fas fa-share"></i>	
+                                </button>
+                                </td>
+                            </tr>
                         @endforeach
-                    </div>
-                @else
-                    <p class="text-gray-500 text-center py-4">No se han recibido mensajes aún</p>
-                @endif
+                    </tbody>
+                </table>
+            </div>
+
+        @else
+            <div class="px-6 py-4 justify-center mt-4 text-center w-full">
+                ---No hay números registrados---
             </div>
         @endif
+
+        @if ($registros->count())
+            
+            <div class="px-6 py-4">
+                {{ $registros->links() }}
+            </div>
+            
+        @endif
+
     </div>
 
-
-    @section('js')
-
-        <script>
-        function numberActivator(checkInterval) {
-            return {
-                init() {
-                    // Escuchar eventos de Livewire
-                    Livewire.on('startStatusCheck', () => {
-                        this.checkStatus();
-                    });
-                    
-                    Livewire.on('continueStatusCheck', () => {
-                        setTimeout(() => {
-                            this.checkStatus();
-                        }, checkInterval);
-                    });
-                    
-                    Livewire.on('startMessagePolling', () => {
-                        this.startPolling(checkInterval);
-                    });
-                    
-                    Livewire.on('notifyNewMessage', (data) => {
-                        this.notify(data.message);
-                    });
-                    
-                    this.requestNotificationPermission();
-                },
-                
-                checkStatus() {
-                    @this.checkNumberStatus();
-                },
-                
-                startPolling(interval) {
-                    setInterval(() => {
-                        @this.loadMessages();
-                    }, interval);
-                },
-                
-                requestNotificationPermission() {
-                    if (Notification.permission !== 'granted') {
-                        Notification.requestPermission();
-                    }
-                },
-                
-                notify(message) {
-                    // Notificación del navegador
-                    if (Notification.permission === 'granted') {
-                        new Notification('Nuevo mensaje recibido', {
-                            body: message
-                        });
-                    }
-                    
-                    // Notificación toast si Toastify está disponible
-                    if (typeof Toastify === 'function') {
-                        Toastify({
-                            text: message,
-                            duration: 5000,
-                            close: true,
-                            gravity: "top",
-                            position: "right",
-                            backgroundColor: "#4CAF50",
-                        }).showToast();
-                    }
-                }
-            }
-        }
-        </script>
-
-    @stop
 </div>

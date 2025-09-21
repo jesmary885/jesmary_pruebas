@@ -53,35 +53,50 @@ class RegistrocCreate extends Component
 
     public function procesar(){
 
-        if($this->tipo == 'agregar'){
+        $buscar = CuentaK::where('pid',$this->pid)->first();
 
-            CuentaK::create([
-                'pid' => $this->pid,
-                'hash' => $this->hash,
-                'user_id' => $this->user->id,
-            ]);
+        if($buscar){
 
-            $this->reset(['hash','pid']);
+    
+        $this->emitTo('admin.registroc','render');
+            $this->emit('alert','Ya el pid se encuentra registrado'); 
 
-            $this->emit('alert','Cuenta registrada correctamente'); 
+            $this->isopen = false; 
 
         }
         else{
 
-            $registro_modf = CuentaK::where('id',$this->registro)->first();
+             if($this->tipo == 'agregar'){
 
-            $registro_modf->update([
-                'pid' => $this->pid,
-                'hash' => $this->hash,
-            ]);
+                CuentaK::create([
+                    'pid' => $this->pid,
+                    'hash' => $this->hash,
+                    'user_id' => $this->user->id,
+                ]);
 
-            $this->emit('alert','Datos modificados correctamente');
+                $this->reset(['hash','pid']);
+
+                $this->emit('alert','Cuenta registrada correctamente'); 
+
+            }
+            else{
+
+                $registro_modf = CuentaK::where('id',$this->registro)->first();
+
+                $registro_modf->update([
+                    'pid' => $this->pid,
+                    'hash' => $this->hash,
+                ]);
+
+                $this->emit('alert','Datos modificados correctamente');
+            }
+
+            $this->emitTo('admin.registroc','render');
+            $this->isopen = false; 
+
             
-
         }
 
-        $this->emitTo('admin.registroc','render');
-        $this->isopen = false; 
-
+       
     }
 }
