@@ -68,7 +68,7 @@ class Index extends Component
     
 
                 if($respuesta['Codigo'] == 'Tiempo de esperado para recibir el codigo 2 minutos'){
-                    $this->emit('alert4','Envia en aproximadamente 2 minutos');
+                    $this->emit('alert4','Envia aproximadamente en 2 minutos');
                 }
                 else{
 
