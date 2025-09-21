@@ -8,7 +8,7 @@
         @if ($registros->count())
 
             <div class=" mt-8 mb-2">
-                <h3 class="font-semibold text-lg text-gray-200 leading-tight mb-3">REGISTRO NÚMEROS</h3>
+                <h3 class="font-semibold text-lg text-gray-200 leading-tight mb-3">REGISTRO DE NÚMEROS</h3>
             </div>
 
               <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
