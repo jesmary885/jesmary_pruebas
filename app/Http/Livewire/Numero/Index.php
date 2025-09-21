@@ -102,14 +102,14 @@ class Index extends Component
 
             $registros = Numeros::where('numero', 'LIKE', '%' . $this->search . '%')
                 //->where('user_id',auth()->user()->id)
-                ->paginate(15);
+                ->get();
 
 
         }else{
 
             $registros = Numeros::where('numero', 'LIKE', '%' . $this->search . '%')
             //->where('user_id',$this->lider)
-            ->paginate(15);
+            ->get();
 
 
         }

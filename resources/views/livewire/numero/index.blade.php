@@ -67,13 +67,7 @@
             </div>
         @endif
 
-        @if ($registros->count())
-            
-            <div class="px-6 py-4">
-                {{ $registros->links() }}
-            </div>
-            
-        @endif
+
 
     </div>
 
