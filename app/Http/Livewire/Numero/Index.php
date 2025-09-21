@@ -101,7 +101,7 @@ class Index extends Component
         if($this->rol == 'Admin'){
 
             $registros = Numeros::where('numero', 'LIKE', '%' . $this->search . '%')
-                ->where('user_id',auth()->user()->id)
+                //->where('user_id',auth()->user()->id)
                 ->paginate(15);
 
 
