@@ -259,9 +259,9 @@ Route::get('/test-pva-auth', function() {
          Route::get('numero',[JumpersController::class,'numero'])->name('numero.index')->middleware('permission:numeros.pva');
       //  Route::get('generador_p_vo',[JumpersController::class,'generador_new_vo'])->name('generador_vo.index')->middleware('permission:menu.premium');
 
-        Route::get('Polltastic',[JumpersController::class,'pollsaltador'])->name('poll.saltador')->middleware('permission:menu.premium');
-        Route::get('Polltastic_preguntas',[JumpersController::class,'pollpreguntas'])->name('poll.preguntas')->middleware('permission:menu.premium');
-        Route::get('Polltastic_edad_preguntas',[JumpersController::class,'polledad'])->name('poll.edad')->middleware('permission:menu.premium');
+        Route::get('Polltastic',[JumpersController::class,'pollsaltador'])->name('poll.saltador')->middleware('permission:premium.vip');
+        Route::get('Polltastic_preguntas',[JumpersController::class,'pollpreguntas'])->name('poll.preguntas')->middleware('permission:premium.vip');
+        Route::get('Polltastic_edad_preguntas',[JumpersController::class,'polledad'])->name('poll.edad')->middleware('permission:premium.vip');
 
 
         Route::get('Panel1',[JumpersController::class,'panel1Login'])->name('panel1.login')->middleware('permission:menu.premium');
