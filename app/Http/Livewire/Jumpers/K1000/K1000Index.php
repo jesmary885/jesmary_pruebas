@@ -120,6 +120,8 @@ class K1000Index extends Component
             
             $pid_buscar_def = substr($this->pid_buscar, 0, 6).rand(1101,9909);
 
+          
+
             try {
                 $client = new Client(['base_uri' => 'http://146.190.74.228/',]);
     

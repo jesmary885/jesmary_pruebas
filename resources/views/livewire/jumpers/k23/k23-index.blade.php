@@ -164,7 +164,7 @@
                             <tbody>
                                 <tr>
                                     <td class="text-center">{{$busqueda_link->jumperType->name}}</td>
-                                    <td class="text-center">{{$busqueda_link->psid}}</td>
+                                    <td class="text-center">{{$psid_buscar}}</td>
                                     <td class="text-center">{{$busqueda_link->created_at->format('d/m/Y')}}</td>
                                     @if ($pid_detectado == 'no')
                                     <td class="text-center"> 
@@ -173,6 +173,27 @@
                                                 <div >
                                                     <input type="number" wire:model.defer="pid_manual" class="rounded-sm bg-light py-1 px-1"  placeholder="{{__('messages.ingrese_pdi')}}">
                                                     <x-input-error for="pid_manual" />
+                                                </div>
+                                                <div>
+                                                    <button
+                                                        class="btn-outline-secondary py-1 px-1 ml-2" 
+                                                        wire:click="jumpear()">
+                                                        <i class="font-semibold fas fa-sync"></i>
+                                                
+                                                    </button>
+                                                </div>
+                                            </div>
+                                    </td>
+                                    @endif
+
+
+                                    @if ($psid_buscar == 'vacio')
+                                    <td class="text-center"> 
+                                            <div class="flex justify-center">
+                                        
+                                                <div >
+                                                    <input type="number" wire:model.defer="psid_buscar" class="rounded-sm bg-light py-1 px-1"  placeholder="{{__('messages.ingrese_psid')}}">
+                                                    <x-input-error for="psid_buscar" />
                                                 </div>
                                                 <div>
                                                     <button

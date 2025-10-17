@@ -43,7 +43,11 @@ class K23Index extends Component
         $rules_pid = $this->rules_pid;
         $this->validate($rules_pid);
 
+
+
         $this->pid_buscar = $this->pid_manual;
+
+        
 
         $link_register_search = Links_usados::where('link',$this->search)
             ->where('k_detected','K=23')
@@ -79,6 +83,8 @@ class K23Index extends Component
     }
 
     public function numerologia(){
+
+       
 
         $cant = Antibot::count();
         $random = rand(1,$cant);
@@ -142,6 +148,8 @@ class K23Index extends Component
             else{
                 $chanel_buscar = '2';
             }
+
+            
 
             try {
                 $client = new Client([
@@ -321,12 +329,76 @@ class K23Index extends Component
         if($long_psid>=5){
 
                 $busqueda_ast_ = strpos($this->search, '**');
-            
+
+
                 if($busqueda_ast_ !== false){
                     $busqueda_id= strpos($this->search, '**');
 
-                    if(session('psid')) $this->psid_buscar = substr($this->search,($busqueda_id - 22),11).substr(session('psid'),11,11);
-                    else $this->psid_buscar = substr($this->search,($busqueda_id - 22),22);
+                    if($busqueda_id){
+
+                        $this->psid_buscar = substr($this->search,($busqueda_id - 22),22);
+                    }else{
+
+                        $busqueda_id= strpos($this->search, 'psid=');
+                        $busqueda_id2= strpos($this->search, 'PSID=');
+                        $busqueda_id3= strpos($this->search, 'EXTID=');
+                        $busqueda_id4= strpos($this->search, 'extid=');
+                        $busqueda_id5= strpos($this->search, 'APID=');
+                        $busqueda_id6= strpos($this->search, 'apid=');
+
+
+                        if($busqueda_id !== false || $busqueda_id2 !== false || $busqueda_id3 !== false || $busqueda_id4 !== false || $busqueda_id5 !== false || $busqueda_id6 !== false){
+
+                            if($busqueda_id !== false || $busqueda_id2 !== false || $busqueda_id5 !== false || $busqueda_id6 !== false){
+                        
+                                $posicion_id = $busqueda_id + 5;
+                                $p_pisd=$busqueda_id + 5;
+                            }
+
+                            if($busqueda_id3 !== false || $busqueda_id4 !== false ){
+                        
+                                $posicion_id = $busqueda_id + 6;
+                                $p_pisd=$busqueda_id + 6;
+                            }
+
+                            $i_id = 0;
+                            $busq_id = 0;
+                                        
+                            do{
+                                $detect_id= substr($this->search, $posicion_id,1);
+                    
+                                if($detect_id == '&') $i_id = 1;
+                                else{
+                                    $posicion_id = $posicion_id + 1;
+                                    $busq_id ++;
+                                }
+
+                                if($busq_id > 1000){
+                                    $i_id = 1;
+                                }
+                    
+                            }while($i_id != 1);
+
+                            if($busq_id < 1000){
+                                $this->psid_buscar = substr($this->search,($p_pisd),($posicion_id - ($p_pisd)));
+                            }
+
+                        }
+                        else{
+
+                            $this->psid_buscar = 'vacio';
+
+                        }
+
+                    }
+                }
+
+
+
+                
+
+                   /* if(session('psid')) $this->psid_buscar = substr($this->search,($busqueda_id - 22),11).substr(session('psid'),11,11);
+                    else $this->psid_buscar = substr($this->search,($busqueda_id - 22),22);*/
 
                     $busqueda_ids= strpos($this->search, 'IDS=');
 
@@ -958,7 +1030,7 @@ class K23Index extends Component
                             $this->jumper_detect = 3;
                         }
     
-                        if($this->jumper_detect == 0 && $this->pid_detectado == 'si'){
+                        if($this->jumper_detect == 0 && $this->pid_detectado == 'si' && $this->psid_detectado != 'vacio'){
 
                             if($this->jumper_list == 0){
 
@@ -1123,11 +1195,8 @@ class K23Index extends Component
     
                         
               
-                }
-                else{
-                    $this->calc_link = 0;
-                }
-                        
+                
+              
                 session()->forget('search');
         }
         else{

@@ -178,7 +178,7 @@
                 @endif
 
 
-            @if($busqueda_link || $jumper_complete || $pid_detectado == 'no' && $jumper_detect == 0)
+            @if($busqueda_link || $jumper_complete || $pid_detectado == 'no' || $psid_buscar == 'vacio' && $jumper_detect == 0)
 
                 <div class="table-responsive">
                     <table class="table table-striped table-responsive">
@@ -198,7 +198,30 @@
                             <tbody>
                                 <tr>
                                     <td class="text-center">{{$busqueda_link->jumperType->name}}</td>
-                                    <td class="text-center">{{$busqueda_link->psid}}</td>
+                                    @if ($psid_buscar == 'vacio')
+                                        <td class="text-center"> 
+                                                <div class="flex justify-center">
+                                            
+                                                    <div >
+                                                        <input type="text" wire:model.defer="psid_prov" class="rounded-sm bg-light py-1 px-1"  placeholder="Ingrese el PSID">
+                                                        <x-input-error for="psid_prov" />
+                                                    </div>
+                                                    <div>
+                                                        <button
+                                                            class="btn-outline-secondary py-1 px-1 ml-2" 
+                                                            wire:click="jumpear()">
+                                                            <i class="font-semibold fas fa-sync"></i>
+                                                    
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                        </td>
+                                    @else
+
+                                        <td class="text-center">{{$busqueda_link->psid}}</td>
+
+                                    @endif
+                                    
                                     <td class="text-center">{{$busqueda_link->created_at->format('d/m/Y')}}</td>
                                     @if ($pid_detectado == 'no')
                                     <td class="text-center"> 
