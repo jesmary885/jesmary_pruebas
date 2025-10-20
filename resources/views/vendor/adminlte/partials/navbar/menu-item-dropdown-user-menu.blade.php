@@ -41,7 +41,7 @@
 
     </div>
     
-    <li class="nav-item dropdown d-none d-md-block">
+    {{-- <li class="nav-item dropdown d-none d-md-block">
         <a href="#" class="nav-link dropdown-toggle text-gray-800 font-semibold" data-toggle="dropdown">
             @if(session('psid'))
                 <span class=" text-cyan-500 font-bold">
@@ -64,7 +64,7 @@
                 <a class="block dropdown-item " href="#"> Su cuenta esta inactiva </a> 
             @endif
         </ul>
-    </li>
+    </li> --}}
 
     <li class="nav-item dropdown d-none d-md-block">
         <a href="#" class="nav-link dropdown-toggle text-gray-800 font-semibold" data-toggle="dropdown">

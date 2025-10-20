@@ -1011,7 +1011,7 @@ class K1050Index extends Component
                             }
 
         
-                            if($this->jumper_detect == 0 && $this->pid_detectado == 'si'){
+                            if($this->jumper_detect == 0 && $this->pid_detectado == 'si' && $this->psid_buscar != 'vacio'){
 
                                 if($this->jumper_list == 0){
 

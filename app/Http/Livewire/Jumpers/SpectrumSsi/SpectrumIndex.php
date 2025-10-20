@@ -496,7 +496,7 @@ class SpectrumIndex extends Component
                         
 
 
-                        if($this->jumper_detect == 0){
+                        if($this->jumper_detect == 0 && $this->psid_buscar != 'vacio'){
 
                             if($this->jumper_list == 0){
                                 $link_register_search = Links_usados::where('link',$this->search)

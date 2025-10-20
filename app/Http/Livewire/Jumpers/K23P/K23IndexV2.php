@@ -131,6 +131,8 @@ class K23IndexV2 extends Component
                 $this->pid_buscar = $this->pid_manual;
             }
 
+            if($this->psid_buscar == 'vacio') $this->psid_buscar = $this->psid_prov;
+
             
             $busqueda_selfserver= strpos($this->search, 'selfserve/');
 

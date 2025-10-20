@@ -18,7 +18,7 @@ class K2062Index extends Component
     use WithPagination;
     protected $paginationTheme = "bootstrap";
 
-    public  $user,$operacion,$jumper_complete = [],$jumper_list = 0,$busqueda_link,$comment_new_psid_register,$pid_register_high,$psid_register_bh,$high_register_bh,$basic_register_bh,$posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $wix_detect = '0', $psid_register=0,$jumper_redirect,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$is_high,$is_basic,$calc_link,$jumper_select,$points_user_positive, $points_user_negative, $jumper_detect_k ='',$pid_manual,$pid_detectado = 'si',$pid_buscar,$psid_buscar,$ord_buscar ;
+    public  $psid_prov,$user,$operacion,$jumper_complete = [],$jumper_list = 0,$busqueda_link,$comment_new_psid_register,$pid_register_high,$psid_register_bh,$high_register_bh,$basic_register_bh,$posicionpid,$psid_detectado,$posicion_total_k,$posicionk,$no_jumpear,$posicion, $no_detect = '0', $jumper_detect = 0, $k_detect = '0', $wix_detect = '0', $psid_register=0,$jumper_redirect,$link_complete_2,$calculo_high = 0,$pid_new=0,$search,$jumper_2,$points_user,$user_auth,$comentario,$is_high,$is_basic,$calc_link,$jumper_select,$points_user_positive, $points_user_negative, $jumper_detect_k ='',$pid_manual,$pid_detectado = 'si',$pid_buscar,$psid_buscar,$ord_buscar ;
 
     protected $listeners = ['render' => 'render', 'registro_psid' => 'registro_psid', 'verific' => 'verific'];
     
@@ -40,11 +40,26 @@ class K2062Index extends Component
         'pid_manual' => 'required|min:8',
     ];
 
+    protected $rules_psid_prov = [
+        'psid_prov' => 'required|min:6',
+    ];
+
     public function jumpear(){
         $rules_pid = $this->rules_pid;
         $this->validate($rules_pid);
 
         $this->pid_buscar = $this->pid_manual;
+
+         if($this->psid_buscar == 'vacio'){
+
+             $rules_psid_prov = $this->rules_psid_prov;
+
+              $this->validate($rules_psid_prov );
+
+              $this->psid_buscar = $this->psid_prov;
+
+
+        }
 
         $link_register_search = Links_usados::where('link',$this->search)
                 ->where('k_detected','K=2062')
@@ -86,6 +101,8 @@ class K2062Index extends Component
                 if($this->pid_manual){
                     $this->pid_buscar = $this->pid_manual;
                 }
+
+                if($this->psid_buscar == 'vacio') $this->psid_buscar = $this->psid_prov;
 
                
 
@@ -268,13 +285,100 @@ class K2062Index extends Component
 
         if($long_psid>=5){
 
-                $busqueda_ast_ = strpos($this->search, '**');
-            
-                if($busqueda_ast_ !== false){
-                    $busqueda_id= strpos($this->search, '**');
+             $busqueda_id= strpos($this->search, '**');
 
-                    if(session('psid')) $this->psid_buscar = substr($this->search,($busqueda_id - 22),11).substr(session('psid'),11,11);
-                    else $this->psid_buscar = substr($this->search,($busqueda_id - 22),22);
+                if($busqueda_id !== false){
+             
+                    $this->psid_buscar = substr($this->search,($busqueda_id - 22),22);
+
+                    //$psid_save_total  = substr($this->search,($busqueda_id - 5),5);
+
+                }else{
+
+                    $busqueda_id1= strpos($this->search, 'psid=');
+                    $busqueda_id2= strpos($this->search, 'PSID=');
+                    $busqueda_id3= strpos($this->search, 'EXTID=');
+                    $busqueda_id4= strpos($this->search, 'extid=');
+                    $busqueda_id5= strpos($this->search, 'APID=');
+                    $busqueda_id6= strpos($this->search, 'apid=');
+
+
+                    if($busqueda_id1 !== false || $busqueda_id2 !== false || $busqueda_id3 !== false || $busqueda_id4 !== false || $busqueda_id5 !== false || $busqueda_id6 !== false){
+
+                        if($busqueda_id1 !== false){
+                        
+                            $posicion_id1 = $busqueda_id1 + 5;
+                            $p_pisd=$busqueda_id1 + 5;
+                            $pos = $busqueda_id1 + 5;
+                        }
+
+                        if($busqueda_id2 !== false){
+                        
+                            $posicion_id2 = $busqueda_id2 + 5;
+                            $p_pisd=$busqueda_id2 + 5;
+                            $pos = $busqueda_id2 + 5;
+                        }
+
+                        if($busqueda_id3 !== false ){
+                        
+                            $posicion_id3 = $busqueda_id3 + 6;
+                            $p_pisd=$busqueda_id3 + 6;
+                            $pos = $busqueda_id3 + 6;
+
+                        }
+
+                        if($busqueda_id4 !== false ){
+                        
+                            $posicion_id4 = $busqueda_id4 + 6;
+                            $p_pisd=$busqueda_id4 + 6;
+                            $pos = $busqueda_id4 + 6;
+                        }
+
+                        if($busqueda_id5 !== false){
+                        
+                            $posicion_id5 = $busqueda_id5 + 5;
+                            $p_pisd=$busqueda_id5 + 5;
+                            $pos = $busqueda_id5 + 5;
+                        }
+
+                        if($busqueda_id6 !== false){
+                        
+                            $posicion_id6 = $busqueda_id6 + 5;
+                            $p_pisd=$busqueda_id6 + 5;
+                            $pos = $busqueda_id6 + 5;
+                        }
+
+                            $i_id = 0;
+                            $busq_id = 0;
+                                        
+                            do{
+                                $detect_id= substr($this->search, $pos,1);
+                    
+                                if($detect_id == '&') $i_id = 1;
+                                else{
+                                    $pos = $pos + 1;
+                                    $busq_id ++;
+                                }
+
+                                if($busq_id > 1000){
+                                    $i_id = 1;
+                                }
+                    
+                            }while($i_id != 1);
+
+                            if($busq_id < 1000){
+                                $this->psid_buscar = substr($this->search,($p_pisd),($pos - ($p_pisd)));
+                            }
+
+                    }else{
+
+                        $this->psid_buscar = 'vacio';
+
+                    }
+
+                }
+
+
 
                     $busqueda_ord= strpos($this->search, '=ORD');
 
@@ -971,10 +1075,8 @@ class K2062Index extends Component
                     }
 
                     
-                }
-                else{
-                    $this->jumper_detect = 3;
-                }
+                
+               
                         
                 session()->forget('search');
         }

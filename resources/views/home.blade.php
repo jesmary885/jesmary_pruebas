@@ -239,10 +239,10 @@
 
                 
 
-                      <ul class="ml-4 mb-0 fa-ul text-muted">
+                      {{-- <ul class="ml-4 mb-0 fa-ul text-muted">
 
                       <li class="medium mt-2"><span class="fa-li"><i class="	fas fa-lg fa-money-bill-wave text-cyan-500 font-bold"></i></span> Tasa de cambio: 1$ = {{$tasa_dia_dolar}} Bs. - 1LTC = {{$tasa_dia_ltc}} $  </li>
-                      </ul>
+                      </ul> --}}
 
                     </div>
                     <div class="col-2 text-center">
