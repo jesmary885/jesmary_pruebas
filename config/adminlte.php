@@ -929,7 +929,7 @@ return [
                 [
                     'text' => 'Identificador de versión',
                     'route'  => 'version.index',
-                    'can' => 'menu.premium.v2',
+                    'can' => 'menu.premium',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
@@ -1004,7 +1004,7 @@ return [
                 [
                     'text' => 'K23 V2',
                     'route'  => 'k23_poderosav2.index',
-                    'can' => 'menu.premium.v2',
+                    'can' => 'menu.premium',
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
                     'label'       => 'With K2',
