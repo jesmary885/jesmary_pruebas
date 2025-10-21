@@ -357,7 +357,7 @@ class K23Index extends Component
 
                 }else{
 
-                    $busqueda_id1= strpos($this->search, 'psid=');
+                  /*  $busqueda_id1= strpos($this->search, 'psid=');
                     $busqueda_id2= strpos($this->search, 'PSID=');
                     $busqueda_id3= strpos($this->search, 'EXTID=');
                     $busqueda_id4= strpos($this->search, 'extid=');
@@ -408,7 +408,32 @@ class K23Index extends Component
                             $posicion_id6 = $busqueda_id6 + 5;
                             $p_pisd=$busqueda_id6 + 5;
                             $pos = $busqueda_id6 + 5;
+                        }*/
+
+                    $busqueda_id1= strpos($this->search, 'psid=');
+                    $busqueda_id2= strpos($this->search, 'PSID=');
+      
+
+
+                    if($busqueda_id1 !== false || $busqueda_id2 !== false ){
+
+                        if($busqueda_id1 !== false){
+                        
+                            $posicion_id1 = $busqueda_id1 + 5;
+                            $p_pisd=$busqueda_id1 + 5;
+                            $pos = $busqueda_id1 + 5;
                         }
+
+                        if($busqueda_id2 !== false){
+                        
+                            $posicion_id2 = $busqueda_id2 + 5;
+                            $p_pisd=$busqueda_id2 + 5;
+                            $pos = $busqueda_id2 + 5;
+                        }
+
+                 
+
+                     
 
                             $i_id = 0;
                             $busq_id = 0;

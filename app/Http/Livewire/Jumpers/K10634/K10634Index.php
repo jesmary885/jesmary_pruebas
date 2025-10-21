@@ -294,13 +294,10 @@ class K10634Index extends Component
 
                     $busqueda_id1= strpos($this->search, 'psid=');
                     $busqueda_id2= strpos($this->search, 'PSID=');
-                    $busqueda_id3= strpos($this->search, 'EXTID=');
-                    $busqueda_id4= strpos($this->search, 'extid=');
-                    $busqueda_id5= strpos($this->search, 'APID=');
-                    $busqueda_id6= strpos($this->search, 'apid=');
+      
 
 
-                    if($busqueda_id1 !== false || $busqueda_id2 !== false || $busqueda_id3 !== false || $busqueda_id4 !== false || $busqueda_id5 !== false || $busqueda_id6 !== false){
+                    if($busqueda_id1 !== false || $busqueda_id2 !== false ){
 
                         if($busqueda_id1 !== false){
                         
@@ -314,35 +311,6 @@ class K10634Index extends Component
                             $posicion_id2 = $busqueda_id2 + 5;
                             $p_pisd=$busqueda_id2 + 5;
                             $pos = $busqueda_id2 + 5;
-                        }
-
-                        if($busqueda_id3 !== false ){
-                        
-                            $posicion_id3 = $busqueda_id3 + 6;
-                            $p_pisd=$busqueda_id3 + 6;
-                            $pos = $busqueda_id3 + 6;
-
-                        }
-
-                        if($busqueda_id4 !== false ){
-                        
-                            $posicion_id4 = $busqueda_id4 + 6;
-                            $p_pisd=$busqueda_id4 + 6;
-                            $pos = $busqueda_id4 + 6;
-                        }
-
-                        if($busqueda_id5 !== false){
-                        
-                            $posicion_id5 = $busqueda_id5 + 5;
-                            $p_pisd=$busqueda_id5 + 5;
-                            $pos = $busqueda_id5 + 5;
-                        }
-
-                        if($busqueda_id6 !== false){
-                        
-                            $posicion_id6 = $busqueda_id6 + 5;
-                            $p_pisd=$busqueda_id6 + 5;
-                            $pos = $busqueda_id6 + 5;
                         }
 
                             $i_id = 0;
