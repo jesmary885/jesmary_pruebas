@@ -454,27 +454,100 @@ class K1000Index extends Component
             if($busqueda_link_https !== false || $busqueda_link_http !== false ){
 
                 if($busqueda_k1000_ !== false){
-                    
-                    $busqueda_ast_ = strpos($this->search, '**');
 
-                    
-                    if($busqueda_ast_ !== false){
-                        $busqueda_id= strpos($this->search, '**');
-                                        
-                     /*  if(session('psid')) $this->psid_buscar = substr($this->search,($busqueda_id - 22),11).substr(session('psid'),11,11);
-                        else $this->psid_buscar = substr($this->search,($busqueda_id - 22),22);
 
-                        $psid_save_total  = substr($this->search,($busqueda_id - 5),5);
+                    $busqueda_id= strpos($this->search, '**');
 
-                        $buscar_psid_user = CuentasPsid::where('user_id',Auth::id())
-                            ->where('psid',$psid_save_total)->count();
+                    if($busqueda_id !== false){
+                
+                        $this->psid_buscar = substr($this->search,($busqueda_id - 22),22);
+
+                        //$psid_save_total  = substr($this->search,($busqueda_id - 5),5);
+
+                    }else{
+
+                        $busqueda_id1= strpos($this->search, 'psid=');
+                        $busqueda_id2= strpos($this->search, 'PSID=');
+                        $busqueda_id3= strpos($this->search, 'EXTID=');
+                        $busqueda_id4= strpos($this->search, 'extid=');
+                        $busqueda_id5= strpos($this->search, 'APID=');
+                        $busqueda_id6= strpos($this->search, 'apid=');
+
+
+                        if($busqueda_id1 !== false || $busqueda_id2 !== false || $busqueda_id3 !== false || $busqueda_id4 !== false || $busqueda_id5 !== false || $busqueda_id6 !== false){
+
+                            if($busqueda_id1 !== false){
+                            
+                                $posicion_id1 = $busqueda_id1 + 5;
+                                $p_pisd=$busqueda_id1 + 5;
+                                $pos = $busqueda_id1 + 5;
+                            }
+
+                            if($busqueda_id2 !== false){
+                            
+                                $posicion_id2 = $busqueda_id2 + 5;
+                                $p_pisd=$busqueda_id2 + 5;
+                                $pos = $busqueda_id2 + 5;
+                            }
+
+                            if($busqueda_id3 !== false ){
+                            
+                                $posicion_id3 = $busqueda_id3 + 6;
+                                $p_pisd=$busqueda_id3 + 6;
+                                $pos = $busqueda_id3 + 6;
+
+                            }
+
+                            if($busqueda_id4 !== false ){
+                            
+                                $posicion_id4 = $busqueda_id4 + 6;
+                                $p_pisd=$busqueda_id4 + 6;
+                                $pos = $busqueda_id4 + 6;
+                            }
+
+                            if($busqueda_id5 !== false){
+                            
+                                $posicion_id5 = $busqueda_id5 + 5;
+                                $p_pisd=$busqueda_id5 + 5;
+                                $pos = $busqueda_id5 + 5;
+                            }
+
+                            if($busqueda_id6 !== false){
+                            
+                                $posicion_id6 = $busqueda_id6 + 5;
+                                $p_pisd=$busqueda_id6 + 5;
+                                $pos = $busqueda_id6 + 5;
+                            }
+
+                                $i_id = 0;
+                                $busq_id = 0;
+                                            
+                                do{
+                                    $detect_id= substr($this->search, $pos,1);
                         
-                        if($buscar_psid_user == 0){
-                            $psid_user_register= new CuentasPsid();
-                            $psid_user_register->user_id = Auth::id();
-                            $psid_user_register->psid = $psid_save_total;
-                            $psid_user_register->save();
-                        }*/
+                                    if($detect_id == '&') $i_id = 1;
+                                    else{
+                                        $pos = $pos + 1;
+                                        $busq_id ++;
+                                    }
+
+                                    if($busq_id > 1000){
+                                        $i_id = 1;
+                                    }
+                        
+                                }while($i_id != 1);
+
+                                if($busq_id < 1000){
+                                    $this->psid_buscar = substr($this->search,($p_pisd),($pos - ($p_pisd)));
+                                }
+
+                        }else{
+
+                            $this->psid_buscar = 'vacio';
+
+                        }
+
+                    }
 
 
                         if(session('pid')){
@@ -1264,9 +1337,7 @@ class K1000Index extends Component
 
                         }
 
-                    }
-
-                    session()->forget('search');
+                 
                 }
 
                 else{

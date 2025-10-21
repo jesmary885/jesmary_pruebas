@@ -466,8 +466,8 @@ class SsidkrIndex extends Component
                                 if(strlen($this->search) == 11){
                                     $subs_psid =  substr($this->search,0,5);
                                     $psid_complete = $subs_psid;
-                                    if(session('psid'))$psid_complete = substr($this->search,0,11).substr(session('psid'),11,11);
-                                    else  $psid_complete = $subs_psid;
+                                  //  if(session('psid'))$psid_complete = substr($this->search,0,11).substr(session('psid'),11,11);
+                                    /*else*/  $psid_complete = $subs_psid;
 
                                 }
                             }
@@ -483,8 +483,10 @@ class SsidkrIndex extends Component
                                     $subs_psid = substr($this->search,($busqueda_psid_ + 5),5);
                                     $subs_psid_sin_cortar = substr($this->search,($busqueda_psid_ + 5));
 
-                                    if(session('psid'))$psid_complete = substr($subs_psid_sin_cortar,0,11).substr(session('psid'),11,11);
-                                    else  $psid_complete = substr($subs_psid_sin_cortar,0,22);
+                                   // if(session('psid'))$psid_complete = substr($subs_psid_sin_cortar,0,11).substr(session('psid'),11,11);
+                                  //  else  $psid_complete = substr($subs_psid_sin_cortar,0,22);
+
+                                  $psid_complete = $subs_psid_sin_cortar;
 
                                 }
                                 else{
@@ -493,8 +495,10 @@ class SsidkrIndex extends Component
 
                                     if(strlen($this->search) < 22) $this->no_jumpear = 1; 
 
-                                    if(session('psid'))$psid_complete = substr($this->search,0,11).substr(session('psid'),11,11);
-                                    else  $psid_complete = substr($this->search,0,22);
+                                   // if(session('psid'))$psid_complete = substr($this->search,0,11).substr(session('psid'),11,11);
+                                    //else  $psid_complete = substr($this->search,0,22);
+
+                                    $psid_complete = $this->search;
 
                                 }
                                 
@@ -544,8 +548,11 @@ class SsidkrIndex extends Component
                                     $subs_psid = substr($this->search,($busqueda_psid + 5),5);
                                     $subs_psid_sin_cortar = substr($this->search,($busqueda_psid + 5));
 
-                                    if(session('psid'))$psid_complete = substr($subs_psid_sin_cortar,0,11).substr(session('psid'),11,11);
-                                    else  $psid_complete = substr($subs_psid_sin_cortar,0,22);
+                                 /*   if(session('psid'))$psid_complete = substr($subs_psid_sin_cortar,0,11).substr(session('psid'),11,11);
+                                    else  $psid_complete = substr($subs_psid_sin_cortar,0,22);*/
+                                    $psid_complete = $subs_psid_sin_cortar;
+
+
 
                                     
 
@@ -561,9 +568,11 @@ class SsidkrIndex extends Component
                                         $subs_psid = substr($this->search,($busqueda_id+ 3),5);
                                         $subs_psid_sin_cortar = substr($this->search,($busqueda_id + 5));
                                         
-                                        if(session('psid'))$psid_complete = substr($subs_psid_sin_cortar,0,11).substr(session('psid'),11,11);
-                                        else  $psid_complete = substr($subs_psid_sin_cortar,0,21);
+                                        /*if(session('psid'))$psid_complete = substr($subs_psid_sin_cortar,0,11).substr(session('psid'),11,11);
+                                        else  $psid_complete = substr($subs_psid_sin_cortar,0,21);*/
                                         //$ultima_letra_psid_search = substr($this->search,($busqueda_id + 25),1);
+
+                                        $psid_complete = $subs_psid_sin_cortar;
                                     }
         
                                     else{
@@ -828,7 +837,7 @@ class SsidkrIndex extends Component
 
                             else{
                                
-                                if($jumper->id_id == 2){
+                                /*if($jumper->id_id == 2){
                                     $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?PSID='.$psid_complete.'%2A%2A&basic='.$jumper->basic.'&pe_ses_key=PSID&psid='.$psid_complete.'%2A%2A&rst=1';
                                 }
                                 elseif($jumper->id_id == 3){
@@ -836,7 +845,18 @@ class SsidkrIndex extends Component
                                 }
                                 else{
                                     $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?rst=1&psid='.$psid_complete.'**&basic='.$jumper->basic;
-                                }
+                                }*/
+
+                                    if($jumper->basic == '00000'){
+
+                                        $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?rst=1&psid='.$psid_complete;
+
+                                    }else{
+                                          $jumper_complete = 'https://dkr1.ssisurveys.com/projects/end?rst=1&psid='.$psid_complete.'&basic='.$jumper->basic;
+                                    }
+
+
+
                             }
 
                             $link_register = new Links_usados();
