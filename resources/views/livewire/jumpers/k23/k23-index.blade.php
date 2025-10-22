@@ -163,8 +163,10 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="text-center">{{$busqueda_link->jumperType->name}}</td>
+                                   
                                     @if ($psid_buscar == 'vacio')
+
+                                     <td class="text-center">-</td>
                                         <td class="text-center"> 
                                                 <div class="flex justify-center">
                                             
@@ -183,6 +185,8 @@
                                                 </div>
                                         </td>
                                     @else
+
+                                     <td class="text-center">{{$busqueda_link->jumperType->name}}</td>
 
                                         <td class="text-center">{{$busqueda_link->psid}}</td>
 

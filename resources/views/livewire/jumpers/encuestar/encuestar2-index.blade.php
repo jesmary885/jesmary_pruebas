@@ -25,9 +25,11 @@
 
                 <div class="flex col-span-1 mt-4">
                     <div class="custom-control custom-switch"> 
-                        <input value="1" wire:model="estado" type="checkbox" class="custom-control-input" id="customSwitch1">
-                        <label class="custom-control-label" for="customSwitch1">Habilitar jumper</label>
+                        <input value="1" wire:model="estado" type="checkbox" class="custom-control-input" id="customSwitch2">
+                        <label class="custom-control-label" for="customSwitch2">Habilitar jumper</label>
                     </div>
+
+                
                 </div>
             </div>
         </div>
