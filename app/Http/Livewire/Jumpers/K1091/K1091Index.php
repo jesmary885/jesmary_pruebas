@@ -119,7 +119,7 @@ class K1091Index extends Component
 
                     $link_register = new Links_usados();
                     $link_register->link = $this->search;
-                    $link_register->k_detected  = 'K=1098';
+                    $link_register->k_detected  = 'K=1091';
                     $link_register->user_id  = $this->user->id;
                     $link_register->link_resultado = $this->jumper_complete['jumper'];
                     $link_register->save();
@@ -281,15 +281,7 @@ class K1091Index extends Component
 
             if($busqueda_k1091_ !== false){
                 
-                $busqueda_id= strpos($this->search, '**');
-
-                if($busqueda_id !== false){
              
-                    $this->psid_buscar = substr($this->search,($busqueda_id - 22),22);
-
-                    //$psid_save_total  = substr($this->search,($busqueda_id - 5),5);
-
-                }else{
 
                     $busqueda_id1= strpos($this->search, 'psid=');
                     $busqueda_id2= strpos($this->search, 'PSID=');
@@ -445,7 +437,7 @@ class K1091Index extends Component
 
                     }
 
-                }
+                
 
                 
                 if($this->jumper_detect == 0 && $this->psid_buscar != 'vacio'){

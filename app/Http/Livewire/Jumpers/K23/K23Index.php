@@ -347,124 +347,53 @@ class K23Index extends Component
 
         if($long_psid>=5){
 
-                $busqueda_id= strpos($this->search, '**');
-
-                if($busqueda_id !== false){
-             
-                    $this->psid_buscar = substr($this->search,($busqueda_id - 22),22);
-
-                    //$psid_save_total  = substr($this->search,($busqueda_id - 5),5);
-
-                }else{
-
-                  /*  $busqueda_id1= strpos($this->search, 'psid=');
-                    $busqueda_id2= strpos($this->search, 'PSID=');
-                    $busqueda_id3= strpos($this->search, 'EXTID=');
-                    $busqueda_id4= strpos($this->search, 'extid=');
-                    $busqueda_id5= strpos($this->search, 'APID=');
-                    $busqueda_id6= strpos($this->search, 'apid=');
-
-
-                    if($busqueda_id1 !== false || $busqueda_id2 !== false || $busqueda_id3 !== false || $busqueda_id4 !== false || $busqueda_id5 !== false || $busqueda_id6 !== false){
-
-                        if($busqueda_id1 !== false){
-                        
-                            $posicion_id1 = $busqueda_id1 + 5;
-                            $p_pisd=$busqueda_id1 + 5;
-                            $pos = $busqueda_id1 + 5;
-                        }
-
-                        if($busqueda_id2 !== false){
-                        
-                            $posicion_id2 = $busqueda_id2 + 5;
-                            $p_pisd=$busqueda_id2 + 5;
-                            $pos = $busqueda_id2 + 5;
-                        }
-
-                        if($busqueda_id3 !== false ){
-                        
-                            $posicion_id3 = $busqueda_id3 + 6;
-                            $p_pisd=$busqueda_id3 + 6;
-                            $pos = $busqueda_id3 + 6;
-
-                        }
-
-                        if($busqueda_id4 !== false ){
-                        
-                            $posicion_id4 = $busqueda_id4 + 6;
-                            $p_pisd=$busqueda_id4 + 6;
-                            $pos = $busqueda_id4 + 6;
-                        }
-
-                        if($busqueda_id5 !== false){
-                        
-                            $posicion_id5 = $busqueda_id5 + 5;
-                            $p_pisd=$busqueda_id5 + 5;
-                            $pos = $busqueda_id5 + 5;
-                        }
-
-                        if($busqueda_id6 !== false){
-                        
-                            $posicion_id6 = $busqueda_id6 + 5;
-                            $p_pisd=$busqueda_id6 + 5;
-                            $pos = $busqueda_id6 + 5;
-                        }*/
-
-                    $busqueda_id1= strpos($this->search, 'psid=');
-                    $busqueda_id2= strpos($this->search, 'PSID=');
+                $busqueda_id1= strpos($this->search, 'psid=');
+                $busqueda_id2= strpos($this->search, 'PSID=');
       
 
 
-                    if($busqueda_id1 !== false || $busqueda_id2 !== false ){
+                if($busqueda_id1 !== false || $busqueda_id2 !== false ){
 
-                        if($busqueda_id1 !== false){
-                        
-                            $posicion_id1 = $busqueda_id1 + 5;
-                            $p_pisd=$busqueda_id1 + 5;
-                            $pos = $busqueda_id1 + 5;
-                        }
-
-                        if($busqueda_id2 !== false){
-                        
-                            $posicion_id2 = $busqueda_id2 + 5;
-                            $p_pisd=$busqueda_id2 + 5;
-                            $pos = $busqueda_id2 + 5;
-                        }
-
-                 
-
-                     
-
-                            $i_id = 0;
-                            $busq_id = 0;
-                                        
-                            do{
-                                $detect_id= substr($this->search, $pos,1);
-                    
-                                if($detect_id == '&') $i_id = 1;
-                                else{
-                                    $pos = $pos + 1;
-                                    $busq_id ++;
-                                }
-
-                                if($busq_id > 1000){
-                                    $i_id = 1;
-                                }
-                    
-                            }while($i_id != 1);
-
-                            if($busq_id < 1000){
-                                $this->psid_buscar = substr($this->search,($p_pisd),($pos - ($p_pisd)));
+                            if($busqueda_id1 !== false){
+                            
+                                $posicion_id1 = $busqueda_id1 + 5;
+                                $p_pisd=$busqueda_id1 + 5;
+                                $pos = $busqueda_id1 + 5;
                             }
 
-                    }else{
+                            if($busqueda_id2 !== false){
+                            
+                                $posicion_id2 = $busqueda_id2 + 5;
+                                $p_pisd=$busqueda_id2 + 5;
+                                $pos = $busqueda_id2 + 5;
+                            }
+                                    $i_id = 0;
+                                    $busq_id = 0;
+                                                
+                                    do{
+                                        $detect_id= substr($this->search, $pos,1);
+                            
+                                        if($detect_id == '&') $i_id = 1;
+                                        else{
+                                            $pos = $pos + 1;
+                                            $busq_id ++;
+                                        }
 
-                        $this->psid_buscar = 'vacio';
+                                        if($busq_id > 1000){
+                                            $i_id = 1;
+                                        }
+                            
+                                    }while($i_id != 1);
 
-                    }
+                                    if($busq_id < 1000){
+                                        $this->psid_buscar = substr($this->search,($p_pisd),($pos - ($p_pisd)));
+                                    }
+
+                }else{
+
+                    $this->psid_buscar = 'vacio';
 
                 }
-
 
 
                 
@@ -489,23 +418,21 @@ class K23Index extends Component
                                     $busq_ids_s ++;
                                 }
 
-                                if($busq_ids_s > 20){
+                                if($busq_ids_s > 200){
                                     $i_ids = 1;
                                 }
         
                             }while($i_ids != 1);
 
-                            if($busq_ids_s < 20)
+                            if($busq_ids_s < 200)
                                 $this->ids_buscar = substr($this->search,($busqueda_ids + 4),($posicion_ids - ($busqueda_ids + 4)));
 
-                            else
-                                //$this->ids_buscar = substr($this->search,($busqueda_ids + 4),20);
-                                $this->jumper_detect = 3;
+                            else $this->jumper_detect = 3;
                         }
 
                         else{
 
-                            $this->jumper_detect = 3;
+                             $ids_buscar=$this->pid_buscar;
                         }
 
 

@@ -292,15 +292,7 @@ class K1092Index extends Component
 
             if($busqueda_k1092_ !== false){
                 
-                $busqueda_id= strpos($this->search, '**');
-
-                if($busqueda_id !== false){
-             
-                    $this->psid_buscar = substr($this->search,($busqueda_id - 22),22);
-
-                    //$psid_save_total  = substr($this->search,($busqueda_id - 5),5);
-
-                }else{
+            
 
                     $busqueda_id1= strpos($this->search, 'psid=');
                     $busqueda_id2= strpos($this->search, 'PSID=');
@@ -455,7 +447,7 @@ class K1092Index extends Component
 
                     }
 
-                }
+                
 
                 
                 if($this->jumper_detect == 0 && $this->psid_buscar != 'vacio'){

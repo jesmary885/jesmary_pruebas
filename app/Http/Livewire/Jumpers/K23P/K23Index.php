@@ -266,6 +266,8 @@ class K23Index extends Component
                             else
                                 //$this->ids_buscar = substr($this->search,($busqueda_ids + 4),20);
                                 $this->jumper_detect = 3;
+                }else{
+                    $ids_buscar=$this->pid_buscar;
                 }
 
                 $busqueda_k2= strpos($this->search, '&K2=');
@@ -563,64 +565,52 @@ class K23Index extends Component
             if($busqueda_k23_ !== false){
 
 
-                $busqueda_id= strpos($this->search, '**');
-
-                if($busqueda_id !== false){
-             
-                    $this->psid_buscar = substr($this->search,($busqueda_id - 22),22);
-
-                    //$psid_save_total  = substr($this->search,($busqueda_id - 5),5);
-
-                }else{
-
-                    $busqueda_id1= strpos($this->search, 'psid=');
-                    $busqueda_id2= strpos($this->search, 'PSID=');
+                $busqueda_id1= strpos($this->search, 'psid=');
+                $busqueda_id2= strpos($this->search, 'PSID=');
       
 
 
-                    if($busqueda_id1 !== false || $busqueda_id2 !== false ){
+                if($busqueda_id1 !== false || $busqueda_id2 !== false ){
 
-                        if($busqueda_id1 !== false){
-                        
-                            $posicion_id1 = $busqueda_id1 + 5;
-                            $p_pisd=$busqueda_id1 + 5;
-                            $pos = $busqueda_id1 + 5;
-                        }
-
-                        if($busqueda_id2 !== false){
-                        
-                            $posicion_id2 = $busqueda_id2 + 5;
-                            $p_pisd=$busqueda_id2 + 5;
-                            $pos = $busqueda_id2 + 5;
-                        }
-
-                            $i_id = 0;
-                            $busq_id = 0;
-                                        
-                            do{
-                                $detect_id= substr($this->search, $pos,1);
-                    
-                                if($detect_id == '&') $i_id = 1;
-                                else{
-                                    $pos = $pos + 1;
-                                    $busq_id ++;
-                                }
-
-                                if($busq_id > 1000){
-                                    $i_id = 1;
-                                }
-                    
-                            }while($i_id != 1);
-
-                            if($busq_id < 1000){
-                                $this->psid_buscar = substr($this->search,($p_pisd),($pos - ($p_pisd)));
-                            }
-
-                    }else{
-
-                        $this->psid_buscar = 'vacio';
-
+                    if($busqueda_id1 !== false){
+                            
+                        $posicion_id1 = $busqueda_id1 + 5;
+                        $p_pisd=$busqueda_id1 + 5;
+                        $pos = $busqueda_id1 + 5;
                     }
+
+                    if($busqueda_id2 !== false){
+                            
+                        $posicion_id2 = $busqueda_id2 + 5;
+                        $p_pisd=$busqueda_id2 + 5;
+                        $pos = $busqueda_id2 + 5;
+                    }
+
+                    $i_id = 0;
+                    $busq_id = 0;
+                                                
+                    do{
+                        $detect_id= substr($this->search, $pos,1);
+                            
+                        if($detect_id == '&') $i_id = 1;
+                        else{
+                            $pos = $pos + 1;
+                            $busq_id ++;
+                        }
+
+                        if($busq_id > 1000){
+                            $i_id = 1;
+                        }
+                            
+                    }while($i_id != 1);
+
+                    if($busq_id < 1000){
+                        $this->psid_buscar = substr($this->search,($p_pisd),($pos - ($p_pisd)));
+                    }
+
+                }else{
+
+                    $this->psid_buscar = 'vacio';
 
                 }
 

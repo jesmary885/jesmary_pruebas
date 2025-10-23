@@ -295,15 +295,7 @@ class K3203Index extends Component
         if($long_psid>=5){
 
             
-                $busqueda_id= strpos($this->search, '**');
-
-                if($busqueda_id !== false){
-             
-                    $this->psid_buscar = substr($this->search,($busqueda_id - 22),22);
-
-                    //$psid_save_total  = substr($this->search,($busqueda_id - 5),5);
-
-                }else{
+          
 
                     $busqueda_id1= strpos($this->search, 'psid=');
                     $busqueda_id2= strpos($this->search, 'PSID=');
@@ -354,7 +346,7 @@ class K3203Index extends Component
 
                     }
 
-                }
+                
 
 
                 
