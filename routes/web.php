@@ -119,7 +119,7 @@ Route::get('/test-pva-auth', function() {
         Route::get('ktmr_ssi',[JumpersController::class,'ktmr_ssi'])->name('ktmr_ssi.index')->middleware('permission:menu.premium');
         Route::get('ipso',[JumpersController::class,'ipso'])->name('ipso.index')->middleware('permission:menu.premium');
 
-        Route::get('k23-P-K2v2',[JumpersController::class,'k23_poderosa_v2'])->name('k23_poderosav2.index')->middleware('permission:menu.premium.v2');
+        Route::get('k23-P-K2v2',[JumpersController::class,'k23_poderosa_v2'])->name('k23_poderosav2.index')->middleware('permission:menu.premium');
         Route::get('k1083v2',[JumpersController::class,'k1083_v2'])->name('k1083v2.index')->middleware('permission:menu.premium.v2');
         Route::get('detector',[JumpersController::class,'detector'])->name('version.index')->middleware('permission:menu.premium.v2');
 
