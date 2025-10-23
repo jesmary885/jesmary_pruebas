@@ -347,8 +347,7 @@ class K23IndexV2 extends Component
                     $chanel_buscar = '2';
                 }
 
-                dd($ids_buscar);
-
+   
             try {
 
                 $client = new Client([
