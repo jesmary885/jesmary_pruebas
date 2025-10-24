@@ -679,12 +679,17 @@ class K23Index extends Component
 
                                 if($busqueda_pid !== false || $busqueda_pid2 !== false || $busqueda_pid3 !== false || $busqueda_pid4 !== false || $busqueda_pid5 !== false || $busqueda_pid6 !== false || $busqueda_pid7 !== false || $busqueda_pid8 !== false || $busqueda_pid9 !== false || $busqueda_pid10 !== false){
                             
+                                    
+                                    
                                     if($busqueda_pid !== false){
                             
                                         $pid_detect_com= strpos($this->search, '&PID=');
                                         $posicion_pid = $pid_detect_com + 5;
                                         $pid_calculate = $pid_detect_com + 5;
                                         $cont_pid++;
+
+                                  
+
                                     }
                                     if($busqueda_pid2 !== false){ 
                                         
@@ -765,9 +770,11 @@ class K23Index extends Component
                                         }while($i != 1);
 
                                         if($busq_pid_s < 13){
-                                            if(is_numeric(substr($this->search,($pid_calculate),($posicion_pid - ($pid_calculate)))))
-                                                $this->pid_buscar = substr($this->search,($pid_calculate),($posicion_pid - ($pid_calculate)));
-                                                else {
+                                            if(is_numeric(substr($this->search,($pid_calculate),($posicion_pid - ($pid_calculate))))){
+                                                $this->pid_buscar = substr($this->search,($pid_calculate),($posicion_pid - ($pid_calculate))); 
+                                                
+                                            }else {
+
 
                                                     $this->pid_detectado = 'no';
                                                 
@@ -877,6 +884,8 @@ class K23Index extends Component
                                             
                                         }
                                         else{
+
+                                        
                                             if(is_numeric(substr($this->search,($pid_calculate),11)))
                                                 $this->pid_buscar = substr($this->search,($pid_calculate),11);
                                                 else {
@@ -987,6 +996,8 @@ class K23Index extends Component
                                                     }
                                                 }
                                         }
+
+                                   
 
                                     }
 
@@ -1099,6 +1110,8 @@ class K23Index extends Component
                     
                                 }
                                 else{
+
+                       
                                     $this->pid_detectado = 'no';
                                     $this->busqueda_link = Link::where('psid',substr($this->psid_buscar,0,5))->first();
                     
@@ -1204,6 +1217,8 @@ class K23Index extends Component
                                                     }
                                                 }
                                 }
+
+                         
                             }
 
         

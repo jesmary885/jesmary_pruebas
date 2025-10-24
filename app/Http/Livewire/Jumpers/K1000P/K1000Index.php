@@ -153,6 +153,8 @@ class K1000Index extends Component
                 $this->pid_buscar = $this->pid_manual;
             }
 
+       
+
 
             $busqueda_selfserver= strpos($this->search, 'selfserve/');
 
@@ -512,6 +514,7 @@ class K1000Index extends Component
 
                         if(session('pid')){
                             $this->pid_buscar = session('pid');
+
                         }
 
                         else{
