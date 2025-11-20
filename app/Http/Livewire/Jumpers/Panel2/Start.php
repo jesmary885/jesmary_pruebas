@@ -353,7 +353,7 @@ class Start extends Component
 
                 $client = new Client();
 
-                $resultado = $client->post('http://146.190.74.228/Startg_post/1/', [
+                $resultado = $client->post('http://147.182.190.233/Startgolden(abrir encuesta)/1/', [
                     'headers' => ['Content-Type' => 'application/json'],
                     'body' => json_encode([
                         'link' => $this->search
