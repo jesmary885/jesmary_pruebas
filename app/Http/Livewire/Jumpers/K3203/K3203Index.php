@@ -297,7 +297,7 @@ class K3203Index extends Component
             
           
 
-                    $busqueda_id1= strpos($this->search, 'psid=');
+                  /*  $busqueda_id1= strpos($this->search, 'psid=');
                     $busqueda_id2= strpos($this->search, 'PSID=');
       
 
@@ -340,11 +340,11 @@ class K3203Index extends Component
                                 $this->psid_buscar = substr($this->search,($p_pisd),($pos - ($p_pisd)));
                             }
 
-                    }else{
+                    }else{*/
 
                         $this->psid_buscar = 'vacio';
 
-                    }
+                   // }
 
                 
 
