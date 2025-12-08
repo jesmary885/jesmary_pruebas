@@ -351,26 +351,15 @@ class IpsoIndex extends Component
 
             if($busqueda_ipso_ !== false){
 
-                $busqueda_id= strpos($this->search, '**');
-
-                if($busqueda_id !== false){
-             
-                    $this->psid_buscar = substr($this->search,($busqueda_id - 22),22);
-
-                    //$psid_save_total  = substr($this->search,($busqueda_id - 5),5);
-
-                }else{
-
-           
+  
 
 
 
-                        $this->psid_buscar = 'vacio';
+                    $this->psid_buscar = 'vacio';
 
               
 
-                }
-
+          
 
                        /* $busqueda_id= strpos($this->search, '**');
 
