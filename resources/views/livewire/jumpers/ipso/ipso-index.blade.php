@@ -184,7 +184,7 @@
                     <table class="table table-striped table-responsive">
                             <thead class="thead-dark">
                                 <tr>
-                                    <th class="text-center">{{__('messages.Tipo')}}</th>
+                                   
                                     <th class="text-center">PSID</th>
                       
                                     <th class="text-center">{{__('messages.Subido')}}</th>
@@ -197,7 +197,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="text-center">{{$busqueda_link->jumperType->name}}</td>
+                                  
                                     @if ($psid_buscar == 'vacio')
                                         <td class="text-center"> 
                                                 <div class="flex justify-center">
