@@ -7,19 +7,23 @@ use Livewire\Component;
 use GuzzleHttp\Client;
 use Livewire\WithPagination;
 
-class Login extends Component
+class CalificadorP1 extends Component
 {
 
-    use WithPagination;
+     use WithPagination;
     protected $paginationTheme = "bootstrap";
 
-    public  $user,$jumper_complete = [],$jumper_detect = 0, $email, $contrasena;
+    public  $user,$jumper_complete = [],$jumper_detect = 0, $app_id, $ext_user_id, $token,$survey_id,$opcion;
 
     protected $listeners = ['render' => 'render'];
 
+
     protected $rules = [
-        'email' => 'required',
-        'contrasena' => 'required',
+        'app_id' => 'required',
+        'ext_user_id' => 'required',
+        'token' => 'required',
+        'survey_id' => 'required',
+        'opcion' => 'required',
     ];
     
     public function mount(){
@@ -31,48 +35,36 @@ class Login extends Component
         $this->user = User::where('id',auth()->user()->id)->first();
     }
 
-    public function clear(){
-        $this->reset(['email','contrasena']);
-       // $this->informacion_complete = [];
-        $this->jumper_complete = [];
-
-         $this->jumper_detect = 0;
-        //$this->emitTo('jumpers.encuestar.encuestar1-index','render');
-    }
 
     public function procesar(){
+
+  
 
         $rules = $this->rules;
         $this->validate($rules);
 
-         try {
+        try {
 
-       
+            
             $client = new Client([
                 //'base_uri' => 'http://127.0.0.1:8000',
                 'base_uri' => 'http://146.190.74.228/',
             ]);
 
-       
+
+
+            $resultado = $client->request('GET', 'Quaifield_auto_cpx_P1_P2/1/'.$this->app_id.'/'.$this->ext_user_id.'/'.$this->survey_id.'/'.$this->token.'/'.$this->opcion);
+
      
-         $resultado = $client->request('GET', 'Panel_polls/1/'.$this->email.'/'.$this->contrasena);
-
-
             if($resultado->getStatusCode() == 200){
 
-                $this->jumper_complete = json_decode($resultado->getBody(),true);
 
-            
+               $this->jumper_complete = json_decode($resultado->getBody(),true);
 
-         
-                
+           
+
                 if(!$this->jumper_complete)  $this->jumper_detect = 2;
-               /* else{
-                    $busqueda_https= strpos($this->informacion_complete['Survey'], 'ttps://');
 
-                    if($busqueda_https != false) $this->jumper_detect = 10;
-                    else $this->jumper_detect = 1;
-                }*/
             }
 
             else{
@@ -88,8 +80,6 @@ class Login extends Component
             if($e->hasResponse()){
                 if ($e->getResponse()->getStatusCode() !== '200'){
 
-      
-
                     $error['response'] = $e->getResponse(); 
                     $this->jumper_detect = 2;
                 }
@@ -99,6 +89,6 @@ class Login extends Component
 
     public function render()
     {
-        return view('livewire.jumpers.panel1.login');
+        return view('livewire.jumpers.panel1.calificador-p1');
     }
 }

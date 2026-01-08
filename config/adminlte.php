@@ -1306,6 +1306,30 @@ return [
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],
+                [
+                    'text' => 'Start P1',
+                    'route'  => 'panel1.startp1',
+                    'can' => 'premium.vip',
+                    'icon_color' => 'red',
+                 
+                    'icon'    => 'fas fa-angle-right',
+                ],
+                [
+                    'text' => 'Cpx Listar p1',
+                    'route'  => 'panel1.CpxListar',
+                    'can' => 'premium.vip',
+                    'icon_color' => 'red',
+               
+                    'icon'    => 'fas fa-angle-right',
+                ],
+                [
+                    'text' => 'Calificador P1',
+                    'route'  => 'panel1.CalificadorP1',
+                    'can' => 'premium.vip',
+                    'icon_color' => 'red',
+                
+                    'icon'    => 'fas fa-angle-right',
+                ],
             ],
         ],
 
@@ -1334,6 +1358,29 @@ return [
                 [
                     'text' => 'Jumper',
                     'route'  => 'panel2.jumper',
+                    'can' => 'premium.vip',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+                [
+                    'text' => 'Start P2',
+                    'route'  => 'panel2.startp2',
+                    'can' => 'premium.vip',
+                    'icon_color' => 'red',
+                 
+                    'icon'    => 'fas fa-angle-right',
+                ],
+                [
+                    'text' => 'Cpx Listar p2',
+                    'route'  => 'panel2.CpxListar',
+                    'can' => 'premium.vip',
+                    'icon_color' => 'red',
+                   
+                    'icon'    => 'fas fa-angle-right',
+                ],
+                [
+                    'text' => 'Calificador P2',
+                    'route'  => 'panel2.CalificadorP2',
                     'can' => 'premium.vip',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',

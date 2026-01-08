@@ -138,9 +138,21 @@ class JumpersController extends Controller
         return view('panel1.jumper');
     }
 
+
+    public function panel1Startp1(){
+        return view('panel1.Startp1');
+    }
+    public function panel1CpxListar(){
+        return view('panel1.CpxListar');
+    }
+    public function panel1CalificadorP1(){
+        return view('panel1.CalificadorP1');
+    }
+
      public function panel2Login(){
         return view('panel2.login');
     }
+
 
     public function panel2Start(){
         return view('panel2.start');
@@ -148,6 +160,16 @@ class JumpersController extends Controller
 
     public function panel2Jumper(){
         return view('panel2.jumper');
+    }
+
+    public function panel1Startp2(){
+        return view('panel2.Startp2');
+    }
+    public function panel2CpxListar(){
+        return view('panel2.CpxListar');
+    }
+    public function panel2CalificadorP2(){
+        return view('panel2.CalificadorP2');
     }
 
     public function pollsaltador(){

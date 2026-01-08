@@ -7,9 +7,8 @@ use Livewire\Component;
 use GuzzleHttp\Client;
 use Livewire\WithPagination;
 
-class Start extends Component
+class StartP1 extends Component
 {
-
     use WithPagination;
     protected $paginationTheme = "bootstrap";
 
@@ -350,8 +349,8 @@ class Start extends Component
 
          try {
 
-            
-            if($b_asper == 0){
+    
+           /* if($b_asper == 0){
 
                 $client = new Client([
                 //'base_uri' => 'http://127.0.0.1:8000',
@@ -360,7 +359,7 @@ class Start extends Component
 
                  $resultado = $client->request('GET', 'Startp/1/'.$e.'/'.$p.'/'.$c.'/'.$u.'/'.$s.'/'.$l.'/'.$r.'/'.$t.'/'.$o.'/'.$prcr.'/'.$h);
 
-            }else{
+            }else{*/
 
                 $client = new Client();
 
@@ -371,7 +370,7 @@ class Start extends Component
                     ])
                 ]);
 
-            }
+           // }
             
 
             if($resultado->getStatusCode() == 200){
@@ -379,18 +378,8 @@ class Start extends Component
                 $value = json_decode($resultado->getBody(),true);
 
                 
-
-                if (isset($value ['Encuesta'])) {
-
-                    $this->jumper_complete = $value ['Encuesta'];
-
-                } elseif (isset($value ['jumper'])) {
-
-                    $this->jumper_complete = $value ['jumper'];
-                }
-
-
-                if(!$this->jumper_complete)  $this->jumper_detect = 2;
+               // if(!$this->jumper_complete)  $this->jumper_detect = 2;
+                $this->jumper_complete = $e;
     
             }
 
@@ -408,19 +397,18 @@ class Start extends Component
             $error['request'] = $e->getRequest();
 
             if($e->hasResponse()){
-                if ($e->getResponse()->getStatusCode() !== '200'){
-
-      
+                if ($e->getResponse()->getStatusCode() !== '200'){    
 
                     $error['response'] = $e->getResponse(); 
                     $this->jumper_detect = 2;
+
+             
                 }
             }
         }
     }
-
     public function render()
     {
-        return view('livewire.jumpers.panel1.start');
+        return view('livewire.jumpers.panel1.start-p1');
     }
 }
