@@ -351,16 +351,16 @@ class Start extends Component
          try {
 
             
-            if($b_asper == 0){
+            // if($b_asper == 0){
 
-                $client = new Client([
-                //'base_uri' => 'http://127.0.0.1:8000',
-                    'base_uri' => 'http://146.190.74.228/',
-                ]);
+            //     $client = new Client([
+            //     //'base_uri' => 'http://127.0.0.1:8000',
+            //         'base_uri' => 'http://146.190.74.228/',
+            //     ]);
 
-                 $resultado = $client->request('GET', 'Startp/1/'.$e.'/'.$p.'/'.$c.'/'.$u.'/'.$s.'/'.$l.'/'.$r.'/'.$t.'/'.$o.'/'.$prcr.'/'.$h);
+            //      $resultado = $client->request('GET', 'Startp/1/'.$e.'/'.$p.'/'.$c.'/'.$u.'/'.$s.'/'.$l.'/'.$r.'/'.$t.'/'.$o.'/'.$prcr.'/'.$h);
 
-            }else{
+            // }else{
 
                 $client = new Client();
 
@@ -371,7 +371,7 @@ class Start extends Component
                     ])
                 ]);
 
-            }
+            // }
             
 
             if($resultado->getStatusCode() == 200){
