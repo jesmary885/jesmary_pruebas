@@ -377,6 +377,8 @@ class StartP1 extends Component
 
                 $value = json_decode($resultado->getBody(),true);
 
+             
+
                 
                // if(!$this->jumper_complete)  $this->jumper_detect = 2;
                 $this->jumper_complete = $e;

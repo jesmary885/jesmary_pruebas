@@ -264,19 +264,19 @@ Route::get('/test-pva-auth', function() {
         Route::get('Polltastic_edad_preguntas',[JumpersController::class,'polledad'])->name('poll.edad')->middleware('permission:premium.vip');
 
 
-        Route::get('Panel1',[JumpersController::class,'panel1Login'])->name('panel1.login')->middleware('permission:menu.premium');
-        Route::get('Panel1_Start',[JumpersController::class,'panel1Start'])->name('panel1.start')->middleware('permission:menu.premium');
-        Route::get('Panel1_Jumper',[JumpersController::class,'panel1Jumper'])->name('panel1.jumper')->middleware('permission:menu.premium');
-        Route::get('Panel1_StartP1',[JumpersController::class,'panel1Startp1'])->name('panel1.startp1')->middleware('permission:menu.premium');
-        Route::get('Panel1_CpxListar',[JumpersController::class,'panel1CpxListar'])->name('panel1.CpxListar')->middleware('permission:menu.premium');
-        Route::get('Panel1_CalificadorP1',[JumpersController::class,'panel1CalificadorP1'])->name('panel1.CalificadorP1')->middleware('permission:menu.premium');
+        Route::get('Panel1',[JumpersController::class,'panel1Login'])->name('panel1.login')->middleware('permission:premium.vip');
+        Route::get('Panel1_Start',[JumpersController::class,'panel1Start'])->name('panel1.start')->middleware('permission:premium.vip');
+        Route::get('Panel1_Jumper',[JumpersController::class,'panel1Jumper'])->name('panel1.jumper')->middleware('permission:premium.vip');
+        Route::get('Panel1_StartP1',[JumpersController::class,'panel1Startp1'])->name('panel1.startp1')->middleware('permission:premium.vip');
+        Route::get('Panel1_CpxListar',[JumpersController::class,'panel1CpxListar'])->name('panel1.CpxListar')->middleware('permission:premium.vip');
+        Route::get('Panel1_CalificadorP1',[JumpersController::class,'panel1CalificadorP1'])->name('panel1.CalificadorP1')->middleware('permission:premium.vip');
 
-        Route::get('Panel2',[JumpersController::class,'panel2Login'])->name('panel2.login')->middleware('permission:menu.premium');
-        Route::get('Panel2_Start',[JumpersController::class,'panel2Start'])->name('panel2.start')->middleware('permission:menu.premium');
-        Route::get('Panel2_Jumper',[JumpersController::class,'panel2Jumper'])->name('panel2.jumper')->middleware('permission:menu.premium');
-        Route::get('Panel2_StartP2',[JumpersController::class,'panel2Start'])->name('panel2.startp2')->middleware('permission:menu.premium');
-        Route::get('Panel2_CpxListar',[JumpersController::class,'panel2CpxListar'])->name('panel2.CpxListar')->middleware('permission:menu.premium');
-        Route::get('Panel2_CalificadorP2',[JumpersController::class,'panel2CalificadorP2'])->name('panel2.CalificadorP2')->middleware('permission:menu.premium');
+        Route::get('Panel2',[JumpersController::class,'panel2Login'])->name('panel2.login')->middleware('permission:premium.vip');
+        Route::get('Panel2_Start',[JumpersController::class,'panel2Start'])->name('panel2.start')->middleware('permission:premium.vip');
+        Route::get('Panel2_Jumper',[JumpersController::class,'panel2Jumper'])->name('panel2.jumper')->middleware('permission:premium.vip');
+        Route::get('Panel2_StartP2',[JumpersController::class,'panel2Start'])->name('panel2.startp2')->middleware('permission:premium.vip');
+        Route::get('Panel2_CpxListar',[JumpersController::class,'panel2CpxListar'])->name('panel2.CpxListar')->middleware('permission:premium.vip');
+        Route::get('Panel2_CalificadorP2',[JumpersController::class,'panel2CalificadorP2'])->name('panel2.CalificadorP2')->middleware('permission:premium.vip');
 
         Route::get('Panel3',[JumpersController::class,'panel3Login'])->name('panel3.login')->middleware('permission:premium.admin');
 
