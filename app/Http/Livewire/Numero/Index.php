@@ -55,15 +55,18 @@ class Index extends Component
 
         $numero = Numeros::where('id',$result)->first();
 
+
          try {
 
             $client = new Client(['base_uri' => 'http://67.205.168.133/',]);
         
-            $resultado = $client->request('GET', '/Text_verified/1/'.$numero->codigo );
+            $resultado = $client->request('GET', '/Text_verified/1/'.$numero->codigo);
 
             if($resultado->getStatusCode() == 200){
 
                 $respuesta = json_decode($resultado->getBody(),true);
+
+                //dd($respuesta);
 
     
 
@@ -72,7 +75,7 @@ class Index extends Component
                 // }
                 // else{
 
-                     $this->emit('alert3',' <p class="text-md text-gray-200 underline m-0 font-bold p-0 text-justify"> Fecha: </p>'.'<p class="text-sm text-gray-200 m-0 font-bold p-0 text-justify">'.$respuesta['Fecha']  .'</p>'.' <br> <p class="text-md underline text-gray-200 m-0 font-bold p-0 text-justify"> Código: '.'<p class="text-sm text-gray-200 m-0 font-bold p-0 text-justify">'. $respuesta['Codigo'].'</p>');
+                     $this->emit('alert3',' <p class="text-md text-gray-200 underline m-0 font-bold p-0 text-justify"> Fecha: </p>'.'<p class="text-sm text-gray-200 m-0 font-bold p-0 text-justify">'.$respuesta['Fecha']  .'</p>'.' <br> <p class="text-md underline text-gray-200 m-0 font-bold p-0 text-justify"> Código: '.'<p class="text-sm text-gray-200 m-0 font-bold p-0 text-justify">'. $respuesta['codigo'].'</p>');
                // }
 
             }
