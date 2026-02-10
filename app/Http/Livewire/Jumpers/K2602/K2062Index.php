@@ -117,11 +117,13 @@ class K2062Index extends Component
 
                     $this->jumper_complete = json_decode($resultado->getBody(),true);
 
+           
+
                     $link_register = new Links_usados();
                     $link_register->link = $this->search;
                     $link_register->k_detected  = 'K=2062';
                     $link_register->user_id  = $this->user->id;
-                    $link_register->link_resultado = $this->jumper_complete['jumper'];
+                    $link_register->link_resultado = $this->jumper_complete;
                     $link_register->save();
 
                     
@@ -286,57 +288,8 @@ class K2062Index extends Component
         if($long_psid>=5){
 
       
-                    $busqueda_id1= strpos($this->search, 'psid=');
-                    $busqueda_id2= strpos($this->search, 'PSID=');
-           
 
-
-                    if($busqueda_id1 !== false || $busqueda_id2 !== false ){
-
-                        if($busqueda_id1 !== false){
-                        
-                            $posicion_id1 = $busqueda_id1 + 5;
-                            $p_pisd=$busqueda_id1 + 5;
-                            $pos = $busqueda_id1 + 5;
-                        }
-
-                        if($busqueda_id2 !== false){
-                        
-                            $posicion_id2 = $busqueda_id2 + 5;
-                            $p_pisd=$busqueda_id2 + 5;
-                            $pos = $busqueda_id2 + 5;
-                        }
-
-                            $i_id = 0;
-                            $busq_id = 0;
-                                        
-                            do{
-                                $detect_id= substr($this->search, $pos,1);
-                    
-                                if($detect_id == '&') $i_id = 1;
-                                else{
-                                    $pos = $pos + 1;
-                                    $busq_id ++;
-                                }
-
-                                if($busq_id > 1000){
-                                    $i_id = 1;
-                                }
-                    
-                            }while($i_id != 1);
-
-                            if($busq_id < 1000){
-                                $this->psid_buscar = substr($this->search,($p_pisd),($pos - ($p_pisd)));
-                            }
-
-                    }else{
-
-                        $this->psid_buscar = 'vacio';
-
-                    }
-
-                
-
+                    $this->psid_buscar = 'vacio';
 
 
                     $busqueda_ord= strpos($this->search, '=ORD');
