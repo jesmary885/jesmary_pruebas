@@ -132,7 +132,7 @@ class K3203Index extends Component
                     $link_register = new Links_usados();
                     $link_register->link = $this->search;
                     $link_register->k_detected  = 'K=3203';
-                    $link_register->link_resultado = $this->jumper_complete['jumper'];
+                    $link_register->link_resultado = $this->jumper_complete;
                     $link_register->user_id  = $this->user->id;
                     $link_register->save();
 
