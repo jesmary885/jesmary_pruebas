@@ -172,6 +172,10 @@ class JumpersController extends Controller
         return view('panel2.CalificadorP2');
     }
 
+     public function survey_j_e(){
+        return view('survey_je.listar');
+    }
+
     public function pollsaltador(){
         return view('poll.saltador');
     }

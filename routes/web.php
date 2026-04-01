@@ -280,6 +280,10 @@ Route::get('/test-pva-auth', function() {
 
         Route::get('Panel3',[JumpersController::class,'panel3Login'])->name('panel3.login')->middleware('permission:premium.admin');
 
+    
+        
+        Route::get('survey_j_e',[JumpersController::class,'survey_j_e'])->name('survey_j_e.listar')->middleware('permission:menu.premium');
+
         Route::get('Inbrain_rex',[JumpersController::class,'inbrainrex'])->name('inbrain.rex')->middleware('permission:menu.premium');
         Route::get('Inbrain_profiled',[JumpersController::class,'inbrainprofiled'])->name('inbrain.profiled')->middleware('permission:menu.premium');
         Route::get('Inbrain_wix',[JumpersController::class,'inbrainwix'])->name('inbrain.wix')->middleware('permission:menu.premium');

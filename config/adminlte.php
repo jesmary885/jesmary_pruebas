@@ -1388,6 +1388,24 @@ return [
             ],
         ],
 
+
+        [
+            'text'    => 'SURVEY JUNKIE ENCUESTAS',
+            'icon'    => 'fas fa-search',
+            'can' => 'menu.premium',
+            'icon_color' => 'cyan',
+            'submenu' => [
+         
+                [
+                    'text' => 'Listar',
+                    'route'  => 'survey_j_e.listar',
+                    'can' => 'menu.premium',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+              
+            ],
+        ],
        
 
         [
