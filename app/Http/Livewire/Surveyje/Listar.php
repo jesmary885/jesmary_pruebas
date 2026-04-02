@@ -58,7 +58,7 @@ use WithPagination;
             ]);
 
 
-            $resultado = $client->request('GET', 'surveyjunkie_encuesta/1/'.$this->token.'/'.$this->user_idd.'/'.$this->ids);
+            $resultado = $client->request('GET', 'surveyjunkie_encuestas/1/'.$this->token.'/'.$this->user_idd.'/'.$this->ids);
 
      
             if($resultado->getStatusCode() == 200){

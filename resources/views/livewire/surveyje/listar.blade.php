@@ -129,11 +129,14 @@
 
                                             <th class="text-center"></th>
 
-                                            <th class="text-center">InternalUrl</th>
-            
-                                            <th class="text-center">ID</th>
-                                            <th class="text-center">Puntos</th>
-                                            <th class="text-center">tiempo</th>
+                                  
+
+                                            <th class="text-left">ID</th>
+                                            <th class="text-left">Puntos</th>
+                                            <th class="text-left">tiempo</th>
+
+                                                      <th class="text-left">InternalUrl</th>
+        
 
                                             </tr>
                                         </thead>
@@ -143,16 +146,18 @@
 
                                                     <th class=" text-center  text-white">
                                                     
-                                                        <div class="flex justify-center">
-                                                            <button onclick="copiarAlPortapapeles('jumper_copy_{{ $loop->index }}')" class="btn btn-sm btn-success text-bold" title="{{__('messages.copiar_portapapeles')}}" id="button_copy">Copiar ID</button> 
+                                                        <div class="flex justify-center text-sm">
+                                                            <button onclick="copiarAlPortapapeles('jumper_copy_{{ $loop->index }}')" class="btn btn-sm btn-success text-bold" title="{{__('messages.copiar_portapapeles')}}" id="button_copy">Copiar URL</button> 
                                                         </div>
 
                                                     </th>
 
-                                                    <td class="text-center" ><p  class="text-blue-400 font-bold " id="jumper_copy_{{ $loop->index }}"> {{$registro['internalUrl']}}</p></td>
-                                                    <td class="text-center">{{$registro['id']}}</td>
-                                                    <td class="text-center">{{$registro['points']}}</td>
-                                                    <td class="text-center">{{$registro['duration']}} min.</td>
+                                                    <td class="text-left text-sm">{{$registro['id']}}</td>
+                                                    <td class="text-left text-sm">{{$registro['points']}}</td>
+                                                    <td class="text-left text-sm">{{$registro['duration']}} min.</td>
+
+                                                    <td class="text-left text-sm" ><p  class="text-blue-400 text-sm font-bold " id="jumper_copy_{{ $loop->index }}"> {{$registro['internalUrl']}}</p></td>
+                                                    
 
                                                 </tr>
                                             @endforeach
