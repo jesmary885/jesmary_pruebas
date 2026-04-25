@@ -349,6 +349,13 @@ Route::get('/test-pva-auth', function() {
         //ENCUESTAR
 
         Route::get('encuestar',[JumpersController::class,'encuestar'])->name('encuestar.index')->middleware('permission:menu.encuestar');
+
+
+
+     //ADMIN ERIK
+
+     Route::get('admin_numeros_str', [AdminController::class, 'admin_numeros_str'])->name('admin.numeros.str.index')->middleware('permission:admin.erik');
+     Route::get('admin_cuentas_trabajadores', [AdminController::class, 'admin_cuentas_trabajadores'])->name('admin.cuentas.trab.index')->middleware('permission:admin.erik');
     });
 });
 

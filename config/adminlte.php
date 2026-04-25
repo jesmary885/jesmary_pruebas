@@ -456,6 +456,33 @@ return [
             ],
         ],
 
+
+         [
+            'text'    => 'ADMIN PREMIUM ',
+            'icon'    => 'fas fa-crown',
+            'can' => 'admin.erik',
+            'icon_color' => 'cyan',
+            'submenu' => [
+
+                 [
+                    'text' => 'Control de números',
+                    'route'  => 'admin.numeros.str.index',
+                    'icon'    => 'fas fa-server',
+                    'icon_color' => 'red',
+                    'can' => 'admin.erik'
+                ],
+
+                [
+                    'text' => 'Control de cuentas',
+                    'route'  => 'admin.cuentas.trab.index',
+                    'icon'    => 'fas fa-server',
+                    'icon_color' => 'red',
+                    'can' => 'admin.erik'
+                ],
+
+            ],
+        ],
+
         // [
         //     'text'    => 'SALE MARKET',
         //     'icon'    => 'fas fa-cart-arrow-down',

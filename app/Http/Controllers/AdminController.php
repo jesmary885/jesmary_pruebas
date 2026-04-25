@@ -102,4 +102,14 @@ class AdminController extends Controller
         return view('admin.links_gener');
     }
 
+    public function admin_numeros_str(){
+        return view('admin.numeros_str_admin');
+    }
+
+    public function admin_cuentas_trabajadores(){
+        return view('admin.cuentas_trabajadores');
+    }
+
+
+
 }
