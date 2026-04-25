@@ -104,14 +104,14 @@ class Index extends Component
         if($this->rol == 'Admin'){
 
             $registros = Numeros::where('numero', 'LIKE', '%' . $this->search . '%')
-                //->where('user_id',auth()->user()->id)
+                ->where('status','activo')
                 ->get();
 
 
         }else{
 
             $registros = Numeros::where('numero', 'LIKE', '%' . $this->search . '%')
-            //->where('user_id',$this->lider)
+                ->where('status','activo')
             ->get();
 
 

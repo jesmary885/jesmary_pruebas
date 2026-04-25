@@ -123,7 +123,7 @@ public $isopen = false;
                 $registro_modf->update([
                     'numero' => $this->numero,
                     'codigo' => $this->codigo,
-                    'status' => 'activo',
+                    'status' => $this->status,
                     'trabajador_id' => $this->trabajador_id
                 ]);
 

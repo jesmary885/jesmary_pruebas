@@ -36,7 +36,7 @@ class ControlCuentasRegistro extends Component
             $this->trabajadores = User::where('status','activo')
                 ->permission('ssidkr.index')
                 ->get();
-                
+
             $this->trabajador_id = $registro->trabajador_id;
 
         }
@@ -119,10 +119,12 @@ class ControlCuentasRegistro extends Component
 
                 $registro_modf = Numeros::where('id',$this->registro)->first();
 
+                dd($registro_modf);
+
                 $registro_modf->update([
                     'numero' => $this->numero,
                     'codigo' => $this->codigo,
-                    'status' => 'activo',
+                    'status' => $this->status,
                     'trabajador_id' => $this->trabajador_id
                 ]);
 
