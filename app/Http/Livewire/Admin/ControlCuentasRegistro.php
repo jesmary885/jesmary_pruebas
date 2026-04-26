@@ -33,9 +33,15 @@ class ControlCuentasRegistro extends Component
             $this->numero = $registro->numero;
             $this->codigo = $registro->codigo;
             $this->status = $registro->status;
-            $this->trabajadores = User::where('status','activo')
-                ->permission('ssidkr.index')
-                ->get();
+
+
+            $this->trabajadores = User::where('status', 'activo')
+                ->whereHas('permissions', function($query) {
+                    $query->where('name', 'ssidkr.index');
+                })
+                ->get(['id', 'name']); // Solo traer campos necesarios
+
+
 
             $this->trabajador_id = $registro->trabajador_id;
 
@@ -76,7 +82,7 @@ class ControlCuentasRegistro extends Component
             if($this->tipo == 'agregar'){
 
                 Numeros::create([
-                    'mumero' => $this->numero,
+                    'numero' => $this->numero,
                     'codigo' => $this->codigo,
                     'user_id' => '2',
                     'type' => 'ER',
@@ -84,7 +90,7 @@ class ControlCuentasRegistro extends Component
                 ]);
 
                 Numeros::create([
-                    'mumero' => $this->numero,
+                    'numero' => $this->numero,
                     'codigo' => $this->codigo,
                     'user_id' => '2',
                     'type' => 'VO',
@@ -93,7 +99,7 @@ class ControlCuentasRegistro extends Component
 
 
                 Numeros::create([
-                    'mumero' => $this->numero,
+                    'numero' => $this->numero,
                     'codigo' => $this->codigo,
                     'user_id' => '2',
                     'type' => 'QT',
@@ -118,8 +124,6 @@ class ControlCuentasRegistro extends Component
             else{
 
                 $registro_modf = Numeros::where('id',$this->registro)->first();
-
-                dd($registro_modf);
 
                 $registro_modf->update([
                     'numero' => $this->numero,
