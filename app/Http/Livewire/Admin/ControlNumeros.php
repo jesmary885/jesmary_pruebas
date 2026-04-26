@@ -31,11 +31,12 @@ class ControlNumeros extends Component
     public function render()
     {
 
-        $registros = Numeros::when($this->search, function($query, $search) {
-            return $query->where('numero', 'LIKE', '%' . $search . '%');
-        })
-        ->where('status','activo')
-        ->get();
+
+
+        $registros = Numeros::where('numero', 'LIKE', '%' . $this->search . '%')
+            ->where('status','activo')
+            ->get();
+
         return view('livewire.admin.control-numeros',compact('registros'));
     }
 
