@@ -17,10 +17,26 @@ public $isopen = false;
     protected $listeners = ['render'];
 
     protected $rules = [
-        'pid' => 'required',
-        'hash' => 'required',
+     
     
     ];
+
+    public function buscarTrabajadores($searchTerm = '')
+    {
+        if (strlen($searchTerm) < 2) {
+            $this->trabajadores = [];
+            return;
+        }
+
+        $this->trabajadores = User::where('type', 'gratis')
+            ->where(function($query) use ($searchTerm) {
+                $query->where('name', 'LIKE', "%{$searchTerm}%")
+                    ->orWhere('email', 'LIKE', "%{$searchTerm}%");
+            })
+            ->permission('ssidkr.index')
+            ->limit(20) // Solo 20 resultados
+            ->get(['id', 'name', 'email']);
+    }
 
     public function mount(){
 
@@ -46,8 +62,21 @@ public $isopen = false;
 
      public function open()
     {
-        $this->isopen = true;  
+        $this->isopen = true; 
+        
+        if ($this->tipo == 'editar' && !$this->trabajadores) {
+        // Cargar SOLO cuando se abre el modal
+            $this->trabajadores = User::where('type', 'gratis')
+                ->permission('ssidkr.index')
+                ->limit(100) // Límite máximo
+                ->orderBy('name')
+                ->get(['id', 'name']);
+            
+            $this->trabajadores = true;
+        }
     }
+
+
     public function close()
     {
         $this->isopen = false;  
@@ -108,6 +137,38 @@ public $isopen = false;
                         'type' => 'OO',
                         'status' => 'activo'
                     ]);
+
+                    Numeros::create([
+                    'numero' => '(1)'.$this->numero,
+                    'user_id' => '2',
+                    'type' => 'ER',
+                    'status' => 'activo'
+                ]);
+
+                Numeros::create([
+                    'numero' => '(1)'.$this->numero,
+                   
+                    'user_id' => '2',
+                    'type' => 'VO',
+                    'status' => 'activo'
+                ]);
+
+
+                Numeros::create([
+                    'numero' => '(1)'.$this->numero,
+                 
+                    'user_id' => '2',
+                    'type' => 'QT',
+                    'status' => 'activo'
+                ]);
+
+
+                Numeros::create([
+                    'numero' => '(1)'.$this->numero,
+                    'user_id' => '2',
+                    'type' => 'OO',
+                    'status' => 'activo'
+                ]);
 
                     $this->reset(['numero','codigo']);
 

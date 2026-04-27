@@ -21,6 +21,10 @@ class ControlCuentasRegistro extends Component
     
     ];
 
+
+
+   
+
     public function mount(){
 
          $this->user = auth()->user();
@@ -114,6 +118,9 @@ class ControlCuentasRegistro extends Component
                     'type' => 'OO',
                     'status' => 'activo'
                 ]);
+
+
+                
 
 
                 $this->reset(['numero','codigo']);

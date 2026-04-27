@@ -91,6 +91,10 @@
                 </table>
             </div>
 
+            <div class="card-footer">
+                    {{$registros->links()}}
+            </div>
+
         @else
             <div class="px-6 py-4 justify-center mt-4 text-center w-full">
                 ---No hay números registrados---

@@ -32,10 +32,10 @@ class ControlNumeros extends Component
     {
 
 
-
         $registros = Numeros::where('numero', 'LIKE', '%' . $this->search . '%')
             ->where('status','activo')
-            ->get();
+            ->latest('id')
+            ->paginate(25);
 
         return view('livewire.admin.control-numeros',compact('registros'));
     }

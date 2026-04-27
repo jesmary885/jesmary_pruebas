@@ -20,6 +20,10 @@ class Index extends Component
     protected $paginationTheme = "bootstrap";
     protected $listeners = ['render' => 'render'];
 
+    public function updatingSearch(){
+        $this->resetPage();
+    }
+
     public $lider,$rol,$search;
 
     public function mount(){
@@ -105,14 +109,18 @@ class Index extends Component
 
             $registros = Numeros::where('numero', 'LIKE', '%' . $this->search . '%')
                 ->where('status','activo')
-                ->get();
+                ->where('codigo','!=','')
+                ->latest('id')
+                ->paginate(20);
 
 
         }else{
 
             $registros = Numeros::where('numero', 'LIKE', '%' . $this->search . '%')
                 ->where('status','activo')
-            ->get();
+                ->where('codigo','!=','')
+                ->latest('id')
+                ->paginate(20);
 
 
         }
