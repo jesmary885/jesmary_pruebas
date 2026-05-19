@@ -1268,6 +1268,34 @@ return [
             ],
         ],
 
+        [
+            'text'    => 'LISTAR SSI',
+            'icon'    => 'fas fa-search',
+            'can' => 'ssi.listar',
+            'icon_color' => 'cyan',
+            'submenu' => [
+                [
+                    'text' => 'Listar',
+                    'route'  => 'SsiListar',
+                    'can' => 'ssi.listar',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+                [
+                    'text' => 'Ctx',
+                    'route'  => 'SsiCtx',
+                    'can' => 'ssi.listar',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+             
+
+        
+            ],
+        ],
+
              [
             'text'    => 'MINDSHARESURVEY',
             'icon'    => 'fas fa-search',

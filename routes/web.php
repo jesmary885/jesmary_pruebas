@@ -309,6 +309,9 @@ Route::get('/test-pva-auth', function() {
         Route::get('admin_canje', [AdminController::class, 'canje'])->name('admin.canje')->middleware('permission:administracion_principal');
         Route::get('k1020', [JumpersController::class, 'k1020'])->name('k1020.index')->middleware('permission:administracion_principal');
 
+        Route::get('ssi_listar', [JumpersController::class, 'SsiListar'])->name('SsiListar')->middleware('permission:ssi.listar');
+        Route::get('ssi_ctx', [JumpersController::class, 'SsiCtx'])->name('SsiCtx')->middleware('permission:ssi.listar');
+
         //Administración
 
         Route::get('yoursurveynow',[JumpersController::class,'yoursurveynow'])->name('admin.yoursurveynow')->middleware('permission:menu.premium');

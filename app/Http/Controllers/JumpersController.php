@@ -16,6 +16,15 @@ class JumpersController extends Controller
         return view('cpx.listar');
     }
 
+
+     public function SsiListar(){
+        return view('ssi.listar');
+    }
+
+     public function SsiCtx(){
+        return view('ssi.ctx');
+    }
+
     public function kmil_cincuenta(){
 
         return view('jumpers.kmil_cincuenta');
