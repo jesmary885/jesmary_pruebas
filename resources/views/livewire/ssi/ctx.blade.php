@@ -5,16 +5,22 @@
         <div class="card-body">
 
             
-            <div>
+             <div>
 
 
-                <div class="w-full mt-2">
-                    <input wire:model.defer="ctx" placeholder="Ctx"  class="form-control w-full" >
-                </div>
+                    <div >
+
+                         <div class="w-full mt-2">
+                            <input wire:model.defer="ctx" placeholder="Ctx"  class="form-control w-full" >
+                        </div>
 
 
+                        <div class="w-full mt-2">
+                            <input wire:model.defer="ip" placeholder="Ip (Opcional)"  class="form-control w-1/2" >
+                        </div> 
 
-     
+
+                    </div>
    
             </div>
 

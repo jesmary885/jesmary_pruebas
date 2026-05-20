@@ -49,21 +49,23 @@ use WithPagination;
 
         try {
 
-
              $client = new Client([
                 //'base_uri' => 'http://127.0.0.1:8000',
                 'base_uri' => 'http://147.182.190.233/',
             ]);
 
+            $url = 'Ctx_SSI/1/' . $this->ctx;
 
-            $resultado = $client->request('GET', 'Ctx_SSI/1/'.$this->ctx);
+            $options = [];
+            if (!empty($this->ip)) {
+                $options['query'] = ['ip' => $this->ip];
+            }
 
-     
+            $resultado = $client->request('GET', $url, $options);
+
             if($resultado->getStatusCode() == 200){
 
                $this->jumper_ctx = json_decode($resultado->getBody(),true);
-
-            
 
                 if(!$this->jumper_ctx)  $this->jumper_detect = 2;
 

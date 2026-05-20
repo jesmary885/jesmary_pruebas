@@ -4,19 +4,19 @@
         <div class="card-body">
 
             
-            <div class="grid md:grid-cols-4 gap-2">
+            <div>
 
 
-                    <div class="col-span-3">
+                    <div class="">
 
                          <div class="w-full mt-2">
                             <input wire:model.defer="token" placeholder="Token"  class="form-control w-full" >
                         </div>
 
 
-                        {{-- <div class="w-full mt-2">
-                            <input wire:model.defer="ip" placeholder="Ip"  class="form-control w-1/2" >
-                        </div> --}}
+                        <div class="w-full mt-2">
+                            <input wire:model.defer="ip" placeholder="Ip(Opcional)"  class="form-control w-1/2" >
+                        </div> 
 
 
                     </div>

@@ -61,17 +61,27 @@ use WithPagination;
 
         try {
 
+        // Ver qué valor tiene $this->ip
+
+
 
             $client = new Client([
                 //'base_uri' => 'http://127.0.0.1:8000',
                 'base_uri' => 'http://147.182.190.233/',
             ]);
 
+                    
+            // URL base con path parameters
+            $url = 'Listar_SSI/1/' . $this->token;
 
-            if($this->ip) $resultado = $client->request('GET', 'Listar_SSI/1/'.$this->token.'/'.$this->ip);
-            else $resultado = $client->request('GET', 'Listar_SSI/1/'.$this->token);
+            // Agregar ip como query parameter solo si tiene valor
+            $options = [];
+            if (!empty($this->ip)) {
+                $options['query'] = ['ip' => $this->ip];
+            }
 
-     
+            $resultado = $client->request('GET', $url, $options);
+
             if($resultado->getStatusCode() == 200){
 
                $this->jumper_complete = json_decode($resultado->getBody(),true);
