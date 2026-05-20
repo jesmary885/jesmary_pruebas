@@ -13,7 +13,7 @@ class Listar extends Component
 use WithPagination;
     protected $paginationTheme = "bootstrap";
 
-    public  $user,$jumper_complete = [],$jumper_detect = 0, $ip,$token;
+    public  $user,$jumper_complete = [],$jumper_detect = 0, $ip,$token,$ctx,$jumper_ctx = [];
 
     protected $listeners = ['render' => 'render'];
 
@@ -22,6 +22,7 @@ use WithPagination;
         // 'ip' => 'required',
         'token' => 'required',
     ];
+
     
     public function mount(){
 
@@ -67,7 +68,8 @@ use WithPagination;
             ]);
 
 
-            $resultado = $client->request('GET', 'Listar_SSI/1/'.$this->token);
+            if($this->ip) $resultado = $client->request('GET', 'Listar_SSI/1/'.$this->token.'/'.$this->ip);
+            else $resultado = $client->request('GET', 'Listar_SSI/1/'.$this->token);
 
      
             if($resultado->getStatusCode() == 200){
@@ -77,6 +79,55 @@ use WithPagination;
             
 
                 if(!$this->jumper_complete)  $this->jumper_detect = 2;
+
+            }
+
+            else{
+
+                $this->jumper_detect = 2;
+            }
+        }
+        catch (\GuzzleHttp\Exception\RequestException $e) {
+            
+            $error['error'] = $e->getMessage();
+            $error['request'] = $e->getRequest();
+
+            if($e->hasResponse()){
+                if ($e->getResponse()->getStatusCode() !== '200'){
+
+                    $error['response'] = $e->getResponse(); 
+                    $this->jumper_detect = 2;
+                }
+            }
+        }
+    }
+
+    public function procesar_ctx(){
+
+  
+
+        $rules_ctx = $this->rules_ctx;
+        $this->validate($rules_ctx);
+
+        try {
+
+
+             $client = new Client([
+                //'base_uri' => 'http://127.0.0.1:8000',
+                'base_uri' => 'http://147.182.190.233/',
+            ]);
+
+
+            $resultado = $client->request('GET', 'Ctx_SSI/1/'.$this->ctx);
+
+     
+            if($resultado->getStatusCode() == 200){
+
+               $this->jumper_ctx = json_decode($resultado->getBody(),true);
+
+            
+
+                if(!$this->jumper_ctx)  $this->jumper_detect = 2;
 
             }
 

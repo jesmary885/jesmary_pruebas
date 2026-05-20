@@ -10,13 +10,13 @@
                     <div class="col-span-3">
 
                          <div class="w-full mt-2">
-                            <input wire:model.defer="token" placeholder="Token"  class="form-control w-1/2" >
+                            <input wire:model.defer="token" placeholder="Token"  class="form-control w-full" >
                         </div>
 
 
-                        <div class="w-full mt-2">
+                        {{-- <div class="w-full mt-2">
                             <input wire:model.defer="ip" placeholder="Ip"  class="form-control w-1/2" >
-                        </div>
+                        </div> --}}
 
 
                     </div>
@@ -158,7 +158,7 @@
 
                     
 
-                        <div class="card m-4">
+                        <div class="card">
             
                             <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
                                 <table class="table text-sm table-bordered table-responsive-lg table-responsive-md table-responsive-sm">
@@ -209,6 +209,8 @@
                     
 
                 </div>
+
+
             </div>
 
         @endif

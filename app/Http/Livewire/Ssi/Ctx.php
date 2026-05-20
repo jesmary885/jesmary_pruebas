@@ -13,7 +13,7 @@ class Ctx extends Component
 use WithPagination;
     protected $paginationTheme = "bootstrap";
 
-    public  $user,$jumper_complete = [],$jumper_detect = 0, $ctx;
+    public  $user,$jumper_complete = [],$jumper_detect = 0, $ctx,$jumper_ctx;
 
     protected $listeners = ['render' => 'render'];
 
@@ -40,7 +40,7 @@ use WithPagination;
         //$this->emitTo('jumpers.encuestar.encuestar1-index','render');
     }
 
-    public function procesar(){
+   public function procesar_ctx(){
 
   
 
@@ -50,7 +50,7 @@ use WithPagination;
         try {
 
 
-            $client = new Client([
+             $client = new Client([
                 //'base_uri' => 'http://127.0.0.1:8000',
                 'base_uri' => 'http://147.182.190.233/',
             ]);
@@ -61,9 +61,11 @@ use WithPagination;
      
             if($resultado->getStatusCode() == 200){
 
-               $this->jumper_complete = json_decode($resultado->getBody(),true);
+               $this->jumper_ctx = json_decode($resultado->getBody(),true);
 
-                if(!$this->jumper_complete)  $this->jumper_detect = 2;
+            
+
+                if(!$this->jumper_ctx)  $this->jumper_detect = 2;
 
             }
 
