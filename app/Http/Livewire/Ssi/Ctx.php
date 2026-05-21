@@ -42,6 +42,8 @@ use WithPagination;
 
    public function procesar_ctx(){
 
+        $this->jumper_detect=0;
+
   
 
         $rules = $this->rules;

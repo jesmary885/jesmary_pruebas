@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Ssi;
 
+use App\Models\CommentLinkSsi;
+use App\Models\Linkssi;
 use App\Models\User;
 use Livewire\Component;
 use GuzzleHttp\Client;
@@ -13,8 +15,9 @@ class Listar extends Component
 use WithPagination;
     protected $paginationTheme = "bootstrap";
 
-    public  $user,$jumper_complete = [],$jumper_detect = 0, $ip,$token,$ctx,$jumper_ctx = [];
+    public  $comentario,$user,$jumper_complete = [],$jumper_detect = 0, $ip,$token,$ctx,$jumper_ctx = [],$search,$k_detect=0;
 
+    private $comments = "";
     protected $listeners = ['render' => 'render'];
 
 
@@ -52,7 +55,13 @@ use WithPagination;
 
     }
 
+    
+
+    
+
     public function procesar(){
+
+        $this->jumper_detect=0;
 
   
 
@@ -162,6 +171,10 @@ use WithPagination;
     }
     public function render()
     {
+
+      
+
+      
         return view('livewire.ssi.listar');
     }
 }

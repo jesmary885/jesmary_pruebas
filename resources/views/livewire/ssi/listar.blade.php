@@ -87,131 +87,154 @@
 
 
         @if($jumper_complete)
-            <div class="card pt-2">
-     
 
-            <div class="card card-primary w-1/2 mx-auto">
-              <div class="card-header">
-                <h3 class="card-title">{{$jumper_complete[0]['Nombre']}} {{$jumper_complete[0]['Apellido']}}</h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <strong><i class="fas fa-check-circle text-green-500 mr-1"></i> Correo</strong>
+            <div class="grid grid-cols-4 gap-2" >
 
-                <p class="text-muted">
-                  {{$jumper_complete[0]['Correo Cuenta']}}
-                </p>
-
-                <hr>
-
-                <strong><i class="fas fa-check-circle text-green-500  mr-1"></i> Fecha de nacimiento</strong>
-                <p class="text-muted">
-                  {{$jumper_complete[0]['Fecha de cumpleaños']}}
-                </p>
-
-                <hr>
-
-                <strong><i class="fas fa-check-circle text-green-500  mr-1"></i> Saldo actual</strong>
-                <p class="text-muted">
-                  {{$jumper_complete[0]['Saldo actual']}}
-                </p>
-
-                <hr>
-
-
-                <strong><i class="fas fa-check-circle text-green-500  mr-1"></i> Saldo total de la cuenta</strong>
-                <p class="text-muted">
-                  {{$jumper_complete[0]['Saldo Total Cuenta']}}
-                </p>
-
-                <hr>
-
-                <strong><i class="fas fa-check-circle text-green-500  mr-1"></i> Estado de la cuenta </strong>
-                <p class="text-muted">
-                    @if($jumper_complete[0]['Estado de la Cuenta'] == 'true')
-
-                    Activa
-
-                    @else
-
-                    Inactiva
-
-                    @endif
-                
-                </p>
-
-                <hr>
-
-                <strong><i class="fas fa-check-circle text-green-500  mr-1"></i> Última modificación de la cuenta</strong>
-                <p class="text-muted">
-                  {{$jumper_complete[0]['Modificaciones en la cuenta']}}
-                </p>
-
-                <hr>
-
-                
-              </div>
-              <!-- /.card-body -->
-            </div>
-
-                <div class="card-body mt-0">
-
-                    
-
-                        <div class="card">
-            
-                            <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
-                                <table class="table text-sm table-bordered table-responsive-lg table-responsive-md table-responsive-sm">
-                                    <thead class="text-xs uppercase bg-gray-700 text-gray-400">
-                                        <tr>
-
-                                            <th class="text-center"></th>
-
-                                  
-
-                                            <th class="text-left">ID</th>
-                                            <th class="text-left">Puntos</th>
-                                            <th class="text-left">tiempo</th>
-
-                                            <th class="text-left">Link</th>
+                <div class="card pt-2 col-span-2 ">
         
+                    <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title font-bold">{{$jumper_complete[0]['Nombre']}} {{$jumper_complete[0]['Apellido']}}</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <strong><i class="fas fa-check-circle text-green-500 mr-1"></i> Correo</strong>
 
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($jumper_complete[1] as $registro)
-                                                <tr class="bg-gray-800 border-gray-700 hover:bg-gray-600">
+                        <p class="text-muted">
+                        {{$jumper_complete[0]['Correo Cuenta']}}
+                        </p>
 
-                                                    <th class=" text-center  text-white">
-                                                    
-                                                        <div class="flex justify-center text-sm">
-                                                            <button onclick="copiarAlPortapapeles('jumper_copy_{{ $loop->index }}')" class="btn btn-sm btn-success text-bold" title="{{__('messages.copiar_portapapeles')}}" id="button_copy">Copiar URL</button> 
-                                                        </div>
+                        <hr>
 
-                                                    </th>
+                        <strong><i class="fas fa-check-circle text-green-500  mr-1"></i> Fecha de nacimiento</strong>
+                        <p class="text-muted">
+                        {{$jumper_complete[0]['Fecha de cumpleaños']}}
+                        </p>
 
-                                                    <td class="text-left text-sm">{{$registro['Id']}}</td>
-                                                    <td class="text-left text-sm">{{$registro['Monto']}}</td>
-                                                    <td class="text-left text-sm">{{$registro['Tiempo']}} min.</td>
+                        <hr>
+
+                        <strong><i class="fas fa-check-circle text-green-500  mr-1"></i> Saldo actual</strong>
+                        <p class="text-muted">
+                        {{$jumper_complete[0]['Saldo actual']}}
+                        </p>
+
+                        <hr>
 
 
+                        <strong><i class="fas fa-check-circle text-green-500  mr-1"></i> Saldo total de la cuenta</strong>
+                        <p class="text-muted">
+                        {{$jumper_complete[0]['Saldo Total Cuenta']}}
+                        </p>
 
-                                                    <td class="text-left text-sm" ><p  class="text-blue-400 text-sm font-bold " id="jumper_copy_{{ $loop->index }}"> {{$this->sacar_link($registro['Link'])}}</p></td>
-                                                    
+                        <hr>
+
+                        <strong><i class="fas fa-check-circle text-green-500  mr-1"></i> Estado de la cuenta </strong>
+                        <p class="text-muted">
+                            @if($jumper_complete[0]['Estado de la Cuenta'] == 'true')
+
+                            Activa
+
+                            @else
+
+                            Inactiva
+
+                            @endif
+                        
+                        </p>
+
+                        <hr>
+
+                        <strong><i class="fas fa-check-circle text-green-500  mr-1"></i> Última modificación de la cuenta</strong>
+                        <p class="text-muted">
+                        {{$jumper_complete[0]['Modificaciones en la cuenta']}}
+                        </p>
+
+                        <hr>
+
+                        
+                    </div>
+                    <!-- /.card-body -->
+                    </div>
+
+                    <div class="card-body mt-0">
+
+                        
+
+                            <div class="card">
+                
+                                <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
+                                    <table class="table text-sm table-bordered table-responsive-lg table-responsive-md table-responsive-sm">
+                                        <thead class="text-xs uppercase bg-gray-700 text-gray-400">
+                                            <tr>
+
+                                                <th class="text-center"></th>
+
+                                    
+
+                                                <th class="text-left">ID</th>
+                                                <th class="text-left">Puntos</th>
+                                                <th class="text-left">tiempo</th>
+
+                                                <th class="text-left">Link</th>
+            
 
                                                 </tr>
-                                            @endforeach
-                                        </tbody>
-                                </table>
-                            </div>
-                        </div>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($jumper_complete[1] as $registro)
+                                                    <tr class="bg-gray-800 border-gray-700 hover:bg-gray-600">
 
-                    
+                                                        <th class=" text-center  text-white">
+                                                        
+                                                            <div class="flex justify-center text-sm">
+                                                                <button onclick="copiarAlPortapapeles('jumper_copy_{{ $loop->index }}')" class="btn btn-sm btn-success text-bold" title="{{__('messages.copiar_portapapeles')}}" id="button_copy">Copiar URL</button> 
+                                                            </div>
+
+                                                        </th>
+
+                                                        <td class="text-left text-sm">{{$registro['Id']}}</td>
+                                                        <td class="text-left text-sm">{{$registro['Monto']}}</td>
+                                                        <td class="text-left text-sm">{{$registro['Tiempo']}} min.</td>
+
+
+
+                                                        <td class="text-left text-sm" ><p  class="text-blue-400 text-sm font-bold " id="jumper_copy_{{ $loop->index }}"> {{$this->sacar_link($registro['Link'])}}</p></td>
+                                                        
+
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        
+
+                    </div>
 
                 </div>
 
+                <div class="card pt-2 col-span-2 ">
+
+                     @livewire('ssi.listar-k-registro')
+                   
+
+                        
+
+                </div>
+        
+                    
 
             </div>
+
+
+            </div>
+
+            <div>
+
+
+            </div>
+            
 
         @endif
 
