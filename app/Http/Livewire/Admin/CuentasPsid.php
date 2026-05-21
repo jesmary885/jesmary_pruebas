@@ -13,8 +13,49 @@ class CuentasPsid extends Component
 
     protected $listeners = ['render' => 'render'];
 
+    public $user_autentic;
+
     public function cant_cuentas($user_id){
         return ModelsCuentasPsid::where('user_id',$user_id)->count();
+    }
+
+    public function mount(){
+
+        $this->user_autentic = auth()->user()->id;
+    }
+
+    public function rol_numero($userID){
+
+        $user = User::where('id',$userID)->first();
+        $roles_user = $user->roles->all();
+        $inactivo = 0;
+
+        foreach($roles_user as $rol){
+            if($rol->id == 4) $inactivo = 1;
+        }
+
+        $user->assignRole('Numeros PVA');
+
+        if($inactivo == 1) $user->roles()->detach(4);
+
+        $this->emit('alert','Rol agregado correctamente');
+    }
+
+    public function rol_listar_ssi($userID){
+
+        $user = User::where('id',$userID)->first();
+        $roles_user = $user->roles->all();
+        $inactivo = 0;
+
+        foreach($roles_user as $rol){
+            if($rol->id == 4) $inactivo = 1;
+        }
+
+        $user->assignRole('SSI LISTAR');
+
+        if($inactivo == 1) $user->roles()->detach(4);
+
+        $this->emit('alert','Rol agregado correctamente');
     }
 
     public function rol($user_id){

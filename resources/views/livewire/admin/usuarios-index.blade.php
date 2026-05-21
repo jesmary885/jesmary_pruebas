@@ -53,7 +53,7 @@
                                         @livewire('admin.usuarios-edit', ['usuario' => $user],key($user->id))
                                     </td>
 
-                                    @if($user_autentic == 2 || $user_autentic == 5 || $user_autentic == 10)
+                                    @if($user_autentic == 2 || $user_autentic == 5 )
 
                                         <td class="text-center">
                                             <button

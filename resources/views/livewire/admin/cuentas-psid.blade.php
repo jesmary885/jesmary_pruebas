@@ -13,6 +13,11 @@
                         <th class="text-center">Rol</th>
                         <th class="text-center">Administrador</th>
                         <th class="text-center"></th>
+
+                         @if($user_autentic == 2 || $user_autentic == 5)
+                                <th class="text-center">ROL NÚMERO</th>
+                                <th class="text-center">ROL LISTAR SSI</th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody>
@@ -31,6 +36,27 @@
                                 <td class="text-center">
                                 </td>
                             @endif
+                            @if($user_autentic == 2 || $user_autentic == 5 )
+
+                                        <td class="text-center">
+                                            <button
+                                                class="btn btn-info btn-sm" 
+                                                wire:click="rol_numero('{{$user->id}}')"
+                                                title="Otorgar rol de Ktmr">
+                                                <i class="fas fa-award"></i>
+                                            </button>
+                                        </td>
+
+                                        <td class="text-center">
+                                            <button
+                                                class="btn btn-danger btn-sm" 
+                                                wire:click="rol_listar_ssi('{{$user->id}}')"
+                                                title="Quitar rol de Ktmr">
+                                                <i class="fas fa-award"></i>
+                                            </button>
+                                        </td>
+
+                             @endif
                         </tr>
                     @endforeach
                 </tbody>
