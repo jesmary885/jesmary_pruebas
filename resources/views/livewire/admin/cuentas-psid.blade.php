@@ -42,7 +42,7 @@
                                             <button
                                                 class="btn btn-info btn-sm" 
                                                 wire:click="rol_numero('{{$user->id}}')"
-                                                title="Otorgar rol de Ktmr">
+                                                title="Otorgar de numeros">
                                                 <i class="fas fa-award"></i>
                                             </button>
                                         </td>
@@ -51,7 +51,7 @@
                                             <button
                                                 class="btn btn-danger btn-sm" 
                                                 wire:click="rol_listar_ssi('{{$user->id}}')"
-                                                title="Quitar rol de Ktmr">
+                                                title="Quitar rol listar SSI">
                                                 <i class="fas fa-award"></i>
                                             </button>
                                         </td>
