@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Ssi;
 
+use App\Models\CommentLinkSsi;
 use App\Models\Linkssi;
 use Livewire\Component;
 
@@ -40,9 +41,9 @@ class KCreate extends Component
 
        if($jumper){
             $jumper->update([
-                'psid' => $this->psid,
+                'codigo' => $this->psid,
                 'user_id' => $user_auth,
-                'k' => $this->k_type,
+                
             ]);
             //$this->save = 1;
        }
@@ -50,10 +51,15 @@ class KCreate extends Component
  
             $link = new Linkssi();
             $link->codigo = $this->psid;
-            $link->k = $this->k_type;
             $link->user_id = $user_auth;
 
             $link->save();
+
+            $comment = new CommentLinkSsi();
+            $comment->comment = $this->comentario;
+            $comment->link_id = $link->id;
+            $comment->user_id = auth()->user()->id;
+            $comment->save();
         }
 
 

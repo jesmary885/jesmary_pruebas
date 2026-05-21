@@ -52,13 +52,40 @@ class ListarKRegistro extends Component
 
         if($this->comentario != ''){
 
-        
+        $bus = Linkssi::where('codigo',$k_detect)->first();
+
+        if($bus){
 
             $comment = new CommentLinkSsi();
             $comment->comment = $this->comentario;
-            $comment->link_id = $k_detect;
+            $comment->link_id = $bus->id;
             $comment->user_id = auth()->user()->id;
             $comment->save();
+
+
+        }else{
+
+            $link = new Linkssi();
+            $link->codigo = $k_detect;
+            $link->user_id = auth()->user()->id;
+
+            $link->save();
+
+
+            $comment = new CommentLinkSsi();
+            $comment->comment = $this->comentario;
+            $comment->link_id = $link->id;
+            $comment->user_id = auth()->user()->id;
+            $comment->save();
+
+            
+
+
+        }
+
+        
+
+            
 
             $this->reset(['comentario']);
 
@@ -73,7 +100,7 @@ class ListarKRegistro extends Component
     {
 
     $this->k_detect = 0;
-    $comments ="";
+    $comments =[];
 
 
         if($this->search){
@@ -88,7 +115,14 @@ class ListarKRegistro extends Component
                         ->paginate(10);
 
             }
-            else $this->k_detect = 0;
+            else {
+
+            $this->k_detect = 0;
+            $comments = [];
+            
+
+
+            } 
 
             
         }

@@ -51,7 +51,7 @@
                                             <button
                                                 class="btn btn-danger btn-sm" 
                                                 wire:click="rol_listar_ssi('{{$user->id}}')"
-                                                title="Quitar rol listar SSI">
+                                                title="Otorgar rol listar SSI">
                                                 <i class="fas fa-award"></i>
                                             </button>
                                         </td>
