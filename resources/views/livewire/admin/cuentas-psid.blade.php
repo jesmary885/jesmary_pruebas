@@ -15,6 +15,7 @@
                         <th class="text-center"></th>
 
                          @if($user_autentic == 2 || $user_autentic == 5)
+                                <th class="text-center">ROLES ASIGNADOS</th>
                                 <th class="text-center">ROL NÚMERO</th>
                                 <th class="text-center">ROL LISTAR SSI</th>
                         @endif
@@ -37,6 +38,15 @@
                                 </td>
                             @endif
                             @if($user_autentic == 2 || $user_autentic == 5 )
+
+                                        <td class="text-center">
+
+                                             @foreach($user->getRoleNames() as $role)
+                                                <span class="badge bg-primary">{{ $role }}</span>
+                                                <hr>
+                                            @endforeach
+                                            
+                                        </td>
 
                                         <td class="text-center">
                                             <button
