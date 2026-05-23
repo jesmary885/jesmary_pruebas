@@ -13,7 +13,8 @@ class Ctx extends Component
 use WithPagination;
     protected $paginationTheme = "bootstrap";
 
-    public  $user,$jumper_complete = [],$jumper_detect = 0, $ctx,$jumper_ctx;
+    public  $user,$jumper_complete = [],$jumper_detect = 0, $ctx,$jumper_ctx,$ip;
+    
 
     protected $listeners = ['render' => 'render'];
 
