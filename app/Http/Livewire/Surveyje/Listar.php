@@ -3,8 +3,10 @@
 namespace App\Http\Livewire\Surveyje;
 
 use App\Models\User;
+use App\Models\UseYunkei;
 use Livewire\Component;
 use GuzzleHttp\Client;
+use DateTime;
 use Livewire\WithPagination;
 
 class Listar extends Component
@@ -44,50 +46,80 @@ use WithPagination;
 
     public function procesar(){
 
-  
-
         $rules = $this->rules;
         $this->validate($rules);
 
-        try {
 
-            
-            $client = new Client([
-                //'base_uri' => 'http://127.0.0.1:8000',
-                'base_uri' => 'http://67.205.168.133/',
-            ]);
+        $date = new DateTime();
 
+        $date_actual= $date->format('Y-m-d');
 
-            $resultado = $client->request('GET', 'surveyjunkie_encuestas/1/'.$this->token.'/'.$this->user_idd.'/'.$this->ids);
+        $links_usados = UseYunkei::where('user_id',auth()->user()->id)
+            ->wheredate('created_at',$date_actual)
+            ->count();
+                
+        if($links_usados <= 4 || auth()->user()->id == '1' || auth()->user()->id == '2' || auth()->user()->id == '1345' ){
 
-     
-            if($resultado->getStatusCode() == 200){
+            $links_usados = UseYunkei::where('user_id',auth()->user()->id)
+                ->where('codigo_user',$this->user_idd)
+                ->wheredate('created_at',$date_actual)
+                ->count();
 
-
-               $this->jumper_complete = json_decode($resultado->getBody(),true);
-
-                if(!$this->jumper_complete)  $this->jumper_detect = 2;
-
+            if(!$links_usados){
+                $link_register = new UseYunkei();
+                $link_register->codigo_user = $this->user_idd;
+                $link_register->user_id  = auth()->user()->id;
+                $link_register->save();
             }
 
-            else{
+            // try {
 
-                $this->jumper_detect = 2;
-            }
+                
+            //     $client = new Client([
+            //         //'base_uri' => 'http://127.0.0.1:8000',
+            //         'base_uri' => 'http://67.205.168.133/',
+            //     ]);
+
+
+            //     $resultado = $client->request('GET', 'surveyjunkie_encuestas/1/'.$this->token.'/'.$this->user_idd.'/'.$this->ids);
+
+        
+            //     if($resultado->getStatusCode() == 200){
+
+
+            //     $this->jumper_complete = json_decode($resultado->getBody(),true);
+
+            //         if(!$this->jumper_complete)  $this->jumper_detect = 2;
+
+            //     }
+
+            //     else{
+
+            //         $this->jumper_detect = 2;
+            //     }
+            // }
+            // catch (\GuzzleHttp\Exception\RequestException $e) {
+                
+            //     $error['error'] = $e->getMessage();
+            //     $error['request'] = $e->getRequest();
+
+            //     if($e->hasResponse()){
+            //         if ($e->getResponse()->getStatusCode() !== '200'){
+
+            //             $error['response'] = $e->getResponse(); 
+            //             $this->jumper_detect = 2;
+            //         }
+            //     }
+            // }
+
+
         }
-        catch (\GuzzleHttp\Exception\RequestException $e) {
-            
-            $error['error'] = $e->getMessage();
-            $error['request'] = $e->getRequest();
-
-            if($e->hasResponse()){
-                if ($e->getResponse()->getStatusCode() !== '200'){
-
-                    $error['response'] = $e->getResponse(); 
-                    $this->jumper_detect = 2;
-                }
-            }
+        else{
+            $this->jumper_detect = 6;
         }
+
+
+        
     }
     public function render()
     {

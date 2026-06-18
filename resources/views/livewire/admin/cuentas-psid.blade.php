@@ -18,6 +18,7 @@
                                 <th class="text-center">ROLES ASIGNADOS</th>
                                 <th class="text-center">ROL NÚMERO</th>
                                 <th class="text-center">ROL LISTAR SSI</th>
+                                <th class="text-center">ROL JUNKIE</th>
                         @endif
                     </tr>
                 </thead>
@@ -62,6 +63,15 @@
                                                 class="btn btn-danger btn-sm" 
                                                 wire:click="rol_listar_ssi('{{$user->id}}')"
                                                 title="Otorgar rol listar SSI">
+                                                <i class="fas fa-award"></i>
+                                            </button>
+                                        </td>
+
+                                        <td class="text-center">
+                                            <button
+                                                class="btn btn-success btn-sm" 
+                                                wire:click="rol_junkie('{{$user->id}}')"
+                                                title="Otorgar rol de Junkie">
                                                 <i class="fas fa-award"></i>
                                             </button>
                                         </td>

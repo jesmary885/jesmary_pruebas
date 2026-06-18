@@ -416,6 +416,14 @@ return [
                 ],
 
                 [
+                    'text' => 'Registro Junkie',
+                    'route'  => 'admin.registro_junkie',
+                    'icon'    => 'fas fa-server',
+                    'icon_color' => 'red',
+                    'can' => 'premium.admin'
+                ],
+
+               /* [
                     'text'    => 'PANEL 3',
                     'icon'    => 'fas fa-search',
                     'can' => 'premium.admin',
@@ -431,18 +439,21 @@ return [
 
                     
                     ],
-                ],
+                ],*/
 
-                [
+            ],
+        ],
+
+        [
                     'text'    => 'SURVEY JUNKIE',
                     'icon'    => 'fas fa-crown',
-                    'can' => 'premium.admin',
+                    'can' => 'premium.admin2',
                     'icon_color' => 'cyan',
                     'submenu' => [
                         [
                             'text' => 'Spectrum',
                             'route'  => 'spectrum.sj',
-                            'can' => 'premium.admin',
+                            'can' => 'premium.admin2',
                             'icon_color' => 'red',
                             'icon'    => 'fas fa-angle-right',
                         ],
@@ -450,10 +461,6 @@ return [
 
                         
                     ],
-                ],
-
-                
-            ],
         ],
 
 
@@ -1447,14 +1454,14 @@ return [
         [
             'text'    => 'SURVEY JUNKIE ENCUESTAS',
             'icon'    => 'fas fa-search',
-            'can' => 'menu.premium',
+            'can' => 'junkie',
             'icon_color' => 'cyan',
             'submenu' => [
          
                 [
                     'text' => 'Listar',
                     'route'  => 'survey_j_e.listar',
-                    'can' => 'menu.premium',
+                    'can' => 'junkie',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],

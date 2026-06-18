@@ -78,6 +78,19 @@
         @endif
 
 
+         @if ($jumper_detect == 6)
+            <div class="px-4">
+                <div class=" info-box bg-warning">
+                    <span class="info-box-icon"><i class="fas fa-info"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Ya ha generado la cantidad de peticiones permitidas en el día</span>
+                            
+                        </div>
+                </div>
+            </div>
+        @endif
+
+
 
 
         @if ($jumper_detect == 3)

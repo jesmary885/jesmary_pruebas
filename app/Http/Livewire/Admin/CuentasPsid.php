@@ -41,6 +41,24 @@ class CuentasPsid extends Component
         $this->emit('alert','Rol agregado correctamente');
     }
 
+
+    public function rol_junkie($userID){
+
+        $user = User::where('id',$userID)->first();
+        $roles_user = $user->roles->all();
+        $inactivo = 0;
+
+        foreach($roles_user as $rol){
+            if($rol->id == 4) $inactivo = 1;
+        }
+
+        $user->assignRole('JUNKIE');
+
+        if($inactivo == 1) $user->roles()->detach(4);
+
+        $this->emit('alert','Rol agregado correctamente');
+    }
+
     public function rol_listar_ssi($userID){
 
         $user = User::where('id',$userID)->first();
@@ -57,6 +75,8 @@ class CuentasPsid extends Component
 
         $this->emit('alert','Rol agregado correctamente');
     }
+
+
 
     public function rol($user_id){
 

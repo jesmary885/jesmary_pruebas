@@ -203,7 +203,7 @@ Route::get('/test-pva-auth', function() {
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-         Route::get('spectrum_sj',[JumpersController::class,'spectrum_sj'])->name('spectrum.sj')->middleware('permission:premium.admin');
+        Route::get('spectrum_sj',[JumpersController::class,'spectrum_sj'])->name('spectrum.sj')->middleware('permission:premium.admin2');
 
 
         //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -282,7 +282,7 @@ Route::get('/test-pva-auth', function() {
 
     
         
-        Route::get('survey_j_e',[JumpersController::class,'survey_j_e'])->name('survey_j_e.listar')->middleware('permission:menu.premium');
+        Route::get('survey_j_e',[JumpersController::class,'survey_j_e'])->name('survey_j_e.listar')->middleware('permission:junkie');
 
         Route::get('Inbrain_rex',[JumpersController::class,'inbrainrex'])->name('inbrain.rex')->middleware('permission:menu.premium');
         Route::get('Inbrain_profiled',[JumpersController::class,'inbrainprofiled'])->name('inbrain.profiled')->middleware('permission:menu.premium');
@@ -330,8 +330,9 @@ Route::get('/test-pva-auth', function() {
         Route::get('admin_users', [AdminController::class, 'users'])->name('admin.users')->middleware('permission:administracion_principal');
         Route::get('admin_pagos', [AdminController::class, 'pagos'])->name('admin.pagos')->middleware('permission:administracion_principal');
         Route::get('admin_jumpers', [AdminController::class, 'jumpers'])->name('admin.jumpers')->middleware('permission:administracion_principal');
-        Route::get('admin_registroc', [AdminController::class, 'registroc'])->name('admin.registroc')->middleware('permission:premium.admin');
 
+        Route::get('admin_registroc', [AdminController::class, 'registroc'])->name('admin.registroc')->middleware('permission:premium.admin');
+        Route::get('admin_registro_junkie', [AdminController::class, 'registro_junkie'])->name('admin.registro_junkie')->middleware('permission:premium.admin');
 
 
         Route::get('admin_ganancias', [AdminController::class, 'ganancias'])->name('admin.ganancias.index')->middleware('permission:administracion_principal');

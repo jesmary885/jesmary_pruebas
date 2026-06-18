@@ -110,6 +110,9 @@ class AdminController extends Controller
         return view('admin.cuentas_trabajadores');
     }
 
+    public function registro_junkie(){
+        return view('admin.registro_junkie');
+    }
 
 
 }
