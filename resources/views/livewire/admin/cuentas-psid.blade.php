@@ -50,30 +50,67 @@
                                         </td>
 
                                         <td class="text-center">
-                                            <button
-                                                class="btn btn-info btn-sm" 
-                                                wire:click="rol_numero('{{$user->id}}')"
-                                                title="Otorgar de numeros">
-                                                <i class="fas fa-award"></i>
-                                            </button>
+                                            @if($this->verificar_rol('otorgar_numero',$user->id) == 0)
+                                                <button
+                                                    class="btn btn-secondary btn-sm" 
+                                                    wire:click="rol_numero('{{$user->id}}')"
+                                                    title="Otorgar de numeros">
+                                                    <i class="fas fa-award"></i>
+                                                </button>
+
+                                            @else
+                                                <button
+                                                    class="btn btn-info btn-sm" 
+                                                    wire:click="rol_numero_quitar('{{$user->id}}')"
+                                                    title="Quitar de numeros">
+                                                    <i class="fas fa-award"></i>
+                                                </button>
+                                            @endif
+                                            
                                         </td>
 
                                         <td class="text-center">
-                                            <button
-                                                class="btn btn-danger btn-sm" 
-                                                wire:click="rol_listar_ssi('{{$user->id}}')"
-                                                title="Otorgar rol listar SSI">
-                                                <i class="fas fa-award"></i>
-                                            </button>
+
+                                            @if($this->verificar_rol('rol_listar_ssi',$user->id) == 0)
+                                                <button
+                                                    class="btn btn-secondary btn-sm" 
+                                                    wire:click="rol_listar_ssi('{{$user->id}}')"
+                                                    title="Otorgar rol listar SSI">
+                                                    <i class="fas fa-award"></i>
+                                                </button>
+
+                                            @else
+                                                <button
+                                                    class="btn btn-danger btn-sm" 
+                                                    wire:click="rol_listarssi_quitar('{{$user->id}}')"
+                                                    title="Quitar listar SSI">
+                                                    <i class="fas fa-award"></i>
+                                                </button>
+                                            @endif
+
+
                                         </td>
 
                                         <td class="text-center">
-                                            <button
-                                                class="btn btn-success btn-sm" 
-                                                wire:click="rol_junkie('{{$user->id}}')"
-                                                title="Otorgar rol de Junkie">
-                                                <i class="fas fa-award"></i>
-                                            </button>
+
+
+                                             @if($this->verificar_rol('rol_junkie',$user->id) == 0)
+                                                <button
+                                                    class="btn btn-secondary btn-sm" 
+                                                    wire:click="rol_junkie('{{$user->id}}')"
+                                                    title="Otorgar rol de Junkie">
+                                                    <i class="fas fa-award"></i>
+                                                </button>
+
+                                            @else
+                                                <button
+                                                    class="btn btn-success btn-sm" 
+                                                    wire:click="rol_junkie_quitar('{{$user->id}}')"
+                                                    title="Quitar listar SSI">
+                                                    <i class="fas fa-award"></i>
+                                                </button>
+                                            @endif
+
                                         </td>
 
                              @endif

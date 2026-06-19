@@ -24,6 +24,21 @@ class CuentasPsid extends Component
         $this->user_autentic = auth()->user()->id;
     }
 
+    public function rol_numero_quitar($userID){
+
+        $user = User::where('id',$userID)->first();
+        $roles_user = $user->roles->all();
+        $rol_numero = 0;
+
+        foreach($roles_user as $rol){
+            if($rol->id == 23) $rol_numero = 1;
+        }
+
+        if($rol_numero == 1) $user->roles()->detach(23);
+
+        $this->emit('alert','Rol de numeros PVA eliminado');
+    }
+
     public function rol_numero($userID){
 
         $user = User::where('id',$userID)->first();
@@ -42,6 +57,23 @@ class CuentasPsid extends Component
     }
 
 
+
+    public function rol_junkie_quitar($userID){
+
+        $user = User::where('id',$userID)->first();
+        $roles_user = $user->roles->all();
+        $rol_junkie = 0;
+
+        foreach($roles_user as $rol){
+            if($rol->id == 26) $rol_junkie = 1;
+        }
+
+        if($rol_junkie == 1) $user->roles()->detach(26);
+
+        $this->emit('alert','Rol de junkie eliminado');
+    }
+
+
     public function rol_junkie($userID){
 
         $user = User::where('id',$userID)->first();
@@ -57,6 +89,22 @@ class CuentasPsid extends Component
         if($inactivo == 1) $user->roles()->detach(4);
 
         $this->emit('alert','Rol agregado correctamente');
+    }
+
+
+    public function rol_listarssi_quitar($userID){
+
+        $user = User::where('id',$userID)->first();
+        $roles_user = $user->roles->all();
+        $rol_ssi = 0;
+
+        foreach($roles_user as $rol){
+            if($rol->id == 25) $rol_ssi = 1;
+        }
+
+        if($rol_ssi == 1) $user->roles()->detach(25);
+
+        $this->emit('alert','Rol de listar SSI eliminado');
     }
 
     public function rol_listar_ssi($userID){
@@ -131,6 +179,55 @@ class CuentasPsid extends Component
 
     }
 
+    public function verificar_rol($tipo,$user_id){
+
+        if($tipo == 'otorgar_numero'){
+
+            $user = User::where('id',$user_id)->first();
+            $roles_user = $user->roles->all();
+            $act = 0;
+
+            foreach($roles_user as $rol){
+                if($rol->id == 23) $act = 1;
+            }
+
+            if($act == '1') return '1'; else
+            return '0';
+
+        }
+        
+        elseif($tipo == 'rol_listar_ssi'){
+
+            $user = User::where('id',$user_id)->first();
+            $roles_user = $user->roles->all();
+            $act = 0;
+
+            foreach($roles_user as $rol){
+                if($rol->id == 25) $act = 1;
+            }
+
+            if($act == '1') return '1'; else
+            return '0';
+
+        }
+
+        else{
+
+            $user = User::where('id',$user_id)->first();
+            $roles_user = $user->roles->all();
+            $act = 0;
+
+            foreach($roles_user as $rol){
+                if($rol->id == 26) $act = 1;
+            }
+
+            if($act == '1') return '1'; else
+            return '0';
+
+        }
+
+    }
+
 
     public function render()
     {
@@ -140,7 +237,6 @@ class CuentasPsid extends Component
             ->where('id','!=','2205')
             ->where('id','!=','2206')
             ->where('id','!=','249')
-            ->where('id','!=','2024')
             ->where('id','!=','509')
             ->permission('menu.premium')
             ->get();
