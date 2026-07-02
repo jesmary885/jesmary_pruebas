@@ -609,17 +609,6 @@ return [
 
 
 
-
-
-
-      /*  [
-            'text' => 'YOURSURVEYNOW',
-            'route'  => 'admin.yoursurveynow',
-            'icon_color' => 'red',
-            'icon'    => 'fas fa-crown',
-            'can' => 'menu.premium',
-        ],
-*/
         [
             'text' => 'ENCUESTAR',
             'route'  => 'encuestar.index',
@@ -977,6 +966,8 @@ return [
 
                 ],
 
+                
+
                 [
                     'text' => 'K1000 Selfserve',
                     'route'  => 'kmil_poderosa1.index',
@@ -1001,11 +992,13 @@ return [
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
                 ],*/
-              /*  [
+                [
                     'text' => 'K1083 V1',
                     'route'  => 'k1083.index',
                     'can' => 'menu.premium',
                     'icon_color' => 'red',
+                    'label'       => 'Imperium',
+                    'label_color' => 'danger',
                     'icon'    => '	fas fa-angle-right',
                 ],
 
@@ -1017,13 +1010,13 @@ return [
                     'icon'    => '	fas fa-angle-right',
                 ],
 
-                [
-                    'text' => 'k1093 beasurveytaker',
-                    'route'  => 'k1093_bea.index',
-                    'can' => 'ssidkr.index',
-                    'icon_color' => 'red',
-                    'icon'    => '	fas fa-angle-right',
-                ],*/
+                // [
+                //     'text' => 'k1093 beasurveytaker',
+                //     'route'  => 'k1093_bea.index',
+                //     'can' => 'ssidkr.index',
+                //     'icon_color' => 'red',
+                //     'icon'    => '	fas fa-angle-right',
+                // ],
                
                 [
                     'text' => 'K23 V1',
@@ -1072,8 +1065,22 @@ return [
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
                 ],*/
+
+                 [
+                    'text' => 'Yoursurveynow',
+                    'route'  => 'admin.yoursurveynow',
+                    'icon_color' => 'red',
+                    'icon'    => '	fas fa-angle-right',
+                    'label'       => '(RD)',
+                    'label_color' => 'danger',
+                    'can' => 'menu.premium',
+
+                ],
                 
             ],            
+
+
+           
         ],
 
          [
