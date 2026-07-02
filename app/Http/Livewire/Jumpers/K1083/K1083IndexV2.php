@@ -215,7 +215,7 @@ class K1083IndexV2 extends Component
 
                     $long_jump1 = strlen($jump1['jumper']);
 
-                    $this->jumper_complete = substr($jump1['jumper'],1,($long_jump1-2));
+                    $this->jumper_complete = substr($jump1['jumper'],0,($long_jump1));
 
                     $link_register = new Links_usados();
                     $link_register->link = $this->search;
