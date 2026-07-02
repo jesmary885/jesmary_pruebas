@@ -1005,7 +1005,7 @@ return [
                 [
                     'text' => 'K1083 V2',
                     'route'  => 'k1083v2.index',
-                    'can' => 'menu.premium.v2',
+                    'can' => 'menu.premium',
                     'icon_color' => 'red',
                     'icon'    => '	fas fa-angle-right',
                 ],
