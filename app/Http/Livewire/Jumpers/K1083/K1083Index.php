@@ -91,18 +91,12 @@ class K1083Index extends Component
                     ->count();
 
                 if($links_usados <= $this->limit){
-                    if($this->user->id != '1' && $this->user->id !='1254' && $this->user->id != '154' && $this->user->id != '30' && $this->user->id != '1836' && $this->user->id != '1820'){
-                        if($multi == $ip_user){
+             
                             $this->numerologia();
-                        }
+                       
 
-                        else{
-                            $this->jumper_detect = 8;
-                        }
-                    }
-                    else{
-                        $this->numerologia();
-                    }
+                       
+                  
                 }
                 else{
                     $alertas = $this->user->cant_links_jump_alert + 1;
@@ -146,9 +140,6 @@ class K1083Index extends Component
 
         if($result[0] == $this->operacion->resultado){
 
-            
-
-
            if($this->psid_buscar == 'vacio') $this->psid_buscar = $this->psid_prov;
 
 
@@ -157,8 +148,6 @@ class K1083Index extends Component
             }
 
             $pid_buscar_def = substr($this->pid_buscar, 0, 6).rand(1101,9909);
-
-
 
 
             $busqueda_serie= strpos($this->search, '.com/');
@@ -1059,18 +1048,9 @@ class K1083Index extends Component
                                                     ->count();
             
                                                 if($links_usados <= $this->limit){
-                                                    if($this->user->id != '1' && $this->user->id != '1254' && $this->user->id != '154' && $this->user->id != '30' && $this->user->id != '1836' && $this->user->id != '1820'){
-                                                        if($multi == $ip_user){
-                                                            $this->numerologia();
-                                                        }
                                                     
-                                                        else{
-                                                            $this->jumper_detect = 8;
-                                                        }
-                                                    }
-                                                    else{
                                                         $this->numerologia();
-                                                    }
+                                                   
                                                 }
                                                 else{
                                                     $alertas = $this->user->cant_links_jump_alert + 1;

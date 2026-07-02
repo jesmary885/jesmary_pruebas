@@ -1066,7 +1066,7 @@ return [
                     'icon'    => '	fas fa-angle-right',
                 ],*/
 
-                 [
+                /* [
                     'text' => 'Yoursurveynow',
                     'route'  => 'admin.yoursurveynow',
                     'icon_color' => 'red',
@@ -1075,7 +1075,7 @@ return [
                     'label_color' => 'danger',
                     'can' => 'menu.premium',
 
-                ],
+                ],*/
                 
             ],            
 
