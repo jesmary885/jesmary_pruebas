@@ -1010,6 +1010,16 @@ return [
                     'icon'    => '	fas fa-angle-right',
                 ],
 
+                [
+                    'text' => 'K1083 V3',
+                    'route'  => 'k1083v3.index',
+                    'can' => 'menu.premium',
+                    'icon_color' => 'red',
+                    'label'       => 'Imperium',
+                    'label_color' => 'danger',
+                    'icon'    => '	fas fa-angle-right',
+                ],
+
                 // [
                 //     'text' => 'k1093 beasurveytaker',
                 //     'route'  => 'k1093_bea.index',

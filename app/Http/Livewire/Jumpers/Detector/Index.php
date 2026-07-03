@@ -37,6 +37,7 @@ class Index extends Component
 
             if($respuesta_servidor['jumper'] == 'El Jump es V1' ) $version = 'v1'; //con imperium o vieja
             elseif($respuesta_servidor['jumper'] == 'El Jump es V2') $version = 'v2'; //sin imperium o nueva
+            elseif($respuesta_servidor['jumper'] == 'El Jump es V3') $version = 'v3'; //sin imperium o nueva
             elseif ($respuesta_servidor['jumper'] == 'El Jump bajo comentario') $version = 'comentario';
             else $version = 'error';
 
@@ -55,6 +56,12 @@ class Index extends Component
                     if($busqueda_k23_ !== false) return redirect()->route("k23_poderosav2.index");
                     elseif($busqueda_k1083_ !== false) return redirect()->route("k1083v2.index");
                     else return redirect()->route("kmil_poderosa1.index");
+                }
+
+                elseif($version == 'v3'){
+       
+                    if($busqueda_k1083_ !== false) return redirect()->route("k1083v3.index");
+                   
                 }
                 elseif($version == 'comentario'){
                     $this->error = 'Genera de acuerdo con los comentarios';
