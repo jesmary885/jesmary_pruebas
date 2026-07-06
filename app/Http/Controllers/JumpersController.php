@@ -563,6 +563,11 @@ class JumpersController extends Controller
             return view('jumpers.detector');
         }
 
+        public function detector_83(){
+            return view('jumpers.detector_83');
+
+        }
+
 
 
         public function encuestar(){

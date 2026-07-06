@@ -123,6 +123,7 @@ Route::get('/test-pva-auth', function() {
         Route::get('k1083v2',[JumpersController::class,'k1083_v2'])->name('k1083v2.index')->middleware('permission:menu.premium');
         Route::get('k1083v3',[JumpersController::class,'k1083_v3'])->name('k1083v3.index')->middleware('permission:menu.premium');
         Route::get('detector',[JumpersController::class,'detector'])->name('version.index')->middleware('permission:menu.premium');
+        Route::get('detector-1083',[JumpersController::class,'detector_83'])->name('version83.index')->middleware('permission:menu.premium');
 
         Route::get('k1093',[JumpersController::class,'k1093'])->name('k1093.index');
         Route::get('k1093_easurveytaker',[JumpersController::class,'k1093_bea'])->name('k1093_bea.index')->middleware('permission:menu.premium');

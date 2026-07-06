@@ -957,6 +957,14 @@ return [
                     'icon'    => 'fas fa-angle-right',
                 ],
 
+                [
+                    'text' => 'Identificador de versiones (K-1083)',
+                    'route'  => 'version83.index',
+                    'can' => 'menu.premium',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
                  [
                     'text' => 'Ipso Interactive',
                     'route'  => 'ipso.index',
