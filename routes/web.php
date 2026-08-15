@@ -314,6 +314,11 @@ Route::get('/test-pva-auth', function() {
         Route::get('ssi_listar', [JumpersController::class, 'SsiListar'])->name('SsiListar')->middleware('permission:ssi.listar');
         Route::get('ssi_ctx', [JumpersController::class, 'SsiCtx'])->name('SsiCtx')->middleware('permission:ssi.listar');
 
+       
+        Route::get('Registro_cuentas',[JumpersController::class,'registro_cuentas'])->name('registro.cuentas')->middleware('permission:menu.premium');
+        Route::get('Verificacion_cuentas',[JumpersController::class,'verificacion_cuentas'])->name('verificacion.cuentas')->middleware('permission:menu.premium');
+       
+       
         //Administración
 
         Route::get('yoursurveynow',[JumpersController::class,'yoursurveynow'])->name('admin.yoursurveynow')->middleware('permission:menu.premium');

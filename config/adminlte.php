@@ -627,6 +627,31 @@ return [
         ],
 
         [
+            'text'    => 'REGISTRO DE CUENTAS',
+            'icon'    => 'fas fa-search',
+            'can' => 'menu.premium',
+            'icon_color' => 'red',
+            'submenu' => [
+                [
+                    'text' => 'Registro',
+                    'route'  => 'registro.cuentas',
+                    'can' => 'menu.premium',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
+    
+                [
+                    'text' => 'Verificación',
+                    'route'  => 'verificacion.cuentas',
+                    'can' => 'menu.premium',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+            ],
+        ],
+
+        [
             'text'    => 'GENERADORES SSI',
             'icon'    => 'fas fa-search',
             'can' => 'menu.premium',
@@ -1224,13 +1249,13 @@ return [
         [
             'text'    => 'HERRAMIENTAS',
             'icon'    => 'fas fa-search',
-            'can' => 'premium.vip',
+            'can' => 'menu.premium',
             'icon_color' => 'cyan',
             'submenu' => [
                 [
                     'text' => 'Calculadora de extensión',
                     'route'  => 'c.extension',
-                    'can' => 'premium.vip',
+                    'can' => 'menu.premium',
                     'icon_color' => 'red',
                     'icon'    => 'fas fa-angle-right',
                 ],

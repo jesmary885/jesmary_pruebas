@@ -28,8 +28,6 @@ class CalificadorP1 extends Component
     
     public function mount(){
 
-
-      //  if(session('search')) $this->search = session('search');
         $this->jumper_detect = 0;
 
         $this->user = User::where('id',auth()->user()->id)->first();

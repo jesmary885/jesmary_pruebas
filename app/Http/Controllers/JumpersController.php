@@ -11,6 +11,12 @@ use Maatwebsite\Excel\Facades\Excel;
 class JumpersController extends Controller
 {
 
+    public function registro_cuentas(){
+        return view('cuentas.registro');
+    }
+    public function verificacion_cuentas(){
+        return view('cuentas.verificacion');
+    }
 
     public function cpxListar(){
         return view('cpx.listar');
