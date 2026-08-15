@@ -391,12 +391,32 @@ return [
                     'can' => 'administracion_principal'
                 ],
 
+               
+
                 [
-                    'text' => 'Registro de cuentas',
-                    'route'  => 'registro.cuentas',
+                    'text'    => 'Registro de cuentas',
+                    'icon'    => 'fas fa-server',
                     'can' => 'administracion_principal',
                     'icon_color' => 'red',
-                    'icon'    => 'fas fa-angle-right',
+                    'submenu' => [
+                         [
+                            'text' => 'Registro',
+                            'route'  => 'registro.cuentas',
+                            'can' => 'administracion_principal',
+                            'icon_color' => 'red',
+                            'icon'    => 'fas fa-angle-right',
+                        ],
+
+                            
+                        [
+                            'text' => 'Verificación',
+                            'route'  => 'verificacion.cuentas',
+                            'can' => 'administracion_principal',
+                            'icon_color' => 'red',
+                            'icon'    => 'fas fa-angle-right',
+                        ],
+                  
+                    ],
                 ],
 
 
