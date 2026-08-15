@@ -391,6 +391,14 @@ return [
                     'can' => 'administracion_principal'
                 ],
 
+                [
+                    'text' => 'Registro de cuentas',
+                    'route'  => 'registro.cuentas',
+                    'can' => 'administracion_principal',
+                    'icon_color' => 'red',
+                    'icon'    => 'fas fa-angle-right',
+                ],
+
 
                 
 
@@ -626,30 +634,24 @@ return [
                         
         ],
 
-        [
-            'text'    => 'REGISTRO DE CUENTAS',
-            'icon'    => 'fas fa-search',
-            'can' => 'menu.premium',
-            'icon_color' => 'red',
-            'submenu' => [
-                [
-                    'text' => 'Registro',
-                    'route'  => 'registro.cuentas',
-                    'can' => 'menu.premium',
-                    'icon_color' => 'red',
-                    'icon'    => 'fas fa-angle-right',
-                ],
+        // [
+        //     'text'    => 'REGISTRO DE CUENTAS',
+        //     'icon'    => 'fas fa-search',
+        //     'can' => 'menu.premium',
+        //     'icon_color' => 'red',
+        //     'submenu' => [
+               
 
     
-                [
-                    'text' => 'Verificación',
-                    'route'  => 'verificacion.cuentas',
-                    'can' => 'menu.premium',
-                    'icon_color' => 'red',
-                    'icon'    => 'fas fa-angle-right',
-                ],
-            ],
-        ],
+        //         [
+        //             'text' => 'Verificación',
+        //             'route'  => 'verificacion.cuentas',
+        //             'can' => 'menu.premium',
+        //             'icon_color' => 'red',
+        //             'icon'    => 'fas fa-angle-right',
+        //         ],
+        //     ],
+        // ],
 
         [
             'text'    => 'GENERADORES SSI',
