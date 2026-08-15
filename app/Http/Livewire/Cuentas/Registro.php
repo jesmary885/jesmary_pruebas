@@ -15,8 +15,8 @@ class Registro extends Component
 
 
     protected $rules = [
-        'dia' => 'required|integer|max:31|digits:2',
-        'mes' => 'required|integer|max:12',
+        'dia' => 'required|regex:/^(0[1-9]|[12][0-9]|3[01])$/',
+        'mes' => 'required|regex:/^(0[1-9]|[12][0-9]|3[01])$/',
         'ano' => 'required|integer|digits:4',
         'firstname' => 'required',
         'lastname' => 'required',
