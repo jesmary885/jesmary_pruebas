@@ -6,9 +6,9 @@
             <div class="w-1/2">
                 <select wire:model.defer="opcion" class="form-control w-full">
                     <option value="" selected>Panel</option>
-                    <option value="oo">OO</option>
-                    <option value="vo">VO</option>
-                    <option value="er">ER</option>
+                    <option value="OO">OO</option>
+                    <option value="VO">VO</option>
+                    <option value="ER">ER</option>
                 </select>
                 <x-input-error for="opcion" />
             </div>

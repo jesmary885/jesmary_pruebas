@@ -297,7 +297,7 @@ Route::get('/test-pva-auth', function() {
         Route::get('Cpx_calificador',[JumpersController::class,'cpxCalificador'])->name('cpxCalificador')->middleware('permission:premium.vip');
         Route::get('Cpx_jumper',[JumpersController::class,'cpxJumper'])->name('cpxJumper')->middleware('permission:premium.vip');
 
-        Route::get('calculadoraExtension',[JumpersController::class,'calculadorae'])->name('c.extension')->middleware('permission:premium.vip');
+        Route::get('calculadoraExtension',[JumpersController::class,'calculadorae'])->name('c.extension')->middleware('permission:menu.premium');
 
          Route::get('Adscenmecia_listar',[JumpersController::class,'AdscenmeciaListar'])->name('AdscenmeciaListar')->middleware('permission:premium.vip');
           Route::get('Adscenmecia_saltador',[JumpersController::class,'Adscenmecia_saltador'])->name('AdscenmeciaSaltador')->middleware('permission:premium.vip');
