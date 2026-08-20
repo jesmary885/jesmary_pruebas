@@ -57,7 +57,7 @@ class Verificacion extends Component
 
                 $client = new Client();
 
-                $resultado = $client->post('http://147.182.190.233/status_verificacion/1/', [
+                $resultado = $client->post('http://147.182.190.233/status_revision/1/', [
                     'headers' => ['Content-Type' => 'application/json'],
                     'body' => json_encode([
                         'link' => $this->search
@@ -77,8 +77,6 @@ class Verificacion extends Component
             }
 
             else{
-
-                dd($resultado->getStatusCode() );
 
                 $this->jumper_detect = 2;
             }
